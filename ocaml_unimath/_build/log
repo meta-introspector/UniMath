@@ -1,0 +1,6 @@
+# dune init project ocaml_unimath
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /home/mdupont/.cache/dune/db
+# Workspace root: /mnt/data1/2024/01/05/UniMath/ocaml_unimath
+# Auto-detected concurrency: 24
