@@ -1,0 +1,47 @@
+(* This file has been auto-generated, do not edit it. *)
+
+Require Export UniMath.Combinatorics.StandardFiniteSets.
+Require Export UniMath.Combinatorics.Vectors.
+Require Export UniMath.Combinatorics.VectorsTests.
+Require Export UniMath.Combinatorics.Lists.
+Require Export UniMath.Combinatorics.FiniteSets.
+Require Export UniMath.Combinatorics.KFiniteTypes.
+Require Export UniMath.Combinatorics.KFiniteSubtypes.
+Require Export UniMath.Combinatorics.Graph.
+Require Export UniMath.Combinatorics.CGraph.
+Require Export UniMath.Combinatorics.GraphPaths.
+Require Export UniMath.Combinatorics.Equivalence_Relations.
+Require Export UniMath.Combinatorics.OrderedSets.
+Require Export UniMath.Combinatorics.WellFoundedRelations.
+Require Export UniMath.Combinatorics.WellOrderedSets.
+Require Export UniMath.Combinatorics.ZFstructures.
+Require Export UniMath.Combinatorics.FiniteSequences.
+Require Export UniMath.Combinatorics.BoundedSearch.
+Require Export UniMath.Combinatorics.MetricTree.
+Require Export UniMath.Combinatorics.DecSet.
+Require Export UniMath.Combinatorics.Maybe.
+Require Export UniMath.Combinatorics.MoreLists.
+Require Export UniMath.Combinatorics.Tuples.
+
+Separate Extraction Tuples.
+Separate Extraction MoreLists.
+Separate Extraction StandardFiniteSets.
+Separate Extraction Vectors.
+Separate Extraction VectorsTests.
+Separate Extraction Lists.
+Separate Extraction FiniteSets.
+Separate Extraction KFiniteTypes.
+Separate Extraction KFiniteSubtypes.
+Separate Extraction Graph.
+Separate Extraction CGraph.
+Separate Extraction GraphPaths.
+Separate Extraction Equivalence_Relations.
+Separate Extraction OrderedSets.
+Separate Extraction WellFoundedRelations.
+Separate Extraction WellOrderedSets.
+Separate Extraction ZFstructures.
+Separate Extraction FiniteSequences.
+Separate Extraction BoundedSearch.
+Separate Extraction MetricTree.
+Separate Extraction DecSet.
+Separate Extraction Maybe.
