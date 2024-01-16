@@ -1,6 +1,10 @@
+(* From MetaCoq.Template Require config utils All. *)
+(* From MetaCoq.Template Require Import BasicAst Ast. *)
+
 (** Author: Floris van Doorn, december 2017 *)
 Require Import UniMath.Combinatorics.Lists.
 Require Import UniMath.MoreFoundations.Subtypes.
+
 
 (** Graphs.
 
