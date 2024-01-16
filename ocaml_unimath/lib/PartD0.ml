@@ -26,6 +26,8 @@ let sum_of_fibers f =
         (make_hfiber f (f a) a Coq_paths_refl) } Coq_paths_refl) (fun _ ->
       Coq_paths_refl))
 
+type 'a display = (__, 'a) hfiber
+
 (** val totalfst : (__, __ -> 'a1) total2 **)
 
 let totalfst =

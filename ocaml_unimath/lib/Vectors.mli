@@ -34,6 +34,8 @@ val el_make_vec_fun : nat -> (stn -> 'a1) -> (stn -> 'a1) paths
 
 val el_vcons_tl : nat -> 'a1 vec -> 'a1 -> stn -> 'a1 paths
 
+val el_vcons_hd : nat -> 'a1 vec -> 'a1 -> 'a1 paths
+
 val drop_el : nat -> 'a1 vec -> stn -> 'a1 paths
 
 val el_tl : nat -> 'a1 vec -> stn -> 'a1 paths
@@ -51,3 +53,39 @@ val make_vec_el : nat -> 'a1 vec -> 'a1 vec paths
 val isweqvecfun : nat -> ('a1 vec, stn -> 'a1) isweq
 
 val weqvecfun : nat -> ('a1 vec, stn -> 'a1) weq
+
+val isofhlevelvec : nat -> 'a1 isofhlevel -> nat -> 'a1 vec isofhlevel
+
+val vec_ind :
+  'a2 -> ('a1 -> nat -> 'a1 vec -> 'a2 -> 'a2) -> nat -> 'a1 vec -> 'a2
+
+val vec_map : ('a1 -> 'a2) -> nat -> 'a1 vec -> 'a2 vec
+
+val hd_vec_map : ('a1 -> 'a2) -> nat -> 'a1 vec -> 'a2 paths
+
+val tl_vec_map : ('a1 -> 'a2) -> nat -> 'a1 vec -> 'a2 vec paths
+
+val el_vec_map : ('a1 -> 'a2) -> nat -> 'a1 vec -> stn -> 'a2 paths
+
+val vec_map_as_make_vec : ('a1 -> 'a2) -> nat -> 'a1 vec -> 'a2 vec paths
+
+val vec_foldr : ('a1 -> 'a2 -> 'a2) -> 'a2 -> nat -> 'a1 vec -> 'a2
+
+val vec_foldr1 : ('a1 -> 'a1 -> 'a1) -> nat -> 'a1 vec -> 'a1
+
+val vec_append : nat -> 'a1 vec -> nat -> 'a1 vec -> 'a1 vec
+
+val vec_map_id : nat -> 'a1 vec -> 'a1 vec paths
+
+val vec_map_comp :
+  ('a1 -> 'a2) -> ('a2 -> 'a3) -> nat -> 'a1 vec -> 'a3 vec paths
+
+val vec_map_make_vec : nat -> (stn -> 'a1) -> ('a1 -> 'a2) -> 'a2 vec paths
+
+val vec_append_lid : 'a1 vec -> nat -> ('a1 vec -> 'a1 vec) paths
+
+val vec_fill : 'a1 -> nat -> 'a1 vec
+
+val vec_map_const : nat -> 'a1 vec -> 'a2 -> 'a2 vec paths
+
+val vec_zip : nat -> 'a1 vec -> 'a2 vec -> ('a1, 'a2) dirprod vec

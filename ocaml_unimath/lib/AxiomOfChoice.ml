@@ -5,6 +5,7 @@ open PartC
 open Preamble
 open Propositions
 open Sets
+open Sets0
 
 let __ = let rec f _ = Obj.repr f in Obj.repr f
 
@@ -49,6 +50,17 @@ let eqrel_on_bool_iff p =
   pr2 = (fun p0 ->
   iscompsetquotpr e (Obj.magic Coq_true) (Obj.magic Coq_false) p0) }
 
+(** val coq_AxiomOfChoice : hProp **)
+
+let coq_AxiomOfChoice =
+  forall_hProp (fun _ -> ischoicebase)
+
+(** val coq_AxiomOfChoice_surj : hProp **)
+
+let coq_AxiomOfChoice_surj =
+  forall_hProp (fun _ ->
+    forall_hProp (fun _ -> forall_hProp (fun _ -> himpl ishinh)))
+
 (** val coq_AC_impl2 : (hProptoType, hProptoType) logeq **)
 
 let coq_AC_impl2 =
@@ -60,6 +72,20 @@ let coq_AC_impl2 =
     Obj.magic (fun x _ ne ->
       hinhuniv ishinh (fun sec -> hinhpr (fun x0 -> (sec.pr1 x0).pr2))
         (Obj.magic aC x __ (fun t -> t.pr1) (pr1_issurjective ne)))) }
+
+(** val coq_SetCovering : hProptoType -> hProptoType **)
+
+let coq_SetCovering ac =
+  let ac' = coq_AC_impl2.pr1 ac in
+  let f = Obj.magic ac' pi0 __ pi0pr (issurjsetquotpr pathseqrel) in
+  squash_to_prop f (propproperty ishinh) (fun x0 ->
+    let f0 = x0.pr1 in
+    let eqn = x0.pr2 in
+    hinhpr { pr1 = pi0; pr2 = { pr1 = f0; pr2 = (fun x ->
+      squash_to_prop
+        (invmap (weqpathsinsetquot pathseqrel (f0 (pi0pr x)) x)
+          (eqn (pi0pr x))) (propproperty ishinh) (fun e ->
+        hinhpr { pr1 = (pi0pr x); pr2 = e })) } })
 
 (** val coq_AC_to_LEM : hProptoType -> hProptoType **)
 
@@ -78,3 +104,17 @@ let coq_AC_to_LEM aC =
         (retract_dec (Obj.magic f) g h isdeceqbool
           (setquotpr (Obj.magic eqrel_on_bool p) Coq_true)
           (setquotpr (Obj.magic eqrel_on_bool p) Coq_false))))
+
+(** val coq_AxiomOfDecidableChoice : hProp **)
+
+let coq_AxiomOfDecidableChoice =
+  forall_hProp (fun _ -> himpl ischoicebase)
+
+(** val coq_AC_iff_ADC_and_LEM : hProptoType **)
+
+let coq_AC_iff_ADC_and_LEM =
+  Obj.magic { pr1 = (fun aC -> { pr1 = (fun _ i ->
+    Obj.magic aC (make_hSet (isasetifdeceq i))); pr2 = (coq_AC_to_LEM aC) });
+    pr2 = (fun x0 ->
+    let adc = x0.pr1 in
+    let lem = x0.pr2 in (fun x -> adc __ (fun x1 y -> lem (eqset x x1 y)))) }
