@@ -7,7 +7,6 @@ val transitive_paths_weq :
 val weqtotal2comm :
   (('a1, ('a2, 'a3) total2) total2, ('a2, ('a1, 'a3) total2) total2) weq
 
-type dirprod a b = ()
 val pathsdirprodweq :
   'a1 -> 'a1 -> 'a2 -> 'a2 -> (('a1, 'a2) dirprod paths, ('a1 paths, 'a2
   paths) dirprod) weq

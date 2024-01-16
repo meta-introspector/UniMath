@@ -1,5 +1,7 @@
 open Notations
 open PartA
+open PartB
+open PartC
 open PartD
 open Preamble
 open Propositions
@@ -34,6 +36,12 @@ let subtype_notContainedIn _ _ =
 let subtype_inc _ _ le s =
   { pr1 = s.pr1; pr2 = (Obj.magic le s.pr1 s.pr2) }
 
+(** val subtype_smallerThan : 'a1 hsubtype -> 'a1 hsubtype -> hProp **)
+
+let subtype_smallerThan s t =
+  hconj (subtype_containedIn (Obj.magic s) (Obj.magic t))
+    (subtype_notContainedIn t s)
+
 (** val subtype_equal : 'a1 hsubtype -> 'a1 hsubtype -> hProp **)
 
 let subtype_equal s t =
@@ -57,6 +65,25 @@ let subtype_notEqual_containedIn s t ci ne =
         let p = pr3.pr1 in let q = pr3.pr2 in fromempty (q (Obj.magic ci x p)))
     | Coq_ii2 h -> h)
 
+(** val subtype_notEqual_to_negEqual :
+    'a1 hsubtype -> 'a1 hsubtype -> hProptoType -> hProptoType **)
+
+let subtype_notEqual_to_negEqual _ _ n =
+  squash_to_prop n isapropneg (fun x0 ->
+    match x0 with
+    | Coq_ii1 h ->
+      squash_to_prop h isapropneg (fun x1 ->
+        let x = x1.pr1 in
+        let pr3 = x1.pr2 in
+        let sx = pr3.pr1 in
+        let nTx = pr3.pr2 in Obj.magic (fun e -> nTx ((e x).pr1 sx)))
+    | Coq_ii2 h ->
+      squash_to_prop h isapropneg (fun x1 ->
+        let x = x1.pr1 in
+        let pr3 = x1.pr2 in
+        let tx = pr3.pr1 in
+        let nSx = pr3.pr2 in Obj.magic (fun e -> nSx ((e x).pr2 tx))))
+
 (** val subtype_notEqual_from_negEqual :
     'a1 hsubtype -> 'a1 hsubtype -> hProptoType -> hProptoType -> hProptoType **)
 
@@ -77,6 +104,22 @@ let subtype_notEqual_from_negEqual s t lem ne =
            Coq_ii2
              (hinhpr { pr1 = x; pr2 = (negimpl_to_conj (t x) (s x) lem b) }))))
 
+(** val emptysubtype : 'a1 hsubtype **)
+
+let emptysubtype _ =
+  hfalse
+
+(** val subtype_difference : 'a1 hsubtype -> 'a1 hsubtype -> 'a1 hsubtype **)
+
+let subtype_difference s _ x =
+  hconj (s x) hneg
+
+(** val subtype_difference_containedIn :
+    'a1 hsubtype -> 'a1 hsubtype -> hProptoType **)
+
+let subtype_difference_containedIn _ _ =
+  Obj.magic (fun _ u -> u.pr1)
+
 (** val subtype_equal_cond : 'a1 hsubtype -> 'a1 hsubtype -> hProptoType **)
 
 let subtype_equal_cond _ _ =
@@ -91,11 +134,33 @@ let subtype_equal_cond _ _ =
 let subtype_union _ _ =
   ishinh
 
+(** val subtype_binaryunion : 'a1 hsubtype -> 'a1 hsubtype -> 'a1 hsubtype **)
+
+let subtype_binaryunion _ _ _ =
+  hdisj
+
+(** val subtype_binaryunion_leq1 :
+    'a1 hsubtype -> 'a1 hsubtype -> hProptoType **)
+
+let subtype_binaryunion_leq1 _ _ =
+  Obj.magic (fun _ -> hdisj_in1)
+
+(** val subtype_binaryunion_leq2 :
+    'a1 hsubtype -> 'a1 hsubtype -> hProptoType **)
+
+let subtype_binaryunion_leq2 _ _ =
+  Obj.magic (fun _ -> hdisj_in2)
+
 (** val subtype_union_containedIn :
     hSet -> ('a1 -> pr1hSet hsubtype) -> 'a1 -> hProptoType **)
 
 let subtype_union_containedIn _ _ i =
   Obj.magic (fun _ s -> hinhpr { pr1 = i; pr2 = s })
+
+(** val subtype_intersection : ('a2 -> 'a1 hsubtype) -> 'a1 hsubtype **)
+
+let subtype_intersection s x =
+  forall_hProp (fun i -> s i x)
 
 (** val hsubtype_univalence :
     'a1 hsubtype -> 'a1 hsubtype -> ('a1 hsubtype paths, hProptoType) weq **)
@@ -103,6 +168,13 @@ let subtype_union_containedIn _ _ i =
 let hsubtype_univalence s t =
   weqcomp (Obj.magic weqtoforallpaths s t)
     (Obj.magic weqonsecfibers (fun x -> weqlogeq (s x) (t x)))
+
+(** val hsubtype_rect :
+    'a1 hsubtype -> 'a1 hsubtype -> ('a1 hsubtype paths -> 'a2, hProptoType
+    -> 'a2) weq **)
+
+let hsubtype_rect s t =
+  weqinvweq.pr1 (weqonsecbase (hsubtype_univalence s t))
 
 (** val subtype_containment_istrans : pr1hSet istrans **)
 
@@ -131,6 +203,24 @@ let subtype_containment_isantisymm s t i j =
 let subtype_containment_isPartialOrder =
   make_dirprod subtype_containment_ispreorder subtype_containment_isantisymm
 
+(** val subtype_inc_comp :
+    'a1 hsubtype -> 'a1 hsubtype -> 'a1 hsubtype -> hProptoType ->
+    hProptoType -> 'a1 carrier -> 'a1 carrier paths **)
+
+let subtype_inc_comp _ _ _ _ _ _ =
+  Coq_paths_refl
+
+(** val subtype_deceq : 'a1 hsubtype -> 'a1 isdeceq -> 'a1 carrier isdeceq **)
+
+let subtype_deceq s i s0 t =
+  let d = i s0.pr1 t.pr1 in
+  (match d with
+   | Coq_ii1 a -> Coq_ii1 (subtypePath_prop s s0 t a)
+   | Coq_ii2 b ->
+     Coq_ii2 (fun eq -> b (maponpaths (fun t0 -> t0.pr1) s0 t eq)))
+
+type 'x isDecidablePredicate = 'x -> hProptoType decidable
+
 (** val subtype_plus : 'a1 hsubtype -> 'a1 -> 'a1 hsubtype **)
 
 let subtype_plus _ _ _ =
@@ -156,3 +246,246 @@ let subtype_plus_in _ _ t le tz =
       match x0 with
       | Coq_ii1 h -> Obj.magic le x h
       | Coq_ii2 _ -> tz))
+
+(** val subtype_complement : 'a1 hsubtype -> 'a1 hsubtype **)
+
+let subtype_complement _ _ =
+  hneg
+
+(** val not_in_subtype_and_complement :
+    'a1 hsubtype -> 'a1 -> hProptoType -> hProptoType -> empty **)
+
+let not_in_subtype_and_complement _ _ in_S in_neg_S =
+  Obj.magic in_neg_S in_S
+
+(** val subtype_complement_intersection_empty :
+    'a1 hsubtype -> ('a2 -> 'a1 hsubtype) -> ('a2, 'a1 hsubtype paths) total2
+    -> ('a2, 'a1 hsubtype paths) total2 -> hProptoType **)
+
+let subtype_complement_intersection_empty s f x x0 =
+  let subtype_complement_intersection_empty_subproof =
+    fun _ _ has_S _ in_intersection -> in_intersection has_S.pr1
+  in
+  let subtype_complement_intersection_empty_subproof0 =
+    fun _ _ has_neg_S _ in_intersection -> in_intersection has_neg_S.pr1
+  in
+  Obj.magic (fun x1 ->
+    make_dirprod (fun in_intersection ->
+      not_in_subtype_and_complement s x1
+        (subtype_complement_intersection_empty_subproof s f x x1
+          in_intersection)
+        (subtype_complement_intersection_empty_subproof0 s f x0 x1
+          in_intersection)) (fun _ -> assert false (* absurd case *)))
+
+(** val subtype_complement_union :
+    'a1 hsubtype -> hProptoType -> ('a2 -> 'a1 hsubtype) -> ('a2, 'a1
+    hsubtype paths) total2 -> ('a2, 'a1 hsubtype paths) total2 -> hProptoType **)
+
+let subtype_complement_union s lem f x x0 =
+  let subtype_complement_union_subproof = fun s0 f0 has_S _ a ->
+    internal_paths_rew_r (f0 has_S.pr1) s0 a has_S.pr2
+  in
+  let subtype_complement_union_subproof0 = fun s0 f0 has_neg_S _ b ->
+    internal_paths_rew_r (f0 has_neg_S.pr1) (subtype_complement s0) b
+      has_neg_S.pr2
+  in
+  Obj.magic (fun x1 ->
+    make_dirprod (fun _ -> Coq_tt) (fun _ ->
+      let h = Obj.magic lem (s x1) in
+      (match h with
+       | Coq_ii1 a ->
+         hinhpr { pr1 = x.pr1; pr2 =
+           (subtype_complement_union_subproof s f x x1 a) }
+       | Coq_ii2 b ->
+         hinhpr { pr1 = x0.pr1; pr2 =
+           (subtype_complement_union_subproof0 s f x0 x1 b) })))
+
+(** val binary_intersection' :
+    'a1 hsubtype -> 'a1 hsubtype -> 'a1 hsubtype **)
+
+let binary_intersection' u v =
+  subtype_intersection (fun b -> match b with
+                                 | Coq_true -> u
+                                 | Coq_false -> v)
+
+(** val binary_intersection : 'a1 hsubtype -> 'a1 hsubtype -> 'a1 hsubtype **)
+
+let binary_intersection u v x =
+  hconj (u x) (v x)
+
+(** val binary_intersection_commutative :
+    'a1 hsubtype -> 'a1 hsubtype -> 'a1 -> hProptoType -> hProptoType **)
+
+let binary_intersection_commutative u v x p =
+  transportf (hconj (u x) (v x)) (hconj (v x) (u x))
+    (iscomm_hconj (u x) (v x)) p
+
+(** val intersection_contained_l :
+    'a1 hsubtype -> 'a1 hsubtype -> hProptoType **)
+
+let intersection_contained_l _ _ =
+  Obj.magic (fun _ xinUV -> xinUV.pr1)
+
+(** val intersection_contained_r :
+    'a1 hsubtype -> 'a1 hsubtype -> hProptoType **)
+
+let intersection_contained_r _ _ =
+  Obj.magic (fun _ xinUV -> xinUV.pr2)
+
+(** val intersection_contained :
+    'a1 hsubtype -> 'a1 hsubtype -> 'a1 hsubtype -> 'a1 hsubtype ->
+    hProptoType -> hProptoType -> hProptoType **)
+
+let intersection_contained u _ v _ uu vv =
+  Obj.magic (fun x p -> { pr1 =
+    (Obj.magic uu x (Obj.magic intersection_contained_l u v x p)); pr2 =
+    (Obj.magic vv x (Obj.magic intersection_contained_r u v x p)) })
+
+(** val isaprop_subtype_containedIn :
+    'a1 hsubtype -> 'a1 hsubtype -> hProptoType isaprop **)
+
+let isaprop_subtype_containedIn _ v =
+  impred_isaprop (fun t -> isapropimpl (v t).pr2)
+
+(** val image_hsubtype : 'a1 hsubtype -> ('a1 -> 'a2) -> 'a2 hsubtype **)
+
+let image_hsubtype _ _ _ =
+  ishinh
+
+(** val image_hsubtype_emptyhsubtype : ('a1 -> 'a2) -> 'a2 hsubtype paths **)
+
+let image_hsubtype_emptyhsubtype f =
+  Obj.magic funextsec (image_hsubtype emptysubtype (Obj.magic f))
+    emptysubtype (fun y ->
+    Obj.magic hPropUnivalence (image_hsubtype emptysubtype (Obj.magic f) y)
+      (emptysubtype y) (fun yinfEmpty ->
+      factor_through_squash (emptysubtype y).pr2 (fun x -> x.pr2.pr2)
+        yinfEmpty) (fun yinEmpty -> fromempty (Obj.magic yinEmpty)))
+
+(** val image_hsubtype_id : 'a1 hsubtype -> 'a1 hsubtype paths **)
+
+let image_hsubtype_id u =
+  Obj.magic funextsec (image_hsubtype (Obj.magic u) idfun) u (fun x ->
+    Obj.magic hPropUnivalence (image_hsubtype (Obj.magic u) idfun x)
+      (Obj.magic u x) (fun xinIdU ->
+      factor_through_squash (let x0 = fun x0 -> (u x0).pr2 in Obj.magic x0 x)
+        (fun u0 -> u0.pr2.pr2) xinIdU) (fun xinU ->
+      hinhpr { pr1 = x; pr2 = { pr1 = Coq_paths_refl; pr2 = xinU } }))
+
+(** val image_hsubtype_comp :
+    'a1 hsubtype -> ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 hsubtype paths **)
+
+let image_hsubtype_comp u f g =
+  Obj.magic funextsec (image_hsubtype u (funcomp f (Obj.magic g)))
+    (image_hsubtype (image_hsubtype u f) (Obj.magic g)) (fun z ->
+    Obj.magic hPropUnivalence (image_hsubtype u (funcomp f (Obj.magic g)) z)
+      (image_hsubtype (image_hsubtype u f) (Obj.magic g) z) (fun zinCompU ->
+      factor_through_squash ishinh.pr2 (fun x ->
+        hinhpr { pr1 = (f x.pr1); pr2 = { pr1 = x.pr2.pr1; pr2 =
+          (hinhpr { pr1 = x.pr1; pr2 = { pr1 =
+            (maponpaths f x.pr1 x.pr1 Coq_paths_refl); pr2 = x.pr2.pr2 } }) } })
+        zinCompU) (fun zinCompU ->
+      factor_through_squash ishinh.pr2 (fun y ->
+        factor_through_squash ishinh.pr2 (fun x ->
+          hinhpr { pr1 = x.pr1; pr2 = { pr1 =
+            (pathscomp0 (funcomp f g x.pr1) (g y.pr1) (Obj.magic z)
+              (maponpaths g (f x.pr1) y.pr1 x.pr2.pr1) y.pr2.pr1); pr2 =
+            x.pr2.pr2 } }) y.pr2.pr2) zinCompU))
+
+type ('x, 'y) hsubtype_preserving = hProptoType
+
+(** val isaprop_hsubtype_preserving :
+    'a1 hsubtype -> 'a2 hsubtype -> ('a1 -> 'a2) -> ('a1, 'a2)
+    hsubtype_preserving isaprop **)
+
+let isaprop_hsubtype_preserving _ v _ =
+  impred_isaprop (fun t -> isapropimpl (v t).pr2)
+
+(** val id_hsubtype_preserving :
+    'a1 hsubtype -> ('a1, 'a1) hsubtype_preserving **)
+
+let id_hsubtype_preserving u =
+  Obj.magic (fun _ xinU ->
+    internal_paths_rew (image_hsubtype u idfun) xinU u (image_hsubtype_id u))
+
+(** val comp_hsubtype_preserving :
+    'a1 hsubtype -> 'a2 hsubtype -> 'a3 hsubtype -> ('a1 -> 'a2) -> ('a2 ->
+    'a3) -> ('a1, 'a2) hsubtype_preserving -> ('a2, 'a3) hsubtype_preserving
+    -> ('a1, 'a3) hsubtype_preserving **)
+
+let comp_hsubtype_preserving u _ _ f g fsp gsp =
+  Obj.magic (fun z zinU ->
+    let zinU0 =
+      internal_paths_rew (image_hsubtype u (funcomp f g)) zinU
+        (image_hsubtype (image_hsubtype u f) g) (image_hsubtype_comp u f g)
+    in
+    Obj.magic gsp z
+      (factor_through_squash ishinh.pr2 (fun y ->
+        hinhpr { pr1 = y.pr1; pr2 = { pr1 = y.pr2.pr1; pr2 =
+          (Obj.magic fsp y.pr1 y.pr2.pr2) } }) zinU0))
+
+(** val empty_hsubtype_preserving :
+    ('a1 -> 'a2) -> ('a1, 'a2) hsubtype_preserving **)
+
+let empty_hsubtype_preserving f =
+  internal_paths_rew_r (image_hsubtype emptysubtype f) emptysubtype
+    (subtype_containment_isrefl (Obj.magic emptysubtype))
+    (image_hsubtype_emptyhsubtype f)
+
+(** val total_hsubtype_preserving :
+    ('a1 -> 'a2) -> ('a1, 'a2) hsubtype_preserving **)
+
+let total_hsubtype_preserving _ =
+  Obj.magic (fun _ _ -> Coq_tt)
+
+(** val singleton : 'a1 -> 'a1 hsubtype **)
+
+let singleton _ _ =
+  ishinh
+
+(** val singleton_point : 'a1 -> 'a1 carrier **)
+
+let singleton_point x =
+  { pr1 = x; pr2 = (hinhpr Coq_paths_refl) }
+
+(** val iscontr_singleton : hSet -> pr1hSet -> pr1hSet carrier iscontr **)
+
+let iscontr_singleton x x0 =
+  make_iscontr (singleton_point x0) (fun t ->
+    subtypePath_prop (singleton x0) t (singleton_point x0)
+      (squash_to_prop t.pr2 (setproperty x t.pr1 (singleton_point x0).pr1)
+        (fun x1 -> x1)))
+
+(** val singleton_is_in : 'a1 hsubtype -> 'a1 carrier -> hProptoType **)
+
+let singleton_is_in a a0 =
+  Obj.magic (fun y -> hinhuniv (a y) (fun p -> transportb y a0.pr1 p a0.pr2))
+
+(** val coprod_carrier_binary_union :
+    'a1 hsubtype -> 'a1 hsubtype -> ('a1 carrier, 'a1 carrier) coprod -> 'a1
+    carrier **)
+
+let coprod_carrier_binary_union a b =
+  sumofmaps
+    (subtype_inc a (subtype_binaryunion a b) (subtype_binaryunion_leq1 a b))
+    (subtype_inc b (subtype_binaryunion a b) (subtype_binaryunion_leq2 a b))
+
+(** val issurjective_coprod_carrier_binary_union :
+    'a1 hsubtype -> 'a1 hsubtype -> (('a1 carrier, 'a1 carrier) coprod, 'a1
+    carrier) issurjective **)
+
+let issurjective_coprod_carrier_binary_union a b y =
+  let x = y.pr1 in
+  let aub = y.pr2 in
+  hinhfun
+    (sumofmaps (fun y0 ->
+      make_hfiber (coprod_carrier_binary_union a b) { pr1 = x; pr2 = aub }
+        (Coq_ii1 { pr1 = x; pr2 = y0 })
+        (subtypePath_prop (subtype_binaryunion a b)
+          (coprod_carrier_binary_union a b (Coq_ii1 { pr1 = x; pr2 = y0 }))
+          { pr1 = x; pr2 = aub } Coq_paths_refl)) (fun y0 ->
+      make_hfiber (coprod_carrier_binary_union a b) { pr1 = x; pr2 = aub }
+        (Coq_ii2 { pr1 = x; pr2 = y0 })
+        (subtypePath_prop (subtype_binaryunion a b)
+          (coprod_carrier_binary_union a b (Coq_ii2 { pr1 = x; pr2 = y0 }))
+          { pr1 = x; pr2 = aub } Coq_paths_refl))) aub

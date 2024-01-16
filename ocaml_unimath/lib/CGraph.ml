@@ -4,7 +4,7 @@ open PartB
 open PartD
 open PartD0
 open Preamble
-open Propositions
+open Propositions0
 open Sets
 open UnivalenceAxiom
 
