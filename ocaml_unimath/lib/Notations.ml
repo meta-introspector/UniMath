@@ -1,7 +1,8 @@
 open Propositions
 
 (** val hequiv : hProp -> hProp -> hProp **)
-
+type hconj a b = ()
+             
 let hequiv p q =
   hconj (himpl q) (himpl p)
 

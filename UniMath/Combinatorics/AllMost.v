@@ -23,25 +23,25 @@ Require Export UniMath.Combinatorics.Maybe.
 Require Export UniMath.Combinatorics.MoreLists.
 Require Export UniMath.Combinatorics.Tuples.
 
-Separate Extraction Tuples.
-Separate Extraction MoreLists.
-Separate Extraction StandardFiniteSets.
-Separate Extraction Vectors.
-Separate Extraction VectorsTests.
-Separate Extraction Lists.
-Separate Extraction FiniteSets.
-Separate Extraction KFiniteTypes.
-Separate Extraction KFiniteSubtypes.
-Separate Extraction Graph.
-Separate Extraction CGraph.
-Separate Extraction GraphPaths.
-Separate Extraction Equivalence_Relations.
-Separate Extraction OrderedSets.
-Separate Extraction WellFoundedRelations.
-Separate Extraction WellOrderedSets.
-Separate Extraction ZFstructures.
-Separate Extraction FiniteSequences.
-Separate Extraction BoundedSearch.
-Separate Extraction MetricTree.
-Separate Extraction DecSet.
-Separate Extraction Maybe.
+Recursive Extraction Library  Tuples.
+Recursive Extraction Library  MoreLists.
+Recursive Extraction Library  StandardFiniteSets.
+Recursive Extraction Library  Vectors.
+Recursive Extraction Library  VectorsTests.
+Recursive Extraction Library  Lists.
+Recursive Extraction Library  FiniteSets.
+Recursive Extraction Library  KFiniteTypes.
+Recursive Extraction Library  KFiniteSubtypes.
+Recursive Extraction Library  Graph.
+Recursive Extraction Library  CGraph.
+Recursive Extraction Library  GraphPaths.
+Recursive Extraction Library  Equivalence_Relations.
+Recursive Extraction Library  OrderedSets.
+Recursive Extraction Library  WellFoundedRelations.
+Recursive Extraction Library  WellOrderedSets.
+Recursive Extraction Library  ZFstructures.
+Recursive Extraction Library  FiniteSequences.
+Recursive Extraction Library  BoundedSearch.
+Recursive Extraction Library  MetricTree.
+Recursive Extraction Library  DecSet.
+Recursive Extraction Library  Maybe.
