@@ -1,0 +1,10 @@
+open Classes
+open Specif
+
+val coq_UIP_K : 'a1 -> 'a2 -> 'a2
+
+val coq_K_dec : 'a1 coq_EqDec -> 'a1 -> 'a2 -> 'a2
+
+val coq_K_dec_point : 'a1 -> 'a1 coq_EqDecPoint -> 'a2 -> 'a2
+
+val eq_eqdec : 'a1 coq_EqDec -> 'a1 -> 'a1 -> sumbool

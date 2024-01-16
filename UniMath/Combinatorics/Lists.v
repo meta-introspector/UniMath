@@ -28,7 +28,7 @@ Definition list_to_vec: ∏ l: list, vec A (length l) := pr2.
 Coercion list_to_vec: list >-> vec.
 
 (** The empty list *)
-Definition nil : list := (0,, vnil).
+Definition nil : list := (0,,u vnil).
 
 (** List cons *)
 Definition cons (x : A) (xs : list) : list :=
@@ -49,7 +49,7 @@ induction n as [|n IHn].
   apply Hnil.
 - simpl in xs.
   induction xs as [x xs].
-  apply (Hcons x (n,,xs) (IHn xs)).
+  apply (Hcons x (n ,,u xs) (IHn xs)).
 Defined.
 
 Lemma list_ind_compute_2
@@ -103,7 +103,7 @@ Defined.
 Definition functionToList n : (stn n -> A) -> list.
 Proof.
   intros f.
-  exact (n ,, make_vec f).
+  exact (n ,,u make_vec f).
 Defined.
 
 Section Test.
@@ -230,11 +230,11 @@ Proof.
     + induction xs as [m []].
       apply idpath.
     + induction xs as [m [k xs]].
-      assert (IHinst := IH (k,,xs)).
-      change (S (S n),, m,, k,, xs) with (cons m (cons k (n,,xs))).
+      assert (IHinst := IH (k ,,u xs)).
+      change (S (S n),,u m,,u k ,,u xs) with (cons m (cons k (n ,,u xs))).
       do 2 rewrite map_cons.
       rewrite foldr1_cons.
-      change (S n,, k,, xs) with (cons k (n,,xs)) in IHinst.
+      change (S n,,u k,,u xs) with (cons k (n ,,u xs)) in IHinst.
       rewrite map_cons in IHinst.
       rewrite <- IHinst.
       apply foldr1_map_cons. (* this steps could be done by cbn and reflexivity *)
