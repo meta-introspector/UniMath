@@ -145,7 +145,19 @@ let paths_rect _ f _ _ =
 let paths_rec _ f _ _ =
   f
 
+(** val pr1 : ('a1, 'a2) total2 -> 'a1 **)
+
 type ('t, 'p) total2 = { pr1 : 't; pr2 : 'p }
+                       
+let pr1 t =
+  t.pr1
+
+(** val pr2 : ('a1, 'a2) total2 -> 'a2 **)
+
+let pr2 t =
+  t.pr2
+
+
 
 (** val total2_rect : ('a1 -> 'a2 -> 'a3) -> ('a1, 'a2) total2 -> 'a3 **)
 
@@ -154,15 +166,6 @@ let total2_rect f t =
 
 (** val total2_rec : ('a1 -> 'a2 -> 'a3) -> ('a1, 'a2) total2 -> 'a3 **)
 
+
 let total2_rec f t =
   f (pr1 t) (pr2 t)
-
-(** val pr1 : ('a1, 'a2) total2 -> 'a1 **)
-
-let pr1 t =
-  t.pr1
-
-(** val pr2 : ('a1, 'a2) total2 -> 'a2 **)
-
-let pr2 t =
-  t.pr2

@@ -27,6 +27,8 @@ let isaprop_isweqtoforallpathsStatement =
 
 (** val isaprop_propositionalUnivalenceStatement :
     propositionalUnivalenceStatement isaprop **)
+let univalence =
+  univalenceUAH (fun _ _ -> univalenceAxiom)
 
 let isaprop_propositionalUnivalenceStatement =
   impred_isaprop (fun _ ->

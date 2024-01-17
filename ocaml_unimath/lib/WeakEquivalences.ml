@@ -31,11 +31,14 @@ let transitive_paths_weq x y z xeqy =
 (** val weqtotal2comm :
     (('a1, ('a2, 'a3) total2) total2, ('a2, ('a1, 'a3) total2) total2) weq **)
 
-let weqtotal2comm =
-  weq_iso (fun pair -> { pr1 = pair.pr2.pr1; pr2 = { pr1 = pair.pr1; pr2 =
-    pair.pr2.pr2 } }) (fun pair -> { pr1 = pair.pr2.pr1; pr2 = { pr1 =
-    pair.pr1; pr2 = pair.pr2.pr2 } }) (fun _ -> Coq_paths_refl) (fun _ ->
-    Coq_paths_refl)
+(* val weqtotal2comm : *)
+(*   (('a1, ('a2, 'a3) total2) total2, ('a2, ('a1, 'a3) total2) total2) weq *)
+
+(* let weqtotal2comm = *)
+(*   weq_iso (fun pair -> { pr1 = pair.pr2.pr1; pr2 = { pr1 = pair.pr1; pr2 = *)
+(*     pair.pr2.pr2 } }) (fun pair -> { pr1 = pair.pr2.pr1; pr2 = { pr1 = *)
+(*     pair.pr1; pr2 = pair.pr2.pr2 } }) (fun _ -> Coq_paths_refl) (fun _ -> *)
+(*     Coq_paths_refl) *)
 
 (** val pathsdirprodweq :
     'a1 -> 'a1 -> 'a2 -> 'a2 -> (('a1, 'a2) dirprod paths, ('a1 paths, 'a2
@@ -65,11 +68,11 @@ let dirprod_with_contr_l iscontrX =
     (('a1 -> ('a2, 'a3) total2, 'a4) total2, ('a1 -> 'a2, ('a1 -> 'a3, 'a4)
     total2) total2) weq **)
 
-let total2_assoc_fun_left =
-  weq_iso (fun p -> { pr1 = (fun a -> (p.pr1 a).pr1); pr2 = { pr1 = (fun a ->
-    (p.pr1 a).pr2); pr2 = p.pr2 } }) (fun p -> { pr1 = (fun a -> { pr1 =
-    (p.pr1 a); pr2 = (p.pr2.pr1 a) }); pr2 = p.pr2.pr2 }) (fun _ ->
-    Coq_paths_refl) (fun _ -> Coq_paths_refl)
+(* let total2_assoc_fun_left = *)
+(*   weq_iso (fun p -> { pr1 = (fun a -> (p.pr1 a).pr1); pr2 = { pr1 = (fun a -> *)
+(*     (p.pr1 a).pr2); pr2 = p.pr2 } }) (fun p -> { pr1 = (fun a -> { pr1 = *)
+(*     (p.pr1 a); pr2 = (p.pr2.pr1 a) }); pr2 = p.pr2.pr2 }) (fun _ -> *)
+(*     Coq_paths_refl) (fun _ -> Coq_paths_refl) *)
 
 (** val sec_total2_distributivity :
     ('a1 -> ('a2, 'a3) total2, ('a1 -> 'a2, 'a1 -> 'a3) total2) weq **)

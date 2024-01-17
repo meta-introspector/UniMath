@@ -34,8 +34,8 @@ val reverse :
 
 type ('v, 'e) symmetric_closure = ('e, 'e) coprod
 
-val issymmetric_symmetric_closure :
-  ('a1, ('a1, 'a2) symmetric_closure) issymmetric
+(* val issymmetric_symmetric_closure : *)
+(*   ('a1, ('a1, 'a2) symmetric_closure) issymmetric *)
 
 val reverse_in_closure :
   'a1 -> 'a1 -> ('a1, ('a1, 'a2) symmetric_closure) gpaths -> ('a1, ('a1,

@@ -1879,12 +1879,8 @@ let weqdirprodf w w' =
 
 (** val weqtodirprodwithunit : ('a1, ('a1, coq_unit) dirprod) weq **)
 
-let weqtodirprodwithunit =
-  let f = fun x -> make_dirprod x Coq_tt in
-  { pr1 = f; pr2 =
-  (let g = fun xu -> xu.pr1 in
-   let egf = fun _ -> Coq_paths_refl in
-   let efg = fun _ -> Coq_paths_refl in isweq_iso f g egf efg) }
+(* val weqtodirprodwithunit : ('a1, ('a1, Preamble.coq_unit) dirprod) weq *)
+
 
 (** val total2asstor :
     (('a1, 'a2) total2, 'a3) total2 -> ('a1, ('a2, 'a3) total2) total2 **)
@@ -2939,18 +2935,56 @@ let ezmaphf f g z ye xe =
           (maponpaths g (f xe.pr1) ye.pr1 xe.pr2) ye.pr2)) ye xe.pr2
       Coq_paths_refl) }
 
-(** val invezmaphf :
-    ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a3)
-    hfiber, ('a2, 'a3) hfiber) hfiber -> ('a1, 'a2) hfiber **)
+let make_weq f is =
+  { pr1 = f; pr2 = is }
 
+let invweq w =
+  make_weq (invmap w) (isweqinvmap w)
+
+let hfibersftogf f g z ye xe =
+  { pr1 = xe.pr1; pr2 =
+    (pathscomp0 (g (f xe.pr1)) (g ye.pr1) z
+      (maponpaths g (f xe.pr1) ye.pr1 xe.pr2) ye.pr2) }
+
+let ezmaphf f g z ye xe =
+  { pr1 = (hfibersftogf f g z ye xe); pr2 =
+    (hfibertriangle2 g z
+      (make_hfiber g z (f xe.pr1)
+        (pathscomp0 (g (f xe.pr1)) (g ye.pr1) z
+          (maponpaths g (f xe.pr1) ye.pr1 xe.pr2) ye.pr2)) ye xe.pr2
+      Coq_paths_refl) }
 let invezmaphf f g z ye xee' =
   { pr1 = xee'.pr1.pr1; pr2 =
     (maponpaths (hfiberpr1 g z) (hfibersgftog f g z xee'.pr1) ye xee'.pr2) }
 
-(** val ffgg :
+(** val invezmaphf :
     ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a3)
-    hfiber, ('a2, 'a3) hfiber) hfiber -> (('a1, 'a3) hfiber, ('a2, 'a3)
-    hfiber) hfiber **)
+    hfiber, ('a2, 'a3) hfiber) hfiber -> ('a1, 'a2) hfiber **)
+
+let totalfun f z =
+  { pr1 = z.pr1; pr2 = (f z.pr1 z.pr2) }
+
+let make_weq f is =
+  { pr1 = f; pr2 = is }
+
+let invweq w =
+  make_weq (invmap w) (isweqinvmap w)
+
+let hfibersftogf f g z ye xe =
+  { pr1 = xe.pr1; pr2 =
+    (pathscomp0 (g (f xe.pr1)) (g ye.pr1) z
+      (maponpaths g (f xe.pr1) ye.pr1 xe.pr2) ye.pr2) }
+
+let ezmaphf f g z ye xe =
+  { pr1 = (hfibersftogf f g z ye xe); pr2 =
+    (hfibertriangle2 g z
+      (make_hfiber g z (f xe.pr1)
+        (pathscomp0 (g (f xe.pr1)) (g ye.pr1) z
+          (maponpaths g (f xe.pr1) ye.pr1 xe.pr2) ye.pr2)) ye xe.pr2
+      Coq_paths_refl) }
+let invezmaphf f g z ye xee' =
+  { pr1 = xee'.pr1.pr1; pr2 =
+    (maponpaths (hfiberpr1 g z) (hfibersgftog f g z xee'.pr1) ye xee'.pr2) }
 
 let ffgg f g _ ye xee' =
   let y = ye.pr1 in
@@ -2976,6 +3010,12 @@ let ffgg f g _ ye xee' =
         Coq_paths_refl)) (make_hfiber g (g y) y Coq_paths_refl)
     (maponpaths (hfiberpr1 g (g y)) (make_hfiber g (g y) (f x) e) { pr1 = y;
       pr2 = Coq_paths_refl } e') Coq_paths_refl) }
+
+(** val ffgg :
+    ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a3)
+    hfiber, ('a2, 'a3) hfiber) hfiber -> (('a1, 'a3) hfiber, ('a2, 'a3)
+    hfiber) hfiber **)
+
 
 (** val homotffggid :
     ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a3)
@@ -3048,8 +3088,6 @@ let weqhfibersgwtog w g z =
 (** val totalfun :
     ('a1 -> 'a2 -> 'a3) -> ('a1, 'a2) total2 -> ('a1, 'a3) total2 **)
 
-let totalfun f z =
-  { pr1 = z.pr1; pr2 = (f z.pr1 z.pr2) }
 
 (** val isweqtotaltofib :
     ('a1 -> 'a2 -> 'a3) -> (('a1, 'a2) total2, ('a1, 'a3) total2) isweq ->

@@ -359,8 +359,8 @@ let weqhfibertocontr f y is =
 
 (** val weqhfibertounit : (('a1, coq_unit) hfiber, 'a1) weq **)
 
-let weqhfibertounit =
-  weqhfibertocontr (fun _ -> Coq_tt) Coq_tt iscontrunit
+let weqhfibertounit = 
+  weqhfibertocontr (fun _ -> Coq_tt) Coq_tt iscontrunit 
 
 (** val isofhleveltofun :
     nat -> 'a1 isofhlevel -> ('a1, coq_unit) isofhlevelf **)

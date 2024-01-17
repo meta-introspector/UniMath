@@ -68,8 +68,14 @@ let reverse h u v p =
 
 type ('v, 'e) symmetric_closure = ('e, 'e) coprod
 
+let coprodcomm = function
+| Coq_ii1 x -> Coq_ii2 x
+| Coq_ii2 y -> Coq_ii1 y
+
 (** val issymmetric_symmetric_closure :
     ('a1, ('a1, 'a2) symmetric_closure) issymmetric **)
+let weqcoprodcomm =
+  make_weq coprodcomm isweqcoprodcomm
 
 let issymmetric_symmetric_closure _ _ =
   weqcoprodcomm

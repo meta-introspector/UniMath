@@ -352,6 +352,7 @@ let funextempty =
 
 (** val univalence : (coq_UU paths, ('a1, 'a2) weq) weq **)
 
+(* val univalence : (coq_UU paths, ('a1, 'a2) weq) weq  *)
 let univalence =
   univalenceUAH (fun _ _ -> univalenceAxiom)
 

@@ -732,7 +732,7 @@ val weqdirprodf :
   ('a1, 'a2) weq -> ('a3, 'a4) weq -> (('a1, 'a3) dirprod, ('a2, 'a4)
   dirprod) weq
 
-val weqtodirprodwithunit : ('a1, ('a1, coq_unit) dirprod) weq
+(* val weqtodirprodwithunit : ('a1, ('a1, coq_unit) dirprod) weq *)
 
 val total2asstor :
   (('a1, 'a2) total2, 'a3) total2 -> ('a1, ('a2, 'a3) total2) total2

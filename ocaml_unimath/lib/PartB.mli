@@ -131,7 +131,7 @@ val isweqfinfibseq :
 val weqhfibertocontr :
   ('a1 -> 'a2) -> 'a2 -> 'a2 iscontr -> (('a1, 'a2) hfiber, 'a1) weq
 
-val weqhfibertounit : (('a1, coq_unit) hfiber, 'a1) weq
+(* val weqhfibertounit : (('a1, coq_unit) hfiber, 'a1) weq *)
 
 val isofhleveltofun : nat -> 'a1 isofhlevel -> ('a1, coq_unit) isofhlevelf
 

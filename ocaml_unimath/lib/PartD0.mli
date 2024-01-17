@@ -19,4 +19,4 @@ val totalfst_display : (__, __ -> 'a1) total2 -> (__, __ -> 'a1) total2 paths
 
 val display_totalfst : __ paths
 
-val display_weq : ((__, __ -> 'a1) total2, __) weq
+(* val display_weq : ((__, __ -> 'a1) total2, __) weq *)

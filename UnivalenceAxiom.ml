@@ -96,6 +96,8 @@ let funextfunImplication fe =
 (** val univfromtwoaxioms :
     ((weqtopathsStatement, weqpathsweqStatement) total2, univalenceStatement)
     logeq **)
+let totalfun f z =
+  { pr1 = z.pr1; pr2 = (f z.pr1 z.pr2) }
 
 let univfromtwoaxioms =
   { pr1 = (fun x ->
@@ -352,7 +354,7 @@ let funextempty =
 
 (** val univalence : (coq_UU paths, ('a1, 'a2) weq) weq **)
 
-let univalence =
+let univalence : (coq_UU paths, ('a1, 'a2) weq) weq =
   univalenceUAH (fun _ _ -> univalenceAxiom)
 
 (** val weqtopaths : (__, __) weq -> coq_UU paths **)
