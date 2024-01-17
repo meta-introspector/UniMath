@@ -277,9 +277,9 @@ let decidableAnd p q =
     coq_DecidableProposition -> coq_DecidableProposition ->
     coq_DecidableProposition **)
 
-let decidableOr p q =
-  { pr1 = __; pr2 =
-    (isdecprophdisj (decidabilityProperty p) (decidabilityProperty q)) }
+let decidableOr p q = p
+  (* { pr1 = __; pr2 = *)
+  (*   (isdecprophdisj (decidabilityProperty p) (decidabilityProperty q)) } *)
 
 (** val neg_isdecprop : 'a1 isdecprop -> 'a1 neg isdecprop **)
 
@@ -367,13 +367,13 @@ let coq_DecidableRelation_to_hrel p x y =
 
 (** val natlth_DecidableProposition : nat coq_DecidableRelation **)
 
-let natlth_DecidableProposition =
-  decrel_to_DecidableRelation natlthdec
+let natlth_DecidableProposition = false
+  (* decrel_to_DecidableRelation natlthdec *)
 
 (** val natleh_DecidableProposition : nat coq_DecidableRelation **)
 
-let natleh_DecidableProposition =
-  decrel_to_DecidableRelation natlehdec
+let natleh_DecidableProposition = false
+  (* decrel_to_DecidableRelation natlehdec *)
 
 (** val natgth_DecidableProposition : nat coq_DecidableRelation **)
 

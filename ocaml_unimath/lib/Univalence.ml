@@ -116,15 +116,15 @@ let weqpath_transport w =
 
 (** val weqpath_cast : ('a1, 'a2) weq -> ('a1 -> 'a2) paths **)
 
-let weqpath_cast w =
-  pathscomp0
-    (cast (weqtopathsUAH (fun _ _ -> univalenceAxiom) (Obj.magic w)))
-    (eqweqmap (weqtopathsUAH (fun _ _ -> univalenceAxiom) (Obj.magic w))).pr1
-    w.pr1
-    (pr1_eqweqmap (weqtopathsUAH (fun _ _ -> univalenceAxiom) (Obj.magic w)))
-    (maponpaths (Obj.magic (fun t -> t.pr1))
-      (eqweqmap (weqtopathsUAH (fun _ _ -> univalenceAxiom) (Obj.magic w)))
-      (Obj.magic w) (weqpathsweq (Obj.magic w)))
+let weqpath_cast w = w
+  (* pathscomp0 *)
+  (*   (cast (weqtopathsUAH (fun _ _ -> univalenceAxiom) (Obj.magic w))) *)
+  (*   (eqweqmap (weqtopathsUAH (fun _ _ -> univalenceAxiom) (Obj.magic w))).pr1 *)
+  (*   w.pr1 *)
+  (*   (pr1_eqweqmap (weqtopathsUAH (fun _ _ -> univalenceAxiom) (Obj.magic w))) *)
+  (*   (maponpaths (Obj.magic (fun t -> t.pr1)) *)
+  (*     (eqweqmap (weqtopathsUAH (fun _ _ -> univalenceAxiom) (Obj.magic w))) *)
+  (*     (Obj.magic w) (weqpathsweq (Obj.magic w))) *)
 
 (** val switch_weq :
     ('a1, 'a2) weq -> 'a1 -> 'a2 -> 'a2 paths -> 'a1 paths **)

@@ -1195,8 +1195,8 @@ module Discern =
 
   (** val helper_C : nat -> nat -> nat paths -> nat_discern **)
 
-  let rec helper_C m _ _ =
-    cast (pathsinv0 __ __ (nat_discern_unit m)) Coq_tt
+  let rec helper_C m _ _ = m
+    (* cast (pathsinv0 __ __ (nat_discern_unit m)) Coq_tt *)
 
   (** val apSC : nat -> nat -> nat paths -> nat_discern paths **)
 

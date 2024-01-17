@@ -132,78 +132,78 @@ val total2tohexists : ('a1, 'a2) total2 -> hProptoType
 
 val islogeqcommhdisj : hProp -> hProp -> (hProptoType, hProptoType) logeq
 
-val hconjtohdisj : hProp -> hProptoType -> hProptoType
+(* val hconjtohdisj : hProp -> hProptoType -> hProptoType *)
 
-val hexistsnegtonegforall : hProptoType -> ('a1 -> 'a2) neg
+(* val hexistsnegtonegforall : hProptoType -> ('a1 -> 'a2) neg *)
 
-val forallnegtoneghexists : ('a1 -> 'a2 neg) -> hProptoType neg
+(* val forallnegtoneghexists : ('a1 -> 'a2 neg) -> hProptoType neg *)
 
-val neghexisttoforallneg : hProptoType -> 'a1 -> hProptoType
+(* val neghexisttoforallneg : hProptoType -> 'a1 -> hProptoType *)
 
-(* val weqforallnegtonegexists : ('a1 -> hProptoType, hProptoType) weq *)
+(* (\* val weqforallnegtonegexists : ('a1 -> hProptoType, hProptoType) weq *\) *)
 
-val tonegdirprod : hProptoType -> hProptoType
+(* val tonegdirprod : hProptoType -> hProptoType *)
 
-val weak_fromnegdirprod : hProp -> hProp -> hProptoType -> hProptoType dneg
+(* val weak_fromnegdirprod : hProp -> hProp -> hProptoType -> hProptoType dneg *)
 
-val tonegcoprod : (hProptoType, hProptoType) dirprod -> hProptoType
+(* val tonegcoprod : (hProptoType, hProptoType) dirprod -> hProptoType *)
 
-val toneghdisj : (hProptoType, hProptoType) dirprod -> hProptoType
+(* val toneghdisj : (hProptoType, hProptoType) dirprod -> hProptoType *)
 
-val fromnegcoprod : hProptoType -> (hProptoType, hProptoType) dirprod
+(* val fromnegcoprod : hProptoType -> (hProptoType, hProptoType) dirprod *)
 
-val fromnegcoprod_prop : hProp -> hProp -> hProptoType -> hProptoType
+(* val fromnegcoprod_prop : hProp -> hProp -> hProptoType -> hProptoType *)
 
-val hdisjtoimpl : hProp -> hProptoType -> hProptoType -> hProptoType
+(* val hdisjtoimpl : hProp -> hProptoType -> hProptoType -> hProptoType *)
 
-val isdecprophdisj : 'a1 isdecprop -> 'a2 isdecprop -> hProptoType isdecprop
+(* val isdecprophdisj : 'a1 isdecprop -> 'a2 isdecprop -> hProptoType isdecprop *)
 
-val isinhdneg : hProp
+(* val isinhdneg : hProp *)
 
-val inhdnegpr : 'a1 -> hProptoType
+(* val inhdnegpr : 'a1 -> hProptoType *)
 
-val inhdnegfun : ('a1 -> 'a2) -> hProptoType -> hProptoType
+(* val inhdnegfun : ('a1 -> 'a2) -> hProptoType -> hProptoType *)
 
-val inhdneguniv : ('a2, 'a2 dneg) isweq -> ('a1 -> 'a2) -> hProptoType -> 'a2
+(* val inhdneguniv : ('a2, 'a2 dneg) isweq -> ('a1 -> 'a2) -> hProptoType -> 'a2 *)
 
-val inhdnegand : hProptoType -> hProptoType -> hProptoType
+(* val inhdnegand : hProptoType -> hProptoType -> hProptoType *)
 
-val hinhimplinhdneg : hProptoType -> hProptoType
+(* val hinhimplinhdneg : hProptoType -> hProptoType *)
 
-val hPropUnivalence :
-  hProp -> hProp -> (hProptoType -> hProptoType) -> (hProptoType ->
-  hProptoType) -> hProp paths
+(* val hPropUnivalence : *)
+(*   hProp -> hProp -> (hProptoType -> hProptoType) -> (hProptoType -> *)
+(*   hProptoType) -> hProp paths *)
 
-val eqweqmaphProp :
-  hProp -> hProp -> hProp paths -> (hProptoType, hProptoType) weq
+(* val eqweqmaphProp : *)
+(*   hProp -> hProp -> hProp paths -> (hProptoType, hProptoType) weq *)
 
-val weqtopathshProp :
-  hProp -> hProp -> (hProptoType, hProptoType) weq -> hProp paths
+(* val weqtopathshProp : *)
+(*   hProp -> hProp -> (hProptoType, hProptoType) weq -> hProp paths *)
 
-val weqpathsweqhProp :
-  hProp -> hProp -> (hProptoType, hProptoType) weq -> (hProptoType,
-  hProptoType) weq paths
+(* val weqpathsweqhProp : *)
+(*   hProp -> hProp -> (hProptoType, hProptoType) weq -> (hProptoType, *)
+(*   hProptoType) weq paths *)
 
-val univfromtwoaxiomshProp :
-  hProp -> hProp -> (hProp paths, (hProptoType, hProptoType) weq) isweq
+(* val univfromtwoaxiomshProp : *)
+(*   hProp -> hProp -> (hProp paths, (hProptoType, hProptoType) weq) isweq *)
 
-val weqeqweqhProp :
-  hProp -> hProp -> (hProp paths, (hProptoType, hProptoType) weq) weq
+(* val weqeqweqhProp : *)
+(*   hProp -> hProp -> (hProp paths, (hProptoType, hProptoType) weq) weq *)
 
-val isasethProp : hProp isaset
+(* val isasethProp : hProp isaset *)
 
-val weqpathsweqhProp' : hProp -> hProp -> hProp paths -> hProp paths paths
+(* val weqpathsweqhProp' : hProp -> hProp -> hProp paths -> hProp paths paths *)
 
-val iscontrtildehProp : tildehProp iscontr
+(* val iscontrtildehProp : tildehProp iscontr *)
 
-val isaproptildehProp : tildehProp isaprop
+(* val isaproptildehProp : tildehProp isaprop *)
 
-val isasettildehProp : tildehProp isaset
+(* val isasettildehProp : tildehProp isaset *)
 
-val logeqweq :
-  hProp -> hProp -> (hProptoType -> hProptoType) -> (hProptoType ->
-  hProptoType) -> (hProptoType, hProptoType) weq
+(* val logeqweq : *)
+(*   hProp -> hProp -> (hProptoType -> hProptoType) -> (hProptoType -> *)
+(*   hProptoType) -> (hProptoType, hProptoType) weq *)
 
-val total2_paths_hProp_equiv :
-  ('a1 -> hProp) -> ('a1, hProptoType) total2 -> ('a1, hProptoType) total2 ->
-  (('a1, hProptoType) total2 paths, 'a1 paths) weq
+(* val total2_paths_hProp_equiv : *)
+(*   ('a1 -> hProp) -> ('a1, hProptoType) total2 -> ('a1, hProptoType) total2 -> *)
+(*   (('a1, hProptoType) total2 paths, 'a1 paths) weq *)

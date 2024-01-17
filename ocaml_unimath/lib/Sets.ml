@@ -89,8 +89,8 @@ let dirprod_hSet x y =
 
 (** val hPropset : hSet **)
 
-let hPropset =
-  { pr1 = __; pr2 = (Obj.magic isasethProp) }
+(* let hPropset = *)
+  (* { pr1 = __; pr2 = (Obj.magic isasethProp) } *)
 
 (** val hProp_to_hSet : hProp -> hSet **)
 
@@ -201,8 +201,8 @@ let isinclpr1carrier a =
 
 (** val isasethsubtype : 'a1 hsubtype isaset **)
 
-let isasethsubtype x =
-  Obj.magic impred (S (S O)) (fun _ -> Obj.magic isasethProp) x
+let isasethsubtype x = x
+  (* Obj.magic impred (S (S O)) (fun _ -> Obj.magic isasethProp) x *)
 
 (** val totalsubtype : 'a1 hsubtype **)
 
@@ -422,8 +422,8 @@ let isaprop_isPartialOrder x r =
 
 (** val isaset_hrel : hSet -> pr1hSet hrel isaset **)
 
-let isaset_hrel _ =
-  impred_isaset (fun _ -> impred_isaset (fun _ -> isasethProp))
+let isaset_hrel _ = false
+  (* impred_isaset (fun _ -> impred_isaset (fun _ -> isasethProp)) *)
 
 (** val istransandirrefltoasymm :
     'a1 hrel -> 'a1 istrans -> 'a1 isirrefl -> 'a1 isasymm **)
@@ -433,8 +433,8 @@ let istransandirrefltoasymm _ is1 is2 a b rab rba =
 
 (** val istotaltoiscoasymm : 'a1 hrel -> 'a1 istotal -> 'a1 iscoasymm **)
 
-let istotaltoiscoasymm r is x1 x2 =
-  Obj.magic hdisjtoimpl (r x2 x1) (is x1 x2)
+let istotaltoiscoasymm r is x1 x2 = r
+  (* Obj.magic hdisjtoimpl (r x2 x1) (is x1 x2) *)
 
 (** val isdecreltoisnegrel : 'a1 hrel -> 'a1 isdecrel -> 'a1 isnegrel **)
 
@@ -838,8 +838,8 @@ let negrel _ _ _ =
 
 (** val istransnegrel : 'a1 hrel -> 'a1 iscotrans -> 'a1 istrans **)
 
-let istransnegrel _ isr x1 x2 x3 r12 r23 =
-  Obj.magic negf (isr x1 x2 x3) (toneghdisj (make_dirprod r12 r23))
+let istransnegrel _ isr x1 x2 x3 r12 r23 = x1
+  (* Obj.magic negf (isr x1 x2 x3) (toneghdisj (make_dirprod r12 r23)) *)
 
 (** val isasymmnegrel : 'a1 hrel -> 'a1 iscoasymm -> 'a1 isasymm **)
 
@@ -1195,34 +1195,34 @@ let isaset_set_fun_space b =
     pr1hSet) -> ('a1 -> pr1hSet paths) -> 'a2 -> pr1hSet paths) -> ('a1, 'a2)
     issurjective **)
 
-let epiissurjectiontosets p isB epip =
-  let pred_set = isaset_set_fun_space (make_hSet isasethProp) in
-  let epip0 =
-    Obj.magic epip (make_hSet pred_set) (fun _ _ -> ishinh) (fun b x ->
-      make_hProp (isB x b))
-  in
-  let h =
-    epip0 (fun b ->
-      funextfun (fun _ -> Obj.magic ishinh) (fun x ->
-        Obj.magic make_hProp (Obj.magic isB x (p b))) (fun x ->
-        Obj.magic weqtopathshProp ishinh (make_hProp (Obj.magic isB x (p b)))
-          (logeqweq ishinh (make_hProp (Obj.magic isB x (p b)))
-            (hinhuniv (make_hProp (Obj.magic isB x (p b))) (fun x0 ->
-              let y = x0.pr1 in
-              let eqx = x0.pr2 in
-              internal_paths_rew_r (Obj.magic x) (p y.pr1)
-                (Obj.magic hfiberpr2 p (p b) y) eqx)) (fun eqx ->
-            hinhpr { pr1 = { pr1 = b; pr2 = Coq_paths_refl }; pr2 = eqx }))))
-  in
-  (fun y ->
-  let h0 = h y in
-  let h1 = toforallpaths (fun _ -> ishinh) (fun x -> make_hProp (isB x y)) h0
-  in
-  let h2 = h1 y in
-  let typ = make_hProp (isB y y) in
-  let witness = Coq_paths_refl in
-  internal_paths_rew ishinh (Obj.magic hinhfun (fun h' -> h'.pr1)) typ h2
-    witness)
+let epiissurjectiontosets p isB epip = p isB epip
+  (* let pred_set = isaset_set_fun_space (make_hSet isasethProp) in *)
+  (* let epip0 = *)
+  (*   Obj.magic epip (make_hSet pred_set) (fun _ _ -> ishinh) (fun b x -> *)
+  (*     make_hProp (isB x b)) *)
+  (* in *)
+  (* let h = *)
+  (*   epip0 (fun b -> *)
+  (*     funextfun (fun _ -> Obj.magic ishinh) (fun x -> *)
+  (*       Obj.magic make_hProp (Obj.magic isB x (p b))) (fun x -> *)
+  (*       Obj.magic weqtopathshProp ishinh (make_hProp (Obj.magic isB x (p b))) *)
+  (*         (logeqweq ishinh (make_hProp (Obj.magic isB x (p b))) *)
+  (*           (hinhuniv (make_hProp (Obj.magic isB x (p b))) (fun x0 -> *)
+  (*             let y = x0.pr1 in *)
+  (*             let eqx = x0.pr2 in *)
+  (*             internal_paths_rew_r (Obj.magic x) (p y.pr1) *)
+  (*               (Obj.magic hfiberpr2 p (p b) y) eqx)) (fun eqx -> *)
+  (*           hinhpr { pr1 = { pr1 = b; pr2 = Coq_paths_refl }; pr2 = eqx })))) *)
+  (* in *)
+  (* (fun y -> *)
+  (* let h0 = h y in *)
+  (* let h1 = toforallpaths (fun _ -> ishinh) (fun x -> make_hProp (isB x y)) h0 *)
+  (* in *)
+  (* let h2 = h1 y in *)
+  (* let typ = make_hProp (isB y y) in *)
+  (* let witness = Coq_paths_refl in *)
+  (* internal_paths_rew ishinh (Obj.magic hinhfun (fun h' -> h'.pr1)) typ h2 *)
+  (*   witness) *)
 
 (** val surjective_iscontr_im :
     'a3 isaset -> ('a1 -> 'a2) -> ('a1 -> 'a3) -> ('a1 -> 'a1 -> 'a2 paths ->
@@ -1300,9 +1300,9 @@ let isinclpr1setquot r =
 
 (** val isasetsetquot : 'a1 hrel -> 'a1 setquot isaset **)
 
-let isasetsetquot r =
-  isasetsubset (fun t -> t.pr1) isasethsubtype
-    (isinclpr1 (fun x -> isapropiseqclass r x))
+let isasetsetquot r = r
+  (* isasetsubset (fun t -> t.pr1) isasethsubtype *)
+  (*   (isinclpr1 (fun x -> isapropiseqclass r x)) *)
 
 (** val setquotinset : 'a1 hrel -> hSet **)
 
@@ -1326,9 +1326,9 @@ let setquotpr r x0 =
 
 (** val issurjsetquotpr : 'a1 eqrel -> ('a1, 'a1 setquot) issurjective **)
 
-let issurjsetquotpr r c =
-  hinhuniv ishinh (fun x -> hinhpr { pr1 = x.pr1; pr2 = (setquotl0 r c x) })
-    (eqax0 (pr1eqrel r) c.pr1 c.pr2)
+let issurjsetquotpr r c = r c
+  (* hinhuniv ishinh (fun x -> hinhpr { pr1 = x.pr1; pr2 = (setquotl0 r c x) }) *)
+  (*   (eqax0 (pr1eqrel r) c.pr1 c.pr2) *)
 
 (** val iscompsetquotpr :
     'a1 eqrel -> 'a1 -> 'a1 -> hProptoType -> 'a1 setquot paths **)
@@ -1383,22 +1383,22 @@ let setquotunivcomm _ _ _ _ _ =
 (** val weqpathsinsetquot :
     'a1 eqrel -> 'a1 -> 'a1 -> (hProptoType, 'a1 setquot paths) weq **)
 
-let weqpathsinsetquot r x x' =
-  { pr1 = (iscompsetquotpr r x x'); pr2 =
-    (isweqimplimpl (iscompsetquotpr r x x') (fun e ->
-      let e' =
-        maponpaths (pr1setquot (pr1eqrel r)) (setquotpr r x) (setquotpr r x')
-          e
-      in
-      let e'' =
-        maponpaths (fun f -> f x') (fun x0 -> pr1eqrel r x x0) (fun x0 ->
-          pr1eqrel r x' x0) e'
-      in
-      pr1weq
-        (eqweqmaphProp (pr1eqrel r x' x') (pr1eqrel r x x')
-          (pathsinv0 (pr1eqrel r x x') (pr1eqrel r x' x') e''))
-        (eqrelrefl r x')) (pr1eqrel r x x').pr2
-      (isasetsetquot (pr1eqrel r) (setquotpr r x) (setquotpr r x'))) }
+let weqpathsinsetquot r x x' = r x x'
+  (* { pr1 = (iscompsetquotpr r x x'); pr2 = *)
+  (*   (isweqimplimpl (iscompsetquotpr r x x') (fun e -> *)
+  (*     let e' = *)
+  (*       maponpaths (pr1setquot (pr1eqrel r)) (setquotpr r x) (setquotpr r x') *)
+  (*         e *)
+  (*     in *)
+  (*     let e'' = *)
+  (*       maponpaths (fun f -> f x') (fun x0 -> pr1eqrel r x x0) (fun x0 -> *)
+  (*         pr1eqrel r x' x0) e' *)
+  (*     in *)
+  (*     pr1weq *)
+  (*       (eqweqmaphProp (pr1eqrel r x' x') (pr1eqrel r x x') *)
+  (*         (pathsinv0 (pr1eqrel r x x') (pr1eqrel r x' x') e'')) *)
+  (*       (eqrelrefl r x')) (pr1eqrel r x x').pr2 *)
+  (*     (isasetsetquot (pr1eqrel r) (setquotpr r x) (setquotpr r x'))) } *)
 
 type ('x, 'y) iscomprelrelfun = 'x -> 'x -> hProptoType -> hProptoType
 
@@ -1420,11 +1420,11 @@ let iscomprelfunlogeqf2 _ _ _ lg f is x x' r =
     'a1 hrel -> 'a2 eqrel -> ('a1 -> 'a2) -> ('a1, 'a2) iscomprelrelfun ->
     'a1 setquot -> 'a2 setquot **)
 
-let setquotfun rX rY f is cx =
-  let ff = funcomp f (setquotpr rY) in
-  let isff = fun x x' r -> (weqpathsinsetquot rY (f x) (f x')).pr1 (is x x' r)
-  in
-  Obj.magic setquotuniv rX (setquotinset (pr1eqrel rY)) ff isff cx
+let setquotfun rX rY f is cx = rX rY f is cx 
+  (* let ff = funcomp f (setquotpr rY) in *)
+  (* let isff = fun x x' r -> (weqpathsinsetquot rY (f x) (f x')).pr1 (is x x' r) *)
+  (* in *)
+  (* Obj.magic setquotuniv rX (setquotinset (pr1eqrel rY)) ff isff cx *)
 
 (** val setquotfuncomm :
     'a1 eqrel -> 'a2 eqrel -> ('a1 -> 'a2) -> ('a1, 'a2) iscomprelrelfun ->
@@ -1436,136 +1436,136 @@ let setquotfuncomm _ _ _ _ _ =
 (** val setquotunivprop :
     'a1 eqrel -> ('a1 setquot -> hProp) -> ('a1 -> __) -> 'a1 setquot -> __ **)
 
-let setquotunivprop r p ps c =
-  hinhuniv (p c) (fun x ->
-    let e = setquotl0 r c x in
-    (eqweqmaphProp (p (setquotpr r x.pr1)) (p c)
-      (maponpaths p (setquotpr r x.pr1) c e)).pr1 (ps x.pr1))
-    (eqax0 r.pr1 c.pr1 c.pr2)
+let setquotunivprop r p ps c = r p ps c 
+  (* hinhuniv (p c) (fun x -> *)
+  (*   let e = setquotl0 r c x in *)
+  (*   (eqweqmaphProp (p (setquotpr r x.pr1)) (p c) *)
+  (*     (maponpaths p (setquotpr r x.pr1) c e)).pr1 (ps x.pr1)) *)
+  (*   (eqax0 r.pr1 c.pr1 c.pr2) *)
 
 (** val setquotuniv2prop :
     'a1 eqrel -> ('a1 setquot -> 'a1 setquot -> hProp) -> ('a1 -> 'a1 ->
     hProptoType) -> 'a1 setquot -> 'a1 setquot -> hProptoType **)
 
-let setquotuniv2prop r p is c c' =
-  setquotunivprop r (fun c0' -> p c c0') (fun x ->
-    setquotunivprop r (fun c0 -> p c0 (setquotpr r x)) (fun x0 -> is x0 x) c)
-    c'
+let setquotuniv2prop r p is c c' = r
+  (* setquotunivprop r (fun c0' -> p c c0') (fun x -> *)
+  (*   setquotunivprop r (fun c0 -> p c0 (setquotpr r x)) (fun x0 -> is x0 x) c) *)
+  (*   c' *)
 
 (** val setquotuniv3prop :
     'a1 eqrel -> ('a1 setquot -> 'a1 setquot -> 'a1 setquot -> hProp) -> ('a1
     -> 'a1 -> 'a1 -> hProptoType) -> 'a1 setquot -> 'a1 setquot -> 'a1
     setquot -> hProptoType **)
 
-let setquotuniv3prop r p is c c' c'' =
-  setquotuniv2prop r (fun c0' c0'' -> p c c0' c0'') (fun x x' ->
-    setquotunivprop r (fun c0 -> p c0 (setquotpr r x) (setquotpr r x'))
-      (fun x0 -> is x0 x x') c) c' c''
+let setquotuniv3prop r p is c c' c'' = r
+  (* setquotuniv2prop r (fun c0' c0'' -> p c c0' c0'') (fun x x' -> *)
+  (*   setquotunivprop r (fun c0 -> p c0 (setquotpr r x) (setquotpr r x')) *)
+  (*     (fun x0 -> is x0 x x') c) c' c'' *)
 
 (** val setquotuniv4prop :
     'a1 eqrel -> ('a1 setquot -> 'a1 setquot -> 'a1 setquot -> 'a1 setquot ->
     hProp) -> ('a1 -> 'a1 -> 'a1 -> 'a1 -> hProptoType) -> 'a1 setquot -> 'a1
     setquot -> 'a1 setquot -> 'a1 setquot -> hProptoType **)
 
-let setquotuniv4prop r p is c c' c'' c''' =
-  setquotuniv3prop r (fun c0 c0' c0'' -> p c c0 c0' c0'') (fun x x' x'' ->
-    setquotunivprop r (fun c0 ->
-      p c0 (setquotpr r x) (setquotpr r x') (setquotpr r x'')) (fun x0 ->
-      is x0 x x' x'') c) c' c'' c'''
+let setquotuniv4prop r p is c c' c'' c''' = r
+  (* setquotuniv3prop r (fun c0 c0' c0'' -> p c c0 c0' c0'') (fun x x' x'' -> *)
+  (*   setquotunivprop r (fun c0 -> *)
+  (*     p c0 (setquotpr r x) (setquotpr r x') (setquotpr r x'')) (fun x0 -> *)
+  (*     is x0 x x' x'') c) c' c'' c''' *)
 
 (** val issurjsetquotfun :
     'a1 eqrel -> 'a2 eqrel -> ('a1 -> 'a2) -> ('a1, 'a2) issurjective ->
     ('a1, 'a2) iscomprelrelfun -> ('a1 setquot, 'a2 setquot) issurjective **)
 
-let issurjsetquotfun rX rY f is is1 =
-  issurjtwooutof3b (setquotpr rX) (setquotfun (pr1eqrel rX) rY f is1)
-    (issurjcomp f (setquotpr rY) is (issurjsetquotpr rY))
+let issurjsetquotfun rX rY f is is1 = rX
+  (* issurjtwooutof3b (setquotpr rX) (setquotfun (pr1eqrel rX) rY f is1) *)
+  (*   (issurjcomp f (setquotpr rY) is (issurjsetquotpr rY)) *)
 
 (** val isinclsetquotfun :
     'a1 eqrel -> 'a2 eqrel -> ('a1 -> 'a2) -> ('a1, 'a2) iscomprelrelfun ->
     ('a1 -> 'a1 -> hProptoType -> hProptoType) -> ('a1 setquot, 'a2 setquot)
     isincl **)
 
-let isinclsetquotfun rX rY f is1 is2 =
-  isinclbetweensets (setquotfun (pr1eqrel rX) rY f is1)
-    (isasetsetquot (pr1eqrel rX)) (isasetsetquot (pr1eqrel rY))
-    (let is = fun x x' ->
-       impred (S O) (fun _ -> isasetsetquot (pr1eqrel rX) x x')
-     in
-     Obj.magic setquotuniv2prop rX (fun x x' -> make_hProp (is x x'))
-       (fun x x' ->
-       Obj.magic (fun e ->
-         let e' = pr1weq (invweq (weqpathsinsetquot rY (f x) (f x'))) e in
-         pr1weq (weqpathsinsetquot rX x x') (is2 x x' e'))))
+let isinclsetquotfun rX rY f is1 is2 = rX
+  (* isinclbetweensets (setquotfun (pr1eqrel rX) rY f is1) *)
+  (*   (isasetsetquot (pr1eqrel rX)) (isasetsetquot (pr1eqrel rY)) *)
+  (*   (let is = fun x x' -> *)
+  (*      impred (S O) (fun _ -> isasetsetquot (pr1eqrel rX) x x') *)
+  (*    in *)
+  (*    Obj.magic setquotuniv2prop rX (fun x x' -> make_hProp (is x x')) *)
+  (*      (fun x x' -> *)
+  (*      Obj.magic (fun e -> *)
+  (*        let e' = pr1weq (invweq (weqpathsinsetquot rY (f x) (f x'))) e in *)
+  (*        pr1weq (weqpathsinsetquot rX x x') (is2 x x' e')))) *)
 
 (** val setquotincl :
     'a1 eqrel -> 'a2 eqrel -> ('a1 -> 'a2) -> ('a1, 'a2) iscomprelrelfun ->
     ('a1 -> 'a1 -> hProptoType -> hProptoType) -> ('a1 setquot, 'a2 setquot)
     incl **)
 
-let setquotincl rX rY f is1 is2 =
-  make_incl (setquotfun (pr1eqrel rX) rY f is1)
-    (isinclsetquotfun rX rY f is1 is2)
+let setquotincl rX rY f is1 is2 = rX
+  (* make_incl (setquotfun (pr1eqrel rX) rY f is1) *)
+  (*   (isinclsetquotfun rX rY f is1 is2) *)
 
 (** val weqsetquotweq :
     'a1 eqrel -> 'a2 eqrel -> ('a1, 'a2) weq -> ('a1, 'a2) iscomprelrelfun ->
     ('a1 -> 'a1 -> hProptoType -> hProptoType) -> ('a1 setquot, 'a2 setquot)
     weq **)
 
-let weqsetquotweq rX rY f is1 is2 =
-  let ff = setquotfun (pr1eqrel rX) rY (pr1weq f) is1 in
-  { pr1 = ff; pr2 =
-  (let is2' = fun y y' ->
-     internal_paths_rew_r y (pr1weq f (invmap f y))
-       (internal_paths_rew_r y' (pr1weq f (invmap f y'))
-         (internal_paths_rew_r (invmap f (pr1weq f (invmap f y)))
-           (invmap f y)
-           (internal_paths_rew_r (invmap f (pr1weq f (invmap f y')))
-             (invmap f y') (is2 (invmap f y) (invmap f y'))
-             (homotinvweqweq f (invmap f y')))
-           (homotinvweqweq f (invmap f y)))
-         (pathsinv0 (pr1weq f (invmap f y')) y' (homotweqinvweq f y')))
-       (pathsinv0 (pr1weq f (invmap f y)) y (homotweqinvweq f y))
-   in
-   let gg = setquotfun (pr1eqrel rY) rX (invmap f) is2' in
-   let egf =
-     setquotunivprop rX (fun a0 ->
-       make_hProp (isasetsetquot (pr1eqrel rX) (gg (ff a0)) a0)) (fun x ->
-       Obj.magic maponpaths (setquotpr rX) (invmap f (pr1weq f x)) x
-         (homotinvweqweq f x))
-   in
-   let efg =
-     setquotunivprop rY (fun a0 ->
-       make_hProp (isasetsetquot (pr1eqrel rY) (ff (gg a0)) a0)) (fun x ->
-       Obj.magic maponpaths (setquotpr rY) (pr1weq f (invmap f x)) x
-         (homotweqinvweq f x))
-   in
-   isweq_iso ff gg (Obj.magic egf) (Obj.magic efg)) }
+let weqsetquotweq rX rY f is1 is2 = rX
+  (* let ff = setquotfun (pr1eqrel rX) rY (pr1weq f) is1 in *)
+  (* { pr1 = ff; pr2 = *)
+  (* (let is2' = fun y y' -> *)
+  (*    internal_paths_rew_r y (pr1weq f (invmap f y)) *)
+  (*      (internal_paths_rew_r y' (pr1weq f (invmap f y')) *)
+  (*        (internal_paths_rew_r (invmap f (pr1weq f (invmap f y))) *)
+  (*          (invmap f y) *)
+  (*          (internal_paths_rew_r (invmap f (pr1weq f (invmap f y'))) *)
+  (*            (invmap f y') (is2 (invmap f y) (invmap f y')) *)
+  (*            (homotinvweqweq f (invmap f y'))) *)
+  (*          (homotinvweqweq f (invmap f y))) *)
+  (*        (pathsinv0 (pr1weq f (invmap f y')) y' (homotweqinvweq f y'))) *)
+  (*      (pathsinv0 (pr1weq f (invmap f y)) y (homotweqinvweq f y)) *)
+  (*  in *)
+  (*  let gg = setquotfun (pr1eqrel rY) rX (invmap f) is2' in *)
+  (*  let egf = *)
+  (*    setquotunivprop rX (fun a0 -> *)
+  (*      make_hProp (isasetsetquot (pr1eqrel rX) (gg (ff a0)) a0)) (fun x -> *)
+  (*      Obj.magic maponpaths (setquotpr rX) (invmap f (pr1weq f x)) x *)
+  (*        (homotinvweqweq f x)) *)
+  (*  in *)
+  (*  let efg = *)
+  (*    setquotunivprop rY (fun a0 -> *)
+  (*      make_hProp (isasetsetquot (pr1eqrel rY) (ff (gg a0)) a0)) (fun x -> *)
+  (*      Obj.magic maponpaths (setquotpr rY) (pr1weq f (invmap f x)) x *)
+  (*        (homotweqinvweq f x)) *)
+  (*  in *)
+  (*  isweq_iso ff gg (Obj.magic egf) (Obj.magic efg)) } *)
 
 (** val weqsetquotsurj :
     'a1 eqrel -> 'a2 eqrel -> ('a1 -> 'a2) -> ('a1, 'a2) issurjective ->
     ('a1, 'a2) iscomprelrelfun -> ('a1 -> 'a1 -> hProptoType -> hProptoType)
     -> ('a1 setquot, 'a2 setquot) weq **)
 
-let weqsetquotsurj rX rY f is is1 is2 =
-  let ff = setquotfun (pr1eqrel rX) rY f is1 in
-  { pr1 = ff; pr2 =
-  (isweqinclandsurj ff (isinclsetquotfun rX rY f is1 is2)
-    (issurjsetquotfun rX rY f is is1)) }
+let weqsetquotsurj rX rY f is is1 is2 = rX
+  (* let ff = setquotfun (pr1eqrel rX) rY f is1 in *)
+  (* { pr1 = ff; pr2 = *)
+  (* (isweqinclandsurj ff (isinclsetquotfun rX rY f is1 is2) *)
+  (*   (issurjsetquotfun rX rY f is is1)) } *)
 
 (** val setquottodirprod :
     'a1 eqrel -> 'a2 eqrel -> ('a1, 'a2) dirprod setquot -> ('a1 setquot, 'a2
     setquot) dirprod **)
 
-let setquottodirprod rX rY cc =
-  let rXY = eqreldirprod rX rY in
-  make_dirprod
-    (Obj.magic setquotuniv (pr1eqrel rXY) (setquotinset (pr1eqrel rX))
-      (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX)) (fun xy xy' rr ->
-      Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1 (Obj.magic rr).pr1) cc)
-    (Obj.magic setquotuniv (pr1eqrel rXY) (setquotinset (pr1eqrel rY))
-      (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY)) (fun xy xy' rr ->
-      Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2 (Obj.magic rr).pr2) cc)
+let setquottodirprod rX rY cc = rX
+  (* let rXY = eqreldirprod rX rY in *)
+  (* make_dirprod *)
+  (*   (Obj.magic setquotuniv (pr1eqrel rXY) (setquotinset (pr1eqrel rX)) *)
+  (*     (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX)) (fun xy xy' rr -> *)
+  (*     Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1 (Obj.magic rr).pr1) cc) *)
+  (*   (Obj.magic setquotuniv (pr1eqrel rXY) (setquotinset (pr1eqrel rY)) *)
+  (*     (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY)) (fun xy xy' rr -> *)
+  (*     Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2 (Obj.magic rr).pr2) cc) *)
 
 (** val dirprodtosetquot :
     'a1 hrel -> 'a2 hrel -> ('a1 setquot, 'a2 setquot) dirprod -> ('a1, 'a2)
@@ -1579,134 +1579,134 @@ let dirprodtosetquot rX rY cd =
     'a1 eqrel -> 'a2 eqrel -> (('a1, 'a2) dirprod setquot, ('a1 setquot, 'a2
     setquot) dirprod) weq **)
 
-let weqsetquottodirprod rX rY =
-  let f = setquottodirprod rX rY in
-  let g = dirprodtosetquot (pr1eqrel rX) (pr1eqrel rY) in
-  { pr1 = f; pr2 =
-  (let egf =
-     setquotunivprop (eqreldirprod rX rY) (fun a ->
-       make_hProp
-         (isasetsetquot (hreldirprod (pr1eqrel rX) (pr1eqrel rY)) (g (f a)) a))
-       (fun xy ->
-       let x = xy.pr1 in
-       let y = xy.pr2 in
-       Obj.magic invmaponpathsincl
-         (pr1setquot (hreldirprod (pr1eqrel rX) (pr1eqrel rY)))
-         (isinclpr1setquot
-           (Obj.magic hreldirprod (pr1eqrel rX) (pr1eqrel rY)))
-         (g (f (setquotpr (eqreldirprod rX rY) { pr1 = x; pr2 = y })))
-         (setquotpr (eqreldirprod rX rY) { pr1 = x; pr2 = y })
-         (funextsec
-           (Obj.magic subtypesdirprod (fun x0 -> pr1eqrel rX x x0) (fun x0 ->
-             pr1eqrel rY y x0)) (fun x0 ->
-           Obj.magic hreldirprod (pr1eqrel rX) (pr1eqrel rY) { pr1 = x; pr2 =
-             y } x0) (fun _ -> Coq_paths_refl)))
-   in
-   let efg = fun a ->
-     let ax = a.pr1 in
-     let ay = a.pr2 in
-     pathsdirprod
-       (Obj.magic setquotuniv (pr1eqrel (eqreldirprod rX rY))
-         (setquotinset (pr1eqrel rX))
-         (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX))
-         (fun xy xy' rr ->
-         Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1 (Obj.magic rr).pr1)
-         (Obj.magic g { pr1 = ax; pr2 = ay })) ax
-       (Obj.magic setquotuniv (pr1eqrel (eqreldirprod rX rY))
-         (setquotinset (pr1eqrel rY))
-         (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY))
-         (fun xy xy' rr ->
-         Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2 (Obj.magic rr).pr2)
-         (Obj.magic g { pr1 = ax; pr2 = ay })) ay
-       (Obj.magic setquotunivprop rX (fun ax0 ->
-         make_hProp
-           (isasetsetquot (pr1eqrel rX)
-             (Obj.magic setquotuniv (pr1eqrel (eqreldirprod rX rY))
-               (setquotinset (pr1eqrel rX))
-               (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX))
-               (fun xy xy' rr ->
-               Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1 (Obj.magic rr).pr1)
-               (Obj.magic g { pr1 = ax0; pr2 = ay })) ax0)) (fun x ->
-         setquotunivprop (Obj.magic rY) (fun ay0 ->
-           make_hProp
-             (isasetsetquot (pr1eqrel rX)
-               (Obj.magic setquotuniv
-                 (hreldirprod (pr1eqrel rX) (pr1eqrel rY))
-                 (setquotinset (pr1eqrel rX))
-                 (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX))
-                 (fun xy xy' rr ->
-                 Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1
-                   (Obj.magic rr).pr1)
-                 (Obj.magic g { pr1 = (setquotpr rX x); pr2 = ay0 }))
-               (setquotpr rX x))) (fun y ->
-           Obj.magic invmaponpathsincl (pr1setquot (pr1eqrel rX))
-             (isinclpr1setquot (pr1eqrel (Obj.magic rX)))
-             (setquotuniv (hreldirprod (pr1eqrel rX) (pr1eqrel rY))
-               (setquotinset (pr1eqrel rX))
-               (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX))
-               (fun xy xy' rr ->
-               Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1 (Obj.magic rr).pr1)
-               (Obj.magic g { pr1 = (setquotpr rX x); pr2 =
-                 (setquotpr (Obj.magic rY) y) })) (setquotpr rX x)
-             (funextsec
-               (Obj.magic pr1setquot (pr1eqrel (Obj.magic rX))
-                 (setquotuniv (hreldirprod (pr1eqrel rX) (pr1eqrel rY))
-                   (setquotinset (pr1eqrel rX))
-                   (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX))
-                   (fun xy xy' rr ->
-                   Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1
-                     (Obj.magic rr).pr1)
-                   (Obj.magic g { pr1 = (setquotpr rX x); pr2 =
-                     (setquotpr (Obj.magic rY) y) })))
-               (Obj.magic pr1setquot (pr1eqrel (Obj.magic rX))
-                 (setquotpr (Obj.magic rX) (Obj.magic x))) (fun _ ->
-               Coq_paths_refl))) ay) ax)
-       (Obj.magic setquotunivprop rX (fun ax0 ->
-         make_hProp
-           (isasetsetquot (pr1eqrel (Obj.magic rY))
-             (Obj.magic setquotuniv (pr1eqrel (eqreldirprod rX rY))
-               (setquotinset (pr1eqrel rY))
-               (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY))
-               (fun xy xy' rr ->
-               Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2 (Obj.magic rr).pr2)
-               (Obj.magic g { pr1 = ax0; pr2 = ay })) ay)) (fun x ->
-         setquotunivprop (Obj.magic rY) (fun ay0 ->
-           make_hProp
-             (isasetsetquot (pr1eqrel (Obj.magic rY))
-               (Obj.magic setquotuniv
-                 (hreldirprod (pr1eqrel rX) (pr1eqrel rY))
-                 (setquotinset (pr1eqrel rY))
-                 (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY))
-                 (fun xy xy' rr ->
-                 Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2
-                   (Obj.magic rr).pr2)
-                 (Obj.magic g { pr1 = (setquotpr rX x); pr2 = ay0 })) ay0))
-           (fun y ->
-           Obj.magic invmaponpathsincl (pr1setquot (pr1eqrel (Obj.magic rY)))
-             (isinclpr1setquot (pr1eqrel (Obj.magic rY)))
-             (setquotuniv (hreldirprod (pr1eqrel rX) (pr1eqrel rY))
-               (setquotinset (pr1eqrel rY))
-               (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY))
-               (fun xy xy' rr ->
-               Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2 (Obj.magic rr).pr2)
-               (Obj.magic g { pr1 = (setquotpr rX x); pr2 =
-                 (setquotpr (Obj.magic rY) y) }))
-             (setquotpr (Obj.magic rY) y)
-             (funextsec
-               (Obj.magic pr1setquot (pr1eqrel (Obj.magic rY))
-                 (setquotuniv (hreldirprod (pr1eqrel rX) (pr1eqrel rY))
-                   (setquotinset (pr1eqrel rY))
-                   (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY))
-                   (fun xy xy' rr ->
-                   Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2
-                     (Obj.magic rr).pr2)
-                   (Obj.magic g { pr1 = (setquotpr rX x); pr2 =
-                     (setquotpr (Obj.magic rY) y) })))
-               (Obj.magic pr1setquot (pr1eqrel (Obj.magic rY))
-                 (setquotpr (Obj.magic rY) y)) (fun _ -> Coq_paths_refl))) ay)
-         ax)
-   in
-   isweq_iso f g (Obj.magic egf) (Obj.magic efg)) }
+let weqsetquottodirprod rX rY = rX
+  (* let f = setquottodirprod rX rY in *)
+  (* let g = dirprodtosetquot (pr1eqrel rX) (pr1eqrel rY) in *)
+  (* { pr1 = f; pr2 = *)
+  (* (let egf = *)
+  (*    setquotunivprop (eqreldirprod rX rY) (fun a -> *)
+  (*      make_hProp *)
+  (*        (isasetsetquot (hreldirprod (pr1eqrel rX) (pr1eqrel rY)) (g (f a)) a)) *)
+  (*      (fun xy -> *)
+  (*      let x = xy.pr1 in *)
+  (*      let y = xy.pr2 in *)
+  (*      Obj.magic invmaponpathsincl *)
+  (*        (pr1setquot (hreldirprod (pr1eqrel rX) (pr1eqrel rY))) *)
+  (*        (isinclpr1setquot *)
+  (*          (Obj.magic hreldirprod (pr1eqrel rX) (pr1eqrel rY))) *)
+  (*        (g (f (setquotpr (eqreldirprod rX rY) { pr1 = x; pr2 = y }))) *)
+  (*        (setquotpr (eqreldirprod rX rY) { pr1 = x; pr2 = y }) *)
+  (*        (funextsec *)
+  (*          (Obj.magic subtypesdirprod (fun x0 -> pr1eqrel rX x x0) (fun x0 -> *)
+  (*            pr1eqrel rY y x0)) (fun x0 -> *)
+  (*          Obj.magic hreldirprod (pr1eqrel rX) (pr1eqrel rY) { pr1 = x; pr2 = *)
+  (*            y } x0) (fun _ -> Coq_paths_refl))) *)
+  (*  in *)
+  (*  let efg = fun a -> *)
+  (*    let ax = a.pr1 in *)
+  (*    let ay = a.pr2 in *)
+  (*    pathsdirprod *)
+  (*      (Obj.magic setquotuniv (pr1eqrel (eqreldirprod rX rY)) *)
+  (*        (setquotinset (pr1eqrel rX)) *)
+  (*        (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX)) *)
+  (*        (fun xy xy' rr -> *)
+  (*        Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1 (Obj.magic rr).pr1) *)
+  (*        (Obj.magic g { pr1 = ax; pr2 = ay })) ax *)
+  (*      (Obj.magic setquotuniv (pr1eqrel (eqreldirprod rX rY)) *)
+  (*        (setquotinset (pr1eqrel rY)) *)
+  (*        (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY)) *)
+  (*        (fun xy xy' rr -> *)
+  (*        Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2 (Obj.magic rr).pr2) *)
+  (*        (Obj.magic g { pr1 = ax; pr2 = ay })) ay *)
+  (*      (Obj.magic setquotunivprop rX (fun ax0 -> *)
+  (*        make_hProp *)
+  (*          (isasetsetquot (pr1eqrel rX) *)
+  (*            (Obj.magic setquotuniv (pr1eqrel (eqreldirprod rX rY)) *)
+  (*              (setquotinset (pr1eqrel rX)) *)
+  (*              (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX)) *)
+  (*              (fun xy xy' rr -> *)
+  (*              Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1 (Obj.magic rr).pr1) *)
+  (*              (Obj.magic g { pr1 = ax0; pr2 = ay })) ax0)) (fun x -> *)
+  (*        setquotunivprop (Obj.magic rY) (fun ay0 -> *)
+  (*          make_hProp *)
+  (*            (isasetsetquot (pr1eqrel rX) *)
+  (*              (Obj.magic setquotuniv *)
+  (*                (hreldirprod (pr1eqrel rX) (pr1eqrel rY)) *)
+  (*                (setquotinset (pr1eqrel rX)) *)
+  (*                (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX)) *)
+  (*                (fun xy xy' rr -> *)
+  (*                Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1 *)
+  (*                  (Obj.magic rr).pr1) *)
+  (*                (Obj.magic g { pr1 = (setquotpr rX x); pr2 = ay0 })) *)
+  (*              (setquotpr rX x))) (fun y -> *)
+  (*          Obj.magic invmaponpathsincl (pr1setquot (pr1eqrel rX)) *)
+  (*            (isinclpr1setquot (pr1eqrel (Obj.magic rX))) *)
+  (*            (setquotuniv (hreldirprod (pr1eqrel rX) (pr1eqrel rY)) *)
+  (*              (setquotinset (pr1eqrel rX)) *)
+  (*              (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX)) *)
+  (*              (fun xy xy' rr -> *)
+  (*              Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1 (Obj.magic rr).pr1) *)
+  (*              (Obj.magic g { pr1 = (setquotpr rX x); pr2 = *)
+  (*                (setquotpr (Obj.magic rY) y) })) (setquotpr rX x) *)
+  (*            (funextsec *)
+  (*              (Obj.magic pr1setquot (pr1eqrel (Obj.magic rX)) *)
+  (*                (setquotuniv (hreldirprod (pr1eqrel rX) (pr1eqrel rY)) *)
+  (*                  (setquotinset (pr1eqrel rX)) *)
+  (*                  (funcomp (fun t -> t.pr1) (Obj.magic setquotpr rX)) *)
+  (*                  (fun xy xy' rr -> *)
+  (*                  Obj.magic iscompsetquotpr rX xy.pr1 xy'.pr1 *)
+  (*                    (Obj.magic rr).pr1) *)
+  (*                  (Obj.magic g { pr1 = (setquotpr rX x); pr2 = *)
+  (*                    (setquotpr (Obj.magic rY) y) }))) *)
+  (*              (Obj.magic pr1setquot (pr1eqrel (Obj.magic rX)) *)
+  (*                (setquotpr (Obj.magic rX) (Obj.magic x))) (fun _ -> *)
+  (*              Coq_paths_refl))) ay) ax) *)
+  (*      (Obj.magic setquotunivprop rX (fun ax0 -> *)
+  (*        make_hProp *)
+  (*          (isasetsetquot (pr1eqrel (Obj.magic rY)) *)
+  (*            (Obj.magic setquotuniv (pr1eqrel (eqreldirprod rX rY)) *)
+  (*              (setquotinset (pr1eqrel rY)) *)
+  (*              (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY)) *)
+  (*              (fun xy xy' rr -> *)
+  (*              Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2 (Obj.magic rr).pr2) *)
+  (*              (Obj.magic g { pr1 = ax0; pr2 = ay })) ay)) (fun x -> *)
+  (*        setquotunivprop (Obj.magic rY) (fun ay0 -> *)
+  (*          make_hProp *)
+  (*            (isasetsetquot (pr1eqrel (Obj.magic rY)) *)
+  (*              (Obj.magic setquotuniv *)
+  (*                (hreldirprod (pr1eqrel rX) (pr1eqrel rY)) *)
+  (*                (setquotinset (pr1eqrel rY)) *)
+  (*                (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY)) *)
+  (*                (fun xy xy' rr -> *)
+  (*                Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2 *)
+  (*                  (Obj.magic rr).pr2) *)
+  (*                (Obj.magic g { pr1 = (setquotpr rX x); pr2 = ay0 })) ay0)) *)
+  (*          (fun y -> *)
+  (*          Obj.magic invmaponpathsincl (pr1setquot (pr1eqrel (Obj.magic rY))) *)
+  (*            (isinclpr1setquot (pr1eqrel (Obj.magic rY))) *)
+  (*            (setquotuniv (hreldirprod (pr1eqrel rX) (pr1eqrel rY)) *)
+  (*              (setquotinset (pr1eqrel rY)) *)
+  (*              (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY)) *)
+  (*              (fun xy xy' rr -> *)
+  (*              Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2 (Obj.magic rr).pr2) *)
+  (*              (Obj.magic g { pr1 = (setquotpr rX x); pr2 = *)
+  (*                (setquotpr (Obj.magic rY) y) })) *)
+  (*            (setquotpr (Obj.magic rY) y) *)
+  (*            (funextsec *)
+  (*              (Obj.magic pr1setquot (pr1eqrel (Obj.magic rY)) *)
+  (*                (setquotuniv (hreldirprod (pr1eqrel rX) (pr1eqrel rY)) *)
+  (*                  (setquotinset (pr1eqrel rY)) *)
+  (*                  (funcomp (fun t -> t.pr2) (Obj.magic setquotpr rY)) *)
+  (*                  (fun xy xy' rr -> *)
+  (*                  Obj.magic iscompsetquotpr rY xy.pr2 xy'.pr2 *)
+  (*                    (Obj.magic rr).pr2) *)
+  (*                  (Obj.magic g { pr1 = (setquotpr rX x); pr2 = *)
+  (*                    (setquotpr (Obj.magic rY) y) }))) *)
+  (*              (Obj.magic pr1setquot (pr1eqrel (Obj.magic rY)) *)
+  (*                (setquotpr (Obj.magic rY) y)) (fun _ -> Coq_paths_refl))) ay) *)
+  (*        ax) *)
+  (*  in *)
+  (*  isweq_iso f g (Obj.magic egf) (Obj.magic efg)) } *)
 
 type ('x, 'y) iscomprelfun2 =
   'x -> 'x -> 'x -> 'x -> hProptoType -> hProptoType -> 'y paths
@@ -1792,10 +1792,10 @@ let setquotfun2_iscomprelfun2 _ rY f is _ _ x x' x0 x0' r r0 =
     'a1 hrel -> 'a2 eqrel -> ('a1 -> 'a1 -> 'a2) -> ('a1, 'a2)
     iscomprelrelfun2 -> 'a1 setquot -> 'a1 setquot -> 'a2 setquot **)
 
-let setquotfun2 rX rY f is cx cx0 =
-  let ff = fun x x0 -> setquotpr rY (f x x0) in
-  Obj.magic setquotuniv2 rX (setquotinset (pr1eqrel rY)) ff
-    (setquotfun2_iscomprelfun2 rX rY f is cx cx0) cx cx0
+let setquotfun2 rX rY f is cx cx0 = rX
+  (* let ff = fun x x0 -> setquotpr rY (f x x0) in *)
+  (* Obj.magic setquotuniv2 rX (setquotinset (pr1eqrel rY)) ff *)
+  (*   (setquotfun2_iscomprelfun2 rX rY f is cx cx0) cx cx0 *)
 
 (** val setquotfun2comm :
     'a1 eqrel -> 'a2 eqrel -> ('a1 -> 'a1 -> 'a2) -> ('a1, 'a2)
@@ -1852,16 +1852,16 @@ let setquotbooleq r is =
     'a1 eqrel -> ('a1 -> 'a1 -> hProptoType isdecprop) -> 'a1 setquot -> 'a1
     setquot -> bool paths -> 'a1 setquot paths **)
 
-let setquotbooleqtopaths r is x x' =
-  let isp = fun x0 x'0 ->
-    impred (S O) (fun _ -> isasetsetquot (pr1eqrel r) x0 x'0)
-  in
-  Obj.magic setquotuniv2prop r (fun x0 x'0 -> make_hProp (isp x0 x'0))
-    (fun x0 x'0 ->
-    let c = (is x0 x'0).pr1 in
-    (match c with
-     | Coq_ii1 a -> Obj.magic (fun _ -> pr1weq (weqpathsinsetquot r x0 x'0) a)
-     | Coq_ii2 _ -> Obj.magic (fun _ -> assert false (* absurd case *)))) x x'
+let setquotbooleqtopaths r is x x' = r
+  (* let isp = fun x0 x'0 -> *)
+  (*   impred (S O) (fun _ -> isasetsetquot (pr1eqrel r) x0 x'0) *)
+  (* in *)
+  (* Obj.magic setquotuniv2prop r (fun x0 x'0 -> make_hProp (isp x0 x'0)) *)
+  (*   (fun x0 x'0 -> *)
+  (*   let c = (is x0 x'0).pr1 in *)
+  (*   (match c with *)
+  (*    | Coq_ii1 a -> Obj.magic (fun _ -> pr1weq (weqpathsinsetquot r x0 x'0) a) *)
+  (*    | Coq_ii2 _ -> Obj.magic (fun _ -> assert false (\* absurd case *\)))) x x' *)
 
 (** val setquotpathstobooleq :
     'a1 eqrel -> ('a1 -> 'a1 -> hProptoType isdecprop) -> 'a1 setquot -> 'a1
@@ -1878,11 +1878,11 @@ let setquotpathstobooleq r is x _ _ =
 (** val isdeceqsetquot :
     'a1 eqrel -> ('a1 -> 'a1 -> hProptoType isdecprop) -> 'a1 setquot isdeceq **)
 
-let isdeceqsetquot r is x x' =
-  let c = boolchoice (setquotbooleq r is x x') in
-  (match c with
-   | Coq_ii1 a -> Coq_ii1 (setquotbooleqtopaths r is x x' a)
-   | Coq_ii2 _ -> Coq_ii2 (fun _ -> assert false (* absurd case *)))
+let isdeceqsetquot r is x x' = r
+  (* let c = boolchoice (setquotbooleq r is x x') in *)
+  (* (match c with *)
+  (*  | Coq_ii1 a -> Coq_ii1 (setquotbooleqtopaths r is x x' a) *)
+  (*  | Coq_ii2 _ -> Coq_ii2 (fun _ -> assert false (\* absurd case *\))) *)
 
 type 'x iscomprelrel = ('x, hProp) iscomprelfun2
 
@@ -1908,8 +1908,8 @@ let iscomprelrellogeqf2 _ _ _ _ is =
 (** val quotrel :
     'a1 hrel -> 'a1 hrel -> 'a1 iscomprelrel -> 'a1 setquot hrel **)
 
-let quotrel r l is =
-  Obj.magic setquotuniv2 r hPropset l is
+let quotrel r l is = r
+  (* Obj.magic setquotuniv2 r hPropset l is *)
 
 (** val istransquotrel :
     'a1 eqrel -> 'a1 hrel -> 'a1 iscomprelrel -> 'a1 istrans -> 'a1 setquot
@@ -1938,8 +1938,8 @@ let issymmquotrel r l is isl =
     'a1 eqrel -> 'a1 hrel -> 'a1 iscomprelrel -> 'a1 isrefl -> 'a1 setquot
     isrefl **)
 
-let isreflquotrel r l is isl =
-  setquotunivprop r (fun c -> quotrel (pr1eqrel r) l is c c) isl
+let isreflquotrel r l is isl = r
+  (* setquotunivprop r (fun c -> quotrel (pr1eqrel r) l is c c) isl *)
 
 (** val ispoquotrel :
     'a1 eqrel -> 'a1 hrel -> 'a1 iscomprelrel -> 'a1 ispreorder -> 'a1
@@ -2140,168 +2140,168 @@ let iseqclassresrel _ p _ is is' =
     'a1 eqrel -> 'a1 setquot hsubtype -> 'a1 setquot carrier -> 'a1 carrier
     setquot **)
 
-let fromsubquot r p p0 =
-  { pr1 = (fun rp -> pr1setquot (pr1eqrel r) p0.pr1 rp.pr1); pr2 =
-    (iseqclassresrel (pr1eqrel r) (funcomp (setquotpr r) p) p0.pr1.pr1
-      p0.pr1.pr2 (fun x px ->
-      let e = setquotl0 r p0.pr1 (make_carrier p0.pr1.pr1 x px) in
-      internal_paths_rew_r (setquotpr r x) p0.pr1 p0.pr2 e)) }
+let fromsubquot r p p0 = r
+  (* { pr1 = (fun rp -> pr1setquot (pr1eqrel r) p0.pr1 rp.pr1); pr2 = *)
+  (*   (iseqclassresrel (pr1eqrel r) (funcomp (setquotpr r) p) p0.pr1.pr1 *)
+  (*     p0.pr1.pr2 (fun x px -> *)
+  (*     let e = setquotl0 r p0.pr1 (make_carrier p0.pr1.pr1 x px) in *)
+  (*     internal_paths_rew_r (setquotpr r x) p0.pr1 p0.pr2 e)) } *)
 
 (** val tosubquot :
     'a1 eqrel -> 'a1 setquot hsubtype -> 'a1 carrier setquot -> 'a1 setquot
     carrier **)
 
-let tosubquot r p =
-  let int =
-    isasetsubset (fun t -> t.pr1)
-      (Obj.magic setproperty (setquotinset (pr1eqrel r))) (isinclpr1carrier p)
-  in
-  Obj.magic setquotuniv (resrel (pr1eqrel r) (funcomp (setquotpr r) p))
-    (make_hSet int) (fun xp ->
-    Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2)
-    (fun xp1 xp2 rp12 ->
-    invmaponpathsincl (Obj.magic pr1carrier p) (isinclpr1carrier p)
-      (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2)
-      (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2)
-      (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12))
+let tosubquot r p = r
+  (* let int = *)
+  (*   isasetsubset (fun t -> t.pr1) *)
+  (*     (Obj.magic setproperty (setquotinset (pr1eqrel r))) (isinclpr1carrier p) *)
+  (* in *)
+  (* Obj.magic setquotuniv (resrel (pr1eqrel r) (funcomp (setquotpr r) p)) *)
+  (*   (make_hSet int) (fun xp -> *)
+  (*   Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2) *)
+  (*   (fun xp1 xp2 rp12 -> *)
+  (*   invmaponpathsincl (Obj.magic pr1carrier p) (isinclpr1carrier p) *)
+  (*     (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2) *)
+  (*     (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2) *)
+  (*     (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) *)
 
 (** val weqsubquot :
     'a1 eqrel -> 'a1 setquot hsubtype -> ('a1 setquot carrier, 'a1 carrier
     setquot) weq **)
 
-let weqsubquot r p =
-  let f = fromsubquot r p in
-  let g = tosubquot r p in
-  { pr1 = f; pr2 =
-  (let int0 =
-     isasetsubset (fun t -> t.pr1)
-       (Obj.magic setproperty (setquotinset (pr1eqrel r)))
-       (isinclpr1carrier p)
-   in
-   let egf = fun a ->
-     let p0 = a.pr1 in
-     let isp = a.pr2 in
-     let int = fun p1 ->
-       impred (S O) (fun t ->
-         int0 (g (f { pr1 = p1; pr2 = t })) { pr1 = p1; pr2 = t })
-     in
-     Obj.magic setquotunivprop r (fun a0 -> make_hProp (int a0)) (fun x ->
-       Obj.magic (fun isp0 ->
-         invmaponpathsincl (pr1carrier p) (isinclpr1carrier p)
-           (g (f { pr1 = (setquotpr r x); pr2 = isp0 })) { pr1 =
-           (setquotpr r x); pr2 = isp0 } Coq_paths_refl)) p0 isp
-   in
-   let efg =
-     let int = fun a ->
-       setproperty
-         (setquotinset (resrel (pr1eqrel r) (funcomp (setquotpr r) p)))
-         (Obj.magic f (Obj.magic g a)) a
-     in
-     let q = reseqrel r (funcomp (setquotpr r) p) in
-     setquotunivprop q (fun a -> make_hProp (Obj.magic int a)) (fun a ->
-       Obj.magic invmaponpathsincl (fun t -> t.pr1)
-         (isinclpr1 (fun a0 ->
-           isapropiseqclass (resrel (pr1eqrel r) (funcomp (setquotpr r) p)) a0))
-         { pr1 = (fun rp ->
-         pr1setquot (pr1eqrel r)
-           (Obj.magic setquotuniv
-             (resrel (pr1eqrel r) (funcomp (setquotpr r) p))
-             (make_hSet
-               (isasetsubset (fun t -> t.pr1)
-                 (Obj.magic setproperty (setquotinset (pr1eqrel r)))
-                 (isinclpr1carrier p))) (fun xp ->
-             Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2)
-             (fun xp1 xp2 rp12 ->
-             invmaponpathsincl (Obj.magic pr1carrier p) (isinclpr1carrier p)
-               (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2)
-               (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2)
-               (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr1
-           rp.pr1); pr2 =
-         (iseqclassresrel (pr1eqrel r) (funcomp (setquotpr r) p)
-           (Obj.magic setquotuniv
-             (resrel (pr1eqrel r) (funcomp (setquotpr r) p))
-             (make_hSet
-               (isasetsubset (fun t -> t.pr1)
-                 (Obj.magic setproperty (setquotinset (pr1eqrel r)))
-                 (isinclpr1carrier p))) (fun xp ->
-             Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2)
-             (fun xp1 xp2 rp12 ->
-             invmaponpathsincl (Obj.magic pr1carrier p) (isinclpr1carrier p)
-               (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2)
-               (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2)
-               (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr1.pr1
-           (Obj.magic setquotuniv
-             (resrel (pr1eqrel r) (funcomp (setquotpr r) p))
-             (make_hSet
-               (isasetsubset (fun t -> t.pr1)
-                 (Obj.magic setproperty (setquotinset (pr1eqrel r)))
-                 (isinclpr1carrier p))) (fun xp ->
-             Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2)
-             (fun xp1 xp2 rp12 ->
-             invmaponpathsincl (Obj.magic pr1carrier p) (isinclpr1carrier p)
-               (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2)
-               (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2)
-               (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr1.pr2
-           (fun x px ->
-           internal_paths_rew_r (setquotpr r x)
-             (Obj.magic setquotuniv
-               (resrel (pr1eqrel r) (funcomp (setquotpr r) p))
-               (make_hSet
-                 (isasetsubset (fun t -> t.pr1)
-                   (Obj.magic setproperty (setquotinset (pr1eqrel r)))
-                   (isinclpr1carrier p))) (fun xp ->
-               Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2)
-               (fun xp1 xp2 rp12 ->
-               invmaponpathsincl (Obj.magic pr1carrier p)
-                 (isinclpr1carrier p)
-                 (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2)
-                 (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2)
-                 (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr1
-             (Obj.magic setquotuniv
-               (resrel (pr1eqrel r) (funcomp (setquotpr r) p))
-               (make_hSet
-                 (isasetsubset (fun t -> t.pr1)
-                   (Obj.magic setproperty (setquotinset (pr1eqrel r)))
-                   (isinclpr1carrier p))) (fun xp ->
-               Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2)
-               (fun xp1 xp2 rp12 ->
-               invmaponpathsincl (Obj.magic pr1carrier p)
-                 (isinclpr1carrier p)
-                 (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2)
-                 (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2)
-                 (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr2
-             (setquotl0 r
-               (Obj.magic setquotuniv
-                 (resrel (pr1eqrel r) (funcomp (setquotpr r) p))
-                 (make_hSet
-                   (isasetsubset (fun t -> t.pr1)
-                     (Obj.magic setproperty (setquotinset (pr1eqrel r)))
-                     (isinclpr1carrier p))) (fun xp ->
-                 Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2)
-                 (fun xp1 xp2 rp12 ->
-                 invmaponpathsincl (Obj.magic pr1carrier p)
-                   (isinclpr1carrier p)
-                   (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2)
-                   (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2)
-                   (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr1
-               (make_carrier
-                 (Obj.magic setquotuniv
-                   (resrel (pr1eqrel r) (funcomp (setquotpr r) p))
-                   (make_hSet
-                     (isasetsubset (fun t -> t.pr1)
-                       (Obj.magic setproperty (setquotinset (pr1eqrel r)))
-                       (isinclpr1carrier p))) (fun xp ->
-                   Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2)
-                   (fun xp1 xp2 rp12 ->
-                   invmaponpathsincl (Obj.magic pr1carrier p)
-                     (isinclpr1carrier p)
-                     (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2)
-                     (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2)
-                     (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12))
-                   (setquotpr q a)).pr1.pr1 x px)))) } (setquotpr q a)
-         Coq_paths_refl)
-   in
-   isweq_iso f g egf (Obj.magic efg)) }
+let weqsubquot r p = r
+  (* let f = fromsubquot r p in *)
+  (* let g = tosubquot r p in *)
+  (* { pr1 = f; pr2 = *)
+  (* (let int0 = *)
+  (*    isasetsubset (fun t -> t.pr1) *)
+  (*      (Obj.magic setproperty (setquotinset (pr1eqrel r))) *)
+  (*      (isinclpr1carrier p) *)
+  (*  in *)
+  (*  let egf = fun a -> *)
+  (*    let p0 = a.pr1 in *)
+  (*    let isp = a.pr2 in *)
+  (*    let int = fun p1 -> *)
+  (*      impred (S O) (fun t -> *)
+  (*        int0 (g (f { pr1 = p1; pr2 = t })) { pr1 = p1; pr2 = t }) *)
+  (*    in *)
+  (*    Obj.magic setquotunivprop r (fun a0 -> make_hProp (int a0)) (fun x -> *)
+  (*      Obj.magic (fun isp0 -> *)
+  (*        invmaponpathsincl (pr1carrier p) (isinclpr1carrier p) *)
+  (*          (g (f { pr1 = (setquotpr r x); pr2 = isp0 })) { pr1 = *)
+  (*          (setquotpr r x); pr2 = isp0 } Coq_paths_refl)) p0 isp *)
+  (*  in *)
+  (*  let efg = *)
+  (*    let int = fun a -> *)
+  (*      setproperty *)
+  (*        (setquotinset (resrel (pr1eqrel r) (funcomp (setquotpr r) p))) *)
+  (*        (Obj.magic f (Obj.magic g a)) a *)
+  (*    in *)
+  (*    let q = reseqrel r (funcomp (setquotpr r) p) in *)
+  (*    setquotunivprop q (fun a -> make_hProp (Obj.magic int a)) (fun a -> *)
+  (*      Obj.magic invmaponpathsincl (fun t -> t.pr1) *)
+  (*        (isinclpr1 (fun a0 -> *)
+  (*          isapropiseqclass (resrel (pr1eqrel r) (funcomp (setquotpr r) p)) a0)) *)
+  (*        { pr1 = (fun rp -> *)
+  (*        pr1setquot (pr1eqrel r) *)
+  (*          (Obj.magic setquotuniv *)
+  (*            (resrel (pr1eqrel r) (funcomp (setquotpr r) p)) *)
+  (*            (make_hSet *)
+  (*              (isasetsubset (fun t -> t.pr1) *)
+  (*                (Obj.magic setproperty (setquotinset (pr1eqrel r))) *)
+  (*                (isinclpr1carrier p))) (fun xp -> *)
+  (*            Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2) *)
+  (*            (fun xp1 xp2 rp12 -> *)
+  (*            invmaponpathsincl (Obj.magic pr1carrier p) (isinclpr1carrier p) *)
+  (*              (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2) *)
+  (*              (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2) *)
+  (*              (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr1 *)
+  (*          rp.pr1); pr2 = *)
+  (*        (iseqclassresrel (pr1eqrel r) (funcomp (setquotpr r) p) *)
+  (*          (Obj.magic setquotuniv *)
+  (*            (resrel (pr1eqrel r) (funcomp (setquotpr r) p)) *)
+  (*            (make_hSet *)
+  (*              (isasetsubset (fun t -> t.pr1) *)
+  (*                (Obj.magic setproperty (setquotinset (pr1eqrel r))) *)
+  (*                (isinclpr1carrier p))) (fun xp -> *)
+  (*            Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2) *)
+  (*            (fun xp1 xp2 rp12 -> *)
+  (*            invmaponpathsincl (Obj.magic pr1carrier p) (isinclpr1carrier p) *)
+  (*              (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2) *)
+  (*              (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2) *)
+  (*              (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr1.pr1 *)
+  (*          (Obj.magic setquotuniv *)
+  (*            (resrel (pr1eqrel r) (funcomp (setquotpr r) p)) *)
+  (*            (make_hSet *)
+  (*              (isasetsubset (fun t -> t.pr1) *)
+  (*                (Obj.magic setproperty (setquotinset (pr1eqrel r))) *)
+  (*                (isinclpr1carrier p))) (fun xp -> *)
+  (*            Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2) *)
+  (*            (fun xp1 xp2 rp12 -> *)
+  (*            invmaponpathsincl (Obj.magic pr1carrier p) (isinclpr1carrier p) *)
+  (*              (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2) *)
+  (*              (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2) *)
+  (*              (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr1.pr2 *)
+  (*          (fun x px -> *)
+  (*          internal_paths_rew_r (setquotpr r x) *)
+  (*            (Obj.magic setquotuniv *)
+  (*              (resrel (pr1eqrel r) (funcomp (setquotpr r) p)) *)
+  (*              (make_hSet *)
+  (*                (isasetsubset (fun t -> t.pr1) *)
+  (*                  (Obj.magic setproperty (setquotinset (pr1eqrel r))) *)
+  (*                  (isinclpr1carrier p))) (fun xp -> *)
+  (*              Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2) *)
+  (*              (fun xp1 xp2 rp12 -> *)
+  (*              invmaponpathsincl (Obj.magic pr1carrier p) *)
+  (*                (isinclpr1carrier p) *)
+  (*                (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2) *)
+  (*                (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2) *)
+  (*                (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr1 *)
+  (*            (Obj.magic setquotuniv *)
+  (*              (resrel (pr1eqrel r) (funcomp (setquotpr r) p)) *)
+  (*              (make_hSet *)
+  (*                (isasetsubset (fun t -> t.pr1) *)
+  (*                  (Obj.magic setproperty (setquotinset (pr1eqrel r))) *)
+  (*                  (isinclpr1carrier p))) (fun xp -> *)
+  (*              Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2) *)
+  (*              (fun xp1 xp2 rp12 -> *)
+  (*              invmaponpathsincl (Obj.magic pr1carrier p) *)
+  (*                (isinclpr1carrier p) *)
+  (*                (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2) *)
+  (*                (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2) *)
+  (*                (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr2 *)
+  (*            (setquotl0 r *)
+  (*              (Obj.magic setquotuniv *)
+  (*                (resrel (pr1eqrel r) (funcomp (setquotpr r) p)) *)
+  (*                (make_hSet *)
+  (*                  (isasetsubset (fun t -> t.pr1) *)
+  (*                    (Obj.magic setproperty (setquotinset (pr1eqrel r))) *)
+  (*                    (isinclpr1carrier p))) (fun xp -> *)
+  (*                Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2) *)
+  (*                (fun xp1 xp2 rp12 -> *)
+  (*                invmaponpathsincl (Obj.magic pr1carrier p) *)
+  (*                  (isinclpr1carrier p) *)
+  (*                  (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2) *)
+  (*                  (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2) *)
+  (*                  (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) (setquotpr q a)).pr1 *)
+  (*              (make_carrier *)
+  (*                (Obj.magic setquotuniv *)
+  (*                  (resrel (pr1eqrel r) (funcomp (setquotpr r) p)) *)
+  (*                  (make_hSet *)
+  (*                    (isasetsubset (fun t -> t.pr1) *)
+  (*                      (Obj.magic setproperty (setquotinset (pr1eqrel r))) *)
+  (*                      (isinclpr1carrier p))) (fun xp -> *)
+  (*                  Obj.magic make_carrier p (setquotpr r xp.pr1) xp.pr2) *)
+  (*                  (fun xp1 xp2 rp12 -> *)
+  (*                  invmaponpathsincl (Obj.magic pr1carrier p) *)
+  (*                    (isinclpr1carrier p) *)
+  (*                    (Obj.magic make_carrier p (setquotpr r xp1.pr1) xp1.pr2) *)
+  (*                    (Obj.magic make_carrier p (setquotpr r xp2.pr1) xp2.pr2) *)
+  (*                    (iscompsetquotpr r xp1.pr1 xp2.pr1 rp12)) *)
+  (*                  (setquotpr q a)).pr1.pr1 x px)))) } (setquotpr q a) *)
+  (*        Coq_paths_refl) *)
+  (*  in *)
+  (*  isweq_iso f g egf (Obj.magic efg)) } *)
 
 (** val pathshrel : 'a1 -> 'a1 -> hProp **)
 
@@ -2330,10 +2330,9 @@ let pathseqrel =
 
 type 'x pi0 = 'x setquot
 
-let _UU03c0__UU2080_ =
-  pi0
-let _UU03c0__UU2080__universal_map y =
-  invmap (_UU03c0__UU2080__universal_property y)
+(* let _UU03c0__UU2080_ =  pi0 *)
+let _UU03c0__UU2080__universal_map y = y
+  (* invmap (_UU03c0__UU2080__universal_property y) *)
 
 (** val pi0pr : 'a1 -> 'a1 setquot **)
 
@@ -2470,35 +2469,18 @@ let component x =
 let _UU03c0__UU2080__map f =
   Obj.magic setquotfun (pr1eqrel pathseqrel) pathseqrel f (fun x x' ->
     hinhfun (maponpaths f x x'))
-let _UU03c0__UU2080__universal_property y =
-  { pr1 = (fun h -> funcomp component h); pr2 = (fun f ->
-    iscontraprop1
-      (isaproptotal2 (fun h ->
-        impred_isaset (fun _ -> setproperty y) (funcomp component h) f)
-        (fun h h' e e' ->
-        funextsec h h' (fun w ->
-          surjectionisepitosets component h h'
-            (Obj.magic issurjsetquotpr pathseqrel) (setproperty y) (fun x ->
-            maponpaths (fun k -> k x) (funcomp component h)
-              (funcomp component h')
-              (pathscomp0 (funcomp component h) f (funcomp component h') e
-                (pathsinv0 (funcomp component h') f e'))) w))) { pr1 =
-      (Obj.magic setquotuniv (fun _ _ -> ishinh) y f (fun x y0 e ->
-        squash_to_prop e (setproperty y (f x) (f y0)) (maponpaths f x y0)));
-      pr2 = Coq_paths_refl }) }
 let _UU03c0__UU2080__universal_map_uniq y h h' e x =
   surjectionisepitosets component h h' (Obj.magic issurjsetquotpr pathseqrel)
     (setproperty y) e x
-let coq_SetCovering ac =
-  let ac' = coq_AC_impl2.pr1 ac in
-  let f = Obj.magic ac' pi0 __ pi0pr (issurjsetquotpr pathseqrel) in
-  squash_to_prop f (propproperty ishinh) (fun x0 ->
-    let f0 = x0.pr1 in
-    let eqn = x0.pr2 in
-    hinhpr { pr1 = pi0; pr2 = { pr1 = f0; pr2 = (fun x ->
-      squash_to_prop
-        (invmap (weqpathsinsetquot pathseqrel (f0 (pi0pr x)) x)
-          (eqn (pi0pr x))) (propproperty ishinh) (fun e ->
-        hinhpr { pr1 = (pi0pr x); pr2 = e })) } })
-let hrel_set x =
-  make_hSet (isaset_hrel x)
+let coq_SetCovering ac = ac
+  (* let ac' = coq_AC_impl2.pr1 ac in *)
+  (* let f = Obj.magic ac' pi0 __ pi0pr (issurjsetquotpr pathseqrel) in *)
+  (* squash_to_prop f (propproperty ishinh) (fun x0 -> *)
+  (*   let f0 = x0.pr1 in *)
+  (*   let eqn = x0.pr2 in *)
+  (*   hinhpr { pr1 = pi0; pr2 = { pr1 = f0; pr2 = (fun x -> *)
+  (*     squash_to_prop *)
+  (*       (invmap (weqpathsinsetquot pathseqrel (f0 (pi0pr x)) x) *)
+  (*         (eqn (pi0pr x))) (propproperty ishinh) (fun e -> *)
+  (*       hinhpr { pr1 = (pi0pr x); pr2 = e })) } }) *)
+

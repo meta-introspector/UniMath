@@ -2106,11 +2106,11 @@ let dirprod_with_prop isa =
 (** val dirprod_with_prop' :
     'a1 isaprop -> (('a1, ('a2, 'a1) dirprod) dirprod, ('a2, 'a1) dirprod) weq **)
 
-let dirprod_with_prop' isa =
-  weqcomp (invweq weqtotal2asstor)
-    (weqcomp weqdirprodcomm
-      (weqcomp (invweq weqtotal2asstor)
-        (weqcomp (weqdirprodf (dirprod_with_prop isa) idweq) weqdirprodcomm)))
+let dirprod_with_prop' isa = isa
+  (* weqcomp (invweq weqtotal2asstor) *)
+  (*   (weqcomp weqdirprodcomm *)
+  (*     (weqcomp (invweq weqtotal2asstor) *)
+  (*       (weqcomp (weqdirprodf (dirprod_with_prop isa) idweq) weqdirprodcomm))) *)
 
 (** val issurjective_idfun : ('a1, 'a1) issurjective **)
 

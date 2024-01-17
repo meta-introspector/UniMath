@@ -458,16 +458,16 @@ let isweqdnitocompl n i jni =
 
 (** val weqdnicompl_compute : nat -> stn -> stn -> stn paths **)
 
-let weqdnicompl_compute n j i =
-  subtypePath_prop (fun x -> natlth x (S n)) (pr1weq (weqdnicompl n j) i).pr1
-    (dni n j i) Coq_paths_refl
+let weqdnicompl_compute n j i = n j i
+  (* subtypePath_prop (fun x -> natlth x (S n)) (pr1weq (weqdnicompl n j) i).pr1 *)
+  (*   (dni n j i) Coq_paths_refl *)
 
 (** val weqdnicoprod_provisional :
     nat -> stn -> ((stn, coq_unit) coprod, stn) weq **)
 
-let weqdnicoprod_provisional n j =
-  weqcomp (weqcoprodf (weqdnicompl n j) idweq)
-    (weqrecompl_ne j (isdeceqstn (S n) j) (stnneq (S n) j))
+let weqdnicoprod_provisional n j = n j
+  (* weqcomp (weqcoprodf (weqdnicompl n j) idweq) *)
+  (*   (weqrecompl_ne j (isdeceqstn (S n) j) (stnneq (S n) j)) *)
 
 (** val weqdnicoprod_map : nat -> stn -> (stn, coq_unit) coprod -> stn **)
 
@@ -478,27 +478,27 @@ let weqdnicoprod_map n j = function
 (** val weqdnicoprod_compute :
     nat -> stn -> ((stn, coq_unit) coprod, stn) homot **)
 
-let weqdnicoprod_compute n j = function
-| Coq_ii1 a ->
-  subtypePath_prop (fun x -> natlth x (S n))
-    (pr1weq (weqdnicoprod_provisional n j) (Coq_ii1 a))
-    (weqdnicoprod_map n j (Coq_ii1 a)) Coq_paths_refl
-| Coq_ii2 _ -> Coq_paths_refl
+let weqdnicoprod_compute n j = n j
+(* | Coq_ii1 a -> *)
+(*   subtypePath_prop (fun x -> natlth x (S n)) *)
+(*     (pr1weq (weqdnicoprod_provisional n j) (Coq_ii1 a)) *)
+(*     (weqdnicoprod_map n j (Coq_ii1 a)) Coq_paths_refl *)
+(* | Coq_ii2 _ -> Coq_paths_refl *)
 
 (** val weqdnicoprod : nat -> stn -> ((stn, coq_unit) coprod, stn) weq **)
 
-let weqdnicoprod n j =
-  make_weq (weqdnicoprod_map n j)
-    (isweqhomot (pr1weq (weqdnicoprod_provisional n j))
-      (weqdnicoprod_map n j) (weqdnicoprod_compute n j)
-      (weqproperty (weqdnicoprod_provisional n j)))
+let weqdnicoprod n j = n
+  (* make_weq (weqdnicoprod_map n j) *)
+  (*   (isweqhomot (pr1weq (weqdnicoprod_provisional n j)) *)
+  (*     (weqdnicoprod_map n j) (weqdnicoprod_compute n j) *)
+  (*     (weqproperty (weqdnicoprod_provisional n j))) *)
 
 (** val weqoverdnicoprod :
     nat -> ((stn, 'a1) total2, ((stn, 'a1) total2, 'a1) coprod) weq **)
 
-let weqoverdnicoprod n =
-  weqcomp (weqtotal2overcoprod' (weqdnicoprod n (lastelement n)))
-    (weqcoprodf idweq weqtotal2overunit)
+let weqoverdnicoprod n = n
+  (* weqcomp (weqtotal2overcoprod' (weqdnicoprod n (lastelement n))) *)
+  (*   (weqcoprodf idweq weqtotal2overunit) *)
 
 (** val weqoverdnicoprod_eq1 :
     nat -> stn -> 'a1 -> (stn, 'a1) total2 paths **)

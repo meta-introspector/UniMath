@@ -42,21 +42,21 @@ val pr1_eqweqmap2 : coq_UU paths -> ('a1 -> 'a2) paths
 
 val weqpath_transport : ('a1, 'a2) weq -> ('a1 -> 'a2) paths
 
-val weqpath_cast : ('a1, 'a2) weq -> ('a1 -> 'a2) paths
+(* val weqpath_cast : ('a1, 'a2) weq -> ('a1 -> 'a2) paths *)
 
-val switch_weq : ('a1, 'a2) weq -> 'a1 -> 'a2 -> 'a2 paths -> 'a1 paths
+(* val switch_weq : ('a1, 'a2) weq -> 'a1 -> 'a2 -> 'a2 paths -> 'a1 paths *)
 
-val switch_weq' : ('a1, 'a2) weq -> 'a1 -> 'a2 -> 'a1 paths -> 'a2 paths
+(* val switch_weq' : ('a1, 'a2) weq -> 'a1 -> 'a2 -> 'a1 paths -> 'a2 paths *)
 
-val weq_over_sections :
-  ('a1, 'a2) weq -> 'a1 -> 'a2 -> 'a2 paths -> 'a3 -> 'a3 -> 'a3 paths ->
-  (('a2 -> 'a3) -> ('a4, 'a5) weq) -> ((('a2 -> 'a3, 'a4) total2, 'a3)
-  hfiber, (('a1 -> 'a3, 'a5) total2, 'a3) hfiber) weq
+(* val weq_over_sections : *)
+(*   ('a1, 'a2) weq -> 'a1 -> 'a2 -> 'a2 paths -> 'a3 -> 'a3 -> 'a3 paths -> *)
+(*   (('a2 -> 'a3) -> ('a4, 'a5) weq) -> ((('a2 -> 'a3, 'a4) total2, 'a3) *)
+(*   hfiber, (('a1 -> 'a3, 'a5) total2, 'a3) hfiber) weq *)
 
-val maponpaths_app_homot :
-  ('a2 -> 'a1 -> 'a3) -> ('a2 -> 'a1 -> 'a3) -> (('a2, 'a1) dirprod -> 'a3
-  paths) -> 'a1 -> 'a2 -> 'a3 paths paths
+(* val maponpaths_app_homot : *)
+(*   ('a2 -> 'a1 -> 'a3) -> ('a2 -> 'a1 -> 'a3) -> (('a2, 'a1) dirprod -> 'a3 *)
+(*   paths) -> 'a1 -> 'a2 -> 'a3 paths paths *)
 
-val path_path_fun :
-  ('a1 -> 'a2) -> ('a1 -> 'a2) -> ('a1 -> 'a2) paths -> ('a1 -> 'a2) paths ->
-  ('a1 -> 'a2 paths paths) -> ('a1 -> 'a2) paths paths
+(* val path_path_fun : *)
+(*   ('a1 -> 'a2) -> ('a1 -> 'a2) -> ('a1 -> 'a2) paths -> ('a1 -> 'a2) paths -> *)
+(*   ('a1 -> 'a2 paths paths) -> ('a1 -> 'a2) paths paths *)

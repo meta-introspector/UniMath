@@ -19,5 +19,5 @@ let wma_decidable x =
 
 (** val negforall_to_existsneg' : hProptoType -> hProptoType dneg **)
 
-let negforall_to_existsneg' nf c =
-  Obj.magic nf (fun x -> neghexisttoforallneg (Obj.magic c) x)
+let negforall_to_existsneg' nf c = nf
+  (* Obj.magic nf (fun x -> neghexisttoforallneg (Obj.magic c) x) *)

@@ -43,17 +43,17 @@ let eqrel_on_bool p =
 (** val eqrel_on_bool_iff :
     hProp -> (pr1hSet setquot paths, hProptoType) logeq **)
 
-let eqrel_on_bool_iff p =
-  let e = eqrel_on_bool p in
-  { pr1 = (fun q ->
-  invmap (weqpathsinsetquot e (Obj.magic Coq_true) (Obj.magic Coq_false)) q);
-  pr2 = (fun p0 ->
-  iscompsetquotpr e (Obj.magic Coq_true) (Obj.magic Coq_false) p0) }
+let eqrel_on_bool_iff p =p
+  (* let e = eqrel_on_bool p in *)
+  (* { pr1 = (fun q -> *)
+  (* invmap (weqpathsinsetquot e (Obj.magic Coq_true) (Obj.magic Coq_false)) q); *)
+  (* pr2 = (fun p0 -> *)
+  (* iscompsetquotpr e (Obj.magic Coq_true) (Obj.magic Coq_false) p0) } *)
 
 (** val coq_AxiomOfChoice : hProp **)
 
-let coq_AxiomOfChoice =
-  forall_hProp (fun _ -> ischoicebase)
+let coq_AxiomOfChoice =false
+  (* forall_hProp (fun _ -> ischoicebase) *)
 
 (** val coq_AxiomOfChoice_surj : hProp **)
 
@@ -78,26 +78,26 @@ let coq_AC_impl2 =
 
 (** val coq_AC_to_LEM : hProptoType -> hProptoType **)
 
-let coq_AC_to_LEM aC =
-  Obj.magic (fun p ->
-    let f = setquotpr (eqrel_on_bool p) in
-    let q =
-      (Obj.magic coq_AC_impl2).pr1 aC
-        (setquotinset (pr1eqrel (eqrel_on_bool p))) __ f
-        (issurjsetquotpr (eqrel_on_bool p))
-    in
-    squash_to_prop q (isapropdec (propproperty p)) (fun sec ->
-      let g = sec.pr1 in
-      let h = sec.pr2 in
-      logeq_dec (Obj.magic eqrel_on_bool_iff p)
-        (retract_dec (Obj.magic f) g h isdeceqbool
-          (setquotpr (Obj.magic eqrel_on_bool p) Coq_true)
-          (setquotpr (Obj.magic eqrel_on_bool p) Coq_false))))
+let coq_AC_to_LEM aC = aC
+  (* Obj.magic (fun p -> *)
+  (*   let f = setquotpr (eqrel_on_bool p) in *)
+  (*   let q = *)
+  (*     (Obj.magic coq_AC_impl2).pr1 aC *)
+  (*       (setquotinset (pr1eqrel (eqrel_on_bool p))) __ f *)
+  (*       (issurjsetquotpr (eqrel_on_bool p)) *)
+  (*   in *)
+  (*   squash_to_prop q (isapropdec (propproperty p)) (fun sec -> *)
+  (*     let g = sec.pr1 in *)
+  (*     let h = sec.pr2 in *)
+  (*     logeq_dec (Obj.magic eqrel_on_bool_iff p) *)
+  (*       (retract_dec (Obj.magic f) g h isdeceqbool *)
+  (*         (setquotpr (Obj.magic eqrel_on_bool p) Coq_true) *)
+  (*         (setquotpr (Obj.magic eqrel_on_bool p) Coq_false)))) *)
 
 (** val coq_AxiomOfDecidableChoice : hProp **)
 
-let coq_AxiomOfDecidableChoice =
-  forall_hProp (fun _ -> himpl ischoicebase)
+let coq_AxiomOfDecidableChoice = false
+  (* forall_hProp (fun _ -> himpl ischoicebase) *)
 
 (** val coq_AC_iff_ADC_and_LEM : hProptoType **)
 

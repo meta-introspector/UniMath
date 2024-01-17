@@ -13,23 +13,23 @@ let __ = let rec f _ = Obj.repr f in Obj.repr f
     ('a1 -> hProp) -> ('a1, hProptoType) total2 -> ('a1, hProptoType) total2
     paths iscontr -> 'a1 paths iscontr **)
 
-let contr_to_pr1contr p t c =
-  Obj.magic isofhlevelweqf O (total2_paths_hProp_equiv p t t) c
+let contr_to_pr1contr p t c =p
+  (* Obj.magic isofhlevelweqf O (total2_paths_hProp_equiv p t t) c *)
 
 (** val pr1contr_to_contr :
     ('a1 -> hProp) -> ('a1, hProptoType) total2 -> 'a1 paths iscontr -> ('a1,
     hProptoType) total2 paths iscontr **)
 
-let pr1contr_to_contr p t c =
-  Obj.magic isofhlevelweqb O (total2_paths_hProp_equiv p t t) c
+let pr1contr_to_contr p t c =p
+  (* Obj.magic isofhlevelweqb O (total2_paths_hProp_equiv p t t) c *)
 
 (** val substructure_univalence :
     ('a1 -> 'a1 -> ('a1 paths, 'a2) weq) -> ('a1 -> hProp) -> ('a1,
     hProptoType) total2 -> ('a1, hProptoType) total2 -> (('a1, hProptoType)
     total2 paths, 'a2) weq **)
 
-let substructure_univalence u q a b =
-  weqcomp (total2_paths_hProp_equiv q a b) (u a.pr1 b.pr1)
+let substructure_univalence u q a b = u
+  (* weqcomp (total2_paths_hProp_equiv q a b) (u a.pr1 b.pr1) *)
 
 type coq_PointedGraph = (hSet, (pr1hSet hrel, pr1hSet) total2) total2
 
@@ -158,37 +158,37 @@ let coq_TRRGraph_univalence_weq1 =
     coq_TRRGraph -> coq_TRRGraph -> ((hSet, coq_TRRGraphData) coq_PathPair,
     coq_TRRGraphiso) weq **)
 
-let coq_TRRGraph_univalence_weq2 g h =
-  weqbandf (hSet_univalence g.pr1 h.pr1) (fun p ->
-    weqimplimpl (fun q -> coq_TRRGhomo_frompath g.pr1 h.pr1 g.pr2 h.pr2 p q)
-      (fun q -> coq_TRRGhomo_topath g.pr1 h.pr1 g.pr2 h.pr2 p q)
-      (isaset_TRRGraphData h.pr1 (transportf g.pr1 h.pr1 p g.pr2) h.pr2)
-      (isaprop_isTRRGhomo g h (pr1weq (hSet_univalence_map g.pr1 h.pr1 p))))
+let coq_TRRGraph_univalence_weq2 g h = g h
+  (* weqbandf (hSet_univalence g.pr1 h.pr1) (fun p -> *)
+  (*   weqimplimpl (fun q -> coq_TRRGhomo_frompath g.pr1 h.pr1 g.pr2 h.pr2 p q) *)
+  (*     (fun q -> coq_TRRGhomo_topath g.pr1 h.pr1 g.pr2 h.pr2 p q) *)
+  (*     (isaset_TRRGraphData h.pr1 (transportf g.pr1 h.pr1 p g.pr2) h.pr2) *)
+  (*     (isaprop_isTRRGhomo g h (pr1weq (hSet_univalence_map g.pr1 h.pr1 p)))) *)
 
 (** val coq_TRRGraph_univalence_weq2_idpath :
     coq_TRRGraph -> coq_TRRGraphiso paths **)
 
-let coq_TRRGraph_univalence_weq2_idpath g =
-  let x = fun x y -> (total2_paths_equiv x y).pr2 in
-  let x0 = fun x0 y y0 -> (x x0 y y0).pr1 in
-  let x1 =
-    pr1weq (coq_TRRGraph_univalence_weq2 g g) { pr1 = Coq_paths_refl; pr2 =
-      Coq_paths_refl }
-  in
-  let y = id_TRRGraphiso g in
-  let y0 = { pr1 = Coq_paths_refl; pr2 =
-    (let f = pr1weq (id_TRRGraphiso g).pr1 in
-     let x2 =
-       transportf
-         (pr1weq (coq_TRRGraph_univalence_weq2 g g) { pr1 = Coq_paths_refl;
-           pr2 = Coq_paths_refl }).pr1 (id_TRRGraphiso g).pr1 Coq_paths_refl
-         (pr1weq (coq_TRRGraph_univalence_weq2 g g) { pr1 = Coq_paths_refl;
-           pr2 = Coq_paths_refl }).pr2
-     in
-     let x' = (id_TRRGraphiso g).pr2 in
-     (Obj.magic isaprop_isTRRGhomo g g f x2 x').pr1) }
-  in
-  (x0 x1 y y0).pr1
+let coq_TRRGraph_univalence_weq2_idpath g = g
+  (* let x = fun x y -> (total2_paths_equiv x y).pr2 in *)
+  (* let x0 = fun x0 y y0 -> (x x0 y y0).pr1 in *)
+  (* let x1 = *)
+  (*   pr1weq (coq_TRRGraph_univalence_weq2 g g) { pr1 = Coq_paths_refl; pr2 = *)
+  (*     Coq_paths_refl } *)
+  (* in *)
+  (* let y = id_TRRGraphiso g in *)
+  (* let y0 = { pr1 = Coq_paths_refl; pr2 = *)
+  (*   (let f = pr1weq (id_TRRGraphiso g).pr1 in *)
+  (*    let x2 = *)
+  (*      transportf *)
+  (*        (pr1weq (coq_TRRGraph_univalence_weq2 g g) { pr1 = Coq_paths_refl; *)
+  (*          pr2 = Coq_paths_refl }).pr1 (id_TRRGraphiso g).pr1 Coq_paths_refl *)
+  (*        (pr1weq (coq_TRRGraph_univalence_weq2 g g) { pr1 = Coq_paths_refl; *)
+  (*          pr2 = Coq_paths_refl }).pr2 *)
+  (*    in *)
+  (*    let x' = (id_TRRGraphiso g).pr2 in *)
+  (*    (Obj.magic isaprop_isTRRGhomo g g f x2 x').pr1) } *)
+  (* in *)
+  (* (x0 x1 y y0).pr1 *)
 
 (** val coq_TRRGraph_univalence_weq1_idpath :
     coq_TRRGraph -> (hSet, coq_TRRGraphData) coq_PathPair paths **)
@@ -204,32 +204,32 @@ let coq_TRRGraph_univalence_weq1_idpath g =
     coq_TRRGraph -> coq_TRRGraph -> (coq_TRRGraph paths, coq_TRRGraphiso)
     isweq **)
 
-let isweq_TRRGraph_univalence_map g h =
-  isweqhomot
-    (pr1weq
-      (weqcomp (coq_TRRGraph_univalence_weq1 g h)
-        (coq_TRRGraph_univalence_weq2 g h)))
-    (coq_TRRGraph_univalence_map g h) (fun _ ->
-    pathscomp0
-      (pr1weq
-        (weqcomp (coq_TRRGraph_univalence_weq1 g g)
-          (coq_TRRGraph_univalence_weq2 g g)) Coq_paths_refl)
-      (pr1weq (coq_TRRGraph_univalence_weq2 g g)
-        (pr1weq (coq_TRRGraph_univalence_weq1 g g) Coq_paths_refl))
-      (coq_TRRGraph_univalence_map g g Coq_paths_refl)
-      (weqcomp_to_funcomp_app Coq_paths_refl
-        (coq_TRRGraph_univalence_weq1 g g) (coq_TRRGraph_univalence_weq2 g g))
-      (internal_paths_rew_r
-        (pr1weq (coq_TRRGraph_univalence_weq1 g g) Coq_paths_refl) { pr1 =
-        Coq_paths_refl; pr2 = Coq_paths_refl }
-        (internal_paths_rew_r
-          (pr1weq (coq_TRRGraph_univalence_weq2 g g) { pr1 = Coq_paths_refl;
-            pr2 = Coq_paths_refl }) (id_TRRGraphiso g) Coq_paths_refl
-          (coq_TRRGraph_univalence_weq2_idpath g))
-        (coq_TRRGraph_univalence_weq1_idpath g)))
-    (weqproperty
-      (weqcomp (coq_TRRGraph_univalence_weq1 g h)
-        (coq_TRRGraph_univalence_weq2 g h)))
+let isweq_TRRGraph_univalence_map g h = g h
+  (* isweqhomot *)
+  (*   (pr1weq *)
+  (*     (weqcomp (coq_TRRGraph_univalence_weq1 g h) *)
+  (*       (coq_TRRGraph_univalence_weq2 g h))) *)
+  (*   (coq_TRRGraph_univalence_map g h) (fun _ -> *)
+  (*   pathscomp0 *)
+  (*     (pr1weq *)
+  (*       (weqcomp (coq_TRRGraph_univalence_weq1 g g) *)
+  (*         (coq_TRRGraph_univalence_weq2 g g)) Coq_paths_refl) *)
+  (*     (pr1weq (coq_TRRGraph_univalence_weq2 g g) *)
+  (*       (pr1weq (coq_TRRGraph_univalence_weq1 g g) Coq_paths_refl)) *)
+  (*     (coq_TRRGraph_univalence_map g g Coq_paths_refl) *)
+  (*     (weqcomp_to_funcomp_app Coq_paths_refl *)
+  (*       (coq_TRRGraph_univalence_weq1 g g) (coq_TRRGraph_univalence_weq2 g g)) *)
+  (*     (internal_paths_rew_r *)
+  (*       (pr1weq (coq_TRRGraph_univalence_weq1 g g) Coq_paths_refl) { pr1 = *)
+  (*       Coq_paths_refl; pr2 = Coq_paths_refl } *)
+  (*       (internal_paths_rew_r *)
+  (*         (pr1weq (coq_TRRGraph_univalence_weq2 g g) { pr1 = Coq_paths_refl; *)
+  (*           pr2 = Coq_paths_refl }) (id_TRRGraphiso g) Coq_paths_refl *)
+  (*         (coq_TRRGraph_univalence_weq2_idpath g)) *)
+  (*       (coq_TRRGraph_univalence_weq1_idpath g))) *)
+  (*   (weqproperty *)
+  (*     (weqcomp (coq_TRRGraph_univalence_weq1 g h) *)
+  (*       (coq_TRRGraph_univalence_weq2 g h))) *)
 
 (** val coq_TRRGraph_univalence :
     coq_TRRGraph -> coq_TRRGraph -> (coq_TRRGraph paths, coq_TRRGraphiso) weq **)
@@ -377,8 +377,8 @@ let isaprop_issuperrigid t =
 
 (** val isWellFoundedUp : coq_Tree -> hProp **)
 
-let isWellFoundedUp t =
-  hasSmallest t.pr1.pr2.pr1
+let isWellFoundedUp t = false
+  (* hasSmallest t.pr1.pr2.pr1 *)
 
 (** val hasLargest : 'a1 hrel -> hProp **)
 
@@ -395,16 +395,16 @@ type coq_Tree_isWellFounded = (hProptoType, hProptoType) dirprod
 (** val isaprop_Tree_isWellFounded :
     coq_Tree -> coq_Tree_isWellFounded isaprop **)
 
-let isaprop_Tree_isWellFounded t =
-  isapropdirprod (propproperty (isWellFoundedUp t))
-    (propproperty (isWellFoundedDown t))
+let isaprop_Tree_isWellFounded t = false
+  (* isapropdirprod (propproperty (isWellFoundedUp t)) *)
+  (*   (propproperty (isWellFoundedDown t)) *)
 
 type ispreZFS = (coq_Tree_isWellFounded, issuperrigid) dirprod
 
 (** val isaprop_ispreZFS : coq_Tree -> ispreZFS isaprop **)
 
-let isaprop_ispreZFS t =
-  isapropdirprod (isaprop_Tree_isWellFounded t) (isaprop_issuperrigid t)
+let isaprop_ispreZFS t = false
+  (* isapropdirprod (isaprop_Tree_isWellFounded t) (isaprop_issuperrigid t) *)
 
 type preZFS = (coq_Tree, ispreZFS) total2
 
@@ -482,76 +482,76 @@ let toBranch_hsubtype _ _ _ _ e s =
 (** val preZFS_Branch_isWellFounded :
     preZFS -> pr1hSet -> coq_Tree_isWellFounded **)
 
-let preZFS_Branch_isWellFounded t x =
-  { pr1 =
-    (Obj.magic (fun s ->
-      let sS = preZFS_Branch_hsubtype_tohsubtype t x s in
-      (fun x0 ->
-      let wfunder = t.pr2.pr1 in
-      let wfunder0 = wfunder.pr1 in
-      let l1 = Obj.magic wfunder0 sS in
-      let l2 = fun p ->
-        p ishinh (fun x1 ->
-          let te = x1.pr1 in
-          let s0 = x1.pr2 in
-          let t0 = te.pr1 in
-          let e = te.pr2 in
-          (fun _ x2 ->
-          x2 { pr1 = t0; pr2 =
-            (fromBranch_hsubtype t x s (Obj.magic { pr1 = t0; pr2 = e }) s0) }))
-      in
-      let x1 = l2 x0 in
-      l1 x1 ishinh (fun y ->
-        let t0 = y.pr1 in
-        let pr3 = y.pr2 in
-        let s0 = pr3.pr1 in
-        let _UU03c0_ = pr3.pr2 in
-        let e = s0 (coq_Ed t x t0) (fun y0 -> y0.pr1) in
-        let l4 =
-          internal_paths_rew
-            (hsubtype_to_preZFS_Branch_hsubtype t x
-              (preZFS_Branch_hsubtype_tohsubtype t x s))
-            (toBranch_hsubtype t x sS t0 e (Obj.magic s0)) s
-            (coq_Branch_to_subtype t x s)
-        in
-        (fun _ y0 ->
-        y0 { pr1 = { pr1 = t0; pr2 = e }; pr2 = { pr1 = l4; pr2 =
-          (fun xx q ->
-          _UU03c0_ xx.pr1 (fun _ z -> z { pr1 = xx.pr2; pr2 = q })) } })))));
-    pr2 =
-    (Obj.magic (fun s ->
-      let sS = preZFS_Branch_hsubtype_tohsubtype t x s in
-      (fun x0 ->
-      let wfunder = t.pr2.pr1.pr2 in
-      let l1 = Obj.magic wfunder sS in
-      let l2 = fun y ->
-        y ishinh (fun z ->
-          let te = z.pr1 in
-          let s0 = z.pr2 in
-          let t0 = te.pr1 in
-          let e = te.pr2 in
-          (fun _ w ->
-          w { pr1 = t0; pr2 =
-            (fromBranch_hsubtype t x s (Obj.magic { pr1 = t0; pr2 = e }) s0) }))
-      in
-      let x1 = l2 x0 in
-      l1 x1 ishinh (fun y ->
-        let t0 = y.pr1 in
-        let pr3 = y.pr2 in
-        let s0 = pr3.pr1 in
-        let _UU03c0_ = pr3.pr2 in
-        let e = s0 (coq_Ed t x t0) (fun y0 -> y0.pr1) in
-        let l4 =
-          internal_paths_rew
-            (hsubtype_to_preZFS_Branch_hsubtype t x
-              (preZFS_Branch_hsubtype_tohsubtype t x s))
-            (toBranch_hsubtype t x sS t0 e (Obj.magic s0)) s
-            (coq_Branch_to_subtype t x s)
-        in
-        (fun _ y0 ->
-        y0 { pr1 = { pr1 = t0; pr2 = e }; pr2 = { pr1 = l4; pr2 =
-          (fun xx q ->
-          _UU03c0_ xx.pr1 (fun _ z -> z { pr1 = xx.pr2; pr2 = q })) } }))))) }
+let preZFS_Branch_isWellFounded t x = t x
+  (* { pr1 = *)
+  (*   (Obj.magic (fun s -> *)
+  (*     let sS = preZFS_Branch_hsubtype_tohsubtype t x s in *)
+  (*     (fun x0 -> *)
+  (*     let wfunder = t.pr2.pr1 in *)
+  (*     let wfunder0 = wfunder.pr1 in *)
+  (*     let l1 = Obj.magic wfunder0 sS in *)
+  (*     let l2 = fun p -> *)
+  (*       p ishinh (fun x1 -> *)
+  (*         let te = x1.pr1 in *)
+  (*         let s0 = x1.pr2 in *)
+  (*         let t0 = te.pr1 in *)
+  (*         let e = te.pr2 in *)
+  (*         (fun _ x2 -> *)
+  (*         x2 { pr1 = t0; pr2 = *)
+  (*           (fromBranch_hsubtype t x s (Obj.magic { pr1 = t0; pr2 = e }) s0) })) *)
+  (*     in *)
+  (*     let x1 = l2 x0 in *)
+  (*     l1 x1 ishinh (fun y -> *)
+  (*       let t0 = y.pr1 in *)
+  (*       let pr3 = y.pr2 in *)
+  (*       let s0 = pr3.pr1 in *)
+  (*       let _UU03c0_ = pr3.pr2 in *)
+  (*       let e = s0 (coq_Ed t x t0) (fun y0 -> y0.pr1) in *)
+  (*       let l4 = *)
+  (*         internal_paths_rew *)
+  (*           (hsubtype_to_preZFS_Branch_hsubtype t x *)
+  (*             (preZFS_Branch_hsubtype_tohsubtype t x s)) *)
+  (*           (toBranch_hsubtype t x sS t0 e (Obj.magic s0)) s *)
+  (*           (coq_Branch_to_subtype t x s) *)
+  (*       in *)
+  (*       (fun _ y0 -> *)
+  (*       y0 { pr1 = { pr1 = t0; pr2 = e }; pr2 = { pr1 = l4; pr2 = *)
+  (*         (fun xx q -> *)
+  (*         _UU03c0_ xx.pr1 (fun _ z -> z { pr1 = xx.pr2; pr2 = q })) } }))))); *)
+  (*   pr2 = *)
+  (*   (Obj.magic (fun s -> *)
+  (*     let sS = preZFS_Branch_hsubtype_tohsubtype t x s in *)
+  (*     (fun x0 -> *)
+  (*     let wfunder = t.pr2.pr1.pr2 in *)
+  (*     let l1 = Obj.magic wfunder sS in *)
+  (*     let l2 = fun y -> *)
+  (*       y ishinh (fun z -> *)
+  (*         let te = z.pr1 in *)
+  (*         let s0 = z.pr2 in *)
+  (*         let t0 = te.pr1 in *)
+  (*         let e = te.pr2 in *)
+  (*         (fun _ w -> *)
+  (*         w { pr1 = t0; pr2 = *)
+  (*           (fromBranch_hsubtype t x s (Obj.magic { pr1 = t0; pr2 = e }) s0) })) *)
+  (*     in *)
+  (*     let x1 = l2 x0 in *)
+  (*     l1 x1 ishinh (fun y -> *)
+  (*       let t0 = y.pr1 in *)
+  (*       let pr3 = y.pr2 in *)
+  (*       let s0 = pr3.pr1 in *)
+  (*       let _UU03c0_ = pr3.pr2 in *)
+  (*       let e = s0 (coq_Ed t x t0) (fun y0 -> y0.pr1) in *)
+  (*       let l4 = *)
+  (*         internal_paths_rew *)
+  (*           (hsubtype_to_preZFS_Branch_hsubtype t x *)
+  (*             (preZFS_Branch_hsubtype_tohsubtype t x s)) *)
+  (*           (toBranch_hsubtype t x sS t0 e (Obj.magic s0)) s *)
+  (*           (coq_Branch_to_subtype t x s) *)
+  (*       in *)
+  (*       (fun _ y0 -> *)
+  (*       y0 { pr1 = { pr1 = t0; pr2 = e }; pr2 = { pr1 = l4; pr2 = *)
+  (*         (fun xx q -> *)
+  (*         _UU03c0_ xx.pr1 (fun _ z -> z { pr1 = xx.pr2; pr2 = q })) } }))))) } *)
 
 (** val iscontrauto_Tree_TRRGraph :
     coq_Tree -> isrigid -> coq_TRRGraph paths iscontr **)
@@ -582,51 +582,51 @@ let coq_Up_to_Up_inv _ _ _ x =
 (** val isweq_Up_to_Up :
     coq_Tree -> pr1hSet -> pr1hSet -> (pr1hSet, pr1hSet) isweq **)
 
-let isweq_Up_to_Up t x y =
-  let f = coq_Up_to_Up t x y in
-  let g = coq_Up_to_Up_inv t x y in
-  let l = fun z ->
-    let z0 = z.pr1 in
-    let _UU03c0_ = z.pr2 in
-    let x0 = fun x0 y0 -> (total2_paths_equiv x0 y0).pr2 in
-    let x1 = fun x1 y0 y1 -> (x0 x1 y0 y1).pr1 in
-    let x2 = { pr1 = { pr1 = z0.pr1; pr2 =
-      (t.pr1.pr2.pr2.pr2.pr2.pr1 x (Obj.magic y).pr1 z0.pr1 (Obj.magic y).pr2
-        _UU03c0_) }; pr2 = _UU03c0_ }
-    in
-    let y0 = { pr1 = z0; pr2 = _UU03c0_ } in
-    let y1 =
-      let h =
-        let x3 = fun x3 y1 -> (total2_paths_equiv x3 y1).pr2 in
-        let x4 = fun x4 y1 y2 -> (x3 x4 y1 y2).pr1 in
-        let x5 = { pr1 = z0.pr1; pr2 =
-          (t.pr1.pr2.pr2.pr2.pr2.pr1 x (Obj.magic y).pr1 z0.pr1
-            (Obj.magic y).pr2 _UU03c0_) }
-        in
-        let y1 = { pr1 = Coq_paths_refl; pr2 =
-          (let p = t.pr1.pr2.pr1 x z0.pr1 in
-           let x6 =
-             transportf z0.pr1 z0.pr1 Coq_paths_refl
-               (t.pr1.pr2.pr2.pr2.pr2.pr1 x (Obj.magic y).pr1 z0.pr1
-                 (Obj.magic y).pr2 _UU03c0_)
-           in
-           let x' = z0.pr2 in (Obj.magic propproperty p x6 x').pr1) }
-        in
-        (x4 x5 z0 y1).pr1
-      in
-      { pr1 = h; pr2 =
-      (let p = (Obj.magic coq_Up t x).pr1.pr2.pr1 y z0 in
-       let x3 =
-         transportf { pr1 = z0.pr1; pr2 =
-           (t.pr1.pr2.pr2.pr2.pr2.pr1 x (Obj.magic y).pr1 z0.pr1
-             (Obj.magic y).pr2 _UU03c0_) } z0 h _UU03c0_
-       in
-       (Obj.magic propproperty p x3 _UU03c0_).pr1) }
-    in
-    (x1 x2 y0 y1).pr1
-  in
-  let lL = fun _ -> Coq_paths_refl in
-  let x0 = (weq_iso (Obj.magic f) (Obj.magic g) lL l).pr2 in Obj.magic x0
+let isweq_Up_to_Up t x y = t
+  (* let f = coq_Up_to_Up t x y in *)
+  (* let g = coq_Up_to_Up_inv t x y in *)
+  (* let l = fun z -> *)
+  (*   let z0 = z.pr1 in *)
+  (*   let _UU03c0_ = z.pr2 in *)
+  (*   let x0 = fun x0 y0 -> (total2_paths_equiv x0 y0).pr2 in *)
+  (*   let x1 = fun x1 y0 y1 -> (x0 x1 y0 y1).pr1 in *)
+  (*   let x2 = { pr1 = { pr1 = z0.pr1; pr2 = *)
+  (*     (t.pr1.pr2.pr2.pr2.pr2.pr1 x (Obj.magic y).pr1 z0.pr1 (Obj.magic y).pr2 *)
+  (*       _UU03c0_) }; pr2 = _UU03c0_ } *)
+  (*   in *)
+  (*   let y0 = { pr1 = z0; pr2 = _UU03c0_ } in *)
+  (*   let y1 = *)
+  (*     let h = *)
+  (*       let x3 = fun x3 y1 -> (total2_paths_equiv x3 y1).pr2 in *)
+  (*       let x4 = fun x4 y1 y2 -> (x3 x4 y1 y2).pr1 in *)
+  (*       let x5 = { pr1 = z0.pr1; pr2 = *)
+  (*         (t.pr1.pr2.pr2.pr2.pr2.pr1 x (Obj.magic y).pr1 z0.pr1 *)
+  (*           (Obj.magic y).pr2 _UU03c0_) } *)
+  (*       in *)
+  (*       let y1 = { pr1 = Coq_paths_refl; pr2 = *)
+  (*         (let p = t.pr1.pr2.pr1 x z0.pr1 in *)
+  (*          let x6 = *)
+  (*            transportf z0.pr1 z0.pr1 Coq_paths_refl *)
+  (*              (t.pr1.pr2.pr2.pr2.pr2.pr1 x (Obj.magic y).pr1 z0.pr1 *)
+  (*                (Obj.magic y).pr2 _UU03c0_) *)
+  (*          in *)
+  (*          let x' = z0.pr2 in (Obj.magic propproperty p x6 x').pr1) } *)
+  (*       in *)
+  (*       (x4 x5 z0 y1).pr1 *)
+  (*     in *)
+  (*     { pr1 = h; pr2 = *)
+  (*     (let p = (Obj.magic coq_Up t x).pr1.pr2.pr1 y z0 in *)
+  (*      let x3 = *)
+  (*        transportf { pr1 = z0.pr1; pr2 = *)
+  (*          (t.pr1.pr2.pr2.pr2.pr2.pr1 x (Obj.magic y).pr1 z0.pr1 *)
+  (*            (Obj.magic y).pr2 _UU03c0_) } z0 h _UU03c0_ *)
+  (*      in *)
+  (*      (Obj.magic propproperty p x3 _UU03c0_).pr1) } *)
+  (*   in *)
+  (*   (x1 x2 y0 y1).pr1 *)
+  (* in *)
+  (* let lL = fun _ -> Coq_paths_refl in *)
+  (* let x0 = (weq_iso (Obj.magic f) (Obj.magic g) lL l).pr2 in Obj.magic x0 *)
 
 (** val isTRRGhomo_Up_to_Up : coq_Tree -> pr1hSet -> pr1hSet -> isTRRGhomo **)
 
@@ -674,37 +674,37 @@ let isTRRGhomo_Up_to_Up t x y =
 
 (** val coq_UpUpid : coq_Tree -> pr1hSet -> pr1hSet -> coq_TRRGraph paths **)
 
-let coq_UpUpid t x y =
-  let x0 = fun g h -> (coq_TRRGraph_univalence g h).pr2 in
-  let x1 = fun g h y0 -> (x0 g h y0).pr1 in
-  let g = (coq_Up t (Obj.magic y).pr1).pr1 in
-  let h = coq_Upw_to_TRRGraph (coq_Up t x) y in
-  let y0 = { pr1 = (make_weq (coq_Up_to_Up t x y) (isweq_Up_to_Up t x y));
-    pr2 = (isTRRGhomo_Up_to_Up t x y) }
-  in
-  (x1 g h y0).pr1
+let coq_UpUpid t x y = t
+  (* let x0 = fun g h -> (coq_TRRGraph_univalence g h).pr2 in *)
+  (* let x1 = fun g h y0 -> (x0 g h y0).pr1 in *)
+  (* let g = (coq_Up t (Obj.magic y).pr1).pr1 in *)
+  (* let h = coq_Upw_to_TRRGraph (coq_Up t x) y in *)
+  (* let y0 = { pr1 = (make_weq (coq_Up_to_Up t x y) (isweq_Up_to_Up t x y)); *)
+  (*   pr2 = (isTRRGhomo_Up_to_Up t x y) } *)
+  (* in *)
+  (* (x1 g h y0).pr1 *)
 
 (** val preZFS_Branch_issuperrigid : preZFS -> pr1hSet -> issuperrigid **)
 
-let preZFS_Branch_issuperrigid t x =
-  { pr1 =
-    (Obj.magic pr1contr_to_contr (fun x0 -> { pr1 = __; pr2 =
-      (isaprop_isatree x0) }) (preZFS_Branch t x)
-      (iscontrauto_Tree_TRRGraph (coq_Up t.pr1 x) (t.pr2.pr2.pr2 x))); pr2 =
-    (fun y ->
-    Obj.magic pr1contr_to_contr (fun x0 -> { pr1 = __; pr2 =
-      (isaprop_isatree x0) }) (coq_Up (preZFS_Branch t x) y)
-      (internal_paths_rew (coq_Up t.pr1 (Obj.magic y).pr1).pr1
-        (iscontrauto_Tree_TRRGraph (coq_Up t.pr1 (Obj.magic y).pr1)
-          (t.pr2.pr2.pr2 (Obj.magic y).pr1))
-        (coq_Upw_to_TRRGraph (coq_Up t.pr1 x) y) (coq_UpUpid t.pr1 x y))) }
+let preZFS_Branch_issuperrigid t x = t
+  (* { pr1 = *)
+  (*   (Obj.magic pr1contr_to_contr (fun x0 -> { pr1 = __; pr2 = *)
+  (*     (isaprop_isatree x0) }) (preZFS_Branch t x) *)
+  (*     (iscontrauto_Tree_TRRGraph (coq_Up t.pr1 x) (t.pr2.pr2.pr2 x))); pr2 = *)
+  (*   (fun y -> *)
+  (*   Obj.magic pr1contr_to_contr (fun x0 -> { pr1 = __; pr2 = *)
+  (*     (isaprop_isatree x0) }) (coq_Up (preZFS_Branch t x) y) *)
+  (*     (internal_paths_rew (coq_Up t.pr1 (Obj.magic y).pr1).pr1 *)
+  (*       (iscontrauto_Tree_TRRGraph (coq_Up t.pr1 (Obj.magic y).pr1) *)
+  (*         (t.pr2.pr2.pr2 (Obj.magic y).pr1)) *)
+  (*       (coq_Upw_to_TRRGraph (coq_Up t.pr1 x) y) (coq_UpUpid t.pr1 x y))) } *)
 
 (** val coq_Branch : preZFS -> pr1hSet -> preZFS **)
 
-let coq_Branch t x =
-  { pr1 = (preZFS_Branch t x); pr2 = { pr1 =
-    (preZFS_Branch_isWellFounded t x); pr2 =
-    (preZFS_Branch_issuperrigid t x) } }
+let coq_Branch t x = t x
+  (* { pr1 = (preZFS_Branch t x); pr2 = { pr1 = *)
+  (*   (preZFS_Branch_isWellFounded t x); pr2 = *)
+  (*   (preZFS_Branch_issuperrigid t x) } } *)
 
 type hasuniquerepbranch = pr1hSet -> pr1hSet -> preZFS paths -> pr1hSet paths
 
@@ -834,38 +834,38 @@ let isTRRGhomo_Branch_of_Branch_to_Branch t x y =
 (** val coq_Branch_of_Branch_eq_Branch :
     preZFS -> pr1hSet -> pr1hSet -> preZFS paths **)
 
-let coq_Branch_of_Branch_eq_Branch t x y =
-  let x0 = fun x0 y0 -> (preZFS_univalence x0 y0).pr2 in
-  let x1 = fun x1 y0 y1 -> (x0 x1 y0 y1).pr1 in
-  let x2 = coq_Branch (coq_Branch t x) y in
-  let y0 = coq_Branch t (Obj.magic y).pr1 in
-  let y1 = { pr1 = { pr1 = (coq_Branch_of_Branch_to_Branch t x y); pr2 =
-    (isweq_Branch_of_Branch_to_Branch t x y) }; pr2 =
-    (isTRRGhomo_Branch_of_Branch_to_Branch t x y) }
-  in
-  (x1 x2 y0 y1).pr1
+let coq_Branch_of_Branch_eq_Branch t x y = t
+  (* let x0 = fun x0 y0 -> (preZFS_univalence x0 y0).pr2 in *)
+  (* let x1 = fun x1 y0 y1 -> (x0 x1 y0 y1).pr1 in *)
+  (* let x2 = coq_Branch (coq_Branch t x) y in *)
+  (* let y0 = coq_Branch t (Obj.magic y).pr1 in *)
+  (* let y1 = { pr1 = { pr1 = (coq_Branch_of_Branch_to_Branch t x y); pr2 = *)
+  (*   (isweq_Branch_of_Branch_to_Branch t x y) }; pr2 = *)
+  (*   (isTRRGhomo_Branch_of_Branch_to_Branch t x y) } *)
+  (* in *)
+  (* (x1 x2 y0 y1).pr1 *)
 
 (** val coq_ZFS_Branch_is_ZFS : coq_ZFS -> pr1hSet -> hasuniquerepbranch **)
 
-let coq_ZFS_Branch_is_ZFS x x0 y z =
-  internal_paths_rew_r (coq_Branch (coq_Branch (pr1ZFS x) x0) y)
-    (coq_Branch (pr1ZFS x) (Obj.magic y).pr1)
-    (internal_paths_rew_r (coq_Branch (coq_Branch (pr1ZFS x) x0) z)
-      (coq_Branch (pr1ZFS x) (Obj.magic z).pr1) (fun p ->
-      let _UU03c0_ = x.pr2 in
-      let _UU03c4_ = _UU03c0_ (Obj.magic y).pr1 (Obj.magic z).pr1 p in
-      let x1 = fun x1 y0 -> (total2_paths_equiv x1 y0).pr2 in
-      let x2 = fun x2 y0 y1 -> (x1 x2 y0 y1).pr1 in
-      let x3 = fun x3 y0 y1 -> (x2 x3 y0 y1).pr1 in
-      Obj.magic x3 y z { pr1 = _UU03c4_; pr2 =
-        (let p0 = (pr1ZFS x).pr1.pr1.pr2.pr1 x0 (Obj.magic z).pr1 in
-         let x4 =
-           transportf (Obj.magic y).pr1 (Obj.magic z).pr1 _UU03c4_
-             (Obj.magic y).pr2
-         in
-         let x' = (Obj.magic z).pr2 in (Obj.magic propproperty p0 x4 x').pr1) })
-      (coq_Branch_of_Branch_eq_Branch (pr1ZFS x) x0 z))
-    (coq_Branch_of_Branch_eq_Branch (pr1ZFS x) x0 y)
+let coq_ZFS_Branch_is_ZFS x x0 y z = x
+  (* internal_paths_rew_r (coq_Branch (coq_Branch (pr1ZFS x) x0) y) *)
+  (*   (coq_Branch (pr1ZFS x) (Obj.magic y).pr1) *)
+  (*   (internal_paths_rew_r (coq_Branch (coq_Branch (pr1ZFS x) x0) z) *)
+  (*     (coq_Branch (pr1ZFS x) (Obj.magic z).pr1) (fun p -> *)
+  (*     let _UU03c0_ = x.pr2 in *)
+  (*     let _UU03c4_ = _UU03c0_ (Obj.magic y).pr1 (Obj.magic z).pr1 p in *)
+  (*     let x1 = fun x1 y0 -> (total2_paths_equiv x1 y0).pr2 in *)
+  (*     let x2 = fun x2 y0 y1 -> (x1 x2 y0 y1).pr1 in *)
+  (*     let x3 = fun x3 y0 y1 -> (x2 x3 y0 y1).pr1 in *)
+  (*     Obj.magic x3 y z { pr1 = _UU03c4_; pr2 = *)
+  (*       (let p0 = (pr1ZFS x).pr1.pr1.pr2.pr1 x0 (Obj.magic z).pr1 in *)
+  (*        let x4 = *)
+  (*          transportf (Obj.magic y).pr1 (Obj.magic z).pr1 _UU03c4_ *)
+  (*            (Obj.magic y).pr2 *)
+  (*        in *)
+  (*        let x' = (Obj.magic z).pr2 in (Obj.magic propproperty p0 x4 x').pr1) }) *)
+  (*     (coq_Branch_of_Branch_eq_Branch (pr1ZFS x) x0 z)) *)
+  (*   (coq_Branch_of_Branch_eq_Branch (pr1ZFS x) x0 y) *)
 
 (** val coq_ZFS_Branch : coq_ZFS -> pr1hSet -> coq_ZFS **)
 
@@ -893,33 +893,33 @@ type coq_ZFS_elementof =
 (** val isaprop_ZFS_elementof :
     coq_ZFS -> coq_ZFS -> coq_ZFS_elementof isaprop **)
 
-let isaprop_ZFS_elementof x y =
-  invproofirrelevance (fun z w ->
-    let z0 = z.pr1 in
-    let pr3 = z.pr2 in
-    let ispp = pr3.pr1 in
-    let p = pr3.pr2 in
-    let w0 = w.pr1 in
-    let pr4 = w.pr2 in
-    let ispq = pr4.pr1 in
-    let q = pr4.pr2 in
-    let r =
-      pathscomp0 (coq_ZFS_Branch y w0) x (coq_ZFS_Branch y z0)
-        (pathsinv0 x (coq_ZFS_Branch y w0) q) p
-    in
-    let x0 = fun x0 y0 -> (total2_paths_equiv x0 y0).pr1 in
-    let r0 = x0 (coq_ZFS_Branch y w0) (coq_ZFS_Branch y z0) r in
-    let r1 = r0.pr1 in
-    let s = y.pr2 w0 z0 r1 in
-    let _UU03c4_ = fun y0 ->
-      isapropdirprod (isaprop_isapoint y y0)
-        (isaset_ZFS x (coq_ZFS_Branch y y0))
-    in
-    let p0 = fun y0 -> { pr1 = __; pr2 = (_UU03c4_ y0) } in
-    let x1 =
-      (total2_paths_hProp_equiv p0 { pr1 = z0; pr2 =
-        (Obj.magic { pr1 = ispp; pr2 = p }) } { pr1 = w0; pr2 =
-        (Obj.magic { pr1 = ispq; pr2 = q }) }).pr2
-    in
-    let x2 = fun y0 -> (x1 y0).pr1 in
-    let x3 = fun y0 -> (x2 y0).pr1 in Obj.magic x3 (pathsinv0 w0 z0 s))
+let isaprop_ZFS_elementof x y =x
+  (* invproofirrelevance (fun z w -> *)
+  (*   let z0 = z.pr1 in *)
+  (*   let pr3 = z.pr2 in *)
+  (*   let ispp = pr3.pr1 in *)
+  (*   let p = pr3.pr2 in *)
+  (*   let w0 = w.pr1 in *)
+  (*   let pr4 = w.pr2 in *)
+  (*   let ispq = pr4.pr1 in *)
+  (*   let q = pr4.pr2 in *)
+  (*   let r = *)
+  (*     pathscomp0 (coq_ZFS_Branch y w0) x (coq_ZFS_Branch y z0) *)
+  (*       (pathsinv0 x (coq_ZFS_Branch y w0) q) p *)
+  (*   in *)
+  (*   let x0 = fun x0 y0 -> (total2_paths_equiv x0 y0).pr1 in *)
+  (*   let r0 = x0 (coq_ZFS_Branch y w0) (coq_ZFS_Branch y z0) r in *)
+  (*   let r1 = r0.pr1 in *)
+  (*   let s = y.pr2 w0 z0 r1 in *)
+  (*   let _UU03c4_ = fun y0 -> *)
+  (*     isapropdirprod (isaprop_isapoint y y0) *)
+  (*       (isaset_ZFS x (coq_ZFS_Branch y y0)) *)
+  (*   in *)
+  (*   let p0 = fun y0 -> { pr1 = __; pr2 = (_UU03c4_ y0) } in *)
+  (*   let x1 = *)
+  (*     (total2_paths_hProp_equiv p0 { pr1 = z0; pr2 = *)
+  (*       (Obj.magic { pr1 = ispp; pr2 = p }) } { pr1 = w0; pr2 = *)
+  (*       (Obj.magic { pr1 = ispq; pr2 = q }) }).pr2 *)
+  (*   in *)
+  (*   let x2 = fun y0 -> (x1 y0).pr1 in *)
+  (*   let x3 = fun y0 -> (x2 y0).pr1 in Obj.magic x3 (pathsinv0 w0 z0 s)) *)

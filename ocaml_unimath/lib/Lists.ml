@@ -66,13 +66,13 @@ let nth x =
 
 (** val functionToList' : nat -> (stn -> 'a1) -> 'a1 vec **)
 
-let rec functionToList' n f =
-  match n with
-  | O -> Obj.magic Coq_tt
-  | S n0 ->
-    Obj.magic { pr1 = (Obj.magic f { pr1 = O; pr2 = Coq_paths_refl }); pr2 =
-      (functionToList' n0
-        (funcomp (dni n0 { pr1 = O; pr2 = (Obj.magic Coq_paths_refl) }) f)) }
+let rec functionToList' n f = n
+  (* match n with *)
+  (* | O -> Obj.magic Coq_tt *)
+  (* | S n0 -> *)
+  (*   Obj.magic { pr1 = (Obj.magic f { pr1 = O; pr2 = Coq_paths_refl }); pr2 = *)
+  (*     (functionToList' n0 *)
+  (*       (funcomp (dni n0 { pr1 = O; pr2 = (Obj.magic Coq_paths_refl) }) f)) } *)
 
 (** val functionToList : nat -> (stn -> 'a1) -> 'a1 list **)
 

@@ -8,4 +8,4 @@ val dneg_decidable : 'a1 decidable dneg
 
 val wma_decidable : ('a2 decidable -> 'a1 neg) -> 'a1 neg
 
-val negforall_to_existsneg' : hProptoType -> hProptoType dneg
+(* val negforall_to_existsneg' : hProptoType -> hProptoType dneg *)

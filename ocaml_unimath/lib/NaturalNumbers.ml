@@ -129,8 +129,8 @@ let isasetnat =
 
 (** val natset : hSet **)
 
-let natset =
-  make_hSet isasetnat
+let natset =false
+  (* make_hSet isasetnat *)
 
 (** val nat_eq_or_neq : nat -> nat -> (nat paths, hProptoType) coprod **)
 
@@ -173,8 +173,8 @@ let isdecrelnateq a b =
 
 (** val natdeceq : nat decrel **)
 
-let natdeceq =
-  make_decrel nateq isdecrelnateq
+let natdeceq =false
+  (* make_decrel nateq isdecrelnateq *)
 
 (** val natdecneq : nat decrel **)
 

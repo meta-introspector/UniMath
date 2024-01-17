@@ -149,6 +149,7 @@ let graph_mor_comp_assoc g1 g2 g3 g4 p q r =
 (** val isaset_graph_mor :
     pregraph -> pregraph -> has_vertexset -> has_edgesets -> graph_mor isaset **)
 
+let funspace_isaset x = x
 let isaset_graph_mor _ _ h k =
   isaset_total2 (funspace_isaset h) (fun p_UU2080_ ->
     impred_isaset (fun x ->

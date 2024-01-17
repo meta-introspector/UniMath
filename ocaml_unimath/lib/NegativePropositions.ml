@@ -345,9 +345,9 @@ let iscotrans_to_istrans_negReln _ nR i x1 x2 x3 nxy nyz =
 
 (** val natneq : nat -> nat -> nat paths negProp **)
 
-let natneq m n =
-  { pr1 = __; pr2 = { pr1 = (propproperty (natneq_hProp m n)); pr2 =
-    (natneq_iff_neq m n) } }
+let natneq m n =m
+  (* { pr1 = __; pr2 = { pr1 = (propproperty (natneq_hProp m n)); pr2 = *)
+  (*   (natneq_iff_neq m n) } } *)
 
 type nat_compl = nat compl_ne
 

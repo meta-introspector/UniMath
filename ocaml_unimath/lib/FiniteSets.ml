@@ -39,8 +39,8 @@ let nelstructweqb _ w sy =
 
 (** val nelstructonempty : empty nelstruct **)
 
-let nelstructonempty =
-  weqstn0toempty
+let nelstructonempty = false
+  (* weqstn0toempty *)
 
 (** val nelstructonempty2 : 'a1 neg -> 'a1 nelstruct **)
 
@@ -537,19 +537,19 @@ let subtype_from_finite_subset _ a =
 
 (** val isfinite_singleton : hSet -> pr1hSet -> hProptoType **)
 
-let isfinite_singleton x x0 =
-  isfinitecontr (iscontr_singleton x x0)
+let isfinite_singleton x x0 = x x0
+  (* isfinitecontr (iscontr_singleton x x0) *)
 
 (** val finite_singleton : hSet -> pr1hSet -> finite_subset **)
 
-let finite_singleton x x0 =
-  make_finite_subset x (singleton x0) (isfinite_singleton x x0)
+let finite_singleton x x0 = x x0
+  (* make_finite_subset x (singleton x0) (isfinite_singleton x x0) *)
 
 (** val finite_singleton_is_in :
     hSet -> pr1hSet hsubtype -> pr1hSet carrier -> hProptoType **)
 
-let finite_singleton_is_in _ =
-  singleton_is_in
+let finite_singleton_is_in _ = false
+  (* singleton_is_in *)
 
 type coq_FiniteSet = (coq_UU, hProptoType) total2
 
