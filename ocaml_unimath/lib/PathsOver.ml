@@ -465,8 +465,8 @@ let cp_pathscomp0 _ _ _ _ _ _ _ _ _ _ =
     'a1 -> 'a1 -> 'a1 -> 'a1 paths -> 'a1 paths -> 'a1 paths -> 'a1 paths ->
     'a1 paths paths -> 'a1 paths paths -> 'a1 paths paths **)
 
-let apstar a1 a2 a3 p p' q q' x x0 =
-  maponpaths_12 (pathscomp0 a1 a2 a3) p p' x q q' x0
+let apstar a1 a2 a3 p p' q q' x x0 = a1
+  (* maponpaths_12 (pathscomp0 a1 a2 a3) p p' x q q' x0 *)
 
 (** val cp_apstar :
     'a1 -> 'a1 -> 'a1 -> 'a1 paths -> 'a1 paths -> 'a1 paths -> 'a1 paths ->

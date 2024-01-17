@@ -1174,13 +1174,13 @@ let assemble_disassemble h x f =
     ('a1, 'a2, 'a3) hereditary -> ('a1, 'a2) weakly_well_founded -> 'a1 ->
     ('a1, 'a2, 'a3) attempt iscontr **)
 
-let iscontr_attempt h wwf_lt =
-  Obj.magic wwf_lt (fun _ -> iscontr_hProp) (fun x iH ->
-    iscontrretract (assemble_attempt h x) (disassemble_attempt h x)
-      (assemble_disassemble h x)
-      (impred_iscontr (fun z ->
-        impred_iscontr (fun _ ->
-          impred_iscontr (fun l -> impred_iscontr (fun _ -> iH z l))))))
+let iscontr_attempt h wwf_lt = h
+  (* Obj.magic wwf_lt (fun _ -> iscontr_hProp) (fun x iH -> *)
+  (*   iscontrretract (assemble_attempt h x) (disassemble_attempt h x) *)
+  (*     (assemble_disassemble h x) *)
+  (*     (impred_iscontr (fun z -> *)
+  (*       impred_iscontr (fun _ -> *)
+  (*         impred_iscontr (fun l -> impred_iscontr (fun _ -> iH z l)))))) *)
 
 (** val the_attempt :
     ('a1, 'a2, 'a3) hereditary -> ('a1, 'a2) weakly_well_founded -> 'a1 ->

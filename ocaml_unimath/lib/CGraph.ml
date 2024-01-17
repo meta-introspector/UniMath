@@ -57,8 +57,8 @@ let isaset_node g =
 
 (** val node_set : cgraph -> hSet **)
 
-let node_set g =
-  make_hSet (isaset_node g)
+let node_set g = g
+  (* make_hSet (isaset_node g) *)
 
 (** val isaset_arc : cgraph -> arc isaset **)
 
@@ -820,10 +820,10 @@ let isaprop_is_cgraph_mor g h p_UU2080_ p_UU2081_ h0 =
 (** val isaset_cgraph_mor :
     precgraph -> precgraph -> has_nodeset -> has_arcset -> cgraph_mor isaset **)
 
-let isaset_cgraph_mor g h h0 k =
-  isaset_total2 (funspace_isaset h0) (fun p_UU2080_ ->
-    isaset_total2 (funspace_isaset k) (fun p_UU2081_ ->
-      isasetaprop (isaprop_is_cgraph_mor g h p_UU2080_ p_UU2081_ h0)))
+let isaset_cgraph_mor g h h0 k = g
+  (* isaset_total2 (funspace_isaset h0) (fun p_UU2080_ -> *)
+  (*   isaset_total2 (funspace_isaset k) (fun p_UU2081_ -> *)
+  (*     isasetaprop (isaprop_is_cgraph_mor g h p_UU2080_ p_UU2081_ h0))) *)
 
 (** val cgraph_mor_eq_aux :
     precgraph -> precgraph -> cgraph_mor -> cgraph_mor -> (node -> node)
@@ -871,7 +871,7 @@ let cgraph_mor_eq g h p q e_UU2080_ e_UU2081_ =
 
 (** val precgraph_weq_pregraph : (precgraph, pregraph) weq **)
 
-let precgraph_weq_pregraph =
-  weqfibtototal (fun _ ->
-    weqcomp (weqfibtototal (fun _ -> invweq weqfuntoprodtoprod))
-      (* (weqcomp (Obj.magic display_weq) (Obj.magic weqfunfromdirprod)) *))
+let precgraph_weq_pregraph = false
+  (* weqfibtototal (fun _ -> *)
+  (*   weqcomp (weqfibtototal (fun _ -> invweq weqfuntoprodtoprod)) *)
+  (*     (\* (weqcomp (Obj.magic display_weq) (Obj.magic weqfunfromdirprod)) *\)) *)

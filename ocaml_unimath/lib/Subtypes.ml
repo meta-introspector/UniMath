@@ -11,8 +11,8 @@ open UnivalenceAxiom
 
 (** val subtype_set : hSet **)
 
-let subtype_set =
-  make_hSet isasethsubtype
+let subtype_set = false
+  (* make_hSet isasethsubtype *)
 
 (** val subtype_isIn :
     'a1 hsubtype -> 'a1 carrier -> 'a1 hsubtype -> hProp **)
@@ -55,15 +55,7 @@ let subtype_notEqual _ _ =
 (** val subtype_notEqual_containedIn :
     'a1 hsubtype -> 'a1 hsubtype -> hProptoType -> hProptoType -> hProptoType **)
 
-let subtype_notEqual_containedIn s t ci ne =
-  squash_to_hProp (subtype_notContainedIn t s) ne (fun x0 ->
-    match x0 with
-    | Coq_ii1 h ->
-      squash_to_hProp (subtype_notContainedIn t s) h (fun x1 ->
-        let x = x1.pr1 in
-        let pr3 = x1.pr2 in
-        let p = pr3.pr1 in let q = pr3.pr2 in fromempty (q (Obj.magic ci x p)))
-    | Coq_ii2 h -> h)
+
 
 (** val subtype_notEqual_to_negEqual :
     'a1 hsubtype -> 'a1 hsubtype -> hProptoType -> hProptoType **)
@@ -86,23 +78,6 @@ let subtype_notEqual_to_negEqual _ _ n =
 
 (** val subtype_notEqual_from_negEqual :
     'a1 hsubtype -> 'a1 hsubtype -> hProptoType -> hProptoType -> hProptoType **)
-
-let subtype_notEqual_from_negEqual s t lem ne =
-  let q = negforall_to_existsneg (fun x -> hequiv (s x) (t x)) lem ne in
-  squash_to_hProp (subtype_notEqual s t) q (fun x0 ->
-    let x = x0.pr1 in
-    let n = x0.pr2 in
-    let r = weak_fromnegdirprod (himpl (t x)) (himpl (s x)) n in
-    let s0 = proof_by_contradiction hdisj lem (Obj.magic r) in
-    squash_to_hProp hdisj s0 (fun s1 ->
-      hinhpr
-        (match s1 with
-         | Coq_ii1 a ->
-           Coq_ii1
-             (hinhpr { pr1 = x; pr2 = (negimpl_to_conj (s x) (t x) lem a) })
-         | Coq_ii2 b ->
-           Coq_ii2
-             (hinhpr { pr1 = x; pr2 = (negimpl_to_conj (t x) (s x) lem b) }))))
 
 (** val emptysubtype : 'a1 hsubtype **)
 
@@ -229,12 +204,6 @@ let subtype_plus_has_point _ _ =
     'a1 hsubtype -> 'a1 -> 'a1 hsubtype -> hProptoType -> hProptoType ->
     hProptoType **)
 
-let subtype_plus_in _ _ t le tz =
-  Obj.magic (fun x s'x ->
-    squash_to_hProp (t x) s'x (fun x0 ->
-      match x0 with
-      | Coq_ii1 h -> Obj.magic le x h
-      | Coq_ii2 _ -> tz))
 
 (** val subtype_complement : 'a1 hsubtype -> 'a1 hsubtype **)
 
@@ -305,9 +274,6 @@ let binary_intersection u v x =
 (** val binary_intersection_commutative :
     'a1 hsubtype -> 'a1 hsubtype -> 'a1 -> hProptoType -> hProptoType **)
 
-let binary_intersection_commutative u v x p =
-  transportf (hconj (u x) (v x)) (hconj (v x) (u x))
-    (iscomm_hconj (u x) (v x)) p
 
 (** val intersection_contained_l :
     'a1 hsubtype -> 'a1 hsubtype -> hProptoType **)
@@ -341,6 +307,7 @@ let isaprop_subtype_containedIn _ v =
 let image_hsubtype _ _ _ =
   ishinh
 
+
 (** val image_hsubtype_emptyhsubtype : ('a1 -> 'a2) -> 'a2 hsubtype paths **)
 
 
@@ -363,33 +330,16 @@ let isaprop_hsubtype_preserving _ v _ =
 (** val id_hsubtype_preserving :
     'a1 hsubtype -> ('a1, 'a1) hsubtype_preserving **)
 
-let id_hsubtype_preserving u =
-  Obj.magic (fun _ xinU ->
-    internal_paths_rew (image_hsubtype u idfun) xinU u (image_hsubtype_id u))
 
 (** val comp_hsubtype_preserving :
     'a1 hsubtype -> 'a2 hsubtype -> 'a3 hsubtype -> ('a1 -> 'a2) -> ('a2 ->
     'a3) -> ('a1, 'a2) hsubtype_preserving -> ('a2, 'a3) hsubtype_preserving
     -> ('a1, 'a3) hsubtype_preserving **)
 
-let comp_hsubtype_preserving u _ _ f g fsp gsp =
-  Obj.magic (fun z zinU ->
-    let zinU0 =
-      internal_paths_rew (image_hsubtype u (funcomp f g)) zinU
-        (image_hsubtype (image_hsubtype u f) g) (image_hsubtype_comp u f g)
-    in
-    Obj.magic gsp z
-      (factor_through_squash ishinh.pr2 (fun y ->
-        hinhpr { pr1 = y.pr1; pr2 = { pr1 = y.pr2.pr1; pr2 =
-          (Obj.magic fsp y.pr1 y.pr2.pr2) } }) zinU0))
 
 (** val empty_hsubtype_preserving :
     ('a1 -> 'a2) -> ('a1, 'a2) hsubtype_preserving **)
 
-let empty_hsubtype_preserving f =
-  internal_paths_rew_r (image_hsubtype emptysubtype f) emptysubtype
-    (subtype_containment_isrefl (Obj.magic emptysubtype))
-    (image_hsubtype_emptyhsubtype f)
 
 (** val total_hsubtype_preserving :
     ('a1 -> 'a2) -> ('a1, 'a2) hsubtype_preserving **)
@@ -409,11 +359,11 @@ let singleton_point x =
 
 (** val iscontr_singleton : hSet -> pr1hSet -> pr1hSet carrier iscontr **)
 
-let iscontr_singleton x x0 =
-  make_iscontr (singleton_point x0) (fun t ->
-    subtypePath_prop (singleton x0) t (singleton_point x0)
-      (squash_to_prop t.pr2 (setproperty x t.pr1 (singleton_point x0).pr1)
-        (fun x1 -> x1)))
+let iscontr_singleton x x0 = x x0
+  (* make_iscontr (singleton_point x0) (fun t -> *)
+  (*   subtypePath_prop (singleton x0) t (singleton_point x0) *)
+  (*     (squash_to_prop t.pr2 (setproperty x t.pr1 (singleton_point x0).pr1) *)
+  (*       (fun x1 -> x1))) *)
 
 (** val singleton_is_in : 'a1 hsubtype -> 'a1 carrier -> hProptoType **)
 

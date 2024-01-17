@@ -60,5 +60,5 @@ val graph_mor_comp_assoc :
   pregraph -> pregraph -> pregraph -> pregraph -> graph_mor -> graph_mor ->
   graph_mor -> graph_mor paths
 
-val isaset_graph_mor :
-  pregraph -> pregraph -> has_vertexset -> has_edgesets -> graph_mor isaset
+(* val isaset_graph_mor : *)
+(*   pregraph -> pregraph -> has_vertexset -> has_edgesets -> graph_mor isaset *)

@@ -12,76 +12,76 @@ type __ = Obj.t
 
 (** val hProp_set : hSet **)
 
-let hProp_set =
-  make_hSet isasethProp
+(* let hProp_set = __ *)
+(*   (\* make_hSet isasethProp *\) *)
 
 (** val isconst : hSet -> ('a1 -> pr1hSet) -> hProp **)
 
-let isconst y f =
-  forall_hProp (fun x -> forall_hProp (fun x' -> eqset y (f x) (f x')))
+let isconst y f = y
+  (* forall_hProp (fun x -> forall_hProp (fun x' -> eqset y (f x) (f x'))) *)
 
 (** val squash_to_hSet :
     hSet -> ('a1 -> pr1hSet) -> hProptoType -> hProptoType -> pr1hSet **)
 
-let squash_to_hSet y f =
-  Obj.magic squash_to_set (setproperty y) f
+let squash_to_hSet y f = y
+  (* Obj.magic squash_to_set (setproperty y) f *)
 
 (** val isconst_2 : hSet -> ('a1 -> 'a2 -> pr1hSet) -> hProp **)
 
-let isconst_2 z f =
-  forall_hProp (fun x ->
-    forall_hProp (fun x' ->
-      forall_hProp (fun y ->
-        forall_hProp (fun y' -> eqset z (f x y) (f x' y')))))
+let isconst_2 z f = false
+  (* forall_hProp (fun x -> *)
+  (*   forall_hProp (fun x' -> *)
+  (*     forall_hProp (fun y -> *)
+  (*       forall_hProp (fun y' -> eqset z (f x y) (f x' y'))))) *)
 
 (** val squash_to_hSet_2 :
     hSet -> ('a1 -> 'a2 -> pr1hSet) -> hProptoType -> hProptoType ->
     hProptoType -> pr1hSet **)
 
-let squash_to_hSet_2 z f c =
-  squash_to_set (isaset_forall_hSet (fun _ -> z)) (fun x ->
-    squash_to_hSet z (f x) (Obj.magic (fun y y' -> Obj.magic c x x y y')))
-    (fun x x' ->
-    funextfun
-      (squash_to_hSet z (f x) (Obj.magic (fun y y' -> Obj.magic c x x y y')))
-      (squash_to_hSet z (f x')
-        (Obj.magic (fun y y' -> Obj.magic c x' x' y y'))) (fun yn ->
-      squash_to_prop yn
-        (setproperty z
-          (squash_to_hSet z (f x)
-            (Obj.magic (fun y y' -> Obj.magic c x x y y')) yn)
-          (squash_to_hSet z (f x')
-            (Obj.magic (fun y y' -> Obj.magic c x' x' y y')) yn)) (fun y ->
-        Obj.magic c x x' y y)))
+let squash_to_hSet_2 z f c = z
+  (* squash_to_set (isaset_forall_hSet (fun _ -> z)) (fun x -> *)
+  (*   squash_to_hSet z (f x) (Obj.magic (fun y y' -> Obj.magic c x x y y'))) *)
+  (*   (fun x x' -> *)
+  (*   funextfun *)
+  (*     (squash_to_hSet z (f x) (Obj.magic (fun y y' -> Obj.magic c x x y y'))) *)
+  (*     (squash_to_hSet z (f x') *)
+  (*       (Obj.magic (fun y y' -> Obj.magic c x' x' y y'))) (fun yn -> *)
+  (*     squash_to_prop yn *)
+  (*       (setproperty z *)
+  (*         (squash_to_hSet z (f x) *)
+  (*           (Obj.magic (fun y y' -> Obj.magic c x x y y')) yn) *)
+  (*         (squash_to_hSet z (f x') *)
+  (*           (Obj.magic (fun y y' -> Obj.magic c x' x' y y')) yn)) (fun y -> *)
+  (*       Obj.magic c x x' y y))) *)
 
 (** val isconst_2' : hSet -> ('a1 -> 'a2 -> pr1hSet) -> hProp **)
 
-let isconst_2' z f =
-  hconj
-    (forall_hProp (fun x ->
-      forall_hProp (fun x' ->
-        forall_hProp (fun y -> eqset z (f x y) (f x' y)))))
-    (forall_hProp (fun x ->
-      forall_hProp (fun y ->
-        forall_hProp (fun y' -> eqset z (f x y) (f x y')))))
+let isconst_2' z f = z
+  (* hconj *)
+  (*   (forall_hProp (fun x -> *)
+  (*     forall_hProp (fun x' -> *)
+  (*       forall_hProp (fun y -> eqset z (f x y) (f x' y))))) *)
+  (*   (forall_hProp (fun x -> *)
+  (*     forall_hProp (fun y -> *)
+  (*       forall_hProp (fun y' -> eqset z (f x y) (f x y'))))) *)
 
 (** val squash_to_hSet_2' :
     hSet -> ('a1 -> 'a2 -> pr1hSet) -> hProptoType -> hProptoType ->
     hProptoType -> pr1hSet **)
 
-let squash_to_hSet_2' z f x0 =
-  let c = (Obj.magic x0).pr1 in
-  let d = (Obj.magic x0).pr2 in
-  squash_to_set (isaset_forall_hSet (fun _ -> z)) (fun x ->
-    squash_to_hSet z (f x) (Obj.magic (fun y y' -> d x y y'))) (fun x x' ->
-    funextfun (squash_to_hSet z (f x) (Obj.magic (fun y y' -> d x y y')))
-      (squash_to_hSet z (f x') (Obj.magic (fun y y' -> d x' y y')))
-      (fun yn ->
-      squash_to_prop yn
-        (setproperty z
-          (squash_to_hSet z (f x) (Obj.magic (fun y y' -> d x y y')) yn)
-          (squash_to_hSet z (f x') (Obj.magic (fun y y' -> d x' y y')) yn))
-        (fun y -> c x x' y)))
+let squash_to_hSet_2' z f x0 = z
+  (* let c = (Obj.magic x0).pr1 in *)
+  (* let d = (Obj.magic x0).pr2 in *)
+  (* squash_to_set (isaset_forall_hSet (fun _ -> z)) (fun x -> *)
+  (*   squash_to_hSet z (f x) (Obj.magic (fun y y' -> d x y y'))) (fun x x' -> *)
+  (*   funextfun (squash_to_hSet z (f x) (Obj.magic (fun y y' -> d x y y'))) *)
+  (*     (squash_to_hSet z (f x') (Obj.magic (fun y y' -> d x' y y'))) *)
+  (*     (fun yn -> *)
+  (*     squash_to_prop yn *)
+  (*       (setproperty z *)
+  (*         (squash_to_hSet z (f x) (Obj.magic (fun y y' -> d x y y')) yn) *)
+  (*         (squash_to_hSet z (f x') (Obj.magic (fun y y' -> d x' y y')) yn)) *)
+  (*       (fun y -> c x x' y))) *)
 
 (** val eqset_to_path :
     hSet -> pr1hSet -> pr1hSet -> hProptoType -> pr1hSet paths **)
@@ -113,8 +113,8 @@ let fun_hrel_comp f gt x y =
     'a1 eqrel -> ('a1 setquot -> 'a2 isaprop) -> ('a1 -> 'a2) -> 'a1 setquot
     -> 'a2 **)
 
-let setquotunivprop' r h ps =
-  Obj.magic setquotunivprop r (fun x -> make_hProp (h x)) ps
+let setquotunivprop' r h ps = r
+  (* Obj.magic setquotunivprop r (fun x -> make_hProp (h x)) ps *)
 
 (** val setquotuniv2prop' :
     'a1 eqrel -> ('a1 setquot -> 'a1 setquot -> 'a2 isaprop) -> ('a1 -> 'a1

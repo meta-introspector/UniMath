@@ -307,16 +307,16 @@ let islogeqcommhdisj _ _ =
 
 (** val hconjtohdisj : hProp -> hProptoType -> hProptoType **)
 
-let hconjtohdisj r x0 =
-  let s1 = fun x1 ->
-    let s2 = fun x2 ->
-      match x2 with
-      | Coq_ii1 a -> (Obj.magic x0).pr1 a
-      | Coq_ii2 b -> (Obj.magic x0).pr2 b
-    in
-    hinhuniv r s2 x1
-  in
-  Obj.magic s1
+let hconjtohdisj r x0 = r
+  (* let s1 = fun x1 -> *)
+  (*   let s2 = fun x2 -> *)
+  (*     match x2 with *)
+  (*     | Coq_ii1 a -> (Obj.magic x0).pr1 a *)
+  (*     | Coq_ii2 b -> (Obj.magic x0).pr2 b *)
+  (*   in *)
+  (*   hinhuniv r s2 x1 *)
+  (* in *)
+  (* Obj.magic s1 *)
 
 (** val hexistsnegtonegforall : hProptoType -> ('a1 -> 'a2) neg **)
 
@@ -864,7 +864,7 @@ let isBaseConnected _ =
 
 (** val isConnected_isBaseConnected :
     coq_PointedType -> (hProptoType, hProptoType) logeq **)
-
+let basepoint x = x (*FIXME*) 
 let isConnected_isBaseConnected x =
   { pr1 = (fun x0 ->
     let ic = (Obj.magic x0).pr2 in Obj.magic (fun x1 -> ic (basepoint x) x1));
@@ -877,8 +877,8 @@ let isConnected_isBaseConnected x =
 
 (** val coq_BasePointComponent : coq_PointedType -> coq_PointedType **)
 
-let coq_BasePointComponent x =
-  pointedType { pr1 = (basepoint x); pr2 = (hinhpr Coq_paths_refl) }
+(* let coq_BasePointComponent x = *)
+(*   pointedType { pr1 = (basepoint x); pr2 = (hinhpr Coq_paths_refl) } *)
 
 (** val basePointComponent_inclusion :
     coq_PointedType -> underlyingType -> underlyingType **)
@@ -943,207 +943,610 @@ let predicateOnBaseConnectedType _ b p p0 x =
 let predicateOnBasePointComponent x p p0 x0 =
   squash_to_hProp (p x0)
     (Obj.magic coq_BasePointComponent_isBaseConnected x x0) (fun _ -> p0)
-let weqlogeq p q =
-  weqimplimpl (fun _ -> Obj.magic isrefl_logeq) (fun c ->
-    hPropUnivalence p q (Obj.magic c).pr1 (Obj.magic c).pr2)
-    (isasethProp p q) (propproperty (hequiv p q))
 
-let setquotl0 r c x =
-  invmaponpathsincl (Obj.magic pr1setquot (pr1eqrel r))
-    (Obj.magic isinclpr1setquot (pr1eqrel (Obj.magic r))) (setquotpr r x.pr1)
-    c
-    (funextsec
-      (Obj.magic pr1setquot (pr1eqrel (Obj.magic r))
-        (setquotpr (Obj.magic r) (Obj.magic x).pr1))
-      (Obj.magic pr1setquot (pr1eqrel (Obj.magic r)) c) (fun x0 ->
-      Obj.magic hPropUnivalence
-        (pr1setquot (pr1eqrel (Obj.magic r))
-          (setquotpr (Obj.magic r) (Obj.magic x).pr1) x0)
-        (pr1setquot (pr1eqrel (Obj.magic r)) (Obj.magic c) x0) (fun r0 ->
-        eqax1 (pr1eqrel (Obj.magic r)) (Obj.magic c).pr1 (Obj.magic c).pr2
-          (Obj.magic x).pr1 x0 r0 x.pr2) (fun r0 ->
-        eqax2 (pr1eqrel (Obj.magic r)) (Obj.magic c).pr1 (Obj.magic c).pr2
-          (Obj.magic x).pr1 x0 x.pr2 r0)))
-let image_hsubtype_emptyhsubtype f =
-  Obj.magic funextsec (image_hsubtype emptysubtype (Obj.magic f))
-    emptysubtype (fun y ->
-    Obj.magic hPropUnivalence (image_hsubtype emptysubtype (Obj.magic f) y)
-      (emptysubtype y) (fun yinfEmpty ->
-      factor_through_squash (emptysubtype y).pr2 (fun x -> x.pr2.pr2)
-        yinfEmpty) (fun yinEmpty -> fromempty (Obj.magic yinEmpty)))
-let posetStructureIdentity x r s =
-  { pr1 = (fun e ->
-    subtypePath (fun t -> isaprop_isPartialOrder x t) r s
-      (let r0 = r.pr1 in
-       let s0 = s.pr1 in
-       Obj.magic funextfun r0 s0 (fun x0 ->
-         Obj.magic funextfun (Obj.magic r0 x0) (Obj.magic s0 x0) (fun y ->
-           let e0 = e.pr1 in
-           let e' = e.pr2 in
-           Obj.magic hPropUnivalence (r0 x0 y) (s0 x0 y) (e0 x0 y) (e' x0 y)))));
-    pr2 = (fun _ -> isPosetEquivalence_idweq { pr1 = x; pr2 = r }) }
-let iscompsetquotpr r x x' a =
-  invmaponpathsincl (Obj.magic pr1setquot (pr1eqrel r))
-    (Obj.magic isinclpr1setquot (pr1eqrel (Obj.magic r))) (setquotpr r x)
-    (setquotpr r x')
-    (funextsec (fun x0 -> Obj.magic pr1eqrel r x x0) (fun x0 ->
-      Obj.magic pr1eqrel r x' x0) (fun x0 ->
-      Obj.magic hPropUnivalence (pr1eqrel (Obj.magic r) (Obj.magic x) x0)
-        (pr1eqrel (Obj.magic r) (Obj.magic x') x0) (fun r0 ->
-        eqreltrans (Obj.magic r) (Obj.magic x') (Obj.magic x) x0
-          (eqrelsymm r x x' a) r0) (fun x0' ->
-        eqreltrans (Obj.magic r) (Obj.magic x) (Obj.magic x') x0 a x0')))
+(* let weqlogeq p q = p q *)
+  (* weqimplimpl (fun _ -> Obj.magic isrefl_logeq) (fun c -> *)
+  (*   hPropUnivalence p q (Obj.magic c).pr1 (Obj.magic c).pr2) *)
+  (*   (isasethProp p q) (propproperty (hequiv p q)) *)
+ 
+(* let setquotl0 r c x = r  *)
 
-let iscomprelrelif _ l isr i1 i2 x x' y y' rx ry =
-  let rx' = isr x x' rx in
-  let ry' = isr y y' ry in
-  hPropUnivalence (l x y) (l x' y') (fun lxy ->
-    let int1 = i1 x x' y rx lxy in i2 x' y y' ry int1) (fun lxy' ->
-    let int1 = i1 x' x y' rx' lxy' in i2 x y' y ry' int1)
-let weqpathssetquot2l1 r x x' x'' r0 =
-  hPropUnivalence (pr1eqrel r x x') (pr1eqrel r x x'') (fun r' ->
-    eqreltrans r x x' x'' r' r0) (fun r'' ->
-    eqreltrans r x x'' x' r'' (eqrelsymm r x' x'' r0))
-let image_hsubtype_id u =
-  Obj.magic funextsec (image_hsubtype (Obj.magic u) idfun) u (fun x ->
-    Obj.magic hPropUnivalence (image_hsubtype (Obj.magic u) idfun x)
-      (Obj.magic u x) (fun xinIdU ->
-      factor_through_squash (let x0 = fun x0 -> (u x0).pr2 in Obj.magic x0 x)
-        (fun u0 -> u0.pr2.pr2) xinIdU) (fun xinU ->
-      hinhpr { pr1 = x; pr2 = { pr1 = Coq_paths_refl; pr2 = xinU } }))
-let image_hsubtype_comp u f g =
-  Obj.magic funextsec (image_hsubtype u (funcomp f (Obj.magic g)))
-    (image_hsubtype (image_hsubtype u f) (Obj.magic g)) (fun z ->
-    Obj.magic hPropUnivalence (image_hsubtype u (funcomp f (Obj.magic g)) z)
-      (image_hsubtype (image_hsubtype u f) (Obj.magic g) z) (fun zinCompU ->
-      factor_through_squash ishinh.pr2 (fun x ->
-        hinhpr { pr1 = (f x.pr1); pr2 = { pr1 = x.pr2.pr1; pr2 =
-          (hinhpr { pr1 = x.pr1; pr2 = { pr1 =
-            (maponpaths f x.pr1 x.pr1 Coq_paths_refl); pr2 = x.pr2.pr2 } }) } })
-        zinCompU) (fun zinCompU ->
-      factor_through_squash ishinh.pr2 (fun y ->
-        factor_through_squash ishinh.pr2 (fun x ->
-          hinhpr { pr1 = x.pr1; pr2 = { pr1 =
-            (pathscomp0 (funcomp f g x.pr1) (g y.pr1) (Obj.magic z)
-              (maponpaths g (f x.pr1) y.pr1 x.pr2.pr1) y.pr2.pr1); pr2 =
-            x.pr2.pr2 } }) y.pr2.pr2) zinCompU))
-let wosub_univalence x s t =
-  remakeweq
-    (weqcomp (Obj.magic total2_paths_equiv s t)
-      (weqcomp
-        (weqbandf
-          (Obj.magic hsubtype_univalence
-            (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x s))
-            (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x t)))
-          (fun _ ->
-          let s0 = (Obj.magic s).pr1 in
-          let v = (Obj.magic s).pr2 in
-          let w = (Obj.magic t).pr2 in
-          let v0 = v.pr1 in
-          let i = v.pr2 in
-          let w0 = w.pr1 in
-          let j = w.pr2 in
-          weqcomp
-            (subtypeInjectivity (fun r ->
-              propproperty (isWellOrder (carrier_subset x s0) (Obj.magic r)))
-              { pr1 = (Obj.magic v0); pr2 = i } { pr1 = (Obj.magic w0); pr2 =
-              j })
-            (weqimplimpl (fun _ ->
-              Obj.magic { pr1 = { pr1 = (fun _ -> idfun); pr2 = { pr1 =
-                (fun _ _ le -> le); pr2 = (fun _ _ _ st _ -> st) } }; pr2 =
-                { pr1 = (fun _ -> idfun); pr2 = { pr1 = (fun _ _ le -> le);
-                pr2 = (fun _ _ _ st _ -> st) } } }) (fun x0 ->
-              let pr3 = (Obj.magic x0).pr1 in
-              let a = pr3.pr1 in
-              let pr4 = pr3.pr2 in
-              let b = pr4.pr1 in
-              let pr5 = (Obj.magic x0).pr2 in
-              let d = pr5.pr1 in
-              let pr6 = pr5.pr2 in
-              let e = pr6.pr1 in
-              let triv = fun f s1 ->
-                subtypePath_prop s0 (subtype_inc s0 s0 f s1) s1 Coq_paths_refl
-              in
-              funextfun (Obj.magic v0) (Obj.magic w0) (fun s1 ->
-                Obj.magic funextfun (Obj.magic v0 s1) (Obj.magic w0 s1)
-                  (fun t0 ->
-                  Obj.magic hPropUnivalence (Obj.magic v0 s1 t0)
-                    (Obj.magic w0 s1 t0) (fun le ->
-                    let q = b s1 t0 le in
-                    let q0 =
-                      internal_paths_rew (Obj.magic subtype_inc s0 s0 a s1) q
-                        s1 (Obj.magic triv a s1)
-                    in
-                    internal_paths_rew (Obj.magic subtype_inc s0 s0 a t0) q0
-                      t0 (Obj.magic triv a t0)) (fun le ->
-                    let q = e s1 t0 le in
-                    let q0 =
-                      internal_paths_rew (Obj.magic subtype_inc s0 s0 d s1) q
-                        s1 (Obj.magic triv d s1)
-                    in
-                    internal_paths_rew (Obj.magic subtype_inc s0 s0 d t0) q0
-                      t0 (Obj.magic triv d t0)))))
-              (setproperty (hrel_set (carrier_subset x s0)) v0 w0)
-              (propproperty
-                (hconj
-                  (wosub_le x
-                    (Obj.magic { pr1 = s0; pr2 = { pr1 = v0; pr2 = i } })
-                    (Obj.magic { pr1 = s0; pr2 = { pr1 = w0; pr2 = j } }))
-                  (wosub_le x
-                    (Obj.magic { pr1 = s0; pr2 = { pr1 = w0; pr2 = j } })
-                    (Obj.magic { pr1 = s0; pr2 = { pr1 = v0; pr2 = i } })))))))
-        (weqimplimpl (fun k ->
-          Obj.magic { pr1 = (let x0 = k.pr2 in (Obj.magic x0).pr1); pr2 =
-            (let x0 = k.pr2 in (Obj.magic x0).pr2) }) (fun c -> { pr1 =
-          (fun x0 -> { pr1 =
-          (Obj.magic wosub_le_inc x s t (Obj.magic c).pr1 x0); pr2 =
-          (Obj.magic wosub_le_inc x t s (Obj.magic c).pr2 x0) }); pr2 = c })
-          (propproperty
-            (total2_hProp
-              (subtype_equal
-                (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x s))
-                (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x t)))
-              (fun _ -> hconj (wosub_le x s t) (wosub_le x t s))))
-          (propproperty (hconj (wosub_le x s t) (wosub_le x t s))))))
-    (wosub_univalence_map x s t) (fun _ -> Coq_paths_refl)
 
-let coq_TRRGhomo_topath x _ g h _ =
-  internal_paths_rew_r (transportf x x Coq_paths_refl g) g (fun p ->
-    let _UU03c0_ = p.pr1 in
-    let _UU03c3_ = p.pr2 in
-    let q =
-      funextfun (Obj.magic g).pr1 (Obj.magic h).pr1 (fun x0 ->
-        Obj.magic funextfun ((Obj.magic g).pr1 x0) ((Obj.magic h).pr1 x0)
-          (fun y ->
-          Obj.magic hPropUnivalence (g.pr1 x0 y) (h.pr1 x0 y)
-            (_UU03c0_ x0 y).pr1 (_UU03c0_ x0 y).pr2))
-    in
-    let x0 = fun x0 y -> (total2_paths_equiv x0 y).pr2 in
-    let x1 = fun x1 y y0 -> (x0 x1 y y0).pr1 in
-    let x2 = fun x2 y y0 -> (x1 x2 y y0).pr1 in
-    Obj.magic x2 g h { pr1 = q; pr2 =
-      (helper x g.pr1 h.pr1 g.pr2.pr1 h.pr2.pr1 g.pr2.pr2 h.pr2.pr2
-        (Obj.magic q) _UU03c3_) }) (idpath_transportf x g)
-let coq_Branch_to_subtype t x s =
-  let h =
-    hsubtype_to_preZFS_Branch_hsubtype t x
-      (preZFS_Branch_hsubtype_tohsubtype t x s)
-  in
-  Obj.magic funextfunPreliminaryUAH (fun _ _ -> univalenceAxiom) h s
-    (fun y ->
-    let eS = fun x0 ->
-      x0.pr1 (s y) (fun x1 ->
-        let pr4 = (Obj.magic y).pr1 in
-        let pr5 = (Obj.magic y).pr2 in
-        let y0 = x1.pr1 in
-        let z = x1.pr2 in
-        let p =
-          let p = coq_Ed t x pr4 in (Obj.magic propproperty p y0 pr5).pr1
-        in
-        internal_paths_rew y0 z pr5 p)
-    in
-    let sE = fun x0 -> { pr1 = (fun _ q ->
-      q { pr1 = (Obj.magic y).pr2; pr2 = x0 }); pr2 = (Obj.magic y).pr2 }
-    in
-    Obj.magic hPropUnivalence (hconj ishinh (coq_Ed t x (Obj.magic y).pr1))
-      (s y) eS sE)
+  (* invmaponpathsincl (Obj.magic pr1setquot (pr1eqrel r)) *)
+  (*   (Obj.magic isinclpr1setquot (pr1eqrel (Obj.magic r))) (setquotpr r x.pr1) *)
+  (*   c *)
+  (*   (funextsec *)
+  (*     (Obj.magic pr1setquot (pr1eqrel (Obj.magic r)) *)
+  (*       (setquotpr (Obj.magic r) (Obj.magic x).pr1)) *)
+  (*     (Obj.magic pr1setquot (pr1eqrel (Obj.magic r)) c) (fun x0 -> *)
+  (*     Obj.magic hPropUnivalence *)
+  (*       (pr1setquot (pr1eqrel (Obj.magic r)) *)
+  (*         (setquotpr (Obj.magic r) (Obj.magic x).pr1) x0) *)
+  (*       (pr1setquot (pr1eqrel (Obj.magic r)) (Obj.magic c) x0) (fun r0 -> *)
+  (*       eqax1 (pr1eqrel (Obj.magic r)) (Obj.magic c).pr1 (Obj.magic c).pr2 *)
+  (*         (Obj.magic x).pr1 x0 r0 x.pr2) (fun r0 -> *)
+  (*       eqax2 (pr1eqrel (Obj.magic r)) (Obj.magic c).pr1 (Obj.magic c).pr2 *)
+  (*         (Obj.magic x).pr1 x0 x.pr2 r0))) *)
+let image_hsubtype_emptyhsubtype f = f
+  (* Obj.magic funextsec (image_hsubtype emptysubtype (Obj.magic f)) *)
+  (*   emptysubtype (fun y -> *)
+  (*   Obj.magic hPropUnivalence (image_hsubtype emptysubtype (Obj.magic f) y) *)
+  (*     (emptysubtype y) (fun yinfEmpty -> *)
+  (*     factor_through_squash (emptysubtype y).pr2 (fun x -> x.pr2.pr2) *)
+  (*       yinfEmpty) (fun yinEmpty -> fromempty (Obj.magic yinEmpty))) *)
+let posetStructureIdentity x r s = x r s
+  (* { pr1 = (fun e -> *)
+  (*   subtypePath (fun t -> isaprop_isPartialOrder x t) r s *)
+  (*     (let r0 = r.pr1 in *)
+  (*      let s0 = s.pr1 in *)
+  (*      Obj.magic funextfun r0 s0 (fun x0 -> *)
+  (*        Obj.magic funextfun (Obj.magic r0 x0) (Obj.magic s0 x0) (fun y -> *)
+  (*          let e0 = e.pr1 in *)
+  (*          let e' = e.pr2 in *)
+  (*          Obj.magic hPropUnivalence (r0 x0 y) (s0 x0 y) (e0 x0 y) (e' x0 y))))); *)
+  (*   pr2 = (fun _ -> isPosetEquivalence_idweq { pr1 = x; pr2 = r }) } *)
+(* let iscompsetquotpr r x x' a = r *)
+  (* invmaponpathsincl (Obj.magic pr1setquot (pr1eqrel r)) *)
+  (*   (Obj.magic isinclpr1setquot (pr1eqrel (Obj.magic r))) (setquotpr r x) *)
+  (*   (setquotpr r x') *)
+  (*   (funextsec (fun x0 -> Obj.magic pr1eqrel r x x0) (fun x0 -> *)
+  (*     Obj.magic pr1eqrel r x' x0) (fun x0 -> *)
+  (*     Obj.magic hPropUnivalence (pr1eqrel (Obj.magic r) (Obj.magic x) x0) *)
+  (*       (pr1eqrel (Obj.magic r) (Obj.magic x') x0) (fun r0 -> *)
+  (*       eqreltrans (Obj.magic r) (Obj.magic x') (Obj.magic x) x0 *)
+  (*         (eqrelsymm r x x' a) r0) (fun x0' -> *)
+  (*       eqreltrans (Obj.magic r) (Obj.magic x) (Obj.magic x') x0 a x0'))) *)
+
+  
+(* let iscomprelrelif _ l isr i1 i2 x x' y y' rx ry = l *)
+
+(* let g = 1  *)
+  (* let rx' = isr x x' rx in *)
+  (* let ry' = isr y y' ry in *)
+  (* hPropUnivalence (l x y) (l x' y') (fun lxy -> *)
+  (*   let int1 = i1 x x' y rx lxy in i2 x' y y' ry int1) (fun lxy' -> *)
+  (*   let int1 = i1 x' x y' rx' lxy' in i2 x y' y ry' int1) *)
+let weqpathssetquot2l1 r x x' x'' r0 = r
+  (* hPropUnivalence (pr1eqrel r x x') (pr1eqrel r x x'') (fun r' -> *)
+  (*   eqreltrans r x x' x'' r' r0) (fun r'' -> *)
+  (*   eqreltrans r x x'' x' r'' (eqrelsymm r x' x'' r0)) *)
+let image_hsubtype_id u = u
+  (* Obj.magic funextsec (image_hsubtype (Obj.magic u) idfun) u (fun x -> *)
+  (*   Obj.magic hPropUnivalence (image_hsubtype (Obj.magic u) idfun x) *)
+  (*     (Obj.magic u x) (fun xinIdU -> *)
+  (*     factor_through_squash (let x0 = fun x0 -> (u x0).pr2 in Obj.magic x0 x) *)
+  (*       (fun u0 -> u0.pr2.pr2) xinIdU) (fun xinU -> *)
+  (*     hinhpr { pr1 = x; pr2 = { pr1 = Coq_paths_refl; pr2 = xinU } })) *)
+let image_hsubtype_comp u f g = u
+(*   Obj.magic funextsec (image_hsubtype u (funcomp f (Obj.magic g))) *)
+(*     (image_hsubtype (image_hsubtype u f) (Obj.magic g)) (fun z -> *)
+(*     Obj.magic hPropUnivalence (image_hsubtype u (funcomp f (Obj.magic g)) z) *)
+(*       (image_hsubtype (image_hsubtype u f) (Obj.magic g) z) (fun zinCompU -> *)
+(*       factor_through_squash ishinh.pr2 (fun x -> *)
+(*         hinhpr { pr1 = (f x.pr1); pr2 = { pr1 = x.pr2.pr1; pr2 = *)
+(*           (hinhpr { pr1 = x.pr1; pr2 = { pr1 = *)
+(*             (maponpaths f x.pr1 x.pr1 Coq_paths_refl); pr2 = x.pr2.pr2 } }) } }) *)
+(*         zinCompU) (fun zinCompU -> *)
+(*       factor_through_squash ishinh.pr2 (fun y -> *)
+(*         factor_through_squash ishinh.pr2 (fun x -> *)
+(*           hinhpr { pr1 = x.pr1; pr2 = { pr1 = *)
+(*             (pathscomp0 (funcomp f g x.pr1) (g y.pr1) (Obj.magic z) *)
+(*               (maponpaths g (f x.pr1) y.pr1 x.pr2.pr1) y.pr2.pr1); pr2 = *)
+(*             x.pr2.pr2 } }) y.pr2.pr2) zinCompU)) *)
+
+  let wosub_univalence x s t = x s t
+      
+(*   remakeweq *)
+(*     (weqcomp (Obj.magic total2_paths_equiv s t) *)
+(*       (weqcomp *)
+(*         (weqbandf *)
+(*           (Obj.magic hsubtype_univalence *)
+(*             (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x s)) *)
+(*             (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x t))) *)
+(*           (fun _ -> *)
+(*           let s0 = (Obj.magic s).pr1 in *)
+(*           let v = (Obj.magic s).pr2 in *)
+(*           let w = (Obj.magic t).pr2 in *)
+(*           let v0 = v.pr1 in *)
+(*           let i = v.pr2 in *)
+(*           let w0 = w.pr1 in *)
+(*           let j = w.pr2 in *)
+(*           weqcomp *)
+(*             (subtypeInjectivity (fun r -> *)
+(*               propproperty (isWellOrder (carrier_subset x s0) (Obj.magic r))) *)
+(*               { pr1 = (Obj.magic v0); pr2 = i } { pr1 = (Obj.magic w0); pr2 = *)
+(*               j }) *)
+(*             (weqimplimpl (fun _ -> *)
+(*               Obj.magic { pr1 = { pr1 = (fun _ -> idfun); pr2 = { pr1 = *)
+(*                 (fun _ _ le -> le); pr2 = (fun _ _ _ st _ -> st) } }; pr2 = *)
+(*                 { pr1 = (fun _ -> idfun); pr2 = { pr1 = (fun _ _ le -> le); *)
+(*                 pr2 = (fun _ _ _ st _ -> st) } } }) (fun x0 -> *)
+(*               let pr3 = (Obj.magic x0).pr1 in *)
+(*               let a = pr3.pr1 in *)
+(*               let pr4 = pr3.pr2 in *)
+(*               let b = pr4.pr1 in *)
+(*               let pr5 = (Obj.magic x0).pr2 in *)
+(*               let d = pr5.pr1 in *)
+(*               let pr6 = pr5.pr2 in *)
+(*               let e = pr6.pr1 in *)
+(*               let triv = fun f s1 -> *)
+(*                 subtypePath_prop s0 (subtype_inc s0 s0 f s1) s1 Coq_paths_refl *)
+(*               in *)
+(*               funextfun (Obj.magic v0) (Obj.magic w0) (fun s1 -> *)
+(*                 Obj.magic funextfun (Obj.magic v0 s1) (Obj.magic w0 s1) *)
+(*                   (fun t0 -> *)
+(*                   Obj.magic hPropUnivalence (Obj.magic v0 s1 t0) *)
+(*                     (Obj.magic w0 s1 t0) (fun le -> *)
+(*                     let q = b s1 t0 le in *)
+(*                     let q0 = *)
+(*                       internal_paths_rew (Obj.magic subtype_inc s0 s0 a s1) q *)
+(*                         s1 (Obj.magic triv a s1) *)
+(*                     in *)
+(*                     internal_paths_rew (Obj.magic subtype_inc s0 s0 a t0) q0 *)
+(*                       t0 (Obj.magic triv a t0)) (fun le -> *)
+(*                     let q = e s1 t0 le in *)
+(*                     let q0 = *)
+(*                       internal_paths_rew (Obj.magic subtype_inc s0 s0 d s1) q *)
+(*                         s1 (Obj.magic triv d s1) *)
+(*                     in *)
+(*                     internal_paths_rew (Obj.magic subtype_inc s0 s0 d t0) q0 *)
+(*                       t0 (Obj.magic triv d t0))))) *)
+(*               (setproperty (hrel_set (carrier_subset x s0)) v0 w0) *)
+(*               (propproperty *)
+(*                 (hconj *)
+(*                   (wosub_le x *)
+(*                     (Obj.magic { pr1 = s0; pr2 = { pr1 = v0; pr2 = i } }) *)
+(*                     (Obj.magic { pr1 = s0; pr2 = { pr1 = w0; pr2 = j } })) *)
+(*                   (wosub_le x *)
+(*                     (Obj.magic { pr1 = s0; pr2 = { pr1 = w0; pr2 = j } }) *)
+(*                     (Obj.magic { pr1 = s0; pr2 = { pr1 = v0; pr2 = i } }))))))) *)
+(*         (weqimplimpl (fun k -> *)
+(*           Obj.magic { pr1 = (let x0 = k.pr2 in (Obj.magic x0).pr1); pr2 = *)
+(*             (let x0 = k.pr2 in (Obj.magic x0).pr2) }) (fun c -> { pr1 = *)
+(*           (fun x0 -> { pr1 = *)
+(*           (Obj.magic wosub_le_inc x s t (Obj.magic c).pr1 x0); pr2 = *)
+(*           (Obj.magic wosub_le_inc x t s (Obj.magic c).pr2 x0) }); pr2 = c }) *)
+(*           (propproperty *)
+(*             (total2_hProp *)
+(*               (subtype_equal *)
+(*                 (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x s)) *)
+(*                 (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x t))) *)
+(*               (fun _ -> hconj (wosub_le x s t) (wosub_le x t s)))) *)
+(*           (propproperty (hconj (wosub_le x s t) (wosub_le x t s)))))) *)
+(*     (wosub_univalence_map x s t) (fun _ -> Coq_paths_refl) *)
+
+let coq_TRRGhomo_topath x _ g h _ = x
+  (* internal_paths_rew_r (transportf x x Coq_paths_refl g) g (fun p -> *)
+  (*   let _UU03c0_ = p.pr1 in *)
+  (*   let _UU03c3_ = p.pr2 in *)
+  (*   let q = *)
+  (*     funextfun (Obj.magic g).pr1 (Obj.magic h).pr1 (fun x0 -> *)
+  (*       Obj.magic funextfun ((Obj.magic g).pr1 x0) ((Obj.magic h).pr1 x0) *)
+  (*         (fun y -> *)
+  (*         Obj.magic hPropUnivalence (g.pr1 x0 y) (h.pr1 x0 y) *)
+  (*           (_UU03c0_ x0 y).pr1 (_UU03c0_ x0 y).pr2)) *)
+  (*   in *)
+  (*   let x0 = fun x0 y -> (total2_paths_equiv x0 y).pr2 in *)
+  (*   let x1 = fun x1 y y0 -> (x0 x1 y y0).pr1 in *)
+  (*   let x2 = fun x2 y y0 -> (x1 x2 y y0).pr1 in *)
+  (*   Obj.magic x2 g h { pr1 = q; pr2 = *)
+  (*     (helper x g.pr1 h.pr1 g.pr2.pr1 h.pr2.pr1 g.pr2.pr2 h.pr2.pr2 *)
+  (*       (Obj.magic q) _UU03c3_) }) (idpath_transportf x g) *)
+  
+let coq_Branch_to_subtype t x s = t
+  (* let h = *)
+  (*   hsubtype_to_preZFS_Branch_hsubtype t x *)
+  (*     (preZFS_Branch_hsubtype_tohsubtype t x s) *)
+  (* in *)
+  (* Obj.magic funextfunPreliminaryUAH (fun _ _ -> univalenceAxiom) h s *)
+  (*   (fun y -> *)
+  (*   let eS = fun x0 -> *)
+  (*     x0.pr1 (s y) (fun x1 -> *)
+  (*       let pr4 = (Obj.magic y).pr1 in *)
+  (*       let pr5 = (Obj.magic y).pr2 in *)
+  (*       let y0 = x1.pr1 in *)
+  (*       let z = x1.pr2 in *)
+  (*       let p = *)
+  (*         let p = coq_Ed t x pr4 in (Obj.magic propproperty p y0 pr5).pr1 *)
+  (*       in *)
+  (*       internal_paths_rew y0 z pr5 p) *)
+  (*   in *)
+  (*   let sE = fun x0 -> { pr1 = (fun _ q -> *)
+  (*     q { pr1 = (Obj.magic y).pr2; pr2 = x0 }); pr2 = (Obj.magic y).pr2 } *)
+  (*   in *)
+  (*   Obj.magic hPropUnivalence (hconj ishinh (coq_Ed t x (Obj.magic y).pr1)) *)
+  (*     (s y) eS sE) *)
+  
+let chain_union_prelim_eq0 x s chain x0 y i j xi xj yi yj = x
+  (* let x1 = fun p q -> (weqlogeq p q).pr2 in *)
+  (* let x2 = fun p q y0 -> (x1 p q y0).pr1 in *)
+  (* let p = *)
+  (*   coq_WOSrel x (s i) (Obj.magic { pr1 = x0; pr2 = xi }) *)
+  (*     (Obj.magic { pr1 = y; pr2 = yi }) *)
+  (* in *)
+  (* let q = *)
+  (*   coq_WOSrel x (s j) (Obj.magic { pr1 = x0; pr2 = xj }) *)
+  (*     (Obj.magic { pr1 = y; pr2 = yj }) *)
+  (* in *)
+  (* let y0 = *)
+  (*   squash_to_hProp *)
+  (*     (hequiv *)
+  (*       (coq_WOSrel x (s i) (Obj.magic { pr1 = x0; pr2 = xi }) *)
+  (*         (Obj.magic { pr1 = y; pr2 = yi })) *)
+  (*       (coq_WOSrel x (s j) (Obj.magic { pr1 = x0; pr2 = xj }) *)
+  (*         (Obj.magic { pr1 = y; pr2 = yj }))) (Obj.magic chain i j) *)
+  (*     (fun x3 -> *)
+  (*     match x3 with *)
+  (*     | Coq_ii1 h -> *)
+  (*       Obj.magic { pr1 = (fun l -> *)
+  (*         let q0 = *)
+  (*           Obj.magic wosub_le_comp x (s i) (s j) h { pr1 = x0; pr2 = xi } *)
+  (*             { pr1 = y; pr2 = yi } l *)
+  (*         in *)
+  (*         h1'' x (coq_WOSubset_to_TOSubset x (s j)) *)
+  (*           (subtype_inc *)
+  (*             (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s i))) *)
+  (*             (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s j))) *)
+  (*             (Obj.magic h).pr1 { pr1 = x0; pr2 = xi }) { pr1 = x0; pr2 = *)
+  (*           xj } *)
+  (*           (subtype_inc *)
+  (*             (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s i))) *)
+  (*             (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s j))) *)
+  (*             (Obj.magic h).pr1 { pr1 = y; pr2 = yi }) { pr1 = y; pr2 = yj } *)
+  (*           q0 Coq_paths_refl Coq_paths_refl); pr2 = (fun l -> *)
+  (*         (Obj.magic wosub_fidelity x (s i) (s j) h { pr1 = x0; pr2 = xi } *)
+  (*           { pr1 = y; pr2 = yi }).pr2 *)
+  (*           (h1'' x (coq_WOSubset_to_TOSubset x (s j)) { pr1 = x0; pr2 = xj } *)
+  (*             (wosub_inc x (s i) (s j) h { pr1 = x0; pr2 = xi }) { pr1 = y; *)
+  (*             pr2 = yj } (wosub_inc x (s i) (s j) h { pr1 = y; pr2 = yi }) l *)
+  (*             Coq_paths_refl Coq_paths_refl)) } *)
+  (*     | Coq_ii2 h -> *)
+  (*       Obj.magic { pr1 = (fun l -> *)
+  (*         (Obj.magic wosub_fidelity x (s j) (s i) h { pr1 = x0; pr2 = xj } *)
+  (*           { pr1 = y; pr2 = yj }).pr2 *)
+  (*           (h1'' x (coq_WOSubset_to_TOSubset x (s i)) { pr1 = x0; pr2 = xi } *)
+  (*             (wosub_inc x (s j) (s i) h { pr1 = x0; pr2 = xj }) { pr1 = y; *)
+  (*             pr2 = yi } (wosub_inc x (s j) (s i) h { pr1 = y; pr2 = yj }) l *)
+  (*             Coq_paths_refl Coq_paths_refl)); pr2 = (fun l -> *)
+  (*         let q0 = *)
+  (*           Obj.magic wosub_le_comp x (s j) (s i) h { pr1 = x0; pr2 = xj } *)
+  (*             { pr1 = y; pr2 = yj } l *)
+  (*         in *)
+  (*         h1'' x (coq_WOSubset_to_TOSubset x (s i)) *)
+  (*           (subtype_inc *)
+  (*             (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s j))) *)
+  (*             (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s i))) *)
+  (*             (Obj.magic h).pr1 { pr1 = x0; pr2 = xj }) { pr1 = x0; pr2 = *)
+  (*           xi } *)
+  (*           (subtype_inc *)
+  (*             (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s j))) *)
+  (*             (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s i))) *)
+  (*             (Obj.magic h).pr1 { pr1 = y; pr2 = yj }) { pr1 = y; pr2 = yi } *)
+  (*           q0 Coq_paths_refl Coq_paths_refl) }) *)
+  (* in *)
+  (* (x2 p q y0).pr1 *)
+  
+let subtype_notEqual_containedIn s t ci ne = s
+  (* squash_to_hProp (subtype_notContainedIn t s) ne (fun x0 -> *)
+  (*   match x0 with *)
+  (*   | Coq_ii1 h -> *)
+  (*     squash_to_hProp (subtype_notContainedIn t s) h (fun x1 -> *)
+  (*       let x = x1.pr1 in *)
+  (*       let pr3 = x1.pr2 in *)
+  (*       let p = pr3.pr1 in let q = pr3.pr2 in fromempty (q (Obj.magic ci x p))) *)
+  (*   | Coq_ii2 h -> h) *)
+  
+let subtype_notEqual_from_negEqual s t lem ne = s
+  (* let q = negforall_to_existsneg (fun x -> hequiv (s x) (t x)) lem ne in *)
+  (* squash_to_hProp (subtype_notEqual s t) q (fun x0 -> *)
+  (*   let x = x0.pr1 in *)
+  (*   let n = x0.pr2 in *)
+  (*   let r = weak_fromnegdirprod (himpl (t x)) (himpl (s x)) n in *)
+  (*   let s0 = proof_by_contradiction hdisj lem (Obj.magic r) in *)
+  (*   squash_to_hProp hdisj s0 (fun s1 -> *)
+  (*     hinhpr *)
+  (*       (match s1 with *)
+  (*        | Coq_ii1 a -> *)
+  (*          Coq_ii1 *)
+  (*            (hinhpr { pr1 = x; pr2 = (negimpl_to_conj (s x) (t x) lem a) }) *)
+  (*        | Coq_ii2 b -> *)
+  (*          Coq_ii2 *)
+  (*            (hinhpr { pr1 = x; pr2 = (negimpl_to_conj (t x) (s x) lem b) })))) *)
+
+let isapropmin_n p = p
+  (* isaproptotal2 (fun n -> isapropdirprod (p n).pr2 (isapropminimal p n)) *)
+  (*   (fun n n' k k' -> *)
+  (*   let p0 = k.pr1 in *)
+  (*   let m = k.pr2 in *)
+  (*   let p' = k'.pr1 in *)
+  (*   let m' = k'.pr2 in isantisymmnatleh n n' (m n' p') (m' n p0)) *)
+
+let _UU03c0__UU2080__universal_property y = y
+  (* { pr1 = (fun h -> funcomp component h); pr2 = (fun f -> *)
+  (*   iscontraprop1 *)
+  (*     (isaproptotal2 (fun h -> *)
+  (*       impred_isaset (fun _ -> setproperty y) (funcomp component h) f) *)
+  (*       (fun h h' e e' -> *)
+  (*       funextsec h h' (fun w -> *)
+  (*         surjectionisepitosets component h h' *)
+  (*           (Obj.magic issurjsetquotpr pathseqrel) (setproperty y) (fun x -> *)
+  (*           maponpaths (fun k -> k x) (funcomp component h) *)
+  (*             (funcomp component h') *)
+  (*             (pathscomp0 (funcomp component h) f (funcomp component h') e *)
+  (*               (pathsinv0 (funcomp component h') f e'))) w))) { pr1 = *)
+  (*     (Obj.magic setquotuniv (fun _ _ -> ishinh) y f (fun x y0 e -> *)
+  (*       squash_to_prop e (setproperty y (f x) (f y0)) (maponpaths f x y0))); *)
+  (*     pr2 = Coq_paths_refl }) } *)
+  
+let min_n p =
+  make_hProp (isapropmin_n p)
+let subtype_plus_in _ _ t le tz =
+  Obj.magic (fun x s'x ->
+    squash_to_hProp (t x) s'x (fun x0 ->
+      match x0 with
+      | Coq_ii1 h -> Obj.magic le x h
+      | Coq_ii2 _ -> tz))
+let max_common_initial_is_sub x s t = x
+  (* Obj.magic { pr1 = (fun x0 m -> *)
+  (*   squash_to_hProp (coq_TOSubset_to_subtype x s x0) m (fun x1 -> *)
+  (*     let pr3 = x1.pr2 in *)
+  (*     let bx = pr3.pr1 in let pr4 = pr3.pr2 in pr4.pr1 x0 bx)); pr2 = *)
+  (*   (fun x0 m -> *)
+  (*   squash_to_hProp (coq_TOSubset_to_subtype x t x0) m (fun x1 -> *)
+  (*     let pr3 = x1.pr2 in *)
+  (*     let bx = pr3.pr1 in *)
+  (*     let pr4 = pr3.pr2 in let pr5 = pr4.pr2 in pr5.pr1 x0 bx)) } *)
+
+
+
+let max_common_initial_is_common_initial x s t = x
+  (* Obj.magic { pr1 = (Obj.magic max_common_initial_is_sub x s t).pr1; pr2 = *)
+  (*   { pr1 = (Obj.magic max_common_initial_is_sub x s t).pr2; pr2 = { pr1 = *)
+  (*   (fun x0 s0 m ss le -> *)
+  (*   squash_to_hProp (max_common_initial x s t s0) m (fun x1 -> *)
+  (*     let b = x1.pr1 in *)
+  (*     let pr3 = x1.pr2 in *)
+  (*     let bx = pr3.pr1 in *)
+  (*     let pr4 = pr3.pr2 in *)
+  (*     let bS = pr4.pr1 in *)
+  (*     let pr5 = pr4.pr2 in *)
+  (*     let bT = pr5.pr1 in *)
+  (*     let pr6 = pr5.pr2 in *)
+  (*     let bSi = pr6.pr1 in *)
+  (*     let pr7 = pr6.pr2 in *)
+  (*     let bTi = pr7.pr1 in *)
+  (*     let bST = pr7.pr2 in *)
+  (*     hinhpr { pr1 = b; pr2 = { pr1 = *)
+  (*       (bSi x0 s0 bx ss *)
+  (*         (h1'' x s { pr1 = s0; pr2 = ss } { pr1 = s0; pr2 = ss } { pr1 = x0; *)
+  (*           pr2 = ((Obj.magic max_common_initial_is_sub x s t).pr1 x0 m) } *)
+  (*           { pr1 = x0; pr2 = (bS x0 bx) } le Coq_paths_refl Coq_paths_refl)); *)
+  (*       pr2 = { pr1 = bS; pr2 = { pr1 = bT; pr2 = { pr1 = bSi; pr2 = { pr1 = *)
+  (*       bTi; pr2 = bST } } } } } })); pr2 = { pr1 = (fun x0 t0 m tt le -> *)
+  (*   squash_to_hProp (max_common_initial x s t t0) m (fun x1 -> *)
+  (*     let b = x1.pr1 in *)
+  (*     let pr3 = x1.pr2 in *)
+  (*     let bx = pr3.pr1 in *)
+  (*     let pr4 = pr3.pr2 in *)
+  (*     let bS = pr4.pr1 in *)
+  (*     let pr5 = pr4.pr2 in *)
+  (*     let bT = pr5.pr1 in *)
+  (*     let pr6 = pr5.pr2 in *)
+  (*     let bSi = pr6.pr1 in *)
+  (*     let pr7 = pr6.pr2 in *)
+  (*     let bTi = pr7.pr1 in *)
+  (*     let bST = pr7.pr2 in *)
+  (*     hinhpr { pr1 = b; pr2 = { pr1 = *)
+  (*       (bTi x0 t0 bx tt *)
+  (*         (h1'' x t { pr1 = t0; pr2 = tt } { pr1 = t0; pr2 = tt } { pr1 = x0; *)
+  (*           pr2 = ((Obj.magic max_common_initial_is_sub x s t).pr2 x0 m) } *)
+  (*           { pr1 = x0; pr2 = (bT x0 bx) } le Coq_paths_refl Coq_paths_refl)); *)
+  (*       pr2 = { pr1 = bS; pr2 = { pr1 = bT; pr2 = { pr1 = bSi; pr2 = { pr1 = *)
+  (*       bTi; pr2 = bST } } } } } })); pr2 = (fun x0 y -> { pr1 = (fun le -> *)
+  (*   let x1 = x0.pr1 in *)
+  (*   let xm = x0.pr2 in *)
+  (*   let y0 = y.pr1 in *)
+  (*   let ym = y.pr2 in *)
+  (*   squash_to_hProp *)
+  (*     (coq_TOSrel x t *)
+  (*       (Obj.magic subtype_inc (max_common_initial x s t) *)
+  (*         (coq_TOSubset_to_subtype x t) *)
+  (*         (Obj.magic max_common_initial_is_sub x s t).pr2 { pr1 = x1; pr2 = *)
+  (*         xm }) *)
+  (*       (Obj.magic subtype_inc (max_common_initial x s t) *)
+  (*         (coq_TOSubset_to_subtype x t) *)
+  (*         (Obj.magic max_common_initial_is_sub x s t).pr2 { pr1 = y0; pr2 = *)
+  (*         ym })) xm (fun x2 -> *)
+  (*     let pr3 = x2.pr2 in *)
+  (*     let bx = pr3.pr1 in *)
+  (*     let pr4 = pr3.pr2 in *)
+  (*     let bS = pr4.pr1 in *)
+  (*     squash_to_hProp *)
+  (*       (coq_TOSrel x t *)
+  (*         (Obj.magic subtype_inc (max_common_initial x s t) *)
+  (*           (coq_TOSubset_to_subtype x t) *)
+  (*           (Obj.magic max_common_initial_is_sub x s t).pr2 { pr1 = x1; pr2 = *)
+  (*           xm }) *)
+  (*         (Obj.magic subtype_inc (max_common_initial x s t) *)
+  (*           (coq_TOSubset_to_subtype x t) *)
+  (*           (Obj.magic max_common_initial_is_sub x s t).pr2 { pr1 = y0; pr2 = *)
+  (*           ym })) ym (fun x3 -> *)
+  (*       let c = x3.pr1 in *)
+  (*       let pr5 = x3.pr2 in *)
+  (*       let cy = pr5.pr1 in *)
+  (*       let pr6 = pr5.pr2 in *)
+  (*       let cS = pr6.pr1 in *)
+  (*       let pr7 = pr6.pr2 in *)
+  (*       let cT = pr7.pr1 in *)
+  (*       let pr8 = pr7.pr2 in *)
+  (*       let cSi = pr8.pr1 in *)
+  (*       let pr9 = pr8.pr2 in *)
+  (*       let cST = pr9.pr2 in *)
+  (*       let cx = *)
+  (*         cSi y0 x1 cy (bS x1 bx) *)
+  (*           (h1'' x s *)
+  (*             (subtype_inc (max_common_initial x s t) *)
+  (*               (coq_TOSubset_to_subtype x s) *)
+  (*               (Obj.magic max_common_initial_is_sub x s t).pr1 { pr1 = x1; *)
+  (*               pr2 = xm }) { pr1 = x1; pr2 = (bS x1 bx) } *)
+  (*             (subtype_inc (max_common_initial x s t) *)
+  (*               (coq_TOSubset_to_subtype x s) *)
+  (*               (Obj.magic max_common_initial_is_sub x s t).pr1 { pr1 = y0; *)
+  (*               pr2 = ym }) { pr1 = y0; pr2 = (cS y0 cy) } le Coq_paths_refl *)
+  (*             Coq_paths_refl) *)
+  (*       in *)
+  (*       let q = (cST { pr1 = x1; pr2 = cx } { pr1 = y0; pr2 = cy }).pr1 in *)
+  (*       let e = *)
+  (*         h1'' x s *)
+  (*           (subtype_inc (max_common_initial x s t) *)
+  (*             (coq_TOSubset_to_subtype x s) *)
+  (*             (Obj.magic max_common_initial_is_sub x s t).pr1 { pr1 = x1; *)
+  (*             pr2 = xm }) *)
+  (*           (subtype_inc c (coq_TOSubset_to_subtype x s) (Obj.magic cS) *)
+  (*             { pr1 = x1; pr2 = cx }) *)
+  (*           (subtype_inc (max_common_initial x s t) *)
+  (*             (coq_TOSubset_to_subtype x s) *)
+  (*             (Obj.magic max_common_initial_is_sub x s t).pr1 { pr1 = y0; *)
+  (*             pr2 = ym }) *)
+  (*           (subtype_inc c (coq_TOSubset_to_subtype x s) (Obj.magic cS) *)
+  (*             { pr1 = y0; pr2 = cy }) le Coq_paths_refl Coq_paths_refl *)
+  (*       in *)
+  (*       h1'' x t *)
+  (*         (subtype_inc c (coq_TOSubset_to_subtype x t) cT { pr1 = x1; pr2 = *)
+  (*           cx }) *)
+  (*         (subtype_inc (max_common_initial x s t) *)
+  (*           (coq_TOSubset_to_subtype x t) *)
+  (*           (Obj.magic max_common_initial_is_sub x s t).pr2 { pr1 = x1; pr2 = *)
+  (*           xm }) *)
+  (*         (subtype_inc c (coq_TOSubset_to_subtype x t) cT { pr1 = y0; pr2 = *)
+  (*           cy }) *)
+  (*         (subtype_inc (max_common_initial x s t) *)
+  (*           (coq_TOSubset_to_subtype x t) *)
+  (*           (Obj.magic max_common_initial_is_sub x s t).pr2 { pr1 = y0; pr2 = *)
+  (*           ym }) (q e) Coq_paths_refl Coq_paths_refl))); pr2 = (fun le -> *)
+  (*   let x1 = x0.pr1 in *)
+  (*   let xm = x0.pr2 in *)
+  (*   let y0 = y.pr1 in *)
+  (*   let ym = y.pr2 in *)
+  (*   squash_to_hProp *)
+  (*     (coq_TOSrel x s *)
+  (*       (Obj.magic subtype_inc (max_common_initial x s t) *)
+  (*         (coq_TOSubset_to_subtype x s) *)
+  (*         (Obj.magic max_common_initial_is_sub x s t).pr1 { pr1 = x1; pr2 = *)
+  (*         xm }) *)
+  (*       (Obj.magic subtype_inc (max_common_initial x s t) *)
+  (*         (coq_TOSubset_to_subtype x s) *)
+  (*         (Obj.magic max_common_initial_is_sub x s t).pr1 { pr1 = y0; pr2 = *)
+  (*         ym })) xm (fun x2 -> *)
+  (*     let pr3 = x2.pr2 in *)
+  (*     let bx = pr3.pr1 in *)
+  (*     let pr4 = pr3.pr2 in *)
+  (*     let pr5 = pr4.pr2 in *)
+  (*     let bT = pr5.pr1 in *)
+  (*     squash_to_hProp *)
+  (*       (coq_TOSrel x s *)
+  (*         (Obj.magic subtype_inc (max_common_initial x s t) *)
+  (*           (coq_TOSubset_to_subtype x s) *)
+  (*           (Obj.magic max_common_initial_is_sub x s t).pr1 { pr1 = x1; pr2 = *)
+  (*           xm }) *)
+  (*         (Obj.magic subtype_inc (max_common_initial x s t) *)
+  (*           (coq_TOSubset_to_subtype x s) *)
+  (*           (Obj.magic max_common_initial_is_sub x s t).pr1 { pr1 = y0; pr2 = *)
+  (*           ym })) ym (fun x3 -> *)
+  (*       let c = x3.pr1 in *)
+  (*       let pr6 = x3.pr2 in *)
+  (*       let cy = pr6.pr1 in *)
+  (*       let pr7 = pr6.pr2 in *)
+  (*       let cS = pr7.pr1 in *)
+  (*       let pr8 = pr7.pr2 in *)
+  (*       let cT = pr8.pr1 in *)
+  (*       let pr9 = pr8.pr2 in *)
+  (*       let pr10 = pr9.pr2 in *)
+  (*       let cTi = pr10.pr1 in *)
+  (*       let cST = pr10.pr2 in *)
+  (*       let cx = *)
+  (*         cTi y0 x1 cy (bT x1 bx) *)
+  (*           (h1'' x t *)
+  (*             (subtype_inc (max_common_initial x s t) *)
+  (*               (coq_TOSubset_to_subtype x t) *)
+  (*               (Obj.magic max_common_initial_is_sub x s t).pr2 { pr1 = x1; *)
+  (*               pr2 = xm }) { pr1 = x1; pr2 = (bT x1 bx) } *)
+  (*             (subtype_inc (max_common_initial x s t) *)
+  (*               (coq_TOSubset_to_subtype x t) *)
+  (*               (Obj.magic max_common_initial_is_sub x s t).pr2 { pr1 = y0; *)
+  (*               pr2 = ym }) { pr1 = y0; pr2 = (cT y0 cy) } le Coq_paths_refl *)
+  (*             Coq_paths_refl) *)
+  (*       in *)
+  (*       let q = (cST { pr1 = x1; pr2 = cx } { pr1 = y0; pr2 = cy }).pr2 in *)
+  (*       let e = *)
+  (*         h1'' x t *)
+  (*           (subtype_inc (max_common_initial x s t) *)
+  (*             (coq_TOSubset_to_subtype x t) *)
+  (*             (Obj.magic max_common_initial_is_sub x s t).pr2 { pr1 = x1; *)
+  (*             pr2 = xm }) *)
+  (*           (subtype_inc c (coq_TOSubset_to_subtype x t) (Obj.magic cT) *)
+  (*             { pr1 = x1; pr2 = cx }) *)
+  (*           (subtype_inc (max_common_initial x s t) *)
+  (*             (coq_TOSubset_to_subtype x t) *)
+  (*             (Obj.magic max_common_initial_is_sub x s t).pr2 { pr1 = y0; *)
+  (*             pr2 = ym }) *)
+  (*           (subtype_inc c (coq_TOSubset_to_subtype x t) (Obj.magic cT) *)
+  (*             { pr1 = y0; pr2 = cy }) le Coq_paths_refl Coq_paths_refl *)
+  (*       in *)
+  (*       h1'' x s *)
+  (*         (subtype_inc c (coq_TOSubset_to_subtype x s) cS { pr1 = x1; pr2 = *)
+  (*           cx }) *)
+  (*         (subtype_inc (max_common_initial x s t) *)
+  (*           (coq_TOSubset_to_subtype x s) *)
+  (*           (Obj.magic max_common_initial_is_sub x s t).pr1 { pr1 = x1; pr2 = *)
+  (*           xm }) *)
+  (*         (subtype_inc c (coq_TOSubset_to_subtype x s) cS { pr1 = y0; pr2 = *)
+  (*           cy }) *)
+  (*         (subtype_inc (max_common_initial x s t) *)
+  (*           (coq_TOSubset_to_subtype x s) *)
+  (*           (Obj.magic max_common_initial_is_sub x s t).pr1 { pr1 = y0; pr2 = *)
+  (*           ym }) (q e) Coq_paths_refl Coq_paths_refl))) }) } } } } *)
+
+let binary_intersection_commutative u v x p =
+  transportf (hconj (u x) (v x)) (hconj (v x) (u x))
+    (iscomm_hconj (u x) (v x)) p
+let id_hsubtype_preserving u = u
+  (* Obj.magic (fun _ xinU -> *)
+  (*   internal_paths_rew (image_hsubtype u idfun) xinU u (image_hsubtype_id u)) *)
+let posetTransport_weq x y = x
+  (* weqbandf (hSet_univalence (carrierofposet x) (carrierofposet y)) (fun _ -> *)
+  (*   invweq *)
+  (*     (let x0 = x.pr1 in *)
+  (*      let r = x.pr2 in *)
+  (*      let s = y.pr2 in *)
+  (*      weqimplimpl (posetStructureIdentity x0 r s).pr1 *)
+  (*        (posetStructureIdentity x0 r s).pr2 *)
+  (*        (isaprop_isPosetEquivalence { pr1 = x0; pr2 = r } { pr1 = x0; pr2 = *)
+  (*          s } (hSet_univalence_map x0 x0 Coq_paths_refl)) *)
+  (*        (isaset_PartialOrder x0 (transportf x0 x0 Coq_paths_refl r) s))) *)
+
+let comp_hsubtype_preserving u _ _ f g fsp gsp = u
+  (* Obj.magic (fun z zinU -> *)
+  (*   let zinU0 = *)
+  (*     internal_paths_rew (image_hsubtype u (funcomp f g)) zinU *)
+  (*       (image_hsubtype (image_hsubtype u f) g) (image_hsubtype_comp u f g) *)
+  (*   in *)
+  (*   Obj.magic gsp z *)
+  (*     (factor_through_squash ishinh.pr2 (fun y -> *)
+  (*       hinhpr { pr1 = y.pr1; pr2 = { pr1 = y.pr2.pr1; pr2 = *)
+  (*         (Obj.magic fsp y.pr1 y.pr2.pr2) } }) zinU0)) *)
+
+let coq_TotalOrdering s =s
+  (* total2_hSet (hrel_set s) (fun r -> *)
+  (*   hProp_to_hSet (isTotalOrder s (Obj.magic r))) *)
+let total2_hSet x y = x
+  
+let coq_WellOrdering s =s
+  (* total2_hSet (hrel_set s) (fun r -> *)
+  (*   hProp_to_hSet (isWellOrder s (Obj.magic r))) *)
+let empty_hsubtype_preserving f =f
+  (* internal_paths_rew_r (image_hsubtype emptysubtype f) emptysubtype *)
+  (*   (subtype_containment_isrefl (Obj.magic emptysubtype)) *)
+  (*   (image_hsubtype_emptyhsubtype f) *)
+let coq_Poset_univalence_0 x y = x
+  (* weqcomp (total2_paths_equiv x y) (posetTransport_weq x y) *)

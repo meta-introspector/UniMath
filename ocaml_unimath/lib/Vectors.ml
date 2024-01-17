@@ -10,8 +10,8 @@ type __ = Obj.t
 
 (** val stn_extens : nat -> stn -> stn -> nat paths -> stn paths **)
 
-let stn_extens n i j p =
-  subtypePath' i j p (propproperty (natlth (stntonat n j) n))
+let stn_extens n i j p = n
+  (* subtypePath' i j p (propproperty (natlth (stntonat n j) n)) *)
 
 (** val fromstn0 : stn -> 'a1 **)
 

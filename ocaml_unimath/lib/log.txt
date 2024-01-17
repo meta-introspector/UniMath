@@ -2747,7 +2747,7 @@ DEBUG2Erec: let process_type_decl_coprod (x:coprod):string = match x with {emit_
 DEBUG2C: let process_coprod__Coq_ii1 x :string =match x with 
 DEBUG2A:let process_var-name x : var-name= x
 DEBUG2A:let process_var-name x : var-name= x
-DEBUG2B:let process_types_coprod__Coq_ii1((avar-name0):(var-name)):string = "process_types_coprod__Coq_ii1"^"avar-name0"
+DEBUG2B:
 DEBUG2C:| Coq_ii1 (var-name0) -> (process_types_coprod__Coq_ii1((process_var-name var-name0)))
 DEBUG2C: let process_coprod__Coq_ii2 x :string =match x with 
 DEBUG2A:let process_var-name x : var-name= x
@@ -8267,4 +8267,4 @@ File "ocaml_unimath/lib/StandardFiniteSets.ml", line 3016, characters 40-42:
 3016 |     let l1 = c3 x2 e2 in let l2 = c4 x1 e1 in isantisymmnatleh x1 x2 l1 l2)
                                                ^^
 Error (warning 20 [ignored-extra-argument]): this argument will not be used by the function.
-Done: 91% (547/596, 49 left, 22 failed) (jobs: 2)                                                 Done: 91% (547/596, 49 left, 23 failed) (jobs: 1)                                                 
+Done: 91% (547/596, 49 left, 22 failed) (jobs: 2)                                                 Done: 91% (547/596, 49 left, 23 failed) (jobs: 1)                                                 

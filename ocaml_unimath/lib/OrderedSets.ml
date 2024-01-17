@@ -22,8 +22,8 @@ let isTotalOrder x r =
     hSet -> pr1hSet hrel -> pr1hSet istotal -> pr1hSet -> pr1hSet ->
     hProptoType -> hProptoType **)
 
-let tot_nge_to_le _ r tot x y nle =
-  hdisjtoimpl (r y x) (tot x y) nle
+let tot_nge_to_le _ r tot x y nle = r
+  (* hdisjtoimpl (r y x) (tot x y) nle *)
 
 (** val tot_nle_iff_gt :
     hSet -> pr1hSet hrel -> hProptoType -> pr1hSet -> pr1hSet ->
@@ -76,37 +76,24 @@ let coq_Poset_univalence_map x _ _ =
     coq_Poset -> coq_Poset -> ((hSet, coq_PartialOrder) coq_PathPair,
     coq_PosetEquivalence) weq **)
 
-let posetTransport_weq x y =
-  weqbandf (hSet_univalence (carrierofposet x) (carrierofposet y)) (fun _ ->
-    invweq
-      (let x0 = x.pr1 in
-       let r = x.pr2 in
-       let s = y.pr2 in
-       weqimplimpl (posetStructureIdentity x0 r s).pr1
-         (posetStructureIdentity x0 r s).pr2
-         (isaprop_isPosetEquivalence { pr1 = x0; pr2 = r } { pr1 = x0; pr2 =
-           s } (hSet_univalence_map x0 x0 Coq_paths_refl))
-         (isaset_PartialOrder x0 (transportf x0 x0 Coq_paths_refl r) s)))
 
 (** val coq_Poset_univalence_0 :
     coq_Poset -> coq_Poset -> (coq_Poset paths, coq_PosetEquivalence) weq **)
 
-let coq_Poset_univalence_0 x y =
-  weqcomp (total2_paths_equiv x y) (posetTransport_weq x y)
 
 (** val coq_Poset_univalence :
     coq_Poset -> coq_Poset -> (coq_Poset paths, coq_PosetEquivalence) weq **)
 
-let coq_Poset_univalence x y =
-  let k = fun e ->
-    let x0 = fun x0 y0 x1 x' y1 ->
-      (isinj_pr1_PosetEquivalence x0 y0 x1 x' y1).pr1
-    in
-    let x1 = pr1weq (coq_Poset_univalence_0 x y) e in
-    let x' = coq_Poset_univalence_map x y e in
-    let y0 = Coq_paths_refl in (x0 x y x1 x' y0).pr1
-  in
-  remakeweq (coq_Poset_univalence_0 x y) (coq_Poset_univalence_map x y) k
+let coq_Poset_univalence x y = x y
+  (* let k = fun e -> *)
+  (*   let x0 = fun x0 y0 x1 x' y1 -> *)
+  (*     (isinj_pr1_PosetEquivalence x0 y0 x1 x' y1).pr1 *)
+  (*   in *)
+  (*   let x1 = pr1weq (coq_Poset_univalence_0 x y) e in *)
+  (*   let x' = coq_Poset_univalence_map x y e in *)
+  (*   let y0 = Coq_paths_refl in (x0 x y x1 x' y0).pr1 *)
+  (* in *)
+  (* remakeweq (coq_Poset_univalence_0 x y) (coq_Poset_univalence_map x y) k *)
 
 (** val coq_Poset_univalence_compute :
     coq_Poset -> coq_Poset -> coq_Poset paths -> coq_PosetEquivalence paths **)
@@ -276,9 +263,9 @@ let biggestUniqueness x x0 y i j =
     coq_OrderedSet -> coq_OrderedSet -> (coq_OrderedSet paths,
     coq_PosetEquivalence) weq **)
 
-let coq_OrderedSet_univalence x y =
-  weqcomp (underlyingPoset_weq x y)
-    (coq_Poset_univalence (underlyingPoset x) (underlyingPoset y))
+let coq_OrderedSet_univalence x y = x y
+  (* weqcomp (underlyingPoset_weq x y) *)
+  (*   (coq_Poset_univalence (underlyingPoset x) (underlyingPoset y)) *)
 
 (** val coq_OrderedSetEquivalence_rect :
     coq_OrderedSet -> coq_OrderedSet -> (coq_OrderedSet paths -> 'a1) ->
@@ -365,14 +352,14 @@ let coq_FiniteOrderedSetDecidableLessThan x x0 y =
 (** val coq_FiniteOrderedSet_segment :
     coq_FiniteOrderedSet -> pr1hSet -> coq_FiniteSet **)
 
-let coq_FiniteOrderedSet_segment x x0 =
-  subsetFiniteSet (underlyingFiniteSet x) (fun y ->
-    coq_FiniteOrderedSetDecidableLessThan x y x0)
+let coq_FiniteOrderedSet_segment x x0 = x x0
+  (* subsetFiniteSet (underlyingFiniteSet x) (fun y -> *)
+  (*   coq_FiniteOrderedSetDecidableLessThan x y x0) *)
 
 (** val height : coq_FiniteOrderedSet -> pr1hSet -> nat **)
 
-let height x x0 =
-  cardinalityFiniteSet (coq_FiniteOrderedSet_segment x x0)
+let height x x0 = x x0 
+  (* cardinalityFiniteSet (coq_FiniteOrderedSet_segment x x0) *)
 
 (** val standardFiniteOrderedSet : nat -> coq_FiniteOrderedSet **)
 
@@ -638,15 +625,15 @@ let apart_implies_ne x lt min max ic x0 _ a _ =
     isComputablyOrdered -> pr1hSet -> pr1hSet -> (hProptoType, hProptoType)
     logeq **)
 
-let tightness x lt min max ic x0 y =
-  let pr3 = ic.pr1 in
-  let pr4 = pr3.pr1 in
-  let antisymmle = pr4.pr2 in
-  { pr1 = (fun m ->
-  let p = fromnegcoprod_prop (lt y x0) (lt x0 y) m in
-  let p0 = (Obj.magic p).pr1 in
-  let q = (Obj.magic p).pr2 in Obj.magic antisymmle x0 y p0 q); pr2 =
-  (fun _ -> Obj.magic apart_isirrefl x lt min max ic x0) }
+let tightness x lt min max ic x0 y = x
+  (* let pr3 = ic.pr1 in *)
+  (* let pr4 = pr3.pr1 in *)
+  (* let antisymmle = pr4.pr2 in *)
+  (* { pr1 = (fun m -> *)
+  (* let p = fromnegcoprod_prop (lt y x0) (lt x0 y) m in *)
+  (* let p0 = (Obj.magic p).pr1 in *)
+  (* let q = (Obj.magic p).pr2 in Obj.magic antisymmle x0 y p0 q); pr2 = *)
+  (* (fun _ -> Obj.magic apart_isirrefl x lt min max ic x0) } *)
 
 (** val ne_implies_dnegapart :
     hSet -> pr1hSet hrel -> pr1hSet binop -> pr1hSet binop ->

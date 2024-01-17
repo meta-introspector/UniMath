@@ -105,11 +105,3 @@ val isweqrecompl_ne :
 val isweqrecompl' :
   'a1 -> 'a1 isisolated -> (('a1 compl, coq_unit) coprod, 'a1) isweq
 
-val iscotrans_to_istrans_negReln :
-  'a1 hrel -> ('a1, hProptoType) negReln -> 'a1 isdeccotrans -> 'a1 istrans
-
-val natneq : nat -> nat -> nat paths negProp
-
-type nat_compl = nat compl_ne
-
-val weqdicompl : nat -> (nat, nat_compl) weq

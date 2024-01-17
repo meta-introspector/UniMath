@@ -187,7 +187,7 @@ type 'x coq_Sequence = (nat, 'x coq_Vector) total2
 
 type 'x coq_NonemptySequence = (nat, stn -> 'x) total2
 
-type 'x coq_UnorderedSequence = (coq_FiniteSet, pr1hSet -> 'x) total2
+(* type 'x coq_UnorderedSequence = (coq_FiniteSet, pr1hSet -> 'x) total2 *)
 
 (** val length : 'a1 coq_Sequence -> nat **)
 
@@ -208,9 +208,9 @@ let unorderedSequenceToFunction x =
 (** val sequenceToUnorderedSequence :
     'a1 coq_Sequence -> 'a1 coq_UnorderedSequence **)
 
-let sequenceToUnorderedSequence x =
-  { pr1 = (standardFiniteSet (length x)); pr2 =
-    (Obj.magic sequenceToFunction x) }
+let sequenceToUnorderedSequence x = x
+  (* { pr1 = (standardFiniteSet (length x)); pr2 = *)
+  (*   (Obj.magic sequenceToFunction x) } *)
 
 (** val length' : 'a1 coq_NonemptySequence -> nat **)
 
@@ -664,12 +664,12 @@ let flatten x =
     'a1 coq_UnorderedSequence coq_UnorderedSequence -> 'a1
     coq_UnorderedSequence **)
 
-let flattenUnorderedSequence x =
-  { pr1 =
-    (coq_FiniteSetSum x.pr1 (fun i -> (unorderedSequenceToFunction x i).pr1));
-    pr2 = (fun ij ->
-    unorderedSequenceToFunction
-      (unorderedSequenceToFunction x (Obj.magic ij).pr1) (Obj.magic ij).pr2) }
+let flattenUnorderedSequence x = x
+  (* { pr1 = *)
+  (*   (coq_FiniteSetSum x.pr1 (fun i -> (unorderedSequenceToFunction x i).pr1)); *)
+  (*   pr2 = (fun ij -> *)
+  (*   unorderedSequenceToFunction *)
+  (*     (unorderedSequenceToFunction x (Obj.magic ij).pr1) (Obj.magic ij).pr2) } *)
 
 (** val flattenStep' :
     nat -> (stn -> nat) -> (stn -> stn -> 'a1) -> (stn -> 'a1) paths **)

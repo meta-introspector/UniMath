@@ -53,42 +53,42 @@ let kfinstruct_weqb w =
 
 (** val kfinstruct_contr : 'a1 iscontr -> 'a1 kfinstruct **)
 
-let kfinstruct_contr contr =
-  make_kfinstruct (S O) (fun _ -> iscontrpr1 contr)
-    (issurjective_to_contr { pr1 = O; pr2 = Coq_paths_refl } (fun _ ->
-      iscontrpr1 contr) contr)
+let kfinstruct_contr contr = contr
+  (* make_kfinstruct (S O) (fun _ -> iscontrpr1 contr) *)
+  (*   (issurjective_to_contr { pr1 = O; pr2 = Coq_paths_refl } (fun _ -> *)
+  (*     iscontrpr1 contr) contr) *)
 
 (** val kfinstruct_coprod :
     'a1 kfinstruct -> 'a2 kfinstruct -> ('a1, 'a2) coprod kfinstruct **)
 
-let kfinstruct_coprod f g =
-  let n = kfinstruct_cardinality f in
-  let m = kfinstruct_cardinality g in
-  make_kfinstruct (add n m)
-    (funcomp (pr1weq (invweq (weqfromcoprodofstn n m)))
-      (coprodf (kfinstruct_map f) (kfinstruct_map g)))
-    (issurjcomp (pr1weq (invweq (weqfromcoprodofstn n m)))
-      (coprodf (kfinstruct_map f) (kfinstruct_map g))
-      (issurjectiveweq (pr1weq (invweq (weqfromcoprodofstn n m)))
-        (weqproperty (invweq (weqfromcoprodofstn n m))))
-      (issurjective_coprodf (kfinstruct_map f) (kfinstruct_map g)
-        (issurjective_kfinstruct f) (issurjective_kfinstruct g)))
+let kfinstruct_coprod f g = f g
+  (* let n = kfinstruct_cardinality f in *)
+  (* let m = kfinstruct_cardinality g in *)
+  (* make_kfinstruct (add n m) *)
+  (*   (funcomp (pr1weq (invweq (weqfromcoprodofstn n m))) *)
+  (*     (coprodf (kfinstruct_map f) (kfinstruct_map g))) *)
+  (*   (issurjcomp (pr1weq (invweq (weqfromcoprodofstn n m))) *)
+  (*     (coprodf (kfinstruct_map f) (kfinstruct_map g)) *)
+  (*     (issurjectiveweq (pr1weq (invweq (weqfromcoprodofstn n m))) *)
+  (*       (weqproperty (invweq (weqfromcoprodofstn n m)))) *)
+  (*     (issurjective_coprodf (kfinstruct_map f) (kfinstruct_map g) *)
+  (*       (issurjective_kfinstruct f) (issurjective_kfinstruct g))) *)
 
 (** val kfinstruct_dirprod :
     'a1 kfinstruct -> 'a2 kfinstruct -> ('a1, 'a2) dirprod kfinstruct **)
 
-let kfinstruct_dirprod f g =
-  let k = kfinstruct_cardinality f in
-  let l = kfinstruct_cardinality g in
-  make_kfinstruct (mul k l)
-    (funcomp (pr1weq (invweq (weqfromprodofstn k l)))
-      (dirprodf (kfinstruct_map f) (kfinstruct_map g)))
-    (issurjcomp (pr1weq (invweq (weqfromprodofstn k l)))
-      (dirprodf (kfinstruct_map f) (kfinstruct_map g))
-      (issurjectiveweq (pr1weq (invweq (weqfromprodofstn k l)))
-        (weqproperty (invweq (weqfromprodofstn k l))))
-      (issurjective_dirprodf (kfinstruct_map f) (kfinstruct_map g)
-        (issurjective_kfinstruct f) (issurjective_kfinstruct g)))
+let kfinstruct_dirprod f g = f g
+  (* let k = kfinstruct_cardinality f in *)
+  (* let l = kfinstruct_cardinality g in *)
+  (* make_kfinstruct (mul k l) *)
+  (*   (funcomp (pr1weq (invweq (weqfromprodofstn k l))) *)
+  (*     (dirprodf (kfinstruct_map f) (kfinstruct_map g))) *)
+  (*   (issurjcomp (pr1weq (invweq (weqfromprodofstn k l))) *)
+  (*     (dirprodf (kfinstruct_map f) (kfinstruct_map g)) *)
+  (*     (issurjectiveweq (pr1weq (invweq (weqfromprodofstn k l))) *)
+  (*       (weqproperty (invweq (weqfromprodofstn k l)))) *)
+  (*     (issurjective_dirprodf (kfinstruct_map f) (kfinstruct_map g) *)
+  (*       (issurjective_kfinstruct f) (issurjective_kfinstruct g))) *)
 
 (** val kfinstruct_finstruct : 'a1 finstruct -> 'a1 kfinstruct **)
 
@@ -103,31 +103,31 @@ let kfinstruct_unit =
 
 (** val kfinstruct_bool : bool kfinstruct **)
 
-let kfinstruct_bool =
-  make_kfinstruct (S (S O)) (two_rec Coq_false Coq_true) (fun b ->
-    match b with
-    | Coq_true ->
-      hinhpr { pr1 = { pr1 = (S O); pr2 = Coq_paths_refl }; pr2 =
-        Coq_paths_refl }
-    | Coq_false ->
-      hinhpr { pr1 = { pr1 = O; pr2 = Coq_paths_refl }; pr2 = Coq_paths_refl })
+let kfinstruct_bool =false
+  (* make_kfinstruct (S (S O)) (two_rec Coq_false Coq_true) (fun b -> *)
+  (*   match b with *)
+  (*   | Coq_true -> *)
+  (*     hinhpr { pr1 = { pr1 = (S O); pr2 = Coq_paths_refl }; pr2 = *)
+  (*       Coq_paths_refl } *)
+  (*   | Coq_false -> *)
+  (*     hinhpr { pr1 = { pr1 = O; pr2 = Coq_paths_refl }; pr2 = Coq_paths_refl }) *)
 
 (** val kfinstruct_stn : nat -> stn kfinstruct **)
 
-let kfinstruct_stn n =
-  make_kfinstruct n idfun issurjective_idfun
+let kfinstruct_stn n = n
+  (* make_kfinstruct n idfun issurjective_idfun *)
 
 (** val kfinstruct_stn_indexed :
     nat -> (stn -> 'a1 kfinstruct) -> (stn, 'a1) total2 kfinstruct **)
 
-let kfinstruct_stn_indexed n index =
-  let j = fun j -> kfinstruct_cardinality (index j) in
-  kfinstruct_from_surjection
-    (totalfun (let x = fun k -> (index k).pr2 in fun k -> (x k).pr1))
-    (issurjective_totalfun
-      (let x = fun k -> (index k).pr2 in fun k -> (x k).pr1) (fun x ->
-      issurjective_kfinstruct (index x)))
-    (kfinstruct_weqb (weqstnsum1 n j) (kfinstruct_stn (stnsum n j)))
+let kfinstruct_stn_indexed n index = n
+  (* let j = fun j -> kfinstruct_cardinality (index j) in *)
+  (* kfinstruct_from_surjection *)
+  (*   (totalfun (let x = fun k -> (index k).pr2 in fun k -> (x k).pr1)) *)
+  (*   (issurjective_totalfun *)
+  (*     (let x = fun k -> (index k).pr2 in fun k -> (x k).pr1) (fun x -> *)
+  (*     issurjective_kfinstruct (index x))) *)
+  (*   (kfinstruct_weqb (weqstnsum1 n j) (kfinstruct_stn (stnsum n j))) *)
 
 type 'x iskfinite = hProptoType
 

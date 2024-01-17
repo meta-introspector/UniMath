@@ -7,8 +7,8 @@ open UnivalenceAxiom
 
 (** val stnweq : nat -> ((stn, coq_unit) coprod, stn) weq **)
 
-let stnweq n =
-  weqdnicoprod n (lastelement n)
+let stnweq n =n
+  (* weqdnicoprod n (lastelement n) *)
 
 (** val extend_tuple : nat -> (stn -> 'a1) -> 'a1 -> stn -> 'a1 **)
 
@@ -38,43 +38,43 @@ let extend_tuple_dep_const n f last af al =
     nat -> (stn -> 'a1) -> 'a1 -> nat -> hProptoType -> hProptoType -> 'a1
     paths **)
 
-let extend_tuple_i n f last i hi1 hi2 =
-  maponpaths (fun c -> match c with
-                       | Coq_ii1 a -> f a
-                       | Coq_ii2 _ -> last)
-    (invmap (stnweq n) { pr1 = i; pr2 = hi1 }) (Coq_ii1 (make_stn n i hi2))
-    (invmaponpathsweq (weqdnicoprod n (lastelement n))
-      (invmap (stnweq n) { pr1 = i; pr2 = hi1 }) (Coq_ii1 (make_stn n i hi2))
-      (pathscomp0
-        (pr1weq (weqdnicoprod n (lastelement n))
-          (invmap (weqdnicoprod n (lastelement n)) { pr1 = i; pr2 = hi1 }))
-        { pr1 = i; pr2 = hi1 }
-        (pr1weq (weqdnicoprod n (lastelement n)) (Coq_ii1 (make_stn n i hi2)))
-        (homotweqinvweq (weqdnicoprod n (lastelement n)) { pr1 = i; pr2 =
-          hi1 })
-        (stn_eq (S n) { pr1 = i; pr2 = hi1 }
-          (pr1weq (weqdnicoprod n (lastelement n)) (Coq_ii1
-            (make_stn n i hi2)))
-          (pathsinv0 (di (stntonat (S n) (lastelement n)) i) i
-            (di_eq1 (stntonat (S n) (lastelement n)) i hi2)))))
+let extend_tuple_i n f last i hi1 hi2 = n
+  (* maponpaths (fun c -> match c with *)
+  (*                      | Coq_ii1 a -> f a *)
+  (*                      | Coq_ii2 _ -> last) *)
+  (*   (invmap (stnweq n) { pr1 = i; pr2 = hi1 }) (Coq_ii1 (make_stn n i hi2)) *)
+  (*   (invmaponpathsweq (weqdnicoprod n (lastelement n)) *)
+  (*     (invmap (stnweq n) { pr1 = i; pr2 = hi1 }) (Coq_ii1 (make_stn n i hi2)) *)
+  (*     (pathscomp0 *)
+  (*       (pr1weq (weqdnicoprod n (lastelement n)) *)
+  (*         (invmap (weqdnicoprod n (lastelement n)) { pr1 = i; pr2 = hi1 })) *)
+  (*       { pr1 = i; pr2 = hi1 } *)
+  (*       (pr1weq (weqdnicoprod n (lastelement n)) (Coq_ii1 (make_stn n i hi2))) *)
+  (*       (homotweqinvweq (weqdnicoprod n (lastelement n)) { pr1 = i; pr2 = *)
+  (*         hi1 }) *)
+  (*       (stn_eq (S n) { pr1 = i; pr2 = hi1 } *)
+  (*         (pr1weq (weqdnicoprod n (lastelement n)) (Coq_ii1 *)
+  (*           (make_stn n i hi2))) *)
+  (*         (pathsinv0 (di (stntonat (S n) (lastelement n)) i) i *)
+  (*           (di_eq1 (stntonat (S n) (lastelement n)) i hi2))))) *)
 
 (** val extend_tuple_last :
     nat -> (stn -> 'a1) -> 'a1 -> stn -> nat paths -> 'a1 paths **)
 
-let extend_tuple_last n f last i hi =
-  maponpaths (fun c -> match c with
-                       | Coq_ii1 a -> f a
-                       | Coq_ii2 _ -> last) (invmap (stnweq n) i) (Coq_ii2
-    Coq_tt)
-    (invmaponpathsweq (weqdnicoprod n (lastelement n)) (invmap (stnweq n) i)
-      (Coq_ii2 Coq_tt)
-      (pathscomp0
-        (pr1weq (weqdnicoprod n (lastelement n))
-          (invmap (weqdnicoprod n (lastelement n)) i)) i
-        (pr1weq (weqdnicoprod n (lastelement n)) (Coq_ii2 Coq_tt))
-        (homotweqinvweq (weqdnicoprod n (lastelement n)) i)
-        (stn_eq (S n) i
-          (pr1weq (weqdnicoprod n (lastelement n)) (Coq_ii2 Coq_tt)) hi)))
+let extend_tuple_last n f last i hi = n
+  (* maponpaths (fun c -> match c with *)
+  (*                      | Coq_ii1 a -> f a *)
+  (*                      | Coq_ii2 _ -> last) (invmap (stnweq n) i) (Coq_ii2 *)
+  (*   Coq_tt) *)
+  (*   (invmaponpathsweq (weqdnicoprod n (lastelement n)) (invmap (stnweq n) i) *)
+  (*     (Coq_ii2 Coq_tt) *)
+  (*     (pathscomp0 *)
+  (*       (pr1weq (weqdnicoprod n (lastelement n)) *)
+  (*         (invmap (weqdnicoprod n (lastelement n)) i)) i *)
+  (*       (pr1weq (weqdnicoprod n (lastelement n)) (Coq_ii2 Coq_tt)) *)
+  (*       (homotweqinvweq (weqdnicoprod n (lastelement n)) i) *)
+  (*       (stn_eq (S n) i *)
+  (*         (pr1weq (weqdnicoprod n (lastelement n)) (Coq_ii2 Coq_tt)) hi))) *)
 
 (** val extend_tuple_inl : nat -> (stn -> 'a1) -> 'a1 -> stn -> 'a1 paths **)
 
