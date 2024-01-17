@@ -1348,23 +1348,11 @@ let nat_dist_between_le m n a b i j =
     nat -> nat -> nat -> nat -> hProptoType -> nat paths -> (nat, (nat paths,
     nat paths) dirprod) total2 **)
 
-let nat_dist_between_ge m n a b i j =
-  let j0 =
-    internal_paths_rew (nat_dist m n) j (nat_dist n m) (nat_dist_symm m n)
-  in
-  let j1 = internal_paths_rew (add a b) j0 (add b a) (natpluscomm a b) in
-  { pr1 = (nat_dist_between_le n m b a i j1).pr1; pr2 =
-  (weqdirprodcomm.pr1 (nat_dist_between_le n m b a i j1).pr2) }
 
 (** val nat_dist_between :
     nat -> nat -> nat -> nat -> nat paths -> (nat, (nat paths, nat paths)
     dirprod) total2 **)
 
-let nat_dist_between m n a b j =
-  let c = natgthorleh m n in
-  (match c with
-   | Coq_ii1 a0 -> nat_dist_between_ge m n a b (natlthtoleh n m a0) j
-   | Coq_ii2 b0 -> nat_dist_between_le m n a b b0 j)
 
 (** val natleorle : nat -> nat -> (hProptoType, hProptoType) coprod **)
 

@@ -132,23 +132,6 @@ let helper x e _ r r' isE isE' _ _UU03c3_ =
     hSet -> hSet -> coq_TRRGraphData -> coq_TRRGraphData -> hSet paths ->
     isTRRGhomo -> coq_TRRGraphData paths **)
 
-let coq_TRRGhomo_topath x _ g h _ =
-  internal_paths_rew_r (transportf x x Coq_paths_refl g) g (fun p ->
-    let _UU03c0_ = p.pr1 in
-    let _UU03c3_ = p.pr2 in
-    let q =
-      funextfun (Obj.magic g).pr1 (Obj.magic h).pr1 (fun x0 ->
-        Obj.magic funextfun ((Obj.magic g).pr1 x0) ((Obj.magic h).pr1 x0)
-          (fun y ->
-          Obj.magic hPropUnivalence (g.pr1 x0 y) (h.pr1 x0 y)
-            (_UU03c0_ x0 y).pr1 (_UU03c0_ x0 y).pr2))
-    in
-    let x0 = fun x0 y -> (total2_paths_equiv x0 y).pr2 in
-    let x1 = fun x1 y y0 -> (x0 x1 y y0).pr1 in
-    let x2 = fun x2 y y0 -> (x1 x2 y y0).pr1 in
-    Obj.magic x2 g h { pr1 = q; pr2 =
-      (helper x g.pr1 h.pr1 g.pr2.pr1 h.pr2.pr1 g.pr2.pr2 h.pr2.pr2
-        (Obj.magic q) _UU03c3_) }) (idpath_transportf x g)
 
 type coq_TRRGraphiso = ((pr1hSet, pr1hSet) weq, isTRRGhomo) total2
 
@@ -481,29 +464,6 @@ let hsubtype_to_preZFS_Branch_hsubtype t x s z =
 (** val coq_Branch_to_subtype :
     preZFS -> pr1hSet -> pr1hSet hsubtype -> pr1hSet hsubtype paths **)
 
-let coq_Branch_to_subtype t x s =
-  let h =
-    hsubtype_to_preZFS_Branch_hsubtype t x
-      (preZFS_Branch_hsubtype_tohsubtype t x s)
-  in
-  Obj.magic funextfunPreliminaryUAH (fun _ _ -> univalenceAxiom) h s
-    (fun y ->
-    let eS = fun x0 ->
-      x0.pr1 (s y) (fun x1 ->
-        let pr4 = (Obj.magic y).pr1 in
-        let pr5 = (Obj.magic y).pr2 in
-        let y0 = x1.pr1 in
-        let z = x1.pr2 in
-        let p =
-          let p = coq_Ed t x pr4 in (Obj.magic propproperty p y0 pr5).pr1
-        in
-        internal_paths_rew y0 z pr5 p)
-    in
-    let sE = fun x0 -> { pr1 = (fun _ q ->
-      q { pr1 = (Obj.magic y).pr2; pr2 = x0 }); pr2 = (Obj.magic y).pr2 }
-    in
-    Obj.magic hPropUnivalence (hconj ishinh (coq_Ed t x (Obj.magic y).pr1))
-      (s y) eS sE)
 
 (** val fromBranch_hsubtype :
     preZFS -> pr1hSet -> pr1hSet hsubtype -> pr1hSet -> hProptoType ->

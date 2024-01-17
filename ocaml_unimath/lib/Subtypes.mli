@@ -60,9 +60,9 @@ val subtype_intersection : ('a2 -> 'a1 hsubtype) -> 'a1 hsubtype
 val hsubtype_univalence :
   'a1 hsubtype -> 'a1 hsubtype -> ('a1 hsubtype paths, hProptoType) weq
 
-val hsubtype_rect :
-  'a1 hsubtype -> 'a1 hsubtype -> ('a1 hsubtype paths -> 'a2, hProptoType ->
-  'a2) weq
+(* val hsubtype_rect : *)
+(*   'a1 hsubtype -> 'a1 hsubtype -> ('a1 hsubtype paths -> 'a2, hProptoType -> *)
+(*   'a2) weq *)
 
 val subtype_containment_istrans : pr1hSet istrans
 

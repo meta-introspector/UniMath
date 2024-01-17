@@ -94,13 +94,13 @@ val isweqrecompl_ne :
   'a1 -> 'a1 isisolated -> 'a1 neqPred -> (('a1 compl_ne, coq_unit) coprod,
   'a1) isweq
 
-val isweqrecompl_ne' :
-  'a1 -> 'a1 isisolated -> 'a1 neqPred -> (('a1 compl_ne, coq_unit) coprod,
-  'a1) isweq
+(* val isweqrecompl_ne' : *)
+(*   'a1 -> 'a1 isisolated -> 'a1 neqPred -> (('a1 compl_ne, coq_unit) coprod, *)
+(*   'a1) isweq *)
 
-val weqrecompl_ne :
-  'a1 -> 'a1 isisolated -> 'a1 neqPred -> (('a1 compl_ne, coq_unit) coprod,
-  'a1) weq
+(* val weqrecompl_ne : *)
+(*   'a1 -> 'a1 isisolated -> 'a1 neqPred -> (('a1 compl_ne, coq_unit) coprod, *)
+(*   'a1) weq *)
 
 val isweqrecompl' :
   'a1 -> 'a1 isisolated -> (('a1 compl, coq_unit) coprod, 'a1) isweq

@@ -20,7 +20,7 @@ val coq_AxiomOfChoice_surj : hProp
 
 val coq_AC_impl2 : (hProptoType, hProptoType) logeq
 
-val coq_SetCovering : hProptoType -> hProptoType
+(* val coq_SetCovering : hProptoType -> hProptoType *)
 
 val coq_AC_to_LEM : hProptoType -> hProptoType
 

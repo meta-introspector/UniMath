@@ -60,13 +60,13 @@ val setquotuniv4prop' :
 
 val same_fiber_eqrel : hSet -> hSet -> (pr1hSet -> pr1hSet) -> pr1hSet eqrel
 
-val pi0 : hSet
+(* val pi0 : hSet *)
 
-val _UU03c0__UU2080_ : hSet
+(* val _UU03c0__UU2080_ : hSet *)
 
-val component : 'a1 -> pr1hSet
+(* val component : 'a1 -> pr1hSet *)
 
-val _UU03c0__UU2080__map : ('a1 -> 'a2) -> pr1hSet -> pr1hSet
+(* val _UU03c0__UU2080__map : ('a1 -> 'a2) -> pr1hSet -> pr1hSet *)
 
 val _UU03c0__UU2080__universal_property :
   hSet -> (pr1hSet -> pr1hSet, 'a1 -> pr1hSet) weq

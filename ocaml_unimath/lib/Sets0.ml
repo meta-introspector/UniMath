@@ -152,50 +152,23 @@ let same_fiber_eqrel _ y f =
 
 (** val pi0 : hSet **)
 
-let pi0 =
-  setquotinset (pr1eqrel pathseqrel)
 
 (** val _UU03c0__UU2080_ : hSet **)
 
-let _UU03c0__UU2080_ =
-  pi0
 
 (** val component : 'a1 -> pr1hSet **)
 
-let component x =
-  Obj.magic setquotpr pathseqrel x
 
 (** val _UU03c0__UU2080__map : ('a1 -> 'a2) -> pr1hSet -> pr1hSet **)
 
-let _UU03c0__UU2080__map f =
-  Obj.magic setquotfun (pr1eqrel pathseqrel) pathseqrel f (fun x x' ->
-    hinhfun (maponpaths f x x'))
 
 (** val _UU03c0__UU2080__universal_property :
     hSet -> (pr1hSet -> pr1hSet, 'a1 -> pr1hSet) weq **)
 
-let _UU03c0__UU2080__universal_property y =
-  { pr1 = (fun h -> funcomp component h); pr2 = (fun f ->
-    iscontraprop1
-      (isaproptotal2 (fun h ->
-        impred_isaset (fun _ -> setproperty y) (funcomp component h) f)
-        (fun h h' e e' ->
-        funextsec h h' (fun w ->
-          surjectionisepitosets component h h'
-            (Obj.magic issurjsetquotpr pathseqrel) (setproperty y) (fun x ->
-            maponpaths (fun k -> k x) (funcomp component h)
-              (funcomp component h')
-              (pathscomp0 (funcomp component h) f (funcomp component h') e
-                (pathsinv0 (funcomp component h') f e'))) w))) { pr1 =
-      (Obj.magic setquotuniv (fun _ _ -> ishinh) y f (fun x y0 e ->
-        squash_to_prop e (setproperty y (f x) (f y0)) (maponpaths f x y0)));
-      pr2 = Coq_paths_refl }) }
 
 (** val _UU03c0__UU2080__universal_map :
     hSet -> ('a1 -> pr1hSet) -> pr1hSet -> pr1hSet **)
 
-let _UU03c0__UU2080__universal_map y =
-  invmap (_UU03c0__UU2080__universal_property y)
 
 (** val _UU03c0__UU2080__universal_map_eqn :
     hSet -> ('a1 -> pr1hSet) -> 'a1 -> pr1hSet paths **)
@@ -207,9 +180,6 @@ let _UU03c0__UU2080__universal_map_eqn _ _ _ =
     hSet -> (pr1hSet -> pr1hSet) -> (pr1hSet -> pr1hSet) -> ('a1 -> pr1hSet
     paths) -> (pr1hSet, pr1hSet) homot **)
 
-let _UU03c0__UU2080__universal_map_uniq y h h' e x =
-  surjectionisepitosets component h h' (Obj.magic issurjsetquotpr pathseqrel)
-    (setproperty y) e x
 
 (** val isaprop_eqrel_from_hrel :
     'a1 hrel -> 'a1 -> 'a1 -> ('a1 eqrel -> ('a1 -> 'a1 -> hProptoType ->
@@ -324,3 +294,5 @@ let univalence_hSet_inv x y w =
           (hSet_univalence_map x y (univalence_hSet x y w)) w Coq_paths_refl
           (hSet_univalence_map_univalence_hSet x y w))
         (hSet_univalence_map_inv x y (univalence_hSet x y w))))
+
+

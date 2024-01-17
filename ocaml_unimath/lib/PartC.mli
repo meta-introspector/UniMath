@@ -216,9 +216,9 @@ val fromcompltodisjoint : ('a1, coq_unit) coprod compl -> 'a1
 
 val isweqtocompltodisjoint : ('a1, ('a1, coq_unit) coprod compl) isweq
 
-val weqtocompltodisjoint : ('a1, ('a1, coq_unit) coprod compl) weq
+(* val weqtocompltodisjoint : ('a1, ('a1, coq_unit) coprod compl) weq *)
 
-val isweqfromcompltodisjoint : (('a1, coq_unit) coprod compl, 'a1) isweq
+(* val isweqfromcompltodisjoint : (('a1, coq_unit) coprod compl, 'a1) isweq *)
 
 val isdecpropif' :
   'a1 isaprop -> ('a1, 'a1 neg) coprod -> ('a1, 'a1 neg) coprod iscontr

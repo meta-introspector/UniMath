@@ -75,17 +75,6 @@ let coq_AC_impl2 =
 
 (** val coq_SetCovering : hProptoType -> hProptoType **)
 
-let coq_SetCovering ac =
-  let ac' = coq_AC_impl2.pr1 ac in
-  let f = Obj.magic ac' pi0 __ pi0pr (issurjsetquotpr pathseqrel) in
-  squash_to_prop f (propproperty ishinh) (fun x0 ->
-    let f0 = x0.pr1 in
-    let eqn = x0.pr2 in
-    hinhpr { pr1 = pi0; pr2 = { pr1 = f0; pr2 = (fun x ->
-      squash_to_prop
-        (invmap (weqpathsinsetquot pathseqrel (f0 (pi0pr x)) x)
-          (eqn (pi0pr x))) (propproperty ishinh) (fun e ->
-        hinhpr { pr1 = (pi0pr x); pr2 = e })) } })
 
 (** val coq_AC_to_LEM : hProptoType -> hProptoType **)
 

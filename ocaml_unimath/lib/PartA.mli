@@ -732,7 +732,9 @@ val weqdirprodf :
   ('a1, 'a2) weq -> ('a3, 'a4) weq -> (('a1, 'a3) dirprod, ('a2, 'a4)
   dirprod) weq
 
-(* val weqtodirprodwithunit : ('a1, ('a1, coq_unit) dirprod) weq *)
+(* val weqtodirprodwithunit : ('a1, ('a1, coq_unit) dirprod) weq  *)
+
+(* val weqtodirprodwithunit : ('a1, ('a1, coq_unit) dirprod) weq  *)
 
 val total2asstor :
   (('a1, 'a2) total2, 'a3) total2 -> ('a1, ('a2, 'a3) total2) total2
@@ -740,31 +742,31 @@ val total2asstor :
 val total2asstol :
   ('a1, ('a2, 'a3) total2) total2 -> (('a1, 'a2) total2, 'a3) total2
 
-val weqtotal2asstor :
-  ((('a1, 'a2) total2, 'a3) total2, ('a1, ('a2, 'a3) total2) total2) weq
+(* val weqtotal2asstor : *)
+(*   ((('a1, 'a2) total2, 'a3) total2, ('a1, ('a2, 'a3) total2) total2) weq *)
 
-val weqtotal2asstol :
-  (('a1, ('a2, 'a3) total2) total2, (('a1, 'a2) total2, 'a3) total2) weq
+(* val weqtotal2asstol : *)
+(*   (('a1, ('a2, 'a3) total2) total2, (('a1, 'a2) total2, 'a3) total2) weq *)
 
-val weqdirprodasstor :
-  ((('a1, 'a2) dirprod, 'a3) dirprod, ('a1, ('a2, 'a3) dirprod) dirprod) weq
+(* val weqdirprodasstor : *)
+(*   ((('a1, 'a2) dirprod, 'a3) dirprod, ('a1, ('a2, 'a3) dirprod) dirprod) weq *)
 
-val weqdirprodasstol :
-  (('a1, ('a2, 'a3) dirprod) dirprod, (('a1, 'a2) dirprod, 'a3) dirprod) weq
+(* val weqdirprodasstol : *)
+(*   (('a1, ('a2, 'a3) dirprod) dirprod, (('a1, 'a2) dirprod, 'a3) dirprod) weq *)
 
-val weqdirprodcomm : (('a1, 'a2) dirprod, ('a2, 'a1) dirprod) weq
+(* val weqdirprodcomm : (('a1, 'a2) dirprod, ('a2, 'a1) dirprod) weq *)
 
-val weqtotal2dirprodcomm :
-  ((('a1, 'a2) dirprod, 'a3) total2, (('a2, 'a1) dirprod, 'a3) total2) weq
+(* val weqtotal2dirprodcomm : *)
+(*   ((('a1, 'a2) dirprod, 'a3) total2, (('a2, 'a1) dirprod, 'a3) total2) weq *)
 
-val weqtotal2dirprodassoc :
-  ((('a1, 'a2) dirprod, 'a3) total2, ('a1, ('a2, 'a3) total2) total2) weq
+(* val weqtotal2dirprodassoc : *)
+(*   ((('a1, 'a2) dirprod, 'a3) total2, ('a1, ('a2, 'a3) total2) total2) weq *)
 
-val weqtotal2dirprodassoc' :
-  ((('a1, 'a2) dirprod, 'a3) total2, ('a2, ('a1, 'a3) total2) total2) weq
+(* val weqtotal2dirprodassoc' : *)
+(*   ((('a1, 'a2) dirprod, 'a3) total2, ('a2, ('a1, 'a3) total2) total2) weq *)
 
-val weqtotal2comm12 :
-  ((('a1, 'a2) total2, 'a3) total2, (('a1, 'a3) total2, 'a2) total2) weq
+(* val weqtotal2comm12 : *)
+(*   ((('a1, 'a2) total2, 'a3) total2, (('a1, 'a3) total2, 'a2) total2) weq *)
 
 val rdistrtocoprod :
   ('a1, ('a2, 'a3) coprod) dirprod -> (('a1, 'a2) dirprod, ('a1, 'a3)
@@ -778,17 +780,17 @@ val isweqrdistrtoprod :
   ((('a1, 'a2) dirprod, ('a1, 'a3) dirprod) coprod, ('a1, ('a2, 'a3) coprod)
   dirprod) isweq
 
-val weqrdistrtoprod :
-  ((('a1, 'a2) dirprod, ('a1, 'a3) dirprod) coprod, ('a1, ('a2, 'a3) coprod)
-  dirprod) weq
+(* val weqrdistrtoprod : *)
+(*   ((('a1, 'a2) dirprod, ('a1, 'a3) dirprod) coprod, ('a1, ('a2, 'a3) coprod) *)
+(*   dirprod) weq *)
 
-val isweqrdistrtocoprod :
-  (('a1, ('a2, 'a3) coprod) dirprod, (('a1, 'a2) dirprod, ('a1, 'a3) dirprod)
-  coprod) isweq
+(* val isweqrdistrtocoprod : *)
+(*   (('a1, ('a2, 'a3) coprod) dirprod, (('a1, 'a2) dirprod, ('a1, 'a3) dirprod) *)
+(*   coprod) isweq *)
 
-val weqrdistrtocoprod :
-  (('a1, ('a2, 'a3) coprod) dirprod, (('a1, 'a2) dirprod, ('a1, 'a3) dirprod)
-  coprod) weq
+(* val weqrdistrtocoprod : *)
+(*   (('a1, ('a2, 'a3) coprod) dirprod, (('a1, 'a2) dirprod, ('a1, 'a3) dirprod) *)
+(*   coprod) weq *)
 
 val fromtotal2overcoprod :
   (('a1, 'a2) coprod, 'a3) total2 -> (('a1, 'a3) total2, ('a2, 'a3) total2)
@@ -798,9 +800,9 @@ val tototal2overcoprod :
   (('a1, 'a3) total2, ('a2, 'a3) total2) coprod -> (('a1, 'a2) coprod, 'a3)
   total2
 
-val weqtotal2overcoprod :
-  ((('a1, 'a2) coprod, 'a3) total2, (('a1, 'a3) total2, ('a2, 'a3) total2)
-  coprod) weq
+(* val weqtotal2overcoprod : *)
+(*   ((('a1, 'a2) coprod, 'a3) total2, (('a1, 'a3) total2, ('a2, 'a3) total2) *)
+(*   coprod) weq *)
 
 val sumofmaps : ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a1, 'a2) coprod -> 'a3
 
@@ -821,14 +823,14 @@ val sumofmaps_assoc_right :
 val isweqcoprodasstor :
   ((('a1, 'a2) coprod, 'a3) coprod, ('a1, ('a2, 'a3) coprod) coprod) isweq
 
-val weqcoprodasstor :
-  ((('a1, 'a2) coprod, 'a3) coprod, ('a1, ('a2, 'a3) coprod) coprod) weq
+(* val weqcoprodasstor : *)
+(*   ((('a1, 'a2) coprod, 'a3) coprod, ('a1, ('a2, 'a3) coprod) coprod) weq *)
 
-val isweqcoprodasstol :
-  (('a1, ('a2, 'a3) coprod) coprod, (('a1, 'a2) coprod, 'a3) coprod) isweq
+(* val isweqcoprodasstol : *)
+(*   (('a1, ('a2, 'a3) coprod) coprod, (('a1, 'a2) coprod, 'a3) coprod) isweq *)
 
-val weqcoprodasstol :
-  (('a1, ('a2, 'a3) coprod) coprod, (('a1, 'a2) coprod, 'a3) coprod) weq
+(* val weqcoprodasstol : *)
+(*   (('a1, ('a2, 'a3) coprod) coprod, (('a1, 'a2) coprod, 'a3) coprod) weq *)
 
 val coprodcomm : ('a1, 'a2) coprod -> ('a2, 'a1) coprod
 
@@ -1308,3 +1310,24 @@ val fibseqstrtohfsqstr :
 val hfsqstrtofibseqstr :
   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> (coq_unit, 'a2, 'a3, 'a1) hfsqstr ->
   ('a1, 'a2, 'a3) fibseqstr
+
+val transitive_paths_weq :
+  'a1 -> 'a1 -> 'a1 -> 'a1 paths -> ('a1 paths, 'a1 paths) weq
+
+(* val weqtotal2comm : *)
+(*   (('a1, ('a2, 'a3) total2) total2, ('a2, ('a1, 'a3) total2) total2) weq *)
+
+val pathsdirprodweq :
+  'a1 -> 'a1 -> 'a2 -> 'a2 -> (('a1, 'a2) dirprod paths, ('a1 paths, 'a2
+  paths) dirprod) weq
+
+(* val dirprod_with_contr_r : 'a1 iscontr -> ('a2, ('a2, 'a1) dirprod) weq *)
+
+(* val dirprod_with_contr_l : 'a1 iscontr -> ('a2, ('a1, 'a2) dirprod) weq *)
+
+(* val total2_assoc_fun_left : *)
+(*   (('a1 -> ('a2, 'a3) total2, 'a4) total2, ('a1 -> 'a2, ('a1 -> 'a3, 'a4) *)
+(*   total2) total2) weq *)
+
+(* val sec_total2_distributivity : *)
+(*   ('a1 -> ('a2, 'a3) total2, ('a1 -> 'a2, 'a1 -> 'a3) total2) weq *)

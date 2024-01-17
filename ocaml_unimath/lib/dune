@@ -6,5 +6,5 @@
 (library
  (name ocaml_unimath)
  (libraries  ppxlib )
- ; (preprocess  (pps ppx-introspector ))
+ (preprocess  (pps ppx-introspector ))
 )

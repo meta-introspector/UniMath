@@ -523,6 +523,15 @@ let isapropisaprop =
   Obj.magic (fun x -> Obj.magic isapropisofhlevel (S O) x)
 
 (** val isapropisdecprop : 'a1 isdecprop isaprop **)
+let make_dirprod x y =
+  { pr1 = x; pr2 = y }
+
+let weqdirprodcomm =
+  let f = fun xy -> make_dirprod xy.pr2 xy.pr1 in
+  let g = fun yx -> make_dirprod yx.pr2 yx.pr1 in
+  let egf = fun _ -> Coq_paths_refl in
+  let efg = fun _ -> Coq_paths_refl in
+  { pr1 = f; pr2 = (isweq_iso f g egf efg) }
 
 let isapropisdecprop =
   isofhlevelweqf (S O) weqdirprodcomm
@@ -1026,3 +1035,111 @@ let invweqcomp f g =
 
 let invmapweqcomp _ _ =
   Coq_paths_refl
+
+(*
+ocaml_unimath/lib/Subtypes.ml
+*)
+
+let chain_union_prelim_eq0 x s chain x0 y i j xi xj yi yj =
+  let x1 = fun p q -> (weqlogeq p q).pr2 in
+  let x2 = fun p q y0 -> (x1 p q y0).pr1 in
+  let p =
+    coq_WOSrel x (s i) (Obj.magic { pr1 = x0; pr2 = xi })
+      (Obj.magic { pr1 = y; pr2 = yi })
+  in
+  let q =
+    coq_WOSrel x (s j) (Obj.magic { pr1 = x0; pr2 = xj })
+      (Obj.magic { pr1 = y; pr2 = yj })
+  in
+  let y0 =
+    squash_to_hProp
+      (hequiv
+        (coq_WOSrel x (s i) (Obj.magic { pr1 = x0; pr2 = xi })
+          (Obj.magic { pr1 = y; pr2 = yi }))
+        (coq_WOSrel x (s j) (Obj.magic { pr1 = x0; pr2 = xj })
+          (Obj.magic { pr1 = y; pr2 = yj }))) (Obj.magic chain i j)
+      (fun x3 ->
+      match x3 with
+      | Coq_ii1 h ->
+        Obj.magic { pr1 = (fun l ->
+          let q0 =
+            Obj.magic wosub_le_comp x (s i) (s j) h { pr1 = x0; pr2 = xi }
+              { pr1 = y; pr2 = yi } l
+          in
+          h1'' x (coq_WOSubset_to_TOSubset x (s j))
+            (subtype_inc
+              (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s i)))
+              (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s j)))
+              (Obj.magic h).pr1 { pr1 = x0; pr2 = xi }) { pr1 = x0; pr2 =
+            xj }
+            (subtype_inc
+              (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s i)))
+              (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s j)))
+              (Obj.magic h).pr1 { pr1 = y; pr2 = yi }) { pr1 = y; pr2 = yj }
+            q0 Coq_paths_refl Coq_paths_refl); pr2 = (fun l ->
+          (Obj.magic wosub_fidelity x (s i) (s j) h { pr1 = x0; pr2 = xi }
+            { pr1 = y; pr2 = yi }).pr2
+            (h1'' x (coq_WOSubset_to_TOSubset x (s j)) { pr1 = x0; pr2 = xj }
+              (wosub_inc x (s i) (s j) h { pr1 = x0; pr2 = xi }) { pr1 = y;
+              pr2 = yj } (wosub_inc x (s i) (s j) h { pr1 = y; pr2 = yi }) l
+              Coq_paths_refl Coq_paths_refl)) }
+      | Coq_ii2 h ->
+        Obj.magic { pr1 = (fun l ->
+          (Obj.magic wosub_fidelity x (s j) (s i) h { pr1 = x0; pr2 = xj }
+            { pr1 = y; pr2 = yj }).pr2
+            (h1'' x (coq_WOSubset_to_TOSubset x (s i)) { pr1 = x0; pr2 = xi }
+              (wosub_inc x (s j) (s i) h { pr1 = x0; pr2 = xj }) { pr1 = y;
+              pr2 = yi } (wosub_inc x (s j) (s i) h { pr1 = y; pr2 = yj }) l
+              Coq_paths_refl Coq_paths_refl)); pr2 = (fun l ->
+          let q0 =
+            Obj.magic wosub_le_comp x (s j) (s i) h { pr1 = x0; pr2 = xj }
+              { pr1 = y; pr2 = yj } l
+          in
+          h1'' x (coq_WOSubset_to_TOSubset x (s i))
+            (subtype_inc
+              (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s j)))
+              (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s i)))
+              (Obj.magic h).pr1 { pr1 = x0; pr2 = xj }) { pr1 = x0; pr2 =
+            xi }
+            (subtype_inc
+              (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s j)))
+              (coq_TOSubset_to_subtype x (coq_WOSubset_to_TOSubset x (s i)))
+              (Obj.magic h).pr1 { pr1 = y; pr2 = yj }) { pr1 = y; pr2 = yi }
+            q0 Coq_paths_refl Coq_paths_refl) })
+  in
+  (x2 p q y0).pr1
+
+let hsubtype_univalence s t =
+  weqcomp (Obj.magic weqtoforallpaths s t)
+    (Obj.magic weqonsecfibers (fun x -> weqlogeq (s x) (t x)))
+
+let subtype_containment_isantisymm s t i j =
+  invmap (Obj.magic hsubtype_univalence s t)
+    (let x0 = fun s0 t0 -> (Obj.magic subtype_equal_cond s0 t0).pr1 in
+     Obj.magic x0 s t { pr1 = i; pr2 = j })
+
+let hsubtype_rect s t =
+  weqinvweq.pr1 (weqonsecbase (hsubtype_univalence s t))
+
+let weq_vector_1 =
+  weqcomp (invweq weqfunfromunit) (weqbfun weqstn1tounit)
+
+let iscontr_rect'' i p0 x =
+  invmap (weqsecovercontr i) p0 x
+let iscontr_rect_compute'' i p =
+  homotweqinvweq (weqsecovercontr i) p
+let weqdnicompl n i =
+  let w = weqdicompl (stntonat (S n) i) in
+  let eq = fun j ->
+    let c = natlthorgeh j (stntonat (S n) i) in
+    (match c with
+     | Coq_ii1 a ->
+       { pr1 = (natlthtolths j n); pr2 = (fun _ ->
+         natlehlthtrans (S j) (stntonat (S n) i) (S n) a i.pr2) }
+     | Coq_ii2 _ -> { pr1 = idfun; pr2 = idfun })
+  in
+  weqcomp
+    (weq_subtypes w (fun j -> natlth j n) (fun j -> natlth j.pr1 (S n)) eq)
+    weqtotal2comm12
+let subtype_containment_isPartialOrder =
+  make_dirprod subtype_containment_ispreorder subtype_containment_isantisymm

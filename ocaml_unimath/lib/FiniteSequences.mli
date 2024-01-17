@@ -64,7 +64,7 @@ val matrix_hlevel :
 
 val const_matrix : nat -> nat -> 'a1 -> 'a1 coq_Matrix
 
-val weq_matrix_1_1 : ('a1, 'a1 coq_Matrix) weq
+(* val weq_matrix_1_1 : ('a1, 'a1 coq_Matrix) weq *)
 
 type 'x coq_Sequence = (nat, 'x coq_Vector) total2
 

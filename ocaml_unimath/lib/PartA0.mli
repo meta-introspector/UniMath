@@ -109,7 +109,7 @@ val flipsec : ('a1 -> 'a2 -> 'a3) -> 'a2 -> 'a1 -> 'a3
 
 val isweq_flipsec : ('a1 -> 'a2 -> 'a3, 'a2 -> 'a1 -> 'a3) isweq
 
-val flipsec_weq : ('a1 -> 'a2 -> 'a3, 'a2 -> 'a1 -> 'a3) weq
+(* val flipsec_weq : ('a1 -> 'a2 -> 'a3, 'a2 -> 'a1 -> 'a3) weq *)
 
 val empty_hlevel : nat -> empty isofhlevel
 

@@ -311,21 +311,7 @@ let isweqrecompl_ne x is neq_x =
     'a1 -> 'a1 isisolated -> 'a1 neqPred -> (('a1 compl_ne, coq_unit) coprod,
     'a1) isweq **)
 
-let isweqrecompl_ne' x is neq_x y =
-  iscontrweqb weqtotal2overcoprod
-    (let c = is y in
-     match c with
-     | Coq_ii1 _ ->
-       iscontrweqf (weqii2withneg (fun _ -> assert false (* absurd case *)))
-         { pr1 = { pr1 = Coq_tt; pr2 = Coq_paths_refl }; pr2 = (fun w ->
-         let e = w.pr2 in
-         maponpaths (fun x0 -> { pr1 = Coq_tt; pr2 = x0 }) e Coq_paths_refl
-           (let x' = Coq_paths_refl in
-            (Obj.magic isaproppathsfromisolated x is x e x').pr1)) }
-     | Coq_ii2 b ->
-       iscontrweqf (weqii1withneg (fun _ -> assert false (* absurd case *)))
-         { pr1 = { pr1 = { pr1 = y; pr2 = (neg_to_negProp (neq_x y) b) };
-         pr2 = Coq_paths_refl }; pr2 = (fun _ -> Coq_paths_refl) })
+
 
 (** val weqrecompl_ne :
     'a1 -> 'a1 isisolated -> 'a1 neqPred -> (('a1 compl_ne, coq_unit) coprod,
