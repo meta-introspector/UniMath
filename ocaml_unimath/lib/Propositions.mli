@@ -63,11 +63,11 @@ val hinhfun2 :
 
 val hinhunivcor1 : hProp -> hProptoType -> hProptoType
 
-val weqishinhnegtoneg : (hProptoType, 'a1 neg) weq
+(* val weqishinhnegtoneg : (hProptoType, 'a1 neg) weq *)
 
-val weqnegtonegishinh : ('a1 neg, hProptoType neg) weq
+(* val weqnegtonegishinh : ('a1 neg, hProptoType neg) weq *)
 
-val hinhcoprod : hProptoType -> hProptoType
+(* val hinhcoprod : hProptoType -> hProptoType *)
 
 val decidable_ishinh : 'a1 decidable -> hProptoType decidable
 
@@ -128,7 +128,7 @@ val wittohexists : 'a1 -> 'a2 -> hProptoType
 
 val total2tohexists : ('a1, 'a2) total2 -> hProptoType
 
-val weqneghexistsnegtotal2 : (hProptoType neg, ('a1, 'a2) total2 neg) weq
+(* val weqneghexistsnegtotal2 : (hProptoType neg, ('a1, 'a2) total2 neg) weq *)
 
 val islogeqcommhdisj : hProp -> hProp -> (hProptoType, hProptoType) logeq
 
@@ -140,7 +140,7 @@ val forallnegtoneghexists : ('a1 -> 'a2 neg) -> hProptoType neg
 
 val neghexisttoforallneg : hProptoType -> 'a1 -> hProptoType
 
-val weqforallnegtonegexists : ('a1 -> hProptoType, hProptoType) weq
+(* val weqforallnegtonegexists : ('a1 -> hProptoType, hProptoType) weq *)
 
 val tonegdirprod : hProptoType -> hProptoType
 

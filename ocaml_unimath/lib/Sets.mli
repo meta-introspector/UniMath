@@ -71,7 +71,7 @@ val ischoicebaseempty : hProptoType
 
 val ischoicebaseempty2 : 'a1 neg -> hProptoType
 
-val ischoicebasecoprod : hProptoType -> hProptoType -> hProptoType
+(* val ischoicebasecoprod : hProptoType -> hProptoType -> hProptoType *)
 
 type 'x hsubtype = 'x -> hProp
 
@@ -95,7 +95,7 @@ val isasethsubtype : 'a1 hsubtype isaset
 
 val totalsubtype : 'a1 hsubtype
 
-val weqtotalsubtype : ('a1 carrier, 'a1) weq
+(* val weqtotalsubtype : ('a1 carrier, 'a1) weq *)
 
 val weq_subtypes :
   ('a1, 'a2) weq -> 'a1 hsubtype -> 'a2 hsubtype -> ('a1 -> (hProptoType,
@@ -863,11 +863,11 @@ val isreflpathshrel : 'a1 isrefl
 
 val issymmpathshrel : 'a1 issymm
 
-val pathseqrel : 'a1 eqrel
+(* val pathseqrel : 'a1 eqrel *)
 
 type 'x pi0 = 'x setquot
 
-val pi0pr : 'a1 -> 'a1 setquot
+(* val pi0pr : 'a1 -> 'a1 setquot *)
 
 type ('x, 's) compfun = ('x -> 's, ('x, 's) iscomprelfun) total2
 

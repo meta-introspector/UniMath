@@ -165,16 +165,11 @@ let subtype_intersection s x =
 (** val hsubtype_univalence :
     'a1 hsubtype -> 'a1 hsubtype -> ('a1 hsubtype paths, hProptoType) weq **)
 
-let hsubtype_univalence s t =
-  weqcomp (Obj.magic weqtoforallpaths s t)
-    (Obj.magic weqonsecfibers (fun x -> weqlogeq (s x) (t x)))
 
 (** val hsubtype_rect :
     'a1 hsubtype -> 'a1 hsubtype -> ('a1 hsubtype paths -> 'a2, hProptoType
     -> 'a2) weq **)
 
-let hsubtype_rect s t =
-  weqinvweq.pr1 (weqonsecbase (hsubtype_univalence s t))
 
 (** val subtype_containment_istrans : pr1hSet istrans **)
 
@@ -193,15 +188,9 @@ let subtype_containment_ispreorder =
 
 (** val subtype_containment_isantisymm : pr1hSet isantisymm **)
 
-let subtype_containment_isantisymm s t i j =
-  invmap (Obj.magic hsubtype_univalence s t)
-    (let x0 = fun s0 t0 -> (Obj.magic subtype_equal_cond s0 t0).pr1 in
-     Obj.magic x0 s t { pr1 = i; pr2 = j })
 
 (** val subtype_containment_isPartialOrder : pr1hSet isPartialOrder **)
 
-let subtype_containment_isPartialOrder =
-  make_dirprod subtype_containment_ispreorder subtype_containment_isantisymm
 
 (** val subtype_inc_comp :
     'a1 hsubtype -> 'a1 hsubtype -> 'a1 hsubtype -> hProptoType ->
@@ -354,43 +343,13 @@ let image_hsubtype _ _ _ =
 
 (** val image_hsubtype_emptyhsubtype : ('a1 -> 'a2) -> 'a2 hsubtype paths **)
 
-let image_hsubtype_emptyhsubtype f =
-  Obj.magic funextsec (image_hsubtype emptysubtype (Obj.magic f))
-    emptysubtype (fun y ->
-    Obj.magic hPropUnivalence (image_hsubtype emptysubtype (Obj.magic f) y)
-      (emptysubtype y) (fun yinfEmpty ->
-      factor_through_squash (emptysubtype y).pr2 (fun x -> x.pr2.pr2)
-        yinfEmpty) (fun yinEmpty -> fromempty (Obj.magic yinEmpty)))
 
 (** val image_hsubtype_id : 'a1 hsubtype -> 'a1 hsubtype paths **)
 
-let image_hsubtype_id u =
-  Obj.magic funextsec (image_hsubtype (Obj.magic u) idfun) u (fun x ->
-    Obj.magic hPropUnivalence (image_hsubtype (Obj.magic u) idfun x)
-      (Obj.magic u x) (fun xinIdU ->
-      factor_through_squash (let x0 = fun x0 -> (u x0).pr2 in Obj.magic x0 x)
-        (fun u0 -> u0.pr2.pr2) xinIdU) (fun xinU ->
-      hinhpr { pr1 = x; pr2 = { pr1 = Coq_paths_refl; pr2 = xinU } }))
 
 (** val image_hsubtype_comp :
     'a1 hsubtype -> ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 hsubtype paths **)
 
-let image_hsubtype_comp u f g =
-  Obj.magic funextsec (image_hsubtype u (funcomp f (Obj.magic g)))
-    (image_hsubtype (image_hsubtype u f) (Obj.magic g)) (fun z ->
-    Obj.magic hPropUnivalence (image_hsubtype u (funcomp f (Obj.magic g)) z)
-      (image_hsubtype (image_hsubtype u f) (Obj.magic g) z) (fun zinCompU ->
-      factor_through_squash ishinh.pr2 (fun x ->
-        hinhpr { pr1 = (f x.pr1); pr2 = { pr1 = x.pr2.pr1; pr2 =
-          (hinhpr { pr1 = x.pr1; pr2 = { pr1 =
-            (maponpaths f x.pr1 x.pr1 Coq_paths_refl); pr2 = x.pr2.pr2 } }) } })
-        zinCompU) (fun zinCompU ->
-      factor_through_squash ishinh.pr2 (fun y ->
-        factor_through_squash ishinh.pr2 (fun x ->
-          hinhpr { pr1 = x.pr1; pr2 = { pr1 =
-            (pathscomp0 (funcomp f g x.pr1) (g y.pr1) (Obj.magic z)
-              (maponpaths g (f x.pr1) y.pr1 x.pr2.pr1) y.pr2.pr1); pr2 =
-            x.pr2.pr2 } }) y.pr2.pr2) zinCompU))
 
 type ('x, 'y) hsubtype_preserving = hProptoType
 

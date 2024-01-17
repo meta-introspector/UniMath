@@ -37,10 +37,8 @@ let iscontr_vector_0 =
 let empty_vec x =
   iscontrpr1 iscontr_vector_0 x
 
-(** val weq_vector_1 : ('a1, 'a1 coq_Vector) weq **)
+(** val _1 : ('a1, 'a1 coq_Vector) weq **)
 
-let weq_vector_1 =
-  weqcomp (invweq weqfunfromunit) (weqbfun weqstn1tounit)
 
 (** val append_vec : nat -> 'a1 coq_Vector -> 'a1 -> 'a1 coq_Vector **)
 
@@ -182,8 +180,8 @@ let const_matrix n m x =
 
 (** val weq_matrix_1_1 : ('a1, 'a1 coq_Matrix) weq **)
 
-let weq_matrix_1_1 =
-  weqcomp weq_vector_1 weq_vector_1
+(* let weq_matrix_1_1 = *)
+(*   weqcomp weq_vector_1 weq_vector_1 *)
 
 type 'x coq_Sequence = (nat, 'x coq_Vector) total2
 
@@ -377,13 +375,9 @@ let iscontr_rect_compute' _ _ _ =
 
 (** val iscontr_rect'' : 'a1 iscontr -> 'a2 -> 'a1 -> 'a2 **)
 
-let iscontr_rect'' i p0 x =
-  invmap (weqsecovercontr i) p0 x
 
 (** val iscontr_rect_compute'' : 'a1 iscontr -> 'a2 -> 'a2 paths **)
 
-let iscontr_rect_compute'' i p =
-  homotweqinvweq (weqsecovercontr i) p
 
 (** val iscontr_adjointness : 'a1 iscontr -> 'a1 -> 'a1 paths paths **)
 

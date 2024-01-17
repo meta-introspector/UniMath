@@ -3715,3 +3715,144 @@ let hfsqstrtofibseqstr f g z hf =
     (let ff = ezmap f g z hf.pr1 in
      let ggff = weqZtohfp (fun _ -> z) g (fun _ -> Coq_tt) f hf in
      let gg = weqhfibertohfp g z in twooutof3a ff (pr1weq gg) ggff.pr2 gg.pr2) }
+
+
+(** val transitive_paths_weq :
+    'a1 -> 'a1 -> 'a1 -> 'a1 paths -> ('a1 paths, 'a1 paths) weq **)
+
+let transitive_paths_weq x y z xeqy =
+  weq_iso (fun xeqz -> pathscomp0 y x z (pathsinv0 x y xeqy) xeqz)
+    (fun yeqz -> pathscomp0 x y z xeqy yeqz) (fun xeqz ->
+    pathscomp0
+      (pathscomp0 x y z xeqy (pathscomp0 y x z (pathsinv0 x y xeqy) xeqz))
+      (pathscomp0 x x z (pathscomp0 x y x xeqy (pathsinv0 x y xeqy)) xeqz)
+      xeqz (path_assoc x y x z xeqy (pathsinv0 x y xeqy) xeqz)
+      (pathscomp0
+        (pathscomp0 x x z (pathscomp0 x y x xeqy (pathsinv0 x y xeqy)) xeqz)
+        (pathscomp0 x x z Coq_paths_refl xeqz) xeqz
+        (maponpaths (fun p -> pathscomp0 x x z p xeqz)
+          (pathscomp0 x y x xeqy (pathsinv0 x y xeqy)) Coq_paths_refl
+          (pathsinv0r x y xeqy)) Coq_paths_refl)) (fun yeqz ->
+    pathscomp0
+      (pathscomp0 y x z (pathsinv0 x y xeqy) (pathscomp0 x y z xeqy yeqz))
+      (pathscomp0 y y z (pathscomp0 y x y (pathsinv0 x y xeqy) xeqy) yeqz)
+      yeqz (path_assoc y x y z (pathsinv0 x y xeqy) xeqy yeqz)
+      (pathscomp0
+        (pathscomp0 y y z (pathscomp0 y x y (pathsinv0 x y xeqy) xeqy) yeqz)
+        (pathscomp0 y y z Coq_paths_refl yeqz) yeqz
+        (maponpaths (fun p -> pathscomp0 y y z p yeqz)
+          (pathscomp0 y x y (pathsinv0 x y xeqy) xeqy) Coq_paths_refl
+          (pathsinv0l x y xeqy)) Coq_paths_refl))
+
+(** val weqtotal2comm :
+    (('a1, ('a2, 'a3) total2) total2, ('a2, ('a1, 'a3) total2) total2) weq **)
+
+(* val weqtotal2comm : *)
+(*   (('a1, ('a2, 'a3) total2) total2, ('a2, ('a1, 'a3) total2) total2) weq *)
+
+(* let weqtotal2comm = *)
+(*   weq_iso (fun pair -> { pr1 = pair.pr2.pr1; pr2 = { pr1 = pair.pr1; pr2 = *)
+(*     pair.pr2.pr2 } }) (fun pair -> { pr1 = pair.pr2.pr1; pr2 = { pr1 = *)
+(*     pair.pr1; pr2 = pair.pr2.pr2 } }) (fun _ -> Coq_paths_refl) (fun _ -> *)
+(*     Coq_paths_refl) *)
+
+(** val pathsdirprodweq :
+    'a1 -> 'a1 -> 'a2 -> 'a2 -> (('a1, 'a2) dirprod paths, ('a1 paths, 'a2
+    paths) dirprod) weq **)
+
+let pathsdirprodweq x1 x2 y1 y2 =
+  weqcomp (total2_paths_equiv (make_dirprod x1 y1) (make_dirprod x2 y2))
+    (weqfibtototal (fun p ->
+      transitive_paths_weq (transportf x1 x2 p y1) y1 y2
+        (toforallpaths (transportf x1 x2 p) idfun (transportf_const x1 x2 p)
+          y1)))
+
+(** val dirprod_with_contr_r :
+    'a1 iscontr -> ('a2, ('a2, 'a1) dirprod) weq **)
+
+let isweqcontrtounit is _ =
+  let c = is.pr1 in
+  let h = is.pr2 in
+  let hc = make_hfiber (fun _ -> Coq_tt) Coq_tt c Coq_paths_refl in
+  { pr1 = hc; pr2 = (fun ha ->
+  let x = ha.pr1 in
+  let e = ha.pr2 in
+  two_arg_paths_f (fun x0 x1 -> { pr1 = x0; pr2 = x1 }) x e c Coq_paths_refl
+    (h x) (ifcontrthenunitl0 (transportf x c (h x) e) Coq_paths_refl)) }
+let make_dirprod x y =
+  { pr1 = x; pr2 = y }
+
+let weqtodirprodwithunit =
+  let f = fun x -> make_dirprod x Coq_tt in
+  { pr1 = f; pr2 =
+  (let g = fun xu -> xu.pr1 in
+   let egf = fun _ -> Coq_paths_refl in
+   let efg = fun _ -> Coq_paths_refl in isweq_iso f g egf efg) }
+
+let dirprod_with_contr_r iscontrX =
+  weqcomp weqtodirprodwithunit
+    (weqdirprodf idweq (invweq (weqcontrtounit iscontrX)))
+
+(** val dirprod_with_contr_l :
+    'a1 iscontr -> ('a2, ('a1, 'a2) dirprod) weq **)
+
+let dirprod_with_contr_l iscontrX =
+  weqcomp (dirprod_with_contr_r iscontrX) weqdirprodcomm
+
+(** val total2_assoc_fun_left :
+    (('a1 -> ('a2, 'a3) total2, 'a4) total2, ('a1 -> 'a2, ('a1 -> 'a3, 'a4)
+    total2) total2) weq **)
+
+(* let total2_assoc_fun_left = *)
+(*   weq_iso (fun p -> { pr1 = (fun a -> (p.pr1 a).pr1); pr2 = { pr1 = (fun a -> *)
+(*     (p.pr1 a).pr2); pr2 = p.pr2 } }) (fun p -> { pr1 = (fun a -> { pr1 = *)
+(*     (p.pr1 a); pr2 = (p.pr2.pr1 a) }); pr2 = p.pr2.pr2 }) (fun _ -> *)
+(*     Coq_paths_refl) (fun _ -> Coq_paths_refl) *)
+
+(** val sec_total2_distributivity :
+    ('a1 -> ('a2, 'a3) total2, ('a1 -> 'a2, 'a1 -> 'a3) total2) weq **)
+
+let sec_total2_distributivity =
+  weq_iso (fun f -> { pr1 = (fun a -> (f a).pr1); pr2 = (fun a ->
+    (f a).pr2) }) (fun f a -> { pr1 = (f.pr1 a); pr2 = (f.pr2 a) })
+    (Obj.magic (fun _ -> Coq_paths_refl))
+    (Obj.magic (fun _ -> Coq_paths_refl))
+
+
+
+let isweqrecompl_ne' x is neq_x y =
+  iscontrweqb weqtotal2overcoprod
+    (let c = is y in
+     match c with
+     | Coq_ii1 _ ->
+       iscontrweqf (weqii2withneg (fun _ -> assert false (* absurd case *)))
+         { pr1 = { pr1 = Coq_tt; pr2 = Coq_paths_refl }; pr2 = (fun w ->
+         let e = w.pr2 in
+         maponpaths (fun x0 -> { pr1 = Coq_tt; pr2 = x0 }) e Coq_paths_refl
+           (let x' = Coq_paths_refl in
+            (Obj.magic isaproppathsfromisolated x is x e x').pr1)) }
+     | Coq_ii2 b ->
+       iscontrweqf (weqii1withneg (fun _ -> assert false (* absurd case *)))
+         { pr1 = { pr1 = { pr1 = y; pr2 = (neg_to_negProp (neq_x y) b) };
+         pr2 = Coq_paths_refl }; pr2 = (fun _ -> Coq_paths_refl) })
+let ischoicebasecoprod isx isy =
+  Obj.magic (fun _ fs ->
+    hinhfun (pr1weq (invweq weqsecovercoprodtoprod))
+      (hinhand (Obj.magic isx __ (fun x -> fs (Coq_ii1 x)))
+        (Obj.magic isy __ (fun y -> fs (Coq_ii2 y)))))
+
+(* from nat *)
+let nat_dist_between_ge m n a b i j =
+  let j0 =
+    internal_paths_rew (nat_dist m n) j (nat_dist n m) (nat_dist_symm m n)
+  in
+  let j1 = internal_paths_rew (add a b) j0 (add b a) (natpluscomm a b) in
+  { pr1 = (nat_dist_between_le n m b a i j1).pr1; pr2 =
+  (weqdirprodcomm.pr1 (nat_dist_between_le n m b a i j1).pr2) }
+let nat_dist_between m n a b j =
+  let c = natgthorleh m n in
+  (match c with
+   | Coq_ii1 a0 -> nat_dist_between_ge m n a b (natlthtoleh n m a0) j
+   | Coq_ii2 b0 -> nat_dist_between_le m n a b b0 j)
+
+

@@ -71,17 +71,6 @@ let coq_Poset_univalence_map x _ _ =
     hSet -> coq_PartialOrder -> coq_PartialOrder -> (isPosetEquivalence,
     coq_PartialOrder paths) logeq **)
 
-let posetStructureIdentity x r s =
-  { pr1 = (fun e ->
-    subtypePath (fun t -> isaprop_isPartialOrder x t) r s
-      (let r0 = r.pr1 in
-       let s0 = s.pr1 in
-       Obj.magic funextfun r0 s0 (fun x0 ->
-         Obj.magic funextfun (Obj.magic r0 x0) (Obj.magic s0 x0) (fun y ->
-           let e0 = e.pr1 in
-           let e' = e.pr2 in
-           Obj.magic hPropUnivalence (r0 x0 y) (s0 x0 y) (e0 x0 y) (e' x0 y)))));
-    pr2 = (fun _ -> isPosetEquivalence_idweq { pr1 = x; pr2 = r }) }
 
 (** val posetTransport_weq :
     coq_Poset -> coq_Poset -> ((hSet, coq_PartialOrder) coq_PathPair,

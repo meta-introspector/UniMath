@@ -874,4 +874,4 @@ let cgraph_mor_eq g h p q e_UU2080_ e_UU2081_ =
 let precgraph_weq_pregraph =
   weqfibtototal (fun _ ->
     weqcomp (weqfibtototal (fun _ -> invweq weqfuntoprodtoprod))
-      (weqcomp (Obj.magic display_weq) (Obj.magic weqfunfromdirprod)))
+      (* (weqcomp (Obj.magic display_weq) (Obj.magic weqfunfromdirprod)) *))

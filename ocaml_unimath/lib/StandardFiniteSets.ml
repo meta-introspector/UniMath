@@ -455,19 +455,6 @@ let isweqdnitocompl n i jni =
 
 (** val weqdnicompl : nat -> stn -> (stn, stn_compl) weq **)
 
-let weqdnicompl n i =
-  let w = weqdicompl (stntonat (S n) i) in
-  let eq = fun j ->
-    let c = natlthorgeh j (stntonat (S n) i) in
-    (match c with
-     | Coq_ii1 a ->
-       { pr1 = (natlthtolths j n); pr2 = (fun _ ->
-         natlehlthtrans (S j) (stntonat (S n) i) (S n) a i.pr2) }
-     | Coq_ii2 _ -> { pr1 = idfun; pr2 = idfun })
-  in
-  weqcomp
-    (weq_subtypes w (fun j -> natlth j n) (fun j -> natlth j.pr1 (S n)) eq)
-    weqtotal2comm12
 
 (** val weqdnicompl_compute : nat -> stn -> stn -> stn paths **)
 

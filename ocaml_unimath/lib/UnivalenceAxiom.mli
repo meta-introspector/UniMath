@@ -150,7 +150,9 @@ val funextcontrAxiom : (__ -> __) -> (__ -> __, __ -> __ paths) total2 iscontr
 
 val funextempty : (__ -> empty) -> (__ -> empty) -> (__ -> empty) paths
 
-(* val univalence : (coq_UU paths, ('a1, 'a2) weq) weq  *)
+    (* val univalence : (coq_UU paths, ('a1, 'a2) weq) weq  *)
+val univalence : (coq_UU paths, (Obj.t, Obj.t) weq) weq      
+     
 
 val weqtopaths : (__, __) weq -> coq_UU paths
 

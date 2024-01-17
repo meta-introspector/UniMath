@@ -16,14 +16,14 @@ val isweqforalltototal :
 val isweqtotaltoforall :
   (('a1 -> 'a2, 'a1 -> 'a3) total2, 'a1 -> ('a2, 'a3) total2) isweq
 
-val weqforalltototal :
-  ('a1 -> ('a2, 'a3) total2, ('a1 -> 'a2, 'a1 -> 'a3) total2) weq
+(* val weqforalltototal : *)
+(*   ('a1 -> ('a2, 'a3) total2, ('a1 -> 'a2, 'a1 -> 'a3) total2) weq *)
 
-val weqtotaltoforall :
-  (('a1 -> 'a2, 'a1 -> 'a3) total2, 'a1 -> ('a2, 'a3) total2) weq
+(* val weqtotaltoforall : *)
+(*   (('a1 -> 'a2, 'a1 -> 'a3) total2, 'a1 -> ('a2, 'a3) total2) weq *)
 
-val weqfuntototaltototal :
-  ('a1 -> ('a2, 'a3) total2, ('a1 -> 'a2, 'a1 -> 'a3) total2) weq
+(* val weqfuntototaltototal : *)
+(*   ('a1 -> ('a2, 'a3) total2, ('a1 -> 'a2, 'a1 -> 'a3) total2) weq *)
 
 val funtoprodtoprod :
   ('a1 -> ('a2, 'a3) dirprod) -> ('a1 -> 'a2, 'a1 -> 'a3) dirprod
@@ -31,8 +31,8 @@ val funtoprodtoprod :
 val prodtofuntoprod :
   ('a1 -> 'a2, 'a1 -> 'a3) dirprod -> 'a1 -> ('a2, 'a3) dirprod
 
-val weqfuntoprodtoprod :
-  ('a1 -> ('a2, 'a3) dirprod, ('a1 -> 'a2, 'a1 -> 'a3) dirprod) weq
+(* val weqfuntoprodtoprod : *)
+(*   ('a1 -> ('a2, 'a3) dirprod, ('a1 -> 'a2, 'a1 -> 'a3) dirprod) weq *)
 
 val maponsec : ('a1 -> 'a2 -> 'a3) -> ('a1 -> 'a2) -> 'a1 -> 'a3
 
@@ -92,8 +92,8 @@ val secovercoprodtoprod :
 val prodtosecovercoprod :
   ('a1 -> 'a3, 'a2 -> 'a3) dirprod -> ('a1, 'a2) coprod -> 'a3
 
-val weqsecovercoprodtoprod :
-  (('a1, 'a2) coprod -> 'a3, ('a1 -> 'a3, 'a2 -> 'a3) dirprod) weq
+(* val weqsecovercoprodtoprod : *)
+(*   (('a1, 'a2) coprod -> 'a3, ('a1 -> 'a3, 'a2 -> 'a3) dirprod) weq *)
 
 val iscontrfunfromempty : (empty -> 'a1) iscontr
 
@@ -105,26 +105,26 @@ val funfromcoprodtoprod :
 val prodtofunfromcoprod :
   ('a1 -> 'a3, 'a2 -> 'a3) dirprod -> ('a1, 'a2) coprod -> 'a3
 
-val weqfunfromcoprodtoprod :
-  (('a1, 'a2) coprod -> 'a3, ('a1 -> 'a3, 'a2 -> 'a3) dirprod) weq
+(* val weqfunfromcoprodtoprod : *)
+(*   (('a1, 'a2) coprod -> 'a3, ('a1 -> 'a3, 'a2 -> 'a3) dirprod) weq *)
 
 val tosecoverunit : 'a1 -> coq_unit -> 'a1
 
-val weqsecoverunit : (coq_unit -> 'a1, 'a1) weq
+(* val weqsecoverunit : (coq_unit -> 'a1, 'a1) weq *)
 
-val weqsecovercontr : 'a1 iscontr -> ('a1 -> 'a2, 'a2) weq
+(* val weqsecovercontr : 'a1 iscontr -> ('a1 -> 'a2, 'a2) weq *)
 
 val tosecovertotal2 : ('a1 -> 'a2 -> 'a3) -> ('a1, 'a2) total2 -> 'a3
 
-val weqsecovertotal2 : (('a1, 'a2) total2 -> 'a3, 'a1 -> 'a2 -> 'a3) weq
+(* val weqsecovertotal2 : (('a1, 'a2) total2 -> 'a3, 'a1 -> 'a2 -> 'a3) weq *)
 
-val weqfunfromunit : (coq_unit -> 'a1, 'a1) weq
+(* val weqfunfromunit : (coq_unit -> 'a1, 'a1) weq *)
 
-val weqfunfromcontr : 'a1 iscontr -> ('a1 -> 'a2, 'a2) weq
+(* val weqfunfromcontr : 'a1 iscontr -> ('a1 -> 'a2, 'a2) weq *)
 
-val weqfunfromtotal2 : (('a1, 'a2) total2 -> 'a3, 'a1 -> 'a2 -> 'a3) weq
+(* val weqfunfromtotal2 : (('a1, 'a2) total2 -> 'a3, 'a1 -> 'a2 -> 'a3) weq *)
 
-val weqfunfromdirprod : (('a1, 'a2) dirprod -> 'a3, 'a1 -> 'a2 -> 'a3) weq
+(* val weqfunfromdirprod : (('a1, 'a2) dirprod -> 'a3, 'a1 -> 'a2 -> 'a3) weq *)
 
 val impred : nat -> ('a1 -> 'a2 isofhlevel) -> ('a1 -> 'a2) isofhlevel
 
@@ -187,7 +187,7 @@ val weqcomp_assoc :
 
 val eqweqmap_pathscomp0 : coq_UU paths -> coq_UU paths -> ('a1, 'a3) weq paths
 
-val inv_idweq_is_idweq : ('a1, 'a1) weq paths
+(* val inv_idweq_is_idweq : ('a1, 'a1) weq paths *)
 
 val eqweqmap_pathsinv0 : coq_UU paths -> ('a2, 'a1) weq paths
 
@@ -197,7 +197,7 @@ val weqbweq : ('a1, 'a2) weq -> (('a2, 'a3) weq, ('a1, 'a3) weq) weq
 
 val weqweq : ('a1, 'a2) weq -> (('a1, 'a1) weq, ('a2, 'a2) weq) weq
 
-val weqinvweq : (('a1, 'a2) weq, ('a2, 'a1) weq) weq
+(* val weqinvweq : (('a1, 'a2) weq, ('a2, 'a1) weq) weq *)
 
 val isofhlevelsnweqtohlevelsn :
   nat -> 'a2 isofhlevel -> ('a1, 'a2) weq isofhlevel
