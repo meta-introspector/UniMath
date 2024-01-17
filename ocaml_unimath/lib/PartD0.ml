@@ -69,7 +69,7 @@ let display_totalfst =
     pathsinv0 (Obj.magic __) (Obj.magic __)
       (Obj.magic weqtopaths (ezweqpr1 a)))
 
-(** val display_weq : ((__, __ -> 'a1) total2, __) weq **)
+val display_weq : ((__, __ -> 'a1) total2, __) weq 
 
 let display_weq =
   { pr1 = (Obj.magic __); pr2 =

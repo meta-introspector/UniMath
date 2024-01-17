@@ -732,7 +732,7 @@ val weqdirprodf :
   ('a1, 'a2) weq -> ('a3, 'a4) weq -> (('a1, 'a3) dirprod, ('a2, 'a4)
   dirprod) weq
 
-val weqtodirprodwithunit : ('a1, ('a1, coq_unit) dirprod) weq
+(* val weqtodirprodwithunit : ('a1, ('a1, coq_unit) dirprod) weq *)
 
 val total2asstor :
   (('a1, 'a2) total2, 'a3) total2 -> ('a1, ('a2, 'a3) total2) total2
@@ -740,136 +740,136 @@ val total2asstor :
 val total2asstol :
   ('a1, ('a2, 'a3) total2) total2 -> (('a1, 'a2) total2, 'a3) total2
 
-val weqtotal2asstor :
-  ((('a1, 'a2) total2, 'a3) total2, ('a1, ('a2, 'a3) total2) total2) weq
+(* val weqtotal2asstor : *)
+(*   ((('a1, 'a2) total2, 'a3) total2, ('a1, ('a2, 'a3) total2) total2) weq *)
 
-val weqtotal2asstol :
-  (('a1, ('a2, 'a3) total2) total2, (('a1, 'a2) total2, 'a3) total2) weq
+(* val weqtotal2asstol : *)
+(*   (('a1, ('a2, 'a3) total2) total2, (('a1, 'a2) total2, 'a3) total2) weq *)
 
-val weqdirprodasstor :
-  ((('a1, 'a2) dirprod, 'a3) dirprod, ('a1, ('a2, 'a3) dirprod) dirprod) weq
+(* val weqdirprodasstor : *)
+(*   ((('a1, 'a2) dirprod, 'a3) dirprod, ('a1, ('a2, 'a3) dirprod) dirprod) weq *)
 
-val weqdirprodasstol :
-  (('a1, ('a2, 'a3) dirprod) dirprod, (('a1, 'a2) dirprod, 'a3) dirprod) weq
+(* val weqdirprodasstol : *)
+(*   (('a1, ('a2, 'a3) dirprod) dirprod, (('a1, 'a2) dirprod, 'a3) dirprod) weq *)
 
-val weqdirprodcomm : (('a1, 'a2) dirprod, ('a2, 'a1) dirprod) weq
+(* val weqdirprodcomm : (('a1, 'a2) dirprod, ('a2, 'a1) dirprod) weq *)
 
-val weqtotal2dirprodcomm :
-  ((('a1, 'a2) dirprod, 'a3) total2, (('a2, 'a1) dirprod, 'a3) total2) weq
+(* val weqtotal2dirprodcomm : *)
+(*   ((('a1, 'a2) dirprod, 'a3) total2, (('a2, 'a1) dirprod, 'a3) total2) weq *)
 
-val weqtotal2dirprodassoc :
-  ((('a1, 'a2) dirprod, 'a3) total2, ('a1, ('a2, 'a3) total2) total2) weq
+(* val weqtotal2dirprodassoc : *)
+(*   ((('a1, 'a2) dirprod, 'a3) total2, ('a1, ('a2, 'a3) total2) total2) weq *)
 
-val weqtotal2dirprodassoc' :
-  ((('a1, 'a2) dirprod, 'a3) total2, ('a2, ('a1, 'a3) total2) total2) weq
+(* val weqtotal2dirprodassoc' : *)
+(*   ((('a1, 'a2) dirprod, 'a3) total2, ('a2, ('a1, 'a3) total2) total2) weq *)
 
-val weqtotal2comm12 :
-  ((('a1, 'a2) total2, 'a3) total2, (('a1, 'a3) total2, 'a2) total2) weq
+(* val weqtotal2comm12 : *)
+(*   ((('a1, 'a2) total2, 'a3) total2, (('a1, 'a3) total2, 'a2) total2) weq *)
 
-val rdistrtocoprod :
-  ('a1, ('a2, 'a3) coprod) dirprod -> (('a1, 'a2) dirprod, ('a1, 'a3)
-  dirprod) coprod
+(* val rdistrtocoprod : *)
+(*   ('a1, ('a2, 'a3) coprod) dirprod -> (('a1, 'a2) dirprod, ('a1, 'a3) *)
+(*   dirprod) coprod *)
 
-val rdistrtoprod :
-  (('a1, 'a2) dirprod, ('a1, 'a3) dirprod) coprod -> ('a1, ('a2, 'a3) coprod)
-  dirprod
+(* val rdistrtoprod : *)
+(*   (('a1, 'a2) dirprod, ('a1, 'a3) dirprod) coprod -> ('a1, ('a2, 'a3) coprod) *)
+(*   dirprod *)
 
-val isweqrdistrtoprod :
-  ((('a1, 'a2) dirprod, ('a1, 'a3) dirprod) coprod, ('a1, ('a2, 'a3) coprod)
-  dirprod) isweq
+(* val isweqrdistrtoprod : *)
+(*   ((('a1, 'a2) dirprod, ('a1, 'a3) dirprod) coprod, ('a1, ('a2, 'a3) coprod) *)
+(*   dirprod) isweq *)
 
-val weqrdistrtoprod :
-  ((('a1, 'a2) dirprod, ('a1, 'a3) dirprod) coprod, ('a1, ('a2, 'a3) coprod)
-  dirprod) weq
+(* val weqrdistrtoprod : *)
+(*   ((('a1, 'a2) dirprod, ('a1, 'a3) dirprod) coprod, ('a1, ('a2, 'a3) coprod) *)
+(*   dirprod) weq *)
 
-val isweqrdistrtocoprod :
-  (('a1, ('a2, 'a3) coprod) dirprod, (('a1, 'a2) dirprod, ('a1, 'a3) dirprod)
-  coprod) isweq
+(* val isweqrdistrtocoprod : *)
+(*   (('a1, ('a2, 'a3) coprod) dirprod, (('a1, 'a2) dirprod, ('a1, 'a3) dirprod) *)
+(*   coprod) isweq *)
 
-val weqrdistrtocoprod :
-  (('a1, ('a2, 'a3) coprod) dirprod, (('a1, 'a2) dirprod, ('a1, 'a3) dirprod)
-  coprod) weq
+(* val weqrdistrtocoprod : *)
+(*   (('a1, ('a2, 'a3) coprod) dirprod, (('a1, 'a2) dirprod, ('a1, 'a3) dirprod) *)
+(*   coprod) weq *)
 
-val fromtotal2overcoprod :
-  (('a1, 'a2) coprod, 'a3) total2 -> (('a1, 'a3) total2, ('a2, 'a3) total2)
-  coprod
+(* val fromtotal2overcoprod : *)
+(*   (('a1, 'a2) coprod, 'a3) total2 -> (('a1, 'a3) total2, ('a2, 'a3) total2) *)
+(*   coprod *)
 
-val tototal2overcoprod :
-  (('a1, 'a3) total2, ('a2, 'a3) total2) coprod -> (('a1, 'a2) coprod, 'a3)
-  total2
+(* val tototal2overcoprod : *)
+(*   (('a1, 'a3) total2, ('a2, 'a3) total2) coprod -> (('a1, 'a2) coprod, 'a3) *)
+(*   total2 *)
 
-val weqtotal2overcoprod :
-  ((('a1, 'a2) coprod, 'a3) total2, (('a1, 'a3) total2, ('a2, 'a3) total2)
-  coprod) weq
+(* val weqtotal2overcoprod : *)
+(*   ((('a1, 'a2) coprod, 'a3) total2, (('a1, 'a3) total2, ('a2, 'a3) total2) *)
+(*   coprod) weq *)
 
-val sumofmaps : ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a1, 'a2) coprod -> 'a3
+(* val sumofmaps : ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a1, 'a2) coprod -> 'a3 *)
 
-val coprodasstor :
-  (('a1, 'a2) coprod, 'a3) coprod -> ('a1, ('a2, 'a3) coprod) coprod
+(* val coprodasstor : *)
+(*   (('a1, 'a2) coprod, 'a3) coprod -> ('a1, ('a2, 'a3) coprod) coprod *)
 
-val coprodasstol :
-  ('a1, ('a2, 'a3) coprod) coprod -> (('a1, 'a2) coprod, 'a3) coprod
+(* val coprodasstol : *)
+(*   ('a1, ('a2, 'a3) coprod) coprod -> (('a1, 'a2) coprod, 'a3) coprod *)
 
-val sumofmaps_assoc_left :
-  ('a1 -> 'a4) -> ('a2 -> 'a4) -> ('a3 -> 'a4) -> (('a1, ('a2, 'a3) coprod)
-  coprod, 'a4) homot
+(* val sumofmaps_assoc_left : *)
+(*   ('a1 -> 'a4) -> ('a2 -> 'a4) -> ('a3 -> 'a4) -> (('a1, ('a2, 'a3) coprod) *)
+(*   coprod, 'a4) homot *)
 
-val sumofmaps_assoc_right :
-  ('a1 -> 'a4) -> ('a2 -> 'a4) -> ('a3 -> 'a4) -> ((('a1, 'a2) coprod, 'a3)
-  coprod, 'a4) homot
+(* val sumofmaps_assoc_right : *)
+(*   ('a1 -> 'a4) -> ('a2 -> 'a4) -> ('a3 -> 'a4) -> ((('a1, 'a2) coprod, 'a3) *)
+(*   coprod, 'a4) homot *)
 
-val isweqcoprodasstor :
-  ((('a1, 'a2) coprod, 'a3) coprod, ('a1, ('a2, 'a3) coprod) coprod) isweq
+(* val isweqcoprodasstor : *)
+(*   ((('a1, 'a2) coprod, 'a3) coprod, ('a1, ('a2, 'a3) coprod) coprod) isweq *)
 
-val weqcoprodasstor :
-  ((('a1, 'a2) coprod, 'a3) coprod, ('a1, ('a2, 'a3) coprod) coprod) weq
+(* val weqcoprodasstor : *)
+(*   ((('a1, 'a2) coprod, 'a3) coprod, ('a1, ('a2, 'a3) coprod) coprod) weq *)
 
-val isweqcoprodasstol :
-  (('a1, ('a2, 'a3) coprod) coprod, (('a1, 'a2) coprod, 'a3) coprod) isweq
+(* val isweqcoprodasstol : *)
+(*   (('a1, ('a2, 'a3) coprod) coprod, (('a1, 'a2) coprod, 'a3) coprod) isweq *)
 
-val weqcoprodasstol :
-  (('a1, ('a2, 'a3) coprod) coprod, (('a1, 'a2) coprod, 'a3) coprod) weq
+(* val weqcoprodasstol : *)
+(*   (('a1, ('a2, 'a3) coprod) coprod, (('a1, 'a2) coprod, 'a3) coprod) weq *)
 
-val coprodcomm : ('a1, 'a2) coprod -> ('a2, 'a1) coprod
+(* val coprodcomm : ('a1, 'a2) coprod -> ('a2, 'a1) coprod *)
 
-val isweqcoprodcomm : (('a1, 'a2) coprod, ('a2, 'a1) coprod) isweq
+ val isweqcoprodcomm : (('a1, 'a2) coprod, ('a2, 'a1) coprod) isweq 
 
-val weqcoprodcomm : (('a1, 'a2) coprod, ('a2, 'a1) coprod) weq
+(* val weqcoprodcomm : (('a1, 'a2) coprod, ('a2, 'a1) coprod) weq *)
 
-val isweqii1withneg : ('a2 -> empty) -> ('a1, ('a1, 'a2) coprod) isweq
+(* val isweqii1withneg : ('a2 -> empty) -> ('a1, ('a1, 'a2) coprod) isweq *)
 
-val weqii1withneg : 'a2 neg -> ('a1, ('a1, 'a2) coprod) weq
+(* val weqii1withneg : 'a2 neg -> ('a1, ('a1, 'a2) coprod) weq *)
 
-val isweqii2withneg : ('a1 -> empty) -> ('a2, ('a1, 'a2) coprod) isweq
+(* val isweqii2withneg : ('a1 -> empty) -> ('a2, ('a1, 'a2) coprod) isweq *)
 
-val weqii2withneg : 'a1 neg -> ('a2, ('a1, 'a2) coprod) weq
+(* val weqii2withneg : 'a1 neg -> ('a2, ('a1, 'a2) coprod) weq *)
 
-val coprodf :
-  ('a1 -> 'a3) -> ('a2 -> 'a4) -> ('a1, 'a2) coprod -> ('a3, 'a4) coprod
+(* val coprodf : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a4) -> ('a1, 'a2) coprod -> ('a3, 'a4) coprod *)
 
-val coprodf1 : ('a1 -> 'a3) -> ('a1, 'a2) coprod -> ('a3, 'a2) coprod
+(* val coprodf1 : ('a1 -> 'a3) -> ('a1, 'a2) coprod -> ('a3, 'a2) coprod *)
 
-val coprodf2 : ('a2 -> 'a3) -> ('a1, 'a2) coprod -> ('a1, 'a3) coprod
+(* val coprodf2 : ('a2 -> 'a3) -> ('a1, 'a2) coprod -> ('a1, 'a3) coprod *)
 
-val homotcoprodfcomp :
-  ('a1 -> 'a3) -> ('a2 -> 'a4) -> ('a3 -> 'a5) -> ('a4 -> 'a6) -> (('a1, 'a2)
-  coprod, ('a5, 'a6) coprod) homot
+(* val homotcoprodfcomp : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a4) -> ('a3 -> 'a5) -> ('a4 -> 'a6) -> (('a1, 'a2) *)
+(*   coprod, ('a5, 'a6) coprod) homot *)
 
-val homotcoprodfhomot :
-  ('a1 -> 'a3) -> ('a1 -> 'a3) -> ('a2 -> 'a4) -> ('a2 -> 'a4) -> ('a1, 'a3)
-  homot -> ('a2, 'a4) homot -> (('a1, 'a2) coprod, ('a3, 'a4) coprod) homot
+(* val homotcoprodfhomot : *)
+(*   ('a1 -> 'a3) -> ('a1 -> 'a3) -> ('a2 -> 'a4) -> ('a2 -> 'a4) -> ('a1, 'a3) *)
+(*   homot -> ('a2, 'a4) homot -> (('a1, 'a2) coprod, ('a3, 'a4) coprod) homot *)
 
-val isweqcoprodf :
-  ('a1, 'a3) weq -> ('a2, 'a4) weq -> (('a1, 'a2) coprod, ('a3, 'a4) coprod)
-  isweq
+(* val isweqcoprodf : *)
+(*   ('a1, 'a3) weq -> ('a2, 'a4) weq -> (('a1, 'a2) coprod, ('a3, 'a4) coprod) *)
+(*   isweq *)
 
-val weqcoprodf :
-  ('a1, 'a3) weq -> ('a2, 'a4) weq -> (('a1, 'a2) coprod, ('a3, 'a4) coprod)
-  weq
+(* val weqcoprodf : *)
+(*   ('a1, 'a3) weq -> ('a2, 'a4) weq -> (('a1, 'a2) coprod, ('a3, 'a4) coprod) *)
+(*   weq *)
 
-val weqcoprodf1 : ('a1, 'a3) weq -> (('a1, 'a2) coprod, ('a3, 'a2) coprod) weq
+(* val weqcoprodf1 : ('a1, 'a3) weq -> (('a1, 'a2) coprod, ('a3, 'a2) coprod) weq *)
 
-val weqcoprodf2 : ('a2, 'a3) weq -> (('a1, 'a2) coprod, ('a1, 'a3) coprod) weq
+(* val weqcoprodf2 : ('a2, 'a3) weq -> (('a1, 'a2) coprod, ('a1, 'a3) coprod) weq *)
 
 type ('p, 'q) equality_cases = __
 
@@ -881,61 +881,61 @@ val inv_equality_by_case :
   ('a1, 'a2) coprod -> ('a1, 'a2) coprod -> ('a1, 'a2) equality_cases ->
   ('a1, 'a2) coprod paths
 
-val ii1_injectivity : 'a1 -> 'a1 -> ('a1, 'a2) coprod paths -> 'a1 paths
+(* val ii1_injectivity : 'a1 -> 'a1 -> ('a1, 'a2) coprod paths -> 'a1 paths *)
 
-val ii2_injectivity : 'a2 -> 'a2 -> ('a1, 'a2) coprod paths -> 'a2 paths
+(* val ii2_injectivity : 'a2 -> 'a2 -> ('a1, 'a2) coprod paths -> 'a2 paths *)
 
-val negpathsii1ii2 : 'a1 -> 'a2 -> ('a1, 'a2) coprod paths neg
+(* val negpathsii1ii2 : 'a1 -> 'a2 -> ('a1, 'a2) coprod paths neg *)
 
-val negpathsii2ii1 : 'a1 -> 'a2 -> ('a1, 'a2) coprod paths neg
+(* val negpathsii2ii1 : 'a1 -> 'a2 -> ('a1, 'a2) coprod paths neg *)
 
-val boolascoprod : ((coq_unit, coq_unit) coprod, bool) weq
+(* val boolascoprod : ((coq_unit, coq_unit) coprod, bool) weq *)
 
-val coprodtobool : ('a1, 'a2) coprod -> bool
+(* val coprodtobool : ('a1, 'a2) coprod -> bool *)
 
 type ('x, 'y) boolsumfun = __
 
-val coprodtoboolsum :
-  ('a1, 'a2) coprod -> (bool, ('a1, 'a2) boolsumfun) total2
+(* val coprodtoboolsum : *)
+(*   ('a1, 'a2) coprod -> (bool, ('a1, 'a2) boolsumfun) total2 *)
 
-val boolsumtocoprod :
-  (bool, ('a1, 'a2) boolsumfun) total2 -> ('a1, 'a2) coprod
+(* val boolsumtocoprod : *)
+(*   (bool, ('a1, 'a2) boolsumfun) total2 -> ('a1, 'a2) coprod *)
 
-val isweqcoprodtoboolsum :
-  (('a1, 'a2) coprod, (bool, ('a1, 'a2) boolsumfun) total2) isweq
+(* val isweqcoprodtoboolsum : *)
+(*   (('a1, 'a2) coprod, (bool, ('a1, 'a2) boolsumfun) total2) isweq *)
 
-val weqcoprodtoboolsum :
-  (('a1, 'a2) coprod, (bool, ('a1, 'a2) boolsumfun) total2) weq
+(* val weqcoprodtoboolsum : *)
+(*   (('a1, 'a2) coprod, (bool, ('a1, 'a2) boolsumfun) total2) weq *)
 
-val isweqboolsumtocoprod :
-  ((bool, ('a1, 'a2) boolsumfun) total2, ('a1, 'a2) coprod) isweq
+(* val isweqboolsumtocoprod : *)
+(*   ((bool, ('a1, 'a2) boolsumfun) total2, ('a1, 'a2) coprod) isweq *)
 
-val weqboolsumtocoprod :
-  ((bool, ('a1, 'a2) boolsumfun) total2, ('a1, 'a2) coprod) weq
+(* val weqboolsumtocoprod : *)
+(*   ((bool, ('a1, 'a2) boolsumfun) total2, ('a1, 'a2) coprod) weq *)
 
-val weqcoprodsplit :
-  ('a1 -> ('a2, 'a3) coprod) -> ('a1, (('a2, ('a1, ('a2, 'a3) coprod) hfiber)
-  total2, ('a3, ('a1, ('a2, 'a3) coprod) hfiber) total2) coprod) weq
+(* val weqcoprodsplit : *)
+(*   ('a1 -> ('a2, 'a3) coprod) -> ('a1, (('a2, ('a1, ('a2, 'a3) coprod) hfiber) *)
+(*   total2, ('a3, ('a1, ('a2, 'a3) coprod) hfiber) total2) coprod) weq *)
 
-val boolchoice : bool -> (bool paths, bool paths) coprod
+(* val boolchoice : bool -> (bool paths, bool paths) coprod *)
 
 type bool_to_type = __
 
-val nopathstruetofalse : bool paths -> empty
+(* val nopathstruetofalse : bool paths -> empty *)
 
-val nopathsfalsetotrue : bool paths -> empty
+(* val nopathsfalsetotrue : bool paths -> empty *)
 
-val truetonegfalse : bool -> bool paths -> bool paths neg
+(* val truetonegfalse : bool -> bool paths -> bool paths neg *)
 
-val falsetonegtrue : bool -> bool paths -> bool paths neg
+(* val falsetonegtrue : bool -> bool paths -> bool paths neg *)
 
-val negtruetofalse : bool -> bool paths neg -> bool paths
+(* val negtruetofalse : bool -> bool paths neg -> bool paths *)
 
-val negfalsetotrue : bool -> bool paths neg -> bool paths
+(* val negfalsetotrue : bool -> bool paths neg -> bool paths *)
 
-val onefiber :
-  'a1 -> ('a1 -> ('a1 paths, 'a2 neg) coprod) -> ('a2, ('a1, 'a2) total2)
-  isweq
+(* val onefiber : *)
+(*   'a1 -> ('a1 -> ('a1 paths, 'a2 neg) coprod) -> ('a2, ('a1, 'a2) total2) *)
+(*   isweq *)
 
 type ('x, 'y, 'z) complxstr = 'x -> 'z paths
 
@@ -948,119 +948,119 @@ type ('x, 'y, 'z) isfibseq = ('x, ('y, 'z) hfiber) isweq
 type ('x, 'y, 'z) fibseqstr =
   (('x, 'y, 'z) complxstr, ('x, 'y, 'z) isfibseq) total2
 
-val make_fibseqstr :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) complxstr -> ('a1,
-  'a2, 'a3) isfibseq -> (('a1, 'a2, 'a3) complxstr, ('a1, 'a2, 'a3) isfibseq)
-  total2
+(* val make_fibseqstr : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) complxstr -> ('a1, *)
+(*   'a2, 'a3) isfibseq -> (('a1, 'a2, 'a3) complxstr, ('a1, 'a2, 'a3) isfibseq) *)
+(*   total2 *)
 
-val fibseqstrtocomplxstr :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> ('a1,
-  'a2, 'a3) complxstr
+(* val fibseqstrtocomplxstr : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> ('a1, *)
+(*   'a2, 'a3) complxstr *)
 
-val ezweq :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> ('a1,
-  ('a2, 'a3) hfiber) weq
+(* val ezweq : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> ('a1, *)
+(*   ('a2, 'a3) hfiber) weq *)
 
-val d1 :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 ->
-  'a3 paths -> 'a1
+(* val d1 : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 -> *)
+(*   'a3 paths -> 'a1 *)
 
-val ezmap1 :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 ->
-  'a3 paths -> ('a1, 'a2) hfiber
+(* val ezmap1 : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 -> *)
+(*   'a3 paths -> ('a1, 'a2) hfiber *)
 
-val invezmap1 :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) complxstr -> 'a2 ->
-  ('a1, 'a2) hfiber -> 'a3 paths
+(* val invezmap1 : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) complxstr -> 'a2 -> *)
+(*   ('a1, 'a2) hfiber -> 'a3 paths *)
 
-val isweqezmap1 :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 ->
-  ('a3 paths, ('a1, 'a2) hfiber) isweq
+(* val isweqezmap1 : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 -> *)
+(*   ('a3 paths, ('a1, 'a2) hfiber) isweq *)
 
 val ezweq1 :
   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 ->
   ('a3 paths, ('a1, 'a2) hfiber) weq
 
-val fibseq1 :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 ->
-  ('a3 paths, 'a1, 'a2) fibseqstr
+(* val fibseq1 : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 -> *)
+(*   ('a3 paths, 'a1, 'a2) fibseqstr *)
 
-val d2 :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 ->
-  'a1 -> 'a2 paths -> 'a3 paths
+(* val d2 : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 -> *)
+(*   'a1 -> 'a2 paths -> 'a3 paths *)
 
-val ezweq2 :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 ->
-  'a1 -> ('a2 paths, ('a3 paths, 'a1) hfiber) weq
+(* val ezweq2 : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 -> *)
+(*   'a1 -> ('a2 paths, ('a3 paths, 'a1) hfiber) weq *)
 
-val fibseq2 :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 ->
-  'a1 -> ('a2 paths, 'a3 paths, 'a1) fibseqstr
+(* val fibseq2 : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> 'a2 -> *)
+(*   'a1 -> ('a2 paths, 'a3 paths, 'a1) fibseqstr *)
 
-val ezmappr1 : 'a1 -> 'a2 -> (('a1, 'a2) total2, 'a1) hfiber
+(* val ezmappr1 : 'a1 -> 'a2 -> (('a1, 'a2) total2, 'a1) hfiber *)
 
-val invezmappr1 : 'a1 -> (('a1, 'a2) total2, 'a1) hfiber -> 'a2
+val invezmappr1 : 'a1 -> (('a1, 'a2) total2, 'a1) hfiber -> 'a2 
 
 val isweqezmappr1 : 'a1 -> ('a2, (('a1, 'a2) total2, 'a1) hfiber) isweq
 
 val ezweqpr1 : 'a1 -> ('a2, (('a1, 'a2) total2, 'a1) hfiber) weq
 
-val isfibseqpr1 : 'a1 -> ('a2, ('a1, 'a2) total2, 'a1) isfibseq
+(* val isfibseqpr1 : 'a1 -> ('a2, ('a1, 'a2) total2, 'a1) isfibseq *)
 
-val fibseqpr1 : 'a1 -> ('a2, ('a1, 'a2) total2, 'a1) fibseqstr
+(* val fibseqpr1 : 'a1 -> ('a2, ('a1, 'a2) total2, 'a1) fibseqstr *)
 
 val ezweq1pr1 :
   'a1 -> ('a1, 'a2) total2 -> ('a1 paths, ('a2, ('a1, 'a2) total2) hfiber) weq
 
-val isfibseqg : ('a1 -> 'a2) -> 'a2 -> (('a1, 'a2) hfiber, 'a1, 'a2) isfibseq
+(* val isfibseqg : ('a1 -> 'a2) -> 'a2 -> (('a1, 'a2) hfiber, 'a1, 'a2) isfibseq *)
 
-val ezweqg : ('a1 -> 'a2) -> 'a2 -> (('a1, 'a2) hfiber, ('a1, 'a2) hfiber) weq
+(* val ezweqg : ('a1 -> 'a2) -> 'a2 -> (('a1, 'a2) hfiber, ('a1, 'a2) hfiber) weq *)
 
-val fibseqg : ('a1 -> 'a2) -> 'a2 -> (('a1, 'a2) hfiber, 'a1, 'a2) fibseqstr
+(* val fibseqg : ('a1 -> 'a2) -> 'a2 -> (('a1, 'a2) hfiber, 'a1, 'a2) fibseqstr *)
 
-val d1g : ('a1 -> 'a2) -> 'a2 -> 'a1 -> 'a2 paths -> ('a1, 'a2) hfiber
+(* val d1g : ('a1 -> 'a2) -> 'a2 -> 'a1 -> 'a2 paths -> ('a1, 'a2) hfiber *)
 
 val ezweq1g :
   ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a2 paths, (('a1, 'a2) hfiber, 'a1) hfiber)
   weq
 
-val fibseq1g :
-  ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a2 paths, ('a1, 'a2) hfiber, 'a1) fibseqstr
+(* val fibseq1g : *)
+(*   ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a2 paths, ('a1, 'a2) hfiber, 'a1) fibseqstr *)
 
 val d2g :
   ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> 'a1 paths -> 'a2 paths
 
-val ezweq2g :
-  ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> ('a1 paths, ('a2 paths,
-  ('a1, 'a2) hfiber) hfiber) weq
+(* val ezweq2g : *)
+(*   ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> ('a1 paths, ('a2 paths, *)
+(*   ('a1, 'a2) hfiber) hfiber) weq *)
 
-val fibseq2g :
-  ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> ('a1 paths, 'a2 paths,
-  ('a1, 'a2) hfiber) fibseqstr
+(* val fibseq2g : *)
+(*   ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> ('a1 paths, 'a2 paths, *)
+(*   ('a1, 'a2) hfiber) fibseqstr *)
 
-val d3g :
-  ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> 'a2 paths -> ('a1, 'a2)
-  hfiber paths -> 'a1 paths
+(* val d3g : *)
+(*   ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> 'a2 paths -> ('a1, 'a2) *)
+(*   hfiber paths -> 'a1 paths *)
 
-val homotd3g :
-  ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> 'a2 paths -> ('a1, 'a2)
-  hfiber paths -> 'a1 paths paths
+(* val homotd3g : *)
+(*   ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> 'a2 paths -> ('a1, 'a2) *)
+(*   hfiber paths -> 'a1 paths paths *)
 
 val ezweq3g :
   ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> 'a2 paths -> (('a1, 'a2)
   hfiber paths, ('a1 paths, 'a2 paths) hfiber) weq
 
-val fibseq3g :
-  ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> 'a2 paths -> (('a1, 'a2)
-  hfiber paths, 'a1 paths, 'a2 paths) fibseqstr
+(* val fibseq3g : *)
+(*   ('a1 -> 'a2) -> 'a2 -> 'a1 -> ('a1, 'a2) hfiber -> 'a2 paths -> (('a1, 'a2) *)
+(*   hfiber paths, 'a1 paths, 'a2 paths) fibseqstr *)
 
 val hfibersftogf :
   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> ('a1, 'a2)
   hfiber -> ('a1, 'a3) hfiber
 
-val ezmaphf :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> ('a1, 'a2)
-  hfiber -> (('a1, 'a3) hfiber, ('a2, 'a3) hfiber) hfiber
+(* val ezmaphf : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> ('a1, 'a2) *)
+(*   hfiber -> (('a1, 'a3) hfiber, ('a2, 'a3) hfiber) hfiber *)
 
 val invezmaphf :
   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a3)
@@ -1071,240 +1071,240 @@ val ffgg :
   hfiber, ('a2, 'a3) hfiber) hfiber -> (('a1, 'a3) hfiber, ('a2, 'a3) hfiber)
   hfiber
 
-val homotffggid :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a3)
-  hfiber, ('a2, 'a3) hfiber) hfiber -> (('a1, 'a3) hfiber, ('a2, 'a3) hfiber)
-  hfiber paths
+(* val homotffggid : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a3) *)
+(*   hfiber, ('a2, 'a3) hfiber) hfiber -> (('a1, 'a3) hfiber, ('a2, 'a3) hfiber) *)
+(*   hfiber paths *)
 
-val isweqezmaphf :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a2)
-  hfiber, (('a1, 'a3) hfiber, ('a2, 'a3) hfiber) hfiber) isweq
+(* val isweqezmaphf : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a2) *)
+(*   hfiber, (('a1, 'a3) hfiber, ('a2, 'a3) hfiber) hfiber) isweq *)
 
 val ezweqhf :
   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a2)
   hfiber, (('a1, 'a3) hfiber, ('a2, 'a3) hfiber) hfiber) weq
 
-val fibseqhf :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a2)
-  hfiber, ('a1, 'a3) hfiber, ('a2, 'a3) hfiber) fibseqstr
+(* val fibseqhf : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> (('a1, 'a2) *)
+(*   hfiber, ('a1, 'a3) hfiber, ('a2, 'a3) hfiber) fibseqstr *)
 
-val isweqinvezmaphf :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> ((('a1, 'a3)
-  hfiber, ('a2, 'a3) hfiber) hfiber, ('a1, 'a2) hfiber) isweq
+(* val isweqinvezmaphf : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a2, 'a3) hfiber -> ((('a1, 'a3) *)
+(*   hfiber, ('a2, 'a3) hfiber) hfiber, ('a1, 'a2) hfiber) isweq *)
 
-val weqhfibersgwtog :
-  ('a1, 'a2) weq -> ('a2 -> 'a3) -> 'a3 -> (('a1, 'a3) hfiber, ('a2, 'a3)
-  hfiber) weq
+(* val weqhfibersgwtog : *)
+(*   ('a1, 'a2) weq -> ('a2 -> 'a3) -> 'a3 -> (('a1, 'a3) hfiber, ('a2, 'a3) *)
+(*   hfiber) weq *)
 
-val totalfun : ('a1 -> 'a2 -> 'a3) -> ('a1, 'a2) total2 -> ('a1, 'a3) total2
+(* val totalfun : ('a1 -> 'a2 -> 'a3) -> ('a1, 'a2) total2 -> ('a1, 'a3) total2 *)
 
 val isweqtotaltofib :
   ('a1 -> 'a2 -> 'a3) -> (('a1, 'a2) total2, ('a1, 'a3) total2) isweq -> 'a1
   -> ('a2, 'a3) isweq
 
-val weqtotaltofib :
+val weqtotaltofib : 
   ('a1 -> 'a2 -> 'a3) -> (('a1, 'a2) total2, ('a1, 'a3) total2) isweq -> 'a1
   -> ('a2, 'a3) weq
 
-val isweqfibtototal :
-  ('a1 -> ('a2, 'a3) weq) -> (('a1, 'a2) total2, ('a1, 'a3) total2) isweq
+(* val isweqfibtototal : *)
+(*   ('a1 -> ('a2, 'a3) weq) -> (('a1, 'a2) total2, ('a1, 'a3) total2) isweq *)
 
-val isweqfibtototal' :
-  ('a1 -> ('a2, 'a3) weq) -> (('a1, 'a2) total2, ('a1, 'a3) total2) isweq
+(* val isweqfibtototal' : *)
+(*   ('a1 -> ('a2, 'a3) weq) -> (('a1, 'a2) total2, ('a1, 'a3) total2) isweq *)
 
 val weqfibtototal :
   ('a1 -> ('a2, 'a3) weq) -> (('a1, 'a2) total2, ('a1, 'a3) total2) weq
 
-val fpmap : ('a1 -> 'a2) -> ('a1, 'a3) total2 -> ('a2, 'a3) total2
+(* val fpmap : ('a1 -> 'a2) -> ('a1, 'a3) total2 -> ('a2, 'a3) total2 *)
 
-val hffpmap2 :
-  ('a1 -> 'a2) -> ('a1, 'a3) total2 -> (('a2, 'a3) total2, ('a1, 'a2) hfiber)
-  total2
+(* val hffpmap2 : *)
+(*   ('a1 -> 'a2) -> ('a1, 'a3) total2 -> (('a2, 'a3) total2, ('a1, 'a2) hfiber) *)
+(*   total2 *)
 
-val centralfiber : 'a1 -> ('a2, ('a1 coconusfromt, 'a2) total2) isweq
+(* val centralfiber : 'a1 -> ('a2, ('a1 coconusfromt, 'a2) total2) isweq *)
 
-val isweqhff :
-  ('a1 -> 'a2) -> (('a1, 'a3) total2, (('a2, 'a3) total2, ('a1, 'a2) hfiber)
-  total2) isweq
+(* val isweqhff : *)
+(*   ('a1 -> 'a2) -> (('a1, 'a3) total2, (('a2, 'a3) total2, ('a1, 'a2) hfiber) *)
+(*   total2) isweq *)
 
-val hfiberfpmap :
-  ('a1 -> 'a2) -> ('a2, 'a3) total2 -> (('a1, 'a3) total2, ('a2, 'a3) total2)
-  hfiber -> ('a1, 'a2) hfiber
+(* val hfiberfpmap : *)
+(*   ('a1 -> 'a2) -> ('a2, 'a3) total2 -> (('a1, 'a3) total2, ('a2, 'a3) total2) *)
+(*   hfiber -> ('a1, 'a2) hfiber *)
 
 val isweqhfiberfp :
   ('a1 -> 'a2) -> ('a2, 'a3) total2 -> ((('a1, 'a3) total2, ('a2, 'a3)
   total2) hfiber, ('a1, 'a2) hfiber) isweq
 
-val isweqfpmap :
-  ('a1, 'a2) weq -> (('a1, 'a3) total2, ('a2, 'a3) total2) isweq
+(* val isweqfpmap : *)
+(*   ('a1, 'a2) weq -> (('a1, 'a3) total2, ('a2, 'a3) total2) isweq *)
 
-val weqfp_map : ('a1, 'a2) weq -> ('a1, 'a3) total2 -> ('a2, 'a3) total2
+(* val weqfp_map : ('a1, 'a2) weq -> ('a1, 'a3) total2 -> ('a2, 'a3) total2 *)
 
-val weqfp_invmap : ('a1, 'a2) weq -> ('a2, 'a3) total2 -> ('a1, 'a3) total2
+(* val weqfp_invmap : ('a1, 'a2) weq -> ('a2, 'a3) total2 -> ('a1, 'a3) total2 *)
 
-val weqfp : ('a1, 'a2) weq -> (('a1, 'a3) total2, ('a2, 'a3) total2) weq
+(* val weqfp : ('a1, 'a2) weq -> (('a1, 'a3) total2, ('a2, 'a3) total2) weq *)
 
-val weqfp_compute_1 :
-  ('a1, 'a2) weq -> (('a1, 'a3) total2, ('a2, 'a3) total2) homot
+(* val weqfp_compute_1 : *)
+(*   ('a1, 'a2) weq -> (('a1, 'a3) total2, ('a2, 'a3) total2) homot *)
 
-val weqfp_compute_2 :
-  ('a1, 'a2) weq -> (('a2, 'a3) total2, ('a1, 'a3) total2) homot
+(* val weqfp_compute_2 : *)
+(*   ('a1, 'a2) weq -> (('a2, 'a3) total2, ('a1, 'a3) total2) homot *)
 
-val weqtotal2overcoprod' :
-  (('a2, 'a3) coprod, 'a1) weq -> (('a1, 'a4) total2, (('a2, 'a4) total2,
-  ('a3, 'a4) total2) coprod) weq
+(* val weqtotal2overcoprod' : *)
+(*   (('a2, 'a3) coprod, 'a1) weq -> (('a1, 'a4) total2, (('a2, 'a4) total2, *)
+(*   ('a3, 'a4) total2) coprod) weq *)
 
-val fromtotal2overunit : (coq_unit, 'a1) total2 -> 'a1
+(* val fromtotal2overunit : (coq_unit, 'a1) total2 -> 'a1 *)
 
-val tototal2overunit : 'a1 -> (coq_unit, 'a1) total2
+(* val tototal2overunit : 'a1 -> (coq_unit, 'a1) total2 *)
 
-val weqtotal2overunit : ((coq_unit, 'a1) total2, 'a1) weq
+(* val weqtotal2overunit : ((coq_unit, 'a1) total2, 'a1) weq *)
 
-val bandfmap :
-  ('a1 -> 'a2) -> ('a1 -> 'a3 -> 'a4) -> ('a1, 'a3) total2 -> ('a2, 'a4)
-  total2
+(* val bandfmap : *)
+(*   ('a1 -> 'a2) -> ('a1 -> 'a3 -> 'a4) -> ('a1, 'a3) total2 -> ('a2, 'a4) *)
+(*   total2 *)
 
-val isweqbandfmap :
-  ('a1, 'a2) weq -> ('a1 -> ('a3, 'a4) weq) -> (('a1, 'a3) total2, ('a2, 'a4)
-  total2) isweq
+(* val isweqbandfmap : *)
+(*   ('a1, 'a2) weq -> ('a1 -> ('a3, 'a4) weq) -> (('a1, 'a3) total2, ('a2, 'a4) *)
+(*   total2) isweq *)
 
-val weqbandf :
-  ('a1, 'a2) weq -> ('a1 -> ('a3, 'a4) weq) -> (('a1, 'a3) total2, ('a2, 'a4)
-  total2) weq
+(* val weqbandf : *)
+(*   ('a1, 'a2) weq -> ('a1 -> ('a3, 'a4) weq) -> (('a1, 'a3) total2, ('a2, 'a4) *)
+(*   total2) weq *)
 
 type ('x, 'x0, 'y, 'z) commsqstr = 'z -> 'y paths
 
-val hfibersgtof' :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) commsqstr -> 'a1 -> ('a4, 'a1) hfiber -> ('a2, 'a3) hfiber
+(* val hfibersgtof' : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) commsqstr -> 'a1 -> ('a4, 'a1) hfiber -> ('a2, 'a3) hfiber *)
 
-val hfibersg'tof :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) commsqstr -> 'a2 -> ('a4, 'a2) hfiber -> ('a1, 'a3) hfiber
+(* val hfibersg'tof : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) commsqstr -> 'a2 -> ('a4, 'a2) hfiber -> ('a1, 'a3) hfiber *)
 
-val transposcommsqstr :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) commsqstr -> ('a2, 'a1, 'a3, 'a4) commsqstr
+(* val transposcommsqstr : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) commsqstr -> ('a2, 'a1, 'a3, 'a4) commsqstr *)
 
-val complxstrtocommsqstr :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) complxstr ->
-  (coq_unit, 'a2, 'a3, 'a1) commsqstr
+(* val complxstrtocommsqstr : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) complxstr -> *)
+(*   (coq_unit, 'a2, 'a3, 'a1) commsqstr *)
 
-val commsqstrtocomplxstr :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> (coq_unit, 'a2, 'a3, 'a1) commsqstr
-  -> ('a1, 'a2, 'a3) complxstr
+(* val commsqstrtocomplxstr : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> (coq_unit, 'a2, 'a3, 'a1) commsqstr *)
+(*   -> ('a1, 'a2, 'a3) complxstr *)
 
 type ('x, 'x0, 'y) hfp = (('x, 'x0) dirprod, 'y paths) total2
 
-val hfpg : ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a1, 'a2, 'a3) hfp -> 'a1
+(* val hfpg : ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a1, 'a2, 'a3) hfp -> 'a1 *)
 
-val hfpg' : ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a1, 'a2, 'a3) hfp -> 'a2
+(* val hfpg' : ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a1, 'a2, 'a3) hfp -> 'a2 *)
 
-val commsqZtohfp :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) commsqstr -> 'a4 -> ('a1, 'a2, 'a3) hfp
+(* val commsqZtohfp : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) commsqstr -> 'a4 -> ('a1, 'a2, 'a3) hfp *)
 
-val commsqZtohfphomot :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) commsqstr -> 'a4 -> 'a1 paths
+(* val commsqZtohfphomot : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) commsqstr -> 'a4 -> 'a1 paths *)
 
-val commsqZtohfphomot' :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) commsqstr -> 'a4 -> 'a2 paths
+(* val commsqZtohfphomot' : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) commsqstr -> 'a4 -> 'a2 paths *)
 
 type ('x, 'x0, 'y) hfpoverX = ('x, ('x0, 'y) hfiber) total2
 
 type ('x, 'x0, 'y) hfpoverX' = ('x0, ('x, 'y) hfiber) total2
 
-val weqhfptohfpoverX :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, 'a2, 'a3) hfp, ('a1, 'a2, 'a3)
-  hfpoverX) weq
+(* val weqhfptohfpoverX : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, 'a2, 'a3) hfp, ('a1, 'a2, 'a3) *)
+(*   hfpoverX) weq *)
 
-val weqhfptohfpoverX' :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, 'a2, 'a3) hfp, ('a1, 'a2, 'a3)
-  hfpoverX') weq
+(* val weqhfptohfpoverX' : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, 'a2, 'a3) hfp, ('a1, 'a2, 'a3) *)
+(*   hfpoverX') weq *)
 
-val weqhfpcomm :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, 'a2, 'a3) hfp, ('a2, 'a1, 'a3) hfp)
-  weq
+(* val weqhfpcomm : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, 'a2, 'a3) hfp, ('a2, 'a1, 'a3) hfp) *)
+(*   weq *)
 
-val commhfp :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a1, 'a2, 'a3, ('a1, 'a2, 'a3) hfp)
-  commsqstr
+(* val commhfp : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a1, 'a2, 'a3, ('a1, 'a2, 'a3) hfp) *)
+(*   commsqstr *)
 
-val hfibertohfp :
-  ('a1 -> 'a2) -> 'a2 -> ('a1, 'a2) hfiber -> (coq_unit, 'a1, 'a2) hfp
+(* val hfibertohfp : *)
+(*   ('a1 -> 'a2) -> 'a2 -> ('a1, 'a2) hfiber -> (coq_unit, 'a1, 'a2) hfp *)
 
-val hfptohfiber :
-  ('a1 -> 'a2) -> 'a2 -> (coq_unit, 'a1, 'a2) hfp -> ('a1, 'a2) hfiber
+(* val hfptohfiber : *)
+(*   ('a1 -> 'a2) -> 'a2 -> (coq_unit, 'a1, 'a2) hfp -> ('a1, 'a2) hfiber *)
 
-val weqhfibertohfp :
-  ('a1 -> 'a2) -> 'a2 -> (('a1, 'a2) hfiber, (coq_unit, 'a1, 'a2) hfp) weq
+(* val weqhfibertohfp : *)
+(*   ('a1 -> 'a2) -> 'a2 -> (('a1, 'a2) hfiber, (coq_unit, 'a1, 'a2) hfp) weq *)
 
-val hfp_left :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, 'a2, 'a3) hfp, ('a1, ('a2, 'a3)
-  hfiber) total2) weq
+(* val hfp_left : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, 'a2, 'a3) hfp, ('a1, ('a2, 'a3) *)
+(*   hfiber) total2) weq *)
 
-val hfp_right :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, 'a2, 'a3) hfp, ('a2, ('a1, 'a3)
-  hfiber) total2) weq
+(* val hfp_right : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, 'a2, 'a3) hfp, ('a2, ('a1, 'a3) *)
+(*   hfiber) total2) weq *)
 
-val hfiber_comm :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, ('a2, 'a3) hfiber) total2, ('a2,
-  ('a1, 'a3) hfiber) total2) weq
+(* val hfiber_comm : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> (('a1, ('a2, 'a3) hfiber) total2, ('a2, *)
+(*   ('a1, 'a3) hfiber) total2) weq *)
 
 type ('x, 'x0, 'y, 'z) ishfsq = ('z, ('x, 'x0, 'y) hfp) isweq
 
 type ('x, 'x0, 'y, 'z) hfsqstr =
   (('x, 'x0, 'y, 'z) commsqstr, ('z, ('x, 'x0, 'y) hfp) isweq) total2
 
-val make_hfsqstr :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) commsqstr -> ('a4, ('a1, 'a2, 'a3) hfp) isweq -> (('a1, 'a2, 'a3,
-  'a4) commsqstr, ('a4, ('a1, 'a2, 'a3) hfp) isweq) total2
+(* val make_hfsqstr : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) commsqstr -> ('a4, ('a1, 'a2, 'a3) hfp) isweq -> (('a1, 'a2, 'a3, *)
+(*   'a4) commsqstr, ('a4, ('a1, 'a2, 'a3) hfp) isweq) total2 *)
 
-val hfsqstrtocommsqstr :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) hfsqstr -> ('a1, 'a2, 'a3, 'a4) commsqstr
+(* val hfsqstrtocommsqstr : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) hfsqstr -> ('a1, 'a2, 'a3, 'a4) commsqstr *)
 
-val weqZtohfp :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) hfsqstr -> ('a4, ('a1, 'a2, 'a3) hfp) weq
+(* val weqZtohfp : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) hfsqstr -> ('a4, ('a1, 'a2, 'a3) hfp) weq *)
 
-val isweqhfibersgtof' :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) hfsqstr -> 'a1 -> (('a4, 'a1) hfiber, ('a2, 'a3) hfiber) isweq
+(* val isweqhfibersgtof' : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) hfsqstr -> 'a1 -> (('a4, 'a1) hfiber, ('a2, 'a3) hfiber) isweq *)
 
-val weqhfibersgtof' :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) hfsqstr -> 'a1 -> (('a4, 'a1) hfiber, ('a2, 'a3) hfiber) weq
+(* val weqhfibersgtof' : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) hfsqstr -> 'a1 -> (('a4, 'a1) hfiber, ('a2, 'a3) hfiber) weq *)
 
-val ishfsqweqhfibersgtof' :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) commsqstr -> ('a1 -> (('a4, 'a1) hfiber, ('a2, 'a3) hfiber)
-  isweq) -> ('a1, 'a2, 'a3, 'a4) hfsqstr
+(* val ishfsqweqhfibersgtof' : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) commsqstr -> ('a1 -> (('a4, 'a1) hfiber, ('a2, 'a3) hfiber) *)
+(*   isweq) -> ('a1, 'a2, 'a3, 'a4) hfsqstr *)
 
-val isweqhfibersg'tof :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) hfsqstr -> 'a2 -> (('a4, 'a2) hfiber, ('a1, 'a3) hfiber) isweq
+(* val isweqhfibersg'tof : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) hfsqstr -> 'a2 -> (('a4, 'a2) hfiber, ('a1, 'a3) hfiber) isweq *)
 
-val weqhfibersg'tof :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) hfsqstr -> 'a2 -> (('a4, 'a2) hfiber, ('a1, 'a3) hfiber) weq
+(* val weqhfibersg'tof : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) hfsqstr -> 'a2 -> (('a4, 'a2) hfiber, ('a1, 'a3) hfiber) weq *)
 
-val ishfsqweqhfibersg'tof :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) commsqstr -> ('a2 -> (('a4, 'a2) hfiber, ('a1, 'a3) hfiber)
-  isweq) -> ('a1, 'a2, 'a3, 'a4) hfsqstr
+(* val ishfsqweqhfibersg'tof : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) commsqstr -> ('a2 -> (('a4, 'a2) hfiber, ('a1, 'a3) hfiber) *)
+(*   isweq) -> ('a1, 'a2, 'a3, 'a4) hfsqstr *)
 
-val transposhfpsqstr :
-  ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2,
-  'a3, 'a4) hfsqstr -> ('a2, 'a1, 'a3, 'a4) hfsqstr
+(* val transposhfpsqstr : *)
+(*   ('a1 -> 'a3) -> ('a2 -> 'a3) -> ('a4 -> 'a1) -> ('a4 -> 'a2) -> ('a1, 'a2, *)
+(*   'a3, 'a4) hfsqstr -> ('a2, 'a1, 'a3, 'a4) hfsqstr *)
 
-val fibseqstrtohfsqstr :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr ->
-  (coq_unit, 'a2, 'a3, 'a1) hfsqstr
+(* val fibseqstrtohfsqstr : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr -> *)
+(*   (coq_unit, 'a2, 'a3, 'a1) hfsqstr *)
 
-val hfsqstrtofibseqstr :
-  ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> (coq_unit, 'a2, 'a3, 'a1) hfsqstr ->
-  ('a1, 'a2, 'a3) fibseqstr
+(* val hfsqstrtofibseqstr : *)
+(*   ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> (coq_unit, 'a2, 'a3, 'a1) hfsqstr -> *)
+(*   ('a1, 'a2, 'a3) fibseqstr *)

@@ -27,6 +27,14 @@ val isofhlevelfpmap :
   nat -> ('a1 -> 'a2) -> ('a1, 'a2) isofhlevelf -> (('a1, 'a3) total2, ('a2,
   'a3) total2) isofhlevelf
 
+type ('x, 'y, 'z) complxstr = 'x -> 'z paths
+
+type ('x, 'y, 'z) isfibseq = ('x, ('y, 'z) hfiber) isweq
+    
+type ('x, 'y, 'z) fibseqstr =
+  (('x, 'y, 'z) complxstr, ('x, 'y, 'z) isfibseq
+  ) total2
+
 val isofhlevelfffromZ :
   nat -> ('a1 -> 'a2) -> ('a2 -> 'a3) -> 'a3 -> ('a1, 'a2, 'a3) fibseqstr ->
   'a3 isofhlevel -> ('a1, 'a2) isofhlevelf
@@ -131,7 +139,7 @@ val isweqfinfibseq :
 val weqhfibertocontr :
   ('a1 -> 'a2) -> 'a2 -> 'a2 iscontr -> (('a1, 'a2) hfiber, 'a1) weq
 
-val weqhfibertounit : (('a1, coq_unit) hfiber, 'a1) weq
+(* val weqhfibertounit : (('a1, coq_unit) hfiber, 'a1) weq *)
 
 val isofhleveltofun : nat -> 'a1 isofhlevel -> ('a1, coq_unit) isofhlevelf
 

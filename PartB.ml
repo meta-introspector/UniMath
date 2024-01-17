@@ -56,6 +56,17 @@ let isofhlevelfhomot n f f' h x0 y =
     nat -> ('a1 -> 'a2) -> ('a1, 'a2) isofhlevelf -> (('a1, 'a3) total2,
     ('a2, 'a3) total2) isofhlevelf **)
 
+let fpmap f z =
+  { pr1 = (f z.pr1); pr2 = z.pr2 }
+
+let hffpmap2 f x0 =
+  let u = fpmap f x0 in
+  { pr1 = u; pr2 = (let x = x0.pr1 in { pr1 = x; pr2 = Coq_paths_refl }) }
+
+let hfiberfpmap f yp x0 =
+  let int1 = hfibersgftog (hffpmap2 f) (fun u -> u.pr1) yp in
+  invezmappr1 yp (int1 x0)
+
 let isofhlevelfpmap n f x0 y =
   let yy = y.pr1 in
   let g = hfiberfpmap f y in

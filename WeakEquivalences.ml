@@ -28,10 +28,8 @@ let transitive_paths_weq x y z xeqy =
           (pathscomp0 y x y (pathsinv0 x y xeqy) xeqy) Coq_paths_refl
           (pathsinv0l x y xeqy)) Coq_paths_refl))
 
-(** val weqtotal2comm :
-    (('a1, ('a2, 'a3) total2) total2, ('a2, ('a1, 'a3) total2) total2) weq **)
-
-let weqtotal2comm =
+(* val weqtotal2comm :  (('a1, ('a2, 'a3) total2) total2, ('a2, ('a1, 'a3) total2) total2) weq *)
+let weqtotal2comm : (('a1, ('a2, 'a3) total2) total2, ('a2, ('a1, 'a3) total2) total2) weq  =
   weq_iso (fun pair -> { pr1 = pair.pr2.pr1; pr2 = { pr1 = pair.pr1; pr2 =
     pair.pr2.pr2 } }) (fun pair -> { pr1 = pair.pr2.pr1; pr2 = { pr1 =
     pair.pr1; pr2 = pair.pr2.pr2 } }) (fun _ -> Coq_paths_refl) (fun _ ->
@@ -51,12 +49,26 @@ let pathsdirprodweq x1 x2 y1 y2 =
 (** val dirprod_with_contr_r :
     'a1 iscontr -> ('a2, ('a2, 'a1) dirprod) weq **)
 
+let weqtodirprodwithunit =
+  let f = fun x -> make_dirprod x Coq_tt in
+  { pr1 = f; pr2 =
+  (let g = fun xu -> xu.pr1 in
+   let egf = fun _ -> Coq_paths_refl in
+   let efg = fun _ -> Coq_paths_refl in isweq_iso f g egf efg) }
+
 let dirprod_with_contr_r iscontrX =
   weqcomp weqtodirprodwithunit
     (weqdirprodf idweq (invweq (weqcontrtounit iscontrX)))
 
 (** val dirprod_with_contr_l :
     'a1 iscontr -> ('a2, ('a1, 'a2) dirprod) weq **)
+
+let weqdirprodcomm =
+  let f = fun xy -> make_dirprod xy.pr2 xy.pr1 in
+  let g = fun yx -> make_dirprod yx.pr2 yx.pr1 in
+  let egf = fun _ -> Coq_paths_refl in
+  let efg = fun _ -> Coq_paths_refl in
+  { pr1 = f; pr2 = (isweq_iso f g egf efg) }
 
 let dirprod_with_contr_l iscontrX =
   weqcomp (dirprod_with_contr_r iscontrX) weqdirprodcomm

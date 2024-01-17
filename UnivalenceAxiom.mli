@@ -183,4 +183,4 @@ val transportf_funextfun :
   ('a1 -> 'a2) -> ('a1 -> 'a2) -> ('a1 -> 'a2 paths) -> 'a1 -> 'a3 -> 'a3
   paths
 
-val coq_UU_rect : (coq_UU paths -> 'a3) -> ('a1, 'a2) weq -> 'a3
+(* val coq_UU_rect : (coq_UU paths -> 'a3) -> ('a1, 'a2) weq -> 'a3 *)
