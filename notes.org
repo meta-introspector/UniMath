@@ -1,0 +1,3 @@
+* schema for urls
+
+use graphql, linked json, dotty, plantuml, rdf/owl, turtle.
