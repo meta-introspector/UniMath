@@ -56,9 +56,114 @@ let isaset_node g =
   g.pr2.pr1
 
 (** val node_set : cgraph -> hSet **)
+(*
+   in ocaml extracted from unimath coq  via metacoq:
+type __ = Obj.t
+type coq_UU = __
+type ('t, 'p) total2 = { pr1 : 't; pr2 : 'p }
+*)
+let make_hSet i =
+  { pr1 = __; pr2 = (Obj.magic i) }
 
-let node_set g = g
-  (* make_hSet (isaset_node g) *)
+let node_set g =  make_hSet (isaset_node g) 
+
+(*
+now with this information please reinterpret this internal representation
+_build/log:293:> TOPstructure_item_desc:printdescPstr_value:pattern:PATTERNpattern_Ppat_var:node_set| expr: EXPR:process_fun:process_arg_labelNoLabel|process_expression_option_TODOnope|PATTERNpattern_Ppat_var:g|EXPR:apply:EXPR:IDENTident:make_hSet|process_list1process_arg_labelNoLabel|EXPR:apply:EXPR:IDENTident:isaset_node|process_list1process_arg_labelNoLabel|EXPR:IDENTident:g|process_list1process_list1|process_list1process_list1;;print_value_binding_list;; *)
+
+(*
+
+#+begin_src output
+In the internal representation you provided, `node_set` is a hSet created by calling the function `make_hSet`, which takes two arguments: the first is an identifier for some object (in this case, an integer), and the second is an object (in this case, a cgraph). The resulting hSet has two fields: `pr1` and `pr2`. The value of `pr1` is set to the magic number associated with the object passed as the first argument to `make_hSet`, which is likely a unique identifier for that object in some context. The value of `pr2` is set to the cgraph object passed as the second argument to `make_hSet`.
+
+Based on this information, it seems that `node_set` represents a mapping from an integer identifier to a cgraph object. This mapping is likely used to keep track of nodes in some sort of graph data structure or other data structure that uses unique identifiers for its elements.
+#+end_src
+#+begin_src output
+
+It looks like you are defining a function `node_set` that takes in an OCaml code object (a `cgraph`) and returns a hash set of nodes within that code. The `make_hSet` function takes in the set of node identifiers from the code object and returns a hash set with one element containing the value of the first node identifier and another element containing the value of a Coq object (which you are referring to as an "isaset\_node" object).
+
+The `process_fun` function likely processes a given function within the code object and converts it into a form that can be stored in the hash set. The `process_arg_labelNoLabel` function probably does the same thing for each argument of the function, ignoring any labels associated with them.
+
+The `process_expression_option_TODOnope` function is not defined in this code snippet, so it's difficult to say what it does exactly. It may be used to process specific options or attributes within the function or code object that need to be stored in the hash set.
+
+Overall, `node_set` appears to be a function that takes in an OCaml code object and returns a hash set containing the node identifiers and values of the nodes within that code.
+#+end_src
+#+begin_src output
+The internal representation of the function `node_set` is a closure that takes as an argument a Coq graph and returns an HSet. The `isaset_node` function is used to obtain a set of nodes from the given graph. The resulting HSet has two elements: a value (which is `__` in this case) and the set of nodes obtained from the graph using `isaset_node`.
+
+This closure is created by combining multiple functions into one, which are called within the closure. These functions include:
+
+* `make_hSet`: This function takes a set of nodes as input and returns an HSet with two elements: a value (which is `__`) and the set of nodes obtained from the graph using `isaset_node`.
+* `isaset_node`: This function takes a Coq graph as input and returns a set of its nodes.
+* `apply`: This is an application operator that takes two arguments: an expression and a value, which are combined to form a new expression. In this case, the expression is either the fun or the arg label (which has no label), and the value is either the identifier of the set obtained from `isaset_node`, or the identifier of the graph `g`.
+* `process_fun`: This function processes a fun by calling the `apply` operator with the fun and the value as arguments.
+* `process_arg_labelNoLabel`: This function processes an argument label with no label by calling the `apply` operator with the arg label and the value as arguments.
+* `process_expression_option_TODOnope`: This function processes an expression option, but it is not used in this closure.
+* `process_list1`: This function processes a list of one argument by calling the `process_fun` or `process_arg_labelNoLabel` function with the first element of the list and the value as arguments. It also calls the `process_list1` function with the rest of the list to recursively process the remaining elements.
+* `print_value_binding_list`: This function is not used in this closure, but it is likely responsible for printing the resulting HSet.
+#+end_src
+#+begin_src output
+Based on the given code snippet, it seems that `node_set` is a function that takes in a Coq graph (represented by the type `cgraph`) and returns an object of type `hSet`. The `make_hSet` function creates an instance of this object by taking in the set of nodes of the input graph.
+
+Inside the `node_set` function, the `isaset_node` function is called with the given Coq graph to obtain a set of node identifiers in the graph. The `make_hSet` function then creates an instance of type `('t, 'p) total2` where `'t` is the type of the element in the set and `'p` is the proof object for each element in the set.
+
+It appears that the resulting object of type `hSet` represents a collection of nodes in the input graph and their corresponding proof objects.
+#+end_src
+#+begin_src output
+It appears that the given OCaml code defines a function `make_hSet` which takes an integer value `i` as input and returns a new hash set with one element, which is the value of `i`. The resulting hash set has two fields: `pr1`, which is initialized to an empty object (`__`) and `pr2`, which is initialized to the integer value passed as an argument `i` using `Obj.magic i`.
+
+The function then calls another function `node_set` which creates a new hash set by passing the result of `isaset_node g` (which returns a boolean indicating whether the value `g` belongs to the current set) as its first argument and an empty object `__` as its second argument. This is done using the following line:
+```scss
+let node_set g =  make_hSet (isaset_node g) 
+```
+It seems that `node_set` function returns a hash set containing one element: `g`.
+#+end_src
+#+begin_src output
+This looks like code written in OCaml, a functional programming language. It seems to be defining an internal representation for building and manipulating a Coq object graph (a tree-like structure used to represent mathematical constructs) using the Coq library.
+
+The `node_set` function takes a Coq object graph `g` and returns a set of nodes in that graph. The nodes are represented as objects with a magic number attached to them, which is probably used to uniquely identify each node in the graph.
+
+The `make_hSet` function creates an empty set with two parameters: `pr1`, an object with a magic number, and `pr2`, the value of that magic number (which is likely the identity of the node). This set will be used to store nodes in the graph.
+
+The `isaset_node g` expression returns the set of nodes in the graph `g`. This is used as the first parameter for `make_hSet`, which creates a new empty set with the identity of each node in the graph stored in its magic number.
+#+end_src
+#+begin_src output
+This code is a Coq program that defines an internal representation of a set of nodes in a graph. The nodes are represented as values of type `hSet`, which is defined as follows:
+```ruby
+{ pr1 : 't; pr2 : 'p }
+```
+where `pr1` is an arbitrary value of type `'t`, and `pr2` is an arbitrary value of type `'p`.
+
+The program uses the `isaset_node` function to create a set of node IDs, which are then used to create a new `hSet` object with those IDs as arguments. This creates a set of nodes that can be used to represent the graph in Coq. The `make_hSet` function takes an arbitrary value of type `'t` and returns a new `hSet` object with that value assigned to `pr1`.
+
+The program then creates several `apply` operations, which are used to create expressions that combine elements of the graph. Each `apply` operation has two arguments: an expression of type `EXPR`, which is either a `process_fun` or a `process_arg_labelNoLabel`, and a label of type `IDENT`. The resulting expression applies the function to each node in the set, using the IDs as labels.
+
+The program also includes some helper functions that are used throughout the code. These functions are not relevant to understanding the main logic of the program.
+#+end_src
+#+begin_src output
+The given code uses a type `hSet` which is constructed from an OCaml `Obj.t`. The function `make_hSet` creates an instance of the `hSet` type with two fields: `pr1` and `pr2`. `pr1` is an `Obj.t`, while `pr2` is the result of applying `Obj.magic` to a Coq object with ID i.
+
+The code then uses this `node_set` value to store information about nodes in a graph represented by the Coq `isaset_node` function.
+
+It appears that the `PATTERNpattern_Ppat_var:node_set|EXPR:` pattern in the output represents an instance of the `node_set` type, which contains information about a node in the graph. The variable name associated with this node is `node_set`.
+#+end_src
+
+
+#+begin_src output *)
+
+(* In the realm of functional programming with OCaml, we find ourselves in a world of abstraction and computation. Our code is extracting information from Coq's UniMath library via Metacoq, revealing its underlying type system. The main idea is to define our own types for simplicity and ease of understanding. *)
+
+(* We start by defining a new type `__` that represents an empty object in the OCaml type system. This will be our primary building block for creating other types. Additionally, we introduce a type `coq_UU`, which is equivalent to the original Coq type `Obj.t`. This type will allow us to represent UniMath objects in our OCaml code. *)
+
+(* Furthermore, we create a new type `('t, 'p) total2`, which is a tuple containing two elements of types `'t` and `'p`. This represents a set with two distinct elements. We will use this type to represent the concept of a set in our code. *)
+
+(* Now, let's introduce a function called `make_hSet`, which takes an integer as input and returns an object of type `('t, 'p) total2`. The function creates an empty set using the `Obj.magic` method to generate a unique identifier for it. It then assigns this identifier to the `pr1` field while leaving the `pr2` field empty, indicating that the set currently contains only one element. *)
+
+(* In summary, our code is defining new types and functions to represent sets in OCaml using Coq's UniMath library as a foundation. By doing so, we simplify the understanding of the code while maintaining its computational correctness. *)
+(*
+
+#+end_src *)
+
 
 (** val isaset_arc : cgraph -> arc isaset **)
 
@@ -820,10 +925,10 @@ let isaprop_is_cgraph_mor g h p_UU2080_ p_UU2081_ h0 =
 (** val isaset_cgraph_mor :
     precgraph -> precgraph -> has_nodeset -> has_arcset -> cgraph_mor isaset **)
 
-let isaset_cgraph_mor g h h0 k = g
-  (* isaset_total2 (funspace_isaset h0) (fun p_UU2080_ -> *)
-  (*   isaset_total2 (funspace_isaset k) (fun p_UU2081_ -> *)
-  (*     isasetaprop (isaprop_is_cgraph_mor g h p_UU2080_ p_UU2081_ h0))) *)
+let isaset_cgraph_mor g h h0 k = 
+  isaset_total2 (funspace_isaset h0) (fun p_UU2080_ ->
+    isaset_total2 (funspace_isaset k) (fun p_UU2081_ ->
+      isasetaprop (isaprop_is_cgraph_mor g h p_UU2080_ p_UU2081_ h0)))
 
 (** val cgraph_mor_eq_aux :
     precgraph -> precgraph -> cgraph_mor -> cgraph_mor -> (node -> node)

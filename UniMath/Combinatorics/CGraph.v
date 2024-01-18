@@ -35,6 +35,11 @@ Definition make_precgraph {N : UU} {E : UU} (s t : E → N)
   : precgraph
   := N,,u E,,u make_dirprod s t.
 
+(** 
+   Imagine an artist's rendering of a graph where each node represents a unique element from the set "N," and each edge connects two nodes with distinct values from the set "E". The resulting graph is a product of two functions, "s" and "t", that take in an edge value from "E" and map it to a node in "N." This type of function mapping is known as a surjective homomorphism. Thus, this function produces a directed graph with unique nodes and edges where each edge has a corresponding node in the range of the function.
+ **)
+
+
 Definition node : precgraph → UU := pr1.
 
 Definition arc (G : precgraph) : UU
