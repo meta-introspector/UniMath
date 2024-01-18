@@ -8,7 +8,7 @@ type float_comparison =
 | FGt
 | FNotComparable
 
-type float (* AXIOM TO BE REALIZED *)
+(* type float (\* AXIOM TO BE REALIZED *\) *)
 
 type float_wrapper =
   float
@@ -69,30 +69,30 @@ val next_up : float -> float
 
 val next_down : float -> float
 
-val infinity : float
+(* val infinity : float *)
 
-val neg_infinity : float
+(* val neg_infinity : float *)
 
-val nan : float
+(* val nan : float *)
 
-val one : float
+(* val one : float *)
 
 val zero : float
 
-val neg_zero : float
+val neg_zero : float 
 
-val two : float
+(* val two : float *)
 
 val is_nan : float -> bool
 
-val is_zero : float -> bool
+val is_zero : float -> bool 
 
-val is_infinity : float -> bool
+val is_infinity : float -> bool 
 
-val is_finite : float -> bool
+(* val is_finite : float -> bool *)
 
 val get_sign : float -> bool
 
-module PrimFloatNotations :
- sig
- end
+(* module PrimFloatNotations : *)
+(*  sig *)
+(*  end *)

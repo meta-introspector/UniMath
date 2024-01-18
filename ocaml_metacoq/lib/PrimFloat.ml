@@ -8,7 +8,7 @@ type float_comparison =
 | FGt
 | FNotComparable
 
-type float (* AXIOM TO BE REALIZED *)
+(* type float (\* AXIOM TO BE REALIZED *\) *)
 
 type float_wrapper =
   float

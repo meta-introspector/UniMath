@@ -1,0 +1,10 @@
+(env
+ (_
+  (flags
+   (:standard -warn-error -67-20-33-8-9-26-27-37-34-11-11-32-39 -dtypedtree -dparsetree -dump-into-file -dlambda -annot -dlocations -dsource  -drawlambda  ))))
+
+(library
+ (name ocaml_metacoq)
+ (libraries  ppxlib )
+ ; (preprocess  (pps ppx-introspector ))
+)

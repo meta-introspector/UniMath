@@ -1,7 +1,7 @@
 open CarryType
 open Datatypes
 
-type int (* AXIOM TO BE REALIZED *)
+(* type int (\* AXIOM TO BE REALIZED *\) *)
 
 type pos_neg_int63 =
 | Pos of int
@@ -12,6 +12,9 @@ val id_int : int -> int
 type int_wrapper =
   int
   (* singleton inductive, whose constructor was wrap_int *)
+
+val myzero : int_wrapper 
+val myone : int_wrapper 
 
 val int_wrap : int_wrapper -> int
 

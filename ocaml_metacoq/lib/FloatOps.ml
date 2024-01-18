@@ -42,8 +42,8 @@ module Z =
 
 (** val ulp : float -> float **)
 
-let ulp f =
-  Z.ldexp one (fexp prec emax (snd (Z.frexp f)))
+ let ulp f = 
+   Z.ldexp 1. (fexp prec emax (snd (Z.frexp f))) 
 
 (** val coq_Prim2SF : float -> spec_float **)
 

@@ -24,51 +24,54 @@ module Uint63NotationsInternalB =
 
 (** val digits : int **)
 
-let digits =
-  (Uint63.of_int (63))
+let of_int_1 : int_wrapper = myone
+let of_int_0 : int_wrapper = myzero
+  
+let digits = 63
+  (* (of_int (63)) *)
 
 (** val max_int : int **)
 
-let max_int =
-  (Uint63.of_int (-1))
+let max_int = -1
+  (* (of_int (-1)) *)
 
 (** val get_digit : int -> int -> bool **)
 
 let get_digit x p =
-  ltb (Uint63.of_int (0)) (coq_land x (coq_lsl (Uint63.of_int (1)) p))
+  ltb (of_int_0) (coq_land x (coq_lsl (of_int_1) p))
 
 (** val set_digit : int -> int -> bool -> int **)
 
 let set_digit x p b =
-  match match leb (Uint63.of_int (0)) p with
+  match match leb (of_int_0) p with
         | Coq_true -> ltb p digits
         | Coq_false -> Coq_false with
   | Coq_true ->
     (match b with
-     | Coq_true -> coq_lor x (coq_lsl (Uint63.of_int (1)) p)
+     | Coq_true -> coq_lor x (coq_lsl (of_int_1) p)
      | Coq_false ->
-       coq_land x (coq_lxor max_int (coq_lsl (Uint63.of_int (1)) p)))
+       coq_land x (coq_lxor max_int (coq_lsl (of_int_1) p)))
   | Coq_false -> x
 
 (** val is_zero : int -> bool **)
 
 let is_zero i =
-  eqb i (Uint63.of_int (0))
+  eqb i (of_int_0)
 
 (** val is_even : int -> bool **)
 
 let is_even i =
-  is_zero (coq_land i (Uint63.of_int (1)))
+  is_zero (coq_land i (of_int_1))
 
 (** val bit : int -> int -> bool **)
 
 let bit i n =
-  negb (is_zero (coq_lsl (coq_lsr i n) (sub digits (Uint63.of_int (1)))))
+  negb (is_zero (coq_lsl (coq_lsr i n) (sub digits (of_int_1))))
 
 (** val opp : int -> int **)
 
 let opp i =
-  sub (Uint63.of_int (0)) i
+  sub (of_int_0) i
 
 (** val oppcarry : int -> int **)
 
@@ -78,22 +81,22 @@ let oppcarry i =
 (** val succ : int -> int **)
 
 let succ i =
-  add i (Uint63.of_int (1))
+  add i (of_int_1)
 
 (** val pred : int -> int **)
 
 let pred i =
-  sub i (Uint63.of_int (1))
+  sub i (of_int_1)
 
 (** val addcarry : int -> int -> int **)
 
 let addcarry i j =
-  add (add i j) (Uint63.of_int (1))
+  add (add i j) (of_int_1)
 
 (** val subcarry : int -> int -> int **)
 
 let subcarry i j =
-  sub (sub i j) (Uint63.of_int (1))
+  sub (sub i j) (of_int_1)
 
 (** val addc_def : int -> int -> int carry **)
 
@@ -121,8 +124,8 @@ let subc_def x y =
 
 let subcarryc_def x y =
   match ltb y x with
-  | Coq_true -> C0 (sub (sub x y) (Uint63.of_int (1)))
-  | Coq_false -> C1 (sub (sub x y) (Uint63.of_int (1)))
+  | Coq_true -> C0 (sub (sub x y) (of_int_1))
+  | Coq_false -> C1 (sub (sub x y) (of_int_1))
 
 (** val diveucl_def : int -> int -> (int, int) prod **)
 
@@ -141,17 +144,17 @@ module Uint63NotationsInternalC =
 (** val oppc : int -> int carry **)
 
 let oppc i =
-  subc (Uint63.of_int (0)) i
+  subc (of_int_0) i
 
 (** val succc : int -> int carry **)
 
 let succc i =
-  addc i (Uint63.of_int (1))
+  addc i (of_int_1)
 
 (** val predc : int -> int carry **)
 
 let predc i =
-  subc i (Uint63.of_int (1))
+  subc i (of_int_1)
 
 (** val compare_def : int -> int -> comparison **)
 
@@ -169,9 +172,9 @@ let rec to_Z_rec n i =
   | O -> Z0
   | S n0 ->
     (match is_even i with
-     | Coq_true -> Z.double (to_Z_rec n0 (coq_lsr i (Uint63.of_int (1))))
+     | Coq_true -> Z.double (to_Z_rec n0 (coq_lsr i (of_int_1)))
      | Coq_false ->
-       Z.succ_double (to_Z_rec n0 (coq_lsr i (Uint63.of_int (1)))))
+       Z.succ_double (to_Z_rec n0 (coq_lsr i (of_int_1))))
 
 (** val to_Z : int -> coq_Z **)
 
@@ -182,14 +185,14 @@ let to_Z =
 
 let rec of_pos_rec n p =
   match n with
-  | O -> (Uint63.of_int (0))
+  | O -> (of_int_0)
   | S n0 ->
     (match p with
      | Coq_xI p0 ->
-       coq_lor (coq_lsl (of_pos_rec n0 p0) (Uint63.of_int (1)))
-         (Uint63.of_int (1))
-     | Coq_xO p0 -> coq_lsl (of_pos_rec n0 p0) (Uint63.of_int (1))
-     | Coq_xH -> (Uint63.of_int (1)))
+       coq_lor (coq_lsl (of_pos_rec n0 p0) (of_int_1))
+         (of_int_1)
+     | Coq_xO p0 -> coq_lsl (of_pos_rec n0 p0) (of_int_1)
+     | Coq_xH -> (of_int_1))
 
 (** val of_pos : positive -> int **)
 
@@ -199,7 +202,7 @@ let of_pos =
 (** val of_Z : coq_Z -> int **)
 
 let of_Z = function
-| Z0 -> (Uint63.of_int (0))
+| Z0 -> (of_int_0)
 | Zpos p -> of_pos p
 | Zneg p -> opp (of_pos p)
 
@@ -217,7 +220,7 @@ module Uint63NotationsInternalD =
 let sqrt_step rec0 i j =
   let quo = div i j in
   (match ltb quo j with
-   | Coq_true -> rec0 i (coq_lsr (add j quo) (Uint63.of_int (1)))
+   | Coq_true -> rec0 i (coq_lsr (add j quo) (of_int_1))
    | Coq_false -> j)
 
 (** val iter_sqrt : nat -> (int -> int -> int) -> int -> int -> int **)
@@ -227,24 +230,24 @@ let rec iter_sqrt n rec0 i j =
   (match ltb quo j with
    | Coq_true ->
      (match n with
-      | O -> rec0 i (coq_lsr (add j quo) (Uint63.of_int (1)))
+      | O -> rec0 i (coq_lsr (add j quo) (of_int_1))
       | S n0 ->
         iter_sqrt n0 (iter_sqrt n0 rec0) i
-          (coq_lsr (add j quo) (Uint63.of_int (1))))
+          (coq_lsr (add j quo) (of_int_1)))
    | Coq_false -> j)
 
 (** val sqrt : int -> int **)
 
 let sqrt i =
-  match compare (Uint63.of_int (1)) i with
-  | Eq -> (Uint63.of_int (1))
-  | Lt -> iter_sqrt size (fun _ j -> j) i (coq_lsr i (Uint63.of_int (1)))
-  | Gt -> (Uint63.of_int (0))
+  match compare (of_int_1) i with
+  | Eq -> (of_int_1)
+  | Lt -> iter_sqrt size (fun _ j -> j) i (coq_lsr i (of_int_1))
+  | Gt -> (of_int_0)
 
 (** val high_bit : int **)
 
 let high_bit =
-  coq_lsl (Uint63.of_int (1)) (sub digits (Uint63.of_int (1)))
+  coq_lsl (of_int_1) (sub digits (of_int_1))
 
 (** val sqrt2_step :
     (int -> int -> int -> int) -> int -> int -> int -> int **)
@@ -256,8 +259,8 @@ let sqrt2_step rec0 ih il j =
     (match ltb quo j with
      | Coq_true ->
        (match addc j quo with
-        | C0 m1 -> rec0 ih il (coq_lsr m1 (Uint63.of_int (1)))
-        | C1 m1 -> rec0 ih il (add (coq_lsr m1 (Uint63.of_int (1))) high_bit))
+        | C0 m1 -> rec0 ih il (coq_lsr m1 (of_int_1))
+        | C1 m1 -> rec0 ih il (add (coq_lsr m1 (of_int_1)) high_bit))
      | Coq_false -> j)
   | Coq_false -> j
 
@@ -273,16 +276,16 @@ let rec iter2_sqrt n rec0 ih il j =
        (match addc j quo with
         | C0 m1 ->
           (match n with
-           | O -> rec0 ih il (coq_lsr m1 (Uint63.of_int (1)))
+           | O -> rec0 ih il (coq_lsr m1 (of_int_1))
            | S n0 ->
              iter2_sqrt n0 (iter2_sqrt n0 rec0) ih il
-               (coq_lsr m1 (Uint63.of_int (1))))
+               (coq_lsr m1 (of_int_1)))
         | C1 m1 ->
           (match n with
-           | O -> rec0 ih il (add (coq_lsr m1 (Uint63.of_int (1))) high_bit)
+           | O -> rec0 ih il (add (coq_lsr m1 (of_int_1)) high_bit)
            | S n0 ->
              iter2_sqrt n0 (iter2_sqrt n0 rec0) ih il
-               (add (coq_lsr m1 (Uint63.of_int (1))) high_bit)))
+               (add (coq_lsr m1 (of_int_1)) high_bit)))
      | Coq_false -> j)
   | Coq_false -> j
 
@@ -297,7 +300,7 @@ let sqrt2 ih il =
       | Coq_true -> Coq_pair (s, (C1 il2))
       | Coq_false -> Coq_pair (s, (C0 il2)))
    | C1 il2 ->
-     (match ltb ih1 (sub ih (Uint63.of_int (1))) with
+     (match ltb ih1 (sub ih (of_int_1)) with
       | Coq_true -> Coq_pair (s, (C1 il2))
       | Coq_false -> Coq_pair (s, (C0 il2))))
 
@@ -305,9 +308,9 @@ let sqrt2 ih il =
 
 let rec gcd_rec guard i j =
   match guard with
-  | O -> (Uint63.of_int (1))
+  | O -> (of_int_1)
   | S p ->
-    (match eqb j (Uint63.of_int (0)) with
+    (match eqb j (of_int_0) with
      | Coq_true -> i
      | Coq_false -> gcd_rec p j (coq_mod i j))
 
@@ -355,8 +358,8 @@ let lebP x y =
 (** val b2i : bool -> int **)
 
 let b2i = function
-| Coq_true -> (Uint63.of_int (1))
-| Coq_false -> (Uint63.of_int (0))
+| Coq_true -> (of_int_1)
+| Coq_false -> (of_int_0)
 
 module Uint63Notations =
  struct
