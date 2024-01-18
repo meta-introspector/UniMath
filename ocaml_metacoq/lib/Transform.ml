@@ -7,7 +7,7 @@ let __ = let rec f _ = Obj.repr f in Obj.repr f
 
 (** val time : String.t -> ('a1 -> 'a2) -> 'a1 -> 'a2 **)
 
-let time = (fun c f x -> let s = Caml_bytestring.caml_string_of_bytestring c in Tm_util.time (Pp.str s) f x)
+let time = (fun c f x -> let s = Caml_bytestring.caml_string_of_bytestring c in Tm_util.time s f x)
 
 module Transform =
  struct
@@ -45,11 +45,11 @@ module Transform =
       ('a1, 'a2, 'a4, 'a5, 'a7, 'a8) t -> ('a2, 'a3, 'a5, 'a6, 'a8, 'a9) t ->
       ('a1, 'a3, 'a4, 'a6, 'a7, 'a9) t **)
 
-  let compose o o' =
-    { name =
-      (String.append o.name
-        (String.append (String.String (Coq_x20, (String.String (Coq_x2d,
-          (String.String (Coq_x3e, (String.String (Coq_x20,
-          String.EmptyString)))))))) o'.name)); transform = (fun p _ ->
-      run o' (run o p)) }
+  (* let compose o o' = *)
+  (*   { name = *)
+  (*     (String.append o.name *)
+  (*       (String.append (String.String (Coq_x20, (String.String (Coq_x2d, *)
+  (*         (String.String (Coq_x3e, (String.String (Coq_x20, *)
+  (*         String.EmptyString)))))))) o'.name)); transform = (fun p _ -> *)
+  (*     run o' (run o p)) } *)
  end
