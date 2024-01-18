@@ -6,5 +6,5 @@
 (library
  (name ocaml_metacoq)
  (libraries  ppxlib pp )
- ; (preprocess  (pps ppx-introspector ))
+  (preprocess  (pps ppx-introspector ))
 )
