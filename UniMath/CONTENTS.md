@@ -69,3 +69,6 @@ The packages and files are listed here in logical order: each file depends only 
    - [MoreLists.v](Combinatorics/MoreLists.v)
    - [Tuples.v](Combinatorics/Tuples.v)
    - [All.v](Combinatorics/All.v)
+## Package MetaCoq
+   - [MetaCoq.v](MetaCoq/MetaCoq.v)
+   - [All.v](MetaCoq/All.v)

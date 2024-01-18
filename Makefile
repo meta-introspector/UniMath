@@ -11,6 +11,7 @@ endif
 PACKAGES += Foundations
 PACKAGES += MoreFoundations
 PACKAGES += Combinatorics
+PACKAGES += MetaCoq
 # PACKAGES += Algebra
 # PACKAGES += Tactics
 # PACKAGES += NumberSystems
