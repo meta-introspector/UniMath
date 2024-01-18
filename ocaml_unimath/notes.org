@@ -1,0 +1,1 @@
+grep DEBUG2E log.txt  |grep -v SKIP |cut -d: -f2- > lib/gen1.ml
