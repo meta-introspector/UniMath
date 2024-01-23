@@ -1,3 +1,6 @@
+			  
+
+
 (** * Univalent Foundations, Part A
 
 Vladimir Voevodsky.
@@ -137,6 +140,7 @@ Require Export UniMath.Foundations.Preamble.
 (** ** Some standard constructions not using identity types (paths) *)
 
 (** *** Canonical functions from [ empty ] and to [ unit ] *)
+
 
 Definition fromempty  : ∏ X : UU , empty -> X. (* type this in emacs in agda-input method
 with \prod *)
@@ -4029,3 +4033,4 @@ Proof.
 Defined.
 
 (* End of the file PartA.v *)
+

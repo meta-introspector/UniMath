@@ -72,3 +72,6 @@ The packages and files are listed here in logical order: each file depends only 
 ## Package MetaCoq
    - [MetaCoq.v](MetaCoq/MetaCoq.v)
    - [All.v](MetaCoq/All.v)
+## Package Introspector
+   - [Introspector.v](Introspector/Introspector.v)
+   - [All.v](Introspector/All.v)
