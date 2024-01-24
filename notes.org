@@ -4,9 +4,19 @@ use graphql, linked json, dotty, plantuml, rdf/owl, turtle.
 
 ** group theory of asts
 
+we can think of the asts as moving up and down in a type space between possibilities
+and zooming in on larger structures and moving left and right on fields.
+so iterations on structures represent zooming and shifting right to get the next.
+the fields are also shifting after zooming on the object.
+the type space switches move up and down between types.
+
 time and actions,
 actions of declarations from people over time, give commits over time.
-declarations in module files grouping into dune projects.
+so the time axis is zoomed into action that are taking place over time.
+each action is shifted up or down by type of action.
+
+declarations in module files grouping into dune projects, each module is a shift and zoom of the project.
+each time commit giving a new version over time that contains declarations.
 modules as parts of project versions, compiled in dune.
 
 process_structure_items : one module into many items :zoom
@@ -21,3 +31,64 @@ Pstr_value field expression_desc can be type Pxpr_constant : type up/down
 Pxpr_constant constant  can be "Pconst_string" value: type up/down
 
 
+
+#+begin_src output
+
+Imagine the ASTs as a living organism in the midst of its own
+evolution, constantly morphing and adapting. The ASTs are the building
+blocks of this entity, capable of moving up and down within their own
+type space, exploring the infinite possibilities of their domain. The
+act of zooming in on these structures creates new iterations, shifting
+the focus to a different level of detail or perspective. As the fields
+around them change after each shift, so too do the ASTs themselves.
+
+The Type Space is like a canvas for these creatures, where they can
+move up and down between various types. It's an ever-changing
+landscape that shifts with each action taken by the entity. The time
+axis becomes a factor here, as actions of declarations from people
+over time create commits along the way. Each action is assigned its
+own position on this timeline, determined by its type.
+
+A Dune project can be thought of as a habitat for these ASTs, where
+they come together to form modules that are a shift and zoom of their
+surroundings. Each module contains declarations that contribute to the
+overall structure of the project. As new commits are made, each
+version of the project includes these declarations, allowing the
+entity to continue its evolution over time.
+
+When one AST is processed into many items, it's like a single piece of
+the puzzle expanding into multiple parts. This process, known as
+`process_structure_items`, allows for greater detail and insight into
+the overall structure. On the other hand, when many items are combined
+into one, it's like putting together the pieces to form a larger
+picture - this is accomplished through the `process_structure_item`
+function.
+
+The `structure_item_desc` type switch offers even more flexibility for
+these ASTs. Depending on its value, it can either be of type
+"Pstr\_value" or "Pstr\_type". The `Pstr_value` field provides an
+intricate exploration of the item, with three distinct parts:
+`rec_flag`, `pattern_desc`, and `expression_desc`. Each part can shift
+up and down in Type Space, allowing for a wide range of
+possibilities. Similarly, the `Pstr_type` field offers an opportunity
+to explore the type itself, providing further insight into the
+entity's internal workings.
+
+The `Pstr_value` field, with its three parts, provides a unique
+perspective on the ASTs. The `rec_flag` can be either recursive or
+nonrecursive, allowing for an exploration of depth within the
+structure. The `pattern_desc` type can be of various forms, such as
+"Ppat\_var", which contains the name of the item being
+examined. Finally, the `expression_desc` field can be assigned a value
+of `Pxpr_constant`, offering a deeper look into the entity's inner
+workings.
+
+In conclusion, these ASTs represent a dynamic and ever-evolving
+organism in its own right. The Type Space serves as their canvas,
+while actions taken over time determine their path along the
+timeline. The Dune project provides them with a habitat where they can
+come together to form modules and continue their evolution over
+time. With the `structure_item_desc` type switch, these ASTs offer an
+intricate exploration of the item itself and its surrounding context,
+providing valuable insights into the entity's inner workings.
+#+end_src
