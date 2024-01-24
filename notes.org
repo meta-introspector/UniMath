@@ -1,3 +1,23 @@
 * schema for urls
 
 use graphql, linked json, dotty, plantuml, rdf/owl, turtle.
+
+** group theory of asts
+
+time and actions,
+actions of declarations from people over time, give commits over time.
+declarations in module files grouping into dune projects.
+modules as parts of project versions, compiled in dune.
+
+process_structure_items : one module into many items :zoom
+process_structure_item : many items into one item : shift point left right
+structure_item_desc: one item spit by type : shift up down in type space
+structure_item_desc type switch can be of type "Pstr_value"
+structure_item_desc type switch can be of type "Pstr_type" 
+Pstr_value has 3 parts rec_flag pattern_desc expression_desc : zoom and shift
+Pstr_value field rec_flag can be Recursive/Nonrecursive :  up down in types
+Pstr_value field pattern_desc type can be "Ppat_var" which contains the name : type up/down
+Pstr_value field expression_desc can be type Pxpr_constant : type up/down
+Pxpr_constant constant  can be "Pconst_string" value: type up/down
+
+
