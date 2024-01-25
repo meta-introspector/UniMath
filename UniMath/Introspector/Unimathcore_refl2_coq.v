@@ -8,16 +8,17 @@ Require Import CoqOfOCaml.Settings.
 Definition string_list : UU -> UU := list.
 Definition string : UU := UU.
 
-Inductive ast_desc : UU :=
+Inductive ast_desc : Type :=
 | Ad_None : ast_desc
+| Ad_FIXME_process_ast_desc
 | Ad_NoString : ast_desc
+| Ad_quot_list : ast_desc -> ast_desc -> ast_desc -> ast_desc
 | ad_nostring : ast_desc
-| ad_list : ast_desc -> ast_desc
+| Ad_list : ast_desc -> ast_desc
 | Ad_Ident : ast_desc -> ast_desc
 | Ad_fixme : ast_desc
 | Ad_String : ast_desc -> ast_desc
 | Ad_process_string_loc_list_pattern_option : ast_desc
-| Ad_empty_list : ast_desc
 | Ad_root : ast_desc
 | Ad_process_cases : ast_desc -> ast_desc
 | Ad_process_var_list : ast_desc -> ast_desc
@@ -38,7 +39,7 @@ Inductive ast_desc : UU :=
 | Ad_bool : ast_desc -> ast_desc
 | Ad_int : ast_desc -> ast_desc
 | Ad_quote : ast_desc -> ast_desc -> ast_desc
-| Ad_process_generic_list : ast_desc -> ast_desc -> ast_desc
+| Ad_process_generic_list : ast_desc  -> ast_desc -> ast_desc
 | Ad_attributes : ast_desc
 | Ad_process_value_binding_list : ast_desc
 | Ad_process_loc : ast_desc -> ast_desc
@@ -47,6 +48,16 @@ Inductive ast_desc : UU :=
 | Ad_process_arg_label_expression_list : ast_desc -> ast_desc
 | Ad_pos : ast_desc
 
+(* Inductive ast_desc2 : Type := *)
+| Ad_caret
+| Ad_process_generic_type3
+| Ad_openbrace
+| Ad_closebrace
+.
+
+Inductive ast_desc_list  : Type :=
+| Ad_empty_list : ast_desc_list
+| Ad_cons : ast_desc ->ast_desc_list  ->ast_desc_list
 .
 
 Module simple_ast_root.
@@ -68,8 +79,6 @@ Module simple_ast_root.
 End simple_ast_root.
 Definition simple_ast_root_skeleton := simple_ast_root.record.
 
-(* Reserved Notation "'simple_ast_root". *)
-(* Reserved Notation "'ast_desc_list". *)
 
 
 Definition ident (a_value : ast_desc) : ast_desc := Ad_Ident a_value.
@@ -145,48 +154,51 @@ Definition process_structure_items (x_value : ast_desc) : ast_desc :=
   Ad_process_structure_items x_value.
 
 Fixpoint process_generic_list_tail
-  (name : string) (a_value :  ast_desc) (f_value : ast_desc -> ast_desc)
-  : ast_desc :=
+  (name : ast_desc) (a_value :   ast_desc_list  ) (f_value : ast_desc -> ast_desc)
+  : ast_desc_list :=
   match a_value with
-  | Ad_empty_list => Ad_empty_list name
-  | cons a_value t_value =>
-    let v1 := f_value a_value in
-    if Stdlib.op_exclamationeq t_value nil then
-      Ad_process_list_tail v1 (process_generic_list_tail name t_value f_value)
-    else
-      v1
+  | Ad_empty_list => Ad_empty_list
+  | Ad_cons a_value t_value =>
+    let v1 := f_value a_value in Ad_empty_list
+    (* if Stdlib.op_exclamationeq t_value nil then *)
+    (*   Ad_process_list_tail v1 (process_generic_list_tail name t_value f_value) *)
+    (* else *)
+    (*   v1 *)
   end
+with my_append (a_value : ast_desc) (b_value : ast_desc) : ast_desc := a_value
 
 with process_generic_type3
   (a_value : ast_desc) (b_value : ast_desc) (c_value : ast_desc) : ast_desc :=
-  String.append "(process_generic_type3 "
-    (String.append a_value
-      (String.append "^"
-        (String.append b_value
-          (String.append "["
-            (String.append (process_ast_desc2 c_value) "])")))))
+  my_append Ad_process_generic_type3
+    (my_append a_value
+      (my_append Ad_caret
+        (my_append b_value
+          (my_append Ad_openbrace
+            (my_append (process_ast_desc2 c_value) Ad_closebrace )))))
 
 with quot (a_value : ast_desc) (b_value : ast_desc) : ast_desc :=
   Ad_quote a_value b_value
-
+with ad_list(ls : list ast_desc) :=
+       Ad_list Ad_None
 with quot_list (n_value : ast_desc) (fn : ast_desc -> ast_desc) (ls : list ast_desc)
   : ast_desc :=
   let quot_a (c_value : ast_desc) : ast_desc :=
     quot n_value (fn c_value) in
-  process_generic_list (String.append "quot_list" n_value) ls quot_a
+  Ad_None
+  (* process_generic_list (my_append (Ad_quot_list n_value (ad_list ls) quot_a)) *)
 
 with process_ast_desc (l_value : ast_desc) : ast_desc :=
-  Ad_fixme "FIXME:process_ast_desc"
+  Ad_fixme Ad_FIXME_process_ast_desc
 
-with process_simple_ast_root (x_value : simple_ast_root) : ast_desc :=
+with process_simple_ast_root (x_value : ast_desc) : ast_desc :=
   Ad_root x_value
 
 with process_string (a_value : ast_desc) : ast_desc :=
-  quot "process_string" a_value
+  quot Ad_process_string a_value
 
-with process_int (a_value : int) : ast_desc := Ad_int a_value
+with process_int (a_value : ast_desc) : ast_desc := Ad_int a_value
 
-with process_bool (a_value : bool) : ast_desc := Ad_bool a_value
+with process_bool (a_value : ast_desc) : ast_desc := Ad_bool a_value
 
 with process_generic_list
   (name : ast_desc) (a_value : list ast_desc) (f_value : ast_desc -> ast_desc)
@@ -207,9 +219,9 @@ with process_generic_list
 
 with def_basic (a_value : ast_desc) (b_value : ast_desc) : ast_desc :=
   let t_value :=
-    String.append "Definition "
-      (String.append a_value
-        (String.append "(T : " (String.append b_value "): UU := umcr_refl. ")))
+    my_append Ad_MetaCoq_Definition
+      (my_append a_value
+        (my_append Ad_TypeParam_T (my_append b_value Ad_Type_UU)))
     in
   let '_ := CoqOfOCaml.Stdlib.print_endline t_value in
   t_value
@@ -217,76 +229,76 @@ with def_basic (a_value : ast_desc) (b_value : ast_desc) : ast_desc :=
 with def_pair (a_value : ast_desc) (b_value : ast_desc) (a1 : ast_desc) (b1 : ast_desc)
   : ast_desc :=
   let tt :=
-    String.append "Definition "
-      (String.append a_value
-        (String.append "(T : "
-          (String.append b_value
-            (String.append "): UU := "
-              (String.append a1
-                (String.append " T ×u " (String.append b1 " T."))))))) in
+    my_append Ad_Definition
+      (my_append a_value
+        (my_append Ad_TypeParam_T
+          (my_append b_value
+            (my_append Ad_Type_UU
+              (my_append a1
+                (my_append Ad×u (my_append b1 Ad_TypeParam_T_dot ))))))) in
   let '_ := CoqOfOCaml.Stdlib.print_endline tt in
   tt
 
 with process_generic_type2 {A : UU}
-  (a_value : ast_desc) (b_value : ast_desc) (c_value : A) : ast_desc :=
-  let baset := "umcr_type" in
-  let _at := String.append "umcr_n_role_" a_value in
-  let bt := String.append "umcr_n_type_" b_value in
-  let ct :=
-    String.append "umcr_r_rel_"
-      (String.append a_value (String.append "__" b_value)) in
-  let f1 := def_basic _at baset in
-  let f2 := def_basic bt baset in
-  let f3 := def_pair ct baset _at bt in
-  String.append "" (String.append f1 (String.append f2 f3))
+  (a_value : ast_desc) (b_value : ast_desc) (c_value : A) : ast_desc := Ad_empty
+  (* let baset := Ad_umcr_type in *)
+  (* let _at := my_append Ad_umcr_n_role_ a_value in *)
+  (* let bt := my_append Ad_umcr_n_type_ b_value in *)
+  (* let ct := *)
+  (*   my_append Ad_umcr_r_rel_ *)
+  (*     (my_append a_value (my_append Ad___ b_value)) in *)
+  (* let f1 := def_basic _at baset in *)
+  (* let f2 := def_basic bt baset in *)
+  (* let f3 := def_pair ct baset _at bt in *)
+  (* my_append Ad_ (my_append f1 (my_append f2 f3)) *)
 
 with process_ast_desc (x_value : ast_desc) : ast_desc :=
-  Ad_fixme "TODO:Ad_process_ast_desc  x"
+  Ad_fixme Ad_Ad_process_ast_desc
 
 with process_ast_desc2 (al : ast_desc) : ast_desc :=
   match al with
-  | Ad_empty_list => ""
+  | Ad_empty_list => Ad_empty
   | cons h_value t_value =>
     if Stdlib.op_exclamationeq t_value nil then
-      String.append (extract_root h_value)
-        (String.append "^" (process_ast_desc3 t_value))
+      my_append (extract_root h_value)
+        (my_append Ad_caret (process_ast_desc3 t_value))
     else
-      "[]"
+      Ad_empty_array
   end
 
 with process_ast_desc3 (al : list ast_desc) : ast_desc :=
   match al with
-  | Ad_empty_list => ""
+  | Ad_empty_list => Ad_empty
   | cons h_value t_value =>
     if Stdlib.op_exclamationeq t_value nil then
-      String.append (extract_root h_value)
-        (String.append "^" (process_ast_desc4 t_value))
+      my_append (extract_root h_value)
+        (my_append Ad_caret (process_ast_desc4 t_value))
     else
-      "ERR1"
+      Ad_error
   end
 
 with process_ast_desc4 (al : list ast_desc) : ast_desc :=
   match al with
-  | Ad_empty_list => ""
+  | Ad_empty_list => Ad_empty
   | cons h_value t_value =>
     if Stdlib.op_exclamationeq t_value nil then
-      String.append (extract_root h_value) (String.append "^" "...TRUNCATED...")
+      my_append (extract_root h_value) (my_append Ad_caret Ad_TRUNCATED)
     else
-      "errr2"
+       Ad_errr
   end
 
 with process_root_list (a_value : ast_desc) : ast_desc :=
   match a_value with
-  | Ad_empty_list => ""
+  | Ad_empty_list => Ad_empty
   | cons x_value t_value =>
     let v1 := extract_root x_value in
     if Stdlib.op_exclamationeq t_value nil then
-      String.append v1 (String.append "^" (process_root_list t_value))
+      my_append v1 (my_append Ad_caret (process_root_list t_value))
     else
       v1
   end
 
-with tostring (x_value : ast_desc) : ast_desc := "todofixme"
+with tostring (x_value : ast_desc) : ast_desc := Ad_todofixme
 
 with ast_desc_to_yojson (x_value : ast_desc) : ast_desc :=
   x_value
@@ -294,12 +306,12 @@ with ast_desc_to_yojson (x_value : ast_desc) : ast_desc :=
 with process_generic_type_print
   (a_value : ast_desc) (b_value : ast_desc) (c_value : ast_desc) : unit :=
   let yj := tostring (ast_desc_to_yojson c_value) in
-  let dd := String.append "process_generic_type" (String.append a_value b_value)
+  let dd := my_append Ad_process_generic_type (my_append a_value b_value)
     in
   let yj1 := process_root_list c_value in
   let '_ := CoqOfOCaml.Stdlib.print_endline yj in
   let '_ := CoqOfOCaml.Stdlib.print_endline dd in
-  CoqOfOCaml.Stdlib.print_endline (String.append "NEW:" yj1)
+  CoqOfOCaml.Stdlib.print_endline (my_append Ad_NEW yj1)
 
 with process_generic_type
   (a_value : ast_desc) (b_value : ast_desc) (c_value : ast_desc) : ast_desc :=
@@ -315,135 +327,135 @@ with process_structure_item_desc (x_value : ast_desc) : ast_desc :=
   Ad_process_structure_item_desc x_value
 
 with process_structure_items (x_value : list ast_desc) : ast_desc :=
-  process_generic_list "process_structure_items" x_value process_structure_item
+  process_generic_list Ad_process_structure_items x_value process_structure_item
 
 with extract_root (x_value : ast_desc) : ast_desc :=
   match x_value with
-  | Ad_fixme _ => "Fixme1"
-  | Ad_process_ast_desc _ => "Fixme2"
+  | Ad_fixme _ => Ad_Fixme1
+  | Ad_process_ast_desc _ => Ad_Fixme2_Da
   |
     Ad_root {|
       simple_ast_root.sa_role := arole;
         simple_ast_root.sa_type := atype;
         simple_ast_root.sa_list := alist
         |} =>
-    String.append "(rec_root "
-      (String.append arole
-        (String.append "^"
-          (String.append atype
-            (String.append "^" (String.append (process_root_list alist) ")")))))
-  | Ad_pos => process_generic_type3 "ast_desc" "Ad_pos" nil
+    my_append Ad_open_paren_rec_root Ad_
+      (my_append arole
+        (my_append Ad_caret
+          (my_append atype
+            (my_append Ad_caret (my_append (process_root_list alist) Ad_close_parens)))))
+  | Ad_pos => process_generic_type3 Ad_ast_desc_Da Ad_Ad_pos_Da nil
   | Ad_process_arg_label_expression_list ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_arg_label_expression_list"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_arg_label_expression_list_Da
+      process_ast_desc ast_desc0
   | Ad_process_arg_label_expression ast_desc0 ast_desc1 =>
-    process_generic_type3 "ast_desc" "Ad_process_arg_label_expression"
-      [ process_ast_desc ast_desc0; process_ast_desc ast_desc1 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_arg_label_expression_Da
+      [ process_ast_desc ast_desc0, process_ast_desc ast_desc1 ]
   | Ad_process_string_loc_list_pattern_option =>
-    process_generic_type3 "ast_desc" "Ad_process_string_loc_list_pattern_option"
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_string_loc_list_pattern_option_Da
       nil
   | Ad_process_loc ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_loc"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_loc_Da
+       process_ast_desc ast_desc0
   | Ad_process_value_binding_list =>
-    process_generic_type3 "ast_desc" "Ad_process_value_binding_list" nil
-  | Ad_attributes => process_generic_type3 "ast_desc" "Ad_attributes" nil
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_value_binding_list_Da nil
+  | Ad_attributes => process_generic_type3 Ad_ast_desc_Da Ad_Ad_attributes_Da nil
   | Ad_process_generic_list string0 ast_desc1 =>
-    process_generic_type3 "ast_desc" "Ad_process_generic_list"
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_generic_list_Da
       [
-        process_string string0;
-        Ad_fixme "((*P4*) (*emit_core_type_numbered*)ast_desc1)"
+        process_string string0,
+        Ad_fixme Ad_P4
       ]
   | Ad_quote string0 ast_desc1 =>
-    process_generic_type3 "ast_desc" "Ad_quote"
-      [ process_string string0; process_string ast_desc1 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_quote_Da
+      [ process_string string0, process_string ast_desc1 ]
   | Ad_int int0 =>
-    process_generic_type3 "ast_desc" "Ad_int" [ process_int int0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_int_Da process_int int0
   | Ad_bool bool0 =>
-    process_generic_type3 "ast_desc" "Ad_bool" [ process_bool bool0 ]
-  | Ad_loc_stack => process_generic_type3 "ast_desc" "Ad_loc_stack" nil
-  | Ad_loc2 => process_generic_type3 "ast_desc" "Ad_loc2" nil
-  | Ad_loc => process_generic_type3 "ast_desc" "Ad_loc" nil
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_bool_Da process_bool bool0
+  | Ad_loc_stack => process_generic_type3 Ad_ast_desc_Da Ad_Ad_loc_stack_Da nil
+  | Ad_loc2 => process_generic_type3 Ad_ast_desc_Da Ad_Ad_loc2_Da nil
+  | Ad_loc => process_generic_type3 Ad_ast_desc_Da Ad_Ad_loc_Da nil
   | Ad_process_structure_items ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_structure_items"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_structure_items_Da
+       process_ast_desc ast_desc0
   | Ad_process_type_declaration_list ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_type_declaration_list"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_type_declaration_list_Da
+       process_ast_desc ast_desc0
   | Ad_arg_label_expression_list ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_arg_label_expression_list"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_arg_label_expression_list_Da
+      process_ast_desc ast_desc0
   | Ad_process_list_tail ast_desc0 ast_desc1 =>
-    process_generic_type3 "ast_desc" "Ad_process_list_tail"
-      [ process_ast_desc ast_desc0; process_ast_desc ast_desc1 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_list_tail_Da
+      [ process_ast_desc ast_desc0, process_ast_desc ast_desc1 ]
   | Ad_process_cstrs ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_cstrs"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_cstrs_Da
+      process_ast_desc ast_desc0
   | Ad_process_params ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_params"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_params_Da
+      process_ast_desc ast_desc0
   | Ad_process_structure_item_desc ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_structure_item_desc"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_structure_item_desc_Da
+      process_ast_desc ast_desc0
   | Ad_process_structure_item ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_structure_item"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_structure_item_Da
+      process_ast_desc ast_desc0
   | Ad_process_label_declaration_list ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_label_declaration_list"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_label_declaration_list_Da
+      process_ast_desc ast_desc0
   | Ad_process_arg_constructor_declaration ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_arg_constructor_declaration"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_arg_constructor_declaration_Da
+      process_ast_desc ast_desc0
   | Ad_process_var_list ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_var_list"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_var_list_Da
+      process_ast_desc ast_desc0
   | Ad_process_cases ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_process_cases"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc Ad_Ad_process_cases
+      process_ast_desc ast_desc0
   | Ad_list ast_desc0 =>
-    process_generic_type3 "ast_desc" "Ad_list"
-      [ process_ast_desc ast_desc0 ]
+    process_generic_type3 Ad_ast_desc Ad_Ad_list
+      process_ast_desc ast_desc0
   | Ad_empty_list string0 =>
-    process_generic_type3 "ast_desc" "Ad_empty_list" [ process_string string0 ]
+    process_generic_type3 Ad_ast_desc_Da Ad_Ad_empty_list_Da process_string string0
   | Ad_Ident string0 =>
-    String.append "(Ad_Ident """ (String.append string0 ")""")
+    my_append Ad_open_parenAd_Ident Ad__Da_Da (my_append string0 Ad_close_parens_Da_Da)
   | Ad_String string0 =>
-    String.append "(Ad_String """ (String.append string0 """)")
-  | Ad_NoString => process_generic_type3 "ast_desc" "Ad_NoString" nil
-  | Ad_None => process_generic_type3 "ast_desc" "Ad_None" nil
+    my_append Ad_open_parenAd_String Ad__Da_Da (my_append string0 Ad__Da_Da_Da)
+  | Ad_NoString => process_generic_type3 Ad_ast_desc_Da Ad_Ad_NoString_Da nil
+  | Ad_None => process_generic_type3 Ad_ast_desc_Da Ad_Ad_None_Da nil
   end.
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var" [ string_value "none" ];
-      process_generic_type "expression_desc" "Pexp_constant"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_none_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
         [
-          process_generic_type "constant" "Pconst_string"
-            [ string_value " none "; process_string_option ]
+          process_generic_type Ad_constant_Da Ad_Pconst_string_Da
+            [ string_value Ad_ none Ad_, process_string_option ]
         ]
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_vars_list" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_vars_list_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "process_vars_list";
+                    Ad_process_vars_list_Da,
                   process_string_option
                 ]
             ]
@@ -451,24 +463,24 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_arg_constructor_declaration" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_arg_constructor_declaration_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "process_arg_constructor_declaration";
+                    Ad_process_arg_constructor_declaration_Da,
                   process_string_option
                 ]
             ]
@@ -476,24 +488,24 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_label_declaration_list" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_label_declaration_list_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "process_label_declaration_list";
+                    Ad_process_label_declaration_list_Da,
                   process_string_option
                 ]
             ]
@@ -501,24 +513,24 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_params" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_params_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "process_params";
+                    Ad_process_params_Da,
                   process_string_option
                 ]
             ]
@@ -526,24 +538,24 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_cstrs" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_cstrs_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "process_cstrs";
+                    Ad_process_cstrs_Da,
                   process_string_option
                 ]
             ]
@@ -551,24 +563,24 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_core_type_list" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_core_type_list_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "process_core_type_list";
+                    Ad_process_core_type_list_Da,
                   process_string_option
                 ]
             ]
@@ -576,24 +588,24 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_type_declaration_list" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_type_declaration_list_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "process_type_declaration_list";
+                    Ad_process_type_declaration_list_Da,
                   process_string_option
                 ]
             ]
@@ -601,151 +613,151 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var" [ string_value "loc" ];
-      process_generic_type "expression_desc" "Pexp_constant"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_loc_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
         [
-          process_generic_type "constant" "Pconst_string"
-            [ string_value "loc"; process_string_option ]
+          process_generic_type Ad_constant_Da Ad_Pconst_string_Da
+            [ string_value Ad_loc_Da, process_string_option ]
         ]
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var" [ string_value "loc2" ];
-      process_generic_type "expression_desc" "Pexp_constant"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_loc2_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
         [
-          process_generic_type "constant" "Pconst_string"
-            [ string_value "loc"; process_string_option ]
+          process_generic_type Ad_constant_Da Ad_Pconst_string_Da
+            [ string_value Ad_loc_Da, process_string_option ]
         ]
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "loc_stack" ];
-      process_generic_type "expression_desc" "Pexp_constant"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_loc_stack_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
         [
-          process_generic_type "constant" "Pconst_string"
-            [ string_value "loc"; process_string_option ]
+          process_generic_type Ad_constant_Da Ad_Pconst_string_Da
+            [ string_value Ad_loc_Da, process_string_option ]
         ]
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_generic_type" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_generic_type_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_constraint"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_constraint_Da
             [
-              process_generic_type "pattern_desc" "Ppat_var"
-                [ string_value "a" ];
-              process_generic_type "core_type_desc"
-                "Ptyp_constr"
+              process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+                [ string_value Ad_a_Da ],
+              process_generic_type Ad_core_type_desc_Da
+                Ad_Ptyp_constr_Da
                 [
                   ident
-                    "string";
+                    Ad_string_Da,
                   process_core_type_list
                     nil
                 ]
-            ];
-          process_generic_type "expression_desc" "Pexp_fun"
+            ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
             [
-              process_generic_type "arg_label" "Nolabel" nil;
-              none;
-              process_generic_type "pattern_desc"
-                "Ppat_constraint"
+              process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+              none,
+              process_generic_type Ad_pattern_desc_Da
+                Ad_Ppat_constraint_Da
                 [
                   process_generic_type
-                    "pattern_desc"
-                    "Ppat_var"
+                    Ad_pattern_desc_Da
+                    Ad_Ppat_var_Da
                     [
                       string_value
-                        "b"
-                    ];
+                        Ad_b_Da
+                    ],
                   process_generic_type
-                    "core_type_desc"
-                    "Ptyp_constr"
+                    Ad_core_type_desc_Da
+                    Ad_Ptyp_constr_Da
                     [
                       ident
-                        "string";
+                        Ad_string_Da,
                       process_core_type_list
                         nil
                     ]
-                ];
-              process_generic_type "expression_desc"
-                "Pexp_fun"
+                ],
+              process_generic_type Ad_expression_desc_Da
+                Ad_Pexp_fun_Da
                 [
                   process_generic_type
-                    "arg_label"
-                    "Nolabel"
-                    nil;
-                  none;
+                    Ad_arg_label_Da
+                    Ad_Nolabel_Da
+                    nil,
+                  none,
                   process_generic_type
-                    "pattern_desc"
-                    "Ppat_constraint"
+                    Ad_pattern_desc_Da
+                    Ad_Ppat_constraint_Da
                     [
                       process_generic_type
-                        "pattern_desc"
-                        "Ppat_var"
+                        Ad_pattern_desc_Da
+                        Ad_Ppat_var_Da
                         [
                           string_value
-                            "c"
-                        ];
+                            Ad_c_Da
+                        ],
                       process_generic_type
-                        "core_type_desc"
-                        "Ptyp_constr"
+                        Ad_core_type_desc_Da
+                        Ad_Ptyp_constr_Da
                         [
                           ident
-                            "list";
+                            Ad_list_Da,
                           process_core_type_list
                             [
                               process_generic_type
-                                "core_type_desc"
-                                "Ptyp_constr"
+                                Ad_core_type_desc_Da
+                                Ad_Ptyp_constr_Da
                                 [
                                   ident
-                                    "string";
+                                    Ad_string_Da,
                                   process_core_type_list
                                     nil
                                 ]
                             ]
                         ]
-                    ];
+                    ],
                   process_generic_type
-                    "expression_desc"
-                    "Pexp_constraint"
+                    Ad_expression_desc_Da
+                    Ad_Pexp_constraint_Da
                     [
                       process_generic_type
-                        "expression_desc"
-                        "Pexp_constant"
+                        Ad_expression_desc_Da
+                        Ad_Pexp_constant_Da
                         [
                           process_generic_type
-                            "constant"
-                            "Pconst_string"
+                            Ad_constant_Da
+                            Ad_Pconst_string_Da
                             [
                               string_value
-                                "process_generic_type";
+                                Ad_process_generic_type_Da,
                               process_string_option
                             ]
-                        ];
+                        ],
                       process_generic_type
-                        "core_type_desc"
-                        "Ptyp_constr"
+                        Ad_core_type_desc_Da
+                        Ad_Ptyp_constr_Da
                         [
                           ident
-                            "string";
+                            Ad_string_Da,
                           process_core_type_list
                             nil
                         ]
@@ -756,24 +768,24 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_loc" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_loc_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "a" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_a_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "process_loc";
+                    Ad_process_loc_Da,
                   process_string_option
                 ]
             ]
@@ -781,23 +793,23 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var" [ string_value "ident" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_ident_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "a" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_a_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "ident";
+                    Ad_ident_Da,
                   process_string_option
                 ]
             ]
@@ -805,24 +817,24 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_string_loc_list_pattern_option" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_string_loc_list_pattern_option_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "process_string_loc_list_pattern_option";
+                    Ad_process_string_loc_list_pattern_option_Da,
                   process_string_option
                 ]
             ]
@@ -830,32 +842,32 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_arg_label_expression" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_arg_label_expression_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_fun"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
             [
-              process_generic_type "arg_label" "Nolabel" nil;
-              none;
-              process_generic_type "pattern_desc" "Ppat_var"
-                [ string_value "y" ];
-              process_generic_type "expression_desc"
-                "Pexp_constant"
+              process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+              none,
+              process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+                [ string_value Ad_y_Da ],
+              process_generic_type Ad_expression_desc_Da
+                Ad_Pexp_constant_Da
                 [
                   process_generic_type
-                    "constant"
-                    "Pconst_string"
+                    Ad_constant_Da
+                    Ad_Pconst_string_Da
                     [
                       string_value
-                        "process_arg_label_expression";
+                        Ad_process_arg_label_expression_Da,
                       process_string_option
                     ]
                 ]
@@ -864,24 +876,24 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_expression_list" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_expression_list_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_constant"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
             [
-              process_generic_type "constant"
-                "Pconst_string"
+              process_generic_type Ad_constant_Da
+                Ad_Pconst_string_Da
                 [
                   string_value
-                    "process_expression_list";
+                    Ad_process_expression_list_Da,
                   process_string_option
                 ]
             ]
@@ -889,53 +901,53 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var"
-        [ string_value "process_structure_items" ];
-      process_generic_type "expression_desc" "Pexp_fun"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+        [ string_value Ad_process_structure_items_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type "arg_label" "Nolabel" nil;
-          none;
-          process_generic_type "pattern_desc" "Ppat_var"
-            [ string_value "x" ];
-          process_generic_type "expression_desc" "Pexp_apply"
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          none,
+          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
+            [ string_value Ad_x_Da ],
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_apply_Da
             [
-              process_generic_type "expression_desc"
-                "Pexp_ident"
-                [ ident "^" ];
+              process_generic_type Ad_expression_desc_Da
+                Ad_Pexp_ident_Da
+                [ ident Ad_caret ],
               process_arg_label_expression_list
                 [
                   process_arg_label_expression
                     (process_generic_type
-                      "arg_label"
-                      "Nolabel"
+                      Ad_arg_label_Da
+                      Ad_Nolabel_Da
                       nil)
                     (process_generic_type
-                      "expression_desc"
-                      "Pexp_constant"
+                      Ad_expression_desc_Da
+                      Ad_Pexp_constant_Da
                       [
                         process_generic_type
-                          "constant"
-                          "Pconst_string"
+                          Ad_constant_Da
+                          Ad_Pconst_string_Da
                           [
                             string_value
-                              "process_structure_items";
+                              Ad_process_structure_items_Da,
                             process_string_option
                           ]
-                      ]);
+                      ]),
                   process_arg_label_expression
                     (process_generic_type
-                      "arg_label"
-                      "Nolabel"
+                      Ad_arg_label_Da
+                      Ad_Nolabel_Da
                       nil)
                     (process_generic_type
-                      "expression_desc"
-                      "Pexp_ident"
+                      Ad_expression_desc_Da
+                      Ad_Pexp_ident_Da
                       [
                         ident
-                          "x"
+                          Ad_x_Da
                       ])
                 ]
             ]
@@ -943,652 +955,652 @@ Definition foo1 : ast_desc :=
     ].
 
 Definition foo1 : ast_desc :=
-  process_generic_type "structure_item_desc" "Pstr_value"
+  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type "rec_flag" "Nonrecursive" nil;
-      process_generic_type "pattern_desc" "Ppat_var" [ string_value "foo1" ];
-      process_generic_type "expression_desc" "Pexp_apply"
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_foo1_Da ],
+      process_generic_type Ad_expression_desc_Da Ad_Pexp_apply_Da
         [
-          process_generic_type "expression_desc" "Pexp_ident"
-            [ ident "process_generic_type" ];
+          process_generic_type Ad_expression_desc_Da Ad_Pexp_ident_Da
+            [ ident Ad_process_generic_type_Da ],
           process_arg_label_expression_list
             [
               process_arg_label_expression
                 (process_generic_type
-                  "arg_label"
-                  "Nolabel"
+                  Ad_arg_label_Da
+                  Ad_Nolabel_Da
                   nil)
                 (process_generic_type
-                  "expression_desc"
-                  "Pexp_constant"
+                  Ad_expression_desc_Da
+                  Ad_Pexp_constant_Da
                   [
                     process_generic_type
-                      "constant"
-                      "Pconst_string"
+                      Ad_constant_Da
+                      Ad_Pconst_string_Da
                       [
                         string_value
-                          "structure_item_desc";
+                          Ad_structure_item_desc_Da,
                         process_string_option
                       ]
-                  ]);
+                  ]),
               process_arg_label_expression
                 (process_generic_type
-                  "arg_label"
-                  "Nolabel"
+                  Ad_arg_label_Da
+                  Ad_Nolabel_Da
                   nil)
                 (process_generic_type
-                  "expression_desc"
-                  "Pexp_constant"
+                  Ad_expression_desc_Da
+                  Ad_Pexp_constant_Da
                   [
                     process_generic_type
-                      "constant"
-                      "Pconst_string"
+                      Ad_constant_Da
+                      Ad_Pconst_string_Da
                       [
                         string_value
-                          "Pstr_type";
+                          Ad_Pstr_type_Da,
                         process_string_option
                       ]
-                  ]);
+                  ]),
               process_arg_label_expression
                 (process_generic_type
-                  "arg_label"
-                  "Nolabel"
+                  Ad_arg_label_Da
+                  Ad_Nolabel_Da
                   nil)
                 (process_generic_type
-                  "expression_desc"
-                  "Pexp_construct"
+                  Ad_expression_desc_Da
+                  Ad_Pexp_construct_Da
                   [
                     ident
-                      "::";
+                      Ad_::_Da,
                     process_generic_type
-                      "expression_desc"
-                      "Pexp_tuple"
+                      Ad_expression_desc_Da
+                      Ad_Pexp_tuple_Da
                       [
                         process_expression_list
                           [
                             process_generic_type
-                              "expression_desc"
-                              "Pexp_apply"
+                              Ad_expression_desc_Da
+                              Ad_Pexp_apply_Da
                               [
                                 process_generic_type
-                                  "expression_desc"
-                                  "Pexp_ident"
+                                  Ad_expression_desc_Da
+                                  Ad_Pexp_ident_Da
                                   [
                                     ident
-                                      "process_generic_type"
-                                  ];
+                                      Ad_process_generic_type_Da
+                                  ],
                                 process_arg_label_expression_list
                                   [
                                     process_arg_label_expression
                                       (process_generic_type
-                                        "arg_label"
-                                        "Nolabel"
+                                        Ad_arg_label_Da
+                                        Ad_Nolabel_Da
                                         nil)
                                       (process_generic_type
-                                        "expression_desc"
-                                        "Pexp_constant"
+                                        Ad_expression_desc_Da
+                                        Ad_Pexp_constant_Da
                                         [
                                           process_generic_type
-                                            "constant"
-                                            "Pconst_string"
+                                            Ad_constant_Da
+                                            Ad_Pconst_string_Da
                                             [
                                               string_value
-                                                "rec_flag";
+                                                Ad_rec_flag_Da,
                                               process_string_option
                                             ]
-                                        ]);
+                                        ]),
                                     process_arg_label_expression
                                       (process_generic_type
-                                        "arg_label"
-                                        "Nolabel"
+                                        Ad_arg_label_Da
+                                        Ad_Nolabel_Da
                                         nil)
                                       (process_generic_type
-                                        "expression_desc"
-                                        "Pexp_constant"
+                                        Ad_expression_desc_Da
+                                        Ad_Pexp_constant_Da
                                         [
                                           process_generic_type
-                                            "constant"
-                                            "Pconst_string"
+                                            Ad_constant_Da
+                                            Ad_Pconst_string_Da
                                             [
                                               string_value
-                                                "Recursive";
+                                                Ad_Recursive_Da,
                                               process_string_option
                                             ]
-                                        ]);
+                                        ]),
                                     process_arg_label_expression
                                       (process_generic_type
-                                        "arg_label"
-                                        "Nolabel"
+                                        Ad_arg_label_Da
+                                        Ad_Nolabel_Da
                                         nil)
                                       (process_generic_type
-                                        "expression_desc"
-                                        "Pexp_construct"
+                                        Ad_expression_desc_Da
+                                        Ad_Pexp_construct_Da
                                         [
                                           ident
-                                            "[]";
+                                            Ad_empty_list,
                                           none
                                         ])
                                   ]
-                              ];
+                              ],
                             process_generic_type
-                              "expression_desc"
-                              "Pexp_construct"
+                              Ad_expression_desc_Da
+                              Ad_Pexp_construct_Da
                               [
                                 ident
-                                  "::";
+                                  Ad_::_Da,
                                 process_generic_type
-                                  "expression_desc"
-                                  "Pexp_tuple"
+                                  Ad_expression_desc_Da
+                                  Ad_Pexp_tuple_Da
                                   [
                                     process_expression_list
                                       [
                                         process_generic_type
-                                          "expression_desc"
-                                          "Pexp_apply"
+                                          Ad_expression_desc_Da
+                                          Ad_Pexp_apply_Da
                                           [
                                             process_generic_type
-                                              "expression_desc"
-                                              "Pexp_ident"
+                                              Ad_expression_desc_Da
+                                              Ad_Pexp_ident_Da
                                               [
                                                 ident
-                                                  "process_type_declaration_list"
-                                              ];
+                                                  Ad_process_type_declaration_list_Da
+                                              ],
                                             process_arg_label_expression_list
                                               [
                                                 process_arg_label_expression
                                                   (process_generic_type
-                                                    "arg_label"
-                                                    "Nolabel"
+                                                    Ad_arg_label_Da
+                                                    Ad_Nolabel_Da
                                                     nil)
                                                   (process_generic_type
-                                                    "expression_desc"
-                                                    "Pexp_construct"
+                                                    Ad_expression_desc_Da
+                                                    Ad_Pexp_construct_Da
                                                     [
                                                       ident
-                                                        "::";
+                                                        Ad_::_Da,
                                                       process_generic_type
-                                                        "expression_desc"
-                                                        "Pexp_tuple"
+                                                        Ad_expression_desc_Da
+                                                        Ad_Pexp_tuple_Da
                                                         [
                                                           process_expression_list
                                                             [
                                                               process_generic_type
-                                                                "expression_desc"
-                                                                "Pexp_apply"
+                                                                Ad_expression_desc_Da
+                                                                Ad_Pexp_apply_Da
                                                                 [
                                                                   process_generic_type
-                                                                    "expression_desc"
-                                                                    "Pexp_ident"
+                                                                    Ad_expression_desc_Da
+                                                                    Ad_Pexp_ident_Da
                                                                     [
                                                                       ident
-                                                                        "^"
-                                                                    ];
+                                                                        Ad_caret
+                                                                    ],
                                                                   process_arg_label_expression_list
                                                                     [
                                                                       process_arg_label_expression
                                                                         (process_generic_type
-                                                                          "arg_label"
-                                                                          "Nolabel"
+                                                                          Ad_arg_label_Da
+                                                                          Ad_Nolabel_Da
                                                                           nil)
                                                                         (process_generic_type
-                                                                          "expression_desc"
-                                                                          "Pexp_apply"
+                                                                          Ad_expression_desc_Da
+                                                                          Ad_Pexp_apply_Da
                                                                           [
                                                                             process_generic_type
-                                                                              "expression_desc"
-                                                                              "Pexp_ident"
+                                                                              Ad_expression_desc_Da
+                                                                              Ad_Pexp_ident_Da
                                                                               [
                                                                                 ident
-                                                                                  "string"
-                                                                              ];
+                                                                                  Ad_string_Da
+                                                                              ],
                                                                             process_arg_label_expression_list
                                                                               [
                                                                                 process_arg_label_expression
                                                                                   (process_generic_type
-                                                                                    "arg_label"
-                                                                                    "Nolabel"
+                                                                                    Ad_arg_label_Da
+                                                                                    Ad_Nolabel_Da
                                                                                     nil)
                                                                                   (process_generic_type
-                                                                                    "expression_desc"
-                                                                                    "Pexp_constant"
+                                                                                    Ad_expression_desc_Da
+                                                                                    Ad_Pexp_constant_Da
                                                                                     [
                                                                                       process_generic_type
-                                                                                        "constant"
-                                                                                        "Pconst_string"
+                                                                                        Ad_constant_Da
+                                                                                        Ad_Pconst_string_Da
                                                                                         [
                                                                                           string_value
-                                                                                            "__";
+                                                                                            Ad____Da,
                                                                                           process_string_option
                                                                                         ]
                                                                                     ])
                                                                               ]
-                                                                          ]);
+                                                                          ]),
                                                                       process_arg_label_expression
                                                                         (process_generic_type
-                                                                          "arg_label"
-                                                                          "Nolabel"
+                                                                          Ad_arg_label_Da
+                                                                          Ad_Nolabel_Da
                                                                           nil)
                                                                         (process_generic_type
-                                                                          "expression_desc"
-                                                                          "Pexp_apply"
+                                                                          Ad_expression_desc_Da
+                                                                          Ad_Pexp_apply_Da
                                                                           [
                                                                             process_generic_type
-                                                                              "expression_desc"
-                                                                              "Pexp_ident"
+                                                                              Ad_expression_desc_Da
+                                                                              Ad_Pexp_ident_Da
                                                                               [
                                                                                 ident
-                                                                                  "^"
-                                                                              ];
+                                                                                  Ad_caret
+                                                                              ],
                                                                             process_arg_label_expression_list
                                                                               [
                                                                                 process_arg_label_expression
                                                                                   (process_generic_type
-                                                                                    "arg_label"
-                                                                                    "Nolabel"
+                                                                                    Ad_arg_label_Da
+                                                                                    Ad_Nolabel_Da
                                                                                     nil)
                                                                                   (process_generic_type
-                                                                                    "expression_desc"
-                                                                                    "Pexp_apply"
+                                                                                    Ad_expression_desc_Da
+                                                                                    Ad_Pexp_apply_Da
                                                                                     [
                                                                                       process_generic_type
-                                                                                        "expression_desc"
-                                                                                        "Pexp_ident"
+                                                                                        Ad_expression_desc_Da
+                                                                                        Ad_Pexp_ident_Da
                                                                                         [
                                                                                           ident
-                                                                                            "process_params"
-                                                                                        ];
+                                                                                            Ad_process_params_Da
+                                                                                        ],
                                                                                       process_arg_label_expression_list
                                                                                         [
                                                                                           process_arg_label_expression
                                                                                             (process_generic_type
-                                                                                              "arg_label"
-                                                                                              "Nolabel"
+                                                                                              Ad_arg_label_Da
+                                                                                              Ad_Nolabel_Da
                                                                                               nil)
                                                                                             (process_generic_type
-                                                                                              "expression_desc"
-                                                                                              "Pexp_construct"
+                                                                                              Ad_expression_desc_Da
+                                                                                              Ad_Pexp_construct_Da
                                                                                               [
                                                                                                 ident
-                                                                                                  "[]";
+                                                                                                  Ad_empty_list,
                                                                                                 none
                                                                                               ])
                                                                                         ]
-                                                                                    ]);
+                                                                                    ]),
                                                                                 process_arg_label_expression
                                                                                   (process_generic_type
-                                                                                    "arg_label"
-                                                                                    "Nolabel"
+                                                                                    Ad_arg_label_Da
+                                                                                    Ad_Nolabel_Da
                                                                                     nil)
                                                                                   (process_generic_type
-                                                                                    "expression_desc"
-                                                                                    "Pexp_apply"
+                                                                                    Ad_expression_desc_Da
+                                                                                    Ad_Pexp_apply_Da
                                                                                     [
                                                                                       process_generic_type
-                                                                                        "expression_desc"
-                                                                                        "Pexp_ident"
+                                                                                        Ad_expression_desc_Da
+                                                                                        Ad_Pexp_ident_Da
                                                                                         [
                                                                                           ident
-                                                                                            "^"
-                                                                                        ];
+                                                                                            Ad_caret
+                                                                                        ],
                                                                                       process_arg_label_expression_list
                                                                                         [
                                                                                           process_arg_label_expression
                                                                                             (process_generic_type
-                                                                                              "arg_label"
-                                                                                              "Nolabel"
+                                                                                              Ad_arg_label_Da
+                                                                                              Ad_Nolabel_Da
                                                                                               nil)
                                                                                             (process_generic_type
-                                                                                              "expression_desc"
-                                                                                              "Pexp_apply"
+                                                                                              Ad_expression_desc_Da
+                                                                                              Ad_Pexp_apply_Da
                                                                                               [
                                                                                                 process_generic_type
-                                                                                                  "expression_desc"
-                                                                                                  "Pexp_ident"
+                                                                                                  Ad_expression_desc_Da
+                                                                                                  Ad_Pexp_ident_Da
                                                                                                   [
                                                                                                     ident
-                                                                                                      "process_cstrs"
-                                                                                                  ];
+                                                                                                      Ad_process_cstrs_Da
+                                                                                                  ],
                                                                                                 process_arg_label_expression_list
                                                                                                   [
                                                                                                     process_arg_label_expression
                                                                                                       (process_generic_type
-                                                                                                        "arg_label"
-                                                                                                        "Nolabel"
+                                                                                                        Ad_arg_label_Da
+                                                                                                        Ad_Nolabel_Da
                                                                                                         nil)
                                                                                                       (process_generic_type
-                                                                                                        "expression_desc"
-                                                                                                        "Pexp_construct"
+                                                                                                        Ad_expression_desc_Da
+                                                                                                        Ad_Pexp_construct_Da
                                                                                                         [
                                                                                                           ident
-                                                                                                            "[]";
+                                                                                                            Ad_empty_list,
                                                                                                           none
                                                                                                         ])
                                                                                                   ]
-                                                                                              ]);
+                                                                                              ]),
                                                                                           process_arg_label_expression
                                                                                             (process_generic_type
-                                                                                              "arg_label"
-                                                                                              "Nolabel"
+                                                                                              Ad_arg_label_Da
+                                                                                              Ad_Nolabel_Da
                                                                                               nil)
                                                                                             (process_generic_type
-                                                                                              "expression_desc"
-                                                                                              "Pexp_apply"
+                                                                                              Ad_expression_desc_Da
+                                                                                              Ad_Pexp_apply_Da
                                                                                               [
                                                                                                 process_generic_type
-                                                                                                  "expression_desc"
-                                                                                                  "Pexp_ident"
+                                                                                                  Ad_expression_desc_Da
+                                                                                                  Ad_Pexp_ident_Da
                                                                                                   [
                                                                                                     ident
-                                                                                                      "^"
-                                                                                                  ];
+                                                                                                      Ad_caret
+                                                                                                  ],
                                                                                                 process_arg_label_expression_list
                                                                                                   [
                                                                                                     process_arg_label_expression
                                                                                                       (process_generic_type
-                                                                                                        "arg_label"
-                                                                                                        "Nolabel"
+                                                                                                        Ad_arg_label_Da
+                                                                                                        Ad_Nolabel_Da
                                                                                                         nil)
                                                                                                       (process_generic_type
-                                                                                                        "expression_desc"
-                                                                                                        "Pexp_apply"
+                                                                                                        Ad_expression_desc_Da
+                                                                                                        Ad_Pexp_apply_Da
                                                                                                         [
                                                                                                           process_generic_type
-                                                                                                            "expression_desc"
-                                                                                                            "Pexp_ident"
+                                                                                                            Ad_expression_desc_Da
+                                                                                                            Ad_Pexp_ident_Da
                                                                                                             [
                                                                                                               ident
-                                                                                                                "process_generic_type"
-                                                                                                            ];
+                                                                                                                Ad_process_generic_type_Da
+                                                                                                            ],
                                                                                                           process_arg_label_expression_list
                                                                                                             [
                                                                                                               process_arg_label_expression
                                                                                                                 (process_generic_type
-                                                                                                                  "arg_label"
-                                                                                                                  "Nolabel"
+                                                                                                                  Ad_arg_label_Da
+                                                                                                                  Ad_Nolabel_Da
                                                                                                                   nil)
                                                                                                                 (process_generic_type
-                                                                                                                  "expression_desc"
-                                                                                                                  "Pexp_constant"
+                                                                                                                  Ad_expression_desc_Da
+                                                                                                                  Ad_Pexp_constant_Da
                                                                                                                   [
                                                                                                                     process_generic_type
-                                                                                                                      "constant"
-                                                                                                                      "Pconst_string"
+                                                                                                                      Ad_constant_Da
+                                                                                                                      Ad_Pconst_string_Da
                                                                                                                       [
                                                                                                                         string_value
-                                                                                                                          "type_kind";
+                                                                                                                          Ad_type_kind_Da,
                                                                                                                         process_string_option
                                                                                                                       ]
-                                                                                                                  ]);
+                                                                                                                  ]),
                                                                                                               process_arg_label_expression
                                                                                                                 (process_generic_type
-                                                                                                                  "arg_label"
-                                                                                                                  "Nolabel"
+                                                                                                                  Ad_arg_label_Da
+                                                                                                                  Ad_Nolabel_Da
                                                                                                                   nil)
                                                                                                                 (process_generic_type
-                                                                                                                  "expression_desc"
-                                                                                                                  "Pexp_constant"
+                                                                                                                  Ad_expression_desc_Da
+                                                                                                                  Ad_Pexp_constant_Da
                                                                                                                   [
                                                                                                                     process_generic_type
-                                                                                                                      "constant"
-                                                                                                                      "Pconst_string"
+                                                                                                                      Ad_constant_Da
+                                                                                                                      Ad_Pconst_string_Da
                                                                                                                       [
                                                                                                                         string_value
-                                                                                                                          "Ptype_abstract";
+                                                                                                                          Ad_Ptype_abstract_Da,
                                                                                                                         process_string_option
                                                                                                                       ]
-                                                                                                                  ]);
+                                                                                                                  ]),
                                                                                                               process_arg_label_expression
                                                                                                                 (process_generic_type
-                                                                                                                  "arg_label"
-                                                                                                                  "Nolabel"
+                                                                                                                  Ad_arg_label_Da
+                                                                                                                  Ad_Nolabel_Da
                                                                                                                   nil)
                                                                                                                 (process_generic_type
-                                                                                                                  "expression_desc"
-                                                                                                                  "Pexp_construct"
+                                                                                                                  Ad_expression_desc_Da
+                                                                                                                  Ad_Pexp_construct_Da
                                                                                                                   [
                                                                                                                     ident
-                                                                                                                      "[]";
+                                                                                                                      Ad_empty_list,
                                                                                                                     none
                                                                                                                   ])
                                                                                                             ]
-                                                                                                        ]);
+                                                                                                        ]),
                                                                                                     process_arg_label_expression
                                                                                                       (process_generic_type
-                                                                                                        "arg_label"
-                                                                                                        "Nolabel"
+                                                                                                        Ad_arg_label_Da
+                                                                                                        Ad_Nolabel_Da
                                                                                                         nil)
                                                                                                       (process_generic_type
-                                                                                                        "expression_desc"
-                                                                                                        "Pexp_apply"
+                                                                                                        Ad_expression_desc_Da
+                                                                                                        Ad_Pexp_apply_Da
                                                                                                         [
                                                                                                           process_generic_type
-                                                                                                            "expression_desc"
-                                                                                                            "Pexp_ident"
+                                                                                                            Ad_expression_desc_Da
+                                                                                                            Ad_Pexp_ident_Da
                                                                                                             [
                                                                                                               ident
-                                                                                                                "^"
-                                                                                                            ];
+                                                                                                                Ad_caret
+                                                                                                            ],
                                                                                                           process_arg_label_expression_list
                                                                                                             [
                                                                                                               process_arg_label_expression
                                                                                                                 (process_generic_type
-                                                                                                                  "arg_label"
-                                                                                                                  "Nolabel"
+                                                                                                                  Ad_arg_label_Da
+                                                                                                                  Ad_Nolabel_Da
                                                                                                                   nil)
                                                                                                                 (process_generic_type
-                                                                                                                  "expression_desc"
-                                                                                                                  "Pexp_apply"
+                                                                                                                  Ad_expression_desc_Da
+                                                                                                                  Ad_Pexp_apply_Da
                                                                                                                   [
                                                                                                                     process_generic_type
-                                                                                                                      "expression_desc"
-                                                                                                                      "Pexp_ident"
+                                                                                                                      Ad_expression_desc_Da
+                                                                                                                      Ad_Pexp_ident_Da
                                                                                                                       [
                                                                                                                         ident
-                                                                                                                          "process_generic_type"
-                                                                                                                      ];
+                                                                                                                          Ad_process_generic_type_Da
+                                                                                                                      ],
                                                                                                                     process_arg_label_expression_list
                                                                                                                       [
                                                                                                                         process_arg_label_expression
                                                                                                                           (process_generic_type
-                                                                                                                            "arg_label"
-                                                                                                                            "Nolabel"
+                                                                                                                            Ad_arg_label_Da
+                                                                                                                            Ad_Nolabel_Da
                                                                                                                             nil)
                                                                                                                           (process_generic_type
-                                                                                                                            "expression_desc"
-                                                                                                                            "Pexp_constant"
+                                                                                                                            Ad_expression_desc_Da
+                                                                                                                            Ad_Pexp_constant_Da
                                                                                                                             [
                                                                                                                               process_generic_type
-                                                                                                                                "constant"
-                                                                                                                                "Pconst_string"
+                                                                                                                                Ad_constant_Da
+                                                                                                                                Ad_Pconst_string_Da
                                                                                                                                 [
                                                                                                                                   string_value
-                                                                                                                                    "private_flag";
+                                                                                                                                    Ad_private_flag_Da,
                                                                                                                                   process_string_option
                                                                                                                                 ]
-                                                                                                                            ]);
+                                                                                                                            ]),
                                                                                                                         process_arg_label_expression
                                                                                                                           (process_generic_type
-                                                                                                                            "arg_label"
-                                                                                                                            "Nolabel"
+                                                                                                                            Ad_arg_label_Da
+                                                                                                                            Ad_Nolabel_Da
                                                                                                                             nil)
                                                                                                                           (process_generic_type
-                                                                                                                            "expression_desc"
-                                                                                                                            "Pexp_constant"
+                                                                                                                            Ad_expression_desc_Da
+                                                                                                                            Ad_Pexp_constant_Da
                                                                                                                             [
                                                                                                                               process_generic_type
-                                                                                                                                "constant"
-                                                                                                                                "Pconst_string"
+                                                                                                                                Ad_constant_Da
+                                                                                                                                Ad_Pconst_string_Da
                                                                                                                                 [
                                                                                                                                   string_value
-                                                                                                                                    "Public";
+                                                                                                                                    Ad_Public_Da,
                                                                                                                                   process_string_option
                                                                                                                                 ]
-                                                                                                                            ]);
+                                                                                                                            ]),
                                                                                                                         process_arg_label_expression
                                                                                                                           (process_generic_type
-                                                                                                                            "arg_label"
-                                                                                                                            "Nolabel"
+                                                                                                                            Ad_arg_label_Da
+                                                                                                                            Ad_Nolabel_Da
                                                                                                                             nil)
                                                                                                                           (process_generic_type
-                                                                                                                            "expression_desc"
-                                                                                                                            "Pexp_construct"
+                                                                                                                            Ad_expression_desc_Da
+                                                                                                                            Ad_Pexp_construct_Da
                                                                                                                             [
                                                                                                                               ident
-                                                                                                                                "[]";
+                                                                                                                                Ad_empty_list,
                                                                                                                               none
                                                                                                                             ])
                                                                                                                       ]
-                                                                                                                  ]);
+                                                                                                                  ]),
                                                                                                               process_arg_label_expression
                                                                                                                 (process_generic_type
-                                                                                                                  "arg_label"
-                                                                                                                  "Nolabel"
+                                                                                                                  Ad_arg_label_Da
+                                                                                                                  Ad_Nolabel_Da
                                                                                                                   nil)
                                                                                                                 (process_generic_type
-                                                                                                                  "expression_desc"
-                                                                                                                  "Pexp_apply"
+                                                                                                                  Ad_expression_desc_Da
+                                                                                                                  Ad_Pexp_apply_Da
                                                                                                                   [
                                                                                                                     process_generic_type
-                                                                                                                      "expression_desc"
-                                                                                                                      "Pexp_ident"
+                                                                                                                      Ad_expression_desc_Da
+                                                                                                                      Ad_Pexp_ident_Da
                                                                                                                       [
                                                                                                                         ident
-                                                                                                                          "process_generic_type"
-                                                                                                                      ];
+                                                                                                                          Ad_process_generic_type_Da
+                                                                                                                      ],
                                                                                                                     process_arg_label_expression_list
                                                                                                                       [
                                                                                                                         process_arg_label_expression
                                                                                                                           (process_generic_type
-                                                                                                                            "arg_label"
-                                                                                                                            "Nolabel"
+                                                                                                                            Ad_arg_label_Da
+                                                                                                                            Ad_Nolabel_Da
                                                                                                                             nil)
                                                                                                                           (process_generic_type
-                                                                                                                            "expression_desc"
-                                                                                                                            "Pexp_constant"
+                                                                                                                            Ad_expression_desc_Da
+                                                                                                                            Ad_Pexp_constant_Da
                                                                                                                             [
                                                                                                                               process_generic_type
-                                                                                                                                "constant"
-                                                                                                                                "Pconst_string"
+                                                                                                                                Ad_constant_Da
+                                                                                                                                Ad_Pconst_string_Da
                                                                                                                                 [
                                                                                                                                   string_value
-                                                                                                                                    "core_type_desc";
+                                                                                                                                    Ad_core_type_desc_Da,
                                                                                                                                   process_string_option
                                                                                                                                 ]
-                                                                                                                            ]);
+                                                                                                                            ]),
                                                                                                                         process_arg_label_expression
                                                                                                                           (process_generic_type
-                                                                                                                            "arg_label"
-                                                                                                                            "Nolabel"
+                                                                                                                            Ad_arg_label_Da
+                                                                                                                            Ad_Nolabel_Da
                                                                                                                             nil)
                                                                                                                           (process_generic_type
-                                                                                                                            "expression_desc"
-                                                                                                                            "Pexp_constant"
+                                                                                                                            Ad_expression_desc_Da
+                                                                                                                            Ad_Pexp_constant_Da
                                                                                                                             [
                                                                                                                               process_generic_type
-                                                                                                                                "constant"
-                                                                                                                                "Pconst_string"
+                                                                                                                                Ad_constant_Da
+                                                                                                                                Ad_Pconst_string_Da
                                                                                                                                 [
                                                                                                                                   string_value
-                                                                                                                                    "Ptyp_constr";
+                                                                                                                                    Ad_Ptyp_constr_Da,
                                                                                                                                   process_string_option
                                                                                                                                 ]
-                                                                                                                            ]);
+                                                                                                                            ]),
                                                                                                                         process_arg_label_expression
                                                                                                                           (process_generic_type
-                                                                                                                            "arg_label"
-                                                                                                                            "Nolabel"
+                                                                                                                            Ad_arg_label_Da
+                                                                                                                            Ad_Nolabel_Da
                                                                                                                             nil)
                                                                                                                           (process_generic_type
-                                                                                                                            "expression_desc"
-                                                                                                                            "Pexp_construct"
+                                                                                                                            Ad_expression_desc_Da
+                                                                                                                            Ad_Pexp_construct_Da
                                                                                                                             [
                                                                                                                               ident
-                                                                                                                                "::";
+                                                                                                                                Ad_::_Da,
                                                                                                                               process_generic_type
-                                                                                                                                "expression_desc"
-                                                                                                                                "Pexp_tuple"
+                                                                                                                                Ad_expression_desc_Da
+                                                                                                                                Ad_Pexp_tuple_Da
                                                                                                                                 [
                                                                                                                                   process_expression_list
                                                                                                                                     [
                                                                                                                                       process_generic_type
-                                                                                                                                        "expression_desc"
-                                                                                                                                        "Pexp_apply"
+                                                                                                                                        Ad_expression_desc_Da
+                                                                                                                                        Ad_Pexp_apply_Da
                                                                                                                                         [
                                                                                                                                           process_generic_type
-                                                                                                                                            "expression_desc"
-                                                                                                                                            "Pexp_ident"
+                                                                                                                                            Ad_expression_desc_Da
+                                                                                                                                            Ad_Pexp_ident_Da
                                                                                                                                             [
                                                                                                                                               ident
-                                                                                                                                                "ident"
-                                                                                                                                            ];
+                                                                                                                                                Ad_ident_Da
+                                                                                                                                            ],
                                                                                                                                           process_arg_label_expression_list
                                                                                                                                             [
                                                                                                                                               process_arg_label_expression
                                                                                                                                                 (process_generic_type
-                                                                                                                                                  "arg_label"
-                                                                                                                                                  "Nolabel"
+                                                                                                                                                  Ad_arg_label_Da
+                                                                                                                                                  Ad_Nolabel_Da
                                                                                                                                                   nil)
                                                                                                                                                 (process_generic_type
-                                                                                                                                                  "expression_desc"
-                                                                                                                                                  "Pexp_constant"
+                                                                                                                                                  Ad_expression_desc_Da
+                                                                                                                                                  Ad_Pexp_constant_Da
                                                                                                                                                   [
                                                                                                                                                     process_generic_type
-                                                                                                                                                      "constant"
-                                                                                                                                                      "Pconst_string"
+                                                                                                                                                      Ad_constant_Da
+                                                                                                                                                      Ad_Pconst_string_Da
                                                                                                                                                       [
                                                                                                                                                         string_value
-                                                                                                                                                          "Obj.t";
+                                                                                                                                                          Ad_Obj.t_Da,
                                                                                                                                                         process_string_option
                                                                                                                                                       ]
                                                                                                                                                   ])
                                                                                                                                             ]
-                                                                                                                                        ];
+                                                                                                                                        ],
                                                                                                                                       process_generic_type
-                                                                                                                                        "expression_desc"
-                                                                                                                                        "Pexp_construct"
+                                                                                                                                        Ad_expression_desc_Da
+                                                                                                                                        Ad_Pexp_construct_Da
                                                                                                                                         [
                                                                                                                                           ident
-                                                                                                                                            "::";
+                                                                                                                                            Ad_::_Da,
                                                                                                                                           process_generic_type
-                                                                                                                                            "expression_desc"
-                                                                                                                                            "Pexp_tuple"
+                                                                                                                                            Ad_expression_desc_Da
+                                                                                                                                            Ad_Pexp_tuple_Da
                                                                                                                                             [
                                                                                                                                               process_expression_list
                                                                                                                                                 [
                                                                                                                                                   process_generic_type
-                                                                                                                                                    "expression_desc"
-                                                                                                                                                    "Pexp_apply"
+                                                                                                                                                    Ad_expression_desc_Da
+                                                                                                                                                    Ad_Pexp_apply_Da
                                                                                                                                                     [
                                                                                                                                                       process_generic_type
-                                                                                                                                                        "expression_desc"
-                                                                                                                                                        "Pexp_ident"
+                                                                                                                                                        Ad_expression_desc_Da
+                                                                                                                                                        Ad_Pexp_ident_Da
                                                                                                                                                         [
                                                                                                                                                           ident
-                                                                                                                                                            "process_core_type_list"
-                                                                                                                                                        ];
+                                                                                                                                                            Ad_process_core_type_list_Da
+                                                                                                                                                        ],
                                                                                                                                                       process_arg_label_expression_list
                                                                                                                                                         [
                                                                                                                                                           process_arg_label_expression
                                                                                                                                                             (process_generic_type
-                                                                                                                                                              "arg_label"
-                                                                                                                                                              "Nolabel"
+                                                                                                                                                              Ad_arg_label_Da
+                                                                                                                                                              Ad_Nolabel_Da
                                                                                                                                                               nil)
                                                                                                                                                             (process_generic_type
-                                                                                                                                                              "expression_desc"
-                                                                                                                                                              "Pexp_construct"
+                                                                                                                                                              Ad_expression_desc_Da
+                                                                                                                                                              Ad_Pexp_construct_Da
                                                                                                                                                               [
                                                                                                                                                                 ident
-                                                                                                                                                                  "[]";
+                                                                                                                                                                  Ad_empty_list,
                                                                                                                                                                 none
                                                                                                                                                               ])
                                                                                                                                                         ]
-                                                                                                                                                    ];
+                                                                                                                                                    ],
                                                                                                                                                   process_generic_type
-                                                                                                                                                    "expression_desc"
-                                                                                                                                                    "Pexp_construct"
+                                                                                                                                                    Ad_expression_desc_Da
+                                                                                                                                                    Ad_Pexp_construct_Da
                                                                                                                                                     [
                                                                                                                                                       ident
-                                                                                                                                                        "[]";
+                                                                                                                                                        Ad_empty_list,
                                                                                                                                                       none
                                                                                                                                                     ]
                                                                                                                                                 ]
@@ -1608,26 +1620,26 @@ Definition foo1 : ast_desc :=
                                                                               ]
                                                                           ])
                                                                     ]
-                                                                ];
+                                                                ],
                                                               process_generic_type
-                                                                "expression_desc"
-                                                                "Pexp_construct"
+                                                                Ad_expression_desc_Da
+                                                                Ad_Pexp_construct_Da
                                                                 [
                                                                   ident
-                                                                    "[]";
+                                                                    Ad_empty_list,
                                                                   none
                                                                 ]
                                                             ]
                                                         ]
                                                     ])
                                               ]
-                                          ];
+                                          ],
                                         process_generic_type
-                                          "expression_desc"
-                                          "Pexp_construct"
+                                          Ad_expression_desc_Da
+                                          Ad_Pexp_construct_Da
                                           [
                                             ident
-                                              "[]";
+                                              Ad_empty_list,
                                             none
                                           ]
                                       ]
