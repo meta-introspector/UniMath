@@ -1,132 +1,120 @@
-open NaturalNumbers
-open PartA
-open PartA0
-open PartB
-open Preamble
-open Propositions
-open UnivalenceAxiom
+open Datatypes
+open Decimal
+open Hexadecimal
+open Number
 
-type __ = Obj.t
+type t = nat
 
-type _UU2115_ = nat
+val zero : nat
 
-module Uniqueness :
- sig
-  val helper_A :
-    'a1 -> (nat -> 'a1 -> 'a1) -> (nat -> 'a1) -> (nat -> 'a1 paths, ('a1
-    paths, nat -> 'a1 paths) dirprod) weq
+val one : nat
 
-  val helper_B :
-    'a1 -> (nat -> 'a1 -> 'a1) -> (nat -> 'a1) -> ((nat -> 'a1) paths, ('a1
-    paths, nat -> 'a1 paths) dirprod) weq
+val two : nat
 
-  val helper_C :
-    'a1 -> (nat -> 'a1 -> 'a1) -> ((nat -> 'a1, (nat -> 'a1) paths) total2,
-    (nat -> 'a1, ('a1 paths, nat -> 'a1 paths) dirprod) total2) weq
+val succ : nat -> nat
 
-  val hNatRecursionUniq :
-    'a1 -> (nat -> 'a1 -> 'a1) -> (nat -> 'a1, ('a1 paths, nat -> 'a1 paths)
-    dirprod) total2 iscontr
+val pred : nat -> nat
 
-  val helper_D :
-    'a1 -> (nat -> 'a1 -> 'a1) -> ((nat -> 'a1, ('a1 paths, nat -> 'a1 paths)
-    dirprod) total2, ((nat -> 'a1, nat -> 'a1 paths) total2, 'a1) hfiber) weq
+val add : nat -> nat -> nat
 
-  val hNatRecursion_weq :
-    (nat -> 'a1 -> 'a1) -> ((nat -> 'a1, nat -> 'a1 paths) total2, 'a1) weq
- end
+val double : nat -> nat
 
-val nat_dist : nat -> nat -> nat
+val mul : nat -> nat -> nat
 
-module Discern :
- sig
-  type nat_discern = __
+val sub : nat -> nat -> nat
 
-  val coq_Unnamed_thm : nat -> nat -> nat_discern -> nat_discern
+val eqb : nat -> nat -> bool
 
-  val nat_discern_inj : nat -> nat -> nat_discern -> nat_discern
+val leb : nat -> nat -> bool
 
-  val nat_discern_isaprop : nat -> nat -> nat_discern isaprop
+val ltb : nat -> nat -> bool
 
-  val nat_discern_unit : nat -> coq_UU paths
+val compare : nat -> nat -> comparison
 
-  val nat_discern_iscontr : nat -> nat_discern iscontr
+val max : nat -> nat -> nat
 
-  val helper_A : nat -> nat -> nat paths -> nat_discern
+val min : nat -> nat -> nat
 
-  val helper_B : nat -> nat -> nat_discern -> nat paths
+val even : nat -> bool
 
-  val coq_Unnamed_thm0 : nat -> nat -> nat_discern -> nat paths paths
+val odd : nat -> bool
 
-  val helper_C : nat -> nat -> nat paths -> nat_discern
+val pow : nat -> nat -> nat
 
-  val apSC : nat -> nat -> nat paths -> nat_discern paths
+val tail_add : nat -> nat -> nat
 
-  val helper_D : nat -> nat -> (nat_discern, nat paths) isweq
+val tail_addmul : nat -> nat -> nat -> nat
 
-  val coq_E : nat -> nat -> (nat_discern, nat paths) weq
+val tail_mul : nat -> nat -> nat
 
-  val nat_dist_anti : nat -> nat -> nat paths -> nat paths
- end
+val of_uint_acc : Decimal.uint -> nat -> nat
 
-val nat_dist_symm : nat -> nat -> nat paths
+val of_uint : Decimal.uint -> nat
 
-val nat_dist_ge : nat -> nat -> hProptoType -> nat paths
+val of_hex_uint_acc : Hexadecimal.uint -> nat -> nat
 
-val nat_dist_0m : nat -> nat paths
+val of_hex_uint : Hexadecimal.uint -> nat
 
-val nat_dist_m0 : nat -> nat paths
+val of_num_uint : uint -> nat
 
-val nat_dist_plus : nat -> nat -> nat paths
+val to_little_uint : nat -> Decimal.uint -> Decimal.uint
 
-val nat_dist_le : nat -> nat -> hProptoType -> nat paths
+val to_uint : nat -> Decimal.uint
 
-val nat_dist_minus : nat -> nat -> hProptoType -> nat paths
+val to_little_hex_uint : nat -> Hexadecimal.uint -> Hexadecimal.uint
 
-val nat_dist_gt : nat -> nat -> hProptoType -> nat paths
+val to_hex_uint : nat -> Hexadecimal.uint
 
-val nat_dist_S : nat -> nat -> nat paths
+val to_num_uint : nat -> uint
 
-val natminuseqlr : nat -> nat -> nat -> hProptoType -> nat paths -> nat paths
+val to_num_hex_uint : nat -> uint
 
-val nat_dist_between_le :
-  nat -> nat -> nat -> nat -> hProptoType -> nat paths -> (nat, (nat paths,
-  nat paths) dirprod) total2
+val of_int : Decimal.signed_int -> nat option
 
-val nat_dist_between_ge :
-  nat -> nat -> nat -> nat -> hProptoType -> nat paths -> (nat, (nat paths,
-  nat paths) dirprod) total2
+val of_hex_int : Hexadecimal.signed_int -> nat option
 
-val nat_dist_between :
-  nat -> nat -> nat -> nat -> nat paths -> (nat, (nat paths, nat paths)
-  dirprod) total2
+val of_num_int : signed_int -> nat option
 
-val natleorle : nat -> nat -> (hProptoType, hProptoType) coprod
+val to_int : nat -> Decimal.signed_int
 
-val nat_dist_trans : nat -> nat -> nat -> hProptoType
+val to_hex_int : nat -> Hexadecimal.signed_int
 
-val plusmn0n0 : nat -> nat -> nat paths -> nat paths
+val to_num_int : nat -> signed_int
 
-val plusmn0m0 : nat -> nat -> nat paths -> nat paths
+val divmod : nat -> nat -> nat -> nat -> (nat, nat) prod
 
-val natminus0le : nat -> nat -> nat paths -> hProptoType
+val div : nat -> nat -> nat
 
-val minusxx : nat -> nat paths
+val modulo : nat -> nat -> nat
 
-val minusSxx : nat -> nat paths
+val gcd : nat -> nat -> nat
 
-val natminusminus : nat -> nat -> hProptoType -> nat paths
+val square : nat -> nat
 
-val natplusminus : nat -> nat -> nat -> nat paths -> nat paths
+val sqrt_iter : nat -> nat -> nat -> nat -> nat
 
-val natleplusminus : nat -> nat -> nat -> hProptoType -> hProptoType
+val sqrt : nat -> nat
 
-val natltminus1 : nat -> nat -> hProptoType -> hProptoType
+val log2_iter : nat -> nat -> nat -> nat -> nat
 
-val natminusminusassoc : nat -> nat -> nat -> nat paths
+val log2 : nat -> nat
 
-val natminusplusltcomm :
-  nat -> nat -> nat -> hProptoType -> hProptoType -> hProptoType
+val iter : nat -> ('a1 -> 'a1) -> 'a1 -> 'a1
 
-val nat_le_diff :
-  _UU2115_ -> _UU2115_ -> hProptoType -> (_UU2115_, nat paths) total2
+val div2 : nat -> nat
+
+val testbit : nat -> nat -> bool
+
+val shiftl : nat -> nat -> nat
+
+val shiftr : nat -> nat -> nat
+
+val bitwise : (bool -> bool -> bool) -> nat -> nat -> nat -> nat
+
+val coq_land : nat -> nat -> nat
+
+val coq_lor : nat -> nat -> nat
+
+val ldiff : nat -> nat -> nat
+
+val coq_lxor : nat -> nat -> nat

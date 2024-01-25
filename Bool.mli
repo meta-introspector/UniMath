@@ -1,15 +1,37 @@
-open Preamble
+open Datatypes
+open DecidableClass
+open Specif
 
-val andb : bool -> bool -> bool
+type __ = Obj.t
 
-val orb : bool -> bool -> bool
+val bool_dec : bool -> bool -> sumbool
 
-val implb : bool -> bool -> bool
+val compare : bool -> bool -> comparison
 
-val andb_is_associative : bool -> bool -> bool -> bool paths
+val eqb : bool -> bool -> bool
 
-val orb_is_associative : bool -> bool -> bool -> bool paths
+val coq_Decidable_eq_bool : bool -> bool -> coq_Decidable
 
-val andb_is_commutative : bool -> bool -> bool paths
+val ifb : bool -> bool -> bool -> bool
 
-val orb_is_commutative : bool -> bool -> bool paths
+val orb_true_elim : bool -> bool -> sumbool
+
+val andb_false_elim : bool -> bool -> sumbool
+
+type reflect =
+| ReflectT
+| ReflectF
+
+val reflect_rect : (__ -> 'a1) -> (__ -> 'a1) -> bool -> reflect -> 'a1
+
+val reflect_rec : (__ -> 'a1) -> (__ -> 'a1) -> bool -> reflect -> 'a1
+
+val iff_reflect : bool -> reflect
+
+val reflect_dec : bool -> reflect -> sumbool
+
+val eqb_spec : bool -> bool -> reflect
+
+module BoolNotations :
+ sig
+ end
