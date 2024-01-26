@@ -1,3 +1,4 @@
+Global Unset Universe Checking.
 (** * Univalent Foundations, Part A
 
 Vladimir Voevodsky.

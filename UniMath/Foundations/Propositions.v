@@ -1,3 +1,4 @@
+Global Unset Universe Checking.
 (** * Generalities on hProp.  Vladimir Voevodsky . May - Sep. 2011 .
 
 In this file we introduce the hProp - an analog of Prop defined based on the

@@ -1,3 +1,4 @@
+Global Unset Universe Checking.
 (** The univalence axiom and its consequences *)
 
 (**
