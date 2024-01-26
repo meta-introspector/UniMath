@@ -1,0 +1,1 @@
+((v((control())(attrs())(expr(VernacSynterp(VernacSetOption false(Kernel Term Sharing)OptionUnset)))))(loc(((fname(InFile(dirpath())(file UniMath/Algebra/ConstructiveStructures.v)))(line_nb 4)(bol_pos 111)(line_nb_last 4)(bol_pos_last 111)(bp 111)(ep 137)))))

@@ -1,0 +1,1 @@
+((v((control())(attrs())(expr(VernacSynterp(VernacSetOption false(Kernel Term Sharing)OptionUnset)))))(loc(((fname(InFile(dirpath())(file UniMath/NumberSystems/RationalNumbers.v)))(line_nb 14)(bol_pos 377)(line_nb_last 14)(bol_pos_last 377)(bp 377)(ep 403)))))

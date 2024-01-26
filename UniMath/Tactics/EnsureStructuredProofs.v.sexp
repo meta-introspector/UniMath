@@ -1,0 +1,1 @@
+((v((control())(attrs())(expr(VernacSynterp(VernacSetOption true(Default Goal Selector)(OptionSetString !))))))(loc(((fname(InFile(dirpath())(file UniMath/Tactics/EnsureStructuredProofs.v)))(line_nb 11)(bol_pos 331)(line_nb_last 11)(bol_pos_last 331)(bp 331)(ep 368)))))

@@ -1,0 +1,1 @@
+((v((control())(attrs())(expr(VernacSynterp(VernacSetOption false(Kernel Term Sharing)OptionUnset)))))(loc(((fname(InFile(dirpath())(file UniMath/Algebra/Apartness.v)))(line_nb 4)(bol_pos 78)(line_nb_last 4)(bol_pos_last 78)(bp 78)(ep 104)))))
