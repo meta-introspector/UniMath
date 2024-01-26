@@ -512,3 +512,7 @@ with the addition of a type system to represent and manipulate asts.
 *** schema for urls
 
 use graphql, linked json, dotty, plantuml, rdf/owl, turtle.
+
+** sercomp
+ sercomp  --input=vernac --mode=sexp Init.v > Init.sexp
+ 
