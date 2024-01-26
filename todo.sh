@@ -1,4 +1,4 @@
-set -e
+#set -e
 
 ./runfile.sh UniMath/Foundations/Init.v
 ./runfile.sh UniMath/Foundations/Preamble.v

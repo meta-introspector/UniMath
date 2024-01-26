@@ -15,5 +15,5 @@ sercomp   --input=vernac --mode=sexp \
 	  -R UniMath/Tactics/,UniMath.Tactics \
 	  $1  > $1.sexp
 else
-    echo $1.sexp
+    echo done $1.sexp
 fi
