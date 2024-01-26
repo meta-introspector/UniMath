@@ -1,5 +1,7 @@
-Require Export UniMath.Foundations.All.
-Require Import UniMath.Combinatorics.Lists.
+
+
+
+(** This is just printing **)
 
 
 
@@ -8,8 +10,15 @@ Require Import UniMath.Combinatorics.Lists.
 Require Import CoqOfOCaml.CoqOfOCaml.
 Require Import CoqOfOCaml.Settings.
  *)
+
+Section WithUniMath .
+Require Export UniMath.Foundations.All.
+Require Import UniMath.Combinatorics.Lists.
+
 Definition string_list : UU -> UU := list.
 Definition string : UU := UU.
+
+Definition MyUU := UU.
 
 Inductive ast_desc : Type :=
 | Adxu : ast_desc
@@ -27,7 +36,7 @@ Inductive ast_desc : Type :=
 | Ad_Ad_process_arg_label_expression_Da : ast_desc
 | Ad_Ad_process_arg_label_expression_list_Da : ast_desc
 | Ad_Ad_process_ast_desc : ast_desc
-| Ad_Ad_process_cases : ast_desc -> ast_desc
+| Ad_Ad_process_cases : ast_desc
 | Ad_Ad_process_cstrs_Da : ast_desc
 | Ad_Ad_process_generic_list_Da : ast_desc
 | Ad_Ad_process_label_declaration_list_Da : ast_desc
@@ -43,19 +52,16 @@ Inductive ast_desc : Type :=
 | Ad_Ad_process_var_list_Da : ast_desc
 | Ad_Ad_quote_Da : ast_desc
 | Ad_Definition : ast_desc
-| Ad_FIXME_process_ast_desc
-| Ad_FIXME
+| Ad_FIXME : ast_desc
+| Ad_FIXME_process_ast_desc : ast_desc
 | Ad_Fixme1 : ast_desc
 | Ad_Fixme2_Da : ast_desc
 | Ad_Ident : ast_desc -> ast_desc
-
 | Ad_MetaCoq_Definition : ast_desc
 | Ad_NEW : ast_desc
 | Ad_NoString : ast_desc
-
 | Ad_Nolabel_Da : ast_desc
 | Ad_None : ast_desc
-
 | Ad_Nonrecursive_Da : ast_desc
 | Ad_Obj : ast_desc
 | Ad_P4 : ast_desc
@@ -89,10 +95,8 @@ Inductive ast_desc : Type :=
 | Ad_arg_label_expression_list : ast_desc -> ast_desc(*orig*)
 | Ad_ast_desc : ast_desc
 | Ad_ast_desc_Da : ast_desc
-
 | Ad_attributes : ast_desc(*orig*)
 | Ad_b_Da : ast_desc
-
 | Ad_bool : ast_desc -> ast_desc(*orig*)
 | Ad_c_Da : ast_desc
 | Ad_caret
@@ -103,7 +107,6 @@ Inductive ast_desc : Type :=
 | Ad_core_type_desc_Da : ast_desc
 | Ad_empty : ast_desc
 | Ad_empty_array : ast_desc
-
 | Ad_error : ast_desc
 | Ad_errr : ast_desc
 | Ad_expression_desc_Da : ast_desc
@@ -112,7 +115,6 @@ Inductive ast_desc : Type :=
 | Ad_ident_Da : ast_desc
 | Ad_int : ast_desc -> ast_desc(*orig*)
 | Ad_list : ast_desc -> ast_desc(*orig*)
-
 | Ad_list_Da : ast_desc
 | Ad_loc : ast_desc(*orig*)
 | Ad_loc2 : ast_desc(*orig*)
@@ -129,62 +131,44 @@ Inductive ast_desc : Type :=
 | Ad_pos : ast_desc(*orig*)
 | Ad_private_flag_Da : ast_desc
 | Ad_process_arg_constructor_declaration : ast_desc -> ast_desc(*orig*)
-
 | Ad_process_arg_constructor_declaration_Da : ast_desc
-
 | Ad_process_arg_label_expression : ast_desc -> ast_desc -> ast_desc(*orig*)
 | Ad_process_arg_label_expression_Da : ast_desc
 | Ad_process_arg_label_expression_list : ast_desc -> ast_desc(*orig*)
-
-
 | Ad_process_ast_desc : ast_desc -> ast_desc(*orig*)
 | Ad_process_ast_desc_loc_list_pattern_option : ast_desc
 | Ad_process_cases : ast_desc -> ast_desc(*orig*)
-
 | Ad_process_core_type_list_Da : ast_desc
 | Ad_process_cstrs : ast_desc -> ast_desc(*orig*)
-
 | Ad_process_cstrs_Da : ast_desc
 | Ad_process_expression_list_Da : ast_desc
-
 | Ad_process_generic_list : ast_desc -> ast_desc -> ast_desc(*orig*)
 | Ad_process_generic_type : ast_desc
 | Ad_process_generic_type3
 | Ad_process_generic_type_Da : ast_desc
 | Ad_process_label_declaration_list : ast_desc -> ast_desc(*orig*)
-
 | Ad_process_label_declaration_list_Da : ast_desc
-
 | Ad_process_list_tail : ast_desc -> ast_desc -> ast_desc(*orig*)
 | Ad_process_loc : ast_desc -> ast_desc(*orig*)
 | Ad_process_loc_Da : ast_desc
 | Ad_process_params : ast_desc -> ast_desc(*orig*)
-
 | Ad_process_params_Da : ast_desc
 | Ad_process_string : ast_desc
 | Ad_process_string_loc_list_pattern_option : ast_desc(*orig*)
 | Ad_process_string_loc_list_pattern_option_Da : ast_desc
-
 | Ad_process_structure_item : ast_desc -> ast_desc(*orig*)
-
 | Ad_process_structure_item_desc : ast_desc -> ast_desc(*orig*)
 | Ad_process_structure_items : ast_desc -> ast_desc(*orig*)
-
 | Ad_process_structure_items_Da : ast_desc
 | Ad_process_type_declaration_list : ast_desc -> ast_desc(*orig*)
-
 | Ad_process_type_declaration_list_Da : ast_desc
-
 | Ad_process_value_binding_list : ast_desc(*orig*)
 | Ad_process_var_list : ast_desc -> ast_desc(*orig*)
-
 | Ad_process_vars_list_Da : ast_desc
 | Ad_quot_list : ast_desc -> ast_desc
-
 | Ad_quote : ast_desc -> ast_desc -> ast_desc(*orig*)
 | Ad_rec_flag_Da : ast_desc
 | Ad_root : ast_desc -> ast_desc(*orig*)
-
 | Ad_string_Da : ast_desc
 | Ad_structure_item_desc_Da : ast_desc
 | Ad_todofixme : ast_desc
@@ -196,7 +180,6 @@ Inductive ast_desc : Type :=
 | Ad_x_Da : ast_desc
 | Ad_y_Da : ast_desc
 | ad_nostring : ast_desc
-
 .
 
 Inductive ast_desc_list  : Type :=
@@ -391,6 +374,7 @@ Definition process_generic_list
   (*   ] *)
 Definition print_endline (a:ast_desc):unit := tt.
 
+
 (*TODO in coq return unit*)
 Definition def_basic (a_value : ast_desc) (b_value : ast_desc) : ast_desc :=
   let t_value :=
@@ -416,7 +400,7 @@ Definition def_pair (a_value : ast_desc) (b_value : ast_desc) (a1 : ast_desc) (b
   tt
 .
 
-Definition process_generic_type2 {A : UU}
+Definition process_generic_type2 {A : MyUU}
   (a_value : ast_desc) (b_value : ast_desc) (c_value : A) : ast_desc := Ad_empty
   (* let baset := Ad_umcr_type in *)
   (* let _at := my_append Ad_umcr_n_role_ a_value in *)
@@ -454,29 +438,31 @@ Definition process_ast_desc4 (al : ast_desc) : ast_desc := Ad_empty
       Ad_empty_array
   end
 .
-Definition extract_root (al : ast_desc) : ast_desc := al.
-Definition process_ast_desc3 (al : ast_desc_list) : ast_desc :=
-  match al with
-  | Ad_empty_list => Ad_empty
-  | Ad_cons h_value t_value =>
-    if not_empty t_value  then
-      my_append (extract_root h_value)
-        (my_append Ad_caret (process_ast_desc3 t_value))
-    else
-      Ad_error
-  end
+(* Definition extract_root (al : ast_desc) : ast_desc := al. *)
+(* Definition process_ast_desc3 (al : ast_desc_list) : ast_desc := *)
+(*   match al with *)
+(*   | Ad_empty_list => Ad_empty *)
+(*   | Ad_cons h_value t_value => *)
+(*     if not_empty t_value  then *)
+(*       my_append (extract_root h_value) *)
+(*         (my_append Ad_caret (process_ast_desc3 t_value)) *)
+(*     else *)
+(*       Ad_error *)
+(*   end
 .
+ *)
 
-Definition process_ast_desc4 (al : ast_desc_list) : ast_desc :=
-  match al with
-  | Ad_empty_list => Ad_empty
-  | Ad_cons h_value t_value =>
-    if not_empty t_value then
-      my_append (extract_root h_value) (my_append Ad_caret Ad_TRUNCATED)
-    else
-       Ad_errr
-  end
-.
+
+(* Definition process_ast_desc4 (al : ast_desc_list) : ast_desc := *)
+(*   match al with *)
+(*   | Ad_empty_list => Ad_empty *)
+(*   | Ad_cons h_value t_value => *)
+(*     if not_empty t_value then *)
+(*       my_append (extract_root h_value) (my_append Ad_caret Ad_TRUNCATED) *)
+(*     else *)
+(*        Ad_errr *)
+(*   end *)
+(* . *)
 
 Definition process_root_list (a_value : ast_desc) : ast_desc := a_value
   (* match a_value with *)
@@ -524,124 +510,221 @@ Definition process_structure_item_desc (x_value : ast_desc) : ast_desc :=
   Ad_process_structure_item_desc x_value
 .
 
-Definition process_structure_items (x_value : ast_desc_list) : ast_desc :=
-  process_generic_list Ad_Ad_process_structure_items_Da x_value process_structure_item.
+(* Definition process_structure_items (x_value : ast_desc_list) : ast_desc := *)
+(*   process_generic_list Ad_Ad_process_structure_items_Da x_value process_structure_item. *)
 
 Definition extract_root (x_value : ast_desc) : ast_desc :=
   match x_value with
-  | Ad_fixme _ => Ad_Fixme1
+  | Ad_Ad_arg_label_expression_list_Da     => Ad_Fixme1
+  | Ad_Ad_attributes_Da     => Ad_Fixme1
+  | Ad_Ad_bool_Da     => Ad_Fixme1
+  | Ad_Ad_empty_list_Da     => Ad_Fixme1
+  | Ad_Ad_int_Da     => Ad_Fixme1
+  | Ad_Ad_list     => Ad_Fixme1
+  | Ad_Ad_loc2_Da     => Ad_Fixme1
+  | Ad_Ad_loc_Da     => Ad_Fixme1
+  | Ad_Ad_loc_stack_Da     => Ad_Fixme1
+  | Ad_Ad_pos_Da     => Ad_Fixme1
+  | Ad_Ad_process_arg_constructor_declaration_Da     => Ad_Fixme1
+  | Ad_Ad_process_arg_label_expression_Da     => Ad_Fixme1
+  | Ad_Ad_process_arg_label_expression_list_Da     => Ad_Fixme1
+  | Ad_Ad_process_ast_desc => Ad_Fixme1
+  | Ad_Ad_process_cases     => Ad_Fixme1
+  | Ad_Ad_process_cstrs_Da     => Ad_Fixme1
+  | Ad_Ad_process_generic_list_Da     => Ad_Fixme1
+  | Ad_Ad_process_label_declaration_list_Da     => Ad_Fixme1
+  | Ad_Ad_process_list_tail_Da     => Ad_Fixme1
+  | Ad_Ad_process_loc_Da     => Ad_Fixme1
+  | Ad_Ad_process_params_Da     => Ad_Fixme1
+  | Ad_Ad_process_string_loc_list_pattern_option_Da     => Ad_Fixme1
+  | Ad_Ad_process_structure_item_Da     => Ad_Fixme1
+  | Ad_Ad_process_structure_item_desc_Da     => Ad_Fixme1
+  | Ad_Ad_process_structure_items_Da     => Ad_Fixme1
+  | Ad_Ad_process_type_declaration_list_Da     => Ad_Fixme1
+  | Ad_Ad_process_value_binding_list_Da     => Ad_Fixme1
+  | Ad_Ad_process_var_list_Da     => Ad_Fixme1
+  | Ad_Ad_quote_Da     => Ad_Fixme1
+  | Ad_Definition     => Ad_Fixme1
+  | Ad_FIXME
+  | Ad_FIXME_process_ast_desc
+  | Ad_Fixme1     => Ad_Fixme1
+  | Ad_Fixme2_Da     => Ad_Fixme1
+  | Ad_Ident string0 =>   Ad_Ident string0
+  | Ad_MetaCoq_Definition     => Ad_Fixme1
+  | Ad_NEW     => Ad_Fixme1
+  | Ad_NoString => Ad_Fixme1
+  | Ad_Nolabel_Da     => Ad_Fixme1
+  | Ad_None => Ad_Fixme1
+  | Ad_Nonrecursive_Da     => Ad_Fixme1
+  | Ad_Obj     => Ad_Fixme1
+  | Ad_P4     => Ad_Fixme1
+  | Ad_Pconst_string_Da     => Ad_Fixme1
+  | Ad_Pexp_apply_Da     => Ad_Fixme1
+  | Ad_Pexp_constant_Da     => Ad_Fixme1
+  | Ad_Pexp_constraint_Da     => Ad_Fixme1
+  | Ad_Pexp_construct_Da     => Ad_Fixme1
+  | Ad_Pexp_fun_Da     => Ad_Fixme1
+  | Ad_Pexp_ident_Da     => Ad_Fixme1
+  | Ad_Pexp_tuple_Da     => Ad_Fixme1
+  | Ad_Ppat_constraint_Da     => Ad_Fixme1
+  | Ad_Ppat_var_Da     => Ad_Fixme1
+  | Ad_Pstr_type_Da     => Ad_Fixme1
+  | Ad_Pstr_value_Da     => Ad_Fixme1
+  | Ad_Ptyp_constr_Da     => Ad_Fixme1
+  | Ad_Ptype_abstract_Da     => Ad_Fixme1
+  | Ad_Public_Da     => Ad_Fixme1
+  | Ad_Recursive_Da     => Ad_Fixme1
+  | Ad_String string0 =>   Ad_Fixme1
+  | Ad_TRUNCATED     => Ad_Fixme1
+  | Ad_TypeParam_T     => Ad_Fixme1
+  | Ad_TypeParam_T_dot     => Ad_Fixme1
+  | Ad_Type_UU     => Ad_Fixme1
+  | Ad__Da_Da     => Ad_Fixme1
+  | Ad__Da_Da_Da     => Ad_Fixme1
+  | Ad___     => Ad_Fixme1
+  | Ad____Da     => Ad_Fixme1
+  | Ad_a_Da     => Ad_Fixme1
+  | Ad_arg_label_Da     => Ad_Fixme1
+  | Ad_arg_label_expression_list ast_desc0 =>    Ad_Fixme1
+  | Ad_ast_desc     => Ad_Fixme1
+  | Ad_ast_desc_Da     => Ad_Fixme1
+  | Ad_attributes => Ad_Fixme1
+  | Ad_b_Da     => Ad_Fixme1
+  | Ad_bool bool0 =>    Ad_bool bool0
+  | Ad_c_Da     => Ad_Fixme1
+  | Ad_caret
+  | Ad_close_parens     => Ad_Fixme1
+  | Ad_close_parens_Da_Da     => Ad_Fixme1
+  | Ad_closebrace     => Ad_Fixme1
+  | Ad_constant_Da     => Ad_Fixme1
+  | Ad_core_type_desc_Da     => Ad_Fixme1
+  | Ad_empty     => Ad_Fixme1
+  | Ad_empty_array     => Ad_Fixme1
+  | Ad_error     => Ad_Fixme1
+  | Ad_errr     => Ad_Fixme1
+  | Ad_expression_desc_Da     => Ad_Fixme1
+  | Ad_fixme  _   => Ad_Fixme1
+  | Ad_foo1_Da     => Ad_Fixme1
+  | Ad_ident_Da     => Ad_Fixme1
+  | Ad_int int0 =>  Ad_Fixme1
+  | Ad_list  _   => Ad_Fixme1
+
+  | Ad_list_Da     => Ad_Fixme1
+  | Ad_loc => process_generic_type3 Ad_ast_desc_Da Ad_Ad_loc_Da Ad_None
+  | Ad_loc2 => process_generic_type3 Ad_ast_desc_Da Ad_Ad_loc2_Da Ad_None
+  | Ad_loc2_Da     => Ad_Fixme1
+  | Ad_loc_Da     => Ad_Fixme1
+  | Ad_loc_stack => process_generic_type3 Ad_ast_desc_Da Ad_Ad_loc_stack_Da Ad_None
+  | Ad_loc_stack_Da     => Ad_Fixme1
+  | Ad_none_Da     => Ad_Fixme1
+  | Ad_open_parenAd_Ident     => Ad_Fixme1
+  | Ad_open_parenAd_String     => Ad_Fixme1
+  | Ad_open_paren_rec_root     => Ad_Fixme1
+  | Ad_openbrace
+  | Ad_pattern_desc_Da     => Ad_Fixme1
+  | Ad_pos => process_generic_type3 Ad_ast_desc_Da Ad_Ad_pos_Da Ad_None
+  | Ad_private_flag_Da     => Ad_Fixme1
+
+  | Ad_process_arg_constructor_declaration ast_desc0 =>    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_arg_constructor_declaration_Da      (Ad_process_ast_desc ast_desc0)
+  | Ad_process_arg_constructor_declaration_Da     => Ad_Fixme1
+
+  | Ad_process_arg_label_expression ast_desc0 ast_desc1 =>    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_arg_label_expression_Da      [ process_ast_desc ast_desc0, process_ast_desc ast_desc1 ]
+  | Ad_process_arg_label_expression_Da     => Ad_Fixme1
+
+  | Ad_process_arg_label_expression_list ast_desc0 =>    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_arg_label_expression_list_Da      (Ad_process_ast_desc ast_desc0)
   | Ad_process_ast_desc _ => Ad_Fixme2_Da
-  |
-    Ad_root {|
-      simple_ast_root.sa_role := arole;
-        simple_ast_root.sa_type := atype;
-        simple_ast_root.sa_list := alist
-        |} =>
-    my_append Ad_open_paren_rec_root
-      (my_append arole
-        (my_append Ad_caret
-          (my_append atype
-            (my_append Ad_caret (my_append (process_root_list alist) Ad_close_parens)))))
-  | Ad_pos => process_generic_type3 Ad_ast_desc_Da Ad_Ad_pos_Da nil
-  | Ad_process_arg_label_expression_list ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_arg_label_expression_list_Da
-      process_ast_desc ast_desc0
-  | Ad_process_arg_label_expression ast_desc0 ast_desc1 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_arg_label_expression_Da
-      [ process_ast_desc ast_desc0, process_ast_desc ast_desc1 ]
-  | Ad_process_string_loc_list_pattern_option =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_string_loc_list_pattern_option_Da
-      nil
-  | Ad_process_loc ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_loc_Da
-       process_ast_desc ast_desc0
-  | Ad_process_value_binding_list =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_value_binding_list_Da nil
-  | Ad_attributes => process_generic_type3 Ad_ast_desc_Da Ad_Ad_attributes_Da nil
-  | Ad_process_generic_list string0 ast_desc1 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_generic_list_Da
-      [
-        process_string string0,
-        Ad_fixme Ad_P4
-      ]
-  | Ad_quote string0 ast_desc1 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_quote_Da
-      [ process_string string0, process_string ast_desc1 ]
-  | Ad_int int0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_int_Da process_int int0
-  | Ad_bool bool0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_bool_Da process_bool bool0
-  | Ad_loc_stack => process_generic_type3 Ad_ast_desc_Da Ad_Ad_loc_stack_Da nil
-  | Ad_loc2 => process_generic_type3 Ad_ast_desc_Da Ad_Ad_loc2_Da nil
-  | Ad_loc => process_generic_type3 Ad_ast_desc_Da Ad_Ad_loc_Da nil
-  | Ad_process_structure_items ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_structure_items_Da
-       process_ast_desc ast_desc0
-  | Ad_process_type_declaration_list ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_type_declaration_list_Da
-       process_ast_desc ast_desc0
-  | Ad_arg_label_expression_list ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_arg_label_expression_list_Da
-      process_ast_desc ast_desc0
-  | Ad_process_list_tail ast_desc0 ast_desc1 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_list_tail_Da
-      [ process_ast_desc ast_desc0, process_ast_desc ast_desc1 ]
-  | Ad_process_cstrs ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_cstrs_Da
-      process_ast_desc ast_desc0
-  | Ad_process_params ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_params_Da
-      process_ast_desc ast_desc0
-  | Ad_process_structure_item_desc ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_structure_item_desc_Da
-      process_ast_desc ast_desc0
-  | Ad_process_structure_item ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_structure_item_Da
-      process_ast_desc ast_desc0
-  | Ad_process_label_declaration_list ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_label_declaration_list_Da
-      process_ast_desc ast_desc0
-  | Ad_process_arg_constructor_declaration ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_arg_constructor_declaration_Da
-      process_ast_desc ast_desc0
-  | Ad_process_var_list ast_desc0 =>
-    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_var_list_Da
-      process_ast_desc ast_desc0
-  | Ad_process_cases ast_desc0 =>
-    process_generic_type3 Ad_ast_desc Ad_Ad_process_cases
-      process_ast_desc ast_desc0
-  | Ad_list ast_desc0 =>
-    process_generic_type3 Ad_ast_desc Ad_Ad_list
-      process_ast_desc ast_desc0
-  | Ad_Ident string0 =>
-    my_append Ad_open_parenAd_Ident Ad__Da_Da (my_append string0 Ad_close_parens_Da_Da)
-  | Ad_String string0 =>
-    my_append Ad_open_parenAd_String Ad__Da_Da (my_append string0 Ad__Da_Da_Da)
-  | Ad_NoString => process_generic_type3 Ad_ast_desc_Da
-  | Ad_None => process_generic_type3 Ad_ast_desc_Da
+  | Ad_process_ast_desc_loc_list_pattern_option     => Ad_Fixme1
+
+  | Ad_process_cases ast_desc0 =>    process_generic_type3 Ad_ast_desc Ad_Ad_process_cases      (Ad_process_ast_desc ast_desc0)
+  | Ad_process_core_type_list_Da     => Ad_Fixme1
+
+  | Ad_process_cstrs ast_desc0 =>    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_cstrs_Da     (Ad_process_ast_desc ast_desc0)
+  | Ad_process_cstrs_Da     => Ad_Fixme1
+  | Ad_process_expression_list_Da     => Ad_Fixme1
+
+  | Ad_process_generic_list string0 ast_desc1 =>     process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_generic_list_Da      [        process_string string0,        Ad_fixme Ad_P4      ]
+  | Ad_process_generic_type     => Ad_Fixme1
+  | Ad_process_generic_type3
+  | Ad_process_generic_type_Da     => Ad_Fixme1
+
+  | Ad_process_label_declaration_list ast_desc0 =>    (* process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_label_declaration_list_Da    Ad_Ad_process_ast_desc ast_desc0 *) Ad_FIXME
+  | Ad_process_label_declaration_list_Da     => Ad_Fixme1
+
+  | Ad_process_list_tail ast_desc0 ast_desc1 =>    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_list_tail_Da      [ process_ast_desc ast_desc0, process_ast_desc ast_desc1 ]
+
+  | Ad_process_loc ast_desc0 =>    (* process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_loc_Da        process_ast_desc ast_desc0 *) Ad_Fixme1
+  | Ad_process_loc_Da     => Ad_Fixme1
+
+  | Ad_process_params ast_desc0 => Ad_Fixme1 (*    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_params_Da       process_ast_desc ast_desc0 *)
+  | Ad_process_params_Da     => Ad_Fixme1
+  | Ad_process_string     => Ad_Fixme1
+  | Ad_process_string_loc_list_pattern_option =>    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_string_loc_list_pattern_option_Da       Ad_None
+  | Ad_process_string_loc_list_pattern_option_Da     => Ad_Fixme1
+  | Ad_process_structure_item _    => Ad_Fixme1
+  (* | Ad_process_structure_item ast_desc0 =>    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_structure_item_Da      process_ast_desc ast_desc0 *)
+  | Ad_process_structure_item_desc _    => Ad_Fixme1
+  (* | Ad_process_structure_item_desc ast_desc0 =>    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_structure_item_desc_Da      process_ast_desc ast_desc0 *)
+  | Ad_process_structure_items  _   => Ad_Fixme1
+  (* | Ad_process_structure_items ast_desc0 =>      process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_structure_items_Da       process_ast_desc ast_desc0 *)
+  | Ad_process_structure_items_Da     => Ad_Fixme1
+  | Ad_process_type_declaration_list _    => Ad_Fixme1
+  (* | Ad_process_type_declaration_list ast_desc0 =>     process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_type_declaration_list_Da        process_ast_desc ast_desc0 *)
+  | Ad_process_type_declaration_list_Da     => Ad_Fixme1
+  | Ad_process_value_binding_list =>     process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_value_binding_list_Da Ad_None
+  | Ad_process_var_list   _  => Ad_Fixme1
+  (* | Ad_process_var_list ast_desc0 =>    process_generic_type3 Ad_ast_desc_Da Ad_Ad_process_var_list_Da      process_ast_desc ast_desc0 *)
+  | Ad_process_vars_list_Da     => Ad_Fixme1
+  | Ad_quot_list  _   => Ad_Fixme1
+  | Ad_quote  _ _   => Ad_Fixme1
+  (* | Ad_quote string0 ast_desc1 =>    process_generic_type3 Ad_ast_desc_Da Ad_Ad_quote_Da      [ process_string string0, process_string ast_desc1 ] *)
+  | Ad_rec_flag_Da     => Ad_Fixme1
+  | Ad_root  _   => Ad_Fixme1
+  | Ad_string_Da     => Ad_Fixme1
+  | Ad_structure_item_desc_Da     => Ad_Fixme1
+  | Ad_todofixme     => Ad_Fixme1
+  | Ad_type_kind_Da     => Ad_Fixme1
+  | Ad_umcr_n_role_     => Ad_Fixme1
+  | Ad_umcr_n_type_     => Ad_Fixme1
+  | Ad_umcr_r_rel_     => Ad_Fixme1
+  | Ad_umcr_type     => Ad_Fixme1
+  | Ad_x_Da     => Ad_Fixme1
+  | Ad_y_Da     => Ad_Fixme1
+  | Adxu => Ad_Fixme1
+  | ad_nostring     => Ad_Fixme1
+
   end.
+
+Definition ff1 := process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da ( string_value Ad_none_Da ).
+Definition ff0 := process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None.
+
+
+Definition ff00 :=      [ string_value Ad_None process_string_option, nil
+  ].
+
+Definition ff000 := [
+          process_generic_type Ad_constant_Da Ad_Pconst_string_Da
+            ff00
+        ].
+Definition ff2 := process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
+        ff000.
 
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_none_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-        [
-          process_generic_type Ad_constant_Da Ad_Pconst_string_Da
-            [ string_value Ad_ none Ad_, process_string_option ]
-        ]
+      ff0,
+      ff1,
+      ff2
     ].
 
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_vars_list_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
@@ -661,12 +744,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_arg_constructor_declaration_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
@@ -686,12 +769,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_label_declaration_list_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
@@ -711,12 +794,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_params_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
@@ -736,12 +819,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_cstrs_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
@@ -761,12 +844,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_core_type_list_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
@@ -786,12 +869,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_type_declaration_list_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
@@ -811,7 +894,7 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_loc_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
         [
@@ -823,7 +906,7 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_loc2_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
         [
@@ -835,7 +918,7 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_loc_stack_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
@@ -848,12 +931,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_generic_type_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_constraint_Da
             [
@@ -865,12 +948,12 @@ Definition foo1 : ast_desc :=
                   ident
                     Ad_string_Da,
                   process_core_type_list
-                    nil
+                    Ad_None
                 ]
             ],
           process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
             [
-              process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+              process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
               none,
               process_generic_type Ad_pattern_desc_Da
                 Ad_Ppat_constraint_Da
@@ -889,7 +972,7 @@ Definition foo1 : ast_desc :=
                       ident
                         Ad_string_Da,
                       process_core_type_list
-                        nil
+                        Ad_None
                     ]
                 ],
               process_generic_type Ad_expression_desc_Da
@@ -898,7 +981,7 @@ Definition foo1 : ast_desc :=
                   process_generic_type
                     Ad_arg_label_Da
                     Ad_Nolabel_Da
-                    nil,
+                    Ad_None,
                   none,
                   process_generic_type
                     Ad_pattern_desc_Da
@@ -926,7 +1009,7 @@ Definition foo1 : ast_desc :=
                                   ident
                                     Ad_string_Da,
                                   process_core_type_list
-                                    nil
+                                    Ad_None
                                 ]
                             ]
                         ]
@@ -955,7 +1038,7 @@ Definition foo1 : ast_desc :=
                           ident
                             Ad_string_Da,
                           process_core_type_list
-                            nil
+                            Ad_None
                         ]
                     ]
                 ]
@@ -966,12 +1049,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_loc_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_a_Da ],
@@ -991,11 +1074,11 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_ident_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_a_Da ],
@@ -1015,12 +1098,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_string_loc_list_pattern_option_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
@@ -1040,18 +1123,18 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_arg_label_expression_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
           process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
             [
-              process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+              process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
               none,
               process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
                 [ string_value Ad_y_Da ],
@@ -1074,12 +1157,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_expression_list_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
@@ -1099,12 +1182,12 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
         [ string_value Ad_process_structure_items_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
         [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da nil,
+          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
           none,
           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
             [ string_value Ad_x_Da ],
@@ -1119,7 +1202,7 @@ Definition foo1 : ast_desc :=
                     (process_generic_type
                       Ad_arg_label_Da
                       Ad_Nolabel_Da
-                      nil)
+                      Ad_None)
                     (process_generic_type
                       Ad_expression_desc_Da
                       Ad_Pexp_constant_Da
@@ -1137,7 +1220,7 @@ Definition foo1 : ast_desc :=
                     (process_generic_type
                       Ad_arg_label_Da
                       Ad_Nolabel_Da
-                      nil)
+                      Ad_None)
                     (process_generic_type
                       Ad_expression_desc_Da
                       Ad_Pexp_ident_Da
@@ -1153,7 +1236,7 @@ Definition foo1 : ast_desc :=
 Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da nil,
+      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_foo1_Da ],
       process_generic_type Ad_expression_desc_Da Ad_Pexp_apply_Da
         [
@@ -1165,7 +1248,7 @@ Definition foo1 : ast_desc :=
                 (process_generic_type
                   Ad_arg_label_Da
                   Ad_Nolabel_Da
-                  nil)
+                  Ad_None)
                 (process_generic_type
                   Ad_expression_desc_Da
                   Ad_Pexp_constant_Da
@@ -1183,7 +1266,7 @@ Definition foo1 : ast_desc :=
                 (process_generic_type
                   Ad_arg_label_Da
                   Ad_Nolabel_Da
-                  nil)
+                  Ad_None)
                 (process_generic_type
                   Ad_expression_desc_Da
                   Ad_Pexp_constant_Da
@@ -1201,7 +1284,7 @@ Definition foo1 : ast_desc :=
                 (process_generic_type
                   Ad_arg_label_Da
                   Ad_Nolabel_Da
-                  nil)
+                  Ad_None)
                 (process_generic_type
                   Ad_expression_desc_Da
                   Ad_Pexp_construct_Da
@@ -1231,7 +1314,7 @@ Definition foo1 : ast_desc :=
                                       (process_generic_type
                                         Ad_arg_label_Da
                                         Ad_Nolabel_Da
-                                        nil)
+                                        Ad_None)
                                       (process_generic_type
                                         Ad_expression_desc_Da
                                         Ad_Pexp_constant_Da
@@ -1249,7 +1332,7 @@ Definition foo1 : ast_desc :=
                                       (process_generic_type
                                         Ad_arg_label_Da
                                         Ad_Nolabel_Da
-                                        nil)
+                                        Ad_None)
                                       (process_generic_type
                                         Ad_expression_desc_Da
                                         Ad_Pexp_constant_Da
@@ -1267,7 +1350,7 @@ Definition foo1 : ast_desc :=
                                       (process_generic_type
                                         Ad_arg_label_Da
                                         Ad_Nolabel_Da
-                                        nil)
+                                        Ad_None)
                                       (process_generic_type
                                         Ad_expression_desc_Da
                                         Ad_Pexp_construct_Da
@@ -1307,7 +1390,7 @@ Definition foo1 : ast_desc :=
                                                   (process_generic_type
                                                     Ad_arg_label_Da
                                                     Ad_Nolabel_Da
-                                                    nil)
+                                                    Ad_None)
                                                   (process_generic_type
                                                     Ad_expression_desc_Da
                                                     Ad_Pexp_construct_Da
@@ -1337,7 +1420,7 @@ Definition foo1 : ast_desc :=
                                                                         (process_generic_type
                                                                           Ad_arg_label_Da
                                                                           Ad_Nolabel_Da
-                                                                          nil)
+                                                                          Ad_None)
                                                                         (process_generic_type
                                                                           Ad_expression_desc_Da
                                                                           Ad_Pexp_apply_Da
@@ -1355,7 +1438,7 @@ Definition foo1 : ast_desc :=
                                                                                   (process_generic_type
                                                                                     Ad_arg_label_Da
                                                                                     Ad_Nolabel_Da
-                                                                                    nil)
+                                                                                    Ad_None)
                                                                                   (process_generic_type
                                                                                     Ad_expression_desc_Da
                                                                                     Ad_Pexp_constant_Da
@@ -1375,7 +1458,7 @@ Definition foo1 : ast_desc :=
                                                                         (process_generic_type
                                                                           Ad_arg_label_Da
                                                                           Ad_Nolabel_Da
-                                                                          nil)
+                                                                          Ad_None)
                                                                         (process_generic_type
                                                                           Ad_expression_desc_Da
                                                                           Ad_Pexp_apply_Da
@@ -1393,7 +1476,7 @@ Definition foo1 : ast_desc :=
                                                                                   (process_generic_type
                                                                                     Ad_arg_label_Da
                                                                                     Ad_Nolabel_Da
-                                                                                    nil)
+                                                                                    Ad_None)
                                                                                   (process_generic_type
                                                                                     Ad_expression_desc_Da
                                                                                     Ad_Pexp_apply_Da
@@ -1411,7 +1494,7 @@ Definition foo1 : ast_desc :=
                                                                                             (process_generic_type
                                                                                               Ad_arg_label_Da
                                                                                               Ad_Nolabel_Da
-                                                                                              nil)
+                                                                                              Ad_None)
                                                                                             (process_generic_type
                                                                                               Ad_expression_desc_Da
                                                                                               Ad_Pexp_construct_Da
@@ -1426,7 +1509,7 @@ Definition foo1 : ast_desc :=
                                                                                   (process_generic_type
                                                                                     Ad_arg_label_Da
                                                                                     Ad_Nolabel_Da
-                                                                                    nil)
+                                                                                    Ad_None)
                                                                                   (process_generic_type
                                                                                     Ad_expression_desc_Da
                                                                                     Ad_Pexp_apply_Da
@@ -1444,7 +1527,7 @@ Definition foo1 : ast_desc :=
                                                                                             (process_generic_type
                                                                                               Ad_arg_label_Da
                                                                                               Ad_Nolabel_Da
-                                                                                              nil)
+                                                                                              Ad_None)
                                                                                             (process_generic_type
                                                                                               Ad_expression_desc_Da
                                                                                               Ad_Pexp_apply_Da
@@ -1462,7 +1545,7 @@ Definition foo1 : ast_desc :=
                                                                                                       (process_generic_type
                                                                                                         Ad_arg_label_Da
                                                                                                         Ad_Nolabel_Da
-                                                                                                        nil)
+                                                                                                        Ad_None)
                                                                                                       (process_generic_type
                                                                                                         Ad_expression_desc_Da
                                                                                                         Ad_Pexp_construct_Da
@@ -1477,7 +1560,7 @@ Definition foo1 : ast_desc :=
                                                                                             (process_generic_type
                                                                                               Ad_arg_label_Da
                                                                                               Ad_Nolabel_Da
-                                                                                              nil)
+                                                                                              Ad_None)
                                                                                             (process_generic_type
                                                                                               Ad_expression_desc_Da
                                                                                               Ad_Pexp_apply_Da
@@ -1495,7 +1578,7 @@ Definition foo1 : ast_desc :=
                                                                                                       (process_generic_type
                                                                                                         Ad_arg_label_Da
                                                                                                         Ad_Nolabel_Da
-                                                                                                        nil)
+                                                                                                        Ad_None)
                                                                                                       (process_generic_type
                                                                                                         Ad_expression_desc_Da
                                                                                                         Ad_Pexp_apply_Da
@@ -1513,7 +1596,7 @@ Definition foo1 : ast_desc :=
                                                                                                                 (process_generic_type
                                                                                                                   Ad_arg_label_Da
                                                                                                                   Ad_Nolabel_Da
-                                                                                                                  nil)
+                                                                                                                  Ad_None)
                                                                                                                 (process_generic_type
                                                                                                                   Ad_expression_desc_Da
                                                                                                                   Ad_Pexp_constant_Da
@@ -1531,7 +1614,7 @@ Definition foo1 : ast_desc :=
                                                                                                                 (process_generic_type
                                                                                                                   Ad_arg_label_Da
                                                                                                                   Ad_Nolabel_Da
-                                                                                                                  nil)
+                                                                                                                  Ad_None)
                                                                                                                 (process_generic_type
                                                                                                                   Ad_expression_desc_Da
                                                                                                                   Ad_Pexp_constant_Da
@@ -1549,7 +1632,7 @@ Definition foo1 : ast_desc :=
                                                                                                                 (process_generic_type
                                                                                                                   Ad_arg_label_Da
                                                                                                                   Ad_Nolabel_Da
-                                                                                                                  nil)
+                                                                                                                  Ad_None)
                                                                                                                 (process_generic_type
                                                                                                                   Ad_expression_desc_Da
                                                                                                                   Ad_Pexp_construct_Da
@@ -1564,7 +1647,7 @@ Definition foo1 : ast_desc :=
                                                                                                       (process_generic_type
                                                                                                         Ad_arg_label_Da
                                                                                                         Ad_Nolabel_Da
-                                                                                                        nil)
+                                                                                                        Ad_None)
                                                                                                       (process_generic_type
                                                                                                         Ad_expression_desc_Da
                                                                                                         Ad_Pexp_apply_Da
@@ -1582,7 +1665,7 @@ Definition foo1 : ast_desc :=
                                                                                                                 (process_generic_type
                                                                                                                   Ad_arg_label_Da
                                                                                                                   Ad_Nolabel_Da
-                                                                                                                  nil)
+                                                                                                                  Ad_None)
                                                                                                                 (process_generic_type
                                                                                                                   Ad_expression_desc_Da
                                                                                                                   Ad_Pexp_apply_Da
@@ -1600,7 +1683,7 @@ Definition foo1 : ast_desc :=
                                                                                                                           (process_generic_type
                                                                                                                             Ad_arg_label_Da
                                                                                                                             Ad_Nolabel_Da
-                                                                                                                            nil)
+                                                                                                                            Ad_None)
                                                                                                                           (process_generic_type
                                                                                                                             Ad_expression_desc_Da
                                                                                                                             Ad_Pexp_constant_Da
@@ -1618,7 +1701,7 @@ Definition foo1 : ast_desc :=
                                                                                                                           (process_generic_type
                                                                                                                             Ad_arg_label_Da
                                                                                                                             Ad_Nolabel_Da
-                                                                                                                            nil)
+                                                                                                                            Ad_None)
                                                                                                                           (process_generic_type
                                                                                                                             Ad_expression_desc_Da
                                                                                                                             Ad_Pexp_constant_Da
@@ -1636,7 +1719,7 @@ Definition foo1 : ast_desc :=
                                                                                                                           (process_generic_type
                                                                                                                             Ad_arg_label_Da
                                                                                                                             Ad_Nolabel_Da
-                                                                                                                            nil)
+                                                                                                                            Ad_None)
                                                                                                                           (process_generic_type
                                                                                                                             Ad_expression_desc_Da
                                                                                                                             Ad_Pexp_construct_Da
@@ -1651,7 +1734,7 @@ Definition foo1 : ast_desc :=
                                                                                                                 (process_generic_type
                                                                                                                   Ad_arg_label_Da
                                                                                                                   Ad_Nolabel_Da
-                                                                                                                  nil)
+                                                                                                                  Ad_None)
                                                                                                                 (process_generic_type
                                                                                                                   Ad_expression_desc_Da
                                                                                                                   Ad_Pexp_apply_Da
@@ -1669,7 +1752,7 @@ Definition foo1 : ast_desc :=
                                                                                                                           (process_generic_type
                                                                                                                             Ad_arg_label_Da
                                                                                                                             Ad_Nolabel_Da
-                                                                                                                            nil)
+                                                                                                                            Ad_None)
                                                                                                                           (process_generic_type
                                                                                                                             Ad_expression_desc_Da
                                                                                                                             Ad_Pexp_constant_Da
@@ -1687,7 +1770,7 @@ Definition foo1 : ast_desc :=
                                                                                                                           (process_generic_type
                                                                                                                             Ad_arg_label_Da
                                                                                                                             Ad_Nolabel_Da
-                                                                                                                            nil)
+                                                                                                                            Ad_None)
                                                                                                                           (process_generic_type
                                                                                                                             Ad_expression_desc_Da
                                                                                                                             Ad_Pexp_constant_Da
@@ -1705,7 +1788,7 @@ Definition foo1 : ast_desc :=
                                                                                                                           (process_generic_type
                                                                                                                             Ad_arg_label_Da
                                                                                                                             Ad_Nolabel_Da
-                                                                                                                            nil)
+                                                                                                                            Ad_None)
                                                                                                                           (process_generic_type
                                                                                                                             Ad_expression_desc_Da
                                                                                                                             Ad_Pexp_construct_Da
@@ -1735,7 +1818,7 @@ Definition foo1 : ast_desc :=
                                                                                                                                                 (process_generic_type
                                                                                                                                                   Ad_arg_label_Da
                                                                                                                                                   Ad_Nolabel_Da
-                                                                                                                                                  nil)
+                                                                                                                                                  Ad_None)
                                                                                                                                                 (process_generic_type
                                                                                                                                                   Ad_expression_desc_Da
                                                                                                                                                   Ad_Pexp_constant_Da
@@ -1780,7 +1863,7 @@ Definition foo1 : ast_desc :=
                                                                                                                                                             (process_generic_type
                                                                                                                                                               Ad_arg_label_Da
                                                                                                                                                               Ad_Nolabel_Da
-                                                                                                                                                              nil)
+                                                                                                                                                              Ad_None)
                                                                                                                                                             (process_generic_type
                                                                                                                                                               Ad_expression_desc_Da
                                                                                                                                                               Ad_Pexp_construct_Da
@@ -1847,3 +1930,13 @@ Definition foo1 : ast_desc :=
             ]
         ]
     ].
+
+End WithUniMath .
+
+Section WithMetaCoq .
+From MetaCoq.Utils Require Import utils.
+From MetaCoq.Template Require Import All.
+
+MetaCoq Test Quote (fun x : ast_desc => x).
+
+End WithMetaCoq .
