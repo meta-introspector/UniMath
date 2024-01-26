@@ -187,25 +187,25 @@ Inductive ast_desc_list  : Type :=
 | Ad_cons : ast_desc ->ast_desc_list  ->ast_desc_list
 .
 
-Module simple_ast_root.
-  Record record {sa_role sa_type sa_list : Set} : Set := Build {
-    sa_role : sa_role;
-    sa_type : sa_type;
-    sa_list : sa_list;
-  }.
-  Arguments record : clear implicits.
-  Definition with_sa_role {t_sa_role t_sa_type t_sa_list} sa_role
-    (r : record t_sa_role t_sa_type t_sa_list) :=
-    Build t_sa_role t_sa_type t_sa_list sa_role r.(sa_type) r.(sa_list).
-  Definition with_sa_type {t_sa_role t_sa_type t_sa_list} sa_type
-    (r : record t_sa_role t_sa_type t_sa_list) :=
-    Build t_sa_role t_sa_type t_sa_list r.(sa_role) sa_type r.(sa_list).
-  Definition with_sa_list {t_sa_role t_sa_type t_sa_list} sa_list
-    (r : record t_sa_role t_sa_type t_sa_list) :=
-    Build t_sa_role t_sa_type t_sa_list r.(sa_role) r.(sa_type) sa_list.
-End simple_ast_root.
+(* Module simple_ast_root. *)
+(*   Record record {sa_role sa_type sa_list : Set} : Set := Build { *)
+(*     sa_role : sa_role; *)
+(*     sa_type : sa_type; *)
+(*     sa_list : sa_list; *)
+(*   }. *)
+(*   Arguments record : clear implicits. *)
+(*   Definition with_sa_role {t_sa_role t_sa_type t_sa_list} sa_role *)
+(*     (r : record t_sa_role t_sa_type t_sa_list) := *)
+(*     Build t_sa_role t_sa_type t_sa_list sa_role r.(sa_type) r.(sa_list). *)
+(*   Definition with_sa_type {t_sa_role t_sa_type t_sa_list} sa_type *)
+(*     (r : record t_sa_role t_sa_type t_sa_list) := *)
+(*     Build t_sa_role t_sa_type t_sa_list r.(sa_role) sa_type r.(sa_list). *)
+(*   Definition with_sa_list {t_sa_role t_sa_type t_sa_list} sa_list *)
+(*     (r : record t_sa_role t_sa_type t_sa_list) := *)
+(*     Build t_sa_role t_sa_type t_sa_list r.(sa_role) r.(sa_type) sa_list. *)
+(* End simple_ast_root. *)
 
-Definition simple_ast_root_skeleton := simple_ast_root.record.
+(* Definition simple_ast_root_skeleton := simple_ast_root.record. *)
 
 (*
 ast_desc2 : Type
@@ -698,13 +698,9 @@ Definition ff1 := process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da ( strin
 Definition ff0 := process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None.
 
 
-Definition ff00 :=      [ string_value Ad_None process_string_option, nil
-  ].
+Definition ff00 :=      Ad_None.
 
-Definition ff000 := [
-          process_generic_type Ad_constant_Da Ad_Pconst_string_Da
-            ff00
-        ].
+Definition ff000 :=     (process_generic_type Ad_constant_Da Ad_Pconst_string_Da            ff00).
 Definition ff2 := process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
         ff000.
 
@@ -712,1224 +708,1227 @@ Definition foo1 : ast_desc :=
   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
     [
       ff0,
-      ff1,
-      ff2
+      [
+        ff1,
+        ff2
+      ]
     ].
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_vars_list_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_process_vars_list_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       [ *)
+(*       (process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         (string_value Ad_process_vars_list_Da)) *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             string_value Ad_x_Da , *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_process_vars_list_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_arg_constructor_declaration_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_process_arg_constructor_declaration_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_arg_constructor_declaration_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_x_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_process_arg_constructor_declaration_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_label_declaration_list_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_process_label_declaration_list_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_label_declaration_list_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_x_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_process_label_declaration_list_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_params_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_process_params_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_params_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_x_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_process_params_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_cstrs_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_process_cstrs_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_cstrs_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_x_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_process_cstrs_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_core_type_list_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_process_core_type_list_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_core_type_list_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_x_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_process_core_type_list_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_type_declaration_list_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_process_type_declaration_list_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_type_declaration_list_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_x_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_process_type_declaration_list_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_loc_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-        [
-          process_generic_type Ad_constant_Da Ad_Pconst_string_Da
-            [ string_value Ad_loc_Da, process_string_option ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_loc_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*         [ *)
+(*           process_generic_type Ad_constant_Da Ad_Pconst_string_Da *)
+(*             [ string_value Ad_loc_Da, process_string_option ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_loc2_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-        [
-          process_generic_type Ad_constant_Da Ad_Pconst_string_Da
-            [ string_value Ad_loc_Da, process_string_option ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_loc2_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*         [ *)
+(*           process_generic_type Ad_constant_Da Ad_Pconst_string_Da *)
+(*             [ string_value Ad_loc_Da, process_string_option ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_loc_stack_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-        [
-          process_generic_type Ad_constant_Da Ad_Pconst_string_Da
-            [ string_value Ad_loc_Da, process_string_option ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_loc_stack_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*         [ *)
+(*           process_generic_type Ad_constant_Da Ad_Pconst_string_Da *)
+(*             [ string_value Ad_loc_Da, process_string_option ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_generic_type_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_constraint_Da
-            [
-              process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-                [ string_value Ad_a_Da ],
-              process_generic_type Ad_core_type_desc_Da
-                Ad_Ptyp_constr_Da
-                [
-                  ident
-                    Ad_string_Da,
-                  process_core_type_list
-                    Ad_None
-                ]
-            ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-            [
-              process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-              none,
-              process_generic_type Ad_pattern_desc_Da
-                Ad_Ppat_constraint_Da
-                [
-                  process_generic_type
-                    Ad_pattern_desc_Da
-                    Ad_Ppat_var_Da
-                    [
-                      string_value
-                        Ad_b_Da
-                    ],
-                  process_generic_type
-                    Ad_core_type_desc_Da
-                    Ad_Ptyp_constr_Da
-                    [
-                      ident
-                        Ad_string_Da,
-                      process_core_type_list
-                        Ad_None
-                    ]
-                ],
-              process_generic_type Ad_expression_desc_Da
-                Ad_Pexp_fun_Da
-                [
-                  process_generic_type
-                    Ad_arg_label_Da
-                    Ad_Nolabel_Da
-                    Ad_None,
-                  none,
-                  process_generic_type
-                    Ad_pattern_desc_Da
-                    Ad_Ppat_constraint_Da
-                    [
-                      process_generic_type
-                        Ad_pattern_desc_Da
-                        Ad_Ppat_var_Da
-                        [
-                          string_value
-                            Ad_c_Da
-                        ],
-                      process_generic_type
-                        Ad_core_type_desc_Da
-                        Ad_Ptyp_constr_Da
-                        [
-                          ident
-                            Ad_list_Da,
-                          process_core_type_list
-                            [
-                              process_generic_type
-                                Ad_core_type_desc_Da
-                                Ad_Ptyp_constr_Da
-                                [
-                                  ident
-                                    Ad_string_Da,
-                                  process_core_type_list
-                                    Ad_None
-                                ]
-                            ]
-                        ]
-                    ],
-                  process_generic_type
-                    Ad_expression_desc_Da
-                    Ad_Pexp_constraint_Da
-                    [
-                      process_generic_type
-                        Ad_expression_desc_Da
-                        Ad_Pexp_constant_Da
-                        [
-                          process_generic_type
-                            Ad_constant_Da
-                            Ad_Pconst_string_Da
-                            [
-                              string_value
-                                Ad_process_generic_type_Da,
-                              process_string_option
-                            ]
-                        ],
-                      process_generic_type
-                        Ad_core_type_desc_Da
-                        Ad_Ptyp_constr_Da
-                        [
-                          ident
-                            Ad_string_Da,
-                          process_core_type_list
-                            Ad_None
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_generic_type_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_constraint_Da *)
+(*             [ *)
+(*               process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*                 [ string_value Ad_a_Da ], *)
+(*               process_generic_type Ad_core_type_desc_Da *)
+(*                 Ad_Ptyp_constr_Da *)
+(*                 [ *)
+(*                   ident *)
+(*                     Ad_string_Da, *)
+(*                   process_core_type_list *)
+(*                     Ad_None *)
+(*                 ] *)
+(*             ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*             [ *)
+(*               process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*               none, *)
+(*               process_generic_type Ad_pattern_desc_Da *)
+(*                 Ad_Ppat_constraint_Da *)
+(*                 [ *)
+(*                   process_generic_type *)
+(*                     Ad_pattern_desc_Da *)
+(*                     Ad_Ppat_var_Da *)
+(*                     [ *)
+(*                       string_value *)
+(*                         Ad_b_Da *)
+(*                     ], *)
+(*                   process_generic_type *)
+(*                     Ad_core_type_desc_Da *)
+(*                     Ad_Ptyp_constr_Da *)
+(*                     [ *)
+(*                       ident *)
+(*                         Ad_string_Da, *)
+(*                       process_core_type_list *)
+(*                         Ad_None *)
+(*                     ] *)
+(*                 ], *)
+(*               process_generic_type Ad_expression_desc_Da *)
+(*                 Ad_Pexp_fun_Da *)
+(*                 [ *)
+(*                   process_generic_type *)
+(*                     Ad_arg_label_Da *)
+(*                     Ad_Nolabel_Da *)
+(*                     Ad_None, *)
+(*                   none, *)
+(*                   process_generic_type *)
+(*                     Ad_pattern_desc_Da *)
+(*                     Ad_Ppat_constraint_Da *)
+(*                     [ *)
+(*                       process_generic_type *)
+(*                         Ad_pattern_desc_Da *)
+(*                         Ad_Ppat_var_Da *)
+(*                         [ *)
+(*                           string_value *)
+(*                             Ad_c_Da *)
+(*                         ], *)
+(*                       process_generic_type *)
+(*                         Ad_core_type_desc_Da *)
+(*                         Ad_Ptyp_constr_Da *)
+(*                         [ *)
+(*                           ident *)
+(*                             Ad_list_Da, *)
+(*                           process_core_type_list *)
+(*                             [ *)
+(*                               process_generic_type *)
+(*                                 Ad_core_type_desc_Da *)
+(*                                 Ad_Ptyp_constr_Da *)
+(*                                 [ *)
+(*                                   ident *)
+(*                                     Ad_string_Da, *)
+(*                                   process_core_type_list *)
+(*                                     Ad_None *)
+(*                                 ] *)
+(*                             ] *)
+(*                         ] *)
+(*                     ], *)
+(*                   process_generic_type *)
+(*                     Ad_expression_desc_Da *)
+(*                     Ad_Pexp_constraint_Da *)
+(*                     [ *)
+(*                       process_generic_type *)
+(*                         Ad_expression_desc_Da *)
+(*                         Ad_Pexp_constant_Da *)
+(*                         [ *)
+(*                           process_generic_type *)
+(*                             Ad_constant_Da *)
+(*                             Ad_Pconst_string_Da *)
+(*                             [ *)
+(*                               string_value *)
+(*                                 Ad_process_generic_type_Da, *)
+(*                               process_string_option *)
+(*                             ] *)
+(*                         ], *)
+(*                       process_generic_type *)
+(*                         Ad_core_type_desc_Da *)
+(*                         Ad_Ptyp_constr_Da *)
+(*                         [ *)
+(*                           ident *)
+(*                             Ad_string_Da, *)
+(*                           process_core_type_list *)
+(*                             Ad_None *)
+(*                         ] *)
+(*                     ] *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_loc_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_a_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_process_loc_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_loc_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_a_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_process_loc_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_ident_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_a_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_ident_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_ident_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_a_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_ident_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_string_loc_list_pattern_option_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_process_string_loc_list_pattern_option_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_string_loc_list_pattern_option_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_x_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_process_string_loc_list_pattern_option_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_arg_label_expression_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-            [
-              process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-              none,
-              process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-                [ string_value Ad_y_Da ],
-              process_generic_type Ad_expression_desc_Da
-                Ad_Pexp_constant_Da
-                [
-                  process_generic_type
-                    Ad_constant_Da
-                    Ad_Pconst_string_Da
-                    [
-                      string_value
-                        Ad_process_arg_label_expression_Da,
-                      process_string_option
-                    ]
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_arg_label_expression_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_x_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*             [ *)
+(*               process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*               none, *)
+(*               process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*                 [ string_value Ad_y_Da ], *)
+(*               process_generic_type Ad_expression_desc_Da *)
+(*                 Ad_Pexp_constant_Da *)
+(*                 [ *)
+(*                   process_generic_type *)
+(*                     Ad_constant_Da *)
+(*                     Ad_Pconst_string_Da *)
+(*                     [ *)
+(*                       string_value *)
+(*                         Ad_process_arg_label_expression_Da, *)
+(*                       process_string_option *)
+(*                     ] *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_expression_list_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da
-            [
-              process_generic_type Ad_constant_Da
-                Ad_Pconst_string_Da
-                [
-                  string_value
-                    Ad_process_expression_list_Da,
-                  process_string_option
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_expression_list_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_x_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_constant_Da *)
+(*             [ *)
+(*               process_generic_type Ad_constant_Da *)
+(*                 Ad_Pconst_string_Da *)
+(*                 [ *)
+(*                   string_value *)
+(*                     Ad_process_expression_list_Da, *)
+(*                   process_string_option *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-        [ string_value Ad_process_structure_items_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da
-        [
-          process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None,
-          none,
-          process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da
-            [ string_value Ad_x_Da ],
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_apply_Da
-            [
-              process_generic_type Ad_expression_desc_Da
-                Ad_Pexp_ident_Da
-                [ ident Ad_caret ],
-              process_arg_label_expression_list
-                [
-                  process_arg_label_expression
-                    (process_generic_type
-                      Ad_arg_label_Da
-                      Ad_Nolabel_Da
-                      Ad_None)
-                    (process_generic_type
-                      Ad_expression_desc_Da
-                      Ad_Pexp_constant_Da
-                      [
-                        process_generic_type
-                          Ad_constant_Da
-                          Ad_Pconst_string_Da
-                          [
-                            string_value
-                              Ad_process_structure_items_Da,
-                            process_string_option
-                          ]
-                      ]),
-                  process_arg_label_expression
-                    (process_generic_type
-                      Ad_arg_label_Da
-                      Ad_Nolabel_Da
-                      Ad_None)
-                    (process_generic_type
-                      Ad_expression_desc_Da
-                      Ad_Pexp_ident_Da
-                      [
-                        ident
-                          Ad_x_Da
-                      ])
-                ]
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*         [ string_value Ad_process_structure_items_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_fun_Da *)
+(*         [ *)
+(*           process_generic_type Ad_arg_label_Da Ad_Nolabel_Da Ad_None, *)
+(*           none, *)
+(*           process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da *)
+(*             [ string_value Ad_x_Da ], *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_apply_Da *)
+(*             [ *)
+(*               process_generic_type Ad_expression_desc_Da *)
+(*                 Ad_Pexp_ident_Da *)
+(*                 [ ident Ad_caret ], *)
+(*               process_arg_label_expression_list *)
+(*                 [ *)
+(*                   process_arg_label_expression *)
+(*                     (process_generic_type *)
+(*                       Ad_arg_label_Da *)
+(*                       Ad_Nolabel_Da *)
+(*                       Ad_None) *)
+(*                     (process_generic_type *)
+(*                       Ad_expression_desc_Da *)
+(*                       Ad_Pexp_constant_Da *)
+(*                       [ *)
+(*                         process_generic_type *)
+(*                           Ad_constant_Da *)
+(*                           Ad_Pconst_string_Da *)
+(*                           [ *)
+(*                             string_value *)
+(*                               Ad_process_structure_items_Da, *)
+(*                             process_string_option *)
+(*                           ] *)
+(*                       ]), *)
+(*                   process_arg_label_expression *)
+(*                     (process_generic_type *)
+(*                       Ad_arg_label_Da *)
+(*                       Ad_Nolabel_Da *)
+(*                       Ad_None) *)
+(*                     (process_generic_type *)
+(*                       Ad_expression_desc_Da *)
+(*                       Ad_Pexp_ident_Da *)
+(*                       [ *)
+(*                         ident *)
+(*                           Ad_x_Da *)
+(*                       ]) *)
+(*                 ] *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
-Definition foo1 : ast_desc :=
-  process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da
-    [
-      process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None,
-      process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_foo1_Da ],
-      process_generic_type Ad_expression_desc_Da Ad_Pexp_apply_Da
-        [
-          process_generic_type Ad_expression_desc_Da Ad_Pexp_ident_Da
-            [ ident Ad_process_generic_type_Da ],
-          process_arg_label_expression_list
-            [
-              process_arg_label_expression
-                (process_generic_type
-                  Ad_arg_label_Da
-                  Ad_Nolabel_Da
-                  Ad_None)
-                (process_generic_type
-                  Ad_expression_desc_Da
-                  Ad_Pexp_constant_Da
-                  [
-                    process_generic_type
-                      Ad_constant_Da
-                      Ad_Pconst_string_Da
-                      [
-                        string_value
-                          Ad_structure_item_desc_Da,
-                        process_string_option
-                      ]
-                  ]),
-              process_arg_label_expression
-                (process_generic_type
-                  Ad_arg_label_Da
-                  Ad_Nolabel_Da
-                  Ad_None)
-                (process_generic_type
-                  Ad_expression_desc_Da
-                  Ad_Pexp_constant_Da
-                  [
-                    process_generic_type
-                      Ad_constant_Da
-                      Ad_Pconst_string_Da
-                      [
-                        string_value
-                          Ad_Pstr_type_Da,
-                        process_string_option
-                      ]
-                  ]),
-              process_arg_label_expression
-                (process_generic_type
-                  Ad_arg_label_Da
-                  Ad_Nolabel_Da
-                  Ad_None)
-                (process_generic_type
-                  Ad_expression_desc_Da
-                  Ad_Pexp_construct_Da
-                  [
-                    ident
-                      Ad_::_Da,
-                    process_generic_type
-                      Ad_expression_desc_Da
-                      Ad_Pexp_tuple_Da
-                      [
-                        process_expression_list
-                          [
-                            process_generic_type
-                              Ad_expression_desc_Da
-                              Ad_Pexp_apply_Da
-                              [
-                                process_generic_type
-                                  Ad_expression_desc_Da
-                                  Ad_Pexp_ident_Da
-                                  [
-                                    ident
-                                      Ad_process_generic_type_Da
-                                  ],
-                                process_arg_label_expression_list
-                                  [
-                                    process_arg_label_expression
-                                      (process_generic_type
-                                        Ad_arg_label_Da
-                                        Ad_Nolabel_Da
-                                        Ad_None)
-                                      (process_generic_type
-                                        Ad_expression_desc_Da
-                                        Ad_Pexp_constant_Da
-                                        [
-                                          process_generic_type
-                                            Ad_constant_Da
-                                            Ad_Pconst_string_Da
-                                            [
-                                              string_value
-                                                Ad_rec_flag_Da,
-                                              process_string_option
-                                            ]
-                                        ]),
-                                    process_arg_label_expression
-                                      (process_generic_type
-                                        Ad_arg_label_Da
-                                        Ad_Nolabel_Da
-                                        Ad_None)
-                                      (process_generic_type
-                                        Ad_expression_desc_Da
-                                        Ad_Pexp_constant_Da
-                                        [
-                                          process_generic_type
-                                            Ad_constant_Da
-                                            Ad_Pconst_string_Da
-                                            [
-                                              string_value
-                                                Ad_Recursive_Da,
-                                              process_string_option
-                                            ]
-                                        ]),
-                                    process_arg_label_expression
-                                      (process_generic_type
-                                        Ad_arg_label_Da
-                                        Ad_Nolabel_Da
-                                        Ad_None)
-                                      (process_generic_type
-                                        Ad_expression_desc_Da
-                                        Ad_Pexp_construct_Da
-                                        [
-                                          ident
-                                            Ad_empty_list,
-                                          none
-                                        ])
-                                  ]
-                              ],
-                            process_generic_type
-                              Ad_expression_desc_Da
-                              Ad_Pexp_construct_Da
-                              [
-                                ident
-                                  Ad_::_Da,
-                                process_generic_type
-                                  Ad_expression_desc_Da
-                                  Ad_Pexp_tuple_Da
-                                  [
-                                    process_expression_list
-                                      [
-                                        process_generic_type
-                                          Ad_expression_desc_Da
-                                          Ad_Pexp_apply_Da
-                                          [
-                                            process_generic_type
-                                              Ad_expression_desc_Da
-                                              Ad_Pexp_ident_Da
-                                              [
-                                                ident
-                                                  Ad_process_type_declaration_list_Da
-                                              ],
-                                            process_arg_label_expression_list
-                                              [
-                                                process_arg_label_expression
-                                                  (process_generic_type
-                                                    Ad_arg_label_Da
-                                                    Ad_Nolabel_Da
-                                                    Ad_None)
-                                                  (process_generic_type
-                                                    Ad_expression_desc_Da
-                                                    Ad_Pexp_construct_Da
-                                                    [
-                                                      ident
-                                                        Ad_::_Da,
-                                                      process_generic_type
-                                                        Ad_expression_desc_Da
-                                                        Ad_Pexp_tuple_Da
-                                                        [
-                                                          process_expression_list
-                                                            [
-                                                              process_generic_type
-                                                                Ad_expression_desc_Da
-                                                                Ad_Pexp_apply_Da
-                                                                [
-                                                                  process_generic_type
-                                                                    Ad_expression_desc_Da
-                                                                    Ad_Pexp_ident_Da
-                                                                    [
-                                                                      ident
-                                                                        Ad_caret
-                                                                    ],
-                                                                  process_arg_label_expression_list
-                                                                    [
-                                                                      process_arg_label_expression
-                                                                        (process_generic_type
-                                                                          Ad_arg_label_Da
-                                                                          Ad_Nolabel_Da
-                                                                          Ad_None)
-                                                                        (process_generic_type
-                                                                          Ad_expression_desc_Da
-                                                                          Ad_Pexp_apply_Da
-                                                                          [
-                                                                            process_generic_type
-                                                                              Ad_expression_desc_Da
-                                                                              Ad_Pexp_ident_Da
-                                                                              [
-                                                                                ident
-                                                                                  Ad_string_Da
-                                                                              ],
-                                                                            process_arg_label_expression_list
-                                                                              [
-                                                                                process_arg_label_expression
-                                                                                  (process_generic_type
-                                                                                    Ad_arg_label_Da
-                                                                                    Ad_Nolabel_Da
-                                                                                    Ad_None)
-                                                                                  (process_generic_type
-                                                                                    Ad_expression_desc_Da
-                                                                                    Ad_Pexp_constant_Da
-                                                                                    [
-                                                                                      process_generic_type
-                                                                                        Ad_constant_Da
-                                                                                        Ad_Pconst_string_Da
-                                                                                        [
-                                                                                          string_value
-                                                                                            Ad____Da,
-                                                                                          process_string_option
-                                                                                        ]
-                                                                                    ])
-                                                                              ]
-                                                                          ]),
-                                                                      process_arg_label_expression
-                                                                        (process_generic_type
-                                                                          Ad_arg_label_Da
-                                                                          Ad_Nolabel_Da
-                                                                          Ad_None)
-                                                                        (process_generic_type
-                                                                          Ad_expression_desc_Da
-                                                                          Ad_Pexp_apply_Da
-                                                                          [
-                                                                            process_generic_type
-                                                                              Ad_expression_desc_Da
-                                                                              Ad_Pexp_ident_Da
-                                                                              [
-                                                                                ident
-                                                                                  Ad_caret
-                                                                              ],
-                                                                            process_arg_label_expression_list
-                                                                              [
-                                                                                process_arg_label_expression
-                                                                                  (process_generic_type
-                                                                                    Ad_arg_label_Da
-                                                                                    Ad_Nolabel_Da
-                                                                                    Ad_None)
-                                                                                  (process_generic_type
-                                                                                    Ad_expression_desc_Da
-                                                                                    Ad_Pexp_apply_Da
-                                                                                    [
-                                                                                      process_generic_type
-                                                                                        Ad_expression_desc_Da
-                                                                                        Ad_Pexp_ident_Da
-                                                                                        [
-                                                                                          ident
-                                                                                            Ad_process_params_Da
-                                                                                        ],
-                                                                                      process_arg_label_expression_list
-                                                                                        [
-                                                                                          process_arg_label_expression
-                                                                                            (process_generic_type
-                                                                                              Ad_arg_label_Da
-                                                                                              Ad_Nolabel_Da
-                                                                                              Ad_None)
-                                                                                            (process_generic_type
-                                                                                              Ad_expression_desc_Da
-                                                                                              Ad_Pexp_construct_Da
-                                                                                              [
-                                                                                                ident
-                                                                                                  Ad_empty_list,
-                                                                                                none
-                                                                                              ])
-                                                                                        ]
-                                                                                    ]),
-                                                                                process_arg_label_expression
-                                                                                  (process_generic_type
-                                                                                    Ad_arg_label_Da
-                                                                                    Ad_Nolabel_Da
-                                                                                    Ad_None)
-                                                                                  (process_generic_type
-                                                                                    Ad_expression_desc_Da
-                                                                                    Ad_Pexp_apply_Da
-                                                                                    [
-                                                                                      process_generic_type
-                                                                                        Ad_expression_desc_Da
-                                                                                        Ad_Pexp_ident_Da
-                                                                                        [
-                                                                                          ident
-                                                                                            Ad_caret
-                                                                                        ],
-                                                                                      process_arg_label_expression_list
-                                                                                        [
-                                                                                          process_arg_label_expression
-                                                                                            (process_generic_type
-                                                                                              Ad_arg_label_Da
-                                                                                              Ad_Nolabel_Da
-                                                                                              Ad_None)
-                                                                                            (process_generic_type
-                                                                                              Ad_expression_desc_Da
-                                                                                              Ad_Pexp_apply_Da
-                                                                                              [
-                                                                                                process_generic_type
-                                                                                                  Ad_expression_desc_Da
-                                                                                                  Ad_Pexp_ident_Da
-                                                                                                  [
-                                                                                                    ident
-                                                                                                      Ad_process_cstrs_Da
-                                                                                                  ],
-                                                                                                process_arg_label_expression_list
-                                                                                                  [
-                                                                                                    process_arg_label_expression
-                                                                                                      (process_generic_type
-                                                                                                        Ad_arg_label_Da
-                                                                                                        Ad_Nolabel_Da
-                                                                                                        Ad_None)
-                                                                                                      (process_generic_type
-                                                                                                        Ad_expression_desc_Da
-                                                                                                        Ad_Pexp_construct_Da
-                                                                                                        [
-                                                                                                          ident
-                                                                                                            Ad_empty_list,
-                                                                                                          none
-                                                                                                        ])
-                                                                                                  ]
-                                                                                              ]),
-                                                                                          process_arg_label_expression
-                                                                                            (process_generic_type
-                                                                                              Ad_arg_label_Da
-                                                                                              Ad_Nolabel_Da
-                                                                                              Ad_None)
-                                                                                            (process_generic_type
-                                                                                              Ad_expression_desc_Da
-                                                                                              Ad_Pexp_apply_Da
-                                                                                              [
-                                                                                                process_generic_type
-                                                                                                  Ad_expression_desc_Da
-                                                                                                  Ad_Pexp_ident_Da
-                                                                                                  [
-                                                                                                    ident
-                                                                                                      Ad_caret
-                                                                                                  ],
-                                                                                                process_arg_label_expression_list
-                                                                                                  [
-                                                                                                    process_arg_label_expression
-                                                                                                      (process_generic_type
-                                                                                                        Ad_arg_label_Da
-                                                                                                        Ad_Nolabel_Da
-                                                                                                        Ad_None)
-                                                                                                      (process_generic_type
-                                                                                                        Ad_expression_desc_Da
-                                                                                                        Ad_Pexp_apply_Da
-                                                                                                        [
-                                                                                                          process_generic_type
-                                                                                                            Ad_expression_desc_Da
-                                                                                                            Ad_Pexp_ident_Da
-                                                                                                            [
-                                                                                                              ident
-                                                                                                                Ad_process_generic_type_Da
-                                                                                                            ],
-                                                                                                          process_arg_label_expression_list
-                                                                                                            [
-                                                                                                              process_arg_label_expression
-                                                                                                                (process_generic_type
-                                                                                                                  Ad_arg_label_Da
-                                                                                                                  Ad_Nolabel_Da
-                                                                                                                  Ad_None)
-                                                                                                                (process_generic_type
-                                                                                                                  Ad_expression_desc_Da
-                                                                                                                  Ad_Pexp_constant_Da
-                                                                                                                  [
-                                                                                                                    process_generic_type
-                                                                                                                      Ad_constant_Da
-                                                                                                                      Ad_Pconst_string_Da
-                                                                                                                      [
-                                                                                                                        string_value
-                                                                                                                          Ad_type_kind_Da,
-                                                                                                                        process_string_option
-                                                                                                                      ]
-                                                                                                                  ]),
-                                                                                                              process_arg_label_expression
-                                                                                                                (process_generic_type
-                                                                                                                  Ad_arg_label_Da
-                                                                                                                  Ad_Nolabel_Da
-                                                                                                                  Ad_None)
-                                                                                                                (process_generic_type
-                                                                                                                  Ad_expression_desc_Da
-                                                                                                                  Ad_Pexp_constant_Da
-                                                                                                                  [
-                                                                                                                    process_generic_type
-                                                                                                                      Ad_constant_Da
-                                                                                                                      Ad_Pconst_string_Da
-                                                                                                                      [
-                                                                                                                        string_value
-                                                                                                                          Ad_Ptype_abstract_Da,
-                                                                                                                        process_string_option
-                                                                                                                      ]
-                                                                                                                  ]),
-                                                                                                              process_arg_label_expression
-                                                                                                                (process_generic_type
-                                                                                                                  Ad_arg_label_Da
-                                                                                                                  Ad_Nolabel_Da
-                                                                                                                  Ad_None)
-                                                                                                                (process_generic_type
-                                                                                                                  Ad_expression_desc_Da
-                                                                                                                  Ad_Pexp_construct_Da
-                                                                                                                  [
-                                                                                                                    ident
-                                                                                                                      Ad_empty_list,
-                                                                                                                    none
-                                                                                                                  ])
-                                                                                                            ]
-                                                                                                        ]),
-                                                                                                    process_arg_label_expression
-                                                                                                      (process_generic_type
-                                                                                                        Ad_arg_label_Da
-                                                                                                        Ad_Nolabel_Da
-                                                                                                        Ad_None)
-                                                                                                      (process_generic_type
-                                                                                                        Ad_expression_desc_Da
-                                                                                                        Ad_Pexp_apply_Da
-                                                                                                        [
-                                                                                                          process_generic_type
-                                                                                                            Ad_expression_desc_Da
-                                                                                                            Ad_Pexp_ident_Da
-                                                                                                            [
-                                                                                                              ident
-                                                                                                                Ad_caret
-                                                                                                            ],
-                                                                                                          process_arg_label_expression_list
-                                                                                                            [
-                                                                                                              process_arg_label_expression
-                                                                                                                (process_generic_type
-                                                                                                                  Ad_arg_label_Da
-                                                                                                                  Ad_Nolabel_Da
-                                                                                                                  Ad_None)
-                                                                                                                (process_generic_type
-                                                                                                                  Ad_expression_desc_Da
-                                                                                                                  Ad_Pexp_apply_Da
-                                                                                                                  [
-                                                                                                                    process_generic_type
-                                                                                                                      Ad_expression_desc_Da
-                                                                                                                      Ad_Pexp_ident_Da
-                                                                                                                      [
-                                                                                                                        ident
-                                                                                                                          Ad_process_generic_type_Da
-                                                                                                                      ],
-                                                                                                                    process_arg_label_expression_list
-                                                                                                                      [
-                                                                                                                        process_arg_label_expression
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_arg_label_Da
-                                                                                                                            Ad_Nolabel_Da
-                                                                                                                            Ad_None)
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_expression_desc_Da
-                                                                                                                            Ad_Pexp_constant_Da
-                                                                                                                            [
-                                                                                                                              process_generic_type
-                                                                                                                                Ad_constant_Da
-                                                                                                                                Ad_Pconst_string_Da
-                                                                                                                                [
-                                                                                                                                  string_value
-                                                                                                                                    Ad_private_flag_Da,
-                                                                                                                                  process_string_option
-                                                                                                                                ]
-                                                                                                                            ]),
-                                                                                                                        process_arg_label_expression
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_arg_label_Da
-                                                                                                                            Ad_Nolabel_Da
-                                                                                                                            Ad_None)
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_expression_desc_Da
-                                                                                                                            Ad_Pexp_constant_Da
-                                                                                                                            [
-                                                                                                                              process_generic_type
-                                                                                                                                Ad_constant_Da
-                                                                                                                                Ad_Pconst_string_Da
-                                                                                                                                [
-                                                                                                                                  string_value
-                                                                                                                                    Ad_Public_Da,
-                                                                                                                                  process_string_option
-                                                                                                                                ]
-                                                                                                                            ]),
-                                                                                                                        process_arg_label_expression
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_arg_label_Da
-                                                                                                                            Ad_Nolabel_Da
-                                                                                                                            Ad_None)
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_expression_desc_Da
-                                                                                                                            Ad_Pexp_construct_Da
-                                                                                                                            [
-                                                                                                                              ident
-                                                                                                                                Ad_empty_list,
-                                                                                                                              none
-                                                                                                                            ])
-                                                                                                                      ]
-                                                                                                                  ]),
-                                                                                                              process_arg_label_expression
-                                                                                                                (process_generic_type
-                                                                                                                  Ad_arg_label_Da
-                                                                                                                  Ad_Nolabel_Da
-                                                                                                                  Ad_None)
-                                                                                                                (process_generic_type
-                                                                                                                  Ad_expression_desc_Da
-                                                                                                                  Ad_Pexp_apply_Da
-                                                                                                                  [
-                                                                                                                    process_generic_type
-                                                                                                                      Ad_expression_desc_Da
-                                                                                                                      Ad_Pexp_ident_Da
-                                                                                                                      [
-                                                                                                                        ident
-                                                                                                                          Ad_process_generic_type_Da
-                                                                                                                      ],
-                                                                                                                    process_arg_label_expression_list
-                                                                                                                      [
-                                                                                                                        process_arg_label_expression
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_arg_label_Da
-                                                                                                                            Ad_Nolabel_Da
-                                                                                                                            Ad_None)
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_expression_desc_Da
-                                                                                                                            Ad_Pexp_constant_Da
-                                                                                                                            [
-                                                                                                                              process_generic_type
-                                                                                                                                Ad_constant_Da
-                                                                                                                                Ad_Pconst_string_Da
-                                                                                                                                [
-                                                                                                                                  string_value
-                                                                                                                                    Ad_core_type_desc_Da,
-                                                                                                                                  process_string_option
-                                                                                                                                ]
-                                                                                                                            ]),
-                                                                                                                        process_arg_label_expression
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_arg_label_Da
-                                                                                                                            Ad_Nolabel_Da
-                                                                                                                            Ad_None)
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_expression_desc_Da
-                                                                                                                            Ad_Pexp_constant_Da
-                                                                                                                            [
-                                                                                                                              process_generic_type
-                                                                                                                                Ad_constant_Da
-                                                                                                                                Ad_Pconst_string_Da
-                                                                                                                                [
-                                                                                                                                  string_value
-                                                                                                                                    Ad_Ptyp_constr_Da,
-                                                                                                                                  process_string_option
-                                                                                                                                ]
-                                                                                                                            ]),
-                                                                                                                        process_arg_label_expression
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_arg_label_Da
-                                                                                                                            Ad_Nolabel_Da
-                                                                                                                            Ad_None)
-                                                                                                                          (process_generic_type
-                                                                                                                            Ad_expression_desc_Da
-                                                                                                                            Ad_Pexp_construct_Da
-                                                                                                                            [
-                                                                                                                              ident
-                                                                                                                                Ad_::_Da,
-                                                                                                                              process_generic_type
-                                                                                                                                Ad_expression_desc_Da
-                                                                                                                                Ad_Pexp_tuple_Da
-                                                                                                                                [
-                                                                                                                                  process_expression_list
-                                                                                                                                    [
-                                                                                                                                      process_generic_type
-                                                                                                                                        Ad_expression_desc_Da
-                                                                                                                                        Ad_Pexp_apply_Da
-                                                                                                                                        [
-                                                                                                                                          process_generic_type
-                                                                                                                                            Ad_expression_desc_Da
-                                                                                                                                            Ad_Pexp_ident_Da
-                                                                                                                                            [
-                                                                                                                                              ident
-                                                                                                                                                Ad_ident_Da
-                                                                                                                                            ],
-                                                                                                                                          process_arg_label_expression_list
-                                                                                                                                            [
-                                                                                                                                              process_arg_label_expression
-                                                                                                                                                (process_generic_type
-                                                                                                                                                  Ad_arg_label_Da
-                                                                                                                                                  Ad_Nolabel_Da
-                                                                                                                                                  Ad_None)
-                                                                                                                                                (process_generic_type
-                                                                                                                                                  Ad_expression_desc_Da
-                                                                                                                                                  Ad_Pexp_constant_Da
-                                                                                                                                                  [
-                                                                                                                                                    process_generic_type
-                                                                                                                                                      Ad_constant_Da
-                                                                                                                                                      Ad_Pconst_string_Da
-                                                                                                                                                      [
-                                                                                                                                                        string_value
-                                                                                                                                                          Ad_Obj.t_Da,
-                                                                                                                                                        process_string_option
-                                                                                                                                                      ]
-                                                                                                                                                  ])
-                                                                                                                                            ]
-                                                                                                                                        ],
-                                                                                                                                      process_generic_type
-                                                                                                                                        Ad_expression_desc_Da
-                                                                                                                                        Ad_Pexp_construct_Da
-                                                                                                                                        [
-                                                                                                                                          ident
-                                                                                                                                            Ad_::_Da,
-                                                                                                                                          process_generic_type
-                                                                                                                                            Ad_expression_desc_Da
-                                                                                                                                            Ad_Pexp_tuple_Da
-                                                                                                                                            [
-                                                                                                                                              process_expression_list
-                                                                                                                                                [
-                                                                                                                                                  process_generic_type
-                                                                                                                                                    Ad_expression_desc_Da
-                                                                                                                                                    Ad_Pexp_apply_Da
-                                                                                                                                                    [
-                                                                                                                                                      process_generic_type
-                                                                                                                                                        Ad_expression_desc_Da
-                                                                                                                                                        Ad_Pexp_ident_Da
-                                                                                                                                                        [
-                                                                                                                                                          ident
-                                                                                                                                                            Ad_process_core_type_list_Da
-                                                                                                                                                        ],
-                                                                                                                                                      process_arg_label_expression_list
-                                                                                                                                                        [
-                                                                                                                                                          process_arg_label_expression
-                                                                                                                                                            (process_generic_type
-                                                                                                                                                              Ad_arg_label_Da
-                                                                                                                                                              Ad_Nolabel_Da
-                                                                                                                                                              Ad_None)
-                                                                                                                                                            (process_generic_type
-                                                                                                                                                              Ad_expression_desc_Da
-                                                                                                                                                              Ad_Pexp_construct_Da
-                                                                                                                                                              [
-                                                                                                                                                                ident
-                                                                                                                                                                  Ad_empty_list,
-                                                                                                                                                                none
-                                                                                                                                                              ])
-                                                                                                                                                        ]
-                                                                                                                                                    ],
-                                                                                                                                                  process_generic_type
-                                                                                                                                                    Ad_expression_desc_Da
-                                                                                                                                                    Ad_Pexp_construct_Da
-                                                                                                                                                    [
-                                                                                                                                                      ident
-                                                                                                                                                        Ad_empty_list,
-                                                                                                                                                      none
-                                                                                                                                                    ]
-                                                                                                                                                ]
-                                                                                                                                            ]
-                                                                                                                                        ]
-                                                                                                                                    ]
-                                                                                                                                ]
-                                                                                                                            ])
-                                                                                                                      ]
-                                                                                                                  ])
-                                                                                                            ]
-                                                                                                        ])
-                                                                                                  ]
-                                                                                              ])
-                                                                                        ]
-                                                                                    ])
-                                                                              ]
-                                                                          ])
-                                                                    ]
-                                                                ],
-                                                              process_generic_type
-                                                                Ad_expression_desc_Da
-                                                                Ad_Pexp_construct_Da
-                                                                [
-                                                                  ident
-                                                                    Ad_empty_list,
-                                                                  none
-                                                                ]
-                                                            ]
-                                                        ]
-                                                    ])
-                                              ]
-                                          ],
-                                        process_generic_type
-                                          Ad_expression_desc_Da
-                                          Ad_Pexp_construct_Da
-                                          [
-                                            ident
-                                              Ad_empty_list,
-                                            none
-                                          ]
-                                      ]
-                                  ]
-                              ]
-                          ]
-                      ]
-                  ])
-            ]
-        ]
-    ].
+(* Definition foo1 : ast_desc := *)
+(*   process_generic_type Ad_structure_item_desc_Da Ad_Pstr_value_Da *)
+(*     [ *)
+(*       process_generic_type Ad_rec_flag_Da Ad_Nonrecursive_Da Ad_None, *)
+(*       process_generic_type Ad_pattern_desc_Da Ad_Ppat_var_Da [ string_value Ad_foo1_Da ], *)
+(*       process_generic_type Ad_expression_desc_Da Ad_Pexp_apply_Da *)
+(*         [ *)
+(*           process_generic_type Ad_expression_desc_Da Ad_Pexp_ident_Da *)
+(*             [ ident Ad_process_generic_type_Da ], *)
+(*           process_arg_label_expression_list *)
+(*             [ *)
+(*               process_arg_label_expression *)
+(*                 (process_generic_type *)
+(*                   Ad_arg_label_Da *)
+(*                   Ad_Nolabel_Da *)
+(*                   Ad_None) *)
+(*                 (process_generic_type *)
+(*                   Ad_expression_desc_Da *)
+(*                   Ad_Pexp_constant_Da *)
+(*                   [ *)
+(*                     process_generic_type *)
+(*                       Ad_constant_Da *)
+(*                       Ad_Pconst_string_Da *)
+(*                       [ *)
+(*                         string_value *)
+(*                           Ad_structure_item_desc_Da, *)
+(*                         process_string_option *)
+(*                       ] *)
+(*                   ]), *)
+(*               process_arg_label_expression *)
+(*                 (process_generic_type *)
+(*                   Ad_arg_label_Da *)
+(*                   Ad_Nolabel_Da *)
+(*                   Ad_None) *)
+(*                 (process_generic_type *)
+(*                   Ad_expression_desc_Da *)
+(*                   Ad_Pexp_constant_Da *)
+(*                   [ *)
+(*                     process_generic_type *)
+(*                       Ad_constant_Da *)
+(*                       Ad_Pconst_string_Da *)
+(*                       [ *)
+(*                         string_value *)
+(*                           Ad_Pstr_type_Da, *)
+(*                         process_string_option *)
+(*                       ] *)
+(*                   ]), *)
+(*               process_arg_label_expression *)
+(*                 (process_generic_type *)
+(*                   Ad_arg_label_Da *)
+(*                   Ad_Nolabel_Da *)
+(*                   Ad_None) *)
+(*                 (process_generic_type *)
+(*                   Ad_expression_desc_Da *)
+(*                   Ad_Pexp_construct_Da *)
+(*                   [ *)
+(*                     ident *)
+(*                       Ad_::_Da, *)
+(*                     process_generic_type *)
+(*                       Ad_expression_desc_Da *)
+(*                       Ad_Pexp_tuple_Da *)
+(*                       [ *)
+(*                         process_expression_list *)
+(*                           [ *)
+(*                             process_generic_type *)
+(*                               Ad_expression_desc_Da *)
+(*                               Ad_Pexp_apply_Da *)
+(*                               [ *)
+(*                                 process_generic_type *)
+(*                                   Ad_expression_desc_Da *)
+(*                                   Ad_Pexp_ident_Da *)
+(*                                   [ *)
+(*                                     ident *)
+(*                                       Ad_process_generic_type_Da *)
+(*                                   ], *)
+(*                                 process_arg_label_expression_list *)
+(*                                   [ *)
+(*                                     process_arg_label_expression *)
+(*                                       (process_generic_type *)
+(*                                         Ad_arg_label_Da *)
+(*                                         Ad_Nolabel_Da *)
+(*                                         Ad_None) *)
+(*                                       (process_generic_type *)
+(*                                         Ad_expression_desc_Da *)
+(*                                         Ad_Pexp_constant_Da *)
+(*                                         [ *)
+(*                                           process_generic_type *)
+(*                                             Ad_constant_Da *)
+(*                                             Ad_Pconst_string_Da *)
+(*                                             [ *)
+(*                                               string_value *)
+(*                                                 Ad_rec_flag_Da, *)
+(*                                               process_string_option *)
+(*                                             ] *)
+(*                                         ]), *)
+(*                                     process_arg_label_expression *)
+(*                                       (process_generic_type *)
+(*                                         Ad_arg_label_Da *)
+(*                                         Ad_Nolabel_Da *)
+(*                                         Ad_None) *)
+(*                                       (process_generic_type *)
+(*                                         Ad_expression_desc_Da *)
+(*                                         Ad_Pexp_constant_Da *)
+(*                                         [ *)
+(*                                           process_generic_type *)
+(*                                             Ad_constant_Da *)
+(*                                             Ad_Pconst_string_Da *)
+(*                                             [ *)
+(*                                               string_value *)
+(*                                                 Ad_Recursive_Da, *)
+(*                                               process_string_option *)
+(*                                             ] *)
+(*                                         ]), *)
+(*                                     process_arg_label_expression *)
+(*                                       (process_generic_type *)
+(*                                         Ad_arg_label_Da *)
+(*                                         Ad_Nolabel_Da *)
+(*                                         Ad_None) *)
+(*                                       (process_generic_type *)
+(*                                         Ad_expression_desc_Da *)
+(*                                         Ad_Pexp_construct_Da *)
+(*                                         [ *)
+(*                                           ident *)
+(*                                             Ad_empty_list, *)
+(*                                           none *)
+(*                                         ]) *)
+(*                                   ] *)
+(*                               ], *)
+(*                             process_generic_type *)
+(*                               Ad_expression_desc_Da *)
+(*                               Ad_Pexp_construct_Da *)
+(*                               [ *)
+(*                                 ident *)
+(*                                   Ad_::_Da, *)
+(*                                 process_generic_type *)
+(*                                   Ad_expression_desc_Da *)
+(*                                   Ad_Pexp_tuple_Da *)
+(*                                   [ *)
+(*                                     process_expression_list *)
+(*                                       [ *)
+(*                                         process_generic_type *)
+(*                                           Ad_expression_desc_Da *)
+(*                                           Ad_Pexp_apply_Da *)
+(*                                           [ *)
+(*                                             process_generic_type *)
+(*                                               Ad_expression_desc_Da *)
+(*                                               Ad_Pexp_ident_Da *)
+(*                                               [ *)
+(*                                                 ident *)
+(*                                                   Ad_process_type_declaration_list_Da *)
+(*                                               ], *)
+(*                                             process_arg_label_expression_list *)
+(*                                               [ *)
+(*                                                 process_arg_label_expression *)
+(*                                                   (process_generic_type *)
+(*                                                     Ad_arg_label_Da *)
+(*                                                     Ad_Nolabel_Da *)
+(*                                                     Ad_None) *)
+(*                                                   (process_generic_type *)
+(*                                                     Ad_expression_desc_Da *)
+(*                                                     Ad_Pexp_construct_Da *)
+(*                                                     [ *)
+(*                                                       ident *)
+(*                                                         Ad_::_Da, *)
+(*                                                       process_generic_type *)
+(*                                                         Ad_expression_desc_Da *)
+(*                                                         Ad_Pexp_tuple_Da *)
+(*                                                         [ *)
+(*                                                           process_expression_list *)
+(*                                                             [ *)
+(*                                                               process_generic_type *)
+(*                                                                 Ad_expression_desc_Da *)
+(*                                                                 Ad_Pexp_apply_Da *)
+(*                                                                 [ *)
+(*                                                                   process_generic_type *)
+(*                                                                     Ad_expression_desc_Da *)
+(*                                                                     Ad_Pexp_ident_Da *)
+(*                                                                     [ *)
+(*                                                                       ident *)
+(*                                                                         Ad_caret *)
+(*                                                                     ], *)
+(*                                                                   process_arg_label_expression_list *)
+(*                                                                     [ *)
+(*                                                                       process_arg_label_expression *)
+(*                                                                         (process_generic_type *)
+(*                                                                           Ad_arg_label_Da *)
+(*                                                                           Ad_Nolabel_Da *)
+(*                                                                           Ad_None) *)
+(*                                                                         (process_generic_type *)
+(*                                                                           Ad_expression_desc_Da *)
+(*                                                                           Ad_Pexp_apply_Da *)
+(*                                                                           [ *)
+(*                                                                             process_generic_type *)
+(*                                                                               Ad_expression_desc_Da *)
+(*                                                                               Ad_Pexp_ident_Da *)
+(*                                                                               [ *)
+(*                                                                                 ident *)
+(*                                                                                   Ad_string_Da *)
+(*                                                                               ], *)
+(*                                                                             process_arg_label_expression_list *)
+(*                                                                               [ *)
+(*                                                                                 process_arg_label_expression *)
+(*                                                                                   (process_generic_type *)
+(*                                                                                     Ad_arg_label_Da *)
+(*                                                                                     Ad_Nolabel_Da *)
+(*                                                                                     Ad_None) *)
+(*                                                                                   (process_generic_type *)
+(*                                                                                     Ad_expression_desc_Da *)
+(*                                                                                     Ad_Pexp_constant_Da *)
+(*                                                                                     [ *)
+(*                                                                                       process_generic_type *)
+(*                                                                                         Ad_constant_Da *)
+(*                                                                                         Ad_Pconst_string_Da *)
+(*                                                                                         [ *)
+(*                                                                                           string_value *)
+(*                                                                                             Ad____Da, *)
+(*                                                                                           process_string_option *)
+(*                                                                                         ] *)
+(*                                                                                     ]) *)
+(*                                                                               ] *)
+(*                                                                           ]), *)
+(*                                                                       process_arg_label_expression *)
+(*                                                                         (process_generic_type *)
+(*                                                                           Ad_arg_label_Da *)
+(*                                                                           Ad_Nolabel_Da *)
+(*                                                                           Ad_None) *)
+(*                                                                         (process_generic_type *)
+(*                                                                           Ad_expression_desc_Da *)
+(*                                                                           Ad_Pexp_apply_Da *)
+(*                                                                           [ *)
+(*                                                                             process_generic_type *)
+(*                                                                               Ad_expression_desc_Da *)
+(*                                                                               Ad_Pexp_ident_Da *)
+(*                                                                               [ *)
+(*                                                                                 ident *)
+(*                                                                                   Ad_caret *)
+(*                                                                               ], *)
+(*                                                                             process_arg_label_expression_list *)
+(*                                                                               [ *)
+(*                                                                                 process_arg_label_expression *)
+(*                                                                                   (process_generic_type *)
+(*                                                                                     Ad_arg_label_Da *)
+(*                                                                                     Ad_Nolabel_Da *)
+(*                                                                                     Ad_None) *)
+(*                                                                                   (process_generic_type *)
+(*                                                                                     Ad_expression_desc_Da *)
+(*                                                                                     Ad_Pexp_apply_Da *)
+(*                                                                                     [ *)
+(*                                                                                       process_generic_type *)
+(*                                                                                         Ad_expression_desc_Da *)
+(*                                                                                         Ad_Pexp_ident_Da *)
+(*                                                                                         [ *)
+(*                                                                                           ident *)
+(*                                                                                             Ad_process_params_Da *)
+(*                                                                                         ], *)
+(*                                                                                       process_arg_label_expression_list *)
+(*                                                                                         [ *)
+(*                                                                                           process_arg_label_expression *)
+(*                                                                                             (process_generic_type *)
+(*                                                                                               Ad_arg_label_Da *)
+(*                                                                                               Ad_Nolabel_Da *)
+(*                                                                                               Ad_None) *)
+(*                                                                                             (process_generic_type *)
+(*                                                                                               Ad_expression_desc_Da *)
+(*                                                                                               Ad_Pexp_construct_Da *)
+(*                                                                                               [ *)
+(*                                                                                                 ident *)
+(*                                                                                                   Ad_empty_list, *)
+(*                                                                                                 none *)
+(*                                                                                               ]) *)
+(*                                                                                         ] *)
+(*                                                                                     ]), *)
+(*                                                                                 process_arg_label_expression *)
+(*                                                                                   (process_generic_type *)
+(*                                                                                     Ad_arg_label_Da *)
+(*                                                                                     Ad_Nolabel_Da *)
+(*                                                                                     Ad_None) *)
+(*                                                                                   (process_generic_type *)
+(*                                                                                     Ad_expression_desc_Da *)
+(*                                                                                     Ad_Pexp_apply_Da *)
+(*                                                                                     [ *)
+(*                                                                                       process_generic_type *)
+(*                                                                                         Ad_expression_desc_Da *)
+(*                                                                                         Ad_Pexp_ident_Da *)
+(*                                                                                         [ *)
+(*                                                                                           ident *)
+(*                                                                                             Ad_caret *)
+(*                                                                                         ], *)
+(*                                                                                       process_arg_label_expression_list *)
+(*                                                                                         [ *)
+(*                                                                                           process_arg_label_expression *)
+(*                                                                                             (process_generic_type *)
+(*                                                                                               Ad_arg_label_Da *)
+(*                                                                                               Ad_Nolabel_Da *)
+(*                                                                                               Ad_None) *)
+(*                                                                                             (process_generic_type *)
+(*                                                                                               Ad_expression_desc_Da *)
+(*                                                                                               Ad_Pexp_apply_Da *)
+(*                                                                                               [ *)
+(*                                                                                                 process_generic_type *)
+(*                                                                                                   Ad_expression_desc_Da *)
+(*                                                                                                   Ad_Pexp_ident_Da *)
+(*                                                                                                   [ *)
+(*                                                                                                     ident *)
+(*                                                                                                       Ad_process_cstrs_Da *)
+(*                                                                                                   ], *)
+(*                                                                                                 process_arg_label_expression_list *)
+(*                                                                                                   [ *)
+(*                                                                                                     process_arg_label_expression *)
+(*                                                                                                       (process_generic_type *)
+(*                                                                                                         Ad_arg_label_Da *)
+(*                                                                                                         Ad_Nolabel_Da *)
+(*                                                                                                         Ad_None) *)
+(*                                                                                                       (process_generic_type *)
+(*                                                                                                         Ad_expression_desc_Da *)
+(*                                                                                                         Ad_Pexp_construct_Da *)
+(*                                                                                                         [ *)
+(*                                                                                                           ident *)
+(*                                                                                                             Ad_empty_list, *)
+(*                                                                                                           none *)
+(*                                                                                                         ]) *)
+(*                                                                                                   ] *)
+(*                                                                                               ]), *)
+(*                                                                                           process_arg_label_expression *)
+(*                                                                                             (process_generic_type *)
+(*                                                                                               Ad_arg_label_Da *)
+(*                                                                                               Ad_Nolabel_Da *)
+(*                                                                                               Ad_None) *)
+(*                                                                                             (process_generic_type *)
+(*                                                                                               Ad_expression_desc_Da *)
+(*                                                                                               Ad_Pexp_apply_Da *)
+(*                                                                                               [ *)
+(*                                                                                                 process_generic_type *)
+(*                                                                                                   Ad_expression_desc_Da *)
+(*                                                                                                   Ad_Pexp_ident_Da *)
+(*                                                                                                   [ *)
+(*                                                                                                     ident *)
+(*                                                                                                       Ad_caret *)
+(*                                                                                                   ], *)
+(*                                                                                                 process_arg_label_expression_list *)
+(*                                                                                                   [ *)
+(*                                                                                                     process_arg_label_expression *)
+(*                                                                                                       (process_generic_type *)
+(*                                                                                                         Ad_arg_label_Da *)
+(*                                                                                                         Ad_Nolabel_Da *)
+(*                                                                                                         Ad_None) *)
+(*                                                                                                       (process_generic_type *)
+(*                                                                                                         Ad_expression_desc_Da *)
+(*                                                                                                         Ad_Pexp_apply_Da *)
+(*                                                                                                         [ *)
+(*                                                                                                           process_generic_type *)
+(*                                                                                                             Ad_expression_desc_Da *)
+(*                                                                                                             Ad_Pexp_ident_Da *)
+(*                                                                                                             [ *)
+(*                                                                                                               ident *)
+(*                                                                                                                 Ad_process_generic_type_Da *)
+(*                                                                                                             ], *)
+(*                                                                                                           process_arg_label_expression_list *)
+(*                                                                                                             [ *)
+(*                                                                                                               process_arg_label_expression *)
+(*                                                                                                                 (process_generic_type *)
+(*                                                                                                                   Ad_arg_label_Da *)
+(*                                                                                                                   Ad_Nolabel_Da *)
+(*                                                                                                                   Ad_None) *)
+(*                                                                                                                 (process_generic_type *)
+(*                                                                                                                   Ad_expression_desc_Da *)
+(*                                                                                                                   Ad_Pexp_constant_Da *)
+(*                                                                                                                   [ *)
+(*                                                                                                                     process_generic_type *)
+(*                                                                                                                       Ad_constant_Da *)
+(*                                                                                                                       Ad_Pconst_string_Da *)
+(*                                                                                                                       [ *)
+(*                                                                                                                         string_value *)
+(*                                                                                                                           Ad_type_kind_Da, *)
+(*                                                                                                                         process_string_option *)
+(*                                                                                                                       ] *)
+(*                                                                                                                   ]), *)
+(*                                                                                                               process_arg_label_expression *)
+(*                                                                                                                 (process_generic_type *)
+(*                                                                                                                   Ad_arg_label_Da *)
+(*                                                                                                                   Ad_Nolabel_Da *)
+(*                                                                                                                   Ad_None) *)
+(*                                                                                                                 (process_generic_type *)
+(*                                                                                                                   Ad_expression_desc_Da *)
+(*                                                                                                                   Ad_Pexp_constant_Da *)
+(*                                                                                                                   [ *)
+(*                                                                                                                     process_generic_type *)
+(*                                                                                                                       Ad_constant_Da *)
+(*                                                                                                                       Ad_Pconst_string_Da *)
+(*                                                                                                                       [ *)
+(*                                                                                                                         string_value *)
+(*                                                                                                                           Ad_Ptype_abstract_Da, *)
+(*                                                                                                                         process_string_option *)
+(*                                                                                                                       ] *)
+(*                                                                                                                   ]), *)
+(*                                                                                                               process_arg_label_expression *)
+(*                                                                                                                 (process_generic_type *)
+(*                                                                                                                   Ad_arg_label_Da *)
+(*                                                                                                                   Ad_Nolabel_Da *)
+(*                                                                                                                   Ad_None) *)
+(*                                                                                                                 (process_generic_type *)
+(*                                                                                                                   Ad_expression_desc_Da *)
+(*                                                                                                                   Ad_Pexp_construct_Da *)
+(*                                                                                                                   [ *)
+(*                                                                                                                     ident *)
+(*                                                                                                                       Ad_empty_list, *)
+(*                                                                                                                     none *)
+(*                                                                                                                   ]) *)
+(*                                                                                                             ] *)
+(*                                                                                                         ]), *)
+(*                                                                                                     process_arg_label_expression *)
+(*                                                                                                       (process_generic_type *)
+(*                                                                                                         Ad_arg_label_Da *)
+(*                                                                                                         Ad_Nolabel_Da *)
+(*                                                                                                         Ad_None) *)
+(*                                                                                                       (process_generic_type *)
+(*                                                                                                         Ad_expression_desc_Da *)
+(*                                                                                                         Ad_Pexp_apply_Da *)
+(*                                                                                                         [ *)
+(*                                                                                                           process_generic_type *)
+(*                                                                                                             Ad_expression_desc_Da *)
+(*                                                                                                             Ad_Pexp_ident_Da *)
+(*                                                                                                             [ *)
+(*                                                                                                               ident *)
+(*                                                                                                                 Ad_caret *)
+(*                                                                                                             ], *)
+(*                                                                                                           process_arg_label_expression_list *)
+(*                                                                                                             [ *)
+(*                                                                                                               process_arg_label_expression *)
+(*                                                                                                                 (process_generic_type *)
+(*                                                                                                                   Ad_arg_label_Da *)
+(*                                                                                                                   Ad_Nolabel_Da *)
+(*                                                                                                                   Ad_None) *)
+(*                                                                                                                 (process_generic_type *)
+(*                                                                                                                   Ad_expression_desc_Da *)
+(*                                                                                                                   Ad_Pexp_apply_Da *)
+(*                                                                                                                   [ *)
+(*                                                                                                                     process_generic_type *)
+(*                                                                                                                       Ad_expression_desc_Da *)
+(*                                                                                                                       Ad_Pexp_ident_Da *)
+(*                                                                                                                       [ *)
+(*                                                                                                                         ident *)
+(*                                                                                                                           Ad_process_generic_type_Da *)
+(*                                                                                                                       ], *)
+(*                                                                                                                     process_arg_label_expression_list *)
+(*                                                                                                                       [ *)
+(*                                                                                                                         process_arg_label_expression *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_arg_label_Da *)
+(*                                                                                                                             Ad_Nolabel_Da *)
+(*                                                                                                                             Ad_None) *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_expression_desc_Da *)
+(*                                                                                                                             Ad_Pexp_constant_Da *)
+(*                                                                                                                             [ *)
+(*                                                                                                                               process_generic_type *)
+(*                                                                                                                                 Ad_constant_Da *)
+(*                                                                                                                                 Ad_Pconst_string_Da *)
+(*                                                                                                                                 [ *)
+(*                                                                                                                                   string_value *)
+(*                                                                                                                                     Ad_private_flag_Da, *)
+(*                                                                                                                                   process_string_option *)
+(*                                                                                                                                 ] *)
+(*                                                                                                                             ]), *)
+(*                                                                                                                         process_arg_label_expression *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_arg_label_Da *)
+(*                                                                                                                             Ad_Nolabel_Da *)
+(*                                                                                                                             Ad_None) *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_expression_desc_Da *)
+(*                                                                                                                             Ad_Pexp_constant_Da *)
+(*                                                                                                                             [ *)
+(*                                                                                                                               process_generic_type *)
+(*                                                                                                                                 Ad_constant_Da *)
+(*                                                                                                                                 Ad_Pconst_string_Da *)
+(*                                                                                                                                 [ *)
+(*                                                                                                                                   string_value *)
+(*                                                                                                                                     Ad_Public_Da, *)
+(*                                                                                                                                   process_string_option *)
+(*                                                                                                                                 ] *)
+(*                                                                                                                             ]), *)
+(*                                                                                                                         process_arg_label_expression *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_arg_label_Da *)
+(*                                                                                                                             Ad_Nolabel_Da *)
+(*                                                                                                                             Ad_None) *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_expression_desc_Da *)
+(*                                                                                                                             Ad_Pexp_construct_Da *)
+(*                                                                                                                             [ *)
+(*                                                                                                                               ident *)
+(*                                                                                                                                 Ad_empty_list, *)
+(*                                                                                                                               none *)
+(*                                                                                                                             ]) *)
+(*                                                                                                                       ] *)
+(*                                                                                                                   ]), *)
+(*                                                                                                               process_arg_label_expression *)
+(*                                                                                                                 (process_generic_type *)
+(*                                                                                                                   Ad_arg_label_Da *)
+(*                                                                                                                   Ad_Nolabel_Da *)
+(*                                                                                                                   Ad_None) *)
+(*                                                                                                                 (process_generic_type *)
+(*                                                                                                                   Ad_expression_desc_Da *)
+(*                                                                                                                   Ad_Pexp_apply_Da *)
+(*                                                                                                                   [ *)
+(*                                                                                                                     process_generic_type *)
+(*                                                                                                                       Ad_expression_desc_Da *)
+(*                                                                                                                       Ad_Pexp_ident_Da *)
+(*                                                                                                                       [ *)
+(*                                                                                                                         ident *)
+(*                                                                                                                           Ad_process_generic_type_Da *)
+(*                                                                                                                       ], *)
+(*                                                                                                                     process_arg_label_expression_list *)
+(*                                                                                                                       [ *)
+(*                                                                                                                         process_arg_label_expression *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_arg_label_Da *)
+(*                                                                                                                             Ad_Nolabel_Da *)
+(*                                                                                                                             Ad_None) *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_expression_desc_Da *)
+(*                                                                                                                             Ad_Pexp_constant_Da *)
+(*                                                                                                                             [ *)
+(*                                                                                                                               process_generic_type *)
+(*                                                                                                                                 Ad_constant_Da *)
+(*                                                                                                                                 Ad_Pconst_string_Da *)
+(*                                                                                                                                 [ *)
+(*                                                                                                                                   string_value *)
+(*                                                                                                                                     Ad_core_type_desc_Da, *)
+(*                                                                                                                                   process_string_option *)
+(*                                                                                                                                 ] *)
+(*                                                                                                                             ]), *)
+(*                                                                                                                         process_arg_label_expression *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_arg_label_Da *)
+(*                                                                                                                             Ad_Nolabel_Da *)
+(*                                                                                                                             Ad_None) *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_expression_desc_Da *)
+(*                                                                                                                             Ad_Pexp_constant_Da *)
+(*                                                                                                                             [ *)
+(*                                                                                                                               process_generic_type *)
+(*                                                                                                                                 Ad_constant_Da *)
+(*                                                                                                                                 Ad_Pconst_string_Da *)
+(*                                                                                                                                 [ *)
+(*                                                                                                                                   string_value *)
+(*                                                                                                                                     Ad_Ptyp_constr_Da, *)
+(*                                                                                                                                   process_string_option *)
+(*                                                                                                                                 ] *)
+(*                                                                                                                             ]), *)
+(*                                                                                                                         process_arg_label_expression *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_arg_label_Da *)
+(*                                                                                                                             Ad_Nolabel_Da *)
+(*                                                                                                                             Ad_None) *)
+(*                                                                                                                           (process_generic_type *)
+(*                                                                                                                             Ad_expression_desc_Da *)
+(*                                                                                                                             Ad_Pexp_construct_Da *)
+(*                                                                                                                             [ *)
+(*                                                                                                                               ident *)
+(*                                                                                                                                 Ad_::_Da, *)
+(*                                                                                                                               process_generic_type *)
+(*                                                                                                                                 Ad_expression_desc_Da *)
+(*                                                                                                                                 Ad_Pexp_tuple_Da *)
+(*                                                                                                                                 [ *)
+(*                                                                                                                                   process_expression_list *)
+(*                                                                                                                                     [ *)
+(*                                                                                                                                       process_generic_type *)
+(*                                                                                                                                         Ad_expression_desc_Da *)
+(*                                                                                                                                         Ad_Pexp_apply_Da *)
+(*                                                                                                                                         [ *)
+(*                                                                                                                                           process_generic_type *)
+(*                                                                                                                                             Ad_expression_desc_Da *)
+(*                                                                                                                                             Ad_Pexp_ident_Da *)
+(*                                                                                                                                             [ *)
+(*                                                                                                                                               ident *)
+(*                                                                                                                                                 Ad_ident_Da *)
+(*                                                                                                                                             ], *)
+(*                                                                                                                                           process_arg_label_expression_list *)
+(*                                                                                                                                             [ *)
+(*                                                                                                                                               process_arg_label_expression *)
+(*                                                                                                                                                 (process_generic_type *)
+(*                                                                                                                                                   Ad_arg_label_Da *)
+(*                                                                                                                                                   Ad_Nolabel_Da *)
+(*                                                                                                                                                   Ad_None) *)
+(*                                                                                                                                                 (process_generic_type *)
+(*                                                                                                                                                   Ad_expression_desc_Da *)
+(*                                                                                                                                                   Ad_Pexp_constant_Da *)
+(*                                                                                                                                                   [ *)
+(*                                                                                                                                                     process_generic_type *)
+(*                                                                                                                                                       Ad_constant_Da *)
+(*                                                                                                                                                       Ad_Pconst_string_Da *)
+(*                                                                                                                                                       [ *)
+(*                                                                                                                                                         string_value *)
+(*                                                                                                                                                           Ad_Obj.t_Da, *)
+(*                                                                                                                                                         process_string_option *)
+(*                                                                                                                                                       ] *)
+(*                                                                                                                                                   ]) *)
+(*                                                                                                                                             ] *)
+(*                                                                                                                                         ], *)
+(*                                                                                                                                       process_generic_type *)
+(*                                                                                                                                         Ad_expression_desc_Da *)
+(*                                                                                                                                         Ad_Pexp_construct_Da *)
+(*                                                                                                                                         [ *)
+(*                                                                                                                                           ident *)
+(*                                                                                                                                             Ad_::_Da, *)
+(*                                                                                                                                           process_generic_type *)
+(*                                                                                                                                             Ad_expression_desc_Da *)
+(*                                                                                                                                             Ad_Pexp_tuple_Da *)
+(*                                                                                                                                             [ *)
+(*                                                                                                                                               process_expression_list *)
+(*                                                                                                                                                 [ *)
+(*                                                                                                                                                   process_generic_type *)
+(*                                                                                                                                                     Ad_expression_desc_Da *)
+(*                                                                                                                                                     Ad_Pexp_apply_Da *)
+(*                                                                                                                                                     [ *)
+(*                                                                                                                                                       process_generic_type *)
+(*                                                                                                                                                         Ad_expression_desc_Da *)
+(*                                                                                                                                                         Ad_Pexp_ident_Da *)
+(*                                                                                                                                                         [ *)
+(*                                                                                                                                                           ident *)
+(*                                                                                                                                                             Ad_process_core_type_list_Da *)
+(*                                                                                                                                                         ], *)
+(*                                                                                                                                                       process_arg_label_expression_list *)
+(*                                                                                                                                                         [ *)
+(*                                                                                                                                                           process_arg_label_expression *)
+(*                                                                                                                                                             (process_generic_type *)
+(*                                                                                                                                                               Ad_arg_label_Da *)
+(*                                                                                                                                                               Ad_Nolabel_Da *)
+(*                                                                                                                                                               Ad_None) *)
+(*                                                                                                                                                             (process_generic_type *)
+(*                                                                                                                                                               Ad_expression_desc_Da *)
+(*                                                                                                                                                               Ad_Pexp_construct_Da *)
+(*                                                                                                                                                               [ *)
+(*                                                                                                                                                                 ident *)
+(*                                                                                                                                                                   Ad_empty_list, *)
+(*                                                                                                                                                                 none *)
+(*                                                                                                                                                               ]) *)
+(*                                                                                                                                                         ] *)
+(*                                                                                                                                                     ], *)
+(*                                                                                                                                                   process_generic_type *)
+(*                                                                                                                                                     Ad_expression_desc_Da *)
+(*                                                                                                                                                     Ad_Pexp_construct_Da *)
+(*                                                                                                                                                     [ *)
+(*                                                                                                                                                       ident *)
+(*                                                                                                                                                         Ad_empty_list, *)
+(*                                                                                                                                                       none *)
+(*                                                                                                                                                     ] *)
+(*                                                                                                                                                 ] *)
+(*                                                                                                                                             ] *)
+(*                                                                                                                                         ] *)
+(*                                                                                                                                     ] *)
+(*                                                                                                                                 ] *)
+(*                                                                                                                             ]) *)
+(*                                                                                                                       ] *)
+(*                                                                                                                   ]) *)
+(*                                                                                                             ] *)
+(*                                                                                                         ]) *)
+(*                                                                                                   ] *)
+(*                                                                                               ]) *)
+(*                                                                                         ] *)
+(*                                                                                     ]) *)
+(*                                                                               ] *)
+(*                                                                           ]) *)
+(*                                                                     ] *)
+(*                                                                 ], *)
+(*                                                               process_generic_type *)
+(*                                                                 Ad_expression_desc_Da *)
+(*                                                                 Ad_Pexp_construct_Da *)
+(*                                                                 [ *)
+(*                                                                   ident *)
+(*                                                                     Ad_empty_list, *)
+(*                                                                   none *)
+(*                                                                 ] *)
+(*                                                             ] *)
+(*                                                         ] *)
+(*                                                     ]) *)
+(*                                               ] *)
+(*                                           ], *)
+(*                                         process_generic_type *)
+(*                                           Ad_expression_desc_Da *)
+(*                                           Ad_Pexp_construct_Da *)
+(*                                           [ *)
+(*                                             ident *)
+(*                                               Ad_empty_list, *)
+(*                                             none *)
+(*                                           ] *)
+(*                                       ] *)
+(*                                   ] *)
+(*                               ] *)
+(*                           ] *)
+(*                       ] *)
+(*                   ]) *)
+(*             ] *)
+(*         ] *)
+(*     ]. *)
 
 End WithUniMath .
 
