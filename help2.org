@@ -1,0 +1,48 @@
+please  in coq i want a list of ast_desc 
+called ast_desc_list
+
+Inductive ast_desc : UU :=
+| Ad_None : ast_desc
+| Ad_NoString : ast_desc
+| ad_nostring : ast_desc
+| ad_list : ast_desc -> ast_desc
+| Ad_Ident : ast_desc -> ast_desc
+| Ad_fixme : ast_desc
+| Ad_String : ast_desc -> ast_desc
+| Ad_process_string_loc_list_pattern_option : ast_desc
+| Ad_root : ast_desc
+| Ad_process_cases : ast_desc -> ast_desc
+| Ad_process_var_list : ast_desc -> ast_desc
+| Ad_process_arg_constructor_declaration : ast_desc -> ast_desc
+| Ad_process_label_declaration_list : ast_desc -> ast_desc
+| Ad_process_structure_item : ast_desc
+| Ad_process_ast_desc : ast_desc -> ast_desc
+| Ad_process_structure_item_desc : ast_desc -> ast_desc
+| Ad_process_params : ast_desc -> ast_desc
+| Ad_process_cstrs : ast_desc -> ast_desc
+| Ad_process_list_tail : ast_desc -> ast_desc -> ast_desc
+| Ad_arg_label_expression_list : ast_desc -> ast_desc
+| Ad_process_type_declaration_list : ast_desc -> ast_desc
+| Ad_process_structure_items : ast_desc -> ast_desc
+| Ad_loc : ast_desc
+| Ad_loc2 : ast_desc
+| Ad_loc_stack : ast_desc
+| Ad_bool : ast_desc -> ast_desc
+| Ad_int : ast_desc -> ast_desc
+| Ad_quote : ast_desc -> ast_desc -> ast_desc
+| Ad_process_generic_list : ast_desc -> ast_desc -> ast_desc
+| Ad_attributes : ast_desc
+| Ad_process_value_binding_list : ast_desc
+| Ad_process_loc : ast_desc -> ast_desc
+| Ad_process_ast_desc_loc_list_pattern_option : ast_desc -> ast_desc
+| Ad_process_arg_label_expression : ast_desc -> ast_desc -> ast_desc
+| Ad_process_arg_label_expression_list : ast_desc -> ast_desc
+| Ad_pos : ast_desc
+
+.
+
+Inductive ast_desc_list (A:Type) : Type :=
+| Ad_empty_list : ast_desc_list A
+| Ad_cons : A ->ast_desc_list A ->ast_desc_list A
+.
+
