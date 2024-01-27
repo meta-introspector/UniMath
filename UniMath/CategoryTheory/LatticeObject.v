@@ -37,7 +37,7 @@ Section LatticeObject_def.
 Context {C : category} {BPC : BinProducts C}.
 
 Local Notation "c ⊗ d" := (BinProductObject C (BPC c d)) : cat.
-Local Notation "f '××' g" := (BinProductOfArrows _ _ _ f g) (at level 80) : cat.
+Local Notation "f '😁' g" := (BinProductOfArrows _ _ _ f g) (at level 80) : cat.
 Local Notation "1" := (identity _) : cat.
 
 Let π1 {x y} : C⟦x ⊗ y,x⟧ := BinProductPr1 _ (BPC x y).
@@ -72,7 +72,7 @@ Let τ {x y} : C⟦x ⊗ y,y ⊗ x⟧ := binprod_swap x y.
               f
 >>
 *)
-Definition isassoc_cat {L} (f : C⟦L ⊗ L,L⟧) : UU := (f ×× 1) · f = α · (1 ×× f) · f.
+Definition isassoc_cat {L} (f : C⟦L ⊗ L,L⟧) : UU := (f 😁 1) · f = α · (1 😁 f) · f.
 
 
 (** Equation witnessing that a morphism representing a binary operation is
@@ -106,12 +106,12 @@ If f is ∧ and g is ∨ this expresses: x ∧ (x ∨ y) = x
 
 *)
 Definition isabsorb_cat {L} (f g : C⟦L ⊗ L,L⟧) : UU :=
-  (δ ×× 1) · α · (1 ×× g) · f = π1.
+  (δ 😁 1) · α · (1 😁 g) · f = π1.
 
 Definition latticeop_cat {L} (meet_mor join_mor : C⟦L ⊗ L,L⟧) :=
     (isassoc_cat meet_mor × iscomm_cat meet_mor)
-  × (isassoc_cat join_mor × iscomm_cat join_mor)
-  × (isabsorb_cat meet_mor join_mor × isabsorb_cat join_mor meet_mor).
+  ☺ (isassoc_cat join_mor ☺ iscomm_cat join_mor)
+  ☺ (isabsorb_cat meet_mor join_mor ☺ isabsorb_cat join_mor meet_mor).
 
 (** A lattice object L has operation meet and join satisfying the above laws *)
 Definition latticeob (L : C) : UU :=
@@ -137,17 +137,17 @@ Let ι {x : C} : C⟦x,TC ⊗ x⟧ :=
           ι
      L ------> 1 ⊗ L
      |           |
-   1 |           | u×1
+   1 |           | u☺1
      V           V
      L <------ L ⊗ L
           f
 >>
 *)
 Definition islunit_cat {L} (f : C⟦L ⊗ L,L⟧) (u : C⟦TC,L⟧) : UU :=
-  ι · (u ×× 1) · f = 1.
+  ι · (u 😁 1) · f = 1.
 
 Definition bounded_latticeop_cat {L} (l : latticeob L) (bot top : C⟦TC,L⟧) :=
-  (islunit_cat (join_mor l) bot) × (islunit_cat (meet_mor l) top).
+  (islunit_cat (join_mor l) bot) ☺ (islunit_cat (meet_mor l) top).
 
 Definition bounded_latticeob (L : C) : UU :=
   ∑ (l : latticeob L) (bot top : C⟦TC,L⟧), bounded_latticeop_cat l bot top.
@@ -206,11 +206,11 @@ Context {C : category} (BPC : BinProducts C) {M L : C}.
 Context {i : C⟦M,L⟧} (Hi : isMonic i) (l : latticeob BPC L).
 
 Local Notation "c ⊗ d" := (BinProductObject C (BPC c d)) : cat.
-Local Notation "f '××' g" := (BinProductOfArrows _ _ _ f g) (at level 90) : cat.
+Local Notation "f '😁' g" := (BinProductOfArrows _ _ _ f g) (at level 90) : cat.
 
 (** This asserts that i is a lattice homomorphism internally *)
-Context {meet_mor_M : C⟦M ⊗ M,M⟧} (Hmeet : meet_mor_M · i = (i ×× i) · meet_mor l).
-Context {join_mor_M : C⟦M ⊗ M,M⟧} (Hjoin : join_mor_M · i = (i ×× i) · join_mor l).
+Context {meet_mor_M : C⟦M ⊗ M,M⟧} (Hmeet : meet_mor_M · i = (i 😁 i) · meet_mor l).
+Context {join_mor_M : C⟦M ⊗ M,M⟧} (Hjoin : join_mor_M · i = (i 😁 i) · join_mor l).
 
 Local Lemma identity_comm : identity M · i = i · identity L.
 Proof.
@@ -218,8 +218,8 @@ Proof.
 Qed.
 
 Local Lemma binprod_assoc_comm :
-  ((i ×× i) ×× i) · @binprod_assoc _ BPC L L L =
-  @binprod_assoc _ BPC M M M · (i ×× (i ×× i)).
+  ((i 😁 i) 😁 i) · @binprod_assoc _ BPC L L L =
+  @binprod_assoc _ BPC M M M · (i 😁 (i 😁 i)).
 Proof.
 unfold binprod_assoc; rewrite postcompWithBinProductArrow.
 apply BinProductArrowUnique.
@@ -240,7 +240,7 @@ apply BinProductArrowUnique.
 Qed.
 
 Local Lemma binprod_delta_comm :
-  i · @binprod_delta _ BPC L = @binprod_delta _ BPC M · (i ×× i).
+  i · @binprod_delta _ BPC L = @binprod_delta _ BPC M · (i 😁 i).
 Proof.
 unfold binprod_delta; rewrite postcompWithBinProductArrow.
 apply BinProductArrowUnique.
@@ -248,7 +248,7 @@ apply BinProductArrowUnique.
 - rewrite <-assoc, BinProductPr2Commutes, identity_comm. reflexivity.
 Qed.
 
-Local Lemma isassoc_cat_comm {f : C⟦M ⊗ M,M⟧} {g : C⟦L ⊗ L,L⟧} (Hfg : f · i = (i ×× i) · g) :
+Local Lemma isassoc_cat_comm {f : C⟦M ⊗ M,M⟧} {g : C⟦L ⊗ L,L⟧} (Hfg : f · i = (i 😁 i) · g) :
   isassoc_cat g → isassoc_cat f.
 Proof.
 unfold isassoc_cat; intros H; apply Hi.
@@ -260,7 +260,7 @@ rewrite <- BinProductOfArrows_comp, !assoc, binprod_assoc_comm.
 reflexivity.
 Qed.
 
-Local Lemma iscomm_cat_comm {f : C⟦M ⊗ M,M⟧} {g : C⟦L ⊗ L,L⟧} (Hfg : f · i = (i ×× i) · g) :
+Local Lemma iscomm_cat_comm {f : C⟦M ⊗ M,M⟧} {g : C⟦L ⊗ L,L⟧} (Hfg : f · i = (i 😁 i) · g) :
   iscomm_cat g → iscomm_cat f.
 Proof.
 unfold iscomm_cat; intros H; apply Hi.
@@ -274,11 +274,11 @@ apply BinProductArrowUnique; rewrite <- assoc.
 Qed.
 
 Local Lemma isabsorb_cat_comm {f1 f2 : C⟦M ⊗ M,M⟧} {g1 g2 : C⟦L ⊗ L,L⟧}
-  (Hfg1 : f1 · i = (i ×× i) · g1) (Hfg2 : f2 · i = (i ×× i) · g2) :
+  (Hfg1 : f1 · i = (i 😁 i) · g1) (Hfg2 : f2 · i = (i 😁 i) · g2) :
   isabsorb_cat g1 g2  → isabsorb_cat f1 f2.
 Proof.
 unfold isabsorb_cat; intros H; apply Hi.
-assert (HH : BinProductPr1 C (BPC M M) · i = (i ×× i) · BinProductPr1 C (BPC L L)).
+assert (HH : BinProductPr1 C (BPC M M) · i = (i 😁 i) · BinProductPr1 C (BPC L L)).
 { now rewrite BinProductOfArrowsPr1. }
 rewrite HH, <- H, <-!assoc, Hfg1, !assoc.
 apply cancel_postcomposition.
@@ -313,15 +313,15 @@ Context {C : category} (BPC : BinProducts C) (TC : Terminal C).
 Context {M L : C} {i : C⟦M,L⟧} (Hi : isMonic i) (l : bounded_latticeob BPC TC L).
 
 Local Notation "c ⊗ d" := (BinProductObject C (BPC c d)) : cat.
-Local Notation "f '××' g" := (BinProductOfArrows _ _ _ f g) (at level 90) : cat.
+Local Notation "f '😁' g" := (BinProductOfArrows _ _ _ f g) (at level 90) : cat.
 
-Context {meet_mor_M : C⟦M ⊗ M,M⟧} (Hmeet : meet_mor_M · i = (i ×× i) · meet_mor l).
-Context {join_mor_M : C⟦M ⊗ M,M⟧} (Hjoin : join_mor_M · i = (i ×× i) · join_mor l).
+Context {meet_mor_M : C⟦M ⊗ M,M⟧} (Hmeet : meet_mor_M · i = (i 😁 i) · meet_mor l).
+Context {join_mor_M : C⟦M ⊗ M,M⟧} (Hjoin : join_mor_M · i = (i 😁 i) · join_mor l).
 Context {bot_mor_M : C⟦TC,M⟧} (Hbot : bot_mor_M · i = bot_mor l).
 Context {top_mor_M : C⟦TC,M⟧} (Htop : top_mor_M · i = top_mor l).
 
 Lemma islunit_cat_comm
-  {fM : C⟦M ⊗ M,M⟧} {fL : C⟦L ⊗ L,L⟧} (Hf : fM · i = (i ×× i) · fL)
+  {fM : C⟦M ⊗ M,M⟧} {fL : C⟦L ⊗ L,L⟧} (Hf : fM · i = (i 😁 i) · fL)
   {gM : C ⟦TC,M⟧} {gL : C⟦TC,L⟧} (Hg : gM · i = gL) :
   islunit_cat fL gL → islunit_cat fM gM.
 Proof.

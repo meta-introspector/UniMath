@@ -149,7 +149,7 @@ Proof.
 Qed.
 
 Lemma equiv_isInitial2 (c : C) :
-  limits.initial.isInitial C c <- isInitial c.
+  limits.initial.isInitial C c <-u isInitial c.
 Proof.
   intros X.
   set (XI := make_Initial c X).
@@ -170,7 +170,7 @@ Proof.
 Defined.
 
 Definition equiv_Initial2 (c : C) :
-  limits.initial.Initial C <- Initial.
+  limits.initial.Initial C <-u Initial.
 Proof.
   intros I.
   use limits.initial.make_Initial.

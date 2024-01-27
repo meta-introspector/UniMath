@@ -560,7 +560,7 @@ Proof.
     rewrite <- p.
     apply z.
   }
-  assert (SE : ((∃ e : Ed T x (pr1 y), S (pr1 y,, e)) ∧ Ed T x (pr1 y)) <- S y).
+  assert (SE : ((∃ e : Ed T x (pr1 y), S (pr1 y,, e)) ∧ Ed T x (pr1 y)) <-u S y).
   {
     intros X.
     simpl.

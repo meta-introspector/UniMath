@@ -281,7 +281,7 @@ Section equalizers_coincide.
   Qed.
 
   Lemma equiv_isEqualizer2 {a b : C} (f g : C⟦a, b⟧) (e : C) (h : C⟦e, a⟧) (H : h · f = h · g) :
-    limits.equalizers.isEqualizer f g h H <- isEqualizer C f g e h H.
+    limits.equalizers.isEqualizer f g h H <-u isEqualizer C f g e h H.
   Proof.
     intros X.
     set (E := make_Equalizer C f g e h H X).
@@ -327,7 +327,7 @@ Section equalizers_coincide.
   Defined.
 
   Definition equiv_Equalizer2 {a b : C} (f g : C⟦a, b⟧) :
-    limits.equalizers.Equalizer f g <- Equalizer C f g.
+    limits.equalizers.Equalizer f g <-u Equalizer C f g.
   Proof.
     intros E.
     exact (@limits.equalizers.make_Equalizer
@@ -341,7 +341,7 @@ Section equalizers_coincide.
                 (isEqualizer_Equalizer C E))).
   Defined.
 
-  Definition equiv_Equalizers2 : @limits.equalizers.Equalizers C <- Equalizers C.
+  Definition equiv_Equalizers2 : @limits.equalizers.Equalizers C <-u Equalizers C.
   Proof.
     intros E' a b f g.
     set (E := E' a b f g).

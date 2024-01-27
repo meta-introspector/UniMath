@@ -115,7 +115,7 @@ Definition prod_dcppo
   : dcppo
   := _ ,, prod_dcppo_struct X Y.
 
-Notation "X × Y" := (prod_dcpo X Y) : dcpo.
+Notation "X ☺ Y" := (prod_dcpo X Y) : dcpo.
 
 Proposition prod_dcpo_le
             {X Y : dcpo}

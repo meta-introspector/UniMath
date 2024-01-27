@@ -133,7 +133,7 @@ Qed.
 Definition cartesian_isPullback_in_cod_disp
     { Γ Γ' : C } {f : Γ' --> Γ}
     {p : disp_codomain _ Γ} {p' : disp_codomain _ Γ'} (ff : p' -->[f] p)
-  : (isPullback (pr2 ff)) <- is_cartesian ff.
+  : (isPullback (pr2 ff)) <-u is_cartesian ff.
 Proof.
   intros cf c h k H.
   destruct p as [a x].

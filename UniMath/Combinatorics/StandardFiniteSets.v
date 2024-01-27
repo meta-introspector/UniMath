@@ -125,7 +125,7 @@ Proof.
   apply negProp_to_iff.
 Defined.
 
-Definition stnneq_to_nopath {n : nat} (i j: ⟦n⟧ ) : ¬ (i = j) <- i ≠ j
+Definition stnneq_to_nopath {n : nat} (i j: ⟦n⟧ ) : ¬ (i = j) <-u i ≠ j
   := pr2 (stn_ne_iff_neq i j).
 
 Corollary isdeceqstn ( n : nat ) : isdeceq (⟦n⟧).
@@ -466,7 +466,7 @@ Defined.
 
 (** ** The order-preserving functions [ sni n i : stn (S n) -> stn n ] that take the value [i] twice. *)
 
-Definition sni {n : nat} ( i : ⟦n⟧ ) : ⟦n⟧ <- ⟦S n⟧.
+Definition sni {n : nat} ( i : ⟦n⟧ ) : ⟦n⟧ <-u ⟦S n⟧.
 Proof.
   intros j. exists (si i j). unfold si. induction (natlthorgeh i j) as [lt|ge].
   - induction j as [j J]. induction i as [i I]. simpl.
@@ -600,7 +600,7 @@ Proof.
   apply idpath.
 Defined.
 
-Definition weqdnicoprod_invmap {n : nat} (j : ⟦S n⟧ ) : ⟦n⟧ ⨿ unit <- ⟦S n⟧.
+Definition weqdnicoprod_invmap {n : nat} (j : ⟦S n⟧ ) : ⟦n⟧ ⨿ unit <-u ⟦S n⟧.
   (* perhaps use this to improve weqdnicoprod *)
 Proof.
   intros i.

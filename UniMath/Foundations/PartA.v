@@ -209,22 +209,23 @@ Definition adjev2 {X Y : UU} (phi : ((X -> Y) -> Y) -> Y) : X -> Y :=
 
 Definition dirprod (X Y : UU) := ∑ x:X, Y.
 
-Notation "A × B" := (dirprod A B) : type_scope.
 
-Definition dirprod_pr1 {X Y : UU} := pr1 : X × Y -> X.
-Definition dirprod_pr2 {X Y : UU} := pr2 : X × Y -> Y.
+Notation "A '☺' B" := (dirprod A B): type_scope.
 
-Definition make_dirprod {X Y : UU} (x:X) (y:Y) : X × Y := x,,y.
+Definition dirprod_pr1 {X Y : UU} := pr1 : X ☺ Y -> X.
+Definition dirprod_pr2 {X Y : UU} := pr2 : X ☺ Y -> Y.
 
-Definition dirprodadj {X Y Z : UU} (f : X × Y -> Z) : X -> Y -> Z :=
+Definition make_dirprod {X Y : UU} (x:X) (y:Y) : X ☺ Y := x,,y.
+
+Definition dirprodadj {X Y Z : UU} (f : X ☺ Y -> Z) : X -> Y -> Z :=
   λ x y, f (x,,y).
 
 Definition dirprodf {X Y X' Y' : UU}
-           (f : X -> Y) (f' : X' -> Y') (xx' : X × X')  : Y × Y' :=
+           (f : X -> Y) (f' : X' -> Y') (xx' : X ☺ X')  : Y ☺ Y' :=
   make_dirprod (f (pr1 xx')) (f' (pr2 xx')).
 
 Definition ddualand {X Y P : UU}
-           (xp : (X -> P) -> P) (yp : (Y -> P) -> P) : (X × Y -> P) -> P.
+           (xp : (X -> P) -> P) (yp : (Y -> P) -> P) : (X ☺ Y -> P) -> P.
 Proof.
   intros X0.
   apply xp. intro x.
@@ -265,11 +266,12 @@ Proof.
 Defined.
 
 Definition dneganddnegimpldneg {X Y : UU}
-           (dnx : ¬¬ X) (dny : ¬¬ Y) : ¬¬ (X × Y) := ddualand dnx dny.
+           (dnx : ¬¬ X) (dny : ¬¬ Y) : ¬¬ (X ☺ Y) := ddualand dnx dny.
 
 (** *** Logical equivalence *)
 
-Definition logeq (X Y : UU) := (X -> Y) × (Y -> X).
+Definition logeq (X Y : UU) := (X -> Y)
+                                 ☺ (Y -> X).
 Notation " X <-> Y " := (logeq X Y) : type_scope.
 
 Lemma isrefl_logeq (X : UU) : X <-> X.
@@ -432,7 +434,7 @@ Proof.
   intros. induction ex. induction ey. apply idpath.
 Defined.
 
-Lemma dirprodeq (A B : UU) (ab ab' : A × B) :
+Lemma dirprodeq (A B : UU) (ab ab' : A ☺ B) :
   pr1 ab = pr1 ab' -> pr2 ab = pr2 ab' -> ab = ab'.
 Proof.
   intros H H'.
@@ -787,7 +789,7 @@ Proof.
   intros. induction p. change _ with (b1 = b2) in q. induction q. apply idpath.
 Defined.
 
-Lemma dirprod_paths {A : UU} {B :  UU} {s s' : A × B}
+Lemma dirprod_paths {A : UU} {B :  UU} {s s' : A ☺ B}
       (p : pr1 s = pr1 s') (q : pr2 s = pr2 s') : s = s'.
 Proof.
   intros.
@@ -922,8 +924,8 @@ Proof.
 Defined.
 
 Definition transportf_dirprod (A : UU) (B B' : A -> UU)
-           (x x' : ∑ a, B a × B' a) (p : pr1 x = pr1 x') :
-  transportf (λ a, B a × B' a) p (pr2 x) =
+           (x x' : ∑ a, B a ☺ B' a) (p : pr1 x = pr1 x') :
+  transportf (λ a, B a ☺ B' a) p (pr2 x) =
   make_dirprod (transportf (λ a, B a) p (pr1 (pr2 x)))
               (transportf (λ a, B' a) p (pr2 (pr2 x))).
 Proof.
@@ -932,8 +934,8 @@ Proof.
 Defined.
 
 Definition transportb_dirprod (A : UU) (B B' : A -> UU)
-  (x x' : ∑ a,  B a × B' a)  (p : pr1 x = pr1 x') :
-  transportb (λ a, B a × B' a) p (pr2 x') =
+  (x x' : ∑ a,  B a ☺ B' a)  (p : pr1 x = pr1 x') :
+  transportb (λ a, B a ☺ B' a) p (pr2 x') =
     make_dirprod (transportb (λ a, B a) p (pr1 (pr2 x')))
                 (transportb (λ a, B' a) p (pr2 (pr2 x'))).
 Proof.
@@ -1176,7 +1178,7 @@ Definition pathsspacetriple (T : UU) {t1 t2 : T}
 Definition deltap (T : UU) : T -> pathsspace T :=
   λ (t : T), pathsspacetriple T (idpath t).
 
-Definition pathsspace' (T : UU) := ∑ xy : T × T, pr1 xy = pr2 xy.
+Definition pathsspace' (T : UU) := ∑ xy : T ☺ T, pr1 xy = pr2 xy.
 
 
 (** *** Coconus of a function: the total space of the family of h-fibers *)
@@ -1385,7 +1387,7 @@ Proof.
   simpl. apply maponpaths. apply homotweqinvweq.
 Defined.
 
-Lemma homotweqinv' {X Y Z} (f:X->Z) (w:X≃Y) (g:Y->Z) : f ~ g ∘ w <- f ∘ invmap w ~ g.
+Lemma homotweqinv' {X Y Z} (f:X->Z) (w:X≃Y) (g:Y->Z) : f ~ g ∘ w <-u f ∘ invmap w ~ g.
 Proof.
   intros q x.
   simple refine (_ @ q (w x)).
@@ -1776,7 +1778,7 @@ Definition weq_iso {X Y : UU} (f : X -> Y) (g : Y -> X)
   make_weq _ (isweq_iso _ _ egf efg).
 
 Definition UniqueConstruction {X Y:UU} (f:X->Y) :=
-  (∏ y, ∑ x, f x = y) × (∏ x x', f x = f x' -> x = x').
+  (∏ y, ∑ x, f x = y) ☺ (∏ x x', f x = f x' -> x = x').
 
 Corollary UniqueConstruction_to_weq {X Y:UU} (f:X->Y) : UniqueConstruction f -> isweq f.
 
@@ -2263,17 +2265,19 @@ Proof.
   apply (isweq_iso _ _ egf efg).
 Defined.
 
-Definition weqdirprodf {X Y X' Y' : UU} (w : X ≃ Y) (w' : X' ≃ Y') : X × X' ≃ Y × Y'
+Definition weqdirprodf {X Y X' Y' : UU}
+  (w : X ≃ Y) (w' : X' ≃ Y') :
+  (X ☺ X') ≃ (Y ☺ Y')
   := make_weq _ (isweqdirprodf w w').
 
 (** *** Weak equivalence of a type and its direct product with the unit *)
 
-Definition weqtodirprodwithunit (X : UU): X ≃ X × unit.
+Definition weqtodirprodwithunit (X : UU): X ≃ (X ☺ unit).
 Proof.
   intros.
   set (f := λ x : X, make_dirprod x tt).
   split with f.
-  set (g := λ xu : X × unit, pr1 xu).
+  set (g := λ xu : X ☺ unit, pr1 xu).
   assert (egf : ∏ x : X, (g (f x)) = x). intro. apply idpath.
   assert (efg : ∏ xu : _, (f (g xu)) = xu). intro. induction xu as [ t x ].
   induction x. apply idpath.
@@ -2323,19 +2327,19 @@ Definition weqtotal2asstol {X : UU} (P : X -> UU) (Q : total2 P -> UU) :
 
 (** *** Associativity and commutativity of direct products as weak equivalences *)
 
-Definition weqdirprodasstor (X Y Z : UU) : (X × Y) × Z ≃ X × (Y × Z).
-Proof.
-  intros. apply weqtotal2asstor.
-Defined.
+Definition weqdirprodasstor (X Y Z : UU) : (X ☺ Y) ☺ Z ≃ X ☺ (Y ☺ Z).
+(* Proof. *)
+(*   intros. apply weqtotal2asstor. *)
+(* Defined. *)
 
-Definition weqdirprodasstol (X Y Z : UU) : X × (Y × Z) ≃ (X × Y) × Z
+Definition weqdirprodasstol (X Y Z : UU) : X ☺ (Y ☺ Z) ≃ (X ☺ Y) ☺ Z
   := invweq (weqdirprodasstor X Y Z).
 
-Definition weqdirprodcomm (X Y : UU) : X × Y ≃ Y × X.
+Definition weqdirprodcomm (X Y : UU) : X ☺ Y ≃ Y ☺ X.
 Proof.
   intros.
-  set (f := λ xy : X × Y, make_dirprod (pr2 xy) (pr1 xy)).
-  set (g := λ yx : Y × X, make_dirprod (pr2 yx) (pr1 yx)).
+  set (f := λ xy : X ☺ Y, make_dirprod (pr2 xy) (pr1 xy)).
+  set (g := λ yx : Y ☺ X, make_dirprod (pr2 yx) (pr1 yx)).
   assert (egf : ∏ xy : _, (g (f xy)) = xy).
   intro. induction xy. apply idpath.
   assert (efg : ∏ yx : _, (f (g yx)) = yx).
@@ -2343,8 +2347,8 @@ Proof.
   split with f. apply (isweq_iso _ _ egf efg).
 Defined.
 
-Definition weqtotal2dirprodcomm {X Y : UU} (P : X × Y -> UU) :
-  (∑ xy : X × Y, P xy) ≃ (∑ xy : Y × X, P (weqdirprodcomm _ _ xy)).
+Definition weqtotal2dirprodcomm {X Y : UU} (P : X ☺ Y -> UU) :
+  (∑ xy : X ☺ Y, P xy) ≃ (∑ xy : Y ☺ X, P (weqdirprodcomm _ _ xy)).
 Proof.
   intros.
   use weq_iso.
@@ -2358,8 +2362,8 @@ Proof.
     apply idpath.
 Defined.
 
-Definition weqtotal2dirprodassoc  {X Y : UU} (P : X × Y -> UU) :
-  (∑ xy : X × Y, P xy) ≃ (∑ (x : X) (y : Y), P (x,,y)).
+Definition weqtotal2dirprodassoc  {X Y : UU} (P : X ☺ Y -> UU) :
+  (∑ xy : X ☺ Y, P xy) ≃ (∑ (x : X) (y : Y), P (x,,y)).
   intros.
   use weq_iso.
   - intros xyp.
@@ -2372,8 +2376,8 @@ Definition weqtotal2dirprodassoc  {X Y : UU} (P : X × Y -> UU) :
     apply idpath.
 Defined.
 
-Definition weqtotal2dirprodassoc' {X Y : UU} (P : X × Y -> UU) :
-  (∑ xy : X × Y, P xy) ≃ (∑ (y : Y) (x : X), P (x,,y)).
+Definition weqtotal2dirprodassoc' {X Y : UU} (P : X ☺ Y -> UU) :
+  (∑ xy : X ☺ Y, P xy) ≃ (∑ (y : Y) (x : X), P (x,,y)).
 Proof.
   intros.
   use weq_iso.
@@ -2407,7 +2411,7 @@ the inductive type family [ sum ] that is defined in Coq.Init. *)
 (** *** Distributivity of coproducts and direct products as a weak equivalence *)
 
 Definition rdistrtocoprod (X Y Z : UU) :
-  X × (Y ⨿ Z) -> (X × Y) ⨿ (X × Z).
+  X ☺ (Y ⨿ Z) -> (X ☺ Y) ⨿ (X ☺ Z).
 Proof.
   intros X0.
   induction X0 as [ t x ]. induction x as [ y | z ].
@@ -2416,7 +2420,7 @@ Proof.
 Defined.
 
 
-Definition rdistrtoprod (X Y Z : UU) : (X × Y) ⨿ (X × Z) -> X × (Y ⨿ Z).
+Definition rdistrtoprod (X Y Z : UU) : (X ☺ Y) ⨿ (X ☺ Z) -> X ☺ (Y ⨿ Z).
 Proof.
   intros X0.
   induction X0 as [ d | d ]. induction d as [ t x ].
@@ -3728,7 +3732,7 @@ Defined.
 
 
 Definition hfp {X X' Y : UU} (f : X -> Y) (f' : X' -> Y)
-  := total2 (λ xx' : X × X', (f' (pr2 xx')) = (f (pr1 xx'))).
+  := total2 (λ xx' : X ☺ X', (f' (pr2 xx')) = (f (pr1 xx'))).
 Definition hfpg {X X' Y : UU} (f : X -> Y) (f' : X' -> Y) :
   hfp f f' -> X := λ xx'e, (pr1 (pr1 xx'e)).
 Definition hfpg' {X X' Y : UU} (f : X -> Y) (f' : X' -> Y) :
@@ -3768,15 +3772,15 @@ Definition weqhfptohfpoverX' {X X' Y : UU} (f : X -> Y) (f' : X' -> Y) :
 Proof.
   intros.
   set (w1 := weqfp (weqdirprodcomm X X')
-                   (λ xx' : X' × X , (f' (pr1 xx')) = (f (pr2 xx')))).
+                   (λ xx' : X' ☺ X , (f' (pr1 xx')) = (f (pr2 xx')))).
   simpl in w1.
   set (w2 := weqfibtototal
-               (λ x'x : X' × X, (f' (pr1 x'x)) = (f (pr2 x'x)))
-               (λ x'x : X' × X, (f (pr2 x'x)) = (f' (pr1 x'x)))
+               (λ x'x : X' ☺ X, (f' (pr1 x'x)) = (f (pr2 x'x)))
+               (λ x'x : X' ☺ X, (f (pr2 x'x)) = (f' (pr1 x'x)))
                (λ x'x : _, weqpathsinv0  (f' (pr1 x'x)) (f (pr2 x'x)))).
   set (w3 := weqtotal2asstor
                (λ x' : X', X)
-               (λ x'x : X' × X, (f (pr2 x'x)) = (f' (pr1 x'x)))).
+               (λ x'x : X' ☺ X, (f (pr2 x'x)) = (f' (pr1 x'x)))).
   simpl in w3.
   apply (weqcomp (weqcomp w1 w2) w3).
 Defined.
@@ -3787,11 +3791,11 @@ Lemma weqhfpcomm {X X' Y : UU} (f : X -> Y) (f' : X' -> Y):
 Proof.
   intros.
   set (w1 := weqfp (weqdirprodcomm X X')
-                   (λ xx' : X' × X, (f' (pr1 xx')) = (f (pr2 xx')))).
+                   (λ xx' : X' ☺ X, (f' (pr1 xx')) = (f (pr2 xx')))).
   simpl in w1.
   set (w2 := weqfibtototal
-               (λ x'x : X' × X, (f' (pr1 x'x)) = (f (pr2 x'x)))
-               (λ x'x : X' × X, (f (pr2 x'x)) = (f' (pr1 x'x)))
+               (λ x'x : X' ☺ X, (f' (pr1 x'x)) = (f (pr2 x'x)))
+               (λ x'x : X' ☺ X, (f (pr2 x'x)) = (f' (pr1 x'x)))
                (λ x'x : _, weqpathsinv0 (f' (pr1 x'x)) (f (pr2 x'x)))).
   apply (weqcomp w1 w2).
 Defined.
@@ -3804,7 +3808,7 @@ Definition commhfp {X X' Y : UU} (f : X -> Y) (f' : X' -> Y) :
 (** *** Homotopy fiber products and homotopy fibers *)
 
 Definition  hfibertohfp {X Y : UU} (f : X -> Y) (y : Y) (xe : hfiber f y) :
-  hfp (λ t : unit, y) f := tpair (λ tx : unit × X, (f (pr2 tx)) = y)
+  hfp (λ t : unit, y) f := tpair (λ tx : unit ☺ X, (f (pr2 tx)) = y)
                                      (make_dirprod tt (pr1 xe)) (pr2 xe).
 
 Definition hfptohfiber {X Y : UU} (f : X -> Y) (y : Y)

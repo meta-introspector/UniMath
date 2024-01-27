@@ -116,7 +116,7 @@ Proof.
         apply (pr2 (N m)). exact neq.
 Defined.
 
-Lemma nat_neq_to_nopath {n m : nat} : ¬ (n = m) <- n ≠ m.
+Lemma nat_neq_to_nopath {n m : nat} : ¬ (n = m) <-u n ≠ m.
 Proof.
   exact (pr2 (natneq_iff_neq n m)).
 Defined.
@@ -468,7 +468,7 @@ Proof.
     + change (S n > S m) with (n > m). intro r. exact (N m r).
 Defined.
 
-Lemma negnatlehtogth {n m : nat} : n > m <- ¬ (n ≤ m).
+Lemma negnatlehtogth {n m : nat} : n > m <-u ¬ (n ≤ m).
 Proof.
   intros r. apply (isdecreltoisnegrel isdecrelnatgth).
   intro s. exact (r (negnatgthtoleh s)).
@@ -1893,7 +1893,7 @@ Proof.
 Defined.
 
 Theorem natdivremunique (m i j i' j' : nat) (lj : j < m) (lj' : j' < m)
-        (e : j + i * m = j' + i' * m) :  i = i' × j = j'.
+        (e : j + i * m = j' + i' * m) :  i = i' ☺ j = j'.
 Proof.
   revert j i' j' lj lj' e. induction i as [ | i IHi ].
   - intros j i' j' lj lj'.

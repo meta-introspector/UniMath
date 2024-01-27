@@ -394,7 +394,7 @@ Section FunctorsFromProductCategory.
   Import BifunctorNotations.
 
   (* This notation comes from Precategorybinproduct. *)
-  Local Notation "C × D" := (category_binproduct C D) (at level 75, right associativity).
+  Local Notation "C ☺ D" := (category_binproduct C D) (at level 75, right associativity).
 
   Definition bifunctor_to_functorfromproductcat_data {C D E : category}
              (F : bifunctor C D E) : functor_data (C × D) E.

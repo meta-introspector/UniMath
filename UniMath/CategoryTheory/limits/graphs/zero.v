@@ -205,7 +205,7 @@ Section zero_coincides.
   Qed.
 
   Lemma equiv_isZero2 (c : C) :
-    limits.zero.isZero c <- isZero c.
+    limits.zero.isZero c <-u isZero c.
   Proof.
     intros X.
     set (XZ := make_Zero c X).
@@ -233,7 +233,7 @@ Section zero_coincides.
   Defined.
 
   Definition equiv_Zero2 :
-    limits.zero.Zero C <- @Zero C.
+    limits.zero.Zero C <-u @Zero C.
   Proof.
     intros Z.
     exact (limits.zero.make_Zero

@@ -595,7 +595,7 @@ Defined.
 
 Definition diagonal_from_section (isPb : isPullback H)
   : (∑ x : C⟦b, c⟧, x · g = f)
-    <-
+    <-u
     ∑ s' : C⟦b, d⟧, s' · h = identity _ .
 Proof.
   intro X.

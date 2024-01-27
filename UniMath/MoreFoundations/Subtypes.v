@@ -64,7 +64,7 @@ Proof.
       ** intros [x [Tx nSx]] e. use nSx; clear nSx. exact (pr2 (e x) Tx).
 Defined.
 
-Lemma subtype_notEqual_from_negEqual {X:UU} (S T : hsubtype X) : LEM -> (S ≢ T <- ¬ (S ≡ T)).
+Lemma subtype_notEqual_from_negEqual {X:UU} (S T : hsubtype X) : LEM -> (S ≢ T <-u ¬ (S ≡ T)).
 Proof.
   intros lem ne. unfold subtype_equal in ne.
   assert (q := negforall_to_existsneg _ lem ne); clear ne.

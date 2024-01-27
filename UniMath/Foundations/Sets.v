@@ -99,7 +99,7 @@ Definition setproperty (X : hSet) := pr2 X.
 
 Definition setdirprod (X Y : hSet) : hSet.
 Proof.
-  intros. exists (X × Y).
+  intros. exists (X ☺ Y).
   apply (isofhleveldirprod 2); apply setproperty.
 Defined.
 
@@ -145,11 +145,11 @@ Definition unitset : hSet := make_hSet unit isasetunit.
 
 Definition dirprod_hSet (X Y : hSet) : hSet.
 Proof.
-  exists (X × Y).
+  exists (X ☺ Y).
   abstract (exact (isasetdirprod _ _ (setproperty X) (setproperty Y))).
 Defined.
 
-Notation "A × B" := (dirprod_hSet A B) (at level 75, right associativity) : set.
+Notation "A ☺ B" := (dirprod_hSet A B) (at level 75, right associativity) : set.
 
 (** *** [hProp] as a set *)
 
@@ -333,7 +333,7 @@ Defined.
 (** *** Direct product of two subtypes *)
 
 Definition subtypesdirprod {X Y : UU} (A : hsubtype X) (B : hsubtype Y) :
-  hsubtype (X × Y) := λ xy : _, hconj (A (pr1 xy)) (B (pr2 xy)).
+  hsubtype (X ☺ Y) := λ xy : _, hconj (A (pr1 xy)) (B (pr2 xy)).
 
 Definition fromdsubtypesdirprodcarrier {X Y : UU}
            (A : hsubtype X) (B : hsubtype Y)
@@ -359,7 +359,7 @@ Proof.
 Defined.
 
 Lemma weqsubtypesdirprod {X Y : UU} (A : hsubtype X) (B : hsubtype Y) :
-  subtypesdirprod A B ≃ A × B.
+  subtypesdirprod A B ≃ A ☺ B.
 Proof.
   intros.
   set (f := fromdsubtypesdirprodcarrier A B).
@@ -492,9 +492,9 @@ Definition isrefl {X : UU} (R : hrel X) : UU
 Definition issymm {X : UU} (R : hrel X) : UU
   := ∏ (x1 x2 : X), R x1 x2 -> R x2 x1.
 
-Definition ispreorder {X : UU} (R : hrel X) : UU := istrans R × isrefl R.
+Definition ispreorder {X : UU} (R : hrel X) : UU := istrans R ☺ isrefl R.
 
-Definition iseqrel {X : UU} (R : hrel X) := ispreorder R × issymm R.
+Definition iseqrel {X : UU} (R : hrel X) := ispreorder R ☺ issymm R.
 Definition iseqrelconstr {X : UU} {R : hrel X}
            (trans0 : istrans R) (refl0 : isrefl R) (symm0 : issymm R) :
   iseqrel R := make_dirprod (make_dirprod trans0 refl0) symm0.
@@ -531,7 +531,7 @@ Definition isantisymm {X : UU} (R : hrel X) : UU
   := ∏ (x1 x2 : X), R x1 x2 -> R x2 x1 -> x1 = x2.
 
 Definition isPartialOrder {X : UU} (R : hrel X) : UU
-  := ispreorder R × isantisymm R.
+  := ispreorder R ☺ isantisymm R.
 
 Ltac unwrap_isPartialOrder i :=
   induction i as [transrefl antisymm]; induction transrefl as [trans refl].
@@ -858,7 +858,7 @@ Defined.
 (** poset equivalences *)
 
 Definition isPosetEquivalence {X Y : Poset} (f : X ≃ Y) :=
-  isaposetmorphism f × isaposetmorphism (invmap f).
+  isaposetmorphism f ☺ isaposetmorphism (invmap f).
 
 Lemma isaprop_isPosetEquivalence {X Y : Poset} (f : X ≃ Y) :
   isaprop (isPosetEquivalence f).
@@ -903,11 +903,11 @@ Defined.
 
 (** poset concepts *)
 
-Notation "m < n" := (m ≤ n × m != n)%poset (only parsing) : poset.
+Notation "m < n" := (m ≤ n ☺ m != n)%poset (only parsing) : poset.
 Definition isMinimal {X : Poset} (x : X) : UU := ∏ y, x ≤ y.
 Definition isMaximal {X : Poset} (x : X) : UU := ∏ y, y ≤ x.
 Definition consecutive {X : Poset} (x y : X) : UU
-  := x < y × ∏ z, ¬ (x < z × z < y).
+  := x < y ☺ ∏ z, ¬ (x < z ☺ z < y).
 
 Lemma isaprop_isMinimal {X : Poset} (x : X) : isaprop (isMaximal x).
 Proof.
@@ -946,7 +946,7 @@ Definition eqrelsymm {X : UU} (R : eqrel X) : issymm R := pr2 (pr2 R).
 (** *** Direct product of two relations *)
 
 Definition hreldirprod {X Y : UU} (RX : hrel X) (RY : hrel Y) :
-  hrel (X × Y)
+  hrel (X ☺ Y)
   := λ xy xy' : dirprod X Y, hconj (RX (pr1 xy) (pr1 xy'))
                                     (RY (pr2 xy) (pr2 xy')).
 
@@ -969,7 +969,7 @@ Definition issymmdirprod {X Y : UU} (RX : hrel X) (RY : hrel Y)
                                               (isy _ _ (pr2 is12)).
 
 Definition eqreldirprod {X Y : UU} (RX : eqrel X) (RY : eqrel Y) :
-  eqrel (X × Y)
+  eqrel (X ☺ Y)
   := eqrelconstr (hreldirprod RX RY)
                  (istransdirprod _ _ (eqreltrans RX) (eqreltrans RY))
                  (isrefldirprod  _ _ (eqrelrefl RX) (eqrelrefl RY))
@@ -1945,7 +1945,7 @@ Defined.
 
 Definition setquottodirprod {X Y : UU} (RX : eqrel X) (RY : eqrel Y)
            (cc : setquot (eqreldirprod RX RY)) :
-  (setquot RX) × (setquot RY).
+  (setquot RX) ☺ (setquot RY).
 Proof.
   intros.
   set (RXY := eqreldirprod RX RY).
@@ -1963,13 +1963,13 @@ Proof.
 Defined.
 
 Definition dirprodtosetquot {X Y : UU} (RX : hrel X) (RY : hrel Y)
-           (cd : (setquot RX) × (setquot RY)) :
+           (cd : (setquot RX) ☺ (setquot RY)) :
   setquot (hreldirprod RX RY)
   := make_setquot _ _ (iseqclassdirprod (pr2 (pr1 cd)) (pr2 (pr2 cd))).
 
 
 Theorem weqsetquottodirprod {X Y : UU} (RX : eqrel X) (RY : eqrel Y) :
-  weq (setquot (eqreldirprod RX RY)) ((setquot RX) × (setquot RY)).
+  weq (setquot (eqreldirprod RX RY)) ((setquot RX) ☺ (setquot RY)).
 Proof.
   intros.
   set (f := setquottodirprod RX RY).

@@ -122,11 +122,11 @@ Theorem univfromtwoaxioms :
 Proof.
   split.
   { intros [weqtopaths weqpathsweq] T1 T2.
-    set ( P1 := λ XY : UU × UU, pr1 XY = pr2 XY ) .
-    set ( P2 := λ XY :  UU × UU, (pr1 XY) ≃ (pr2 XY) ) .
+    set ( P1 := λ XY : UU ☺ UU, pr1 XY = pr2 XY ) .
+    set ( P2 := λ XY :  UU ☺ UU, (pr1 XY) ≃ (pr2 XY) ) .
     set ( Z1 := total2 P1 ). set ( Z2 := total2 P2 ).
-    set ( f := totalfun _ _ ( λ XY : UU × UU,  @eqweqmap (pr1 XY) (pr2 XY)) : Z1 -> Z2 ) .
-    set ( g := totalfun _ _ ( λ XY : UU × UU,  weqtopaths (pr1 XY) (pr2 XY) ) : Z2 -> Z1 ) .
+    set ( f := totalfun _ _ ( λ XY : UU ☺ UU,  @eqweqmap (pr1 XY) (pr2 XY)) : Z1 -> Z2 ) .
+    set ( g := totalfun _ _ ( λ XY : UU ☺ UU,  weqtopaths (pr1 XY) (pr2 XY) ) : Z2 -> Z1 ) .
     assert (efg : funcomp g f ~ idfun _) .
     - intro z2 . induction z2 as [ XY e ] .
       unfold g . unfold f . unfold totalfun . simpl .

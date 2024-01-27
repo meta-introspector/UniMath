@@ -301,7 +301,7 @@ Defined.
 
 Lemma equiv_isPullback_2 {a b c d : C} (f : C ⟦b, a⟧) (g : C ⟦c, a⟧)
       (p1 : C⟦d,b⟧) (p2 : C⟦d,c⟧) (H : p1 · f = p2· g) :
-  limits.pullbacks.isPullback (*f g p1 p2*) H <- isPullback f g p1 p2 H.
+  limits.pullbacks.isPullback (*f g p1 p2*) H <-u isPullback f g p1 p2 H.
 Proof.
   intro X.
   set (XR := make_Pullback _ _ _ _ _  _ X).
@@ -322,7 +322,7 @@ Proof.
 Qed.
 
 Definition equiv_Pullback_2 {a b c : C} (f : C⟦b, a⟧) (g : C⟦c, a⟧) :
-  limits.pullbacks.Pullback f g <- Pullback f g.
+  limits.pullbacks.Pullback f g <-u Pullback f g.
 Proof.
   intros X.
   exact (limits.pullbacks.make_Pullback
@@ -335,7 +335,7 @@ Proof.
            (equiv_isPullback_2 _ _ _ _ _ (isPullback_Pullback X))).
 Defined.
 
-Definition equiv_Pullbacks_2 : @limits.pullbacks.Pullbacks C <- Pullbacks.
+Definition equiv_Pullbacks_2 : @limits.pullbacks.Pullbacks C <-u Pullbacks.
 Proof.
   intros X' a b c f g.
   set (X := X' a b c f g).

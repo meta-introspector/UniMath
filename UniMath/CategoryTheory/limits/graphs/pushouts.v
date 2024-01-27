@@ -352,7 +352,7 @@ Section pushout_coincide.
 
   Lemma equiv_isPushout2 {a b c d : C} (f : C⟦a, b⟧) (g : C⟦a, c⟧)
         (i1 : C⟦b, d⟧) (i2 : C⟦c, d⟧) (H : f · i1 = g · i2) :
-    limits.pushouts.isPushout f g i1 i2 H <- isPushout C f g i1 i2 H.
+    limits.pushouts.isPushout f g i1 i2 H <-u isPushout C f g i1 i2 H.
   Proof.
     intros X R k h HH.
     set (XR := make_Pushout C f g d i1 i2 H X).
@@ -388,7 +388,7 @@ Section pushout_coincide.
   Defined.
 
   Definition equiv_Pushout2 {a b c : C} (f : C⟦a, b⟧) (g : C⟦a, c⟧) :
-    limits.pushouts.Pushout f g <- Pushout C f g.
+    limits.pushouts.Pushout f g <-u Pushout C f g.
   Proof.
     intros X.
     exact (limits.pushouts.make_Pushout

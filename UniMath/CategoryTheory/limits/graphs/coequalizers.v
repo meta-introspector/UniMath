@@ -320,7 +320,7 @@ Section coequalizers_coincide.
   Qed.
 
   Lemma equiv_isCoequalizer2 {a b : C} (f g : C⟦a, b⟧) (e : C) (h : C⟦b, e⟧) (H : f · h = g · h) :
-    limits.coequalizers.isCoequalizer f g h H <- isCoequalizer C f g e h H.
+    limits.coequalizers.isCoequalizer f g h H <-u isCoequalizer C f g e h H.
   Proof.
     intros X.
     set (E := make_Coequalizer C f g e h H X).
@@ -352,7 +352,7 @@ Section coequalizers_coincide.
   Defined.
 
   Definition equiv_Coequalizer2 {a b : C} (f g : C⟦a, b⟧) :
-    limits.coequalizers.Coequalizer f g <- Coequalizer C f g.
+    limits.coequalizers.Coequalizer f g <-u Coequalizer C f g.
   Proof.
     intros E.
     exact (@limits.coequalizers.make_Coequalizer

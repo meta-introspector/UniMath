@@ -104,7 +104,7 @@ Arguments ob1 { _ _ } _ .
 Arguments ob2 { _ _ } _ .
 Arguments mor1 { _ _ _ _ } _ .
 Arguments mor2 { _ _ _ _ } _ .
-Local Notation "C × D" := (category_binproduct C D) (at level 75, right associativity).
+Local Notation "C ☺ D" := (category_binproduct C D) (at level 75, right associativity).
 
 
 
