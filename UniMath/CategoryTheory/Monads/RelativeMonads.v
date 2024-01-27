@@ -40,7 +40,7 @@ Context {C D : precategory_data} {J : functor_data C D}.
 (* implicitness of arguments for RelMonad_data are set after this section *)
 Definition RelMonad_data : UU
   := ∑ F : C -> D, (∏ c, D ⟦J c, F c⟧)
-                 × (∏ c d, D ⟦J c, F d⟧ → D ⟦F c, F d⟧).
+                 ☺ (∏ c d, D ⟦J c, F d⟧ → D ⟦F c, F d⟧).
 
 Definition RelMonad_ob (R : RelMonad_data) (c : C) : D := pr1 R c.
 Coercion RelMonad_ob : RelMonad_data >-> Funclass.
@@ -50,8 +50,8 @@ Definition r_bind (R : RelMonad_data) {c d} (f : D⟦J c, R d⟧) : D ⟦R c, R 
 
 Definition RelMonad_axioms (R : RelMonad_data) : UU
   := (∏ c, r_bind R (r_eta R c) = identity _ )
-   × (∏ c d (f : D⟦J c, R d⟧), r_eta R _ · r_bind R f = f)
-   × (∏ c d e (f : D ⟦J c, R d⟧) (g : D ⟦J d, R e⟧),
+   ☺ (∏ c d (f : D⟦J c, R d⟧), r_eta R _ · r_bind R f = f)
+   ☺ (∏ c d e (f : D ⟦J c, R d⟧) (g : D ⟦J d, R e⟧),
       r_bind R f · r_bind R g = r_bind R (f · r_bind R g)).
 
 Lemma isaprop_RelMonad_axioms (R : RelMonad_data)(hs : has_homsets D) :
@@ -246,7 +246,7 @@ Definition RelMonadMor_data {C D : precategory_data}
 
 Definition RelMonadMor_axioms {C D : precategory_data}
            {J : functor_data C D} {R R' : RelMonad_data J} (α : RelMonadMor_data R R') : UU
-  := (∏ a : C, r_eta R a · α a = r_eta R' a) ×
+  := (∏ a : C, r_eta R a · α a = r_eta R' a) ☺
      (∏ (a b : C) (f : D⟦J a,R b⟧), α a · r_bind R' (f · α b) = (r_bind R f)· α b).
 
 Lemma isaprop_RelMonadMor_axioms {C D : precategory_data}

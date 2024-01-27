@@ -80,17 +80,17 @@ Definition eec_model
        (C : category)
        (EC : enrichment C V),
      (enriched_adjunction (self_enrichment V) EC)
-     ×
+     ☺
      (terminal_enriched EC)
-     ×
+     ☺
      (initial_enriched EC)
-     ×
+     ☺
      (enrichment_power EC)
-     ×
+     ☺
      (enrichment_copower EC)
-     ×
+     ☺
      (enrichment_binary_prod EC)
-     ×
+     ☺
      (enrichment_binary_coprod EC).
 
 (**
@@ -100,7 +100,7 @@ Definition eec_plus_model
   : UU
   := ∑ (M : eec_model),
      Initial (pr1 M)
-     ×
+     ☺
      BinCoproducts (pr1 M).
 
 Coercion eec_plus_model_to_eec_model

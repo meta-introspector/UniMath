@@ -75,7 +75,7 @@ Section TheDefinitions.
 
   (* the order of the entries follws that of [fmonoidal_laxlaws] *)
   Definition lineator_laxlaws (ld : lineator_data) : UU :=
-    lineator_nat_left ld × lineator_nat_right ld × preserves_actor ld × preserves_unitor ld.
+    lineator_nat_left ld ☺ lineator_nat_right ld ☺ preserves_actor ld ☺ preserves_unitor ld.
 
   Lemma isaprop_lineator_laxlaws (ld : lineator_data) : isaprop (lineator_laxlaws ld).
   Proof.

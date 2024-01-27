@@ -150,7 +150,7 @@ Section PresheafCategory.
     := op n n a pr = a.
 
   Definition full_is_presheaf (P : presheaf_data_cat) : UU :=
-    (∏ l m n a f g, op_op_ax (data_theory P) (data_set P) (@data_op P) l m n a f g) ×
+    (∏ l m n a f g, op_op_ax (data_theory P) (data_set P) (@data_op P) l m n a f g) ☺
     (∏ n a, op_pr_ax (data_theory P) (data_set P) (@data_op P) n a).
 
   Definition presheaf_full_disp_cat

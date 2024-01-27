@@ -505,7 +505,7 @@ Section Disp_Univalent_2.
 
   Definition disp_univalent_2 (D : disp_bicat C)
     : UU
-    := disp_univalent_2_0 D × disp_univalent_2_1 D.
+    := disp_univalent_2_0 D ☺ disp_univalent_2_1 D.
 
   Definition make_disp_univalent_2 {D : disp_bicat C}
              (univ_2_0 : disp_univalent_2_0 D)

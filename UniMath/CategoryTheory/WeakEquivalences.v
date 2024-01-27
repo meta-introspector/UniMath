@@ -19,7 +19,7 @@ Section WeakEquivalences.
 
   Definition is_weak_equiv
     {C D : category} (H : functor C D) : UU
-    := essentially_surjective H × fully_faithful H.
+    := essentially_surjective H ☺ fully_faithful H.
 
   Definition eso_from_weak_equiv
     {C D : category} (F : C ⟶ D)

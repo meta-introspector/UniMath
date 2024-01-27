@@ -68,7 +68,7 @@ Section EnrichedRezkCompletion.
           (E : enrichment C V)
           (EqV : Equalizers V)
           (PV : Products C V)
-          (PV' : Products (C × C) V)
+          (PV' : Products (C ☺ C) V)
           (HV : is_univalent V).
 
   (** * 1. The Rezk completion and its enrichment *)

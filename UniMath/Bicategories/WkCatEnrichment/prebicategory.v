@@ -36,7 +36,7 @@ Local Open Scope cat.
 (* The pieces are:
    prebicategory_ob_hom:   A type C, and for each a,b : C, a precategory (a -1-> b)
    prebicategory_id_comp:  For each a : C, an object of (a -1-> a),
-                           For each a b c : C, a functor (a -1-> b) × (b -1-> c) to (a -1-> c)
+                           For each a b c : C, a functor (a -1-> b) ☺ (b -1-> c) to (a -1-> c)
    prebicategory_data:     For each a b c d : C, an associator natural transformation
                            For each a b : C, left and right unitor natural transformations
    prebicategory:          Proofs that:
@@ -49,7 +49,7 @@ Local Open Scope cat.
    each hom type itself has the structure of a precategory, together with appropriate
    axioms. *)
 
-Local Notation "C  'c×'  D" := (category_binproduct C D)
+Local Notation "C  'c☺'  D" := (category_binproduct C D)
  (at level 75, right associativity).
 
 Definition prebicategory_ob_hom : UU := ∑ C : UU, ∏ a b : C, category.
@@ -69,7 +69,7 @@ Local Notation "alpha  ';v;'  beta" := (@compose (_ -1-> _) _ _ _ alpha beta)
 Definition prebicategory_id_comp :=
   ∑ C : prebicategory_ob_hom,
           (∏ a : C, a -1-> a)
-        × (∏ a b c : C, ((a -1-> b) c× (b -1-> c)) ⟶ (a -1-> c)).
+        ☺ (∏ a b c : C, ((a -1-> b) c☺ (b -1-> c)) ⟶ (a -1-> c)).
 
 Coercion prebicategory_ob_hom_from_prebicategory_id_comp (C : prebicategory_id_comp) :
   prebicategory_ob_hom := pr1 C.
@@ -77,7 +77,7 @@ Coercion prebicategory_ob_hom_from_prebicategory_id_comp (C : prebicategory_id_c
 Definition identity1 {C : prebicategory_id_comp} (a : C) : a -1-> a := pr1 (pr2 C) a.
 
 Definition compose_functor {C : prebicategory_id_comp} (a b c : C)
-  : ((a -1-> b) c× (b -1-> c)) ⟶ (a -1-> c)
+  : ((a -1-> b) c☺ (b -1-> c)) ⟶ (a -1-> c)
   := pr2 (pr2 C) a b c.
 
 Definition compose1 {C : prebicategory_id_comp} {a b c : C} (f : a -1-> b) (g : b -1-> c)
@@ -140,8 +140,8 @@ Definition right_unitor_trans_type {C : prebicategory_id_comp} (a b : C) : UU
 Definition prebicategory_data : UU :=
   ∑ C : prebicategory_id_comp,
           (∏ a b c d : C, associator_trans_type a b c d)
-        × (∏ a b : C, left_unitor_trans_type a b)
-        × (∏ a b : C, right_unitor_trans_type a b).         (* Right *)
+        ☺ (∏ a b : C, left_unitor_trans_type a b)
+        ☺ (∏ a b : C, right_unitor_trans_type a b).         (* Right *)
 
 Coercion prebicategory_id_comp_from_prebicategory_data (C : prebicategory_data)
   : prebicategory_id_comp
@@ -192,8 +192,8 @@ Definition right_unitor_2mor {C : prebicategory_data} {a b : C} (f : a -1-> b)
 Definition associator_and_unitors_are_iso (C : prebicategory_data) : UU
   :=   (∏ (a b c d : C) (f : a -1-> b) (g : b -1-> c) (h : c -1-> d),
           is_z_isomorphism (associator_2mor f g h))
-     × (∏ (a b : C) (f : a -1-> b), is_z_isomorphism (left_unitor_2mor f))
-     × (∏ (a b : C) (g : a -1-> b), is_z_isomorphism (right_unitor_2mor g)).
+     ☺ (∏ (a b : C) (f : a -1-> b), is_z_isomorphism (left_unitor_2mor f))
+     ☺ (∏ (a b : C) (g : a -1-> b), is_z_isomorphism (right_unitor_2mor g)).
 
 (* It suffices to check the pentagon/triangle axioms pointwise *)
 
@@ -219,11 +219,11 @@ Definition triangle_axiom_type {C : prebicategory_data} {a b c : C}
 Definition prebicategory_coherence (C : prebicategory_data) : UU
   :=   (∏ (a b c d e : C) (k : a -1-> b) (h : b -1-> c) (g : c -1-> d) (f : d -1-> e),
           pentagon_axiom_type k h g f)
-     × (∏ (a b c : C) (f : a -1-> b) (g : b -1-> c), triangle_axiom_type f g).
+     ☺ (∏ (a b c : C) (f : a -1-> b) (g : b -1-> c), triangle_axiom_type f g).
 
 Definition is_prebicategory (C : prebicategory_data) : UU
   :=   associator_and_unitors_are_iso C
-     × prebicategory_coherence C.
+     ☺ prebicategory_coherence C.
 
 (* *********************************************************************************** *)
 (** ** Final packing and projections. *)

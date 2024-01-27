@@ -95,14 +95,14 @@ Let BC := BinCoproducts_slice_precat _ BinCoproductsHSET sort: BinCoproducts (HS
 
 (** Definition of multi sorted signatures *)
 Definition MultiSortedSig : UU :=
-  ∑ (I : hSet), I → list (list sort × sort) × sort.
+  ∑ (I : hSet), I → list (list sort ☺ sort) ☺ sort.
 
 Definition ops (M : MultiSortedSig) : hSet := pr1 M.
-Definition arity (M : MultiSortedSig) : ops M → list (list sort × sort) × sort :=
+Definition arity (M : MultiSortedSig) : ops M → list (list sort ☺ sort) ☺ sort :=
   λ x, pr2 M x.
 
 Definition make_MultiSortedSig {I : hSet}
-  (ar : I → list (list sort × sort) × sort) : MultiSortedSig := (I,,ar).
+  (ar : I → list (list sort ☺ sort) ☺ sort) : MultiSortedSig := (I,,ar).
 
 
 (** * Construction of an endofunctor on [HSET/sort,HSET/sort] from a multisorted signature *)
@@ -168,7 +168,7 @@ F^(l,t)(X) := proj_functor(t) ∘ X
 
 otherwise
  *)
-Definition exp_functor (lt : list sort × sort) :
+Definition exp_functor (lt : list sort ☺ sort) :
   functor [HSET_over_sort,HSET_over_sort] [HSET_over_sort,HSET].
 Proof.
 induction lt as [l t].
@@ -183,7 +183,7 @@ Defined.
 
 (** This defines F^lts where lts is a list of (l,t). Outputs a product of
     functors if the list is nonempty and otherwise the constant functor. *)
-Local Definition exp_functor_list (xs : list (list sort × sort)) :
+Local Definition exp_functor_list (xs : list (list sort ☺ sort)) :
   functor [HSET_over_sort,HSET_over_sort] [HSET_over_sort,HSET].
 Proof.
 (* If the list is empty we output the constant functor *)
@@ -197,7 +197,7 @@ use (foldr1 (λ F G, BinProduct_of_functors _ F G) T XS).
 apply BinProducts_functor_precat, BinProductsHSET.
 Defined.
 
-Local Definition hat_exp_functor_list (xst : list (list sort × sort) × sort) :
+Local Definition hat_exp_functor_list (xst : list (list sort ☺ sort) ☺ sort) :
   functor [HSET_over_sort,HSET_over_sort] [HSET_over_sort,HSET_over_sort] :=
     exp_functor_list (pr1 xst) ∙ post_comp_functor (hat_functor (pr2 xst)).
 
@@ -238,7 +238,7 @@ induction xs as [[|n] xs].
 Defined.
 
 (* The signature for exp_functor *)
-Local Definition Sig_exp_functor (lt : list sort × sort) :
+Local Definition Sig_exp_functor (lt : list sort ☺ sort) :
   Signature HSET_over_sort HSET HSET_over_sort.
 Proof.
 exists (exp_functor lt).
@@ -255,14 +255,14 @@ induction l as [[|n] xs].
     exact (pr2 (Gθ_Signature Sig_option_list (proj_functor t))).
 Defined.
 
-Local Lemma functor_in_Sig_exp_functor_ok (lt : list sort × sort) :
+Local Lemma functor_in_Sig_exp_functor_ok (lt : list sort ☺ sort) :
   Signature_Functor (Sig_exp_functor lt) = exp_functor lt.
 Proof.
 apply idpath.
 Qed.
 
 (* The signature for exp_functor_list *)
-Local Definition Sig_exp_functor_list (xs : list (list sort × sort)) :
+Local Definition Sig_exp_functor_list (xs : list (list sort ☺ sort)) :
   Signature HSET_over_sort HSET HSET_over_sort.
 Proof.
 exists (exp_functor_list xs).
@@ -276,20 +276,20 @@ induction xs as [[|n] xs].
     exact (pr2 (BinProduct_of_Signatures _ (Sig_exp_functor _) (tpair _ _ (IH (k,,xs))))).
 Defined.
 
-Local Lemma functor_in_Sig_exp_functor_list_ok (xs : list (list sort × sort)) :
+Local Lemma functor_in_Sig_exp_functor_list_ok (xs : list (list sort ☺ sort)) :
   Signature_Functor (Sig_exp_functor_list xs) = exp_functor_list xs.
 Proof.
 apply idpath.
 Qed.
 
 (* the signature for hat_exp_functor_list *)
-Local Definition Sig_hat_exp_functor_list (xst : list (list sort × sort) × sort) :
+Local Definition Sig_hat_exp_functor_list (xst : list (list sort ☺ sort) ☺ sort) :
   Signature HSET_over_sort HSET_over_sort HSET_over_sort.
 Proof.
 apply (Gθ_Signature (Sig_exp_functor_list (pr1 xst)) (hat_functor (pr2 xst))).
 Defined.
 
-Local Lemma functor_in_Sig_hat_exp_functor_list_ok (xst : list (list sort × sort) × sort) :
+Local Lemma functor_in_Sig_hat_exp_functor_list_ok (xst : list (list sort ☺ sort) ☺ sort) :
   Signature_Functor (Sig_hat_exp_functor_list xst) = hat_exp_functor_list xst.
 Proof.
 apply idpath.
@@ -393,7 +393,7 @@ use make_are_adjoints.
     now apply subtypePath; try apply idpath; intros x'; apply setproperty.
 Defined.
 
-Local Lemma is_omega_cocont_exp_functor (a : list sort × sort)
+Local Lemma is_omega_cocont_exp_functor (a : list sort ☺ sort)
   (H : Colims_of_shape nat_graph HSET_over_sort) :
   is_omega_cocont (exp_functor a).
 Proof.
@@ -412,7 +412,7 @@ induction xs as [[|n] xs].
     * apply is_omega_cocont_post_comp_proj.
 Defined.
 
-Local Lemma is_omega_cocont_exp_functor_list (xs : list (list sort × sort))
+Local Lemma is_omega_cocont_exp_functor_list (xs : list (list sort ☺ sort))
   (H : Colims_of_shape nat_graph HSET_over_sort) :
   is_omega_cocont (exp_functor_list xs).
 Proof.
@@ -437,7 +437,7 @@ Proof.
 apply is_omega_cocont_post_composition_functor, is_left_adjoint_hat.
 Defined.
 
-Local Lemma is_omega_cocont_hat_exp_functor_list (xst : list (list sort × sort) × sort)
+Local Lemma is_omega_cocont_hat_exp_functor_list (xst : list (list sort ☺ sort) ☺ sort)
   (H : Colims_of_shape nat_graph HSET_over_sort) :
   is_omega_cocont (hat_exp_functor_list xst).
 Proof.

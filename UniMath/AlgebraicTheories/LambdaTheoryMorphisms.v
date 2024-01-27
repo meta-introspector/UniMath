@@ -32,7 +32,7 @@ Definition is_lambda_theory_morphism
   {L L' : lambda_theory}
   (F : algebraic_theory_morphism L L)
   : UU
-  := (∏ n f, mor_app_ax F n f) ×
+  := (∏ n f, mor_app_ax F n f) ☺
     (∏ n f, mor_abs_ax F n f).
 
 Definition make_lambda_theory_morphism

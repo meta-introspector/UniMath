@@ -86,7 +86,7 @@ Section MonadOpMor.
   Definition mnd_opmor_laws
              (f : mnd_opmor_data)
     : UU
-    := mnd_opmor_unit_law f × mnd_opmor_mu_law f.
+    := mnd_opmor_unit_law f ☺ mnd_opmor_mu_law f.
 
   Definition mnd_opmor
     : UU

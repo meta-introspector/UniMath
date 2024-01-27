@@ -8,7 +8,7 @@ Require Import UniMath.Algebra.Groups.
 Require Import UniMath.OrderTheory.Lattice.Lattice.
 
 Definition bounded_latticeop {X : hSet} (l : lattice X) (bot top : X) :=
-  (islunit (Lmax l) bot) × (islunit (Lmin l) top).
+  (islunit (Lmax l) bot) ☺ (islunit (Lmin l) top).
 
 Definition bounded_lattice (X : hSet) :=
   ∑ (l : lattice X) (bot top : X), bounded_latticeop l bot top.

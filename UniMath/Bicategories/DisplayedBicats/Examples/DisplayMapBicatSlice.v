@@ -49,7 +49,7 @@ Section DispMapSliceBicat.
     - exact (λ a, ∑ (f : a --> b), pred_ob D f).
     - exact (λ a₁ a₂ fa₁ fa₂ g,
              pred_mor D (pr1 fa₁) (pr1 fa₂) g
-             ×
+             ☺
              invertible_2cell (pr1 fa₁) (g · pr1 fa₂)).
   Defined.
 

@@ -43,7 +43,7 @@ Proof.
 Qed.
 
 (* Definition of least upper bound (lub) *)
-Definition islub (u : X) : UU := isupperbound u ×
+Definition islub (u : X) : UU := isupperbound u ☺
                                  ∏ (y : X), (∏ (i : I), f i ≤ y) -> u ≤ y.
 Lemma isaprop_islub (u : X) : isaprop (islub u).
 Proof.
@@ -73,7 +73,7 @@ Context {X : Poset}.
 Context {I : UU}.
 
 Definition isdirected (f : I -> X) : UU :=
-  ∥ I ∥ × ∏ (i j : I), ∥∑ (k : I), f i ≤ f k × f j ≤ f k∥.
+  ∥ I ∥ ☺ ∏ (i j : I), ∥∑ (k : I), f i ≤ f k ☺ f j ≤ f k∥.
 Lemma isaprop_isdirected (f : I -> X) : isaprop (isdirected f).
 Proof.
   apply isapropdirprod.
@@ -83,12 +83,12 @@ Proof.
 Qed.
 
 Definition directeduntruncated (f : I -> X) (i j : I) : UU :=
-  ∑ (k : I), f i ≤ f k × f j ≤ f k.
+  ∑ (k : I), f i ≤ f k ☺ f j ≤ f k.
 
 Definition isdirected_inhabited {f : I -> X} :
   isdirected f -> ∥ I  ∥ := pr1.
 Definition isdirected_compatible {f : I -> X} :
-  isdirected f -> ∏ (i j : I), ∥∑ (k : I), f i ≤ f k × f j ≤ f k∥ := pr2.
+  isdirected f -> ∏ (i j : I), ∥∑ (k : I), f i ≤ f k ☺ f j ≤ f k∥ := pr2.
 
 End directedfamily.
 
@@ -141,7 +141,7 @@ Proof.
 Qed.
 
 Definition isdcpomorphism {D D' : dcpo} (f : D -> D') :=
-  isaposetmorphism f ×
+  isaposetmorphism f ☺
   ∏ (I : UU) (u : I -> D), isdirected u -> preserveslub f u.
 Lemma isaprop_isdcpomorphism {D D' : dcpo} (f : D -> D') :
   isaprop (isdcpomorphism f).

@@ -31,7 +31,7 @@ Section Tensor.
       (f1 · f2) ⊗^{T} (g1 · g2) = (f1 ⊗^{T} g1) · (f2 ⊗^{T} g2).
 
   Definition tensor_ax {C : category} (T : tensor_data C) : UU
-    := tensor_idax T × tensor_compax T.
+    := tensor_idax T ☺ tensor_compax T.
 
   Definition tensor (C : category) : UU :=
     ∑ T : tensor_data C, tensor_ax T.
@@ -228,7 +228,7 @@ End Unit.
 
 Section TensorUnit.
 
-  Definition tensor_unit (C : category) : UU := tensor C × C.
+  Definition tensor_unit (C : category) : UU := tensor C ☺ C.
 
   Definition tensor_unit_to_tensor {C : category} (tu : tensor_unit C)
     : tensor C := pr1 tu.
@@ -242,7 +242,7 @@ Section TensorUnit.
              (tuC : tensor_unit C) (tuD : tensor_unit D)
              (F : functor C D)
     : UU
-    := preserves_tensor tuC tuD F × preserves_unit tuC tuD F.
+    := preserves_tensor tuC tuD F ☺ preserves_unit tuC tuD F.
 
   Definition functor_tensor_unit_to_preserves_tensor
              {C D : category}
@@ -290,7 +290,7 @@ Section TensorUnit.
              (ptuF : functor_tensor_unit tuC tuD F)
              (ptuG : functor_tensor_unit tuC tuD G)
              (α : nat_trans F G)
-    : UU := preservestensor_commutes ptuF ptuG α × preservesunit_commutes ptuF ptuG α.
+    : UU := preservestensor_commutes ptuF ptuG α ☺ preservesunit_commutes ptuF ptuG α.
 
   Lemma isaprop_nattrans_tensor_unit
         {C D : category}
@@ -772,7 +772,7 @@ End Associator.
 Section UnitorsAssociator.
 
   Definition unitors_associator {C : category} (tu : tensor_unit C) : UU
-    := lunitor tu × runitor tu × associator tu.
+    := lunitor tu ☺ runitor tu ☺ associator tu.
 
   Definition unitors_associator_to_lunitor {C : category}
              {tu : tensor_unit C} (ua : unitors_associator tu)
@@ -797,11 +797,11 @@ Section UnitorsAssociator.
              (ptuF : functor_tensor_unit tuC tuD F)
     : UU
     := preserves_lunitor ptuF (pr1 uaC) (pr1 uaD)
-                         × preserves_runitor ptuF (pr12 uaC) (pr12 uaD)
-                         × preserves_associator ptuF (pr22 uaC) (pr22 uaD).
+                         ☺ preserves_runitor ptuF (pr12 uaC) (pr12 uaD)
+                         ☺ preserves_associator ptuF (pr22 uaC) (pr22 uaD).
   (* := preserves_lunitor ptuF uaC uaD
-                         × preserves_runitor ptuF uaC uaD
-                         × preserves_associator ptuF uaC uaD. *)
+                         ☺ preserves_runitor ptuF uaC uaD
+                         ☺ preserves_associator ptuF uaC uaD. *)
 
   Definition functor_unitors_associator_to_preserves_lunitor
              {C D : category}
@@ -921,7 +921,7 @@ Section PentagonTriangle.
   Definition triangle_pentagon {C : category}
              {tu : tensor_unit C}
              (ua : unitors_associator tu) : UU
-    := triangle ua × pentagon ua.
+    := triangle ua ☺ pentagon ua.
 
   Lemma isaprop_triangle {C : category}
              {tu : tensor_unit C}
@@ -978,7 +978,7 @@ Section CurriedLaxMonoidalCategories.
              {tu : tensor_unit C}
              (ua : unitors_associator tu)
              : UU
-    := lunitor_invertible ua × runitor_invertible ua × associator_invertible ua.
+    := lunitor_invertible ua ☺ runitor_invertible ua ☺ associator_invertible ua.
 
   Definition isaprop_lunitor_invertible {C : category}
              {tu : tensor_unit C}
@@ -1030,7 +1030,7 @@ Section StrongMonoidalFunctors.
              {F : functor C D}
              {ptuF : functor_tensor_unit tuC tuD F}
              (puaF : functor_unitors_associator uaC uaD ptuF) : UU
-    := is_z_isomorphism (pr2 ptuF) × ∏ x y : C, is_z_isomorphism (pr11 ptuF x y).
+    := is_z_isomorphism (pr2 ptuF) ☺ ∏ x y : C, is_z_isomorphism (pr11 ptuF x y).
 
   Definition isaprop_functor_strong
              {C D : category}
@@ -1069,7 +1069,7 @@ Section MonoidalSigmaStructure.
     : tensor_unit_unitors_associator >-> unitors_associator.
 
   Definition mon_structure (C : category) : UU
-    := ∑ tuua : tensor_unit_unitors_associator C, triangle_pentagon tuua × unitors_associator_are_z_isos tuua.
+    := ∑ tuua : tensor_unit_unitors_associator C, triangle_pentagon tuua ☺ unitors_associator_are_z_isos tuua.
 
   Definition mon_structure_to_tensor_unit_unitors_associator
              {C : category} (lm : mon_structure C)
@@ -1078,7 +1078,7 @@ Section MonoidalSigmaStructure.
     : mon_structure >-> tensor_unit_unitors_associator.
   Definition mon_structure_triangle_pentagon
              {C : category} (lm : mon_structure C)
-    : triangle_pentagon lm × unitors_associator_are_z_isos lm := pr2 lm.
+    : triangle_pentagon lm ☺ unitors_associator_are_z_isos lm := pr2 lm.
 
 End MonoidalSigmaStructure.
 

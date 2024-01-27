@@ -623,7 +623,7 @@ Section NormalSubGroups.
     (pr1 n1) * g = g * (pr1 (rcoset_in_lcoset_witness H g n1)) := pr2 (H g n1).
 
   Definition lcoset_equal_rcoset {X : gr} (N : subgr X) : UU :=
-    lcoset_in_rcoset N × rcoset_in_lcoset N.
+    lcoset_in_rcoset N ☺ rcoset_in_lcoset N.
 
   Lemma lcoset_in_rcoset_impl_normal {X : gr} (N : subgr X) :
     lcoset_in_rcoset N -> isnormalsubgr N.
@@ -1084,14 +1084,14 @@ Section Fractions.
 Import UniMath.Algebra.Monoids.AddNotation.
 Local Open Scope addmonoid.
 
-Definition hrelabgrdiff (X : abmonoid) : hrel (X × X) :=
+Definition hrelabgrdiff (X : abmonoid) : hrel (X ☺ X) :=
   λ xa1 xa2,
     hexists (λ x0 : X, paths (((pr1 xa1) + (pr2 xa2)) + x0) (((pr1 xa2) + (pr2 xa1)) + x0)).
 
 Definition abgrdiffphi (X : abmonoid) (xa : dirprod X X) :
   dirprod X (totalsubtype X) := make_dirprod (pr1 xa) (make_carrier (λ x : X, htrue) (pr2 xa) tt).
 
-Definition hrelabgrdiff' (X : abmonoid) : hrel (X × X) :=
+Definition hrelabgrdiff' (X : abmonoid) : hrel (X ☺ X) :=
   λ xa1 xa2, eqrelabmonoidfrac X (totalsubmonoid X) (abgrdiffphi X xa1) (abgrdiffphi X xa2).
 
 Lemma logeqhrelsabgrdiff (X : abmonoid) : hrellogeq (hrelabgrdiff' X) (hrelabgrdiff X).
@@ -1191,7 +1191,7 @@ Definition prabgrdiff (X : abmonoid) : X -> X -> abgrdiff X :=
 
 (** *** Abelian group of fractions and abelian monoid of fractions *)
 
-Definition weqabgrdiffint (X : abmonoid) : weq (X × X) (dirprod X (totalsubtype X)) :=
+Definition weqabgrdiffint (X : abmonoid) : weq (X ☺ X) (dirprod X (totalsubtype X)) :=
   weqdirprodf (idweq X) (invweq (weqtotalsubtype X)).
 
 Definition weqabgrdiff (X : abmonoid) : weq (abgrdiff X) (abmonoidfrac X (totalsubmonoid X)).

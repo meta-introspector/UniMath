@@ -1730,7 +1730,7 @@ Defined.
     Section RoundtripForSDData.
 
       Local Definition source_type: UU := ∑ δ: parameterized_distributivity_bicat_nat,
-            param_distr_bicat_triangle_eq_variant0 δ ×
+            param_distr_bicat_triangle_eq_variant0 δ ☺
               param_distr_bicat_pentagon_eq_variant δ.
       Local Definition target_type: UU := ∑ sd: section_disp montrafotargetbicat_disp,
             smonoidal_data Mon_V montrafotargetbicat_disp_monoidal sd.

@@ -173,14 +173,14 @@ Proposition pointed_poset_strict_smash_eqrel_equiv
             {X Y : hSet}
             (PX : pointed_PartialOrder X)
             (PY : pointed_PartialOrder Y)
-            (xy₁ xy₂ : X × Y)
+            (xy₁ xy₂ : X ☺ Y)
   : smash_eqrel
       cartesian_struct_pointed_poset_strict
       pointed_struct_pointed_poset_strict
       PX PY
       xy₁ xy₂
     <->
-    @downward_closed_to_eqrel (X × Y)%set (smash_set PX PY) xy₁ xy₂.
+    @downward_closed_to_eqrel (X ☺ Y)%set (smash_set PX PY) xy₁ xy₂.
 Proof.
   induction xy₁ as [ x₁ y₁ ].
   induction xy₂ as [ x₂ y₂ ].

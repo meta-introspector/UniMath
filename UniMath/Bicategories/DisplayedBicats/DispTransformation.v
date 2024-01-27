@@ -144,8 +144,8 @@ Definition disp_pstrans_comp_law : UU
 Definition is_disp_pstrans
   : UU
   := disp_psnaturality_natural_law
-       × disp_pstrans_id_law
-       × disp_pstrans_comp_law.
+       ☺ disp_pstrans_id_law
+       ☺ disp_pstrans_comp_law.
 
 End DispPstransLaws.
 

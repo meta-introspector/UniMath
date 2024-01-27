@@ -24,11 +24,11 @@ Definition Dcuts_def_bot (X : hsubtype NonnegativeRationals) : UU :=
         X x -> ∏ y : NonnegativeRationals, y <= x -> X y.
 Definition Dcuts_def_open (X : hsubtype NonnegativeRationals) : UU :=
   ∏ x : NonnegativeRationals,
-        X x -> ∃ y : NonnegativeRationals, (X y) × (x < y).
+        X x -> ∃ y : NonnegativeRationals, (X y) ☺ (x < y).
 Definition Dcuts_def_finite (X : hsubtype NonnegativeRationals) : hProp :=
   ∃ ub : NonnegativeRationals, ¬ (X ub).
 Definition Dcuts_def_corr (X : hsubtype NonnegativeRationals) : UU :=
-  ∏ r : NonnegativeRationals, 0 < r -> (¬ (X r)) ∨ ∑ q : NonnegativeRationals, (X q) × (¬ (X (q + r))).
+  ∏ r : NonnegativeRationals, 0 < r -> (¬ (X r)) ∨ ∑ q : NonnegativeRationals, (X q) ☺ (¬ (X (q + r))).
 
 Lemma Dcuts_def_corr_finite (X : hsubtype NonnegativeRationals) :
   Dcuts_def_corr X → Dcuts_def_finite X.
@@ -44,7 +44,7 @@ Qed.
 Lemma Dcuts_def_corr_not_empty (X : hsubtype NonnegativeRationals) :
   X 0 -> Dcuts_def_corr X ->
   ∏ c : NonnegativeRationals,
-    (0 < c)%NRat -> ∃ x : NonnegativeRationals, X x × ¬ X (x + c).
+    (0 < c)%NRat -> ∃ x : NonnegativeRationals, X x ☺ ¬ X (x + c).
 Proof.
   intros X0 Hx c Hc.
   generalize (Hx c Hc).
@@ -73,7 +73,7 @@ Proof.
 Qed.
 
 Lemma isaprop_Dcuts_hsubtype (X : hsubtype NonnegativeRationals) :
-  isaprop (Dcuts_def_bot X × Dcuts_def_open X × Dcuts_def_corr X).
+  isaprop (Dcuts_def_bot X ☺ Dcuts_def_open X ☺ Dcuts_def_corr X).
 Proof.
   apply isofhleveldirprod, isofhleveldirprod.
   - exact (isaprop_Dcuts_def_bot X).
@@ -346,7 +346,7 @@ Notation "x > y" := (@EOgt_rel eo_Dcuts x y) : Dcuts_scope.
 (** ** Equivalence on [Dcuts] *)
 
 Definition Dcuts_eq_rel :=
-  λ X Y : Dcuts_set, ∏ r : NonnegativeRationals, (r ∈ X -> r ∈ Y) × (r ∈ Y -> r ∈ X).
+  λ X Y : Dcuts_set, ∏ r : NonnegativeRationals, (r ∈ X -> r ∈ Y) ☺ (r ∈ Y -> r ∈ X).
 Lemma isaprop_Dcuts_eq_rel : ∏ X Y : Dcuts_set, isaprop (Dcuts_eq_rel X Y).
 Proof.
   intros X Y.
@@ -356,7 +356,7 @@ Proof.
   - now apply isapropimpl, pr2.
 Qed.
 Definition Dcuts_eq : hrel Dcuts_set :=
-  λ X Y : Dcuts_set, make_hProp (∏ r, (r ∈ X -> r ∈ Y) × (r ∈ Y -> r ∈ X)) (isaprop_Dcuts_eq_rel X Y).
+  λ X Y : Dcuts_set, make_hProp (∏ r, (r ∈ X -> r ∈ Y) ☺ (r ∈ Y -> r ∈ X)) (isaprop_Dcuts_eq_rel X Y).
 
 Lemma istrans_Dcuts_eq : istrans Dcuts_eq.
 Proof.
@@ -722,7 +722,7 @@ Section Dcuts_plus.
 Definition Dcuts_plus_val : hsubtype NonnegativeRationals :=
   λ r : NonnegativeRationals,
         ((X r) ⨿ (Y r)) ∨
-        (∑ xy : NonnegativeRationals × NonnegativeRationals, (r = (pr1 xy + pr2 xy)%NRat) × ((X (pr1 xy)) × (Y (pr2 xy)))).
+        (∑ xy : NonnegativeRationals ☺ NonnegativeRationals, (r = (pr1 xy + pr2 xy)%NRat) ☺ ((X (pr1 xy)) ☺ (Y (pr2 xy)))).
 
 Lemma Dcuts_plus_bot : Dcuts_def_bot Dcuts_plus_val.
 Proof.
@@ -956,7 +956,7 @@ Section Dcuts_NQmult.
   Context (Y_corr : Dcuts_def_corr Y).
 
 Definition Dcuts_NQmult_val : hsubtype NonnegativeRationals :=
-  λ r, ∃ ry : NonnegativeRationals, r = x * ry × Y ry.
+  λ r, ∃ ry : NonnegativeRationals, r = x * ry ☺ Y ry.
 
 Lemma Dcuts_NQmult_bot : Dcuts_def_bot Dcuts_NQmult_val.
 Proof.
@@ -1091,8 +1091,8 @@ Section Dcuts_mult.
   Context (Y_corr : Dcuts_def_corr Y).
 
 Definition Dcuts_mult_val : hsubtype NonnegativeRationals :=
-  λ r, ∃ xy : NonnegativeRationals × NonnegativeRationals,
-                           r = (pr1 xy * pr2 xy)%NRat × X (pr1 xy) × Y (pr2 xy).
+  λ r, ∃ xy : NonnegativeRationals ☺ NonnegativeRationals,
+                           r = (pr1 xy * pr2 xy)%NRat ☺ X (pr1 xy) ☺ Y (pr2 xy).
 
 Lemma Dcuts_mult_bot : Dcuts_def_bot Dcuts_mult_val.
 Proof.
@@ -1351,7 +1351,7 @@ Context (X_0 : X 0%NRat).
 Definition Dcuts_inv_val : hsubtype NonnegativeRationals :=
   λ r : NonnegativeRationals,
         hexists (λ l : NonnegativeRationals, (∏ rx : NonnegativeRationals, X rx -> (r * rx <= l)%NRat)
-                                               × (0 < l)%NRat × (l < 1)%NRat).
+                                               ☺ (0 < l)%NRat ☺ (l < 1)%NRat).
 
 Lemma Dcuts_inv_in :
   ∏ x, (0 < x)%NRat -> X x -> (Dcuts_inv_val (/ x)%NRat) -> empty.
@@ -1472,7 +1472,7 @@ Context (X_1 : X 1%NRat).
 
 Lemma Dcuts_inv_corr_aux : Dcuts_def_corr Dcuts_inv_val.
 Proof.
-  assert (∏ c, (0 < c)%NRat -> hexists (λ q : NonnegativeRationals, X q × ¬ X (q + c))).
+  assert (∏ c, (0 < c)%NRat -> hexists (λ q : NonnegativeRationals, X q ☺ ¬ X (q + c))).
   { intros c Hc0.
     generalize (X_corr c Hc0) ; apply hinhuniv ; apply sumofmaps ; [ intros nXc | intros H].
     - apply hinhpr.
@@ -2565,7 +2565,7 @@ Section Dcuts_minus.
   Context (Y_corr : Dcuts_def_corr Y).
 
 Definition Dcuts_minus_val : hsubtype NonnegativeRationals :=
-  λ r, ∃ x, X x × ∏ y, (Y y) ⨿ (y = 0%NRat) -> (r + y < x)%NRat.
+  λ r, ∃ x, X x ☺ ∏ y, (Y y) ⨿ (y = 0%NRat) -> (r + y < x)%NRat.
 
 Lemma Dcuts_minus_bot : Dcuts_def_bot Dcuts_minus_val.
 Proof.
@@ -3683,10 +3683,10 @@ Context (U_cauchy :
                    (0 < eps)%NRat ->
                    hexists
                      (λ N : nat,
-                            ∏ n m : nat, N ≤ n -> N ≤ m -> (∏ r, U n r -> Dcuts_plus_val (U m) (λ q, (q < eps)%NRat) r) × (∏ r, U m r -> Dcuts_plus_val (U n) (λ q, (q < eps)%NRat) r))).
+                            ∏ n m : nat, N ≤ n -> N ≤ m -> (∏ r, U n r -> Dcuts_plus_val (U m) (λ q, (q < eps)%NRat) r) ☺ (∏ r, U m r -> Dcuts_plus_val (U n) (λ q, (q < eps)%NRat) r))).
 
 Definition Dcuts_lim_cauchy_val : hsubtype NonnegativeRationals :=
-λ r : NonnegativeRationals, hexists (λ c : NonnegativeRationals, (0 < c)%NRat × ∑ N : nat, ∏ n : nat, N ≤ n -> U n (r + c)).
+λ r : NonnegativeRationals, hexists (λ c : NonnegativeRationals, (0 < c)%NRat ☺ ∑ N : nat, ∏ n : nat, N ≤ n -> U n (r + c)).
 
 Lemma Dcuts_lim_cauchy_bot : Dcuts_def_bot Dcuts_lim_cauchy_val.
 Proof.
@@ -3919,14 +3919,14 @@ Definition Dcuts_Cauchy_seq (u : nat -> Dcuts) : hProp
                    0 < eps ->
                    hexists
                      (λ N : nat,
-                            ∏ n m : nat, N ≤ n -> N ≤ m -> u n < Dcuts_plus (u m) eps × u m < Dcuts_plus (u n) eps))
+                            ∏ n m : nat, N ≤ n -> N ≤ m -> u n < Dcuts_plus (u m) eps ☺ u m < Dcuts_plus (u n) eps))
                (impred_isaprop _ (λ _, isapropimpl _ _ (pr2 _))).
 Definition is_Dcuts_lim_seq (u : nat -> Dcuts) (l : Dcuts) : hProp
   := make_hProp (∏ eps : Dcuts,
                    0 < eps ->
                    hexists
                      (λ N : nat,
-                            ∏ n : nat, N ≤ n -> u n < Dcuts_plus l eps × l < Dcuts_plus (u n) eps))
+                            ∏ n : nat, N ≤ n -> u n < Dcuts_plus l eps ☺ l < Dcuts_plus (u n) eps))
                (impred_isaprop _ (λ _, isapropimpl _ _ (pr2 _))).
 
 Definition Dcuts_lim_cauchy_seq (U : nat → Dcuts) (HU : Dcuts_Cauchy_seq U) : Dcuts.
@@ -4084,11 +4084,11 @@ Section Dcuts_of_Dcuts.
 
 Context (E : hsubtype Dcuts).
 Context (E_bot : ∏ x : Dcuts, E x -> ∏ y : Dcuts, y <= x -> E y).
-Context (E_open : ∏ x : Dcuts, E x -> ∃ y : Dcuts, x < y × E y).
-Context (E_corr: ∏ c : Dcuts, 0 < c -> (¬ E c) ∨ (hexists (λ P, E P × ¬ E (Dcuts_plus P c)))).
+Context (E_open : ∏ x : Dcuts, E x -> ∃ y : Dcuts, x < y ☺ E y).
+Context (E_corr: ∏ c : Dcuts, 0 < c -> (¬ E c) ∨ (hexists (λ P, E P ☺ ¬ E (Dcuts_plus P c)))).
 
 Definition Dcuts_of_Dcuts_val : NonnegativeRationals → hProp :=
-  λ r : NonnegativeRationals, ∃ X : Dcuts, (E X) × (r ∈ X).
+  λ r : NonnegativeRationals, ∃ X : Dcuts, (E X) ☺ (r ∈ X).
 
 Lemma Dcuts_of_Dcuts_bot :
   ∏ (x : NonnegativeRationals),
@@ -4106,7 +4106,7 @@ Qed.
 Lemma Dcuts_of_Dcuts_open :
   ∏ (x : NonnegativeRationals),
     Dcuts_of_Dcuts_val x ->
-    hexists (λ y : NonnegativeRationals, (Dcuts_of_Dcuts_val y) × (x < y)%NRat).
+    hexists (λ y : NonnegativeRationals, (Dcuts_of_Dcuts_val y) ☺ (x < y)%NRat).
 Proof.
   intros r.
   apply hinhuniv ; intros X.
@@ -4237,7 +4237,7 @@ Context (E_open : Dcuts_def_open E).
 Context (E_corr : Dcuts_def_corr E).
 
 Definition Dcuts_of_Dcuts'_val : hsubtype Dcuts :=
-  λ x : Dcuts, ∃ r : NonnegativeRationals, (¬ (r ∈ x)) × E r.
+  λ x : Dcuts, ∃ r : NonnegativeRationals, (¬ (r ∈ x)) ☺ E r.
 
 Lemma Dcuts_of_Dcuts'_bot :
   ∏ (x : Dcuts),
@@ -4258,7 +4258,7 @@ Qed.
 Lemma Dcuts_of_Dcuts'_open :
   ∏ (x : Dcuts),
     Dcuts_of_Dcuts'_val x ->
-    hexists (λ y : Dcuts, (Dcuts_of_Dcuts'_val y) × (x < y)).
+    hexists (λ y : Dcuts, (Dcuts_of_Dcuts'_val y) ☺ (x < y)).
 Proof.
   intros r.
   apply hinhuniv.
@@ -4283,10 +4283,10 @@ Proof.
 Qed.
 
 Lemma Dcuts_of_Dcuts'_corr:
-  ∏ c : Dcuts, 0 < c -> (¬ Dcuts_of_Dcuts'_val c) ∨ (hexists (λ P, Dcuts_of_Dcuts'_val P × ¬ Dcuts_of_Dcuts'_val (Dcuts_plus P c))).
+  ∏ c : Dcuts, 0 < c -> (¬ Dcuts_of_Dcuts'_val c) ∨ (hexists (λ P, Dcuts_of_Dcuts'_val P ☺ ¬ Dcuts_of_Dcuts'_val (Dcuts_plus P c))).
 Proof.
   intros C HC.
-  assert (∃ c : NonnegativeRationals, c ∈ C × (0 < c)%NRat).
+  assert (∃ c : NonnegativeRationals, c ∈ C ☺ (0 < c)%NRat).
   { revert HC ; apply hinhuniv ; intro d.
     generalize (is_Dcuts_open _ _ (pr2 (pr2 d))).
     apply hinhfun.
@@ -4380,7 +4380,7 @@ Proof.
       exact (pr2 (pr2 q)).
 Qed.
 Lemma Dcuts_of_Dcuts_bij' :
-  ∏ E : hsubtype Dcuts, ∏ (E_bot : ∏ x : Dcuts, E x -> ∏ y : Dcuts, y <= x -> E y) (E_open : ∏ x : Dcuts, E x -> ∃ y : Dcuts, x < y × E y),
+  ∏ E : hsubtype Dcuts, ∏ (E_bot : ∏ x : Dcuts, E x -> ∏ y : Dcuts, y <= x -> E y) (E_open : ∏ x : Dcuts, E x -> ∃ y : Dcuts, x < y ☺ E y),
     Dcuts_of_Dcuts'_val (Dcuts_of_Dcuts_val E) = E.
 Proof.
   intros.
@@ -4523,7 +4523,7 @@ Definition hsubtypeNonnegativeRationals_to_NonnegativeReals
             X x -> ∏ y : NonnegativeRationals, (y <= x)%NRat -> X y)
   (Xopen : ∏ x : NonnegativeRationals,
              X x ->
-             hexists (λ y : NonnegativeRationals, (X y) × (x < y)%NRat))
+             hexists (λ y : NonnegativeRationals, (X y) ☺ (x < y)%NRat))
   (Xtop : Dcuts_def_corr X) : NonnegativeReals :=
   make_Dcuts X Xbot Xopen Xtop.
 
@@ -4737,7 +4737,7 @@ Definition isrefl_leNonnegativeReals :
   ∏ x : NonnegativeReals, x <= x
   := isrefl_EOle (X := EffectivelyOrdered_NonnegativeReals).
 Lemma isantisymm_leNonnegativeReals :
-  ∏ x y : NonnegativeReals, x <= y × y <= x <-> x = y.
+  ∏ x y : NonnegativeReals, x <= y ☺ y <= x <-> x = y.
 Proof.
   intros x y ; split.
   - intros H.
@@ -5244,7 +5244,7 @@ Qed.
 (** ** NonnegativeRationals is dense in NonnegativeReals *)
 
 Lemma NonnegativeReals_dense :
-  ∏ x y : NonnegativeReals, x < y -> ∃ r : NonnegativeRationals, x < NonnegativeRationals_to_NonnegativeReals r × NonnegativeRationals_to_NonnegativeReals r < y.
+  ∏ x y : NonnegativeReals, x < y -> ∃ r : NonnegativeRationals, x < NonnegativeRationals_to_NonnegativeReals r ☺ NonnegativeRationals_to_NonnegativeReals r < y.
 Proof.
   intros x y.
   apply hinhuniv ; intros q.
@@ -5313,14 +5313,14 @@ Definition Cauchy_seq (u : nat -> NonnegativeReals) : hProp
                    0 < eps ->
                    hexists
                      (λ N : nat,
-                            ∏ n m : nat, N ≤ n -> N ≤ m -> u n < u m + eps × u m < u n + eps))
+                            ∏ n m : nat, N ≤ n -> N ≤ m -> u n < u m + eps ☺ u m < u n + eps))
                (impred_isaprop _ (λ _, isapropimpl _ _ (pr2 _))).
 Definition is_lim_seq (u : nat -> NonnegativeReals) (l : NonnegativeReals) : hProp
   := make_hProp (∏ eps : NonnegativeReals,
                    0 < eps ->
                    hexists
                      (λ N : nat,
-                            ∏ n : nat, N ≤ n -> u n < l + eps × l < u n + eps))
+                            ∏ n : nat, N ≤ n -> u n < l + eps ☺ l < u n + eps))
                (impred_isaprop _ (λ _, isapropimpl _ _ (pr2 _))).
 
 Definition Cauchy_lim_seq (u : nat → NonnegativeReals) (Cu : Cauchy_seq u) : NonnegativeReals

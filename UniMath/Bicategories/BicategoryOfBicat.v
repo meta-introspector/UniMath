@@ -28,7 +28,7 @@ Require Import UniMath.Bicategories.Core.Bicat. Import Bicat.Notations.
 Local Open Scope cat.
 
 
-Local Notation "C  'c×'  D" := (precategory_binproduct C D)
+Local Notation "C  'c☺'  D" := (precategory_binproduct C D)
  (at level 75, right associativity).
 
 Section Build_Bicategory.
@@ -52,7 +52,7 @@ Defined.
 (* Left associator. *)
 
 Definition bicate_lassociator_fun {a b c d : bicate_id_comp}
-           (x : C ⟦ a, b ⟧ × C ⟦ b, c ⟧ × C ⟦ c, d ⟧)
+           (x : C ⟦ a, b ⟧ ☺ C ⟦ b, c ⟧ ☺ C ⟦ c, d ⟧)
   : pr1 x · (pr12 x · pr22 x) ==> pr1 x · pr12 x · pr22 x
   := lassociator (pr1 x) (pr12 x) (pr22 x).
 
@@ -85,8 +85,8 @@ Proof.
 Defined.
 
 Lemma bicate_transfs :
-  (∏ a b c d : bicate_id_comp, associator_trans_type a b c d) ×
-  (∏ a b : bicate_id_comp, left_unitor_trans_type a b) ×
+  (∏ a b c d : bicate_id_comp, associator_trans_type a b c d) ☺
+  (∏ a b : bicate_id_comp, left_unitor_trans_type a b) ☺
   (∏ a b : bicate_id_comp, right_unitor_trans_type a b).
 Proof.
   repeat split; red; cbn.

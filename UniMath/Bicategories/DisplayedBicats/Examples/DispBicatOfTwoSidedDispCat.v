@@ -16,7 +16,7 @@
  - Isomorphisms of displayed bicategories transport univalence.
  Note that this isomorphism lies over the diagonal pseudofunctor, because a
  two-sided displayed category over `C` is the same as a displayed category over
- `C × C`.
+ `C ☺ C`.
 
  Contents
  1. The displayed bicategory of two-sided displayed categories

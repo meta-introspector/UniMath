@@ -129,22 +129,22 @@ Definition bimodule_laws
            (μ : R → G → S → G)
   : UU
   := (∏ (x : G), μ 1 x 1 = x)%ring
-     ×
+     ☺
      (∏ (r₁ r₂ : R) (s₁ s₂ : S) (x : G),
       μ (r₁ * r₂)%ring x (s₁ * s₂)%ring
       =
       μ r₁ (μ r₂ x s₁) s₂)
-     ×
+     ☺
      (∏ (r₁ r₂ : R) (s : S) (x : G),
       op (μ r₁ x s) (μ r₂ x s)
       =
       μ (r₁ + r₂)%ring x s)
-     ×
+     ☺
      (∏ (r : R) (s : S) (x₁ x₂ : G),
       op (μ r x₁ s) (μ r x₂ s)
       =
       μ r (op x₁ x₂) s)
-     ×
+     ☺
      (∏ (r : R) (s₁ s₂ : S) (x : G),
       op (μ r x s₁) (μ r x s₂)
       =

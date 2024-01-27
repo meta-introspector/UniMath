@@ -362,7 +362,7 @@ End cocones.
 Section finite.
   Definition is_finite_graph (g : graph) : UU
     := isfinite (vertex g)
-         × ∏ (a b : vertex g), isfinite (edge a b).
+         ☺ ∏ (a b : vertex g), isfinite (edge a b).
 
   Definition finite_vertexset {g : graph} (gfinite : is_finite_graph g)
     : isfinite (vertex g)

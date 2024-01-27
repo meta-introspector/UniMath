@@ -55,7 +55,7 @@ Definition make_presheaf_data
   := P ,, op.
 
 Definition is_presheaf {T : algebraic_theory} (P : presheaf_data T) : UU :=
-  (∏ l m n a f g, op_op_ax T P (@op T P) l m n a f g) ×
+  (∏ l m n a f g, op_op_ax T P (@op T P) l m n a f g) ☺
   (∏ n f, op_pr_ax T P (@op T P) n f).
 
 Definition make_is_presheaf

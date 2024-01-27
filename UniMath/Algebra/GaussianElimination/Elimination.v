@@ -51,7 +51,7 @@ Section Echelon_Form.
   Definition is_leading_entry {n : nat}
     (v : Vector R n) (i_1 : ⟦ n ⟧%stn)
     := (v i_1 != 0%ring)
-      × (∏ i_2 : ⟦ n ⟧%stn, i_2 < i_1 -> (v i_2) = 0%ring).
+      ☺ (∏ i_2 : ⟦ n ⟧%stn, i_2 < i_1 -> (v i_2) = 0%ring).
 
   (** A matrix is in row echelon form if two conditions hold:
     1. each leading entry is strictly to the right of earlier leading entries
@@ -71,7 +71,7 @@ Section Echelon_Form.
       is_leading_entry (mat i_1) j_1
       -> i_1 < i_2 -> j_2 ≤ j_1
       -> mat i_2 j_2 = 0%ring)
-    × ((mat i_1 = const_vec 0%ring)
+    ☺ ((mat i_1 = const_vec 0%ring)
       -> (i_1 < i_2)
       -> (mat i_2 = const_vec 0%ring)).
 
@@ -80,7 +80,7 @@ End Echelon_Form.
 Definition gaussian_elimination_stmt : UU
 := forall (F : fld) (m n : nat) (A : Matrix F m n),
       ∑ (B : Matrix F _ _), (@matrix_inverse F _ B)
-      × (is_row_echelon (B ** A)).
+      ☺ (is_row_echelon (B ** A)).
 
 (** * Leading entries
 
@@ -183,7 +183,7 @@ Section LeadingEntry.
   Lemma leading_entry_compute_dual_internal_inv1
     { n : nat } (v : Vector F n) (iter : ⟦ S n ⟧%stn)
     {i : stn n} (not_nothing : (leading_entry_compute_dual_internal v iter) = just i)
-    : i < iter × (v i != 0%ring).
+    : i < iter ☺ (v i != 0%ring).
   Proof.
     revert not_nothing.
     unfold leading_entry_compute_dual_internal.
@@ -253,7 +253,7 @@ Section LeadingEntry.
     (iter : ⟦ S n ⟧%stn)
     (i : ⟦ n ⟧%stn)
     (eq : (leading_entry_compute_dual_internal v iter) = just i)
-    : (v i != 0%ring) × (∏ i' : ⟦ n ⟧%stn, i < i' -> i' < iter -> v i' = 0%ring).
+    : (v i != 0%ring) ☺ (∏ i' : ⟦ n ⟧%stn, i < i' -> i' < iter -> v i' = 0%ring).
   Proof.
     use tpair.
     - apply (leading_entry_compute_dual_internal_inv1 _ iter); assumption.
@@ -357,7 +357,7 @@ Section Pivot.
 
   Definition select_pivot_row_coprod {m n : nat} (mat : Matrix F m n)
     (row_sep : ⟦ m ⟧%stn) (k : ⟦ n ⟧%stn) :
-    coprod ((∑ i: ⟦ m ⟧%stn, row_sep ≤ i × ((mat i k) != 0%ring)))
+    coprod ((∑ i: ⟦ m ⟧%stn, row_sep ≤ i ☺ ((mat i k) != 0%ring)))
             (∏ i : ⟦ m ⟧%stn, row_sep ≤ i -> mat i k = 0%ring).
   Proof.
     pose (H := (@leading_entry_compute_dual_internal_inv1 _
@@ -387,8 +387,8 @@ Section Pivot.
   {m n : nat} (mat : Matrix F m n)
   (row_sep : ⟦ m ⟧%stn) (col_iter : ⟦ S n ⟧%stn)
     := ((∑ j: ⟦ n ⟧%stn,
-      j < col_iter × (∑ i: ⟦ m ⟧%stn, row_sep ≤ i × (mat i j != 0%ring)
-      × ∏ i' : (⟦ m ⟧)%stn, ∏ (j' : stn n),
+      j < col_iter ☺ (∑ i: ⟦ m ⟧%stn, row_sep ≤ i ☺ (mat i j != 0%ring)
+      ☺ ∏ i' : (⟦ m ⟧)%stn, ∏ (j' : stn n),
         row_sep ≤ i' -> j' < j -> mat i' j' = 0%ring))).
 
   Local Definition lower_left_zero {m n : nat} (mat : Matrix F m n)
@@ -1000,7 +1000,7 @@ Section Gauss.
     : ∏ r : (⟦ m ⟧%stn), r < iter -> r > k_i
     -> ((gauss_clear_column mat k_i k_j iter) r k_j = 0%ring).
   Proof.
-    destruct iter as [sep p]. 
+    destruct iter as [sep p].
     intros r r_le_sep r_gt_k.
     rewrite (gauss_clear_column_inv2  k_i k_j (sep ,, p) mat r r_le_sep)
       , <- gauss_clear_column_step_eq.
@@ -1066,7 +1066,7 @@ Section Gauss.
 
   Definition is_row_echelon_partial
     {m n : nat} (mat : Matrix F m n) (iter : ⟦ S m ⟧%stn)
-    := is_row_echelon_partial_1 mat iter × is_row_echelon_partial_2 mat iter.
+    := is_row_echelon_partial_1 mat iter ☺ is_row_echelon_partial_2 mat iter.
 
   (** Step lemma *)
   Lemma gauss_clear_row_inv0
@@ -1353,7 +1353,7 @@ Section Gauss.
   Lemma gaussian_elimination_width_0
     {m n} (A : Matrix F m n) {eq0 : 0 = n}
   : ∑ (B : Matrix F _ _), (@matrix_inverse F _ B)
-                            × (is_row_echelon (B ** A)).
+                            ☺ (is_row_echelon (B ** A)).
   Proof.
     exists (@identity_matrix F m).
     use tpair. { apply identity_matrix_invertible. }
@@ -1364,7 +1364,7 @@ Section Gauss.
   (** The main theorem: Gaussian elimination over arbitrary fields *)
   Theorem gaussian_elimination {m n} (A : Matrix F m n)
     : ∑ (B : Matrix F _ _), (@matrix_inverse F _ B)
-                              × (is_row_echelon (B ** A)).
+                              ☺ (is_row_echelon (B ** A)).
   Proof.
     destruct (natchoice0 n) as [eq0 | gt].
     { now apply gaussian_elimination_width_0. }

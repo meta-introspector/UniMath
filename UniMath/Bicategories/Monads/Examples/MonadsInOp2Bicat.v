@@ -39,7 +39,7 @@ Section Comonads.
     : UU
     := ∑ (x : B)
          (f : x --> x),
-       f ==> id₁ _ × f ==> f · f.
+       f ==> id₁ _ ☺ f ==> f · f.
 
   Definition make_comnd_data
              (x : B)
@@ -97,9 +97,9 @@ Section Comonads.
              (C : comnd_data)
     : UU
     := comnd_counit_left_law C
-       ×
+       ☺
        comnd_counit_right_law C
-       ×
+       ☺
        comnd_comult_assoc_law C.
 
   Definition isaprop_comnd_laws
@@ -202,7 +202,7 @@ Section ComonadMorphism.
   Definition comnd_mor_laws
              (f : comnd_mor_data)
     : UU
-    := comnd_mor_counit_law f × comnd_mor_comult_law f.
+    := comnd_mor_counit_law f ☺ comnd_mor_comult_law f.
 
   Definition comnd_mor
     : UU

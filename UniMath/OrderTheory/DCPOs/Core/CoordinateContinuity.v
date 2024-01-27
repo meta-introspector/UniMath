@@ -16,12 +16,12 @@ Local Open Scope dcpo.
 
 Section Coordinates.
   Context {X Y Z : dcpo}
-          (f : X × Y → Z)
+          (f : X ☺ Y → Z)
           (Hf₁ : ∏ (x : X), is_scott_continuous Y Z (λ y, f (x ,, y)))
           (Hf₂ : ∏ (y : Y), is_scott_continuous X Z (λ x, f (x ,, y))).
 
   Lemma scott_continuous_map_coordinates_monotone
-    : is_monotone (X × Y) Z f.
+    : is_monotone (X ☺ Y) Z f.
   Proof.
     intros xy₁ xy₂ pq.
     induction xy₁ as [ x₁ y₁ ].
@@ -33,13 +33,13 @@ Section Coordinates.
     exact (trans_PartialOrder Z r₁ r₂).
   Qed.
 
-  Let F : monotone_function (X × Y) Z
+  Let F : monotone_function (X ☺ Y) Z
     := _ ,, scott_continuous_map_coordinates_monotone.
-  Let Fy (D : directed_set (X × Y)) : scott_continuous_map X Z
+  Let Fy (D : directed_set (X ☺ Y)) : scott_continuous_map X Z
     := _ ,, Hf₂ (⨆ (π₂ {{ D }})).
 
   Lemma scott_continuous_map_coordinates_lub
-        (D : directed_set (X × Y))
+        (D : directed_set (X ☺ Y))
     : F (⨆ D) = ⨆ (F {{ D }}).
   Proof.
     rewrite prod_dcpo_lub.
@@ -60,7 +60,7 @@ Section Coordinates.
   Qed.
 
   Proposition scott_continuous_map_coordinates
-    : scott_continuous_map (X × Y) Z.
+    : scott_continuous_map (X ☺ Y) Z.
   Proof.
     refine (f ,, _).
     use is_scott_continuous_chosen_lub.
@@ -75,7 +75,7 @@ Proposition is_scott_continuous_coordinates
             (DX : dcpo_struct X)
             (DY : dcpo_struct Y)
             (DZ : dcpo_struct Z)
-            (f : X × Y → Z)
+            (f : X ☺ Y → Z)
             (Hf₁ : ∏ (x : X), is_scott_continuous DY DZ (λ y, f (x ,, y)))
             (Hf₂ : ∏ (y : Y), is_scott_continuous DX DZ (λ x, f (x ,, y)))
   : is_scott_continuous

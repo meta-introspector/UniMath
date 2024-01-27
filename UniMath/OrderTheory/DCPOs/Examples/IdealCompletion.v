@@ -79,10 +79,10 @@ Definition abstract_basis_laws
            (B : abstract_basis_data)
   : UU
   := (istrans (λ (b₁ b₂ : B), b₁ ≺ b₂)
-     ×
+     ☺
      (∏ (a : B), ∃ (b : B), b ≺ a)
-     ×
-     (∏ (a₁ a₂ b : B), a₁ ≺ b → a₂ ≺ b → ∃ (a : B), a ≺ b × a₁ ≺ a × a₂ ≺ a))%type.
+     ☺
+     (∏ (a₁ a₂ b : B), a₁ ≺ b → a₂ ≺ b → ∃ (a : B), a ≺ b ☺ a₁ ≺ a ☺ a₂ ≺ a))%type.
 
 Definition abstract_basis
   : UU
@@ -122,7 +122,7 @@ Proposition binary_interpolation_abstract_basis
             {a₁ a₂ b : B}
             (p : a₁ ≺ b)
             (q : a₂ ≺ b)
-  : (∃ (a : B), a ≺ b × a₁ ≺ a × a₂ ≺ a)%type.
+  : (∃ (a : B), a ≺ b ☺ a₁ ≺ a ☺ a₂ ≺ a)%type.
 Proof.
   exact (pr222 B a₁ a₂ b p q).
 Qed.

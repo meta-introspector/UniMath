@@ -55,7 +55,7 @@ Definition disp_left_biadj_unit_counit
        (disp_pseudo_id D₁)
        (disp_pseudo_comp _ _ _ _ _ LL RR)
        (biadj_unit e)
-     ×
+     ☺
      disp_pstrans
        (disp_pseudo_comp _ _ _ _ _ RR LL)
        (disp_pseudo_id D₂)
@@ -168,7 +168,7 @@ Definition disp_left_biadj_data
   : UU
   := ∑ (ee : disp_left_biadj_unit_counit e LL),
      (disp_left_biadj_left_triangle ee (pr12 e))
-       ×
+       ☺
        disp_left_biadj_right_triangle ee (pr22 e).
 
 (** ** Total biadjunction. *)

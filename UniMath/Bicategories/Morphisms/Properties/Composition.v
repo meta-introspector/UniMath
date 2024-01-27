@@ -364,7 +364,7 @@ Section CompositionOfSFib.
       Qed.
 
       Definition to_is_cartesian_2cell_comp_unique
-        : isaprop (∑ (δ : k ==> h₁), δ ▹ f · g = δp × δ • α = β).
+        : isaprop (∑ (δ : k ==> h₁), δ ▹ f · g = δp ☺ δ • α = β).
       Proof.
         use invproofirrelevance.
         intros φ₁ φ₂.

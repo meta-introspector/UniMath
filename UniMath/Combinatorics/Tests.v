@@ -202,7 +202,7 @@ Section Test_stn.
   Section Test_weqfromprodofstn.
     (* verify computability in both directions *)
     (* this module exports nothing *)
-    Let f : stn 5 × stn 4 ≃ stn 20 := weqfromprodofstn 5 4.
+    Let f : stn 5 ☺ stn 4 ≃ stn 20 := weqfromprodofstn 5 4.
     Goal f(●0,,●0) = ●0. reflexivity. Defined.
     Goal f(●0,,●1) = ●1. reflexivity. Defined.
     Goal f(●2,,●0) = ●8. reflexivity. Defined.
@@ -317,7 +317,7 @@ Section Test_fin.
     Let y := ●1 : Y.
     Let y' := ●2 : Y.
     Let finY : isfinite Y := isfinitestn _.
-    Let V := X × Y.
+    Let V := X ☺ Y.
     Let eqV := isfinite_to_DecidableEquality (isfinitedirprod finX finY).
     Goal decide (eqV (x,,y) (x',,y')) = false. reflexivity. Defined.
 

@@ -191,7 +191,7 @@ Section Pullback.
     : UU
     := ∑ (η : φ ==> ψ),
        ((η ▹ pb_cone_pr1 q) • pb_1cell_pr1 ψ = pb_1cell_pr1 φ)
-       ×
+       ☺
        ((η ▹ pb_cone_pr2 q) • pb_1cell_pr2 ψ = pb_1cell_pr2 φ).
 
   Coercion pb_2cell_2cell
@@ -298,12 +298,12 @@ Section Pullback.
                 • (ψ ◃ pb_cone_cell p)),
          ∃! (γ : φ ==> ψ),
          (γ ▹ pb_cone_pr1 p = α)
-         ×
+         ☺
          (γ ▹ pb_cone_pr2 p = β).
 
     Definition has_pb_ump
       : UU
-      := pb_ump_1 × pb_ump_2.
+      := pb_ump_1 ☺ pb_ump_2.
   End UniversalMappingPropertyStatements.
 
   Definition has_pb_ump_1

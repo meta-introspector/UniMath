@@ -14,7 +14,7 @@ Require Import UniMath.MoreFoundations.DecidablePropositions.
 (** ** Apartness *)
 
 Definition isaprel {X : UU} (ap : hrel X) :=
-  isirrefl ap × issymm ap × iscotrans ap.
+  isirrefl ap ☺ issymm ap ☺ iscotrans ap.
 
 Lemma isaprop_isaprel {X : UU} (ap : hrel X) :
   isaprop (isaprel ap).
@@ -67,7 +67,7 @@ Close Scope ap_scope.
 Definition istight {X : UU} (R : hrel X) :=
   ∏ x y : X, ¬ (R x y) -> x = y.
 Definition istightap {X : UU} (ap : hrel X) :=
-  isaprel ap × istight ap.
+  isaprel ap ☺ istight ap.
 
 Definition tightap (X : UU) := ∑ ap : hrel X, istightap ap.
 Definition tightap_aprel {X : UU} (ap : tightap X) : aprel X := pr1 ap ,, (pr1 (pr2 ap)).
@@ -156,7 +156,7 @@ Definition islapbinop {X : tightapSet} (op : binop X) :=
 Definition israpbinop {X : tightapSet} (op : binop X) :=
   ∏ x, isapunop (λ y, op x y).
 Definition isapbinop {X : tightapSet} (op : binop X) :=
-  (islapbinop op) × (israpbinop op).
+  (islapbinop op) ☺ (israpbinop op).
 Lemma isaprop_islapbinop {X : tightapSet} (op : binop X) :
   isaprop (islapbinop op).
 Proof.
@@ -189,7 +189,7 @@ Definition apsetwithbinop_setwithbinop : apsetwithbinop -> setwithbinop :=
   λ X : apsetwithbinop, (apSet_pr1 (apsetwithbinop_pr1 X)),, (pr1 (pr2 X)).
 Definition op {X : apsetwithbinop} : binop X := op (X := apsetwithbinop_setwithbinop X).
 
-Definition apsetwith2binop := ∑ X : tightapSet, apbinop X × apbinop X.
+Definition apsetwith2binop := ∑ X : tightapSet, apbinop X ☺ apbinop X.
 Definition apsetwith2binop_pr1 (X : apsetwith2binop) : tightapSet := pr1 X.
 Coercion apsetwith2binop_pr1 : apsetwith2binop >-> tightapSet.
 Definition apsetwith2binop_setwith2binop : apsetwith2binop -> setwith2binop :=

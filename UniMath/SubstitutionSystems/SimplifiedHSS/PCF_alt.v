@@ -163,7 +163,7 @@ Defined.
 (* Definition PCF : MultiSortedSig type. *)
 (* Proof. *)
 (* use make_MultiSortedSig. *)
-(* - apply (type + (type × type) + (type × type) + type)%set. *)
+(* - apply (type + (type ☺ type) + (type ☺ type) + type)%set. *)
 (* - intros [[[t|[t s]]|[t s]]|t]. *)
 (*   * exact ([],,t).                                  (* Bottom *) *)
 (*   * exact ((([],,(arr s t)) :: ([],,s) :: nil),,t). (* App *) *)

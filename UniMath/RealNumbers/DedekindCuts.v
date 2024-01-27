@@ -21,15 +21,15 @@ Local Open Scope hq_scope.
 
 Definition isTwoSided (L U : hq → hProp) : UU :=
   ((∏ q : hq, L q <-> ∃ r : hq, L r ∧ hqlth q r)
-     × (∏ q : hq, U q <-> ∃ r : hq, U r ∧ hqlth r q))
-    × ((∃ q : hq, L q) × (∃ q : hq, U q))
-    × (∏ q : hq, ¬ (U q ∧ L q))
-    × (∏ q r : hq, hqlth q r → L q ∨ U r).
+     ☺ (∏ q : hq, U q <-> ∃ r : hq, U r ∧ hqlth r q))
+    ☺ ((∃ q : hq, L q) ☺ (∃ q : hq, U q))
+    ☺ (∏ q : hq, ¬ (U q ∧ L q))
+    ☺ (∏ q r : hq, hqlth q r → L q ∨ U r).
 
 Definition isOneSided (S : hq → hProp) : UU :=
   ((∃ r : hq, S r) ∧ (∃ r : hq, ¬ S r))
-    × (∏ r : hq, S r → ∃ q : hq, S q ∧ hqlth r q)
-    × (∏ r s : hq, hqlth r s → S r ∨ ¬ S s).
+    ☺ (∏ r : hq, S r → ∃ q : hq, S q ∧ hqlth r q)
+    ☺ (∏ r s : hq, hqlth r s → S r ∨ ¬ S s).
 
 (** ** Equivalence between these two definitions *)
 
@@ -67,7 +67,7 @@ Qed.
 
 Lemma isOneSided_TwoSided :
   ∏ (S : hq → hProp),
-  isOneSided S → isTwoSided S (λ s : hq, ∃ r : hq, hqlth r s × ¬ S r).
+  isOneSided S → isTwoSided S (λ s : hq, ∃ r : hq, hqlth r s ☺ ¬ S r).
 Proof.
   intros S H.
   split ; split ; [ | | split | split].
@@ -143,7 +143,7 @@ Proof.
             pr1 LU,, isTwoSided_OneSided (pr1 LU) (pr1 (pr2 LU)) (pr2 (pr2 LU)))
             : (∑ L U : hq → hProp, isTwoSided L U) → ∑ S, isOneSided S).
   set (g := (λ S : (∑ S : hq → hProp, isOneSided S),
-                   pr1 S ,, (λ s : hq, ∃ r : hq, r < s × ¬ pr1 S r)
+                   pr1 S ,, (λ s : hq, ∃ r : hq, r < s ☺ ¬ pr1 S r)
                        ,, isOneSided_TwoSided (pr1 S) (pr2 S))
             : (∑ S, isOneSided S) → ∑ L U : hq → hProp, isTwoSided L U).
   apply (weq_iso f g).
@@ -280,7 +280,7 @@ Proof.
   apply coprodcomm in H0.
   revert H0 ; apply sumofmaps ; intros H0.
   { apply hinhpr, ii1, H0. }
-  enough (Hq : ∃ q : NonnegativeRationals, D (pr1 q) × ¬ D (pr1 (q + c)%NRat)).
+  enough (Hq : ∃ q : NonnegativeRationals, D (pr1 q) ☺ ¬ D (pr1 (q + c)%NRat)).
   { revert Hq.
     apply hinhfun, ii2. }
 
@@ -342,7 +342,7 @@ Proof.
   set (m := O).
   change (D (nattoring m * hqdiv (pr1 c) 2)
   → ¬ D (nattoring (m + S n) * hqdiv (pr1 c) 2)
-    → ∃ q : NonnegativeRationals, D (pr1 q) × ¬ D (pr1 (q + c)%NRat)).
+    → ∃ q : NonnegativeRationals, D (pr1 q) ☺ ¬ D (pr1 (q + c)%NRat)).
   generalize m ; clear m H0.
   revert D H.
   induction n as [ | n IHn] ; intros D H m Hm Hn.
@@ -503,14 +503,14 @@ Proof.
 Qed.
 
 Lemma weqOneSidedDcuts :
-  weq (∑ S : hq → hProp, isOneSided S × ∏ q : hq, q < 0 → S q) Dcuts.
+  weq (∑ S : hq → hProp, isOneSided S ☺ ∏ q : hq, q < 0 → S q) Dcuts.
 Proof.
-  set (f := (λ (D : ∑ S : hq → hProp, isOneSided S × (∏ q : hq, q < 0 → S q)),
+  set (f := (λ (D : ∑ S : hq → hProp, isOneSided S ☺ (∏ q : hq, q < 0 → S q)),
              make_Dcuts (λ r : NonnegativeRationals, pr1 D (pr1 r))
                      (isOneSided_Dcuts_bot (pr1 D) (pr1 (pr2 D)))
                      (isOneSided_Dcuts_open (pr1 D) (pr1 (pr2 D)))
                      (isOneSided_Dcuts_corr (pr1 D) (pr1 (pr2 D))))
-            : (∑ S : hq → hProp, isOneSided S × (∏ q : hq, q < 0 → S q)) → Dcuts).
+            : (∑ S : hq → hProp, isOneSided S ☺ (∏ q : hq, q < 0 → S q)) → Dcuts).
   assert (Hg : ∏ (D : Dcuts) (q : hq),
                q < 0
                → sumofmaps (λ _ : 0 > q, htrue) (λ Hq : 0 <= q, pr1 D (q,, Hq)) (hqgthorleh 0 q)).
@@ -528,7 +528,7 @@ set (g := (λ D : Dcuts,
        (hqgthorleh 0 q)),,
     isDcuts_OneSided (pr1 D) (is_Dcuts_bot D) (is_Dcuts_open D)
     (is_Dcuts_corr D),, Hg D)
-          : Dcuts → ∑ S : hq → hProp, isOneSided S × (∏ q : hq, q < 0 → S q)).
+          : Dcuts → ∑ S : hq → hProp, isOneSided S ☺ (∏ q : hq, q < 0 → S q)).
   apply (weq_iso f g).
   - intros D.
     simple refine (subtypePath_prop (B := λ _, make_hProp _ _) _).

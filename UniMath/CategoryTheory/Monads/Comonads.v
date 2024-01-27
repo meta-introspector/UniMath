@@ -37,7 +37,7 @@ Section Comonad_disp_def.
   Context {C : category}.
 
   Definition disp_Comonad_data (F : functor C C) : UU :=
-    (F ⟹ F ∙ F) × (F ⟹ functor_identity C).
+    (F ⟹ F ∙ F) ☺ (F ⟹ functor_identity C).
 
   Definition disp_δ {F : functor C C} (T : disp_Comonad_data F) : F ⟹ F ∙ F := pr1 T.
   Definition disp_ε {F : functor C C} (T : disp_Comonad_data F) : F ⟹ functor_identity C := pr2 T.
@@ -46,9 +46,9 @@ Section Comonad_disp_def.
   Definition disp_Comonad_laws {F : functor C C} (T : disp_Comonad_data F) : UU :=
     (
       (∏ c : C, disp_δ T c · disp_ε T (F c)  = identity (F c))
-      ×
+      ☺
       (∏ c : C, disp_δ T c · #F (disp_ε T c)  = identity (F c)) )
-      ×
+      ☺
       (∏ c : C, disp_δ T c · #F (disp_δ T c)  = disp_δ T c · disp_δ T (F c)).
 
   Lemma isaprop_disp_Comonad_laws {F : functor C C} (T : disp_Comonad_data F) : isaprop (disp_Comonad_laws T).
@@ -58,7 +58,7 @@ Section Comonad_disp_def.
   Qed.
 
   Definition disp_Comonad_Mor_laws {F F' : functor C C} (T : disp_Comonad_data F) (T' : disp_Comonad_data F') (α : F ⟹ F') : UU :=
-    (∏ a : C, α a · disp_δ T' a  =  disp_δ T a · #F (α a) · α (F' a)) ×
+    (∏ a : C, α a · disp_δ T' a  =  disp_δ T a · #F (α a) · α (F' a)) ☺
     (∏ a : C, α a · disp_ε T' a  = disp_ε T a).
 
   Lemma isaprop_disp_Comonad_Mor_laws  {F F' : functor C C} (T : disp_Comonad_data F) (T' : disp_Comonad_data F') (α : F ⟹ F')
@@ -213,9 +213,9 @@ Section pointfree.
   Definition Comonad_laws_pointfree : UU :=
     (
       (nat_trans_comp _ _ _ δ (pre_whisker T0 ε) = identity(C:=EndC) T0)
-        ×
+        ☺
       (nat_trans_comp _ _ _ δ (post_whisker ε T0) = identity(C:=EndC) T0) )
-        ×
+        ☺
       (nat_trans_comp _ _ _ δ (post_whisker δ T0) = nat_trans_comp _ _ _ δ (pre_whisker T0 δ)).
 
   Lemma pointfree_is_equiv: Comonad_laws_pointfree <-> disp_Comonad_laws T.
@@ -242,9 +242,9 @@ Section pointfree.
   Definition Comonad_laws_pointfree_in_functor_category : UU :=
     (
       (δ' · #(pre_composition_functor _ _ _ T0') ε' = identity(C:=EndC) T0')
-        ×
+        ☺
       (δ' · #(post_composition_functor _ _ _ T0') ε' = identity(C:=EndC) T0') )
-        ×
+        ☺
       (δ' · #(post_composition_functor _ _ _ T0') δ' = (δ' · #(pre_composition_functor _ _ _ T0') δ')).
 
   (** the last variant of the laws is convertible with the one before *)
@@ -264,7 +264,7 @@ Coercion nat_trans_from_monad_mor {C : category} (T T' : Comonad C) (s : Comonad
 
 Definition Comonad_Mor_laws {C : category} {T T' : Comonad C} (α : T ⟹ T')
   : UU :=
-  (∏ a : C,  α a · δ T' a =  δ T a · #T (α a) · α (T' a)) ×
+  (∏ a : C,  α a · δ T' a =  δ T a · #T (α a) · α (T' a)) ☺
     (∏ a : C, α a · ε T' a  = ε T a).
 
 Definition Comonad_Mor_ε {C : category} {T T' : Comonad C} (α : Comonad_Mor T T')
@@ -355,16 +355,16 @@ Section Comonad_eq_helper.
   Section Comonad'_def.
 
     Definition raw_Comonad_data (C : category) : UU :=
-      ∑ F : C -> C, (((∏ a b : ob C, a --> b -> F a --> F b) ×
-                      (∏ a : ob C, F a --> F (F a))) ×
+      ∑ F : C -> C, (((∏ a b : ob C, a --> b -> F a --> F b) ☺
+                      (∏ a : ob C, F a --> F (F a))) ☺
                      (∏ a : ob C, F a --> a)).
 
     Coercion functor_data_from_raw_Comonad_data {C : category} (T : raw_Comonad_data C) :
       functor_data C C := make_functor_data (pr1 T) (pr1 (pr1 (pr2 T))).
 
     Definition Comonad'_data_laws {C : category} (T : raw_Comonad_data C) :=
-      ((is_functor T) ×
-       (is_nat_trans T (functor_composite_data T T) (pr2 (pr1 (pr2 T))))) ×
+      ((is_functor T) ☺
+       (is_nat_trans T (functor_composite_data T T) (pr2 (pr1 (pr2 T))))) ☺
       (is_nat_trans T (functor_identity C) (pr2 (pr2 T))).
 
     Definition Comonad'_data (C : category) := ∑ (T : raw_Comonad_data C), Comonad'_data_laws T.

@@ -330,7 +330,7 @@ Section associativity.
             (functor_composite (pair_functor (functor_identity _) (functorial_composition _ _ _ )) (functorial_composition _ _ _ )).
 
 Local Lemma is_nat_trans_a_functors: is_nat_trans assoc_left_gen assoc_right_gen
-  (λ F : (C ⟶ D × D ⟶ E) × E ⟶ F, α_functors (pr1 (pr1 F)) (pr2 (pr1 F)) (pr2 F)).
+  (λ F : (C ⟶ D ☺ D ⟶ E) ☺ E ⟶ F, α_functors (pr1 (pr1 F)) (pr2 (pr1 F)) (pr2 F)).
 Proof.
   intros f f' m.
   (* unfold α_functors.

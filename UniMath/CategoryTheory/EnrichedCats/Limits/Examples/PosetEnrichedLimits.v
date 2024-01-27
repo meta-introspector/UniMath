@@ -673,7 +673,7 @@ Section PosetEnrichmentLimits.
        ∏ (P : poset_sym_mon_closed_cat)
          (x : C),
        is_monotone (pr2 P) (E (prods P (λ _, x)) x) (ProductPr _ _ (prods P (λ _, x)))
-       ×
+       ☺
        (∏ (y : C),
         is_monotone
           (monotone_function_PartialOrder

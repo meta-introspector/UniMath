@@ -48,7 +48,7 @@ Section MixedDistributiveLaw.
         τ
         • (f ◃ ε)
         • runitor f)
-       ×
+       ☺
        ((δ ▹ f)
         • rassociator e e f
         • (e ◃ τ)
@@ -58,14 +58,14 @@ Section MixedDistributiveLaw.
         =
         τ
         • (f ◃ δ))
-       ×
+       ☺
        ((e ◃ η)
         • τ
         =
         runitor e
         • linvunitor e
         • (η ▹ e))
-       ×
+       ☺
        ((e ◃ μ)
         • τ
         =

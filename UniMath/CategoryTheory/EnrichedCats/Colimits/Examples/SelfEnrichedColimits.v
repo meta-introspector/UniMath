@@ -115,13 +115,13 @@ Section SelfEnrichmentColimits.
                (g : z --> y ⊸ w)
                (fg : z --> c ⊸ w)
       : (fg · precomp_arr (self_enrichment V) w (internal_to_arr ι₁) = f
-         ×
+         ☺
          fg · precomp_arr (self_enrichment V) w (internal_to_arr ι₂) = g)
         ≃
         (identity z #⊗ BinCoproductIn1 c · (fg #⊗ identity c · internal_eval c w)
          =
          f #⊗ identity x · internal_eval x w)
-        ×
+        ☺
         (identity z #⊗ BinCoproductIn2 c · (fg #⊗ identity c · internal_eval c w)
          =
          g #⊗ identity y · internal_eval y w).
@@ -207,12 +207,12 @@ Section SelfEnrichmentColimits.
                (g : z --> y ⊸ w)
       : (∑ (fg : z --> c ⊸ w),
          fg · precomp_arr (self_enrichment V) w (internal_to_arr ι₁) = f
-         ×
+         ☺
          fg · precomp_arr (self_enrichment V) w (internal_to_arr ι₂) = g)
         ≃
         (∑ (fg : z ⊗ c --> w),
          identity z #⊗ BinCoproductIn1 c · fg = f #⊗ identity x · internal_eval x w
-         ×
+         ☺
          identity z #⊗ BinCoproductIn2 c · fg = g #⊗ identity y · internal_eval y w).
     Proof.
       use weqtotal2.

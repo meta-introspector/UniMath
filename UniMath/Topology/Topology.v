@@ -91,7 +91,7 @@ Proof.
 Qed.
 
 Definition isSetOfOpen :=
-  isSetOfOpen_union × isSetOfOpen_finite_intersection.
+  isSetOfOpen_union ☺ isSetOfOpen_finite_intersection.
 
 End Open.
 
@@ -180,7 +180,7 @@ Section Neighborhood.
 Context {T : TopologicalSpace}.
 
 Definition neighborhood (x : T) : (T → hProp) → hProp :=
-  λ P : T → hProp, ∃ O : Open, O x × (∏ y : T, O y → P y).
+  λ P : T → hProp, ∃ O : Open, O x ☺ (∏ y : T, O y → P y).
 
 Lemma neighborhood_isOpen (P : T → hProp) :
   (∏ x, P x → neighborhood x P) <-> isOpen P.
@@ -286,7 +286,7 @@ Lemma neighborhood_neighborhood :
   ∏ (x : T) (P : T → hProp),
     neighborhood x P
     → ∃ Q : T → hProp, neighborhood x Q
-                        × ∏ y : T, Q y → neighborhood y P.
+                        ☺ ∏ y : T, Q y → neighborhood y P.
 Proof.
   intros x P.
   apply hinhfun.
@@ -327,7 +327,7 @@ Defined.
 
 Definition is_base_of_neighborhood {T : TopologicalSpace} (x : T) (B : (T → hProp) → hProp) :=
   (∏ P : T → hProp, B P → neighborhood x P)
-    × (∏ P : T → hProp, neighborhood x P → ∃ Q : T → hProp, B Q × (∏ t : T, Q t → P t)).
+    ☺ (∏ P : T → hProp, neighborhood x P → ∃ Q : T → hProp, B Q ☺ (∏ t : T, Q t → P t)).
 
 Definition base_of_neighborhood {T : TopologicalSpace} (x : T) :=
   ∑ (B : (T → hProp) → hProp), is_base_of_neighborhood x B.
@@ -352,7 +352,7 @@ Proof.
   - intros. assumption.
 Qed.
 Lemma base_default_2 :
-  ∏ P : T → hProp, neighborhood x P → ∃ Q : T → hProp, base_default Q × (∏ t : T, Q t → P t).
+  ∏ P : T → hProp, neighborhood x P → ∃ Q : T → hProp, base_default Q ☺ (∏ t : T, Q t → P t).
 Proof.
   intros P.
   apply hinhfun.
@@ -375,7 +375,7 @@ Proof.
 Defined.
 
 Definition neighborhood' {T : TopologicalSpace} (x : T) (B : base_of_neighborhood x) : (T → hProp) → hProp :=
-  λ P : T → hProp, ∃ O : T → hProp, B O × (∏ t : T, O t → P t).
+  λ P : T → hProp, ∃ O : T → hProp, B O ☺ (∏ t : T, O t → P t).
 
 Lemma neighborhood_equiv {T : TopologicalSpace} (x : T) (B : base_of_neighborhood x) :
   ∏ P, neighborhood' x B P <-> neighborhood x P.
@@ -400,10 +400,10 @@ Qed.
 
 Definition isNeighborhood {X : UU} (B : X → (X → hProp) → hProp) :=
   (∏ x, isfilter_imply (B x))
-    × (∏ x, isfilter_htrue (B x))
-    × (∏ x, isfilter_and (B x))
-    × (∏ x P, B x P → P x)
-    × (∏ x P, B x P → ∃ Q, B x Q × ∏ y, Q y → B y P).
+    ☺ (∏ x, isfilter_htrue (B x))
+    ☺ (∏ x, isfilter_and (B x))
+    ☺ (∏ x P, B x P → P x)
+    ☺ (∏ x P, B x P → ∃ Q, B x Q ☺ ∏ y, Q y → B y P).
 
 Lemma isNeighborhood_neighborhood {T : TopologicalSpace} :
   isNeighborhood (neighborhood (T := T)).
@@ -431,7 +431,7 @@ Context (Himpl : ∏ x, isfilter_imply (N x))
         (Htrue : ∏ x, isfilter_htrue (N x))
         (Hand : ∏ x, isfilter_and (N x))
         (Hpt : ∏ x P, N x P → P x)
-        (H : ∏ x P, N x P → ∃ Q, N x Q × ∏ y, Q y → N y P).
+        (H : ∏ x P, N x P → ∃ Q, N x Q ☺ ∏ y, Q y → N y P).
 
 Definition topologyfromneighborhood (A : X → hProp) :=
   ∏ x : X, A x → N x A.
@@ -545,7 +545,7 @@ Context {X : hSet} (O : (X → hProp) → hProp).
 
 Definition topologygenerated :=
   λ (x : X) (A : X → hProp),
-  (∃ L : Sequence (X → hProp), (∏ n, O (L n)) × (finite_intersection L x) × (∏ y, finite_intersection L y → A y)).
+  (∃ L : Sequence (X → hProp), (∏ n, O (L n)) ☺ (finite_intersection L x) ☺ (∏ y, finite_intersection L y → A y)).
 
 Lemma topologygenerated_imply :
   ∏ x : X, isfilter_imply (topologygenerated x).
@@ -619,7 +619,7 @@ Lemma topologygenerated_neighborhood :
 ∏ (x : X) (P : X → hProp),
  topologygenerated x P
  → ∃ Q : X → hProp,
-    topologygenerated x Q × (∏ y : X, Q y → topologygenerated y P).
+    topologygenerated x Q ☺ (∏ y : X, Q y → topologygenerated y P).
 Proof.
   intros x P.
   apply hinhfun.
@@ -705,14 +705,14 @@ Section topologydirprod.
 Context (U V : TopologicalSpace).
 
 Definition topologydirprod :=
-  λ (z : U × V) (A : U × V → hProp),
+  λ (z : U ☺ V) (A : U ☺ V → hProp),
   (∃ (Ax : U → hProp) (Ay : V → hProp),
-      (Ax (pr1 z) × isOpen Ax)
-        × (Ay (pr2 z) × isOpen Ay)
-        × (∏ x y, Ax x → Ay y → A (x,,y))).
+      (Ax (pr1 z) ☺ isOpen Ax)
+        ☺ (Ay (pr2 z) ☺ isOpen Ay)
+        ☺ (∏ x y, Ax x → Ay y → A (x,,y))).
 
 Lemma topologydirprod_imply :
-  ∏ x : U × V, isfilter_imply (topologydirprod x).
+  ∏ x : U ☺ V, isfilter_imply (topologydirprod x).
 Proof.
   intros x A B H.
   apply hinhfun.
@@ -725,7 +725,7 @@ Proof.
 Qed.
 
 Lemma topologydirprod_htrue :
-  ∏ x : U × V, isfilter_htrue (topologydirprod x).
+  ∏ x : U ☺ V, isfilter_htrue (topologydirprod x).
 Proof.
   intros z.
   apply hinhpr.
@@ -736,7 +736,7 @@ Proof.
 Qed.
 
 Lemma topologydirprod_and :
-  ∏ x : U × V, isfilter_and (topologydirprod x).
+  ∏ x : U ☺ V, isfilter_and (topologydirprod x).
 Proof.
   intros z A B.
   apply hinhfun2.
@@ -762,7 +762,7 @@ Proof.
 Qed.
 
 Lemma topologydirprod_point :
-  ∏ (x : U × V) (P : U × V → hProp), topologydirprod x P → P x.
+  ∏ (x : U ☺ V) (P : U ☺ V → hProp), topologydirprod x P → P x.
 Proof.
   intros xy A.
   apply hinhuniv.
@@ -773,11 +773,11 @@ Proof.
 Qed.
 
 Lemma topologydirprod_neighborhood :
-  ∏ (x : U × V) (P : U × V → hProp),
+  ∏ (x : U ☺ V) (P : U ☺ V → hProp),
     topologydirprod x P
-    → ∃ Q : U × V → hProp,
+    → ∃ Q : U ☺ V → hProp,
       topologydirprod x Q
-                      × (∏ y : U × V, Q y → topologydirprod y P).
+                      ☺ (∏ y : U ☺ V, Q y → topologydirprod y P).
 Proof.
   intros xy P.
   apply hinhfun.
@@ -808,7 +808,7 @@ End topologydirprod.
 Definition TopologyDirprod (U V : TopologicalSpace) : TopologicalSpace.
 Proof.
   simple refine (TopologyFromNeighborhood _ _).
-  - apply (U × V)%set.
+  - apply (U ☺ V)%set.
   - apply topologydirprod.
   - repeat split.
     + apply topologydirprod_imply.
@@ -818,11 +818,11 @@ Proof.
     + apply topologydirprod_neighborhood.
 Defined.
 
-Definition locally2d {T S : TopologicalSpace} (x : T) (y : S) : Filter (T × S) :=
+Definition locally2d {T S : TopologicalSpace} (x : T) (y : S) : Filter (T ☺ S) :=
   FilterDirprod (locally x) (locally y).
 
 Lemma locally2d_correct {T S : TopologicalSpace} (x : T) (y : S) :
-  ∏ P : T × S → hProp, locally2d x y P <-> locally (T := TopologyDirprod T S) (x,,y) P.
+  ∏ P : T ☺ S → hProp, locally2d x y P <-> locally (T := TopologyDirprod T S) (x,,y) P.
 Proof.
   intros P.
   split ; apply hinhuniv.
@@ -867,7 +867,7 @@ Context {T : TopologicalSpace} (dom : T → hProp).
 Definition topologysubtype :=
   λ (x : ∑ x : T, dom x) (A : (∑ x0 : T, dom x0) → hProp),
   ∃ B : T → hProp,
-    (B (pr1 x) × isOpen B) × (∏ y : ∑ x0 : T, dom x0, B (pr1 y) → A y).
+    (B (pr1 x) ☺ isOpen B) ☺ (∏ y : ∑ x0 : T, dom x0, B (pr1 y) → A y).
 
 Lemma topologysubtype_imply :
   ∏ x : ∑ x : T, dom x, isfilter_imply (topologysubtype x).
@@ -924,7 +924,7 @@ Lemma topologysubtype_neighborhood :
     topologysubtype x P
     → ∃ Q : (∑ x0 : T, dom x0) → hProp,
       topologysubtype x Q
-       × (∏ y : ∑ x0 : T, dom x0, Q y → topologysubtype y P).
+       ☺ (∏ y : ∑ x0 : T, dom x0, Q y → topologysubtype y P).
 Proof.
   intros x A.
   apply hinhfun.
@@ -1120,13 +1120,13 @@ Definition continuous_base_at {U V : TopologicalSpace} (f : U → V) (x : U) bas
 (** *** Continuity for 2 variable functions *)
 
 Definition continuous2d_at {U V W : TopologicalSpace} (f : U → V → W) (x : U) (y : V) :=
-  is_lim (λ z : U × V, f (pr1 z) (pr2 z)) (FilterDirprod (locally x) (locally y)) (f x y).
+  is_lim (λ z : U ☺ V, f (pr1 z) (pr2 z)) (FilterDirprod (locally x) (locally y)) (f x y).
 Definition continuous2d {U V W : TopologicalSpace} (f : U → V → W) :=
   ∏ (x : U) (y : V), continuous2d_at f x y.
 
 Definition continuous2d_base_at {U V W : TopologicalSpace} (f : U → V → W)
            (x : U) (y : V) base_x base_y base_fxy :=
-  is_lim_base (λ z : U × V, f (pr1 z) (pr2 z))
+  is_lim_base (λ z : U ☺ V, f (pr1 z) (pr2 z))
               (FilterDirprod (locally_base x base_x) (locally_base y base_y))
               (f x y) base_fxy.
 
@@ -1194,7 +1194,7 @@ Proof.
     + exact (pr2 (pr2 (pr2 (pr2 Ho)))).
 Qed.
 Lemma continuous_pr1 {U V : TopologicalSpace} :
-  continuous (U := TopologyDirprod U V) (λ (xy : U × V), pr1 xy).
+  continuous (U := TopologyDirprod U V) (λ (xy : U ☺ V), pr1 xy).
 Proof.
   intros xy P.
   apply hinhuniv.
@@ -1205,7 +1205,7 @@ Proof.
   - apply hinhpr.
     use tpair.
     + use tpair.
-      * apply (λ xy : U × V, pr1 O (pr1 xy)).
+      * apply (λ xy : U ☺ V, pr1 O (pr1 xy)).
       * intros xy' Oxy.
         apply hinhpr.
         exists (pr1 O), (λ _, htrue).
@@ -1220,7 +1220,7 @@ Proof.
       * intros. assumption.
 Qed.
 Lemma continuous_pr2 {U V : TopologicalSpace} :
-  continuous (U := TopologyDirprod U V) (λ (xy : U × V), pr2 xy).
+  continuous (U := TopologyDirprod U V) (λ (xy : U ☺ V), pr2 xy).
 Proof.
   intros xy P.
   apply hinhuniv.
@@ -1231,7 +1231,7 @@ Proof.
   - apply hinhpr.
     use tpair.
     + use tpair.
-      * apply (λ xy : U × V, pr1 O (pr2 xy)).
+      * apply (λ xy : U ☺ V, pr1 O (pr2 xy)).
       * intros xy' Oxy.
         apply hinhpr.
         exists (λ _, htrue), (pr1 O).
@@ -1257,7 +1257,7 @@ Definition Topological_monoid :=
 
 Definition isTopological_gr (X : gr) (is : isTopologicalSpace X) :=
   isTopological_monoid X is
-    × continuous (U := (pr11 X) ,, is)
+    ☺ continuous (U := (pr11 X) ,, is)
                  (V := (pr11 X) ,, is)
                  (grinv X).
 Definition Topological_gr :=
@@ -1265,19 +1265,19 @@ Definition Topological_gr :=
 
 Definition isTopological_rig (X : rig) (is : isTopologicalSpace X) :=
   isTopological_monoid (rigaddabmonoid X) is
-  × isTopological_monoid (rigmultmonoid X) is.
+  ☺ isTopological_monoid (rigmultmonoid X) is.
 Definition Topological_rig :=
   ∑ (X : rig) is, isTopological_rig X is.
 
 Definition isTopological_ring (X : ring) (is : isTopologicalSpace X) :=
   isTopological_gr (ringaddabgr X) is
-  × isTopological_monoid (rigmultmonoid X) is.
+  ☺ isTopological_monoid (rigmultmonoid X) is.
 Definition Topological_ring :=
   ∑ (X : ring) is, isTopological_ring X is.
 
 Definition isTopological_DivRig (X : DivRig) (is : isTopologicalSpace X) :=
   isTopological_rig (pr1 X) is
-  × continuous_on (U := (pr111 X) ,, is)
+  ☺ continuous_on (U := (pr111 X) ,, is)
                   (V := (pr111 X) ,, is)
                   (λ x : X, make_hProp (x != 0%dr) (isapropneg _)) (λ x Hx, invDivRig (x,,Hx)).
 Definition Topological_DivRig :=
@@ -1285,7 +1285,7 @@ Definition Topological_DivRig :=
 
 Definition isTopological_fld (X : fld) (is : isTopologicalSpace X) :=
   isTopological_ring (pr1 X) is
-  × continuous_on (U := (pr111 X) ,, is)
+  ☺ continuous_on (U := (pr111 X) ,, is)
                   (V := (pr111 X) ,, is)
                   (λ x : X, make_hProp (x != 0%ring) (isapropneg _))
                   fldmultinv.
@@ -1296,7 +1296,7 @@ Definition isTopological_ConstructiveDivisionRig
   (X : ConstructiveDivisionRig)
   (is : isTopologicalSpace X)
   := isTopological_rig X is
-       × continuous_on (U := (pr111 X) ,, is)
+       ☺ continuous_on (U := (pr111 X) ,, is)
                        (V := (pr111 X) ,, is)
                        (λ x : X, (x ≠ 0)%CDR)
                        CDRinv.
@@ -1308,7 +1308,7 @@ Definition isTopological_ConstructiveField
   (X : ConstructiveField)
   (is : isTopologicalSpace X)
   := isTopological_ring X is
-       × continuous_on (U := (pr111 X) ,, is)
+       ☺ continuous_on (U := (pr111 X) ,, is)
                        (V := (pr111 X) ,, is)
                        (λ x : X, (x ≠ 0)%CF)
                        CFinv.

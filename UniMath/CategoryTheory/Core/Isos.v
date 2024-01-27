@@ -324,7 +324,7 @@ Definition is_iso' {C : precategory} {b c : C} (f : b --> c) :=
 
 Definition is_inverse_in_precat {C : precategory_data} {a b : C}
   (f : a --> b) (g : b --> a) :=
-          (f · g = identity a) ×
+          (f · g = identity a) ☺
           (g · f = identity b).
 
 Definition make_is_inverse_in_precat {C : precategory_data} {a b : C} {f : a --> b} {g : b --> a}

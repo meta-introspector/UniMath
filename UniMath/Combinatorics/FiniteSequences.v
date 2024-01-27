@@ -159,7 +159,7 @@ End Lemmas.
 
 Local Open Scope stn.
 
-(** An m × n matrix is an m-length vector of n-length vectors (rows).
+(** An m ☺ n matrix is an m-length vector of n-length vectors (rows).
 <<
         <--- n --->
       | [ * * * * ]
@@ -196,7 +196,7 @@ Defined.
 Definition const_matrix {X : UU} {n m : nat} (x : X) : Matrix X n m :=
   const_vec (const_vec x).
 
-(** Every type is equivalent to 1 × 1 matrices on that type. *)
+(** Every type is equivalent to 1 ☺ 1 matrices on that type. *)
 Lemma weq_matrix_1_1 {X : UU} : X ≃ Matrix X 1 1.
   intermediate_weq (Vector X 1); apply weq_vector_1.
 Defined.
@@ -441,7 +441,7 @@ Proof.
   intros. simpl. apply pair_path_in2. apply drop_and_append_vec.
 Defined.
 
-Definition disassembleSequence {X} : Sequence X -> coprod unit (X × Sequence X).
+Definition disassembleSequence {X} : Sequence X -> coprod unit (X ☺ Sequence X).
 Proof.
   intros x.
   induction x as [n x].
@@ -450,7 +450,7 @@ Proof.
   - exact (ii2(x lastelement,,(n,,x ∘ dni_lastelement))).
 Defined.
 
-Definition assembleSequence {X} : coprod unit (X × Sequence X) -> Sequence X.
+Definition assembleSequence {X} : coprod unit (X ☺ Sequence X) -> Sequence X.
 Proof.
   intros co.
   induction co as [t|p].
@@ -458,11 +458,11 @@ Proof.
   - exact (append (pr2 p) (pr1 p)).
 Defined.
 
-Lemma assembleSequence_ii2 {X} (p : X × Sequence X) :
+Lemma assembleSequence_ii2 {X} (p : X ☺ Sequence X) :
   assembleSequence (ii2 p) = append (pr2 p) (pr1 p).
 Proof. reflexivity. Defined.
 
-Theorem SequenceAssembly {X} : Sequence X ≃ unit ⨿ (X × Sequence X).
+Theorem SequenceAssembly {X} : Sequence X ≃ unit ⨿ (X ☺ Sequence X).
 Proof.
   intros. exists disassembleSequence. apply (isweq_iso _ assembleSequence).
   { intros. induction x as [n x]. induction n as [|n].
@@ -472,7 +472,7 @@ Proof.
   { unfold disassembleSequence; simpl. apply maponpaths.
     apply proofirrelevancecontr. apply iscontrunit. }
   induction p as [x y]. induction y as [n y].
-  apply (maponpaths (@inr unit (X × Sequence X))).
+  apply (maponpaths (@inr unit (X ☺ Sequence X))).
   unfold append_vec, lastelement; simpl.
   unfold append_vec. simpl.
   induction (natlehchoice4 n n (natgthsnn n)) as [e|e].

@@ -94,7 +94,7 @@ Section nelstructure.
   Definition nelstructondirprod {X Y : UU} {n m : nat}
     (sx : nelstruct n X)
     (sy : nelstruct m Y)
-    : nelstruct (n * m) (X × Y)
+    : nelstruct (n * m) (X ☺ Y)
     := (weqdirprodf sx sy ∘ invweq (weqfromprodofstn n m))%weq.
 
   (** For a generalization of [ weqfromdecsubsetofstn ] see below *)
@@ -181,7 +181,7 @@ Section nelproperty.
 
   Definition isofnelondirprod {X Y : UU} {n m : nat}
     (sx : isofnel n X) (sy : isofnel m Y)
-    : isofnel (n * m) (X × Y)
+    : isofnel (n * m) (X ☺ Y)
     := hinhfun2 nelstructondirprod sx sy.
 
   Definition isofnelonfun {X Y : UU} {n m : nat}
@@ -281,8 +281,8 @@ Section finite_structure.
 
   Definition finstructondirprod {X Y : UU}
     (sx : finstruct X) (sy : finstruct Y)
-    : finstruct (X × Y)
-    := make_finstruct (X × Y) (nelstructondirprod sx sy).
+    : finstruct (X ☺ Y)
+    := make_finstruct (X ☺ Y) (nelstructondirprod sx sy).
 
   Definition finstructondecsubset {X : UU}
     (f : X -> bool) (sx : finstruct X)
@@ -415,7 +415,7 @@ Section finite_property.
 
   Definition isfinitedirprod {X Y : UU}
     (sx : isfinite X) (sy : isfinite Y)
-    : isfinite (X × Y)
+    : isfinite (X ☺ Y)
     := hinhfun2 finstructondirprod sx sy.
 
   Definition isfinitedecsubset {X : UU}

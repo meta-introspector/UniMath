@@ -16,14 +16,14 @@ Definition issubsetwithsmul {R : hSet} {M : hSet} (smul : R → M → M) (A : hs
   ∏ r m, A m → A (smul r m).
 
 Definition issubmodule {R : ring} {M : module R} (A : hsubtype M) : UU :=
-  issubgr A × issubsetwithsmul (module_mult M) A.
+  issubgr A ☺ issubsetwithsmul (module_mult M) A.
 
 Definition make_issubmodule {R : ring} {M : module R} {A : hsubtype M}
            (H1 : issubgr A) (H2 : issubsetwithsmul (module_mult M) A) : issubmodule A :=
   make_dirprod H1 H2.
 
 Definition issubmodule_is {R : ring} {M : module R} (A : hsubtype M) : UU :=
-  issubgr A × issubsetwithsmul (module_mult M) A.
+  issubgr A ☺ issubsetwithsmul (module_mult M) A.
 
 Lemma isapropissubmodule {R : ring} {M : module R} (A : hsubtype M) : isaprop (issubmodule A).
 Proof.

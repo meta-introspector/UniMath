@@ -39,7 +39,7 @@ Section Coproduct.
   (** Cones on the diagram *)
   Definition bincoprod_cocone
     : UU
-    := ∑ (p : B), b₁ --> p × b₂ --> p.
+    := ∑ (p : B), b₁ --> p ☺ b₂ --> p.
 
   Coercion bincoprod_cocone_obj
            (p : bincoprod_cocone)
@@ -71,7 +71,7 @@ Section Coproduct.
        invertible_2cell
          (bincoprod_cocone_inl p · φ)
          (bincoprod_cocone_inl q)
-       ×
+       ☺
        invertible_2cell
          (bincoprod_cocone_inr p · φ)
          (bincoprod_cocone_inr q).
@@ -168,12 +168,12 @@ Section Coproduct.
                 bincoprod_cocone_inr p · ψ),
          ∃! (γ : φ ==> ψ),
          (bincoprod_cocone_inl p ◃ γ = α)
-         ×
+         ☺
          (bincoprod_cocone_inr p ◃ γ = β).
 
     Definition has_bincoprod_ump
       : UU
-      := bincoprod_ump_1 × bincoprod_ump_2.
+      := bincoprod_ump_1 ☺ bincoprod_ump_2.
 
     Definition has_bincoprod_ump_1
                (H : has_bincoprod_ump)
@@ -639,7 +639,7 @@ Section Coproduct.
       : isaprop
           (∑ (γ : u₁ ==> u₂),
            bincoprod_cocone_inl p ◃ γ = ζ₁
-           ×
+           ☺
            bincoprod_cocone_inr p ◃ γ = ζ₂).
     Proof.
       use invproofirrelevance.

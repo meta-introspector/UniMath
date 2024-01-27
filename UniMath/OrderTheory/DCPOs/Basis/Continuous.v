@@ -69,7 +69,7 @@ Definition continuous_dcpo_struct
   := ∏ (x : X),
      ∑ (D : directed_set X),
      (∏ (i : D), D i ≪ x)
-     ×
+     ☺
      is_least_upperbound X D x.
 
 (**

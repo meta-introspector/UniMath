@@ -28,8 +28,8 @@ Definition strictness_structure_data
            (B : bicat)
   : UU
   := (∏ (a b : B) (f : a --> b), id₁ a · f = f)
-     × (∏ (a b : B) (f : a --> b), f · id₁ b = f)
-     × (∏ (a b c d : B) (f : a --> b) (g : b --> c) (h : c --> d),
+     ☺ (∏ (a b : B) (f : a --> b), f · id₁ b = f)
+     ☺ (∏ (a b c d : B) (f : a --> b) (g : b --> c) (h : c --> d),
         f · (g · h) = f · g · h).
 
 (** Projections *)
@@ -91,8 +91,8 @@ Definition strictness_structure_laws
            (S : strictness_structure_data B)
   : UU
   := (∏ (a b : B) (f : a --> b), pr1 (idtoiso_2_1 _ _ (plunitor S f)) = lunitor f)
-     × (∏ (a b : B) (f : a --> b), pr1 (idtoiso_2_1 _ _ (prunitor S f)) = runitor f)
-     × (∏ (a b c d : B) (f : a --> b) (g : b --> c) (h : c --> d),
+     ☺ (∏ (a b : B) (f : a --> b), pr1 (idtoiso_2_1 _ _ (prunitor S f)) = runitor f)
+     ☺ (∏ (a b c d : B) (f : a --> b) (g : b --> c) (h : c --> d),
         pr1 (idtoiso_2_1 _ _ (plassociator S f g h)) = lassociator f g h).
 
 Definition strictness_structure
@@ -157,7 +157,7 @@ Definition is_coh_strictness_structure
       maponpaths (λ z, f · z) (plunitor S g)
       =
       plassociator S _ _ _ @ maponpaths (λ z, z · g) (prunitor S f))
-      ×
+      ☺
       ∏ (v w x y z : B)
       (f : v --> w) (g : w --> x)
       (h : x --> y) (k : y --> z),
@@ -206,7 +206,7 @@ Definition globally_strict
 (** Set bicategories *)
 Definition bisetcat
   : UU
-  := ∑ (B : bicat), locally_strict B × globally_strict B.
+  := ∑ (B : bicat), locally_strict B ☺ globally_strict B.
 
 Coercion bisetcat_to_bicat
          (B : bisetcat)
@@ -231,7 +231,7 @@ Definition is_strict_bicat
            (B : bicat)
   : UU
   := locally_strict B
-     ×
+     ☺
      coh_strictness_structure B.
 
 Definition make_is_strict_bicat

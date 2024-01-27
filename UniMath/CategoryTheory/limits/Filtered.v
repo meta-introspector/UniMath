@@ -50,8 +50,8 @@ Section filtered_categories.
     (J : category)
     : UU
     := ∥ J ∥
-         × (∏ (d : diagram bool_graph J), ∃ z : J, cocone d z)
-         × (∏ (d : diagram pair_graph J), ∃ z : J, cocone d z).
+         ☺ (∏ (d : diagram bool_graph J), ∃ z : J, cocone d z)
+         ☺ (∏ (d : diagram pair_graph J), ∃ z : J, cocone d z).
 
   Definition preserves_filtered_colimits {C D : category} (F : functor C D) : UU
     := ∏ (J : category),
@@ -350,12 +350,12 @@ Section alternate_formulation.
       apply D.
     }
 
-    (* For each pair (u, v) ∈ vertex g × vertex g there is an object D(u,v) in J,
+    (* For each pair (u, v) ∈ vertex g ☺ vertex g there is an object D(u,v) in J,
        and a cocone over the diagram of (edges u v) composed with the injection
        into P. *)
     use D'; clear D'; clear D; intros D.
 
-    transparent assert(spandiagram : (diagram (multispan_graph (vertex g × vertex g)) J)). {
+    transparent assert(spandiagram : (diagram (multispan_graph (vertex g ☺ vertex g)) J)). {
       use make_multispan_diagram.
       - exact P.
       - intros [a b]. exact(pr1 (D a b)).
@@ -365,7 +365,7 @@ Section alternate_formulation.
     (* The objects D(u, v) together with their cocone injections from P is a finite multi
        span. Since J is filtered there is a cocone [Q Qcc] over this span. *)
 
-    use(filtered_alt_has_finite_multispan_cocones filtalt (vertex g × vertex g) (n * n)).
+    use(filtered_alt_has_finite_multispan_cocones filtalt (vertex g ☺ vertex g) (n * n)).
     - apply(weqcomp (invweq (weqdirprodf w w))).
       apply weqfromprodofstn.
     - exact spandiagram.

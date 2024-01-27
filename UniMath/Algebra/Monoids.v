@@ -938,7 +938,7 @@ Local Open Scope addmonoid_scope.
 Import AddNotation.
 
 Definition abmonoidfracopint (X : abmonoid) (A : submonoid X) :
-  binop (X × A) := @op (setwithbinopdirprod X A).
+  binop (X ☺ A) := @op (setwithbinopdirprod X A).
 
 Definition hrelabmonoidfrac (X : abmonoid) (A : submonoid X) : hrel (setwithbinopdirprod X A) :=
   λ xa yb : dirprod X A, hexists (λ a0 : A, paths (((pr1 xa) + (pr1 (pr2 yb))) + (pr1 a0))
@@ -1119,7 +1119,7 @@ Definition ismonoidfuntoabmonoidfrac (X : abmonoid) (A : submonoid X) :
 
 (** **** Abelian monoid of fractions in the case when elements of the localziation submonoid are cancelable *)
 
-Definition hrel0abmonoidfrac (X : abmonoid) (A : submonoid X) : hrel (X × A) :=
+Definition hrel0abmonoidfrac (X : abmonoid) (A : submonoid X) : hrel (X ☺ A) :=
   λ xa yb : setdirprod X A, (pr1 xa) + (pr1 (pr2 yb)) = (pr1 yb) + (pr1 (pr2 xa)).
 
 Lemma weqhrelhrel0abmonoidfrac (X : abmonoid) (A : submonoid X)

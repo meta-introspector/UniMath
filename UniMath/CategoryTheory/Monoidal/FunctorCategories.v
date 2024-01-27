@@ -158,7 +158,7 @@ Section SymmetricMonoidalComonads.
 Definition symmetric_monoidal_comonads_extra_laws {F : C ⟶ C}
   (Fm : disp_cat_lax_monoidal_functors M M F)
   (δ : F ⟹ F ∙ F) (ε : F ⟹ functor_identity C) : UU :=
-  is_mon_nat_trans Fm (comp_fmonoidal_lax Fm Fm) δ ×
+  is_mon_nat_trans Fm (comp_fmonoidal_lax Fm Fm) δ ☺
   is_mon_nat_trans Fm (identity_fmonoidal_lax M) ε.
 
 Lemma isaprop_symmetric_monoidal_comonads_extra_laws {F : C ⟶ C}

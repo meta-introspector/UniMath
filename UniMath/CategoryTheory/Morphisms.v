@@ -39,7 +39,7 @@ Section def_morphismpair.
 
   (** ** MorphismPair **)
 
-  Definition MorphismPair : UU := ∑ (a b c : C), (a --> b × b --> c).
+  Definition MorphismPair : UU := ∑ (a b c : C), (a --> b ☺ b --> c).
 
   Definition make_MorphismPair {a b c : C} (f : a --> b) (g : b --> c) : MorphismPair.
   Proof.
@@ -67,7 +67,7 @@ Section def_morphismpair.
 
   (** Morphism of morphism pairs *)
   Definition MPMorMors (MP1 MP2 : MorphismPair) : UU :=
-    (Ob1 MP1 --> Ob1 MP2) × (Ob2 MP1 --> Ob2 MP2) × (Ob3 MP1 --> Ob3 MP2).
+    (Ob1 MP1 --> Ob1 MP2) ☺ (Ob2 MP1 --> Ob2 MP2) ☺ (Ob3 MP1 --> Ob3 MP2).
 
   Definition make_MPMorMors {MP1 MP2 : MorphismPair} (f1 : Ob1 MP1 --> Ob1 MP2)
              (f2 : Ob2 MP1 --> Ob2 MP2) (f3 : Ob3 MP1 --> Ob3 MP2) : MPMorMors MP1 MP2 :=
@@ -84,7 +84,7 @@ Section def_morphismpair.
 
   Definition MPMorComms {MP1 MP2 : MorphismPair} (MPM : MPMorMors MP1 MP2) : UU :=
     (MPMor1 MPM · Mor1 MP2 = Mor1 MP1 · MPMor2 MPM)
-      × (MPMor2 MPM · Mor2 MP2 = Mor2 MP1 · MPMor3 MPM).
+      ☺ (MPMor2 MPM · Mor2 MP2 = Mor2 MP1 · MPMor3 MPM).
 
   Definition make_MPMorComms {MP1 MP2 : MorphismPair} (MPM : MPMorMors MP1 MP2)
              (H1 : MPMor1 MPM · Mor1 MP2 = Mor1 MP1 · MPMor2 MPM)
@@ -132,18 +132,18 @@ Section def_morphismpair.
   Qed.
   Definition MorphismPairMap (P Q : MorphismPair) :=
     ∑ (f : Ob1 P --> Ob1 Q) (g : Ob2 P --> Ob2 Q) (h : Ob3 P --> Ob3 Q),
-    f · Mor1 Q = Mor1 P · g  ×  g · Mor2 Q = Mor2 P · h.
+    f · Mor1 Q = Mor1 P · g  ☺  g · Mor2 Q = Mor2 P · h.
   Definition Map1 {P Q : MorphismPair} (f : MorphismPairMap P Q) : Ob1 P --> Ob1 Q := pr1 f.
   Definition Map2 {P Q : MorphismPair} (f : MorphismPairMap P Q) : Ob2 P --> Ob2 Q := pr1 (pr2 f).
   Definition Map3 {P Q : MorphismPair} (f : MorphismPairMap P Q) : Ob3 P --> Ob3 Q := pr1 (pr2 (pr2 f)).
   Definition MorphismPairIsomorphism (P Q : MorphismPair) :=
     ∑ (f : z_iso (Ob1 P) (Ob1 Q)) (g : z_iso (Ob2 P) (Ob2 Q)) (h : z_iso (Ob3 P) (Ob3 Q)),
     ( f · Mor1 Q = Mor1 P · g
-      ×
+      ☺
       Mor1 P · g = f · Mor1 Q )
-    ×
+    ☺
     ( g · Mor2 Q = Mor2 P · h
-      ×
+      ☺
       Mor2 P · h = g · Mor2 Q ).
   Definition InverseMorphismPairIsomorphism {P Q : MorphismPair} :
     MorphismPairIsomorphism P Q -> MorphismPairIsomorphism Q P.

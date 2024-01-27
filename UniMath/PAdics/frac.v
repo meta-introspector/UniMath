@@ -60,8 +60,8 @@ Ltac permute := solve
   | idtac "The tactic permute does not apply to the current goal!"
   ].
 
-Lemma azerorelcomp ( cd : A × aintdomazerosubmonoid A )
-  ( ef : A × aintdomazerosubmonoid A )
+Lemma azerorelcomp ( cd : A ☺ aintdomazerosubmonoid A )
+  ( ef : A ☺ aintdomazerosubmonoid A )
   ( p : pr1 cd * pr1 ( pr2 ef ) =
         pr1 ef * pr1 ( pr2 cd ) )
   ( q : pr1 cd # 0 ) : pr1 ef # 0.
@@ -97,7 +97,7 @@ Proof.
   apply ( azerolmultcomp p q ).
 Defined.
 
-Definition afldfracapartrelpre : hrel ( A × aintdomazerosubmonoid A ) :=
+Definition afldfracapartrelpre : hrel ( A ☺ aintdomazerosubmonoid A ) :=
   fun ab cd => ( pr1 ab  * pr1 ( pr2 cd ) ) # ( pr1 cd * pr1 ( pr2 ab ) ).
 
 Lemma afldfracapartiscomprel :
@@ -474,10 +474,10 @@ Proof.
     + apply isbinapartrafldfracop2.
 Defined.
 
-Definition afldfracmultinvint ( ab : A × aintdomazerosubmonoid A )
+Definition afldfracmultinvint ( ab : A ☺ aintdomazerosubmonoid A )
            ( is : afldfracapartrelpre ab ( make_dirprod ( @ringunel1 A )
                               ( unel ( aintdomazerosubmonoid A ) ) ) ) :
-  A × aintdomazerosubmonoid A.
+  A ☺ aintdomazerosubmonoid A.
 Proof.
   intros.
   destruct ab as [ a b ].

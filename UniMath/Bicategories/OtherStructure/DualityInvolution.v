@@ -87,11 +87,11 @@ Section DualityInvolutionData.
        (invertible_modification
           (id₁ _)
           (η · ηinv))
-       ×
+       ☺
        (invertible_modification
           (ηinv · η)
           (id₁ _))
-       ×
+       ☺
        (∏ (x : op2_bicat B),
         invertible_2cell
           (η (L x))
@@ -548,7 +548,7 @@ Section LawsDualityInvolution.
   Definition duality_involution_laws
     : UU
     := duality_coherency
-       ×
+       ☺
        duality_triangle_law.
 End LawsDualityInvolution.
 

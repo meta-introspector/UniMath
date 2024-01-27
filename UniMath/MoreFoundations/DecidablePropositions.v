@@ -128,7 +128,7 @@ Definition pairNegation (C : ComplementaryPair) : ComplementaryPair
 Definition pairConjunction (C C' : ComplementaryPair) : ComplementaryPair.
 Proof.
   unpack_pair C P Q con c; unpack_pair C' P' Q' con' c'; simpl in *.
-  unfold ComplementaryPair. exists (P × P'); exists (Q ⨿ Q'). split.
+  unfold ComplementaryPair. exists (P ☺ P'); exists (Q ⨿ Q'). split.
   - simpl. intros a b. induction a as [p p']. induction b as [b|b].
     + induction c' as [_|q'].
       * contradicts (con p) b.
@@ -236,7 +236,7 @@ Defined.
 
 Definition decidableAnd (P Q : DecidableProposition) : DecidableProposition.
 Proof.
-  intros. exists (P × Q). apply isdecpropdirprod; apply decidabilityProperty.
+  intros. exists (P ☺ Q). apply isdecpropdirprod; apply decidabilityProperty.
 Defined.
 
 Definition decidableOr (P Q : DecidableProposition) : DecidableProposition.

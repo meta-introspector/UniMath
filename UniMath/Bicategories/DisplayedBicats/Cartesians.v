@@ -662,7 +662,7 @@ Section WeakCartesians.
           (h : c --> a)
           (gg : cc -->[ h · f ] bb),
         wk_lift_1cell_factor gg)
-       ×
+       ☺
        ∏ (c : B)
          (cc : D c)
          (h h' : c --> a)

@@ -96,7 +96,7 @@ Section ProductOfDisplayedFunctorsOverFixedBase.
           (FF' : disp_functor F D1' D2').
 
   Definition disp_prod_functor_over_fixed_base_data
-    : disp_functor_data F (D1 × D1')%disp_cat (D2 × D2')%disp_cat.
+    : disp_functor_data F (D1 ☺ D1')%disp_cat (D2 ☺ D2')%disp_cat.
   Proof.
     exists (λ x, dirprodf (FF x) (FF' x)).
     intros x y xx yy f ff.
@@ -125,7 +125,7 @@ Section ProductOfDisplayedFunctorsOverFixedBase.
   Qed.
 
   Definition disp_prod_functor_over_fixed_base
-    : disp_functor F (D1 × D1')%disp_cat (D2 × D2')%disp_cat
+    : disp_functor F (D1 ☺ D1')%disp_cat (D2 ☺ D2')%disp_cat
     := _ ,, disp_prod_functor_over_fixed_base_is_functor.
 
   Definition disp_prod_functor_over_fixed_base_ff

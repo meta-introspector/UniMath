@@ -52,7 +52,7 @@ Section ArrowSubBicatToDispBicat.
     : UU
     := ∑ (f : pr1 h₁ --> pr1 h₂),
        pred_mor D (pr12 h₁) (pr12 h₂) f
-       ×
+       ☺
        invertible_2cell (pr12 h₁ · g) (f · pr12 h₂).
 
   Definition make_disp_map_bicat_mor
@@ -673,7 +673,7 @@ Section ArrowSubBicatToDispBicat.
     : (transportf
          (λ z,
           pred_mor D (pr12 hx) (pr12 hy) z
-          ×
+          ☺
           invertible_2cell (pr12 hx · f) (z · pr12 hy))
          p
          (pr2 hf)

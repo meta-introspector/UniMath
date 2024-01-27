@@ -191,7 +191,7 @@ Section Disp_Prebicat_Cells_Unit.
              (f : adjoint_equivalence a b)
              (aa : disp_cell_unit_bicat a)
              (bb : disp_cell_unit_bicat b)
-    : (aa -->[ f] bb × bb -->[ left_adjoint_right_adjoint f] aa)
+    : (aa -->[ f] bb ☺ bb -->[ left_adjoint_right_adjoint f] aa)
         ≃
         disp_adjoint_equivalence f aa bb.
   Proof.
@@ -208,7 +208,7 @@ Section Disp_Prebicat_Cells_Unit.
     : transportf disp_cell_unit_bicat p aa = bb
       →
       (aa -->[ idtoiso_2_0 _ _ p ] bb)
-        ×
+        ☺
         (bb -->[ left_adjoint_right_adjoint (idtoiso_2_0 _ _ p)] aa).
   Proof.
     induction p ; cbn.
@@ -225,7 +225,7 @@ Section Disp_Prebicat_Cells_Unit.
                    isaprop (aa -->[ f] bb))
              (Dset : ∏ (a : C), isaset (D a))
              (inv : ∏ (a : C) (aa bb : disp_cell_unit_bicat a),
-                    (aa -->[ id₁ a ] bb × bb -->[ id₁ a ] aa)
+                    (aa -->[ id₁ a ] bb ☺ bb -->[ id₁ a ] aa)
                     →
                     aa = bb)
     : disp_univalent_2_0 disp_cell_unit_bicat.
@@ -251,7 +251,7 @@ Section Disp_Prebicat_Cells_Unit.
                    isaprop (aa -->[ f] bb))
              (Dset : ∏ (a : C), isaset (D a))
              (inv : ∏ (a : C) (aa bb : disp_cell_unit_bicat a),
-                    (aa -->[ id₁ a ] bb × bb -->[ id₁ a ] aa)
+                    (aa -->[ id₁ a ] bb ☺ bb -->[ id₁ a ] aa)
                     →
                     aa = bb)
     : disp_univalent_2 disp_cell_unit_bicat.

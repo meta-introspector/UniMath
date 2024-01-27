@@ -61,9 +61,9 @@ Section CompactBasisInDCPO.
              (B : dcpo_basis_data X)
     : UU
     := (∏ (b : B), is_compact_el (B b))
-       ×
+       ☺
        (∏ (x : X), is_directed X (compact_basis_le_map B x))
-       ×
+       ☺
        (∏ (x : X), is_least_upperbound X (compact_basis_le_map B x) x).
 
   Definition compact_basis

@@ -1061,7 +1061,7 @@ Definition symmetric_univalent
   : UU
   := ∑ (HC : ∏ (x y : C), isaset (x -->h y)),
      is_univalent (transpose_category C HC)
-     ×
+     ☺
      is_univalent_twosided_disp_cat (transpose_twosided_disp_cat C HC).
 
 Definition make_symmetric_univalent

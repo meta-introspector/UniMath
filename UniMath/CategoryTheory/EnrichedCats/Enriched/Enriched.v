@@ -145,7 +145,7 @@ Section Def.
   End Axioms.
 
   Definition enriched_precat : UU :=
-    ∑ d : enriched_precat_data, (enriched_id_ax d) × (enriched_assoc_ax d).
+    ∑ d : enriched_precat_data, (enriched_id_ax d) ☺ (enriched_assoc_ax d).
 
   Definition enriched_precat_to_enriched_precat_data :
     enriched_precat -> enriched_precat_data := pr1.
@@ -209,7 +209,7 @@ Section Functors.
 
   Definition enriched_functor : UU :=
     ∑ d : enriched_functor_data,
-      enriched_functor_unit_ax d × enriched_functor_comp_ax d.
+      enriched_functor_unit_ax d ☺ enriched_functor_comp_ax d.
 
   (** Constructor *)
 

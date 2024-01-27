@@ -50,7 +50,7 @@ Definition cartesian_terminal
            (b : B)
   : UU
   := (∏ (x : B), Terminal (hom x b))
-     ×
+     ☺
      (∏ (x y : B) (f : x --> y), preserves_terminal (pre_comp b f)).
 
 Definition cartesian_prod
@@ -58,14 +58,14 @@ Definition cartesian_prod
            (b : B)
   : UU
   := (∏ (x : B), BinProducts (hom x b))
-     ×
+     ☺
      (∏ (x y : B) (f : x --> y), preserves_binproduct (pre_comp b f)).
 
 Definition cartesian_ob
            {B : bicat}
            (b : B)
   : UU
-  := cartesian_terminal b × cartesian_prod b.
+  := cartesian_terminal b ☺ cartesian_prod b.
 
 (**
  2. Being cartesian is a proposition
@@ -164,7 +164,7 @@ Section CartesianViaAdjunction.
 
     Definition cartesian_ob_via_adj
       : UU
-      := cartesian_terminal_via_adj T × cartesian_prod_via_adj prod.
+      := cartesian_terminal_via_adj T ☺ cartesian_prod_via_adj prod.
 
     Definition isaprop_cartesian_ob_via_adj
                (HB : is_univalent_2_1 B)
@@ -1056,7 +1056,7 @@ Section EquivalenceCartesian.
                      (β : k ==> g)
                      (φ : ∑ (fg : k ==> cartesian_prod_via_adj_to_cartesian_prod_1cell f g),
                           fg • cartesian_prod_via_adj_to_cartesian_prod_pr1 f g = α
-                          ×
+                          ☺
                           fg • cartesian_prod_via_adj_to_cartesian_prod_pr2 f g = β)
       : φ
         =

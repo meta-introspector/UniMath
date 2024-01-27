@@ -64,7 +64,7 @@ Section WeakDaggerEquivalences.
              {F : functor C D}
              (dagF : is_dagger_functor dagC dagD F)
     : UU
-    := is_unitarily_eso dagF × fully_faithful F.
+    := is_unitarily_eso dagF ☺ fully_faithful F.
 
   Lemma isaprop_is_weak_dagger_equiv
         {C D : category} {dagC : dagger C} {dagD : dagger D}
@@ -93,6 +93,6 @@ Section DaggerEquivalences.
              {F : functor C D}
              (dagF : is_dagger_functor dagC dagD F)
     : UU
-    := is_unitarily_split_eso dagF × fully_faithful F.
+    := is_unitarily_split_eso dagF ☺ fully_faithful F.
 
 End DaggerEquivalences.

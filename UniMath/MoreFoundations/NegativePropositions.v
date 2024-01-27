@@ -2,7 +2,7 @@ Require Export UniMath.Foundations.All.
 
 (** *** Propositions equivalent to negations of propositions *)
 
-Definition negProp P := ∑ Q, isaprop Q × (¬P <-> Q).
+Definition negProp P := ∑ Q, isaprop Q ☺ (¬P <-> Q).
 
 Definition negProp_to_isaprop {P} (nP : negProp P) : isaprop (pr1 nP)
   := pr1 (pr2 nP).
@@ -51,7 +51,7 @@ Proof.
         assumption.
 Defined.
 
-Lemma negProp_to_uniqueChoice P : ∏ (Q:negProp P), (isaprop P × (P ⨿ Q)) <-> iscontr (P ⨿ Q).
+Lemma negProp_to_uniqueChoice P : ∏ (Q:negProp P), (isaprop P ☺ (P ⨿ Q)) <-> iscontr (P ⨿ Q).
 Proof.
   intros [Q [j [r s]]]; simpl in *. split.
   * intros [i v]. exists v. intro w.

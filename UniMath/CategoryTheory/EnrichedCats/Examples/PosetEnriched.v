@@ -73,7 +73,7 @@ Definition poset_enrichment_laws
         (g : y --> z)
         (p : PEC x y f₁ f₂),
       PEC x z (f₁ · g) (f₂ · g))
-     ×
+     ☺
      (∏ (x y z : C)
         (f : x --> y)
         (g₁ g₂ : y --> z)

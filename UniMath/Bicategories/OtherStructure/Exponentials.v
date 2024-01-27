@@ -95,5 +95,5 @@ Definition bicat_has_exponentials
   := ∏ (b₁ b₂ : B)
        (f : b₁ --> b₂),
      (internal_sfib f → exponentiable_morphism B f)
-     ×
+     ☺
      (internal_sopfib f → exponentiable_morphism B f).

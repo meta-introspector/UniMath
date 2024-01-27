@@ -13,7 +13,7 @@ Extended by: Langston Barrett (@siddharthist), 2018
 - Definition of a binary product structure on a functor category by taking
   pointwise binary products in the target category ([BinProducts_functor_precat])
 - Binary products from limits ([BinProducts_from_Lims])
-- Equivalent universal property: [(C --> A) × (C --> B) ≃ (C --> A × B)]
+- Equivalent universal property: [(C --> A) ☺ (C --> B) ≃ (C --> A ☺ B)]
 - Terminal object as the unit (up to isomorphism) of binary products
 - Definition of the "associative" z-isomorphism [BinProduct_assoc]
 - Definition of the diagonal map [diagonalMap]
@@ -48,7 +48,7 @@ Context (C : category).
 
 Definition isBinProduct (c d p : C) (p1 : p --> c) (p2 : p --> d) : UU :=
   ∏ (a : C) (f : a --> c) (g : a --> d),
-  ∃! fg, (fg · p1 = f) × (fg · p2 = g).
+  ∃! fg, (fg · p1 = f) ☺ (fg · p2 = g).
 
 Lemma isaprop_isBinProduct (c d p : C) (p1 : p --> c) (p2 : p --> d) :
   isaprop (isBinProduct c d p p1 p2).
@@ -58,7 +58,7 @@ Proof.
 Qed.
 
 Definition BinProduct (c d : C) : UU :=
-  ∑ pp1p2 : (∑ p : C, (p --> c) × (p --> d)),
+  ∑ pp1p2 : (∑ p : C, (p --> c) ☺ (p --> d)),
     isBinProduct c d (pr1 pp1p2) (pr1 (pr2 pp1p2)) (pr2 (pr2 pp1p2)).
 
 Definition BinProducts : UU := ∏ (c d : C), BinProduct c d.
@@ -138,7 +138,7 @@ Defined.
 Definition make_isBinProduct (a b p : C)
   (pa : C⟦p,a⟧) (pb : C⟦p,b⟧) :
   (∏ (c : C) (f : C⟦c,a⟧) (g : C⟦c,b⟧),
-    ∃! k : C⟦c,p⟧, k · pa = f × k · pb = g) ->
+    ∃! k : C⟦c,p⟧, k · pa = f ☺ k · pb = g) ->
   isBinProduct a b p pa pb.
 Proof.
   intros H c cc g.
@@ -550,13 +550,13 @@ Lemma binproduct_nat_trans_univ_prop (A : [C, D])
    ∏
    t : ∑ fg : A --> (BinProduct_of_functors:[C,D]),
        fg · (binproduct_nat_trans_pr1 : (BinProduct_of_functors:[C,D]) --> F) = f
-      ×
+      ☺
        fg · (binproduct_nat_trans_pr2 : (BinProduct_of_functors:[C,D]) --> G) = g,
    t =
    tpair
      (λ fg : A --> (BinProduct_of_functors:[C,D]),
       fg · (binproduct_nat_trans_pr1 : (BinProduct_of_functors:[C,D]) --> F) = f
-   ×
+   ☺
       fg · (binproduct_nat_trans_pr2 : (BinProduct_of_functors:[C,D]) --> G) = g)
      (binproduct_nat_trans A f g)
      (make_dirprod (binproduct_nat_trans_Pr1Commutes A f g)
@@ -766,7 +766,7 @@ Section BinProduct_from_iso.
   Local Lemma iso_to_isBinProduct_comm {x y z : C} (BP : BinProduct C x y)
         (i : iso z (BinProductObject C BP)) (w : C) (f : w --> x) (g : w --> y) :
     (BinProductArrow C BP f g · inv_from_iso i · (i · BinProductPr1 C BP) = f)
-      × (BinProductArrow C BP f g · inv_from_iso i · (i · BinProductPr2 C BP) = g).
+      ☺ (BinProductArrow C BP f g · inv_from_iso i · (i · BinProductPr2 C BP) = g).
   Proof.
     split.
     - rewrite <- assoc. rewrite (assoc _ i).
@@ -779,7 +779,7 @@ Section BinProduct_from_iso.
 
   Local Lemma iso_to_isBinProduct_unique {x y z : C} (BP : BinProduct C x y)
         (i : iso z (BinProductObject C BP)) (w : C) (f : C ⟦w, x⟧) (g : C ⟦w, y⟧) (y0 : C ⟦w, z⟧)
-        (T : y0 · (i · BinProductPr1 C BP) = f × y0 · (i · BinProductPr2 C BP) = g) :
+        (T : y0 · (i · BinProductPr1 C BP) = f ☺ y0 · (i · BinProductPr2 C BP) = g) :
     y0 = BinProductArrow C BP f g · iso_inv_from_iso i.
   Proof.
     apply (post_comp_with_iso_is_inj _ _ i (pr2 i)).
@@ -814,7 +814,7 @@ Section BinProduct_from_iso.
 
 End BinProduct_from_iso.
 
-(** ** Equivalent universal property: [(C --> A) × (C --> B) ≃ (C --> A × B)]
+(** ** Equivalent universal property: [(C --> A) ☺ (C --> B) ≃ (C --> A ☺ B)]
 
  Compare to [weqfuntoprodtoprod].
  *)
@@ -823,12 +823,12 @@ Section EquivalentDefinition.
   Context {C : category} {c d p : ob C} (p1 : p --> c) (p2 : p --> d).
 
   Definition postcomp_with_projections (a : ob C) (f : a --> p) :
-    (a --> c) × (a --> d) := make_dirprod (f · p1)  (f · p2).
+    (a --> c) ☺ (a --> d) := make_dirprod (f · p1)  (f · p2).
 
   Definition isBinProduct' : UU := ∏ a : ob C, isweq (postcomp_with_projections a).
 
   Definition isBinProduct'_weq (is : isBinProduct') :
-    ∏ a, (a --> p) ≃ (a --> c) × (a --> d) :=
+    ∏ a, (a --> p) ≃ (a --> c) ☺ (a --> d) :=
     λ a, make_weq (postcomp_with_projections a) (is a).
 
   Lemma isBinProduct'_to_isBinProduct :
@@ -848,7 +848,7 @@ Section EquivalentDefinition.
   Proof.
     intros isBP ? fg.
     unfold hfiber, postcomp_with_projections.
-    apply (@iscontrweqf (∑ u : C ⟦ a, p ⟧, u · p1 = pr1 fg × u · p2 = pr2 fg)).
+    apply (@iscontrweqf (∑ u : C ⟦ a, p ⟧, u · p1 = pr1 fg ☺ u · p2 = pr2 fg)).
     - use weqfibtototal; intro; cbn.
       apply invweq, pathsdirprodweq.
     - exact (isBP a (pr1 fg) (pr2 fg)). (* apply universal property *)
@@ -863,7 +863,7 @@ Arguments isBinProduct' _ _ _ _ _ : clear implicits.
 
 (** ** Terminal object as the unit (up to isomorphism) of binary products *)
 
-(** [T × x ≅ x]*)
+(** [T ☺ x ≅ x]*)
 Lemma terminal_binprod_unit_l_z_aux {C : category} (T : Terminal C) (BC : BinProducts C) (x : C) :
   is_inverse_in_precat (BinProductPr2 C (BC T x))
     (BinProductArrow C (BC T x) (TerminalArrow T x) (identity x)).
@@ -889,7 +889,7 @@ Proof.
   - apply terminal_binprod_unit_l_z_aux.
 Defined.
 
-(** [x × T ≅ x]*)
+(** [x ☺ T ≅ x]*)
 Lemma terminal_binprod_unit_r_z_aux {C : category} (T : Terminal C) (BC : BinProducts C) (x : C) :
   is_inverse_in_precat (BinProductPr1 C (BC x T)) (BinProductArrow C (BC x T) (identity x)
                                                      (TerminalArrow T x)).

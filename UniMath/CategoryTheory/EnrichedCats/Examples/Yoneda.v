@@ -49,7 +49,7 @@ Section YonedaEmbedding.
           (E : enrichment C V)
           (EqV : Equalizers V)
           (PV : Products C V)
-          (PV' : Products (C × C) V).
+          (PV' : Products (C ☺ C) V).
 
   (**
    1. Representable presheaves
@@ -416,8 +416,8 @@ Section YonedaEmbedding.
     intros x.
     unfold enriched_functor_left_map, enriched_functor_right_map.
     rewrite !assoc'.
-    refine (maponpaths (λ z, _ · z) (ProductPrCommutes (C × C) V _ _ _ _ _) @ _).
-    refine (_ @ !(maponpaths (λ z, _ · z) (ProductPrCommutes (C × C) V _ _ _ _ _))).
+    refine (maponpaths (λ z, _ · z) (ProductPrCommutes (C ☺ C) V _ _ _ _ _) @ _).
+    refine (_ @ !(maponpaths (λ z, _ · z) (ProductPrCommutes (C ☺ C) V _ _ _ _ _))).
     rewrite !assoc.
     cbn.
     refine (maponpaths (λ z, z · _) (ProductPrCommutes C V _ _ _ _ _) @ _).

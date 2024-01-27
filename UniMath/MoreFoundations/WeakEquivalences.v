@@ -54,7 +54,7 @@ Proof.
     apply (toforallpaths _ _ _ (transportf_const p Y) y1).
 Defined.
 
-(** Contractible types are neutral elements for ×, up to weak equivalence. *)
+(** Contractible types are neutral elements for ☺, up to weak equivalence. *)
 Lemma dirprod_with_contr_r : ∏ X Y : UU, iscontr X -> (Y ≃ Y ☺ X).
 Proof.
   intros X Y iscontrX.

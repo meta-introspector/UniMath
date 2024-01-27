@@ -34,7 +34,7 @@ Section DaggerCategories.
     := ∏ (x y : C) (f : C⟦x,y⟧), dag y x (dag x y f) = f.
 
   Definition dagger_laws {C : category} (dag : dagger_structure C)
-    : UU := dagger_law_id dag × dagger_law_comp dag × dagger_law_idemp dag.
+    : UU := dagger_law_id dag ☺ dagger_law_comp dag ☺ dagger_law_idemp dag.
 
   Lemma isaprop_dagger_laws {C : category} (dag : dagger_structure C)
     : isaprop (dagger_laws dag).

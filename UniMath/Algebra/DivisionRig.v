@@ -20,7 +20,7 @@ Require Import UniMath.MoreFoundations.Tactics.
 Definition isnonzerorig (X : rig) : UU := (1%rig : X) != 0%rig.
 
 Definition isDivRig (X : rig) : UU :=
-  isnonzerorig X × (∏ x : X, x != 0%rig -> multinvpair X x).
+  isnonzerorig X ☺ (∏ x : X, x != 0%rig -> multinvpair X x).
 
 Lemma isaprop_isDivRig (X : rig) : isaprop (isDivRig X).
 Proof.

@@ -123,7 +123,7 @@ Definition multilinearfuncomp {I : UU} {rings : I -> ring}
 
 Definition ismultimodulefun {I : UU} {rings : I -> ring}
            {MM NN : multimodule rings} (f : MM -> NN) : UU :=
-   (isbinopfun f) × (ismultilinear f).
+   (isbinopfun f) ☺ (ismultilinear f).
 
 Lemma isapropismultimodulefun {I : UU} {rings : I -> ring}
       {MM NN : multimodule rings} (f : MM -> NN) : isaprop (ismultimodulefun f).

@@ -354,7 +354,7 @@ Section Inverses.
   Definition matrix_inverse {n : nat} (A : Matrix R n n) :=
     ∑ (B : Matrix R n n),
       ((A ** B) = identity_matrix)
-    × ((B ** A) = identity_matrix).
+    ☺ ((B ** A) = identity_matrix).
 
   Coercion matrix_left_inverse_of_inverse {n : nat}
     (A : Matrix R n n)
@@ -373,7 +373,7 @@ Section Inverses.
   Lemma matrix_inverse_to_right_and_left_inverse
     {n : nat} (A : Matrix R n n)
     : (matrix_inverse A)
-      -> matrix_left_inverse A × matrix_right_inverse A.
+      -> matrix_left_inverse A ☺ matrix_right_inverse A.
   Proof.
     intros inv; split.
     - apply matrix_left_inverse_of_inverse; exact inv.

@@ -537,7 +537,7 @@ Section BinProduct.
 
     Lemma binproduct_presheaf_induced_morphism_commutes
       : (binproduct_presheaf_induced_morphism : presheaf_cat T⟦Q, binproduct_presheaf⟧) ·
-          binproduct_presheaf_pr1 = F ×
+          binproduct_presheaf_pr1 = F ☺
         (binproduct_presheaf_induced_morphism : presheaf_cat T⟦Q, binproduct_presheaf⟧) ·
           binproduct_presheaf_pr2 = F'.
     Proof.
@@ -550,7 +550,7 @@ Section BinProduct.
 
     Lemma binproduct_presheaf_induced_morphism_unique
       (t : ∑ k : presheaf_cat T ⟦ Q, binproduct_presheaf ⟧,
-        k · binproduct_presheaf_pr1 = F × k · binproduct_presheaf_pr2 = F')
+        k · binproduct_presheaf_pr1 = F ☺ k · binproduct_presheaf_pr2 = F')
       : t = binproduct_presheaf_induced_morphism ,, binproduct_presheaf_induced_morphism_commutes.
     Proof.
       use subtypePairEquality.

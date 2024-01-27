@@ -41,7 +41,7 @@ Definition cat_eq_1
                         (total2_paths_f (pr1 F) (pr2 F))
                         (pr2 C))
         = pr1 (pr2 D))
-     ×
+     ☺
        pr2 (transportf (λ x, precategory_id_comp x)
                        (total2_paths_f (pr1 F) (pr2 F))
                        (pr2 C))
@@ -80,7 +80,7 @@ Definition cat_eq_2
   : UU
   := ∑ (F : ∑ (Fo : ob C = ob D), data_cat_eq_2 C D Fo),
        (∏ (a : C), eqweqmap (pr2 F a a) (identity a) = identity (eqweqmap (pr1 F) a))
-     ×
+     ☺
        (∏ (a b c : C) (f : C⟦a,b⟧) (g : C⟦b,c⟧),
          eqweqmap (pr2 F a c) (f · g)
          =
@@ -166,7 +166,7 @@ Definition cat_equiv
   : UU
   := ∑ (F : ∑ (Fo : ob C ≃ D), ∏ (a b : ob C), C⟦a,b⟧ ≃ D⟦Fo a,Fo b⟧),
        (∏ (a : C), (pr2 F) a a (identity a) = identity (pr1 F a))
-     ×
+     ☺
        (∏ (a b c : C) (f : C⟦a,b⟧) (g : C⟦b,c⟧), pr2 F a c (f · g) = pr2 F a b f · pr2 F b c g).
 
 Definition weq_cat_eq_cat_equiv

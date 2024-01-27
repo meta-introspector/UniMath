@@ -58,7 +58,7 @@ Section FixMoncatAndBicat.
   (FA'm : fmonoidal Mon_V (monoidal_from_bicat_and_ob a0') FA')
   (G : B ⟦ a0, a0' ⟧): UU :=
     ∑ δ : parameterized_distributivity_bicat_nat G,
-                param_distr_bicat_triangle_eq Mon_V FAm FA'm G δ ×
+                param_distr_bicat_triangle_eq Mon_V FAm FA'm G δ ☺
                   param_distr_bicat_pentagon_eq Mon_V FAm FA'm G δ.
 
   Lemma disp_actionbicat_disp_mor_eq {a0 a0' : B}
@@ -657,25 +657,25 @@ Section FixMoncatAndBicat.
   (z : bidisp_actionbicat_disp_prebicat_1_id_comp_cells d) (ff : w -->[ f] x)
   (gg : x -->[ g] y) (hh : y -->[ h] z),
   disp_2cells (rassociator f g h) (ff ;; gg ;; hh) (ff ;; (gg ;; hh)))
- × (∏ (a b c d : B) (f : B ⟦ a, b ⟧) (g : B ⟦ b, c ⟧) (h : B ⟦ c, d ⟧)
+ ☺ (∏ (a b c d : B) (f : B ⟦ a, b ⟧) (g : B ⟦ b, c ⟧) (h : B ⟦ c, d ⟧)
     (w : bidisp_actionbicat_disp_prebicat_1_id_comp_cells a)
     (x : bidisp_actionbicat_disp_prebicat_1_id_comp_cells b)
     (y : bidisp_actionbicat_disp_prebicat_1_id_comp_cells c)
     (z : bidisp_actionbicat_disp_prebicat_1_id_comp_cells d) (ff : w -->[ f] x)
     (gg : x -->[ g] y) (hh : y -->[ h] z),
     disp_2cells (lassociator f g h) (ff ;; (gg ;; hh)) (ff ;; gg ;; hh))
-   × (∏ (a b : B) (f g h : B ⟦ a, b ⟧) (r : f ==> g) (s : g ==> h)
+   ☺ (∏ (a b : B) (f g h : B ⟦ a, b ⟧) (r : f ==> g) (s : g ==> h)
       (x : bidisp_actionbicat_disp_prebicat_1_id_comp_cells a)
       (y : bidisp_actionbicat_disp_prebicat_1_id_comp_cells b) (ff : x -->[ f] y)
       (gg : x -->[ g] y) (hh : x -->[ h] y),
       disp_2cells r ff gg → disp_2cells s gg hh → disp_2cells (r • s) ff hh)
-     × (∏ (a b c : B) (f : B ⟦ a, b ⟧) (g1 g2 : B ⟦ b, c ⟧) (r : g1 ==> g2)
+     ☺ (∏ (a b c : B) (f : B ⟦ a, b ⟧) (g1 g2 : B ⟦ b, c ⟧) (r : g1 ==> g2)
         (x : bidisp_actionbicat_disp_prebicat_1_id_comp_cells a)
         (y : bidisp_actionbicat_disp_prebicat_1_id_comp_cells b)
         (z : bidisp_actionbicat_disp_prebicat_1_id_comp_cells c) (ff : x -->[ f] y)
         (gg1 : y -->[ g1] z) (gg2 : y -->[ g2] z),
         disp_2cells r gg1 gg2 → disp_2cells (f ◃ r) (ff ;; gg1) (ff ;; gg2))
-       × (∏ (a b c : B) (f1 f2 : B ⟦ a, b ⟧) (g : B ⟦ b, c ⟧) (r : f1 ==> f2)
+       ☺ (∏ (a b c : B) (f1 f2 : B ⟦ a, b ⟧) (g : B ⟦ b, c ⟧) (r : f1 ==> f2)
           (x : bidisp_actionbicat_disp_prebicat_1_id_comp_cells a)
           (y : bidisp_actionbicat_disp_prebicat_1_id_comp_cells b)
           (z : bidisp_actionbicat_disp_prebicat_1_id_comp_cells c) (ff1 : x -->[ f1] y)

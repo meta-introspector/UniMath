@@ -118,18 +118,18 @@ Local Definition sortToCC := [sortToC, C].
 Local Definition sortToC1C := [sortToC1, sortToCC].
 
 Let ops : MultiSortedSig sort → hSet := ops sort.
-Let arity : ∏ M : MultiSortedSig sort, MultiSorted_alt.ops sort M → list (list sort × sort) × sort
+Let arity : ∏ M : MultiSortedSig sort, MultiSorted_alt.ops sort M → list (list sort ☺ sort) ☺ sort
     := arity sort.
 
 
 Local Definition sorted_option_functor := sorted_option_functor sort Hsort C TC BC CC.
 Local Definition projSortToC : sort -> sortToCC := projSortToC sort Hsort C.
 Local Definition option_list : list sort → sortToC1 := option_list sort Hsort C TC BC CC.
-Local Definition exp_functor : list sort × sort -> sortToC1C
+Local Definition exp_functor : list sort ☺ sort -> sortToC1C
   := exp_functor sort Hsort C TC BC CC.
-Local Definition exp_functor_list : list (list sort × sort) -> sortToC1C
+Local Definition exp_functor_list : list (list sort ☺ sort) -> sortToC1C
   := exp_functor_list sort Hsort C TC BP BC CC.
-Local Definition hat_exp_functor_list : list (list sort × sort) × sort -> sortToC2
+Local Definition hat_exp_functor_list : list (list sort ☺ sort) ☺ sort -> sortToC2
   := hat_exp_functor_list sort Hsort C TC BP BC CC.
 Local Definition MultiSortedSigToFunctor : MultiSortedSig sort -> sortToC2 := MultiSortedSigToFunctor sort Hsort C TC BP BC CC.
 Local Definition CoproductsMultiSortedSig : ∏ M : MultiSortedSig sort,
@@ -196,7 +196,7 @@ Section strength_through_actegories.
         -- exact (IH (k,,xs)).
   Defined.
 
-  Definition StrengthCAT_exp_functor (lt : list sort × sort) :
+  Definition StrengthCAT_exp_functor (lt : list sort ☺ sort) :
     pointedstrengthfromprecomp_CAT C (exp_functor lt).
   Proof.
     induction lt as [l t]; revert l.
@@ -214,7 +214,7 @@ Section strength_through_actegories.
       exact (ptdlaxcommutatorCAT_option_list (cons x xs)).
   Defined.
 
-  Definition StrengthCAT_exp_functor_list (xs : list (list sort × sort)) :
+  Definition StrengthCAT_exp_functor_list (xs : list (list sort ☺ sort)) :
     pointedstrengthfromprecomp_CAT C (exp_functor_list xs).
   Proof.
     induction xs as [[|n] xs].
@@ -231,7 +231,7 @@ Section strength_through_actegories.
   Defined.
 
   (* the strength for hat_exp_functor_list *)
-  Definition StrengthCAT_hat_exp_functor_list (xst : list (list sort × sort) × sort) :
+  Definition StrengthCAT_hat_exp_functor_list (xst : list (list sort ☺ sort) ☺ sort) :
     pointedstrengthfromprecomp_CAT sortToC (hat_exp_functor_list xst).
   Proof.
     use comp_lineator_lax.
@@ -282,12 +282,12 @@ Section strength_through_actegories.
 
   (** *** we now adapt the definitions to [MultiSortedSigToFunctor'] *)
   Local Definition MultiSortedSigToFunctor' : MultiSortedSig sort -> sortToC2 := MultiSortedSigToFunctor' sort Hsort C TC BP BC CC.
-  Local Definition hat_exp_functor_list'_optimized : list (list sort × sort) × sort -> sortToC2
+  Local Definition hat_exp_functor_list'_optimized : list (list sort ☺ sort) ☺ sort -> sortToC2
     := hat_exp_functor_list'_optimized sort Hsort C TC BP BC CC.
-  Local Definition hat_exp_functor_list'_piece : (list sort × sort) × sort -> sortToC2
+  Local Definition hat_exp_functor_list'_piece : (list sort ☺ sort) ☺ sort -> sortToC2
     := hat_exp_functor_list'_piece sort Hsort C TC BC CC.
 
-  Definition StrengthCAT_hat_exp_functor_list'_piece (xt : (list sort × sort) × sort) :
+  Definition StrengthCAT_hat_exp_functor_list'_piece (xt : (list sort ☺ sort) ☺ sort) :
     pointedstrengthfromselfaction_CAT (hat_exp_functor_list'_piece xt).
   Proof.
     unfold hat_exp_functor_list'_piece, ContinuityOfMultiSortedSigToFunctor.hat_exp_functor_list'_piece.
@@ -300,7 +300,7 @@ Section strength_through_actegories.
     apply (lax_lineator_postcomp_SelfActCAT).
     Defined.
 
-  Definition StrengthCAT_hat_exp_functor_list'_optimized (xst : list (list sort × sort) × sort) :
+  Definition StrengthCAT_hat_exp_functor_list'_optimized (xst : list (list sort ☺ sort) ☺ sort) :
     pointedstrengthfromselfaction_CAT (hat_exp_functor_list'_optimized xst).
   Proof.
     induction xst as [xs t].

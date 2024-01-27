@@ -59,7 +59,7 @@ Section MonoidalFunctorLifting.
   Defined.
 
   Definition flmonoidal_data : UU
-    := fl_preserves_tensor_data × fl_preserves_unit.
+    := fl_preserves_tensor_data ☺ fl_preserves_unit.
   Definition flmonoidal_preserves_tensor_data (ms : flmonoidal_data)
     : fl_preserves_tensor_data := pr1 ms.
   Definition flmonoidal_preserves_unit (ms : flmonoidal_data)
@@ -178,10 +178,10 @@ Section MonoidalFunctorLifting.
   Qed.
 
   Definition flmonoidal_laxlaws (ms : flmonoidal_data) : UU
-    := fl_preserves_tensor_nat_left (flmonoidal_preserves_tensor_data ms) ×
-       fl_preserves_tensor_nat_right (flmonoidal_preserves_tensor_data ms) ×
-       fl_preserves_associativity (flmonoidal_preserves_tensor_data ms) ×
-       fl_preserves_leftunitality (flmonoidal_preserves_tensor_data ms) (flmonoidal_preserves_unit ms) ×
+    := fl_preserves_tensor_nat_left (flmonoidal_preserves_tensor_data ms) ☺
+       fl_preserves_tensor_nat_right (flmonoidal_preserves_tensor_data ms) ☺
+       fl_preserves_associativity (flmonoidal_preserves_tensor_data ms) ☺
+       fl_preserves_leftunitality (flmonoidal_preserves_tensor_data ms) (flmonoidal_preserves_unit ms) ☺
        fl_preserves_rightunitality (flmonoidal_preserves_tensor_data ms) (flmonoidal_preserves_unit ms).
 
   Definition flmonoidal_preserves_tensornatleft
@@ -251,7 +251,7 @@ Section MonoidalFunctorLifting.
     := fl_strongtensor
          (flmonoidal_preserves_tensor_data ms)
          (fmonoidal_preservestensorstrongly ((Fm,,Fs) : fmonoidal M' M F))
-         ×
+         ☺
          fl_strongunit
          (flmonoidal_preserves_unit ms)
          (fmonoidal_preservesunitstrongly ((Fm,,Fs) : fmonoidal M' M F)).

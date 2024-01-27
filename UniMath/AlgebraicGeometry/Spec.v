@@ -73,7 +73,7 @@ Section spec.
     use (hinhuniv _ HU); intros HA.
     use (hinhfun _ HV); intros HB.
     induction HA as [A HA]. induction HB as [B HB].
-    exists (λ x, ∃ a b, A a × B b × x = (a * b)%ring). intro p.
+    exists (λ x, ∃ a b, A a ☺ B b ☺ x = (a * b)%ring). intro p.
     assert (H0 : U p ∧ V p ⇔ A ⊈ p ∧ B ⊈ p).
     { use make_dirprod; intro H.
       - use make_dirprod.

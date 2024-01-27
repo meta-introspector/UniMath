@@ -59,14 +59,14 @@ Let τ {x y} : C⟦x ⊗ y,y ⊗ x⟧ := binprod_swap x y.
 (** Equation witnessing that a morphism representing a binary operation is
     associative as illustrated by the diagram:
 <<
-               f×1
+               f☺1
  (L ⊗ L) ⊗ L -------> L ⊗ L
      |                  |
    α |                  |
      V                  |
  L ⊗ (L ⊗ L)            | f
      |                  |
- 1×f |                  |
+ 1☺f |                  |
      V                  V
    L ⊗ L ----------->   L
               f
@@ -93,10 +93,10 @@ Definition iscomm_cat {L} (f : C⟦L ⊗ L,L⟧) : UU := f = τ · f.
 
 (** Equation witnessing the absorbtion law as illustrated by the diagram:
 <<
-           δ×1                   α
+           δ☺1                   α
    L ⊗ L ------> (L ⊗ L) ⊗ L -------> L ⊗ (L ⊗ L)
      |                                    |
-  π1 |                                    | 1×g
+  π1 |                                    | 1☺g
      V                                    V
      L <------------------------------- L ⊗ L
                        f
@@ -109,7 +109,7 @@ Definition isabsorb_cat {L} (f g : C⟦L ⊗ L,L⟧) : UU :=
   (δ 😁 1) · α · (1 😁 g) · f = π1.
 
 Definition latticeop_cat {L} (meet_mor join_mor : C⟦L ⊗ L,L⟧) :=
-    (isassoc_cat meet_mor × iscomm_cat meet_mor)
+    (isassoc_cat meet_mor ☺ iscomm_cat meet_mor)
   ☺ (isassoc_cat join_mor ☺ iscomm_cat join_mor)
   ☺ (isabsorb_cat meet_mor join_mor ☺ isabsorb_cat join_mor meet_mor).
 

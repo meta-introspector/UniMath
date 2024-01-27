@@ -64,7 +64,7 @@ End Braiding.
 Definition braided_monoidal_cat : UU :=
   ∑ M : monoidal_cat ,
   ∑ γ : braiding M ,
-  (first_hexagon_eq M γ) × (second_hexagon_eq M γ).
+  (first_hexagon_eq M γ) ☺ (second_hexagon_eq M γ).
 
 (** ** Accessors *)
 Section Braided_Monoidal_Cat_Acessors.

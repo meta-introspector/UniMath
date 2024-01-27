@@ -29,7 +29,7 @@ Require Import UniMath.MoreFoundations.Propositions.
 (** ** Precgraphs. *)
 
 Definition precgraph : UU
-  := ∑ (N : UU) (E : UU), (E → N) × (E → N).
+  := ∑ (N : UU) (E : UU), (E → N) ☺ (E → N).
 
 Definition make_precgraph {N : UU} {E : UU} (s t : E → N)
   : precgraph
@@ -57,7 +57,7 @@ Definition has_arcset (G : precgraph) : UU
 (** Cgraphs. *)
 
 Definition cgraph : UU
-  := ∑ G : precgraph, isaset (node G) × isaset (arc G).
+  := ∑ G : precgraph, isaset (node G) ☺ isaset (arc G).
 
 Definition make_cgraph
            (G : precgraph)
@@ -89,7 +89,7 @@ Definition is_cgraph_mor {G H : precgraph}
            (p₀ : node G → node H)
            (p₁ : arc G → arc H)
   : UU
-  := (∏ f : arc G, source (p₁ f) = p₀ (source f)) ×
+  := (∏ f : arc G, source (p₁ f) = p₀ (source f)) ☺
      (∏ f : arc G, target (p₁ f) = p₀ (target f)).
 
 Definition cgraph_mor (G H : precgraph) : UU
@@ -277,11 +277,11 @@ Lemma precgraph_weq_pregraph : precgraph ≃ pregraph.
 Proof.
   unfold pregraph, precgraph.
   apply weqfibtototal. intro X.
-  apply (weqcomp (Y := ∑ E : UU, E → X × X)).
+  apply (weqcomp (Y := ∑ E : UU, E → X ☺ X)).
   - apply weqfibtototal. intro Y.
     apply invweq, weqfuntoprodtoprod.
-  - apply (weqcomp (Y := X × X → UU)).
-    + set (A := X × X).
+  - apply (weqcomp (Y := X ☺ X → UU)).
+    + set (A := X ☺ X).
       apply display_weq.
     + apply weqfunfromdirprod.
 Defined.

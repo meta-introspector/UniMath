@@ -474,7 +474,7 @@ Defined.
 (** **** [modulefun] *)
 
 Definition ismodulefun {R : ring} {M N : module R} (f : M -> N) : UU :=
-   (isbinopfun f) × (islinear f).
+   (isbinopfun f) ☺ (islinear f).
 
 Definition make_ismodulefun {R : ring} {M N : module R} {f : M -> N}
            (H1 : isbinopfun f) (H2 : islinear f) : ismodulefun f :=

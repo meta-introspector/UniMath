@@ -14,13 +14,13 @@ Definition two_cat_data
   := ∑ (C : precategory_data)
        (cells_C : ∏ (x y : C), x --> y → x --> y → UU),
      (∏ (x y : C) (f : x --> y), cells_C _ _ f f)
-     × (∏ (x y : C) (f g h : x --> y),
+     ☺ (∏ (x y : C) (f g h : x --> y),
         cells_C _ _ f g → cells_C _ _ g h → cells_C _ _ f h)
-     × (∏ (x y z : C)
+     ☺ (∏ (x y z : C)
           (f : x --> y)
           (g1 g2 : y --> z),
         cells_C _ _ g1 g2 → cells_C _ _ (f · g1) (f · g2))
-     × (∏ (x y z : C)
+     ☺ (∏ (x y z : C)
           (f1 f2 : x --> y)
           (g : y --> z),
         cells_C _ _ f1 f2 → cells_C _ _ (f1 · g) (f2 · g)).
@@ -114,7 +114,7 @@ Defined.
 
 Definition two_cat_category
   : UU
-  := ∑ (C : two_cat_data), is_precategory C × has_homsets C.
+  := ∑ (C : two_cat_data), is_precategory C ☺ has_homsets C.
 
 
 Definition make_two_cat_category
@@ -140,37 +140,37 @@ Definition two_cat_laws (C : two_cat_category)
   : UU
   :=   (** 1a id2_left *)
        (∏ (a b : C) (f g : C⟦a, b⟧) (x : f ==> g), id2 f • x = x)
-     × (** 1b id2_right *)
+     ☺ (** 1b id2_right *)
        (∏ (a b : C) (f g : C⟦a, b⟧) (x : f ==> g), x • id2 g = x)
-     × (** 2 vassocr *)
+     ☺ (** 2 vassocr *)
        (∏ (a b : C) (f g h k : C⟦a, b⟧) (x : f ==> g) (y : g ==> h) (z : h ==> k),
         x • (y • z) = (x • y) • z)
-     × (** 3a lwhisker_id2 *)
+     ☺ (** 3a lwhisker_id2 *)
        (∏ (a b c : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧), f ◃ id2 g = id2 _)
-     × (** 3b id2_rwhisker *)
+     ☺ (** 3b id2_rwhisker *)
        (∏ (a b c : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧), id2 f ▹ g = id2 _)
-     × (** 4 lwhisker_vcomp *)
+     ☺ (** 4 lwhisker_vcomp *)
        (∏ (a b c : C) (f : C⟦a, b⟧) (g h i : C⟦b, c⟧) (x : g ==> h) (y : h ==> i),
         (f ◃ x) • (f ◃ y) = f ◃ (x • y))
-     × (** 5 rwhisker_vcomp *)
+     ☺ (** 5 rwhisker_vcomp *)
        (∏ (a b c : C) (f g h : C⟦a, b⟧) (i : C⟦b, c⟧) (x : f ==> g) (y : g ==> h),
         (x ▹ i) • (y ▹ i) = (x • y) ▹ i)
-     × (** 6 vcomp_whisker *)
+     ☺ (** 6 vcomp_whisker *)
        (∏ (a b c : C) (f g : C⟦a, b⟧) (h i : C⟦b, c⟧) (x : f ==> g) (y : h ==> i),
         (x ▹ h) • (g ◃ y) = (f ◃ y) • (x ▹ i))
-     × (** 7 naturality of left whiskering *)
+     ☺ (** 7 naturality of left whiskering *)
        (∏ (a b : C) (f g : C⟦a, b⟧) (x : f ==> g),
         (identity a ◃ x) • idto2mor (id_left g) = idto2mor (id_left f) • x)
-     × (** 8 naturality of right whiskering *)
+     ☺ (** 8 naturality of right whiskering *)
        (∏ (a b : C) (f g : C⟦a, b⟧) (x : f ==> g),
         (x ▹ identity b) • idto2mor (id_right g) = idto2mor (id_right f) • x)
-     × (** 9 left whisker of left whisker *)
+     ☺ (** 9 left whisker of left whisker *)
        (∏ (a b c d : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧) (h i : C⟦c, d⟧) (x : h ==> i),
         (f ◃ (g ◃ x)) • idto2mor (assoc f g i) = idto2mor (assoc f g h) • (f · g ◃ x))
-     × (** 10 right whisker of left whisker *)
+     ☺ (** 10 right whisker of left whisker *)
        (∏ (a b c d : C) (f : C⟦a, b⟧) (g h : C⟦b, c⟧) (i : C⟦c, d⟧) (x : g ==> h),
         (f ◃ (x ▹ i) • idto2mor (assoc f h i) = idto2mor (assoc f g i) • ((f ◃ x) ▹ i)))
-     × (** 11 right whisker of right whisker *)
+     ☺ (** 11 right whisker of right whisker *)
        (∏ (a b c d : C) (f g : C⟦a, b⟧) (h : C⟦b, c⟧) (i : C⟦c, d⟧) (x : f ==> g),
         idto2mor (assoc f h i) • (x ▹ h ▹ i) = (x ▹ h · i) • idto2mor (assoc g h i)).
 

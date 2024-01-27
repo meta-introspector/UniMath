@@ -45,7 +45,7 @@ Section adjunctions.
 
 Definition adjunction_data (A B : category) : UU
   := ∑ (F : functor A B) (G : functor B A),
-     nat_trans (functor_identity A) (F ∙ G) ×
+     nat_trans (functor_identity A) (F ∙ G) ☺
                nat_trans (G ∙ F) (functor_identity B).
 
 Definition make_adjunction_data {A B : category}
@@ -80,7 +80,7 @@ Definition triangle_2_statement {A B : category} (X : adjunction_data A B)
   := ∏ b : B, η (G b) · # G (ε b) = identity (G b).
 
 Definition form_adjunction' {A B} (X : adjunction_data A B) : UU
-  := triangle_1_statement X × triangle_2_statement X.
+  := triangle_1_statement X ☺ triangle_2_statement X.
 
 Definition form_adjunction {A B : category} (F : functor A B) (G : functor B A)
              (eta : nat_trans (functor_identity A) (functor_composite F G))
@@ -106,7 +106,7 @@ Definition make_form_adjunction {A B : category} {F : functor A B} {G : functor 
 
   Definition are_adjoints {A B : category} (F : functor A B) (G : functor B A) : UU :=
     ∑ (etaeps : (nat_trans (functor_identity A) (functor_composite F G))
-                  × (nat_trans (functor_composite G F) (functor_identity B))),
+                  ☺ (nat_trans (functor_composite G F) (functor_identity B))),
     form_adjunction F G (pr1 etaeps) (pr2 etaeps).
 
   Definition make_are_adjoints {A B : category}
@@ -804,7 +804,7 @@ End HomSetIso_from_Adjunction.
 Definition natural_hom_weq {C D : precategory} (F : functor C D) (G : functor D C) : UU
   := ∑ (hom_weq :  ∏ {A : C} {B : D}, F A --> B ≃ A --> G B),
        (∏ (A : C) (B : D) (f : F A --> B) (X : C) (h : X --> A),
-        hom_weq (#F h · f) = h · hom_weq f) ×
+        hom_weq (#F h · f) = h · hom_weq f) ☺
        (∏ (A : C) (B : D) (f : F A --> B) (Y : D) (k : B --> Y),
         hom_weq (f · k) = hom_weq f · #G k).
 
@@ -956,7 +956,7 @@ Definition are_relative_adjoints {I: precategory_data} {C D: precategory_data}
   (J: functor_data I C) (L: functor_data I D) (R: functor_data D C) : UU
   :=  ∑ (hom_weq :  ∏ {X : I} {Y : D}, L X --> Y ≃ J X --> R Y),
        (∏ (Y : I) (Z : D) (f : L Y --> Z) (X : I) (h : X --> Y),
-        hom_weq (#L h · f) = #J h · hom_weq f) ×
+        hom_weq (#L h · f) = #J h · hom_weq f) ☺
        (∏ (X : I) (Y : D) (f : L X --> Y) (Z : D) (k : Y --> Z),
         hom_weq (f · k) = hom_weq f · #R k).
 

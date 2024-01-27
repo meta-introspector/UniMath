@@ -899,7 +899,7 @@ Section StructureEnrichmentColimits.
          (pr2 X)
          (E x (prods X (λ _, x)))
          (CoproductIn _ _ (prods X (λ _, x)))
-       ×
+       ☺
        (∏ (y : C),
         mor_hset_struct
           P

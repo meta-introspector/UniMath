@@ -25,7 +25,7 @@ Section quotmod_rel.
     ∏ r a b, E a b -> E (r * a) (r * b).
 
   Definition module_eqrel : UU :=
-    ∑ E : eqrel M, isbinophrel E × isactionhrel E.
+    ∑ E : eqrel M, isbinophrel E ☺ isactionhrel E.
   Definition hrelmodule_eqrel (E : module_eqrel) : eqrel M := pr1 E.
   Coercion hrelmodule_eqrel : module_eqrel >-> eqrel.
 

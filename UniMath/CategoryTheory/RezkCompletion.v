@@ -12,7 +12,7 @@ Section DefinitionRezkCompletion.
     := ∏ C : category,
         ∑ D : univalent_category,
           ∑ H : functor C D,
-            essentially_surjective H × fully_faithful H.
+            essentially_surjective H ☺ fully_faithful H.
 
 End DefinitionRezkCompletion.
 

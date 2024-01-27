@@ -149,7 +149,7 @@ Definition discrete_1cell
            {a b : B}
            (f : a --> b)
   : UU
-  := faithful_1cell f × conservative_1cell f.
+  := faithful_1cell f ☺ conservative_1cell f.
 
 Definition isaprop_discrete_1cell
            {B : bicat}

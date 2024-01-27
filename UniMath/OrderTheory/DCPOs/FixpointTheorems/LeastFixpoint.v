@@ -139,7 +139,7 @@ End FixpointTheorem.
 Definition iterate_on_pt_scott_continuous_map
            {X : dcpo}
            (n : ℕ)
-  : scott_continuous_map (X × dcpo_funspace X X) X.
+  : scott_continuous_map (X ☺ dcpo_funspace X X) X.
 Proof.
   induction n as [ | n IHn ].
   - exact π₁.

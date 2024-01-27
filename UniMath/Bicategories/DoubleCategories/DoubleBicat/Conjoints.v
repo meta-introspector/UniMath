@@ -52,7 +52,7 @@ Definition are_conjoints
   := ∑ (η : square_double_bicat h (id_h x) (id_v x) v)
        (ε : square_double_bicat (id_h y) h v (id_v y)),
      (rinvunitor _ ◃s (lunitor _ ▹s ε ⋆v η) = id_h_square_bicat _)
-     ×
+     ☺
      (lunitor _ ▿s (rinvunitor _ ▵s (η ⋆h ε)) = id_v_square_bicat _).
 
 Definition make_are_conjoints

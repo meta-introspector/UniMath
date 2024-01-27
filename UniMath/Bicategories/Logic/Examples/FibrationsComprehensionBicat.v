@@ -334,7 +334,7 @@ Section LocalCartesianFibration.
     : isaprop
         (∑ δ,
          δ ▹ _ = δp
-         ×
+         ☺
          δ • total_nat_trans (pr1 αα) = γ).
   Proof.
     use invproofirrelevance.

@@ -28,7 +28,7 @@ Section StreetOpFibration.
          (p : #F g = #F f · h),
        ∃! (φ : e₂ --> e₃),
        #F φ = h
-       ×
+       ☺
        f · φ = g.
 
   Definition isaprop_is_opcartesian_sopfib
@@ -103,9 +103,9 @@ Section StreetOpFibration.
          (b : B)
          (f : F e --> b),
        ∑ (bb : E)
-         (ff_i : e --> bb × z_iso b (F bb)),
+         (ff_i : e --> bb ☺ z_iso b (F bb)),
        # F (pr1 ff_i) = f · pr2 ff_i
-       ×
+       ☺
        is_opcartesian_sopfib (pr1 ff_i).
 End StreetOpFibration.
 
@@ -127,7 +127,7 @@ Section OpcleavingToStreetOpFib.
         (g : e₁ --> z)
         (h : P e₂ --> P z)
         (p : # P g = # P f · h)
-    : isaprop (∑ φ : E ⟦ e₂, z ⟧, # P φ = h × f · φ = g).
+    : isaprop (∑ φ : E ⟦ e₂, z ⟧, # P φ = h ☺ f · φ = g).
   Proof.
     pose (lift := H (pr1 z) (pr2 z) h (transportf (λ z, _ -->[ z ] _) p (pr2 g))).
     use invproofirrelevance.
@@ -229,7 +229,7 @@ Section OpcleavingToStreetOpFib.
       apply D.
     }
     pose (φφ₁ := (g ,, pr1 φ₁) : E ⟦ e₂ , z,, zz ⟧).
-    assert (# P φφ₁ = g × f · φφ₁ = pr1 f · g ,, gf) as H₁.
+    assert (# P φφ₁ = g ☺ f · φφ₁ = pr1 f · g ,, gf) as H₁.
     {
       split ; cbn.
       - apply idpath.
@@ -237,7 +237,7 @@ Section OpcleavingToStreetOpFib.
         exact (pr2 φ₁).
     }
     pose (φφ₂ := (g ,, pr1 φ₂) : E ⟦ e₂ , z,, zz ⟧).
-    assert (# P φφ₂ = g × f · φφ₂ = pr1 f · g ,, gf) as H₂.
+    assert (# P φφ₂ = g ☺ f · φφ₂ = pr1 f · g ,, gf) as H₂.
     {
       split ; cbn.
       - apply idpath.
@@ -583,7 +583,7 @@ Section CompositionOpCartesian.
     Qed.
 
     Definition comp_is_opcartesian_sopfib_factor_unique
-      : isaprop (∑ φ, # F φ = h₂ × f · g · φ = h₁).
+      : isaprop (∑ φ, # F φ = h₂ ☺ f · g · φ = h₁).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.

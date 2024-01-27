@@ -153,7 +153,7 @@ Section γ_laws.
 End γ_laws.
 
 Definition relativelaxcommutator: UU := ∑ γ : relativelaxcommutator_data,
-      relativelaxcommutator_nat γ × relativelaxcommutator_tensor γ × relativelaxcommutator_unit γ.
+      relativelaxcommutator_nat γ ☺ relativelaxcommutator_tensor γ ☺ relativelaxcommutator_unit γ.
 
 Definition relativelaxcommutator_lddata (γ : relativelaxcommutator): relativelaxcommutator_data := pr1 γ.
 Coercion relativelaxcommutator_lddata : relativelaxcommutator >-> relativelaxcommutator_data.

@@ -231,12 +231,12 @@ Definition disp_psfunctor_rwhisker_law : UU
 
 Definition is_disp_psfunctor : UU
     := disp_psfunctor_id2_law
-         × disp_psfunctor_vcomp2_law
-         × disp_psfunctor_lunitor_law
-         × disp_psfunctor_runitor_law
-         × disp_psfunctor_lassociator_law
-         × disp_psfunctor_lwhisker_law
-         × disp_psfunctor_rwhisker_law.
+         ☺ disp_psfunctor_vcomp2_law
+         ☺ disp_psfunctor_lunitor_law
+         ☺ disp_psfunctor_runitor_law
+         ☺ disp_psfunctor_lassociator_law
+         ☺ disp_psfunctor_lwhisker_law
+         ☺ disp_psfunctor_rwhisker_law.
 
 Definition disp_psfunctor_id2 (H : is_disp_psfunctor) := pr1 H.
 

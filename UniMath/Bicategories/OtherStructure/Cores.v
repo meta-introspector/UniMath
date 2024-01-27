@@ -154,4 +154,4 @@ Definition has_cores
               (groupoidal_to_inv2cells B)),
      ∏ (x : B),
      let ε := pr1 (pr12 R (x ,, tt)) in
-     is_eso ε × pseudomonic_1cell ε.
+     is_eso ε ☺ pseudomonic_1cell ε.

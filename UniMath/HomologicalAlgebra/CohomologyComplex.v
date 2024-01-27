@@ -1614,7 +1614,7 @@ Section def_kernel_cokernel_complex.
                           (DSq (AbelianToAdditive A) C i) =
                  transportf (λ i0 : pr1 hz, A ⟦ C i0, Cokernel (Diff C (i - 1)) ⟧)
                             (hzrminusplus i 1) (CokernelArrow (Cokernel (Diff C (i - 1)))) · f)
-                  × (CokernelOut (to_Zero A) (Cokernel (Diff C (i - 1))) (C (i + 1))
+                  ☺ (CokernelOut (to_Zero A) (Cokernel (Diff C (i - 1))) (C (i + 1))
                                  (transportf (λ x : A, A ⟦ x, C (i + 1) ⟧)
                                              (! maponpaths C (hzrminusplus i 1)) (Diff C i))
                                  (CokernelKernelMorphism_comm1' C i) =
@@ -1654,7 +1654,7 @@ Section def_kernel_cokernel_complex.
                     (transportf (λ (i0 : hz), A⟦C i0, (Cokernel (Diff C (i - 1)))⟧)
                                 (hzrminusplus i 1)
                                 (CokernelArrow (Cokernel (Diff C (i - 1))))) · f)
-                     × ((CokernelOut (to_Zero A) (Cokernel (Diff C (i - 1))) (C (i + 1))
+                     ☺ ((CokernelOut (to_Zero A) (Cokernel (Diff C (i - 1))) (C (i + 1))
                                      (transportf (λ x : A, A ⟦ x, C (i + 1) ⟧)
                                                  (! maponpaths C (hzrminusplus i 1)) (Diff C i))
                                      (CokernelKernelMorphism_comm1' C i)) =

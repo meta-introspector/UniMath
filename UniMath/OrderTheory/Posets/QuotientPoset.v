@@ -291,7 +291,7 @@ Section SmashLowerSet.
           (RY : pointed_PartialOrder Y).
 
   Definition smash_set
-    : X × Y → hProp
+    : X ☺ Y → hProp
     := λ xy, pr1 xy = ⊥_{RX} ∨ pr2 xy = ⊥_{RY}.
 
   Definition smash_set_downward_closd

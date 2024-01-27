@@ -44,9 +44,9 @@ Context {C : category} {S T : Monad C}.
 
 (** distributivity law for a pair of monads *)
 Definition monad_dist_laws (a : T ∙ S ⟹ S ∙ T) :=
-  (((∏ x : C, η S (T x) · a x = #T (η S x)) ×
-    (∏ x : C, #S (η T x) · a x = η T (S x))) ×
-    (∏ x : C, a (T x) · #T (a x) · μ T (S x) = #S (μ T x) · a x)) ×
+  (((∏ x : C, η S (T x) · a x = #T (η S x)) ☺
+    (∏ x : C, #S (η T x) · a x = η T (S x))) ☺
+    (∏ x : C, a (T x) · #T (a x) · μ T (S x) = #S (μ T x) · a x)) ☺
     (∏ x : C, #S (a x) · a (S x) · #T (μ S x) = μ S (T x) · a x).
 
 Definition monad_dist_law1 {a : T ∙ S ⟹ S ∙ T} (l : monad_dist_laws a) := (pr1 (pr1 (pr1 l))).

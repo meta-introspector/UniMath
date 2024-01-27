@@ -59,7 +59,7 @@ Section BraidedSymmetricMonoidalCategories.
              {C : category} {M : monoidal C}
              (B : braiding_data M)
     : UU
-    := braiding_law_naturality_left B × braiding_law_naturality_right B.
+    := braiding_law_naturality_left B ☺ braiding_law_naturality_right B.
 
   Definition braiding_iso
              {C : category} {M : monoidal C}
@@ -89,13 +89,13 @@ Section BraidedSymmetricMonoidalCategories.
              {C : category} {M : monoidal C}
              (B : braiding_data M)
     : UU
-    := braiding_law_hexagon1 B × braiding_law_hexagon2 B.
+    := braiding_law_hexagon1 B ☺ braiding_law_hexagon2 B.
 
   Definition braiding_laws
              {C : category} {M : monoidal C}
              (B Binv : braiding_data M)
     : UU
-    := braiding_law_naturality B × braiding_iso B Binv × braiding_law_hexagon B.
+    := braiding_law_naturality B ☺ braiding_iso B Binv ☺ braiding_law_hexagon B.
 
   (** the following is done for the situation of symmetric monoidal categories only *)
   Definition braiding_laws_one_hexagon
@@ -103,7 +103,7 @@ Section BraidedSymmetricMonoidalCategories.
              {M : monoidal C}
              (B : braiding_data M)
     : UU
-    := braiding_law_naturality B × braiding_iso B B × braiding_law_hexagon1 B.
+    := braiding_law_naturality B ☺ braiding_iso B B ☺ braiding_law_hexagon1 B.
 
   (*
   Definition braiding_laws_to_braiding_laws_one_hexagon
@@ -327,14 +327,14 @@ Definition sym_mon_cat_laws_tensored
            (c : ∏ (x y : V), x ⊗ y --> y ⊗ x)
   : UU
   := (∏ (x y : V), c x y · c y x = identity _)
-     ×
+     ☺
      (∏ (x₁ x₂ y₁ y₂ : V)
         (f : x₁ --> x₂)
         (g : y₁ --> y₂),
       f #⊗ g · c x₂ y₂
       =
       c x₁ y₁ · g #⊗ f)
-     ×
+     ☺
      (∏ (x y z : V),
       mon_lassociator x y z
       · c x (y ⊗ z)

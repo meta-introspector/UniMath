@@ -74,17 +74,17 @@ Section SmashProduct.
    1. Equivalence relation of smash product
    *)
   Definition product_point_coordinate
-             (xy : X × Y)
+             (xy : X ☺ Y)
     : UU
     := (pr1 xy = Px) ⨿ (pr2 xy = Py).
 
   Definition smash_hrel
-    : hrel (X × Y)
+    : hrel (X ☺ Y)
     := λ xy₁ xy₂,
        xy₁ = xy₂
        ∨
        (product_point_coordinate xy₁
-        ×
+        ☺
         product_point_coordinate xy₂).
 
   Proposition iseqrel_smash_hrel
@@ -126,7 +126,7 @@ Section SmashProduct.
   Qed.
 
   Definition smash_eqrel
-    : eqrel (X × Y).
+    : eqrel (X ☺ Y).
   Proof.
     use make_eqrel.
     - exact smash_hrel.
@@ -227,7 +227,7 @@ Definition hset_struct_with_smash_data
            (Pt : pointed_hset_struct P)
   : UU
   := P boolset
-     ×
+     ☺
      (∏ (X Y : hSet)
         (PX : P X)
         (PY : P Y),
@@ -239,14 +239,14 @@ Definition hset_struct_with_smash_laws
            (SP : hset_struct_with_smash_data P Pt)
   : UU
   := (hset_struct_point Pt (pr1 SP) = false)
-     ×
+     ☺
      (∏ (X Y : hSet)
         (PX : P X)
         (PY : P Y),
       hset_struct_point Pt (pr2 SP X Y PX PY)
       =
       setquotpr _ (hset_struct_point Pt PX ,, hset_struct_point Pt PY))
-     ×
+     ☺
      (∏ (Y : hSet)
         (PY : P Y)
         (y : Y),
@@ -255,7 +255,7 @@ Definition hset_struct_with_smash_laws
         (pr1 SP)
         PY
         (pointed_hset_struct_map_from_unit Pt PY y))
-     ×
+     ☺
      (∏ (X Y : hSet)
         (PX : P X)
         (PY : P Y)
@@ -268,7 +268,7 @@ Definition hset_struct_with_smash_laws
         PX
         PY
         (pointed_hset_struct_unit_map Pt PY f g))
-     ×
+     ☺
      ∏ (X Y : hSet)
        (PX : P X)
        (PY : P Y),
@@ -278,20 +278,20 @@ Definition hset_struct_with_smash_laws
         PX
         (pr2 SP X Y PX PY)
         (λ x, setquotpr (smash_eqrel P Pt PX PY) (x ,, y)))
-     ×
+     ☺
      (∏ (x : X),
       mor_hset_struct
         P
         PY
         (pr2 SP X Y PX PY)
         (λ y, setquotpr (smash_eqrel P Pt PX PY) (x ,, y)))
-      ×
+      ☺
       (mor_hset_struct
         P
         (hset_struct_prod P PX PY)
         (pr2 SP X Y PX PY)
         (setquotpr (smash_eqrel P Pt PX PY)))
-      ×
+      ☺
       (∏ (Z : hSet)
          (PZ : P Z)
          (h : X → Y → Z)
@@ -692,7 +692,7 @@ Definition hset_struct_with_smash_closed_adj_laws
         (pr2 (hset_struct_with_smash_setquot_ob SP PX PY))
         (pr2 PZ)
         (hset_struct_smash_curry_fun PC f))
-     ×
+     ☺
      (∏ (PX PY PZ : category_of_hset_struct P)
         (f : hset_struct_with_smash_setquot_ob SP PX PY --> PZ),
       mor_hset_struct
@@ -789,7 +789,7 @@ Definition hset_struct_with_smash_closed_laws_enrich
                 (hset_struct_with_smash_setquot_ob SP PX PZ)
                 PY))
         (hset_struct_smash_curry PC))
-     ×
+     ☺
      (∏ (PX PY PZ : category_of_hset_struct P),
       mor_hset_struct
         P

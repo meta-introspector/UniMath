@@ -44,7 +44,7 @@ Definition discrete_pr1_category
            (D : disp_cat C)
   : UU
   := faithful (pr1_category D)
-     ×
+     ☺
      conservative (pr1_category D).
 
 Definition pseudomonic_pr1_category
@@ -147,7 +147,7 @@ Definition discrete_disp_cat
            {C : category}
            (D : disp_cat C)
   : UU
-  := locally_propositional D × groupoidal_disp_cat D.
+  := locally_propositional D ☺ groupoidal_disp_cat D.
 
 (**
  We define pseudomonic displayed categories as well
@@ -156,7 +156,7 @@ Definition pseudomonic_disp_cat
            {C : category}
            (D : disp_cat C)
   : UU
-  := locally_propositional D × locally_iso_inhabited D.
+  := locally_propositional D ☺ locally_iso_inhabited D.
 
 Definition isaprop_pseudomonic_disp_cat
            {C : category}
@@ -236,7 +236,7 @@ Definition pseudomonic_weq_locally_prop_and_iso_contractible
            (D : disp_cat C)
   : pseudomonic_disp_cat D
     ≃
-    locally_propositional D × locally_iso_contractible D.
+    locally_propositional D ☺ locally_iso_contractible D.
 Proof.
   use weqimplimpl.
   - intro H.

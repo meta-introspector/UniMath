@@ -105,7 +105,7 @@ Section CofreeComonoid.
   Let m : M → M → M := λ x y, op x y.
 
   Definition cofree_comonoid_REL_comult
-    : REL_sym_mon_closed_cat ⟦ M , (M × M)%set ⟧
+    : REL_sym_mon_closed_cat ⟦ M , (M ☺ M)%set ⟧
     := λ x y, (m (pr1 y) (pr2 y) = x)%logic.
 
   Definition cofree_comonoid_REL_counit

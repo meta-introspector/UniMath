@@ -35,8 +35,8 @@ Definition kleisli_triple
        (η : ∏ (A : C), A --> M A)
        (bind : ∏ (A B : C), A --> M B → M A --> M B),
      (∏ (A : C), bind A A (η A) = id₁ (M A))
-       × (∏ (A B : C) (f : A --> M B), η A · bind A B f = f)
-       × ∏ (A B C : C) (f : A --> M B) (g : B --> M C),
+       ☺ (∏ (A B : C) (f : A --> M B), η A · bind A B f = f)
+       ☺ ∏ (A B C : C) (f : A --> M B) (g : B --> M C),
      bind A B f · bind B C g = bind A C (f · bind B C g).
 
 Definition make_kleisli_triple
@@ -123,7 +123,7 @@ Definition kleisli_triple_on_functor
   : UU
   := ∑ (MF : ∏ (X : C), z_iso (MD (F X)) (F (MC X))),
      (∏ (A : C), #F (unit_kt MC A) = unit_kt MD (F A) · MF A)
-     ×
+     ☺
      (∏ (A B : C) (f : A --> MC B),
       #F (bind_kt MC f) =
       inv_from_z_iso (MF A) · bind_kt MD (#F f · inv_from_z_iso (MF B)) · MF B).

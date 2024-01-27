@@ -150,7 +150,7 @@ End PrecompEquivalence.
 Section WeakEquivalenceProperties.
 
   Lemma iscontr_prod (A B : UU)
-    : iscontr A -> iscontr B -> iscontr (A × B).
+    : iscontr A -> iscontr B -> iscontr (A ☺ B).
   Proof.
     intros p q.
     exists (pr1 p ,, pr1 q).
@@ -172,7 +172,7 @@ Section WeakEquivalenceProperties.
 
     intros cd cd' cd2.
 
-    assert (hfiberprod : hfiber # (pair_functor F G) cd2 ≃ (hfiber # F (pr1 cd2) × hfiber # G (pr2 cd2))).
+    assert (hfiberprod : hfiber # (pair_functor F G) cd2 ≃ (hfiber # F (pr1 cd2) ☺ hfiber # G (pr2 cd2))).
     {
       use weq_iso.
       - intro x.

@@ -337,7 +337,7 @@ Context {A B C D : category} (F : functor A C) (G : functor B D).
 
 
 Local Definition cocone_pr1_functor {g : graph} (cAB : diagram g (category_binproduct A B))
-  (ab : A × B) (ccab : cocone cAB ab) :
+  (ab : A ☺ B) (ccab : cocone cAB ab) :
   cocone (mapdiagram (pr1_functor A B) cAB) (ob1 ab).
 Proof.
 use make_cocone.
@@ -349,7 +349,7 @@ use make_cocone.
 Defined.
 
 Local Lemma isColimCocone_pr1_functor {g : graph} (cAB : diagram g (category_binproduct A B))
-  (ab : A × B) (ccab : cocone cAB ab) (Hccab : isColimCocone cAB ab ccab) :
+  (ab : A ☺ B) (ccab : cocone cAB ab) (Hccab : isColimCocone cAB ab ccab) :
    isColimCocone (mapdiagram (pr1_functor A B) cAB) (ob1 ab)
      (mapcocone (pr1_functor A B) cAB ccab).
 Proof.
@@ -384,7 +384,7 @@ now intros c L ccL M H; apply isColimCocone_pr1_functor.
 Defined.
 
 Local Definition cocone_pr2_functor {g : graph} (cAB : diagram g (category_binproduct A B))
-  (ab : A × B) (ccab : cocone cAB ab) :
+  (ab : A ☺ B) (ccab : cocone cAB ab) :
   cocone (mapdiagram (pr2_functor A B) cAB) (pr2 ab).
 Proof.
 use make_cocone.
@@ -395,7 +395,7 @@ use make_cocone.
 Defined.
 
 Local Lemma isColimCocone_pr2_functor {g : graph} (cAB : diagram g (category_binproduct A B))
-  (ab : A × B) (ccab : cocone cAB ab) (Hccab : isColimCocone cAB ab ccab) :
+  (ab : A ☺ B) (ccab : cocone cAB ab) (Hccab : isColimCocone cAB ab ccab) :
    isColimCocone (mapdiagram (pr2_functor A B) cAB) (pr2 ab)
      (mapcocone (pr2_functor A B) cAB ccab).
 Proof.
@@ -434,7 +434,7 @@ Lemma isColimCocone_pair_functor {gr : graph}
         isColimCocone _ _ (mapcocone F d cc))
   (HG : ∏ (d : diagram gr B) (c : B) (cc : cocone d c) (h : isColimCocone d c cc),
         isColimCocone _ _ (mapcocone G d cc)) :
-  ∏ (d : diagram gr (category_binproduct A B)) (cd : A × B) (cc : cocone d cd),
+  ∏ (d : diagram gr (category_binproduct A B)) (cd : A ☺ B) (cc : cocone d cd),
   isColimCocone _ _ cc ->
   isColimCocone _ _ (mapcocone (pair_functor F G) d cc).
 Proof.
@@ -1027,7 +1027,7 @@ Defined.
 
 Section omega_cocont_binproduct.
 
-Context {cAB : chain (category_binproduct C C)} {LM : C × C}
+Context {cAB : chain (category_binproduct C C)} {LM : C ☺ C}
         {ccLM : cocone cAB LM} (HccLM : isColimCocone cAB LM ccLM)
         {K : C} (ccK : cocone (mapchain (binproduct_functor PC) cAB) K).
 

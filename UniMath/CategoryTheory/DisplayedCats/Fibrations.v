@@ -456,7 +456,7 @@ Definition is_discrete_fibration {C : category} (D : disp_cat C) : UU
 :=
   (forall (c c' : C) (f : c' --> c) (d : D c),
           ∃! d' : D c', d' -->[f] d)
-  ×
+  ☺
   (forall c, isaset (D c)).
 
 Definition discrete_fibration C : UU
@@ -1329,7 +1329,7 @@ Definition is_split_comp {C : category} {D : disp_cat C}
 
 Definition is_split {C : category} {D : disp_cat C}
            (X : cleaving D) : UU
-  := is_split_id X × is_split_comp X × (∏ c, isaset (D c)).
+  := is_split_id X ☺ is_split_comp X ☺ (∏ c, isaset (D c)).
 
 
 Lemma is_split_fibration_from_discrete_fibration

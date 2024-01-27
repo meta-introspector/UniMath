@@ -34,7 +34,7 @@ Section Relations.
     : precategory_id_comp REL_precategory_ob_mor.
   Proof.
     exists (λ _ x1 x2, eqset x1 x2).
-    exact (λ X Y Z r1 r2 x z, ∃ y : pr1 Y, r1 x y × r2 y z).
+    exact (λ X Y Z r1 r2 x z, ∃ y : pr1 Y, r1 x y ☺ r2 y z).
   Defined.
 
   Definition REL_precategory_data : precategory_data.
@@ -275,7 +275,7 @@ Section Isos.
              (py : (∏ y : Y, ∃! x : X, r x y))
              (px : ∏ x: X, ∃! y : Y, r x y)
              (x1 x2 : X)
-    : (∃ y : pr1 Y, r x1 y × r x2 y) = eqset x1 x2.
+    : (∃ y : pr1 Y, r x1 y ☺ r x2 y) = eqset x1 x2.
   Proof.
     apply hPropUnivalence.
       + intro q.
@@ -292,7 +292,7 @@ Section Isos.
 
   Definition unique_image_to_is_z_iso_in_REL
              {X Y : hSet} (r : bin_hrel X Y)
-    : (∏ x: X, ∃! y : Y, r x y) × (∏ y : Y, ∃! x : X, r x y)
+    : (∏ x: X, ∃! y : Y, r x y) ☺ (∏ y : Y, ∃! x : X, r x y)
       -> is_z_isomorphism (C := REL) r.
   Proof.
     intros [px py].
@@ -318,7 +318,7 @@ Section Isos.
   Definition is_z_iso_in_REL_simplified
              {X Y : hSet} (r : bin_hrel X Y)
     : is_z_isomorphism (C := REL) r
-      <-> (∏ x: X, ∃! y : Y, r x y) × (∏ y : Y, ∃! x : X, r x y).
+      <-> (∏ x: X, ∃! y : Y, r x y) ☺ (∏ y : Y, ∃! x : X, r x y).
   Proof.
     split.
     - intro i.

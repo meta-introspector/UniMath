@@ -117,7 +117,7 @@ Definition disp_cat_id_comp (C : precategory_data)
   (D : disp_cat_ob_mor C)
   : UU
 := (forall (x:C) (xx : D x), xx -->[identity x] xx)
-  × (forall (x y z : C) (f : x --> y) (g : y --> z) (xx:D x) (yy:D y) (zz:D z),
+  ☺ (forall (x y z : C) (f : x --> y) (g : y --> z) (xx:D x) (yy:D y) (zz:D z),
            (xx -->[f] yy) -> (yy -->[g] zz) -> (xx -->[f · g] zz)).
 
 Definition disp_cat_data C := total2 (disp_cat_id_comp C).
@@ -171,14 +171,14 @@ Definition disp_cat_axioms (C : category) (D : disp_cat_data C)
 := (∏ x y (f : x --> y) (xx : D x) yy (ff : xx -->[f] yy),
      id_disp _ ;; ff
      = transportb _ (id_left _) ff)
-   × (∏ x y (f : x --> y) (xx : D x) yy (ff : xx -->[f] yy),
+   ☺ (∏ x y (f : x --> y) (xx : D x) yy (ff : xx -->[f] yy),
      ff ;; id_disp _
      = transportb _ (id_right _) ff)
-   × (∏ x y z w f g h (xx : D x) (yy : D y) (zz : D z) (ww : D w)
+   ☺ (∏ x y z w f g h (xx : D x) (yy : D y) (zz : D z) (ww : D w)
         (ff : xx -->[f] yy) (gg : yy -->[g] zz) (hh : zz -->[h] ww),
      ff ;; (gg ;; hh)
      = transportb _ (assoc _ _ _) ((ff ;; gg) ;; hh))
-   × (∏ x y f (xx : D x) (yy : D y), isaset (xx -->[f] yy)).
+   ☺ (∏ x y f (xx : D x) (yy : D y), isaset (xx -->[f] yy)).
 
 
 Definition disp_cat (C : category) := total2 (disp_cat_axioms C).

@@ -68,7 +68,7 @@ Section YonedaLemma.
           (E : enrichment C V)
           (EqV : Equalizers V)
           (PV : Products C V)
-          (PV' : Products (C × C) V).
+          (PV' : Products (C ☺ C) V).
 
   (** * 1. The inverse of the Yoneda embedding *)
   Section Inverse.
@@ -151,12 +151,12 @@ Section YonedaLemma.
       unfold enriched_functor_left_map_ob, enriched_functor_right_map_ob in p₁.
       (* we apply naturality on a morphism going from `x` to `y` *)
       pose (maponpaths
-              (λ f, f · ProductPr (C ^opp × C ^opp) V _ (x ,, z))
+              (λ f, f · ProductPr (C ^opp ☺ C ^opp) V _ (x ,, z))
               p₁ : _ = _) as p₂.
       rewrite !assoc' in p₂.
-      pose (!(maponpaths (λ z, _ · z) (ProductPrCommutes (C^opp × C^opp) V _ _ _ _ _))
+      pose (!(maponpaths (λ z, _ · z) (ProductPrCommutes (C^opp ☺ C^opp) V _ _ _ _ _))
             @ p₂
-            @ maponpaths (λ z, _ · z) (ProductPrCommutes (C^opp × C^opp) V _ _ _ _ _))
+            @ maponpaths (λ z, _ · z) (ProductPrCommutes (C^opp ☺ C^opp) V _ _ _ _ _))
         as p₃.
       cbn -[sym_mon_braiding] in p₃.
       pose (maponpaths (λ z, z #⊗ h · internal_eval _ _) p₃) as p.

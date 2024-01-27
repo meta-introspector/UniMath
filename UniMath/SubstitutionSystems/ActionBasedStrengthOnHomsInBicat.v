@@ -1166,7 +1166,7 @@ End Instantiation_To_FunctorCategory_And_PointedEndofunctors.
 Section Instantiation_To_FunctorCategory_And_PointedEndofunctors_Univalence.
   Context (C : category) (D : univalent_category) (D' : category).
   Definition BothCategoriesUnivalent:
-  is_univalent (Signature_category C D D') ×
+  is_univalent (Signature_category C D D') ☺
                is_univalent (Strong_Functor_category (Mon_endo' C (homset_property C))
                                                      (domain_action C (homset_property C) D' (homset_property D'))
                                                      (target_action C (homset_property C) D (homset_property D))

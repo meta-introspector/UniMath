@@ -203,12 +203,12 @@ Section CommaObject.
                 • (ψ ◃ comma_cone_cell p)),
          ∃! (γ : φ ==> ψ),
          (γ ▹ comma_cone_pr1 p = α)
-         ×
+         ☺
          (γ ▹ comma_cone_pr2 p = β).
 
     Definition has_comma_ump
       : UU
-      := comma_ump_1 × comma_ump_2.
+      := comma_ump_1 ☺ comma_ump_2.
   End UniversalMappingPropertyStatements.
 
   Definition has_comma_ump_1

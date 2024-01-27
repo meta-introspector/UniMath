@@ -232,7 +232,7 @@ Section CoproductOfDCPO.
           (coproduct_set_PartialOrder _ (λ x, Y x))
           D
           (x ,, ⨆ DX)
-        ×
+        ☺
         (∏ (i : D), D i = (x ,, D' i)).
     Proof.
       assert (h := directed_set_all_incl).

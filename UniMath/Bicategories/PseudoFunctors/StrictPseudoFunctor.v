@@ -334,7 +334,7 @@ Definition is_strict_pstrans
       =
       (pr2 η _ _ f)
         • (##F α ▹ pr1 η Y))
-       ×
+       ☺
        (∏ (X : C),
         (pr1 η X ◃ strict_psfunctor_id_cell G X)
           • pr2 η _ _ (id₁ X)
@@ -342,7 +342,7 @@ Definition is_strict_pstrans
         (runitor (pr1 η X))
           • linvunitor (pr1 η X)
           • (strict_psfunctor_id_cell F X ▹ pr1 η X))
-       ×
+       ☺
        (∏ (X Y Z : C) (f : X --> Y) (g : Y --> Z),
         (pr1 η X ◃ strict_psfunctor_comp_cell G f g)
           • pr2 η _ _ (f · g)

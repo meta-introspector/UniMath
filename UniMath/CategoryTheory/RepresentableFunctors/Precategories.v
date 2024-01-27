@@ -516,7 +516,7 @@ Defined.
 Definition ZeroMaps (C:category) :=
   ∑ (zero : ∏ a b:C, a --> b),
   (∏ a b c, ∏ f:b --> c, f ∘ zero a b = zero a c)
-    ×
+    ☺
     (∏ a b c, ∏ f:c --> b, zero b a ∘ f = zero c a).
 
 Definition is {C:category} (zero: ZeroMaps C) {a b:C} (f:a-->b)

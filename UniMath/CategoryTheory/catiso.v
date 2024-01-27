@@ -22,7 +22,7 @@ Require Import UniMath.CategoryTheory.Equivalences.FullyFaithful.
 
 Definition is_catiso {A B : precategory_data}
   (F : functor A B)
-  := (fully_faithful F) × (isweq (functor_on_objects F)).
+  := (fully_faithful F) ☺ (isweq (functor_on_objects F)).
 
 Definition catiso (A B : precategory_data)
   := total2 (λ F : functor A B, is_catiso F).

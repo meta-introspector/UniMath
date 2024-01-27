@@ -51,7 +51,7 @@ Local Open Scope cat.
 
   Definition monoidalcategory_data (C : category): UU :=
     ∑ T : tensor_data C, ∑ I : C,
-          (leftunitor_data T I) × (rightunitor_data T I) × (associator_data T).
+          (leftunitor_data T I) ☺ (rightunitor_data T I) ☺ (associator_data T).
 
 Definition tensordata_from_monoidalcatdata {C : category} (MD : monoidalcategory_data C) : tensor_data C := (pr1 MD).
 Coercion tensordata_from_monoidalcatdata : monoidalcategory_data >-> tensor_data.
@@ -112,10 +112,10 @@ Coercion associatordata_from_monoidalcatdata : monoidalcategory_data >-> associa
            ∘ ((α w x y) ⊗^{T} (identity z))) =  (α w x (y⊗_{T} z)) ∘ (α (w⊗_{T}x) y z).
 
 Definition monoidal_laws {C : category} (MD : monoidalcategory_data C) : UU :=
-  (tensorfunctor_id MD) × (tensorfunctor_comp MD) × (associator_naturality MD) × (associator_is_natiso MD) ×
-                                                    (leftunitor_naturality MD) × (leftunitor_is_natiso MD) ×
-                                                    (rightunitor_naturality MD) × (rightunitor_is_natiso MD) ×
-                                                    (triangle_identity MD MD MD) × (pentagon_identity MD).
+  (tensorfunctor_id MD) ☺ (tensorfunctor_comp MD) ☺ (associator_naturality MD) ☺ (associator_is_natiso MD) ☺
+                                                    (leftunitor_naturality MD) ☺ (leftunitor_is_natiso MD) ☺
+                                                    (rightunitor_naturality MD) ☺ (rightunitor_is_natiso MD) ☺
+                                                    (triangle_identity MD MD MD) ☺ (pentagon_identity MD).
 
 Definition tensorfunctorialityid_from_monoidallaws {C : category} {MD : monoidalcategory_data C} (ML : monoidal_laws MD) : tensorfunctor_id MD := pr1 ML.
 Coercion tensorfunctorialityid_from_monoidallaws : monoidal_laws >-> tensorfunctor_id.

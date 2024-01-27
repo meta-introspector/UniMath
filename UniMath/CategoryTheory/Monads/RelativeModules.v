@@ -74,8 +74,8 @@ Section RelModule_Definition.
 
     Definition RelModule_laws (M : RelModule_data R) : UU
       := RelMonad_axioms R
-       × (∏ c, mbind M (r_eta R c) = identity _ )
-       × (∏ c d e (f : D ⟦J c, R d⟧) (g : D ⟦J d, R e⟧),
+       ☺ (∏ c, mbind M (r_eta R c) = identity _ )
+       ☺ (∏ c d e (f : D ⟦J c, R d⟧) (g : D ⟦J d, R e⟧),
           mbind M f · mbind M g = mbind M (f · r_bind R g)).
 
     Coercion relmonad_axiom_from_relmodule {M : RelModule_data R} (X : RelModule_laws M)

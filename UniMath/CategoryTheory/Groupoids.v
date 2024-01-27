@@ -84,7 +84,7 @@ Coercion univalent_groupoid_to_groupoid :
 
 (** An alternative characterization of univalence for groupoids *)
 Definition is_univalent_pregroupoid (pgpd : pregroupoid) :=
-  (∏ a b : ob pgpd, isweq (fun path : a = b => idtomor a b path)) ×
+  (∏ a b : ob pgpd, isweq (fun path : a = b => idtomor a b path)) ☺
   has_homsets pgpd.
 
 (** The morphism part of an isomorphism is an inclusion. *)
@@ -209,7 +209,7 @@ Abort.
     and isos induce equality (by univalence).
  *)
 Definition is_discrete (C : category) :=
-  (is_setcategory C × is_pregroupoid C × is_univalent C).
+  (is_setcategory C ☺ is_pregroupoid C ☺ is_univalent C).
 
 Definition discrete_category : UU := ∑ C : category, is_discrete C.
 Definition make_discrete_category :

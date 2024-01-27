@@ -4,8 +4,8 @@
 
  In this file, we look at displayed functor over the pair of identity functors.
  More specifically, suppose that we have two displayed category `D₁` and `D₂` over
- the category `C × C`, then we could consider
- - Displayed functors over the identity on `C × C`
+ the category `C ☺ C`, then we could consider
+ - Displayed functors over the identity on `C ☺ C`
  - Displayed functors over the pairing of the identity on `C` with itself.
  These two notions are equivalent and we construct an equivalence between them.
 

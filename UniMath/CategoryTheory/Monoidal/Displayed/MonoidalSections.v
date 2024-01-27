@@ -69,7 +69,7 @@ Section MonoidalSections.
   Defined.
 
   Definition smonoidal_data (sd : section_disp D) : UU
-    := (section_preserves_tensor_data sd) × (section_preserves_unit sd).
+    := (section_preserves_tensor_data sd) ☺ (section_preserves_unit sd).
   Definition smonoidal_preserves_tensor {sd : section_disp D} (ms : smonoidal_data sd)
     : section_preserves_tensor_data sd := pr1 ms.
   Definition smonoidal_preserves_unit {sd : section_disp D} (ms : smonoidal_data sd)
@@ -306,14 +306,14 @@ Section MonoidalSections.
   Definition smonoidal_laxlaws {sd : section_disp D} (ms : smonoidal_data sd) : UU
     := (section_preserves_tensor_nat_left
           (smonoidal_preserves_tensor ms))
-       × (section_preserves_tensor_nat_right
+       ☺ (section_preserves_tensor_nat_right
             (smonoidal_preserves_tensor ms))
-       × (section_preserves_associativity
+       ☺ (section_preserves_associativity
             (smonoidal_preserves_tensor ms))
-       × (section_preserves_leftunitality
+       ☺ (section_preserves_leftunitality
             (smonoidal_preserves_tensor ms)
             (smonoidal_preserves_unit ms))
-       × (section_preserves_rightunitality
+       ☺ (section_preserves_rightunitality
             (smonoidal_preserves_tensor ms)
             (smonoidal_preserves_unit ms)).
 
@@ -419,7 +419,7 @@ Section MonoidalSections.
              (ms : smonoidal_data sd)
     : UU
     := smonoidal_strongtensor (smonoidal_preserves_tensor ms)
-       ×
+       ☺
        smonoidal_strongunit (smonoidal_preserves_unit ms).
 
   Definition smonoidal (sd : section_disp D) : UU

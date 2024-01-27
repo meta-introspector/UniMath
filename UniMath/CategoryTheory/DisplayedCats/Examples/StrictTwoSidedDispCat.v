@@ -952,7 +952,7 @@ Section StrictTwosidedDispCatIso.
     Qed.
 
     Proposition is_z_iso_disp_strict_twosided_disp_cat_to_ob_weq
-                (x : C × C)
+                (x : C ☺ C)
       : isweq (F x).
     Proof.
       use isweq_iso.
@@ -973,7 +973,7 @@ Section StrictTwosidedDispCatIso.
 
   Section ToIso.
     Context (HF_ff : disp_functor_ff F)
-            (HF_weq : ∏ (x : C × C), isweq (F x)).
+            (HF_weq : ∏ (x : C ☺ C), isweq (F x)).
 
     Let φ₀ : ∏ (x y : C), D₁ x y ≃ D₂ x y
       := λ x y, make_weq _ (HF_weq (x ,, y)).
@@ -1282,7 +1282,7 @@ Section StrictTwosidedDispCatIso.
   End ToIso.
 
   Proposition is_z_iso_disp_strict_twosided_disp_cat_weq
-    : (∏ (x : C × C), isweq (F x)) × disp_functor_ff F
+    : (∏ (x : C ☺ C), isweq (F x)) ☺ disp_functor_ff F
       ≃
       is_z_iso_disp
         (D := disp_cat_of_strict_twosided_disp_cat)

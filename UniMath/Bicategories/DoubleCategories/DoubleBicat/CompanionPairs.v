@@ -59,7 +59,7 @@ Definition are_companions
   := ∑ (φ : square_double_bicat h (id_h y) v (id_v y))
        (ψ : square_double_bicat (id_h x) h (id_v x) v),
      (runitor _ ▹s (linvunitor _ ◃s ψ ⋆v φ) = id_h_square_bicat _)
-     ×
+     ☺
      (runitor _ ▿s (linvunitor _ ▵s ψ ⋆h φ) = id_v_square_bicat _).
 
 Definition make_are_companions

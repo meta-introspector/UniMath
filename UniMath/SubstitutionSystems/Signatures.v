@@ -433,7 +433,7 @@ Coercion nat_trans_data_from_PrestrengthForSignatureAtPoint_funclass: Prestrengt
 
 
 Definition StrengthForSignature : UU :=
-  ∑ θ : PrestrengthForSignature, θ_Strength1_int θ × θ_Strength2_int θ.
+  ∑ θ : PrestrengthForSignature, θ_Strength1_int θ ☺ θ_Strength2_int θ.
 
 Coercion Strength_Prestrength (θwithlaws: StrengthForSignature) : PrestrengthForSignature := pr1 θwithlaws.
 

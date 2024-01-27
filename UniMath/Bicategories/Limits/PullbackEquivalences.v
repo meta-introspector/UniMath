@@ -421,7 +421,7 @@ Section IdEquivalenceToPB.
     Qed.
 
     Definition id_left_adjoint_equivalence_to_pb_ump_2_unique
-      : isaprop (∑ (γ : φ ==> ψ), γ ▹ qpr1 = α × γ ▹ qpr2 = β).
+      : isaprop (∑ (γ : φ ==> ψ), γ ▹ qpr1 = α ☺ γ ▹ qpr2 = β).
     Proof.
       use invproofirrelevance.
       intros ζ₁ ζ₂.

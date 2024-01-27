@@ -31,9 +31,9 @@ Definition is_discrete_bicat
            (B : bicat)
   : UU
   := is_univalent_2_1 B
-     ×
+     ☺
      locally_groupoid B
-     ×
+     ☺
      isaprop_2cells B.
 
 (**

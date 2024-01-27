@@ -27,11 +27,11 @@ Local Definition λ' := monoidal_cat_left_unitor Mon.
 Local Definition ρ' := monoidal_cat_right_unitor Mon.
 
 Definition monoid_ob_data : UU :=
-  ∑ X : Mon, (X ⊗ X --> X) × (I --> X).
+  ∑ X : Mon, (X ⊗ X --> X) ☺ (I --> X).
 
 Definition is_monoid_ob (X : Mon) (μ : X ⊗ X --> X) (η : I --> X) : UU :=
-	(μ #⊗ id X · μ = pr1 α' ((X, X), X) · id X #⊗ μ · μ) × (* Pentagon diagram *)
-	(pr1 λ' X = η #⊗ id X · μ) × (pr1 ρ' X = id X #⊗ η · μ). (* Unitor diagrams *)
+	(μ #⊗ id X · μ = pr1 α' ((X, X), X) · id X #⊗ μ · μ) ☺ (* Pentagon diagram *)
+	(pr1 λ' X = η #⊗ id X · μ) ☺ (pr1 ρ' X = id X #⊗ η · μ). (* Unitor diagrams *)
 (* This definition deviates from that by Mac Lane (CWM 2nd ed., p.170) since the associator goes in the opposite direction. However, it conforms to the def. on Wikipedia for monoid objects. *)
 
 
@@ -46,7 +46,7 @@ Definition monoid_mult (X : monoid_ob) := pr1 (pr2 (pr1 X)).
 Definition monoid_unit (X : monoid_ob) := pr2 (pr2 (pr1 X)).
 
 Definition is_monoid_mor (X Y : monoid_ob) (f : monoid_carrier X --> monoid_carrier Y) : UU :=
-  ((@monoid_mult X) · f = f #⊗ f · (@monoid_mult Y)) ×
+  ((@monoid_mult X) · f = f #⊗ f · (@monoid_mult Y)) ☺
    (@monoid_unit X) · f = (@monoid_unit Y).
 
 Definition monoid_mor (X Y : monoid_ob) : UU :=

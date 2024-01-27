@@ -155,7 +155,7 @@ Local Definition μ : monoidal_functor_map M N psfunctor_to_lax_monoidal_functor
 
 Lemma psfunctor_to_lax_monoidal_functor_laws :
   monoidal_functor_associativity M N psfunctor_to_lax_monoidal_functor_functor μ
-  × monoidal_functor_unitality M N psfunctor_to_lax_monoidal_functor_functor (pr1(psfunctor_id psF c0)) μ.
+  ☺ monoidal_functor_unitality M N psfunctor_to_lax_monoidal_functor_functor (pr1(psfunctor_id psF c0)) μ.
 Proof.
   split.
   * red. cbn. intros x y z. unfold rassociator_fun'. cbn.

@@ -43,26 +43,26 @@ Definition prebicat_2_id_comp_struct (C : prebicat_1_id_comp_cells) : UU
   :=
        (* 2-unit *)
        (∏ (a b : C) (f : C⟦a, b⟧), f ==> f)
-     × (* left unitor *)
+     ☺ (* left unitor *)
        (∏ (a b : C) (f : C⟦a, b⟧), identity _ · f ==> f)
-     × (* right unitor *)
+     ☺ (* right unitor *)
        (∏ (a b : C) (f : C⟦a, b⟧), f · identity _  ==> f)
-     × (* left inverse unitor *)
+     ☺ (* left inverse unitor *)
        (∏ (a b : C) (f : C⟦a, b⟧), identity _ · f <== f)
-     × (* right inverse unitor *)
+     ☺ (* right inverse unitor *)
        (∏ (a b : C) (f : C⟦a, b⟧), f · identity _  <== f)
-     × (* right associator *)
+     ☺ (* right associator *)
        (∏ (a b c d : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧) (h : C⟦c, d⟧),
         (f · g) · h ==> f · (g · h))
-     × (* left associator *)
+     ☺ (* left associator *)
        (∏ (a b c d : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧) (h : C⟦c, d⟧),
         f · (g · h) ==> (f · g) · h)
-     × (* vertical composition *)
+     ☺ (* vertical composition *)
        (∏ (a b : C) (f g h : C⟦a, b⟧), f ==> g -> g ==> h -> f ==> h)
-     × (* left whiskering *)
+     ☺ (* left whiskering *)
        (∏ (a b c : C) (f : C⟦a, b⟧) (g1 g2 : C⟦b, c⟧),
         g1 ==> g2 → f · g1 ==> f · g2)
-     × (* right whiskering *)
+     ☺ (* right whiskering *)
        (∏ (a b c : C) (f1 f2 : C⟦a, b⟧) (g : C⟦b, c⟧),
         f1 ==> f2 → f1 · g ==> f2 · g).
 
@@ -150,57 +150,57 @@ Definition prebicat_laws (C : prebicat_data)
   : UU
   :=   (** 1a id2_left *)
        (∏ (a b : C) (f g : C⟦a, b⟧) (x : f ==> g), id2 f • x = x)
-     × (** 1b id2_right *)
+     ☺ (** 1b id2_right *)
        (∏ (a b : C) (f g : C⟦a, b⟧) (x : f ==> g), x • id2 g = x)
-     × (** 2 vassocr *)
+     ☺ (** 2 vassocr *)
        (∏ (a b : C) (f g h k : C⟦a, b⟧) (x : f ==> g) (y : g ==> h) (z : h ==> k),
         x • (y • z) = (x • y) • z)
-     × (** 3a lwhisker_id2 *)
+     ☺ (** 3a lwhisker_id2 *)
        (∏ (a b c : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧), f ◃ id2 g = id2 _)
-     × (** 3b id2_rwhisker *)
+     ☺ (** 3b id2_rwhisker *)
        (∏ (a b c : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧), id2 f ▹ g = id2 _)
-     × (** 4 lwhisker_vcomp *)
+     ☺ (** 4 lwhisker_vcomp *)
        (∏ (a b c : C) (f : C⟦a, b⟧) (g h i : C⟦b, c⟧) (x : g ==> h) (y : h ==> i),
         (f ◃ x) • (f ◃ y) = f ◃ (x • y))
-     × (** 5 rwhisker_vcomp *)
+     ☺ (** 5 rwhisker_vcomp *)
        (∏ (a b c : C) (f g h : C⟦a, b⟧) (i : C⟦b, c⟧) (x : f ==> g) (y : g ==> h),
         (x ▹ i) • (y ▹ i) = (x • y) ▹ i)
-     × (** 6  vcomp_lunitor *)
+     ☺ (** 6  vcomp_lunitor *)
        (∏ (a b : C) (f g : C⟦a, b⟧) (x : f ==> g),
         (identity _ ◃ x) • lunitor g = lunitor f • x)
-     × (** 7 vcomp_runitor *)
+     ☺ (** 7 vcomp_runitor *)
        (∏ (a b : C) (f g : C⟦a, b⟧) (x : f ==> g),
         (x ▹ identity _) • runitor g = runitor f • x)
-     × (** 8 lwhisker_lwhisker *)
+     ☺ (** 8 lwhisker_lwhisker *)
        (∏ (a b c d : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧) (h i : c --> d) (x : h ==> i),
         f ◃ (g ◃ x) • lassociator _ _ _ = lassociator _ _ _ • (f · g ◃ x))
-     × (** 9 rwhisker_lwhisker *)
+     ☺ (** 9 rwhisker_lwhisker *)
        (∏ (a b c d : C) (f : C⟦a, b⟧) (g h : C⟦b, c⟧) (i : c --> d) (x : g ==> h),
         (f ◃ (x ▹ i)) • lassociator _ _ _ = lassociator _ _ _ • ((f ◃ x) ▹ i))
-     × (** 10 rwhisker_rwhisker *)
+     ☺ (** 10 rwhisker_rwhisker *)
        (∏ (a b c d : C) (f g : C⟦a, b⟧) (h : C⟦b, c⟧) (i : c --> d) (x : f ==> g),
         lassociator _ _ _ • ((x ▹ h) ▹ i) = (x ▹ h · i) • lassociator _ _ _)
-     × (** 11 vcomp_whisker *)
+     ☺ (** 11 vcomp_whisker *)
        (∏ (a b c : C) (f g : C⟦a, b⟧) (h i : C⟦b, c⟧) (x : f ==> g) (y : h ==> i),
         (x ▹ h) • (g ◃ y) = (f ◃ y) • (x ▹ i))
-     × (** 12a lunitor_linvunitor *)
+     ☺ (** 12a lunitor_linvunitor *)
        (∏ (a b : C) (f : C⟦a, b⟧), lunitor f • linvunitor _ = id2 _)
-     × (** 12b linvunitor_lunitor *)
+     ☺ (** 12b linvunitor_lunitor *)
        (∏ (a b : C) (f : C⟦a, b⟧), linvunitor f • lunitor _ = id2 _)
-     × (** 13a runitor_rinvunitor *)
+     ☺ (** 13a runitor_rinvunitor *)
        (∏ (a b : C) (f : C⟦a, b⟧), runitor f • rinvunitor _ = id2 _)
-     × (** 13b rinvunitor_runitor *)
+     ☺ (** 13b rinvunitor_runitor *)
      (∏ (a b : C) (f : C⟦a, b⟧), rinvunitor f • runitor _ = id2 _)
-     × (** 14a lassociator_rassociator *)
+     ☺ (** 14a lassociator_rassociator *)
        (∏ (a b c d : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧) (h : c --> d),
         lassociator f g h • rassociator _ _ _ = id2 _)
-     × (** 14b rassociator_lassociator *)
+     ☺ (** 14b rassociator_lassociator *)
        (∏ (a b c d : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧) (h : c --> d),
         rassociator f g h • lassociator _ _ _ = id2 _)
-     × (** 15 runitor_rwhisker *)
+     ☺ (** 15 runitor_rwhisker *)
        (∏ (a b c : C) (f : C⟦a, b⟧) (g : C⟦b, c⟧),
         lassociator _ _ _ • (runitor f ▹ g) = f ◃ lunitor g)
-     × (** 16  lassociator_lassociator *)
+     ☺ (** 16  lassociator_lassociator *)
        (∏ (a b c d e: C) (f : C⟦a, b⟧) (g : C⟦b, c⟧) (h : c --> d) (i : C⟦d, e⟧),
         (f ◃ lassociator g h i) • lassociator _ _ _  • (lassociator _ _ _ ▹ i) =
         lassociator f g _  • lassociator _ _ _).
@@ -439,7 +439,7 @@ Definition cellset_property {C : bicat} {a b : C} (f g : a --> b)
 Definition is_invertible_2cell {C : prebicat_data}
            {a b : C} {f g : a --> b} (η : f ==> g)
   : UU
-  := ∑ φ : g ==> f, η • φ = id2 f × φ • η = id2 g.
+  := ∑ φ : g ==> f, η • φ = id2 f ☺ φ • η = id2 g.
 
 Definition make_is_invertible_2cell {C : prebicat_data}
            {a b : C} {f g : a --> b}
@@ -1068,7 +1068,7 @@ Definition hcomp_functor_data
       (category_binproduct (hom a b) (hom b c))
       (hom a c).
 Proof.
-  exists (λ p : (a-->b) × (b-->c), pr1 p · pr2 p).
+  exists (λ p : (a-->b) ☺ (b-->c), pr1 p · pr2 p).
   unfold hom_ob_mor. simpl. intros (f1, f2) (g1, g2).
   unfold precategory_binproduct_mor. simpl.
   intros (x, y). apply hcomp; assumption.
@@ -1321,7 +1321,7 @@ Defined.
 (* -----------------------------------------------------------------------------------*)
 
 Definition lassociator_fun {a b c d : C}
-           (x : C⟦a,b⟧ × C⟦b,c⟧ × C⟦c,d⟧)
+           (x : C⟦a,b⟧ ☺ C⟦b,c⟧ ☺ C⟦c,d⟧)
   :  pr1 x · (pr12 x · pr22 x) ==> (pr1 x · pr12 x) · pr22 x
   := lassociator (pr1 x) (pr12 x) (pr22 x).
 
@@ -1361,7 +1361,7 @@ Definition lassociator_transf (a b c d : C)
 (* -----------------------------------------------------------------------------------*)
 
 Definition rassociator_fun {a b c d : C}
-           (x : C⟦a,b⟧ × C⟦b,c⟧ × C⟦c,d⟧)
+           (x : C⟦a,b⟧ ☺ C⟦b,c⟧ ☺ C⟦c,d⟧)
   : (pr1 x · pr12 x) · pr22 x ==> pr1 x · (pr12 x · pr22 x)
   := rassociator (pr1 x) (pr12 x) (pr22 x).
 
@@ -1398,7 +1398,7 @@ Definition rassociator_transf (a b c d : C)
  *)
 
 Definition rassociator_fun' {a b c d : C}
-           (x : (C⟦a,b⟧ × C⟦b,c⟧) × C⟦c,d⟧)
+           (x : (C⟦a,b⟧ ☺ C⟦b,c⟧) ☺ C⟦c,d⟧)
   : (pr11 x · pr21 x) · pr2 x ==> pr11 x · (pr21 x · pr2 x)
   := rassociator (pr11 x) (pr21 x) (pr2 x).
 

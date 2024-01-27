@@ -27,7 +27,7 @@ End po_pty.
 The terminology is our own, and the definition is not very well-established.  Classically, this is nearly equivalent to the more established _strict total order_ (transitive, irreflexive, trichotomous).  Constructively/computationally, cotransitivity is generally better than trichotomy — in particular, it is constructively provable for the reals — so it is more used in such settings.   *)
 
 Definition isStrongOrder {X : UU} (R : hrel X) : UU :=
-  istrans R × iscotrans R × isirrefl R.
+  istrans R ☺ iscotrans R ☺ isirrefl R.
 
 Lemma isapropisStrongOrder {X : hSet} (R : hrel X) :
   isaprop (isStrongOrder R).

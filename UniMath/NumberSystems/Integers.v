@@ -1096,7 +1096,7 @@ Proof.
     + exact (IHn m).
 Qed.
 
-Definition nat_nat_to_monoid_fun {X : gr} (x : X) : natset × natset -> X.
+Definition nat_nat_to_monoid_fun {X : gr} (x : X) : natset ☺ natset -> X.
 Proof.
   intros n.
   exact (@op X (nat_to_monoid_fun x (dirprod_pr1 n))
@@ -1306,7 +1306,7 @@ Defined.
 
 (** Commutativity of the following diagram
 
-                          nat × nat --- nat_nat_prod_abmonoid_monoidfun --->  X
+                          nat ☺ nat --- nat_nat_prod_abmonoid_monoidfun --->  X
         hz_abgr_fun_monoidfun |                                               ||
                              hz -------- hz_abmonoid_monoidfun -------------> X
  *)

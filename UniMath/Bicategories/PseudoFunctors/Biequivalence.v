@@ -37,7 +37,7 @@ Section Biequivalence.
 Definition is_biequivalence_unit_counit {C D : bicat}
            (F : psfunctor C D) (G : psfunctor D C)
   : UU
-  := pstrans (comp_psfunctor G F) (id_psfunctor C) ×
+  := pstrans (comp_psfunctor G F) (id_psfunctor C) ☺
      pstrans (comp_psfunctor F G) (id_psfunctor D).
 
 Definition unit_of_is_biequivalence {C D : bicat}
@@ -59,7 +59,7 @@ Definition is_biequivalence_adjoints {C D : bicat}
            {G : psfunctor D C}
            (e : is_biequivalence_unit_counit F G)
   : UU
-  := left_adjoint_equivalence (unit_of_is_biequivalence e) ×
+  := left_adjoint_equivalence (unit_of_is_biequivalence e) ☺
      left_adjoint_equivalence (counit_of_is_biequivalence e).
 
 Definition is_biequivalence_adjoint_unit {C D : bicat}

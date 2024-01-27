@@ -28,7 +28,7 @@ Section StreetFibration.
          (p : #F g = h · #F f),
        ∃! (φ : z --> e₁),
        #F φ = h
-       ×
+       ☺
        φ · f = g.
 
   Definition isaprop_is_cartesian_sfib
@@ -103,9 +103,9 @@ Section StreetFibration.
          (b : B)
          (f : b --> F e),
        ∑ (bb : E)
-         (ff_i : bb --> e × z_iso (F bb) b),
+         (ff_i : bb --> e ☺ z_iso (F bb) b),
        # F (pr1 ff_i) = pr2 ff_i · f
-       ×
+       ☺
        is_cartesian_sfib (pr1 ff_i).
 End StreetFibration.
 
@@ -241,7 +241,7 @@ Section CleavingToStreetFib.
         (g : z --> e₂)
         (h : P z --> P e₁)
         (p : # P g = h · # P f)
-    : isaprop (∑ φ : E ⟦ z, e₁ ⟧, # P φ = h × φ · f = g).
+    : isaprop (∑ φ : E ⟦ z, e₁ ⟧, # P φ = h ☺ φ · f = g).
   Proof.
     pose (lift := H (pr1 z) h (pr2 z) (transportf (λ z, _ -->[ z ] _) p (pr2 g))).
     use invproofirrelevance.
@@ -343,7 +343,7 @@ Section CleavingToStreetFib.
       apply D.
     }
     pose (φφ₁ := (g ,, pr1 φ₁) : E ⟦ z,, zz, e₁ ⟧).
-    assert (# P φφ₁ = g × φφ₁ · f = g · pr1 f,, gf) as H₁.
+    assert (# P φφ₁ = g ☺ φφ₁ · f = g · pr1 f,, gf) as H₁.
     {
       split ; cbn.
       - apply idpath.
@@ -351,7 +351,7 @@ Section CleavingToStreetFib.
         exact (pr2 φ₁).
     }
     pose (φφ₂ := (g ,, pr1 φ₂) : E ⟦ z,, zz, e₁ ⟧).
-    assert (# P φφ₂ = g × φφ₂ · f = g · pr1 f,, gf) as H₂.
+    assert (# P φφ₂ = g ☺ φφ₂ · f = g · pr1 f,, gf) as H₂.
     {
       split ; cbn.
       - apply idpath.
@@ -471,7 +471,7 @@ Definition mor_of_street_fib
   := ∑ (FB : B₁ ⟶ B₂)
        (FE : E₁ ⟶ E₂),
      preserves_cartesian P₁ P₂ FE
-     ×
+     ☺
      nat_z_iso (P₁ ∙ FB) (FE ∙ P₂).
 
 Definition mor_of_street_fib_base
@@ -784,7 +784,7 @@ Section CompositionCartesian.
     Qed.
 
     Definition comp_is_cartesian_sfib_factor_unique
-      : isaprop (∑ φ, # F φ = h₂ × φ · (f · g) = h₁).
+      : isaprop (∑ φ, # F φ = h₂ ☺ φ · (f · g) = h₁).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.

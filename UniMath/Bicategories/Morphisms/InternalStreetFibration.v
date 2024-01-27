@@ -47,7 +47,7 @@ Section InternalStreetFibration.
          (q : α ▹ p = δp • (γ ▹ p)),
        ∃! (δ : h ==> f),
        δ ▹ p = δp
-       ×
+       ☺
        δ • γ = α.
 
   Definition is_cartesian_2cell_sfib_factor
@@ -132,7 +132,7 @@ Section InternalStreetFibration.
          (γ : h ==> g)
          (β : invertible_2cell (h · p) f),
        is_cartesian_2cell_sfib γ
-       ×
+       ☺
        γ ▹ p = β • α.
 
   Definition internal_sfib_cleaving_lift_mor
@@ -193,7 +193,7 @@ Section InternalStreetFibration.
 
   Definition internal_sfib
     : UU
-    := internal_sfib_cleaving × lwhisker_is_cartesian.
+    := internal_sfib_cleaving ☺ lwhisker_is_cartesian.
 
   Coercion internal_sfib_to_cleaving
            (H : internal_sfib)
@@ -204,7 +204,7 @@ Section InternalStreetFibration.
     : UU
     := (∏ (x : B),
         street_fib (post_comp x p))
-       ×
+       ☺
        (∏ (x y : B)
           (h : y --> x),
         preserves_cartesian
@@ -378,7 +378,7 @@ Section VcompIsCartesian.
              {ζ : k ==> h}
              {δp : k · p ==> f · p}
              (q : ζ ▹ p = δp • ((α • β) ▹ p))
-    : isaprop (∑ δ : k ==> f, δ ▹ p = δp × δ • (α • β) = ζ).
+    : isaprop (∑ δ : k ==> f, δ ▹ p = δp ☺ δ • (α • β) = ζ).
   Proof.
     use invproofirrelevance.
     intros φ₁ φ₂.
@@ -541,7 +541,7 @@ Section PostComposition.
     Qed.
 
     Definition is_cartesian_2cell_sfib_postcomp_unique
-      : isaprop (∑ φ, φ ▹ p = δp × φ • α = δ).
+      : isaprop (∑ φ, φ ▹ p = δp ☺ φ • α = δ).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.
@@ -916,7 +916,7 @@ Section Invertible2CellCartesian.
   Qed.
 
   Definition is_cartesian_2cell_sfib_factor_inv2cell_unique
-    : isaprop (∑ (δ : k ==> f), δ ▹ p' = δp × δ • β = ζ).
+    : isaprop (∑ (δ : k ==> f), δ ▹ p' = δp ☺ δ • β = ζ).
   Proof.
     use invproofirrelevance.
     intros φ₁ φ₂.
@@ -1068,7 +1068,7 @@ Definition mor_of_internal_sfib_over
   : UU
   := ∑ (fe : e₁ --> e₂),
      mor_preserves_cartesian p₁ p₂ fe
-     ×
+     ☺
      invertible_2cell (p₁ · fb) (fe · p₂).
 
 Definition make_mor_of_internal_sfib_over

@@ -162,9 +162,9 @@ Section LimitsTotalBicat.
        in
        ∑ (prod : D (binprod_cone_obj p_cone)),
        prod -->[ binprod_cone_pr1 p_cone ] pr2 x
-       ×
+       ☺
        prod -->[ binprod_cone_pr2 p_cone ] pr2 y
-       ×
+       ☺
        ∏ (z : total_bicat D)
          (f : z --> x)
          (g : z --> y),
@@ -279,9 +279,9 @@ Section LimitsTotalBicat.
        in
        ∑ (pb : D (pb_cone_obj p_cone)),
        pb -->[ pb_cone_pr1 p_cone ] pr2 x
-       ×
+       ☺
        pb -->[ pb_cone_pr2 p_cone ] pr2 y
-       ×
+       ☺
        ∏ (q : pb_cone f g),
        pr21 q -->[ pb_ump_mor Hp_cone (total_pb_cone_help_cone q) ] pb.
 
@@ -359,7 +359,7 @@ Section LimitsTotalBicat.
         : isaprop
             (∑ (γ : φ ==> ψ),
               γ ▹ pb_cone_pr1 total_pb_cone = α
-              ×
+              ☺
               γ ▹ pb_cone_pr2 total_pb_cone = β).
       Proof.
         use invproofirrelevance.
@@ -389,7 +389,7 @@ Section LimitsTotalBicat.
       Definition total_pb_cone_ump2
         : ∑ (γ : φ ==> ψ),
           γ ▹ pb_cone_pr1 total_pb_cone = α
-          ×
+          ☺
           γ ▹ pb_cone_pr2 total_pb_cone = β.
       Proof.
         simple refine (_ ,, _ ,, _).
@@ -411,7 +411,7 @@ Section LimitsTotalBicat.
       Definition total_pb_cone_ump2_unique
         : ∃! (γ : φ ==> ψ),
           γ ▹ pb_cone_pr1 total_pb_cone = α
-          ×
+          ☺
           γ ▹ pb_cone_pr2 total_pb_cone = β.
       Proof.
         use iscontraprop1.

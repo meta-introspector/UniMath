@@ -258,7 +258,7 @@ Section StructuredCospans.
     := (mor_left_of_struct_cospan s₁ · φ
         =
         #L f · mor_left_of_struct_cospan s₂)
-       ×
+       ☺
        (mor_right_of_struct_cospan s₁ · φ
         =
         #L g · mor_right_of_struct_cospan s₂).

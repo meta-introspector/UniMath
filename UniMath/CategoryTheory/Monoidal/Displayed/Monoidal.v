@@ -109,11 +109,11 @@ Section DisplayedMonoidalCategories.
     := ∑ (DT : disp_tensor D M)
          (i : D I_{M}),
        (disp_leftunitor_data DT i)
-       × (disp_leftunitorinv_data DT i)
-       × (disp_rightunitor_data DT i)
-       × (disp_rightunitorinv_data DT i)
-       × (disp_associator_data DT)
-       × (disp_associatorinv_data DT).
+       ☺ (disp_leftunitorinv_data DT i)
+       ☺ (disp_rightunitor_data DT i)
+       ☺ (disp_rightunitorinv_data DT i)
+       ☺ (disp_associator_data DT)
+       ☺ (disp_associatorinv_data DT).
 
   Definition make_disp_monoidal_data_groupoidal
              {C : category}
@@ -270,7 +270,7 @@ Section DisplayedMonoidalCategories.
              (dlu : disp_leftunitor_data DT i)
              (dluinv : disp_leftunitorinv_data DT i)
     : UU
-    := disp_leftunitor_nat dlu × disp_leftunitor_iso dlu dluinv.
+    := disp_leftunitor_nat dlu ☺ disp_leftunitor_iso dlu dluinv.
 
   Definition disp_leftunitorlaw_nat
              {C : category}
@@ -339,7 +339,7 @@ Section DisplayedMonoidalCategories.
              (dru : disp_rightunitor_data DT i)
              (druinv : disp_rightunitorinv_data DT i)
     : UU
-    := disp_rightunitor_nat dru × disp_rightunitor_iso dru druinv.
+    := disp_rightunitor_nat dru ☺ disp_rightunitor_iso dru druinv.
 
   Definition disp_rightunitorlaw_nat
              {C : category}
@@ -564,9 +564,9 @@ Section DisplayedMonoidalCategories.
              (dαinv : disp_associatorinv_data DT)
     : UU
     := (disp_associator_nat_leftwhisker dα)
-       × (disp_associator_nat_rightwhisker dα)
-       × (disp_associator_nat_leftrightwhisker dα)
-       × (disp_associator_iso dα dαinv).
+       ☺ (disp_associator_nat_rightwhisker dα)
+       ☺ (disp_associator_nat_leftrightwhisker dα)
+       ☺ (disp_associator_iso dα dαinv).
 
   Definition disp_associatorlaw_natleft
              {C : category}
@@ -658,10 +658,10 @@ Section DisplayedMonoidalCategories.
              (DMD : disp_monoidal_data D M)
     : UU
     := (disp_leftunitor_law dlu_{DMD} dluinv_{DMD})
-       × (disp_rightunitor_law dru_{DMD} druinv_{DMD})
-       × (disp_associator_law dα_{DMD} dαinv_{DMD})
-       × (disp_triangle_identity dlu_{DMD} dru_{DMD} dα_{DMD})
-       × (disp_pentagon_identity dα_{DMD}).
+       ☺ (disp_rightunitor_law dru_{DMD} druinv_{DMD})
+       ☺ (disp_associator_law dα_{DMD} dαinv_{DMD})
+       ☺ (disp_triangle_identity dlu_{DMD} dru_{DMD} dα_{DMD})
+       ☺ (disp_pentagon_identity dα_{DMD}).
 
   Definition disp_monoidal
              {C : category}

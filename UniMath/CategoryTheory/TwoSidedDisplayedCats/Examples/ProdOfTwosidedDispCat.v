@@ -40,10 +40,10 @@ Section ProdTwoSidedDispCat.
         (category_binproduct C₃ C₄).
   Proof.
     simple refine (_ ,, _).
-    - exact (λ wx yz, D₁ (pr1 wx) (pr1 yz) × D₂ (pr2 wx) (pr2 yz)).
+    - exact (λ wx yz, D₁ (pr1 wx) (pr1 yz) ☺ D₂ (pr2 wx) (pr2 yz)).
     - exact (λ wx₁ wx₂ yz₁ yz₂ d₁ d₂ fg hk,
              pr1 d₁ -->[ pr1 fg ][ pr1 hk ] pr1 d₂
-             ×
+             ☺
              pr2 d₁ -->[ pr2 fg ][ pr2 hk ] pr2 d₂).
   Defined.
 
@@ -350,7 +350,7 @@ Section ProdTwoSidedDispCat.
         (identity_z_iso (pr1 wx))
         (identity_z_iso (pr1 yz))
         (pr1 d₁) (pr1 d₂)
-      ×
+      ☺
       iso_twosided_disp
         (identity_z_iso (pr2 wx))
         (identity_z_iso (pr2 yz))

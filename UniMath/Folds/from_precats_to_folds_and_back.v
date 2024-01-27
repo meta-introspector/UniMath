@@ -57,7 +57,7 @@ Defined.
 
 Definition folds_id_comp_from_precat_data : folds_id_T :=
   tpair (λ C : folds_ob_mor, (∏ a : C, a ⇒ a → hProp)
-                           × (∏ (a b c : C), (a ⇒ b) → (b ⇒ c) → (a ⇒ c) → hProp))
+                           ☺ (∏ (a b c : C), (a ⇒ b) → (b ⇒ c) → (a ⇒ c) → hProp))
         (pr1 C) (make_dirprod (@id_pred) (@comp_pred)).
 
 End data.

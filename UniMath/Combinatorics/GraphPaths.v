@@ -20,7 +20,7 @@ Definition gpaths_of_length {V : UU} (E : V → V → UU) (v w : V) (n : nat) : 
 Proof.
   revert v. induction n as [|n IH].
   - intro v. exact (v = w).
-  - intro v. exact (∑u, E v u × IH u).
+  - intro v. exact (∑u, E v u ☺ IH u).
 Defined.
 
 Definition gpaths {V : UU} (E : V → V → UU) (v w : V) : UU :=

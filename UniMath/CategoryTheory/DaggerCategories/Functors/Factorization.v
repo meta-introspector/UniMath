@@ -123,8 +123,8 @@ Section ImageFactorization.
         (dagF0 : is_dagger_functor dagC dagI F0)
         (dagF1 : is_dagger_functor dagI dagD F1),
       is_unitarily_eso dagF0
-                       × fully_faithful F1
-                       × functor_composite F0 F1 = F.
+                       ☺ fully_faithful F1
+                       ☺ functor_composite F0 F1 = F.
   Proof.
     exists full_dagger_img.
     exists full_img_dagger.

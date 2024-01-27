@@ -26,7 +26,7 @@
 
   - Definition of the associator functors
 
-  - Definition of the pair of two functors: A × C → B × D
+  - Definition of the pair of two functors: A ☺ C → B ☺ D
     given A → B and C → D
 
   - Definition of the diagonal functor [bindelta_functor].
@@ -49,7 +49,7 @@ Require Import UniMath.CategoryTheory.FunctorCategory.
 Require Import UniMath.CategoryTheory.opp_precat.
 Local Open Scope cat.
 
-Definition precategory_binproduct_mor (C D : precategory_ob_mor) (cd cd' : C × D) := pr1 cd --> pr1 cd' × pr2 cd --> pr2 cd'.
+Definition precategory_binproduct_mor (C D : precategory_ob_mor) (cd cd' : C ☺ D) := pr1 cd --> pr1 cd' ☺ pr2 cd --> pr2 cd'.
 
 Definition precategory_binproduct_ob_mor (C D : precategory_ob_mor) : precategory_ob_mor
   := tpair _ _ (precategory_binproduct_mor C D).
@@ -104,7 +104,7 @@ Arguments ob1 { _ _ } _ .
 Arguments ob2 { _ _ } _ .
 Arguments mor1 { _ _ _ _ } _ .
 Arguments mor2 { _ _ _ _ } _ .
-Local Notation "C ☺ D" := (category_binproduct C D) (at level 75, right associativity).
+Local Notation "C '☺' D" := (category_binproduct C D) (at level 75, right associativity).
 
 
 
@@ -212,7 +212,7 @@ Proof.
 Defined.
 
 Definition precategory_binproduct_assoc (C0 C1 C2 : category)
-  : (C0 × (C1 × C2)) ⟶ ((C0 × C1) × C2).
+  : (C0 ☺ (C1 ☺ C2)) ⟶ ((C0 ☺ C1) ☺ C2).
 Proof.
   exists (precategory_binproduct_assoc_data _ _ _).
   abstract ( split; [ intros c; apply idpath | intros c0 c1 c2 f g; apply idpath] ).
@@ -228,7 +228,7 @@ Proof.
 Defined.
 
 Definition precategory_binproduct_unassoc (C0 C1 C2 : category)
-  : ((C0 × C1) × C2) ⟶ (C0 × (C1 × C2)).
+  : ((C0 ☺ C1) ☺ C2) ⟶ (C0 ☺ (C1 ☺ C2)).
 Proof.
   exists (precategory_binproduct_unassoc_data _ _ _).
   abstract ( split; [ intros c; apply idpath | intros c0 c1 c2 f g; apply idpath] ).
@@ -236,7 +236,7 @@ Defined.
 
 End assoc.
 
-(** Fixing one argument of C × D -> E results in a functor *)
+(** Fixing one argument of C ☺ D -> E results in a functor *)
 Section functor_fix_fst_arg.
 
 Variable C D E : precategory.
@@ -285,7 +285,7 @@ End functor_fix_fst_arg.
 Section nat_trans_from_functor_fix_fst_morphism_arg.
 
 Variable C D E : category.
-Variable F : (C × D) ⟶ E.
+Variable F : (C ☺ D) ⟶ E.
 Variable c c' : C.
 Variable g: c --> c'.
 
@@ -327,7 +327,7 @@ End nat_trans_from_functor_fix_fst_morphism_arg.
 Section nat_trans_fix_fst_arg.
 
 Variable C D E : category.
-Variable F F' : (C × D) ⟶ E.
+Variable F F' : (C ☺ D) ⟶ E.
 Variable α : F ⟹ F'.
 Variable c : C.
 
@@ -351,7 +351,7 @@ End nat_trans_fix_fst_arg.
 Section nat_z_iso_fix_fst_arg.
 
 Variable C D E : category.
-Variable F F' : (C × D) ⟶ E.
+Variable F F' : (C ☺ D) ⟶ E.
 Variable α : nat_z_iso F F'.
 Variable c : C.
 
@@ -418,7 +418,7 @@ End functor_fix_snd_arg.
 Section nat_trans_from_functor_fix_snd_morphism_arg.
 
 Variable C D E : category.
-Variable F : (C × D) ⟶ E.
+Variable F : (C ☺ D) ⟶ E.
 Variable d d' : D.
 Variable f: d --> d'.
 
@@ -460,7 +460,7 @@ End nat_trans_from_functor_fix_snd_morphism_arg.
 Section nat_trans_fix_snd_arg.
 
 Variable C D E : category.
-Variable F F': (C × D) ⟶ E.
+Variable F F': (C ☺ D) ⟶ E.
 Variable α: F ⟹ F'.
 Variable d: D.
 
@@ -485,7 +485,7 @@ End nat_trans_fix_snd_arg.
 Section functors.
 
 Definition pair_functor_data {A B C D : category}
-  (F : A ⟶ C) (G : B ⟶ D) : functor_data (A × B) (C × D).
+  (F : A ⟶ C) (G : B ⟶ D) : functor_data (A ☺ B) (C ☺ D).
 Proof.
 use tpair.
 - intro x; apply (make_catbinprod (F (pr1 x)) (G (pr2 x))).
@@ -493,7 +493,7 @@ use tpair.
 Defined.
 
 Definition pair_functor {A B C D : category}
-  (F : A ⟶ C) (G : B ⟶ D) : (A × B) ⟶ (C × D).
+  (F : A ⟶ C) (G : B ⟶ D) : (A ☺ B) ⟶ (C ☺ D).
 Proof.
 apply (tpair _ (pair_functor_data F G)).
 abstract (split;
@@ -502,35 +502,35 @@ abstract (split;
 Defined.
 
 Definition pr1_functor_data (A B : category) :
-  functor_data (A × B) A.
+  functor_data (A ☺ B) A.
 Proof.
 use tpair.
 - intro x; apply (pr1 x).
 - intros x y f; simpl; apply (pr1 f).
 Defined.
 
-Definition pr1_functor (A B : category) : (A × B) ⟶ A.
+Definition pr1_functor (A B : category) : (A ☺ B) ⟶ A.
 Proof.
 apply (tpair _ (pr1_functor_data A B)).
 abstract (split; [ intro x; apply idpath | intros x y z f g; apply idpath ]).
 Defined.
 
 Definition pr2_functor_data (A B : category) :
-  functor_data (A × B) B.
+  functor_data (A ☺ B) B.
 Proof.
 use tpair.
 - intro x; apply (pr2 x).
 - intros x y f; simpl; apply (pr2 f).
 Defined.
 
-Definition pr2_functor (A B : category) : (A × B) ⟶ B.
+Definition pr2_functor (A B : category) : (A ☺ B) ⟶ B.
 Proof.
 apply (tpair _ (pr2_functor_data A B)).
 abstract (split; [ intro x; apply idpath | intros x y z f g; apply idpath ]).
 Defined.
 
 Definition bindelta_functor_data (C : category) :
-  functor_data C (C × C).
+  functor_data C (C ☺ C).
 Proof.
 use tpair.
 - intro x; apply (make_catbinprod x x).
@@ -538,7 +538,7 @@ use tpair.
 Defined.
 
 (* The diagonal functor Δ *)
-Definition bindelta_functor (C : category) : C ⟶ (C × C).
+Definition bindelta_functor (C : category) : C ⟶ (C ☺ C).
 Proof.
 apply (tpair _ (bindelta_functor_data C)).
 abstract (split; [ intro x; apply idpath | intros x y z f g; apply idpath ]).
@@ -570,21 +570,21 @@ Proof.
 Qed.
 
 Definition bindelta_pair_functor {C D E : category}
-  (F : C ⟶ D) (G : C ⟶ E) : C ⟶ (D × E).
+  (F : C ⟶ D) (G : C ⟶ E) : C ⟶ (D ☺ E).
 Proof.
   apply (tpair _ (bindelta_pair_functor_data C D E F G)).
   apply is_functor_bindelta_pair_functor_data.
 Defined.
 
 Definition bindelta_pair_functor_alt {C D E : category}
-  (F : C ⟶ D) (G : C ⟶ E) : C ⟶ (D × E) := functor_composite (bindelta_functor C) (pair_functor F G).
+  (F : C ⟶ D) (G : C ⟶ E) : C ⟶ (D ☺ E) := functor_composite (bindelta_functor C) (pair_functor F G).
 
 Lemma bindelta_pair_functor_alt_eq_bindelta_pair_functor {C D E : category}
   (F : C ⟶ D) (G : C ⟶ E) :
   bindelta_pair_functor_alt F G = bindelta_pair_functor F G.
 Proof.
   apply functor_eq.
-    - apply (D × E).
+    - apply (D ☺ E).
     - apply idpath.
 Qed.
 
@@ -676,12 +676,12 @@ Proof.
 Defined.
 
 
-(* A swapping functor σ : C × D → D × C. *)
-Definition binswap_pair_functor {C D : category} : (C × D) ⟶ (D × C) :=
-  bindelta_functor (C × D) ∙ pair_functor (pr2_functor C D) (pr1_functor C D).
+(* A swapping functor σ : C ☺ D → D ☺ C. *)
+Definition binswap_pair_functor {C D : category} : (C ☺ D) ⟶ (D ☺ C) :=
+  bindelta_functor (C ☺ D) ∙ pair_functor (pr2_functor C D) (pr1_functor C D).
 
 (* Reversing the order of three arguments *)
-Definition reverse_three_args {C D E : category} : ((C × D) × E) ⟶ ((E × D) × C).
+Definition reverse_three_args {C D E : category} : ((C ☺ D) ☺ E) ⟶ ((E ☺ D) ☺ C).
 Proof.
   use (functor_composite (precategory_binproduct_unassoc _ _ _)).
   use (functor_composite binswap_pair_functor).
@@ -716,14 +716,14 @@ Section whiskering.
 (** Postwhiskering with parameter *)
 
 Definition nat_trans_data_post_whisker_fst_param {B C D P: category}
-           {G H : B ⟶ C} (γ : G ⟹ H) (K : (P × C) ⟶ D):
+           {G H : B ⟶ C} (γ : G ⟹ H) (K : (P ☺ C) ⟶ D):
   nat_trans_data (functor_composite (pair_functor (functor_identity _) G) K)
                  (functor_composite (pair_functor (functor_identity _) H) K) :=
-  λ pb : P × B, #K ((identity (ob1 pb),, γ (ob2 pb)):
-                      (P × C)⟦ob1 pb,, G(ob2 pb), ob1 pb,, H(ob2 pb)⟧).
+  λ pb : P ☺ B, #K ((identity (ob1 pb),, γ (ob2 pb)):
+                      (P ☺ C)⟦ob1 pb,, G(ob2 pb), ob1 pb,, H(ob2 pb)⟧).
 
 Lemma is_nat_trans_post_whisker_fst_param {B C D P: category}
-  {G H : B ⟶ C} (γ : G ⟹ H) (K : (P × C) ⟶ D):
+  {G H : B ⟶ C} (γ : G ⟹ H) (K : (P ☺ C) ⟶ D):
   is_nat_trans _ _ (nat_trans_data_post_whisker_fst_param γ K).
 Proof.
   intros pb pb' f.
@@ -741,21 +741,21 @@ Proof.
 Qed.
 
 Definition post_whisker_fst_param {B C D P: category}
-  {G H : B ⟶ C} (γ : G ⟹ H) (K : (P × C) ⟶ D):
+  {G H : B ⟶ C} (γ : G ⟹ H) (K : (P ☺ C) ⟶ D):
   (functor_composite (pair_functor (functor_identity _) G) K) ⟹
   (functor_composite (pair_functor (functor_identity _) H) K) :=
   make_nat_trans _ _ _ (is_nat_trans_post_whisker_fst_param γ K).
 
 
 Definition nat_trans_data_post_whisker_snd_param {B C D P: category}
-           {G H : B ⟶ C} (γ : G ⟹ H) (K : (C × P) ⟶ D):
+           {G H : B ⟶ C} (γ : G ⟹ H) (K : (C ☺ P) ⟶ D):
   nat_trans_data (functor_composite (pair_functor G (functor_identity _)) K)
                  (functor_composite (pair_functor H (functor_identity _)) K) :=
-  λ bp : B × P, #K ((γ (ob1 bp),, identity (ob2 bp)):
-                      (C × P)⟦G(ob1 bp),, ob2 bp, H(ob1 bp),, ob2 bp⟧).
+  λ bp : B ☺ P, #K ((γ (ob1 bp),, identity (ob2 bp)):
+                      (C ☺ P)⟦G(ob1 bp),, ob2 bp, H(ob1 bp),, ob2 bp⟧).
 
 Lemma is_nat_trans_post_whisker_snd_param {B C D P: category}
-  {G H : B ⟶ C} (γ : G ⟹ H) (K : (C × P) ⟶ D):
+  {G H : B ⟶ C} (γ : G ⟹ H) (K : (C ☺ P) ⟶ D):
   is_nat_trans _ _ (nat_trans_data_post_whisker_snd_param γ K).
 Proof.
   intros bp bp' f.
@@ -773,7 +773,7 @@ Proof.
 Qed.
 
 Definition post_whisker_snd_param {B C D P: category}
-  {G H : B ⟶ C} (γ : G ⟹ H) (K : (C × P) ⟶ D):
+  {G H : B ⟶ C} (γ : G ⟹ H) (K : (C ☺ P) ⟶ D):
   (functor_composite (pair_functor G (functor_identity _)) K) ⟹
   (functor_composite (pair_functor H (functor_identity _)) K) :=
   make_nat_trans _ _ _ (is_nat_trans_post_whisker_snd_param γ K).
@@ -786,7 +786,7 @@ Section Currying.
   Context (C D E : category).
 
 Section Def_Curry_Ob.
-  Context (F: (C × D) ⟶ E).
+  Context (F: (C ☺ D) ⟶ E).
 
   Definition curry_functor_data: functor_data D [C, E].
   Proof.
@@ -827,7 +827,7 @@ End Def_Curry_Ob.
 
 Section Def_Curry_Mor.
 
-  Context {F G: (C × D) ⟶ E} (α: F ⟹ G).
+  Context {F G: (C ☺ D) ⟶ E} (α: F ⟹ G).
 
   Definition curry_nattrans : curry_functor F ⟹ curry_functor G.
   Proof.
@@ -851,7 +851,7 @@ Section Def_Uncurry_Ob.
 
   Context (G: D ⟶ [C, E]).
 
-  Definition uncurry_functor_data: functor_data (C × D) E.
+  Definition uncurry_functor_data: functor_data (C ☺ D) E.
   Proof.
     use make_functor_data.
     - intro cd. induction cd as [c d].
@@ -889,7 +889,7 @@ Section Def_Uncurry_Ob.
       apply nat_trans_ax.
   Qed.
 
-  Definition uncurry_functor: (C × D) ⟶ E := make_functor uncurry_functor_data uncurry_functor_data_is_functor.
+  Definition uncurry_functor: (C ☺ D) ⟶ E := make_functor uncurry_functor_data uncurry_functor_data_is_functor.
 
 End Def_Uncurry_Ob.
 
@@ -923,7 +923,7 @@ Section Def_Uncurry_Mor.
 End Def_Uncurry_Mor.
 
 
-Lemma uncurry_after_curry (F: (C × D) ⟶ E): uncurry_functor (curry_functor F) = F.
+Lemma uncurry_after_curry (F: (C ☺ D) ⟶ E): uncurry_functor (curry_functor F) = F.
 Proof.
   apply functor_eq. { exact E. }
   (* UniMath.MoreFoundations.Tactics.show_id_type. *)
@@ -966,7 +966,7 @@ Section Evaluation.
 
   Context {C D : category}.
 
-Definition evaluation_functor: ([C, D] × C) ⟶  D.
+Definition evaluation_functor: ([C, D] ☺ C) ⟶  D.
 Proof.
   apply (functor_composite (@binswap_pair_functor _ _)).
   apply (uncurry_functor).
@@ -1180,7 +1180,7 @@ Section Coevaluation.
 
   Context {C D : category}.
 
-  Definition coevaluation_functor: C ⟶  [D, C × D].
+  Definition coevaluation_functor: C ⟶  [D, C ☺ D].
   Proof.
     apply curry_functor.
     apply binswap_pair_functor.
@@ -1195,7 +1195,7 @@ Section CategoryBinproductIsoWeq.
 
 
   Definition category_binproduct_z_iso_map
-    : z_iso (pr1 x) (pr1 y) × z_iso (pr2 x) (pr2 y) → z_iso x y.
+    : z_iso (pr1 x) (pr1 y) ☺ z_iso (pr2 x) (pr2 y) → z_iso x y.
   Proof.
     intros i.
     simple refine ((pr11 i ,, pr12 i) ,, _).
@@ -1205,11 +1205,11 @@ Section CategoryBinproductIsoWeq.
   Defined.
 
   Definition category_binproduct_z_iso_inv
-    : z_iso x y → z_iso (pr1 x) (pr1 y) × z_iso (pr2 x) (pr2 y)
+    : z_iso x y → z_iso (pr1 x) (pr1 y) ☺ z_iso (pr2 x) (pr2 y)
     := λ i, functor_on_z_iso (pr1_functor C D) i ,, functor_on_z_iso (pr2_functor C D) i.
 
   Definition category_binproduct_z_iso_weq
-    : z_iso (pr1 x) (pr1 y) × z_iso (pr2 x) (pr2 y) ≃ z_iso x y.
+    : z_iso (pr1 x) (pr1 y) ☺ z_iso (pr2 x) (pr2 y) ≃ z_iso x y.
   Proof.
     use make_weq.
     - exact category_binproduct_z_iso_map.
@@ -1228,7 +1228,7 @@ Section CategoryBinproductIsoWeq.
 
   (*
   Definition category_binproduct_iso_map
-    : iso (pr1 x) (pr1 y) × iso (pr2 x) (pr2 y) → iso x y.
+    : iso (pr1 x) (pr1 y) ☺ iso (pr2 x) (pr2 y) → iso x y.
   Proof.
     intros i.
     simple refine ((pr11 i ,, pr12 i) ,, _).
@@ -1238,11 +1238,11 @@ Section CategoryBinproductIsoWeq.
   Defined.
 
   Definition category_binproduct_iso_inv
-    : iso x y → iso (pr1 x) (pr1 y) × iso (pr2 x) (pr2 y)
+    : iso x y → iso (pr1 x) (pr1 y) ☺ iso (pr2 x) (pr2 y)
     := λ i, functor_on_iso (pr1_functor C D) i ,, functor_on_iso (pr2_functor C D) i.
 
   Definition category_binproduct_iso_weq
-    : iso (pr1 x) (pr1 y) × iso (pr2 x) (pr2 y) ≃ iso x y.
+    : iso (pr1 x) (pr1 y) ☺ iso (pr2 x) (pr2 y) ≃ iso x y.
   Proof.
     use make_weq.
     - exact category_binproduct_iso_map.
@@ -1330,7 +1330,7 @@ Defined.
 Section PairingWithAnObject.
 
   Definition pair_with_object_left_data {C : category} (I : C)
-    : functor_data C (C × C).
+    : functor_data C (C ☺ C).
   Proof.
     exists (λ x, (I,x)).
     exact (λ x y f, (identity I #, f)).
@@ -1348,11 +1348,11 @@ Section PairingWithAnObject.
   Qed.
 
   Definition pair_with_object_left {C : category} (I : C)
-    : functor C (C × C)
+    : functor C (C ☺ C)
     := pair_with_object_left_data I ,, pair_with_object_left_is_functor I.
 
   Definition pair_with_object_right_data {C : category} (I : C)
-    : functor_data C (C × C).
+    : functor_data C (C ☺ C).
   Proof.
     exists (λ x, (x,I)).
     exact (λ x y f, (f #, identity I)).
@@ -1370,7 +1370,7 @@ Section PairingWithAnObject.
   Qed.
 
   Definition pair_with_object_right {C : category} (I : C)
-    : functor C (C × C)
+    : functor C (C ☺ C)
     := pair_with_object_right_data I ,, pair_with_object_right_is_functor I.
 
   Lemma PairingWithObjectCommutesLeft
@@ -1408,7 +1408,7 @@ Section PairingWithAnObject.
   Defined.
 
   Definition tensor_after_pair_with_object_left
-             {C : category} (T : functor (C × C) C) (I : C)
+             {C : category} (T : functor (C ☺ C) C) (I : C)
     : nat_z_iso (functor_fix_fst_arg _ _ _ T I)
                 (functor_composite (pair_with_object_left I) T).
   Proof.
@@ -1421,7 +1421,7 @@ Section PairingWithAnObject.
   Defined.
 
   Definition tensor_after_pair_with_object_right
-             {C : category} (T : functor (C × C) C) (I : C)
+             {C : category} (T : functor (C ☺ C) C) (I : C)
     : nat_z_iso (functor_fix_snd_arg _ _ _ T I)
                 (functor_composite (pair_with_object_right I) T).
   Proof.
@@ -1436,7 +1436,7 @@ Section PairingWithAnObject.
 End PairingWithAnObject.
 
 
-Definition category_op_binproduct {C D:category}: ((C^op) × (D^op)) ⟶ (C × D)^op.
+Definition category_op_binproduct {C D:category}: ((C^op) ☺ (D^op)) ⟶ (C ☺ D)^op.
 Proof.
   use make_functor.
   + use make_functor_data.

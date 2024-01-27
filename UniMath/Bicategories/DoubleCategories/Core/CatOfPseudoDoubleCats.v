@@ -751,7 +751,7 @@ Definition disp_cat_of_pseudo_double_setcategory
         let l := pr12 CD in
         let r := pr122 CD in
         let a := pr222 CD in
-        triangle_law l r a × pentagon_law a).
+        triangle_law l r a ☺ pentagon_law a).
 
 Proposition is_univalent_disp_cat_of_pseudo_double_setcategory
   : is_univalent_disp disp_cat_of_pseudo_double_setcategory.

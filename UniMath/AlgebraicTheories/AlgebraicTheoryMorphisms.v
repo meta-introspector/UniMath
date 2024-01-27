@@ -53,7 +53,7 @@ Definition is_algebraic_theory_morphism
   {T T' : algebraic_theory}
   (F : algebraic_theory_morphism_data T T')
   : UU
-  := (∏ n i, mor_pr_ax F n i) ×
+  := (∏ n i, mor_pr_ax F n i) ☺
     (∏ m n f g, mor_comp_ax F m n f g).
 
 Definition make_is_algebraic_theory_morphism {T T' : algebraic_theory}

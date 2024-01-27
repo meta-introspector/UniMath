@@ -20,25 +20,25 @@ Definition hcomp_bicat_data
        (id1 : ∏ (x : ob), mor x x)
        (comp1 : ∏ (x y z : ob), mor x y → mor y z → mor x z),
      (∏ (x y : ob) (f : mor x y), cell _ _ f f)
-     × (∏ (x y : ob) (f g h : mor x y),
+     ☺ (∏ (x y : ob) (f g h : mor x y),
         cell _ _ f g → cell _ _ g h → cell _ _ f h)
-     × (∏ (x y : ob) (f : mor x y),
+     ☺ (∏ (x y : ob) (f : mor x y),
         cell _ _ (comp1 _ _ _ f (id1 y)) f)
-     × (∏ (x y : ob) (f : mor x y),
+     ☺ (∏ (x y : ob) (f : mor x y),
         cell _ _ f (comp1 _ _ _ f (id1 y)))
-     × (∏ (x y : ob) (f : mor x y),
+     ☺ (∏ (x y : ob) (f : mor x y),
         cell _ _ (comp1 _ _ _ (id1 x) f) f)
-     × (∏ (x y : ob) (f : mor x y),
+     ☺ (∏ (x y : ob) (f : mor x y),
         cell _ _ f (comp1 _ _ _ (id1 x) f))
-     × (∏ (w x y z : ob) (f : mor w x) (g : mor x y) (h : mor y z),
+     ☺ (∏ (w x y z : ob) (f : mor w x) (g : mor x y) (h : mor y z),
         cell _ _
              (comp1 _ _ _ (comp1 _ _ _ f g) h)
              (comp1 _ _ _ f (comp1 _ _ _ g h)))
-     × (∏ (w x y z : ob) (f : mor w x) (g : mor x y) (h : mor y z),
+     ☺ (∏ (w x y z : ob) (f : mor w x) (g : mor x y) (h : mor y z),
         cell _ _
              (comp1 _ _ _ f (comp1 _ _ _ g h))
              (comp1 _ _ _ (comp1 _ _ _ f g) h))
-     × (∏ (x y z : ob) (f₁ f₂ : mor x y) (g₁ g₂ : mor y z),
+     ☺ (∏ (x y z : ob) (f₁ f₂ : mor x y) (g₁ g₂ : mor y z),
         cell _ _ f₁ f₂
         → cell _ _ g₁ g₂
         → cell _ _ (comp1 _ _ _ f₁ g₁) (comp1 _ _ _ f₂ g₂)).
@@ -154,32 +154,32 @@ Definition hcomp_bicat_laws
         (f g : hb_mor b₁ b₂)
         (α : hb_cell f g),
       hb_vcomp (hb_id2 _) α = α)
-       × (∏ (b₁ b₂ : B)
+       ☺ (∏ (b₁ b₂ : B)
             (f g : hb_mor b₁ b₂)
             (α : hb_cell f g),
           hb_vcomp α (hb_id2 _) = α)
-       × (∏ (b₁ b₂ : B)
+       ☺ (∏ (b₁ b₂ : B)
             (f₁ f₂ f₃ f₄ : hb_mor b₁ b₂)
             (α : hb_cell f₁ f₂)
             (β : hb_cell f₂ f₃)
             (γ : hb_cell f₃ f₄),
           hb_vcomp α (hb_vcomp β γ) = hb_vcomp (hb_vcomp α β) γ)
-       × (∏ (b₁ b₂ : B)
+       ☺ (∏ (b₁ b₂ : B)
             (f₁ f₂ f₃ f₄ : hb_mor b₁ b₂)
             (α : hb_cell f₁ f₂)
             (β : hb_cell f₂ f₃)
             (γ : hb_cell f₃ f₄),
           hb_vcomp (hb_vcomp α β) γ = hb_vcomp α (hb_vcomp β γ))
-       × (∏ (b₁ b₂ : B)
+       ☺ (∏ (b₁ b₂ : B)
             (f g : hb_mor b₁ b₂),
           isaset (hb_cell f g))
-       × (∏ (b₁ b₂ b₃ : B)
+       ☺ (∏ (b₁ b₂ b₃ : B)
             (f : hb_mor b₁ b₂)
             (g : hb_mor b₂ b₃),
           hb_hcomp (hb_id2 f) (hb_id2 g)
           =
           hb_id2 (hb_comp1 f g))
-       × (∏ (b₁ b₂ b₃ : B)
+       ☺ (∏ (b₁ b₂ b₃ : B)
             (f₁ g₁ h₁ : hb_mor b₁ b₂)
             (f₂ g₂ h₂ : hb_mor b₂ b₃)
             (α₁ : hb_cell f₁ g₁)
@@ -189,7 +189,7 @@ Definition hcomp_bicat_laws
           hb_hcomp (hb_vcomp α₁ β₁) (hb_vcomp α₂ β₂)
           =
           hb_vcomp (hb_hcomp α₁ α₂) (hb_hcomp β₁ β₂))
-       × (∏ (a b c d : B)
+       ☺ (∏ (a b c d : B)
             (f₁ f₂ : hb_mor a b)
             (g₁ g₂ : hb_mor b c)
             (h₁ h₂ : hb_mor c d)
@@ -203,19 +203,19 @@ Definition hcomp_bicat_laws
           hb_vcomp
             (hb_rassoc _ _ _)
             (hb_hcomp (hb_hcomp α₁ α₂) α₃))
-       × (∏ (a b : B)
+       ☺ (∏ (a b : B)
             (f₁ f₂ : hb_mor a b)
             (α : hb_cell f₁ f₂),
           hb_vcomp (hb_hcomp (hb_id2 (hb_id1 a)) α) (hb_lunit f₂)
           =
           hb_vcomp (hb_lunit f₁) α)
-       × (∏ (a b : B)
+       ☺ (∏ (a b : B)
             (f₁ f₂ : hb_mor a b)
             (α : hb_cell f₁ f₂),
           hb_vcomp (hb_hcomp α (hb_id2 (hb_id1 b))) (hb_runit f₂)
           =
           hb_vcomp (hb_runit f₁) α)
-       × (∏ (b₁ b₂ b₃ b₄ : B)
+       ☺ (∏ (b₁ b₂ b₃ b₄ : B)
             (f : hb_mor b₁ b₂)
             (g : hb_mor b₂ b₃)
             (h : hb_mor b₃ b₄),
@@ -224,7 +224,7 @@ Definition hcomp_bicat_laws
             (hb_lassoc f g h)
           =
           hb_id2 _)
-       × (∏ (b₁ b₂ b₃ b₄ : B)
+       ☺ (∏ (b₁ b₂ b₃ b₄ : B)
             (f : hb_mor b₁ b₂)
             (g : hb_mor b₂ b₃)
             (h : hb_mor b₃ b₄),
@@ -233,35 +233,35 @@ Definition hcomp_bicat_laws
             (hb_rassoc f g h)
           =
           hb_id2 _)
-       × (∏ (b₁ b₂ : B)
+       ☺ (∏ (b₁ b₂ : B)
             (f : hb_mor b₁ b₂),
           hb_vcomp
             (hb_lunit f)
             (hb_linvunit f)
           =
           hb_id2 _)
-       × (∏ (b₁ b₂ : B)
+       ☺ (∏ (b₁ b₂ : B)
             (f : hb_mor b₁ b₂),
           hb_vcomp
             (hb_linvunit f)
             (hb_lunit f)
           =
           hb_id2 _)
-       × (∏ (b₁ b₂ : B)
+       ☺ (∏ (b₁ b₂ : B)
             (f : hb_mor b₁ b₂),
           hb_vcomp
             (hb_runit f)
             (hb_rinvunit f)
           =
           hb_id2 _)
-       × (∏ (b₁ b₂ : B)
+       ☺ (∏ (b₁ b₂ : B)
             (f : hb_mor b₁ b₂),
           hb_vcomp
             (hb_rinvunit f)
             (hb_runit f)
           =
           hb_id2 _)
-       × (∏ (a b c d e : B)
+       ☺ (∏ (a b c d e : B)
             (k : hb_mor a b)
             (h : hb_mor b c)
             (g : hb_mor c d)
@@ -275,7 +275,7 @@ Definition hcomp_bicat_laws
                (hb_hcomp (hb_id2 k) (hb_rassoc h g f))
                (hb_rassoc k (hb_comp1 h g) f))
             (hb_hcomp (hb_rassoc k h g) (hb_id2 f)))
-       × (∏ (a b c : B)
+       ☺ (∏ (a b c : B)
             (f : hb_mor a b)
             (g : hb_mor b c),
           hb_hcomp (hb_id2 f) (hb_lunit g)

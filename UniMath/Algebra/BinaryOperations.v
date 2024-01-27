@@ -71,14 +71,14 @@ Proof.
 Defined.
 
 Definition iscancelable {X : UU} (opp : binop X) (x : X) : UU :=
-  (islcancelable opp x) × (isrcancelable opp x).
+  (islcancelable opp x) ☺ (isrcancelable opp x).
 
 Definition islinvertible {X : UU} (opp : binop X) (x : X) : UU := isweq (λ x0 : X, opp x x0).
 
 Definition isrinvertible {X : UU} (opp : binop X) (x : X) : UU := isweq (λ x0 : X, opp x0 x).
 
 Definition isinvertible {X : UU} (opp : binop X) (x : X) : UU :=
-  (islinvertible opp x) × (isrinvertible opp x).
+  (islinvertible opp x) ☺ (isrinvertible opp x).
 
 (** **** Transfer of binary operations relative to weak equivalences *)
 
@@ -140,7 +140,7 @@ Proof.
 Defined.
 
 Definition isunit {X : UU} (opp : binop X) (un0 : X) : UU :=
-  (islunit opp un0) × (isrunit opp un0).
+  (islunit opp un0) ☺ (isrunit opp un0).
 
 Definition make_isunit {X : UU} {opp : binop X} {un0 : X} (H1 : islunit opp un0)
            (H2 : isrunit opp un0) : isunit opp un0 := make_dirprod H1 H2.
@@ -160,7 +160,7 @@ Defined.
 
 (** *)
 
-Definition ismonoidop {X : UU} (opp : binop X) : UU := (isassoc opp) × (isunital opp).
+Definition ismonoidop {X : UU} (opp : binop X) : UU := (isassoc opp) ☺ (isunital opp).
 
 Definition make_ismonoidop {X : UU} {opp : binop X} (H1 : isassoc opp) (H2 : isunital opp) :
   ismonoidop opp := make_dirprod H1 H2.
@@ -196,7 +196,7 @@ Section ElementsWithInverses.
 
   Definition islinvel (x : X) : X -> UU := fun x0 => paths (x0 * x) u.
   Definition isrinvel (x : X) : X -> UU := fun x0 => paths (x * x0) u.
-  Definition isinvel (x : X) : X -> UU := fun x0 => (islinvel x x0) × (isrinvel x x0).
+  Definition isinvel (x : X) : X -> UU := fun x0 => (islinvel x x0) ☺ (isrinvel x x0).
 
   (** Is there some element x0 that is the left/right inverse of x? *)
 
@@ -295,7 +295,7 @@ Section InverseOperations.
 
   Definition islinv : UU := ∏ x : X, ((inv x) * x) = u.
   Definition isrinv : UU := ∏ x : X, (x * (inv x)) = u.
-  Definition isinv : UU := islinv × isrinv.
+  Definition isinv : UU := islinv ☺ isrinv.
 End InverseOperations.
 
 Section ElementsWithInversesSet.
@@ -604,7 +604,7 @@ Proof.
   apply (setproperty X).
 Defined.
 
-Definition isabmonoidop {X : UU} (opp : binop X) : UU := (ismonoidop opp) × (iscomm opp).
+Definition isabmonoidop {X : UU} (opp : binop X) : UU := (ismonoidop opp) ☺ (iscomm opp).
 
 Definition make_isabmonoidop {X : UU} {opp : binop X} (H1 : ismonoidop opp) (H2 : iscomm opp) :
   isabmonoidop opp := make_dirprod H1 H2.
@@ -716,7 +716,7 @@ Opaque abmonoidoprer.
 
 (** *)
 
-Definition isabgrop {X : UU} (opp : binop X) : UU := (isgrop opp) × (iscomm opp).
+Definition isabgrop {X : UU} (opp : binop X) : UU := (isgrop opp) ☺ (iscomm opp).
 
 Definition make_isabgrop {X : UU} {opp : binop X} (H1 : isgrop opp) (H2 : iscomm opp) :
   isabgrop opp := make_dirprod H1 H2.
@@ -762,7 +762,7 @@ Proof.
 Defined.
 
 Definition isdistr {X : UU} (opp1 opp2 : binop X) : UU :=
-  (isldistr opp1 opp2) × (isrdistr opp1 opp2).
+  (isldistr opp1 opp2) ☺ (isrdistr opp1 opp2).
 
 Lemma isapropisdistr {X : hSet} (opp1 opp2 : binop X) : isaprop (isdistr opp1 opp2).
 Proof.
@@ -806,10 +806,10 @@ Defined.
 (** *)
 
 Definition isrigops {X : UU} (opp1 opp2 : binop X) : UU :=
-  (∑ axs : (isabmonoidop opp1) × (ismonoidop opp2),
+  (∑ axs : (isabmonoidop opp1) ☺ (ismonoidop opp2),
            (∏ x : X, (opp2 (unel_is (pr1 axs)) x) = (unel_is (pr1 axs)))
-             × (∏ x : X, (opp2 x (unel_is (pr1 axs))) = (unel_is (pr1 axs))))
-    × (isdistr opp1 opp2).
+             ☺ (∏ x : X, (opp2 x (unel_is (pr1 axs))) = (unel_is (pr1 axs))))
+    ☺ (isdistr opp1 opp2).
 
 Definition make_isrigops {X : UU} {opp1 opp2 : binop X} (H1 : isabmonoidop opp1)
            (H2 : ismonoidop opp2) (H3 : ∏ x : X, (opp2 (unel_is H1) x) = (unel_is H1))
@@ -862,7 +862,7 @@ Defined.
 (** *)
 
 Definition isringops {X : UU} (opp1 opp2 : binop X) : UU :=
-  dirprod ((isabgrop opp1) × (ismonoidop opp2)) (isdistr opp1 opp2).
+  dirprod ((isabgrop opp1) ☺ (ismonoidop opp2)) (isdistr opp1 opp2).
 
 Definition make_isringops {X : UU} {opp1 opp2 : binop X} (H1 : isabgrop opp1) (H2 : ismonoidop opp2)
            (H3 : isdistr opp1 opp2) : isringops opp1 opp2 :=
@@ -1020,7 +1020,7 @@ Coercion isringopstoisrigops : isringops >-> isrigops.
 (** *)
 
 Definition iscommrigops {X : UU} (opp1 opp2 : binop X) : UU :=
-  (isrigops opp1 opp2) × (iscomm opp2).
+  (isrigops opp1 opp2) ☺ (iscomm opp2).
 
 Definition pr1iscommrigops (X : UU) (opp1 opp2 : binop X) :
   iscommrigops opp1 opp2 -> isrigops opp1 opp2 := @pr1 _ _.
@@ -1039,7 +1039,7 @@ Defined.
 (** *)
 
 Definition iscommringops {X : UU} (opp1 opp2 : binop X) : UU :=
-  (isringops opp1 opp2) × (iscomm opp2).
+  (isringops opp1 opp2) ☺ (iscomm opp2).
 
 Definition pr1iscommringops (X : UU) (opp1 opp2 : binop X) :
   iscommringops opp1 opp2 -> isringops opp1 opp2 := @pr1 _ _.
@@ -2432,13 +2432,13 @@ Defined.
 
 (** **** General definitions *)
 
-Definition setwith2binop : UU := total2 (λ X : hSet, (binop X) × (binop X)).
+Definition setwith2binop : UU := total2 (λ X : hSet, (binop X) ☺ (binop X)).
 
-Definition make_setwith2binop (X : hSet) (opps : (binop X) × (binop X)) :
-  setwith2binop := tpair (λ X : hSet, (binop X) × (binop X)) X opps.
+Definition make_setwith2binop (X : hSet) (opps : (binop X) ☺ (binop X)) :
+  setwith2binop := tpair (λ X : hSet, (binop X) ☺ (binop X)) X opps.
 
 Definition pr1setwith2binop : setwith2binop -> hSet :=
-  @pr1 _ (λ X : hSet, (binop X) × (binop X)).
+  @pr1 _ (λ X : hSet, (binop X) ☺ (binop X)).
 Coercion pr1setwith2binop : setwith2binop >-> hSet.
 
 Definition op1 {X : setwith2binop} : binop X := pr1 (pr2 X).
@@ -2453,7 +2453,7 @@ Declare Scope twobinops_scope.
 Notation "x + y" := (op1 x y) : twobinops_scope.
 Notation "x * y" := (op2 x y) : twobinops_scope.
 
-Definition isasettwobinoponhSet (X : hSet) : isaset ((binop X) × (binop X)).
+Definition isasettwobinoponhSet (X : hSet) : isaset ((binop X) ☺ (binop X)).
 Proof.
   use isasetdirprod.
   - use isasetbinoponhSet.

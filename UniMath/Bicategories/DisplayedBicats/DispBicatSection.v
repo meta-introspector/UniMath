@@ -38,13 +38,13 @@ Definition section_disp_bicat_data
         (f g : x --> y)
         (τ : f ==> g),
       s_mor _ _ f ==>[ τ ] s_mor _ _ g)
-     ×
+     ☺
      (∏ (x : B),
       disp_invertible_2cell
         (id2_invertible_2cell _)
         (id_disp _)
         (s_mor _ _ (id₁ x)))
-     ×
+     ☺
      (∏ (x y z : B)
         (f : x --> y)
         (g : y --> z),
@@ -267,17 +267,17 @@ Definition section_disp_bicat_laws
            (s : section_disp_bicat_data D)
   : UU
   := section_disp_bicat_laws_id s
-     ×
+     ☺
      section_disp_bicat_laws_comp s
-     ×
+     ☺
      section_disp_bicat_laws_lunitor s
-     ×
+     ☺
      section_disp_bicat_laws_runitor s
-     ×
+     ☺
      section_disp_bicat_laws_lassociator s
-     ×
+     ☺
      section_disp_bicat_laws_lwhisker s
-     ×
+     ☺
      section_disp_bicat_laws_rwhisker s.
 
 Definition section_disp_bicat

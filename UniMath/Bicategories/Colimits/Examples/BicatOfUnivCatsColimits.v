@@ -136,7 +136,7 @@ Section BincoprodUMP.
     : isaprop
         (∑ γ,
          bincoprod_cocone_inl (bincoprod_cocone_bicat_of_univ_cats C₁ C₂) ◃ γ = α
-         ×
+         ☺
          bincoprod_cocone_inr (bincoprod_cocone_bicat_of_univ_cats C₁ C₂) ◃ γ = β).
   Proof.
     use invproofirrelevance.
@@ -1048,7 +1048,7 @@ Section UniversalCoproducts.
 
     Local Lemma pb_of_sum_cats_nat_trans_unique
       : isaprop
-          (∑ (γ : φ ==> ψ), κ₁ ◃ γ = α × κ₂ ◃ γ = β).
+          (∑ (γ : φ ==> ψ), κ₁ ◃ γ = α ☺ κ₂ ◃ γ = β).
     Proof.
       use invproofirrelevance.
       intros τ₁ τ₂.

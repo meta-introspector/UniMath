@@ -58,7 +58,7 @@ Notation "C ⟦ a , b ⟧" := (precategory_morphisms (C:=C) a b) : cat.
 Definition precategory_id_comp (C : precategory_ob_mor) : UU
   :=
     (∏ c : C, c --> c) (* identities *)
-      ×
+      ☺
     (∏ a b c : C, a --> b -> b --> c -> a --> c). (* composition *)
 
 Definition precategory_data : UU
@@ -102,19 +102,19 @@ Definition postcompose {C : precategory_data} {a b c : C} (g : b --> c) (f : a -
 Definition is_precategory (C : precategory_data) : UU
   :=
     ((∏ (a b : C) (f : a --> b), identity a · f = f)
-     ×
+     ☺
      (∏ (a b : C) (f : a --> b), f · identity b = f))
-    ×
+    ☺
     ((∏ (a b c d : C) (f : a --> b) (g : b --> c) (h : c --> d), f · (g · h) = (f · g) · h)
-       ×
+       ☺
      (∏ (a b c d : C) (f : a --> b) (g : b --> c) (h : c --> d), (f · g) · h = f · (g · h))).
 
 Definition is_precategory_one_assoc (C : precategory_data) : UU
   :=
     ((∏ (a b : C) (f : a --> b), identity a · f = f)
-     ×
+     ☺
      (∏ (a b : C) (f : a --> b), f · identity b = f))
-    ×
+    ☺
     (∏ (a b c d : C) (f : a --> b) (g : b --> c) (h : c --> d), f · (g · h) = (f · g) · h).
 
 Definition is_precategory_one_assoc_to_two (C : precategory_data) :

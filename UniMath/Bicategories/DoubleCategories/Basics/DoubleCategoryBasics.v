@@ -66,7 +66,7 @@ Definition hor_id_laws
            (I : hor_id_data D)
   : UU
   := (∏ (x : C), double_id_mor I (identity x) = id_two_disp _)
-     ×
+     ☺
      (∏ (x y z : C)
         (f : x --> y)
         (g : y --> z),
@@ -190,7 +190,7 @@ Definition hor_comp_laws
       double_hor_comp_mor Cm (id_two_disp h₁) (id_two_disp h₂)
       =
       id_two_disp (double_hor_comp Cm h₁ h₂))
-     ×
+     ☺
      (∏ (x₁ x₂ x₃ y₁ y₂ y₃ z₁ z₂ z₃ : C)
         (v₁ : x₁ --> x₂) (v₁' : x₂ --> x₃)
         (v₂ : y₁ --> y₂) (v₂' : y₂ --> y₃)

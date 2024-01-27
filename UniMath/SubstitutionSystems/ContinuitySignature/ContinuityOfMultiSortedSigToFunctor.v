@@ -80,7 +80,7 @@ Section FixTheContext.
   Section DefinitionOfMultiSortedSigToFunctorPrime.
 
   Definition hat_exp_functor_list'_piece
-             (xt : (list sort × sort) × sort)
+             (xt : (list sort ☺ sort) ☺ sort)
     : functor [sortToC,sortToC] [sortToC,sortToC].
   Proof.
     induction xt as [[si s] t].
@@ -93,7 +93,7 @@ Section FixTheContext.
   Defined.
 
   Definition hat_exp_functor_list'
-             (xst : list (list sort × sort) × sort)
+             (xst : list (list sort ☺ sort) ☺ sort)
     : functor [sortToC,sortToC] [sortToC,sortToC].
   Proof.
     induction xst as [a t].
@@ -114,7 +114,7 @@ Section FixTheContext.
 
 (** optimized version that does not introduce the terminal element in the singleton case: *)
   Definition hat_exp_functor_list'_optimized
-             (xst : list (list sort × sort) × sort)
+             (xst : list (list sort ☺ sort) ☺ sort)
     : functor [sortToC,sortToC] [sortToC,sortToC].
   Proof.
     induction xst as [xs t].
@@ -144,7 +144,7 @@ Section FixTheContext.
     Context (expSortToC1 : Exponentials BPC1) (** this requires exponentials in a higher space than before *)
       (HC : Colims_of_shape nat_graph C).
 
-    Local Lemma is_omega_cocont_hat_exp_functor_list'_piece  (xt : (list sort × sort) × sort) :
+    Local Lemma is_omega_cocont_hat_exp_functor_list'_piece  (xt : (list sort ☺ sort) ☺ sort) :
       is_omega_cocont (hat_exp_functor_list'_piece xt).
     Proof.
       apply is_omega_cocont_functor_composite.
@@ -156,7 +156,7 @@ Section FixTheContext.
         + apply MultiSorted_alt.is_left_adjoint_hat.
     Defined.
 
-    Local Lemma is_omega_cocont_hat_exp_functor_list' (xst : list (list sort × sort) × sort) :
+    Local Lemma is_omega_cocont_hat_exp_functor_list' (xst : list (list sort ☺ sort) ☺ sort) :
       is_omega_cocont (hat_exp_functor_list' xst).
     Proof.
       induction xst as [xs t].
@@ -175,7 +175,7 @@ Section FixTheContext.
         * apply is_omega_cocont_hat_exp_functor_list'_piece.
     Defined.
 
-    Local Lemma is_omega_cocont_hat_exp_functor_list'_optimized (xst : list (list sort × sort) × sort) :
+    Local Lemma is_omega_cocont_hat_exp_functor_list'_optimized (xst : list (list sort ☺ sort) ☺ sort) :
       is_omega_cocont (hat_exp_functor_list'_optimized xst).
     Proof.
       induction xst as [xs t].
@@ -345,7 +345,7 @@ Section FixTheContext.
 
   (* In case no constructors were given, i.e. just H := Id. *)
   Lemma pre_comp_option_list_omega_cont
-        (xst : (list sort × sort) × sort)
+        (xst : (list sort ☺ sort) ☺ sort)
     : is_omega_cont (pre_comp_functor (C := sortToC) (option_list sort Hsort C TC BC CC (pr11 xst))).
   Proof.
     apply is_omega_cont_pre_composition_functor'.
@@ -354,7 +354,7 @@ Section FixTheContext.
   Defined.
 
   Lemma is_omega_cont_hat_exp_functor_list'_piece
-  (xst : (list sort × sort) × sort)
+  (xst : (list sort ☺ sort) ☺ sort)
     :  is_omega_cont (hat_exp_functor_list'_piece xst).
   Proof.
     apply is_omega_cont_functor_composite.
@@ -363,7 +363,7 @@ Section FixTheContext.
   Defined.
 
   Lemma is_omega_cont_hat_exp_functor_list'
-        (xst : list (list sort × sort) × sort) :
+        (xst : list (list sort ☺ sort) ☺ sort) :
     is_omega_cont (hat_exp_functor_list' xst).
   Proof.
     induction xst as [a t] ; revert a.
@@ -378,7 +378,7 @@ Section FixTheContext.
   Defined.
 
   Lemma is_omega_cont_hat_exp_functor_list'_optimized
-        (xst : list (list sort × sort) × sort) :
+        (xst : list (list sort ☺ sort) ☺ sort) :
     is_omega_cont (hat_exp_functor_list'_optimized xst).
   Proof.
     induction xst as [xs t].

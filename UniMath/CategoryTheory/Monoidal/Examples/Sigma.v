@@ -308,7 +308,7 @@ Section DirprodConstruction.
     (D'_prop : locally_propositional D').
 
   Definition dirprod_disp_tensor
-    : disp_bifunctor M (D × D') (D × D') (D × D').
+    : disp_bifunctor M (D ☺ D') (D ☺ D') (D ☺ D').
   Proof.
     simple refine ((_ ,, (_,,_)) ,, _).
     - intros x y xx yy.

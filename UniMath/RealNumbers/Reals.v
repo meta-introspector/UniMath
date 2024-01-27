@@ -19,14 +19,14 @@ Local Open Scope NR_scope.
 
 Definition hr_commring : commring := commrigtocommring NonnegativeReals.
 
-Definition NR_to_hr : NonnegativeReals × NonnegativeReals → hr_commring
+Definition NR_to_hr : NonnegativeReals ☺ NonnegativeReals → hr_commring
   := setquotpr (binopeqrelabgrdiff (rigaddabmonoid NonnegativeReals)).
 
 Definition nat_to_hr (n : nat) : hr_commring :=
   NR_to_hr (nat_to_NonnegativeReals n,,0).
 
 Lemma NR_to_hr_inside :
-  ∏ x : NonnegativeReals × NonnegativeReals, pr1 (NR_to_hr x) x.
+  ∏ x : NonnegativeReals ☺ NonnegativeReals, pr1 (NR_to_hr x) x.
 Proof.
   intros x.
   apply hinhpr ; simpl.
@@ -34,7 +34,7 @@ Proof.
 Qed.
 
 Local Lemma iscomprelfun_NRminus :
-  ∏ x y : NonnegativeReals × NonnegativeReals,
+  ∏ x y : NonnegativeReals ☺ NonnegativeReals,
     pr1 x + pr2 y = pr1 y + pr2 x
     → pr1 x - pr2 x = pr1 y - pr2 y.
 Proof.
@@ -48,8 +48,8 @@ Proof.
 Qed.
 
 Lemma iscomprelfun_hr_to_NR :
-  iscomprelfun (Y := NonnegativeReals × NonnegativeReals) (binopeqrelabgrdiff (rigaddabmonoid NonnegativeReals))
-               (λ x : NonnegativeReals × NonnegativeReals,
+  iscomprelfun (Y := NonnegativeReals ☺ NonnegativeReals) (binopeqrelabgrdiff (rigaddabmonoid NonnegativeReals))
+               (λ x : NonnegativeReals ☺ NonnegativeReals,
                       pr1 x - pr2 x ,, pr2 x - pr1 x).
 Proof.
   intros x y.
@@ -69,7 +69,7 @@ Proof.
     exact (pr2 c).
 Qed.
 
-Definition hr_to_NR (x : hr_commring) : NonnegativeReals × NonnegativeReals.
+Definition hr_to_NR (x : hr_commring) : NonnegativeReals ☺ NonnegativeReals.
 Proof.
   revert x.
   simple refine (setquotuniv _ (_,,_) _ _).
@@ -106,7 +106,7 @@ Proof.
 Qed.
 
 Lemma hr_to_NRpos_NR_to_hr :
-  ∏ (x : NonnegativeReals × NonnegativeReals),
+  ∏ (x : NonnegativeReals ☺ NonnegativeReals),
     hr_to_NRpos (NR_to_hr x) = pr1 x - pr2 x.
 Proof.
   intros x.
@@ -114,7 +114,7 @@ Proof.
   now rewrite setquotunivcomm.
 Qed.
 Lemma hr_to_NRneg_NR_to_hr :
-  ∏ (x : NonnegativeReals × NonnegativeReals),
+  ∏ (x : NonnegativeReals ☺ NonnegativeReals),
     hr_to_NRneg (NR_to_hr x) = pr2 x - pr1 x.
 Proof.
   intros x.
@@ -159,7 +159,7 @@ Proof.
 Qed.
 
 Lemma hr_to_NRpos_NR_to_hr_std :
-  ∏ (x : NonnegativeReals × NonnegativeReals),
+  ∏ (x : NonnegativeReals ☺ NonnegativeReals),
     (0 < pr1 x -> pr2 x = 0) ->
     hr_to_NRpos (NR_to_hr x) = pr1 x.
 Proof.
@@ -170,7 +170,7 @@ Proof.
   now apply max_plusNonnegativeReals.
 Qed.
 Lemma hr_to_NRneg_NR_to_hr_std :
-  ∏ (x : NonnegativeReals × NonnegativeReals),
+  ∏ (x : NonnegativeReals ☺ NonnegativeReals),
     (0 < pr1 x -> pr2 x = 0) ->
     hr_to_NRneg (NR_to_hr x) = pr2 x.
 Proof.
@@ -185,7 +185,7 @@ Qed.
 (** Caracterisation of equality *)
 
 Lemma NR_to_hr_eq :
-  ∏ x y : NonnegativeReals × NonnegativeReals,
+  ∏ x y : NonnegativeReals ☺ NonnegativeReals,
     pr1 x + pr2 y = pr1 y + pr2 x <-> NR_to_hr x = NR_to_hr y.
 Proof.
   intros x y.
@@ -235,7 +235,7 @@ Qed.
 (** plus *)
 
 Lemma NR_to_hr_plus :
-  ∏ x y : NonnegativeReals × NonnegativeReals,
+  ∏ x y : NonnegativeReals ☺ NonnegativeReals,
     (NR_to_hr x + NR_to_hr y)%ring = NR_to_hr (pr1 x + pr1 y ,, pr2 x + pr2 y).
 Proof.
   intros x y.
@@ -248,7 +248,7 @@ Qed.
 (** opp *)
 
 Lemma NR_to_hr_opp :
-  ∏ x : NonnegativeReals × NonnegativeReals,
+  ∏ x : NonnegativeReals ☺ NonnegativeReals,
     (- NR_to_hr x)%ring = NR_to_hr (pr2 x ,, pr1 x).
 Proof.
   intros x.
@@ -290,7 +290,7 @@ Qed.
 (** minus *)
 
 Lemma NR_to_hr_minus :
-  ∏ x y : NonnegativeReals × NonnegativeReals,
+  ∏ x y : NonnegativeReals ☺ NonnegativeReals,
     (NR_to_hr x - NR_to_hr y)%ring = NR_to_hr (pr1 x + pr2 y ,, pr2 x + pr1 y).
 Proof.
   intros x y.
@@ -356,7 +356,7 @@ Qed.
 (** mult *)
 
 Lemma NR_to_hr_mult :
-  ∏ x y : NonnegativeReals × NonnegativeReals,
+  ∏ x y : NonnegativeReals ☺ NonnegativeReals,
     (NR_to_hr x * NR_to_hr y)%ring = NR_to_hr (pr1 x * pr1 y + pr2 x * pr2 y ,, pr1 x * pr2 y + pr2 x * pr1 y).
 Proof.
   intros x y.
@@ -382,7 +382,7 @@ Definition hr_lt_rel : hrel hr_commring
   := rigtoringrel NonnegativeReals isbinophrel_ltNonnegativeReals.
 
 Lemma NR_to_hr_lt :
-  ∏ x y : NonnegativeReals × NonnegativeReals,
+  ∏ x y : NonnegativeReals ☺ NonnegativeReals,
     pr1 x + pr2 y < pr1 y + pr2 x
     <-> hr_lt_rel (NR_to_hr x) (NR_to_hr y).
 Proof.
@@ -411,7 +411,7 @@ Definition hr_le_rel : hrel hr_commring
   := rigtoringrel NonnegativeReals isbinophrel_leNonnegativeReals.
 
 Lemma NR_to_hr_le :
-  ∏ x y : NonnegativeReals × NonnegativeReals,
+  ∏ x y : NonnegativeReals ☺ NonnegativeReals,
     pr1 x + pr2 y <= pr1 y + pr2 x
     <-> hr_le_rel (NR_to_hr x) (NR_to_hr y).
 Proof.
@@ -512,7 +512,7 @@ Qed.
 
 Lemma hr_to_NR_positive :
   ∏ x : hr_commring,
-    (hr_to_NRpos x ≠ 0 × hr_to_NRneg x = 0) <-> hr_lt_rel 0%ring x.
+    (hr_to_NRpos x ≠ 0 ☺ hr_to_NRneg x = 0) <-> hr_lt_rel 0%ring x.
 Proof.
   intros x.
   repeat split.
@@ -561,7 +561,7 @@ Qed.
 
 Lemma hr_to_NR_negative :
   ∏ x : hr_commring,
-    (hr_to_NRpos x = 0 × hr_to_NRneg x ≠ 0) <-> hr_lt_rel x 0%ring.
+    (hr_to_NRpos x = 0 ☺ hr_to_NRneg x ≠ 0) <-> hr_lt_rel x 0%ring.
 Proof.
   intros x.
   repeat split.
@@ -728,7 +728,7 @@ Definition hr_ap_rel : hrel hr_commring
   := rigtoringrel NonnegativeReals isbinophrel_apNonnegativeReals.
 
 Lemma NR_to_hr_ap :
-  ∏ x y : NonnegativeReals × NonnegativeReals,
+  ∏ x y : NonnegativeReals ☺ NonnegativeReals,
     pr1 x + pr2 y ≠ pr1 y + pr2 x
     <-> hr_ap_rel (NR_to_hr x) (NR_to_hr y).
 Proof.
@@ -962,7 +962,7 @@ Definition hr_abs (x : hr_ConstructiveField) : NonnegativeReals :=
   maxNonnegativeReals (hr_to_NRpos x) (hr_to_NRneg x).
 
 Lemma NR_to_hr_abs :
-  ∏ x : NonnegativeReals × NonnegativeReals,
+  ∏ x : NonnegativeReals ☺ NonnegativeReals,
     hr_abs (NR_to_hr x) <= maxNonnegativeReals (pr1 x) (pr2 x).
 Proof.
   intros x.
@@ -1378,7 +1378,7 @@ Definition Rtwo : Reals := Rplus Rone Rone.
 Definition Rabs : Reals → NonnegativeReals := hr_abs.
 
 Definition NRNRtoR : NonnegativeReals → NonnegativeReals → Reals := λ (x y : NonnegativeReals), NR_to_hr (x,,y).
-Definition RtoNRNR : Reals → NonnegativeReals × NonnegativeReals := λ x : Reals, (hr_to_NR x).
+Definition RtoNRNR : Reals → NonnegativeReals ☺ NonnegativeReals := λ x : Reals, (hr_to_NR x).
 
 Declare Scope R_scope.
 Delimit Scope R_scope with R.

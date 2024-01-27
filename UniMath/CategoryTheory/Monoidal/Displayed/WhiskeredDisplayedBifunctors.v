@@ -43,7 +43,7 @@ Section DisplayedBifunctor.
         (yy1 -->[g] yy2)
         ->
         ((Fob _ _ xx yy1) -->[x ⊗^{F}_{l} g] (Fob _ _ xx yy2)))
-       ×
+       ☺
        (∏ (x1 x2 : A)
           (y : B)
           (f : A⟦x1,x2⟧)
@@ -357,10 +357,10 @@ Section DisplayedBifunctor.
              (DF : disp_bifunctor_data F DA DB DC)
     : UU
     := (disp_bifunctor_leftidax DF)
-       × (disp_bifunctor_rightidax DF)
-       × (disp_bifunctor_leftcompax DF)
-       × (disp_bifunctor_rightcompax DF)
-       × (dispfunctoronmorphisms_are_equal DF).
+       ☺ (disp_bifunctor_rightidax DF)
+       ☺ (disp_bifunctor_leftcompax DF)
+       ☺ (disp_bifunctor_rightcompax DF)
+       ☺ (dispfunctoronmorphisms_are_equal DF).
 
   Definition disp_bifunctor
              {A B C : category}
@@ -549,7 +549,7 @@ Section DisplayedWhiskeredBinaturaltransformation.
           _
           (pr1 (pr2 α) x y1 y2 _)
           ((dα _ _ xx yy1) ;; (xx ⊗⊗^{DG}_{l} gg))))
-         ×
+         ☺
          (∏ (x1 x2 : A)
             (y : B)
             (f : A⟦x1,x2⟧)
@@ -679,7 +679,7 @@ Section DisplayedWhiskeredBinaturaltransformation.
           _
           (z_iso_after_z_iso_inv _)
           (id_disp _))
-         ×
+         ☺
          (ff ;; gg
           =
             transportb

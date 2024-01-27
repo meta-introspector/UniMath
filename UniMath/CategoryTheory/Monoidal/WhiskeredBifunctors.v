@@ -28,7 +28,7 @@ Section Bifunctor.
 
   Definition bifunctor_data : UU :=
     ∑ (F : A -> B -> C),
-      (∏ (a : A) (b1 b2 : B), B⟦b1, b2⟧ → C⟦F a b1, F a b2⟧) × (* left whiskering *)
+      (∏ (a : A) (b1 b2 : B), B⟦b1, b2⟧ → C⟦F a b1, F a b2⟧) ☺ (* left whiskering *)
       (∏ (b : B) (a1 a2 : A), A⟦a1, a2⟧ → C⟦F a1 b, F a2 b⟧). (* right whiskering *)
 
   Definition make_bifunctor_data
@@ -110,10 +110,10 @@ Section Bifunctor.
   Qed.
 
   Definition is_bifunctor (F : bifunctor_data) : UU :=
-    (bifunctor_leftidax F) ×
-    (bifunctor_rightidax F) ×
-    (bifunctor_leftcompax F) ×
-    (bifunctor_rightcompax F) ×
+    (bifunctor_leftidax F) ☺
+    (bifunctor_rightidax F) ☺
+    (bifunctor_leftcompax F) ☺
+    (bifunctor_rightcompax F) ☺
     (functoronmorphisms_are_equal F).
 
   Lemma isaprop_is_bifunctor (F : bifunctor_data)
@@ -333,7 +333,7 @@ Section WhiskeredBinaturaltransformation.
   Definition is_binat_trans {F G : bifunctor_data A B C} (α : binat_trans_data F G) :=
     (∏ (a : A) (b1 b2 : B) (g : B⟦b1,b2⟧),
        (a ⊗^{ F}_{l} g) · (α a b2) = (α a b1) · (a ⊗^{ G}_{l} g))
-                                           ×
+                                           ☺
        (∏ (a1 a2 : A) (b : B) (f : A⟦a1,a2⟧),
        (f ⊗^{ F}_{r} b) · (α a2 b) = (α a1 b) · (f ⊗^{ G}_{r} b)).
 
@@ -397,7 +397,7 @@ Section FunctorsFromProductCategory.
   Local Notation "C ☺ D" := (category_binproduct C D) (at level 75, right associativity).
 
   Definition bifunctor_to_functorfromproductcat_data {C D E : category}
-             (F : bifunctor C D E) : functor_data (C × D) E.
+             (F : bifunctor C D E) : functor_data (C ☺ D) E.
   Proof.
     exists (λ cd, (pr1 cd) ⊗_{F} (pr2 cd)).
     exact (λ _ _ fg, (pr1 fg) ⊗^{F} (pr2 fg)).
@@ -418,11 +418,11 @@ Section FunctorsFromProductCategory.
   Qed.
 
   Definition bifunctor_to_functorfromproductcat {C D E : category}
-             (F : bifunctor C D E) : functor (C × D) E
+             (F : bifunctor C D E) : functor (C ☺ D) E
     := bifunctor_to_functorfromproductcat_data F ,, bifunctor_to_functorfromproductcat_laws F.
 
   Definition bifunctor_from_functorfromproductcat_data {C D E : category}
-             (F : functor (C × D) E) : bifunctor_data C D E.
+             (F : functor (C ☺ D) E) : bifunctor_data C D E.
   Proof.
     exists (λ c d, F (c,,d)).
     exists (λ c _ _ g, #F (catbinprodmor (identity c) g)).
@@ -430,7 +430,7 @@ Section FunctorsFromProductCategory.
   Defined.
 
   Definition bifunctor_from_functorfromproductcat_laws
-             {C D E : category} (F : functor (C × D) E)
+             {C D E : category} (F : functor (C ☺ D) E)
     : is_bifunctor (bifunctor_from_functorfromproductcat_data F).
   Proof.
     repeat split.
@@ -475,7 +475,7 @@ Section FunctorsFromProductCategory.
   Qed.
 
   Definition bifunctor_from_functorfromproductcat {C D E : category}
-             (F : functor (C × D) E) : bifunctor C D E
+             (F : functor (C ☺ D) E) : bifunctor C D E
     := bifunctor_from_functorfromproductcat_data F ,, bifunctor_from_functorfromproductcat_laws F.
 
   Lemma bifunctor_to_functor_to_bifunctor_data
@@ -504,7 +504,7 @@ Section FunctorsFromProductCategory.
   Qed.
 
   Lemma functor_to_bifunctor_to_functor
-        {C D E : category} (F : functor (C × D) E)
+        {C D E : category} (F : functor (C ☺ D) E)
     : bifunctor_to_functorfromproductcat (bifunctor_from_functorfromproductcat F) = F.
   Proof.
     apply (functor_eq _ _ (homset_property _)).

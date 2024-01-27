@@ -51,7 +51,7 @@ Definition is_iso_twosided_disp
         (z_iso_inv_after_z_iso f_z_iso)
         (z_iso_inv_after_z_iso g_z_iso)
         (id_two_disp _))
-     ×
+     ☺
      (gf ;;2 fg
       =
       transportb_disp_mor2

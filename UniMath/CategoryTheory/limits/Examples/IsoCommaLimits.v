@@ -138,7 +138,7 @@ Section IsoCommaLimits.
                 (g : w --> y).
 
         Definition isBinProduct_in_iso_comma_unique
-          : isaprop (∑ (fg : w --> z), fg · p₁ = f × fg · p₂ = g).
+          : isaprop (∑ (fg : w --> z), fg · p₁ = f ☺ fg · p₂ = g).
         Proof.
           use invproofirrelevance.
           intros φ₁ φ₂.
@@ -334,7 +334,7 @@ Section IsoCommaLimits.
                 (p : h₁ · f = h₂ · g).
 
         Definition isPullback_iso_comma_unique
-          : isaprop (∑ (hk : w --> pb), hk · π₁ = h₁ × hk · π₂ = h₂).
+          : isaprop (∑ (hk : w --> pb), hk · π₁ = h₁ ☺ hk · π₂ = h₂).
         Proof.
           use invproofirrelevance.
           intros φ₁ φ₂.
@@ -647,7 +647,7 @@ Section IsoCommaLimits.
                 (g : y --> w).
 
         Definition isBinCoproduct_in_iso_comma_unique
-          : isaprop (∑ (fg : z --> w), i₁ · fg = f × i₂ · fg = g).
+          : isaprop (∑ (fg : z --> w), i₁ · fg = f ☺ i₂ · fg = g).
         Proof.
           use invproofirrelevance.
           intros φ₁ φ₂.

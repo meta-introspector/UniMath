@@ -554,9 +554,9 @@ Section Monad.
        let η := pr122 m in
        let μ := pr222 m in
        (linvunitor f • (η ▹ f) • μ = id2 f)
-       ×
+       ☺
        (rinvunitor f • (f ◃ η) • μ = id2 f)
-       ×
+       ☺
        (rassociator _ _ _ • (f ◃ μ) • μ
         =
         (μ ▹ f) • μ).
@@ -797,7 +797,7 @@ Definition mnd_mor_laws
   := (linvunitor _ • (unit_of_mnd m₁ ▹ _)
       =
       rinvunitor _ • (_ ◃ unit_of_mnd m₂) • (pr2 f))
-     ×
+     ☺
      (lassociator _ _ _
       • (pr2 f ▹ _)
       • rassociator _ _ _

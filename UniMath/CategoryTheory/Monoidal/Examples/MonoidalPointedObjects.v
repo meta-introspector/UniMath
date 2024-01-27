@@ -98,8 +98,8 @@ Qed.
 
 Lemma monoidal_pointed_objects_disp_data_verif :
   disp_leftunitor_data monoidal_pointed_objects_disp_tensor (identity I_{Mon_V})
-    × disp_rightunitor_data monoidal_pointed_objects_disp_tensor (identity I_{Mon_V})
-    × disp_associator_data monoidal_pointed_objects_disp_tensor.
+    ☺ disp_rightunitor_data monoidal_pointed_objects_disp_tensor (identity I_{Mon_V})
+    ☺ disp_associator_data monoidal_pointed_objects_disp_tensor.
 Proof.
   split3.
   - intros v pv. cbn.

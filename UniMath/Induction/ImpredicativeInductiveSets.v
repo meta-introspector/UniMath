@@ -161,7 +161,7 @@ Proof.
 Defined.
 
 (* copied from https://github.com/jonas-frey/Impredicative/blob/a75cb998/encode.hlean#L173 onwards:
-/- Product A × B of sets -/
+/- Product A ☺ B of sets -/
 
 -- System F encoding
 definition  preProduct (A B : USet) : USet :=

@@ -154,7 +154,7 @@ Lemma BinProductsHSET : BinProducts HSET.
 Proof.
 intros A B.
 use make_BinProduct.
-- apply (A × B)%set.
+- apply (A ☺ B)%set.
 - simpl in *; apply pr1.
 - simpl in *; intros x; apply (pr2 x).
 - apply make_isBinProduct.

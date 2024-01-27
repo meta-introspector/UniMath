@@ -195,9 +195,9 @@ Definition strict_double_cat_laws
        (rp : strict_double_cat_id_right I Cm)
        (ap : strict_double_cat_assoc Cm),
      strict_double_cat_id_left_square lp
-     ×
+     ☺
      strict_double_cat_id_right_square rp
-     ×
+     ☺
      strict_double_cat_assoc_square ap.
 
 Proposition isaprop_strict_double_cat_laws

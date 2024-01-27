@@ -1427,7 +1427,7 @@ Defined.
 
 (** *** Weak equivalence between the direct product of [ stn n ] and [ stn m ] and [ stn n * m ] *)
 
-Theorem weqfromprodofstn ( n m : nat ) : ⟦n⟧ × ⟦m⟧ ≃ ⟦n*m⟧.
+Theorem weqfromprodofstn ( n m : nat ) : ⟦n⟧ ☺ ⟦m⟧ ≃ ⟦n*m⟧.
 Proof.
   intros.
   induction ( natgthorleh m 0 ) as [ is | i ].
@@ -1438,7 +1438,7 @@ Proof.
         rewrite natpluscomm.
         exact (natgthandplusl m j ( i * m ) lj ).
       * exact ( natlehandmultr ( S i ) n m ( natgthtogehsn _ _ li ) ).
-    + set ( f := λ ij : ⟦n⟧ × ⟦m⟧,
+    + set ( f := λ ij : ⟦n⟧ ☺ ⟦m⟧,
                    match ij
                    with tpair _ i j =>
                         make_stn ( n * m ) ( j + i * m ) ( i1 i j ( pr2 i ) ( pr2 j ) )
@@ -1622,10 +1622,10 @@ Defined.
 
 (** *** Weak equivalence between [ ( stn n ) ≃ ( stn n ) ] and [ stn ( factorial n ) ] ( uses functional extensionality ) *)
 
-Theorem weqweqstnsn ( n : nat ) : (⟦S n⟧ ≃ ⟦S n⟧)  ≃  ⟦S n⟧ × ( ⟦n⟧ ≃ ⟦n⟧ ).
+Theorem weqweqstnsn ( n : nat ) : (⟦S n⟧ ≃ ⟦S n⟧)  ≃  ⟦S n⟧ ☺ ( ⟦n⟧ ≃ ⟦n⟧ ).
 Proof.
   assert ( l := @lastelement n ).
-  intermediate_weq ( isolated (⟦S n⟧) × (compl _ l ≃ compl _ l) ).
+  intermediate_weq ( isolated (⟦S n⟧) ☺ (compl _ l ≃ compl _ l) ).
   { apply weqcutonweq. intro i. apply isdeceqstn. }
   apply weqdirprodf.
   - apply weqisolatedstntostn.
@@ -1766,11 +1766,11 @@ Defined.
 
 Lemma weqforallnatlehnsn' ( n' : nat ) ( F : nat -> hProp ) :
   ( ∏ n : nat , natleh n ( S n' ) -> F n ) ≃
-  ( ∏ n : nat , natleh n n' -> F n ) × ( F ( S n' ) ).
+  ( ∏ n : nat , natleh n n' -> F n ) ☺ ( F ( S n' ) ).
 Proof.
   intros.
   assert ( lg : ( ∏ n : nat , natleh n ( S n' ) -> F n ) <->
-                ( ∏ n : nat , natleh n n' -> F n ) × ( F ( S n' ) ) ).
+                ( ∏ n : nat , natleh n n' -> F n ) ☺ ( F ( S n' ) ) ).
   { split.
     - intro f.
       apply ( make_dirprod ( λ n, λ l, ( f n ( natlehtolehs _ _ l ) ) )
@@ -1791,7 +1791,7 @@ Proof.
     intro l.
     apply ( pr2 ( F n ) ).
   }
-  assert ( is2 : isaprop ( ( ∏ n : nat , natleh n n' -> F n ) × ( F ( S n' ) ) ) ).
+  assert ( is2 : isaprop ( ( ∏ n : nat , natleh n n' -> F n ) ☺ ( F ( S n' ) ) ) ).
   { apply isapropdirprod.
     - apply impred.
       intro n.
@@ -1804,9 +1804,9 @@ Proof.
 Defined.
 
 Lemma weqexistsnatlehn0 ( P : nat -> hProp  ) :
-  ( hexists ( λ n : nat, ( natleh n 0 ) × ( P n ) ) ) ≃ P 0.
+  ( hexists ( λ n : nat, ( natleh n 0 ) ☺ ( P n ) ) ) ≃ P 0.
 Proof.
-  assert ( lg : hexists ( λ n : nat, ( natleh n 0 ) × ( P n ) ) <-> P 0  ).
+  assert ( lg : hexists ( λ n : nat, ( natleh n 0 ) ☺ ( P n ) ) <-> P 0  ).
   { split.
     - simpl.
       apply ( @hinhuniv _ ( P 0 ) ).
@@ -1827,12 +1827,12 @@ Proof.
 Defined.
 
 Lemma weqexistsnatlehnsn' ( n' : nat ) ( P : nat -> hProp  ) :
-  ( hexists ( λ n : nat, ( natleh n ( S n' ) ) × ( P n ) ) ) ≃
-  hdisj ( hexists ( λ n : nat, ( natleh n n' ) × ( P n ) ) )  ( P ( S n' ) ).
+  ( hexists ( λ n : nat, ( natleh n ( S n' ) ) ☺ ( P n ) ) ) ≃
+  hdisj ( hexists ( λ n : nat, ( natleh n n' ) ☺ ( P n ) ) )  ( P ( S n' ) ).
 Proof.
   intros.
-  assert ( lg : hexists ( λ n : nat, ( natleh n ( S n' ) ) × ( P n ) ) <->
-                hdisj ( hexists ( λ n : nat, ( natleh n n' ) × ( P n ) ) )  ( P ( S n' ) ) ).
+  assert ( lg : hexists ( λ n : nat, ( natleh n ( S n' ) ) ☺ ( P n ) ) <->
+                hdisj ( hexists ( λ n : nat, ( natleh n n' ) ☺ ( P n ) ) )  ( P ( S n' ) ) ).
   { split.
     - apply hinhfun.
       intro t2.
@@ -1870,7 +1870,7 @@ Defined.
 
 
 Lemma isdecbexists ( n : nat ) ( P : nat -> UU ) ( is : ∏ n' , isdecprop ( P n' ) ) :
-  isdecprop ( hexists ( λ n', ( natleh n' n ) × ( P n' ) ) ).
+  isdecprop ( hexists ( λ n', ( natleh n' n ) ☺ ( P n' ) ) ).
 Proof.
   intros.
   set ( P' := λ n' : nat, make_hProp _ ( is n' ) ).
@@ -1904,7 +1904,7 @@ Defined.
 Lemma negbforalldectototal2neg ( n : nat ) ( P : nat -> UU )
   ( is : ∏ n' : nat , isdecprop ( P n' ) ) :
   ¬ ( ∏ n' : nat , natleh n' n -> P n' ) ->
-  total2 ( λ n', ( natleh n' n ) × ¬ ( P n' ) ).
+  total2 ( λ n', ( natleh n' n ) ☺ ¬ ( P n' ) ).
 Proof.
   set ( P' := λ n' : nat, make_hProp _ ( is n' ) ).
   induction n as [ | n IHn ].
@@ -1931,14 +1931,14 @@ Defined.
 (** ** Accessibility - the least element of an inhabited decidable subset of [nat] *)
 
 Definition natdecleast ( F : nat -> UU ) ( is : ∏ n , isdecprop ( F n ) ) :=
-  total2 ( λ  n : nat, ( F n ) × ( ∏ n' : nat , F n' -> natleh n n' ) ).
+  total2 ( λ  n : nat, ( F n ) ☺ ( ∏ n' : nat , F n' -> natleh n n' ) ).
 
 Lemma isapropnatdecleast ( F : nat -> UU ) ( is : ∏ n , isdecprop ( F n ) ) :
   isaprop ( natdecleast F is ).
 Proof.
   intros.
   set ( P := λ n' : nat, make_hProp _ ( is n' ) ).
-  assert ( int1 : ∏ n : nat, isaprop ( ( F n ) × ( ∏ n' : nat , F n' -> natleh n n' ) ) ).
+  assert ( int1 : ∏ n : nat, isaprop ( ( F n ) ☺ ( ∏ n' : nat , F n' -> natleh n n' ) ) ).
   { intro n.
     apply isapropdirprod.
     - apply ( pr2 ( P n ) ).
@@ -1969,7 +1969,7 @@ Proof.
   intro t2.
   destruct t2 as [ n l ].
   simpl.
-  set ( F' := λ n' : nat, hexists ( λ n'', ( natleh n'' n' ) × ( F n'' ) ) ).
+  set ( F' := λ n' : nat, hexists ( λ n'', ( natleh n'' n' ) ☺ ( F n'' ) ) ).
   assert ( X : ∏ n' , F' n' -> natdecleast F is ).
   { intro n'.
     induction n' as [ | n' IHn' ].

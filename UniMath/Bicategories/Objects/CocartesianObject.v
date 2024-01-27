@@ -47,7 +47,7 @@ Definition cocartesian_initial
            (b : B)
   : UU
   := (∏ (x : B), Initial (hom x b))
-     ×
+     ☺
      (∏ (x y : B) (f : x --> y), preserves_initial (pre_comp b f)).
 
 Definition cocartesian_coprod
@@ -55,14 +55,14 @@ Definition cocartesian_coprod
            (b : B)
   : UU
   := (∏ (x : B), BinCoproducts (hom x b))
-     ×
+     ☺
      (∏ (x y : B) (f : x --> y), preserves_bincoproduct (pre_comp b f)).
 
 Definition cocartesian_ob
            {B : bicat}
            (b : B)
   : UU
-  := cocartesian_initial b × cocartesian_coprod b.
+  := cocartesian_initial b ☺ cocartesian_coprod b.
 
 (**
  2. Being cocartesian is a proposition
@@ -161,7 +161,7 @@ Section CocartesianViaAdjunction.
 
     Definition cocartesian_ob_via_adj
       : UU
-      := cocartesian_initial_via_adj T × cocartesian_coprod_via_adj prod.
+      := cocartesian_initial_via_adj T ☺ cocartesian_coprod_via_adj prod.
 
     Definition isaprop_cocartesian_ob_via_adj
                (HB : is_univalent_2_1 B)
@@ -1053,7 +1053,7 @@ Section EquivalenceCocartesian.
                          • fg
                          =
                          α
-                         ×
+                         ☺
                          cocartesian_coprod_via_adj_to_cocartesian_coprod_in2 f g
                          • fg
                          =

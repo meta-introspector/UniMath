@@ -26,7 +26,7 @@ Section Defn.
   Proof.
     use make_precategory_data.
     - use make_precategory_ob_mor.
-      + exact (∑ (a : ob C × ob C), dirprod_pr1 a --> dirprod_pr2 a).
+      + exact (∑ (a : ob C ☺ ob C), dirprod_pr1 a --> dirprod_pr2 a).
       + intros x y.
         (** The commutative square
 <<
@@ -36,7 +36,7 @@ Section Defn.
             pr1 pr2 x ---> pr1 pr2 y
 >>
          *)
-        exact (∑ fg : dirprod_pr1 (pr1 x) --> dirprod_pr1 (pr1 y) ×
+        exact (∑ fg : dirprod_pr1 (pr1 x) --> dirprod_pr1 (pr1 y) ☺
                       dirprod_pr2 (pr1 x) --> dirprod_pr2 (pr1 y),
               pr2 x · dirprod_pr2 fg = dirprod_pr1 fg · pr2 y).
     - intros x; cbn.

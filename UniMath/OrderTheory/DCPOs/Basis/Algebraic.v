@@ -69,7 +69,7 @@ Definition algebraic_dcpo_struct
   := ∏ (x : X),
      ∑ (D : directed_set X),
      (∏ (i : D), is_compact_el (D i))
-     ×
+     ☺
      is_least_upperbound X D x.
 
 Section AlgebraicDCPOAccessors.

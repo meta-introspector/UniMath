@@ -36,7 +36,7 @@ Definition monad_enrichment
   : UU
   := ∑ (EM : functor_enrichment M E E),
      nat_trans_enrichment (η M) (functor_id_enrichment _) EM
-     ×
+     ☺
      nat_trans_enrichment (μ M) (functor_comp_enrichment EM EM) EM.
 
 Coercion endo_of_monad_enrichment

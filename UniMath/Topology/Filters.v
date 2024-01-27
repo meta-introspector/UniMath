@@ -99,7 +99,7 @@ Qed.
 End Filter_def.
 
 Definition isPreFilter {X : UU} (F : (X → hProp) → hProp) :=
-  isfilter_imply F × isfilter_finite_intersection F.
+  isfilter_imply F ☺ isfilter_finite_intersection F.
 Definition PreFilter (X : UU) :=
   ∑ (F : (X → hProp) → hProp), isPreFilter F.
 Definition make_PreFilter {X : UU} (F : (X → hProp) → hProp)
@@ -112,7 +112,7 @@ Definition pr1PreFilter (X : UU) (F : PreFilter X) : (X → hProp) → hProp := 
 Coercion pr1PreFilter : PreFilter >-> Funclass.
 
 Definition isFilter {X : UU} (F : (X → hProp) → hProp) :=
-  isPreFilter F × isfilter_notempty F.
+  isPreFilter F ☺ isfilter_notempty F.
 Definition Filter (X : UU) := ∑ F : (X → hProp) → hProp, isFilter F.
 Definition pr1Filter (X : UU) (F : Filter X) : PreFilter X :=
   pr1 F,, pr1 (pr2 F).
@@ -563,10 +563,10 @@ Context (Fy : (Y → hProp) → hProp)
         (Hand_y : isfilter_and Fy)
         (Hempty_y : isfilter_notempty Fy).
 
-Definition filterdirprod : (X × Y → hProp) → hProp :=
-  λ A : (X × Y) → hProp,
+Definition filterdirprod : (X ☺ Y → hProp) → hProp :=
+  λ A : (X ☺ Y) → hProp,
         ∃ (Ax : X → hProp) (Ay : Y → hProp),
-          Fx Ax × Fy Ay × (∏ (x : X) (y : Y), Ax x → Ay y → A (x,,y)).
+          Fx Ax ☺ Fy Ay ☺ (∏ (x : X) (y : Y), Ax x → Ay y → A (x,,y)).
 
 Lemma filterdirprod_imply :
   isfilter_imply filterdirprod.
@@ -632,7 +632,7 @@ Qed.
 
 End filterdirprod.
 
-Definition PreFilterDirprod {X Y : UU} (Fx : PreFilter X) (Fy : PreFilter Y) : PreFilter (X × Y).
+Definition PreFilterDirprod {X Y : UU} (Fx : PreFilter X) (Fy : PreFilter Y) : PreFilter (X ☺ Y).
 Proof.
   simple refine (make_PreFilter _ _ _ _).
   - exact (filterdirprod Fx Fy).
@@ -644,7 +644,7 @@ Proof.
     + apply filter_and.
     + apply filter_and.
 Defined.
-Definition FilterDirprod {X Y : UU} (Fx : Filter X) (Fy : Filter Y) : Filter (X × Y).
+Definition FilterDirprod {X Y : UU} (Fx : Filter X) (Fy : Filter Y) : Filter (X ☺ Y).
 Proof.
   refine (tpair _ _ _).
   split.
@@ -654,17 +654,17 @@ Proof.
     + apply filter_notempty.
 Defined.
 
-Definition PreFilterPr1 {X Y : UU} (F : PreFilter (X × Y)) : PreFilter X :=
+Definition PreFilterPr1 {X Y : UU} (F : PreFilter (X ☺ Y)) : PreFilter X :=
   (PreFilterIm pr1 F).
-Definition FilterPr1 {X Y : UU} (F : Filter (X × Y)) : Filter X :=
+Definition FilterPr1 {X Y : UU} (F : Filter (X ☺ Y)) : Filter X :=
   (FilterIm pr1 F).
 
-Definition PreFilterPr2 {X Y : UU} (F : PreFilter (X × Y)) : PreFilter Y :=
+Definition PreFilterPr2 {X Y : UU} (F : PreFilter (X ☺ Y)) : PreFilter Y :=
   (PreFilterIm (@pr2 X (λ _ : X, Y)) F).
-Definition FilterPr2 {X Y : UU} (F : Filter (X × Y)) : Filter Y :=
+Definition FilterPr2 {X Y : UU} (F : Filter (X ☺ Y)) : Filter Y :=
   (FilterIm (@pr2 X (λ _ : X, Y)) F).
 
-Goal ∏ {X Y : UU} (F : PreFilter (X × Y)),
+Goal ∏ {X Y : UU} (F : PreFilter (X ☺ Y)),
     filter_le F (PreFilterDirprod (PreFilterPr1 F) (PreFilterPr2 F)).
 Proof.
   intros X Y F.
@@ -937,7 +937,7 @@ Defined.
 
 Lemma PreFilterIntersection_glb {X : UU} (FF : PreFilter X → hProp) :
   (∏ F : PreFilter X, FF F → filter_le F (PreFilterIntersection FF))
-    × (∏ F : PreFilter X, (∏ G : PreFilter X, FF G → filter_le G F)
+    ☺ (∏ F : PreFilter X, (∏ G : PreFilter X, FF G → filter_le G F)
                           → filter_le (PreFilterIntersection FF) F).
 Proof.
   split.
@@ -949,7 +949,7 @@ Proof.
 Qed.
 Lemma FilterIntersection_glb {X : UU} (FF : Filter X → hProp) Hff :
   (∏ F : Filter X, FF F → filter_le F (FilterIntersection FF Hff))
-    × (∏ F : Filter X, (∏ G : Filter X, FF G → filter_le G F)
+    ☺ (∏ F : Filter X, (∏ G : Filter X, FF G → filter_le G F)
                        → filter_le (FilterIntersection FF Hff) F).
 Proof.
   split.
@@ -970,7 +970,7 @@ Context (Hl : ∏ (L' : Sequence (X → hProp)), (∏ m, L (L' m)) → ∃ x : X
 
 Definition filtergenerated : (X → hProp) → hProp :=
   λ A : X → hProp,
-        ∃ (L' : Sequence (X → hProp)), (∏ m, L (L' m)) × (∏ x : X, finite_intersection L' x → A x).
+        ∃ (L' : Sequence (X → hProp)), (∏ m, L (L' m)) ☺ (∏ x : X, finite_intersection L' x → A x).
 
 Lemma filtergenerated_imply :
   isfilter_imply filtergenerated.
@@ -1064,7 +1064,7 @@ Defined.
 Lemma PreFilterGenerated_correct {X : UU} :
    ∏ (L : (X → hProp) → hProp),
    (∏ A : X → hProp, L A → (PreFilterGenerated L) A)
-   × (∏ F : PreFilter X,
+   ☺ (∏ F : PreFilter X,
       (∏ A : X → hProp, L A → F A) → filter_le F (PreFilterGenerated L)).
 Proof.
   intros L.
@@ -1092,7 +1092,7 @@ Lemma FilterGenerated_correct {X : UU} :
          (∏ m, L (L' m)) →
          (∃ x : X, finite_intersection L' x)),
    (∏ A : X → hProp, L A → (FilterGenerated L Hl) A)
-   × (∏ F : Filter X,
+   ☺ (∏ F : Filter X,
       (∏ A : X → hProp, L A → F A) → filter_le F (FilterGenerated L Hl)).
 Proof.
   intros L Hl.
@@ -1131,7 +1131,7 @@ Qed.
 
 Lemma ex_filter_le {X : UU} :
   ∏ (F : Filter X) (A : X → hProp),
-    (∑ G : Filter X, filter_le G F × G A)
+    (∑ G : Filter X, filter_le G F ☺ G A)
     <-> (∏ B : X → hProp, F B → (∃ x : X, A x ∧ B x)).
 Proof.
   intros F A.
@@ -1147,12 +1147,12 @@ Proof.
       * intros B.
         apply (F B ∨ B = A).
       * intros L Hl.
-        assert (B : ∃ B : X → hProp, F B × (∏ x, (A x ∧ B x → A x ∧ finite_intersection L x))).
+        assert (B : ∃ B : X → hProp, F B ☺ (∏ x, (A x ∧ B x → A x ∧ finite_intersection L x))).
         { revert L Hl.
           apply (Sequence_rect (P := λ L : Sequence (X → hProp),
                                     (∏ m : stn (length L), (λ B : X → hProp, F B ∨ B = A) (L m)) →
                                     ∃ B : X → hProp,
-                                      F B × (∏ x : X, A x ∧ B x → A x ∧ finite_intersection L x))).
+                                      F B ☺ (∏ x : X, A x ∧ B x → A x ∧ finite_intersection L x))).
         - intros Hl.
           apply hinhpr.
           rewrite finite_intersection_htrue.
@@ -1229,16 +1229,16 @@ Context {X : UU}.
 Context (base : (X → hProp) → hProp).
 
 Definition isbase_and :=
-  ∏ A B : X → hProp, base A → base B → ∃ C : X → hProp, base C × (∏ x, C x → A x ∧ B x).
+  ∏ A B : X → hProp, base A → base B → ∃ C : X → hProp, base C ☺ (∏ x, C x → A x ∧ B x).
 Definition isbase_notempty :=
   ∃ A : X → hProp, base A.
 Definition isbase_notfalse :=
   ∏ A, base A → ∃ x, A x.
 
 Definition isBaseOfPreFilter :=
-  isbase_and × isbase_notempty.
+  isbase_and ☺ isbase_notempty.
 Definition isBaseOfFilter :=
-  isbase_and × isbase_notempty × isbase_notfalse.
+  isbase_and ☺ isbase_notempty ☺ isbase_notfalse.
 
 End base.
 
@@ -1260,7 +1260,7 @@ Defined.
 Coercion pr1BaseOfFilter : BaseOfFilter >-> BaseOfPreFilter.
 
   Lemma BaseOfPreFilter_and {X : UU} (base : BaseOfPreFilter X) :
-  ∏ A B : X → hProp, base A → base B → ∃ C : X → hProp, base C × (∏ x, C x → A x ∧ B x).
+  ∏ A B : X → hProp, base A → base B → ∃ C : X → hProp, base C ☺ (∏ x, C x → A x ∧ B x).
 Proof.
   apply (pr1 (pr2 base)).
 Qed.
@@ -1271,7 +1271,7 @@ Proof.
 Qed.
 
 Lemma BaseOfFilter_and {X : UU} (base : BaseOfFilter X) :
-  ∏ A B : X → hProp, base A → base B → ∃ C : X → hProp, base C × (∏ x, C x → A x ∧ B x).
+  ∏ A B : X → hProp, base A → base B → ∃ C : X → hProp, base C ☺ (∏ x, C x → A x ∧ B x).
 Proof.
   apply (pr1 (pr2 base)).
 Qed.
@@ -1295,7 +1295,7 @@ Context (base : (X → hProp) → hProp)
         (Hfalse : isbase_notfalse base).
 
 Definition filterbase : (X → hProp) → hProp :=
-  λ A : X → hProp, (∃ B : X → hProp, base B × ∏ x, B x → A x).
+  λ A : X → hProp, (∃ B : X → hProp, base B ☺ ∏ x, B x → A x).
 
 Lemma filterbase_imply :
   isfilter_imply filterbase.
@@ -1357,10 +1357,10 @@ Qed.
 
 Lemma base_finite_intersection :
   ∏ L : Sequence (X → hProp),
-    (∏ n, base (L n)) → ∃ A, base A × (∏ x, A x → finite_intersection L x).
+    (∏ n, base (L n)) → ∃ A, base A ☺ (∏ x, A x → finite_intersection L x).
 Proof.
   intros L Hbase.
-  apply (pr2 (finite_intersection_hProp (λ B, ∃ A : X → hProp, base A × (∏ x : X, A x → B x)))).
+  apply (pr2 (finite_intersection_hProp (λ B, ∃ A : X → hProp, base A ☺ (∏ x : X, A x → B x)))).
   - split.
     + revert Hempty.
       apply hinhfun.
@@ -1499,7 +1499,7 @@ Proof.
 Qed.
 
 Lemma filterbase_le {X : UU} (base base' : (X → hProp) → hProp) :
-  (∏ P : X → hProp, base P → ∃ Q : X → hProp, base' Q × (∏ x, Q x → P x))
+  (∏ P : X → hProp, base P → ∃ Q : X → hProp, base' Q ☺ (∏ x, Q x → P x))
   <-> (∏ P : X → hProp, filterbase base P → filterbase base' P).
 Proof.
   split.
@@ -1521,7 +1521,7 @@ Proof.
 Qed.
 
 Lemma PreFilterBase_le {X : UU} (base base' : BaseOfPreFilter X) :
-  (∏ P : X → hProp, base P → ∃ Q : X → hProp, base' Q × (∏ x, Q x → P x))
+  (∏ P : X → hProp, base P → ∃ Q : X → hProp, base' Q ☺ (∏ x, Q x → P x))
   <-> filter_le (PreFilterBase base') (PreFilterBase base).
 Proof.
   split.
@@ -1530,7 +1530,7 @@ Proof.
   - apply (pr2 (filterbase_le base base')).
 Qed.
 Lemma FilterBase_le {X : UU} (base base' : BaseOfFilter X) :
-  (∏ P : X → hProp, base P → ∃ Q : X → hProp, base' Q × (∏ x, Q x → P x))
+  (∏ P : X → hProp, base P → ∃ Q : X → hProp, base' Q ☺ (∏ x, Q x → P x))
   <-> filter_le (FilterBase base') (FilterBase base).
 Proof.
   split.

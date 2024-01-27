@@ -109,7 +109,7 @@ Definition prod_pointed_PartialOrder
            {X Y : hSet}
            (RX : pointed_PartialOrder X)
            (RY : pointed_PartialOrder Y)
-  : pointed_PartialOrder (X × Y)%set.
+  : pointed_PartialOrder (X ☺ Y)%set.
 Proof.
   use make_pointed_PartialOrder.
   - exact (prod_PartialOrder RX RY).
@@ -145,7 +145,7 @@ Definition is_strict_and_monotone
            (RY : pointed_PartialOrder Y)
            (f : X → Y)
   : UU
-  := is_monotone RX RY f × f ⊥_{RX} = ⊥_{RY}.
+  := is_monotone RX RY f ☺ f ⊥_{RX} = ⊥_{RY}.
 
 Coercion is_strict_and_monotone_function_to_is_monotone
          {X Y : hSet}

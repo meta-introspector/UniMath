@@ -15,7 +15,7 @@ Module Uniqueness.
   Lemma helper_A (P:nat->Type) (p0:P 0) (IH:∏ n, P n->P(S n))
         (f:∏ n, P n) :
     weq (∏ n, f n = nat_rect P p0 IH n)
-        (f 0=p0 × ∏ n, f(S n)=IH n (f n)).
+        (f 0=p0 ☺ ∏ n, f(S n)=IH n (f n)).
   Proof.
     intros. simple refine (_,,isweq_iso _ _ _ _).
     { intros h. split.
@@ -35,7 +35,7 @@ Module Uniqueness.
   Lemma helper_B (P:nat->Type) (p0:P 0) (IH:∏ n, P n->P(S n))
         (f:∏ n, P n) :
     weq (f = nat_rect P p0 IH)
-        ((f 0=p0) × (∏ n, f(S n)=IH n (f n))).
+        ((f 0=p0) ☺ (∏ n, f(S n)=IH n (f n))).
   Proof.
     intros.
     exact (weqcomp (weqtoforallpaths _ _ _) (helper_A _ _ _ _)).
@@ -44,19 +44,19 @@ Module Uniqueness.
   Lemma helper_C (P:nat->Type) (p0:P 0) (IH:∏ n, P n->P(S n)) :
     (∑ f:∏ n, P n, f = nat_rect P p0 IH)
       ≃
-    (∑ f:∏ n, P n, f 0=p0 × ∏ n, f(S n)=IH n (f n)).
+    (∑ f:∏ n, P n, f 0=p0 ☺ ∏ n, f(S n)=IH n (f n)).
   Proof.
     intros. apply weqfibtototal. intros f. apply helper_B.
   Defined.
 
   Lemma hNatRecursionUniq (P:nat->Type) (p0:P 0) (IH:∏ n, P n->P(S n)) :
-    ∃! (f:∏ n, P n), f 0=p0 × ∏ n, f(S n) = IH n (f n).
+    ∃! (f:∏ n, P n), f 0=p0 ☺ ∏ n, f(S n) = IH n (f n).
   Proof.
     intros. exact (iscontrweqf (helper_C _ _ _) (iscontrcoconustot _ _)).
   Defined.
 
   Lemma helper_D (P:nat->Type) (p0:P 0) (IH:∏ n, P n->P(S n)) :
-     (∑ f:∏ n, P n, (f 0=p0) × (∏ n, f(S n)=IH n (f n)))
+     (∑ f:∏ n, P n, (f 0=p0) ☺ (∏ n, f(S n)=IH n (f n)))
        ≃
         (@hfiber
            (∑ (f:∏ n, P n), ∏ n, f(S n)=IH n (f n))
@@ -264,7 +264,7 @@ Proof.
 Defined.
 
 Definition nat_dist_between_le m n a b : m ≤ n -> nat_dist m n = a + b ->
-  ∑ x, nat_dist x m = a × nat_dist x n = b.
+  ∑ x, nat_dist x m = a ☺ nat_dist x n = b.
 Proof.
   intros i j. exists (m+a). split.
   { apply nat_dist_plus. }
@@ -276,7 +276,7 @@ Proof.
 Defined.
 
 Definition nat_dist_between_ge m n a b :
-  n ≤ m -> nat_dist m n = a + b -> ∑ x:nat, nat_dist x m = a × nat_dist x n = b.
+  n ≤ m -> nat_dist m n = a + b -> ∑ x:nat, nat_dist x m = a ☺ nat_dist x n = b.
 Proof.
   intros i j.
   rewrite nat_dist_symm in j.
@@ -287,7 +287,7 @@ Proof.
 Defined.
 
 Definition nat_dist_between m n a b :
-  nat_dist m n = a + b -> ∑ x:nat, nat_dist x m = a × nat_dist x n = b.
+  nat_dist m n = a + b -> ∑ x:nat, nat_dist x m = a ☺ nat_dist x n = b.
 Proof.
   intros j.
   induction (natgthorleh m n) as [r|s].

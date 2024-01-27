@@ -94,7 +94,7 @@ Section Const_H_AsFunctor.
 
 
   Definition charprop_SpecialGenMendlerIterationWithActegoryAndStrength (h : C ⟦v ⊗_{Act} μF, y⟧) : UU :=
-    v ⊗^{Act}_{l} η · h = f × v ⊗^{Act}_{l} τ · h = θ v μF · #H h · ρ.
+    v ⊗^{Act}_{l} η · h = f ☺ v ⊗^{Act}_{l} τ · h = θ v μF · #H h · ρ.
 
   Lemma isaprop_charprop_SpecialGenMendlerIterationWithActegoryAndStrength (h : C ⟦v ⊗_{Act} μF, y⟧) :
     isaprop (charprop_SpecialGenMendlerIterationWithActegoryAndStrength h).

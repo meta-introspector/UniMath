@@ -73,11 +73,11 @@ Definition cat_with_enrichment_alt_data_help
   : UU
   := ∑ (mor : ob -> ob -> UU),
      (∏ (x : ob), mor x x)
-     ×
+     ☺
      (∏ (x y z : ob), mor x y → mor y z → mor x z)
-     ×
+     ☺
      (∏ (x y : ob), mor x y → I_{V} --> arr x y)
-     ×
+     ☺
      (∏ (x y : ob), I_{V} --> arr x y → mor x y).
 
 Definition path_cat_with_enrichment_alt_data_help_lemma
@@ -218,9 +218,9 @@ Definition cat_with_enrichment_alt_data
   := ∑ (ob : UU)
        (arr : ob -> ob -> V),
      (∏ (x : ob), I_{V} --> arr x x)
-     ×
+     ☺
      (∏ (x y z : ob), arr y z ⊗ arr x y --> arr x z)
-     ×
+     ☺
      cat_with_enrichment_alt_data_help ob arr.
 
 Definition cat_with_enrichment_alt_data_precategory_data
@@ -254,9 +254,9 @@ Definition cat_with_enrichment_alt_laws
            (E : cat_with_enrichment_alt_data V)
   : UU
   := has_homsets (cat_with_enrichment_alt_data_precategory_data E)
-     ×
+     ☺
      is_precategory (cat_with_enrichment_alt_data_precategory_data E)
-     ×
+     ☺
      enrichment_laws (cat_with_enrichment_alt_data_enrichment E).
 
 Definition cat_with_enrichment_alt

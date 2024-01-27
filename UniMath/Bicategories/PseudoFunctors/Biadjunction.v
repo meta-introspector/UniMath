@@ -46,7 +46,7 @@ Definition left_biadj_unit_counit
      (pstrans
        (id_psfunctor B₁)
        (comp_psfunctor R L))
-     ×
+     ☺
      (pstrans
         (comp_psfunctor L R)
         (id_psfunctor B₂)).
@@ -127,7 +127,7 @@ Definition left_biadj_data
            (L : psfunctor B₁ B₂)
   : UU
   := ∑ (R : left_biadj_unit_counit L),
-     biadj_triangle_l_law R × biadj_triangle_r_law R.
+     biadj_triangle_l_law R ☺ biadj_triangle_r_law R.
 
 Section BiadjunctionDataProjections.
   Context {B₁ B₂ : bicat}

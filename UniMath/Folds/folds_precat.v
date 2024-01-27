@@ -38,7 +38,7 @@ Definition has_folds_homsets (C : folds_ob_mor) : UU := ∏ a b: C, isaset (a �
 
 Definition folds_id_T := ∑ C : folds_ob_mor,
     (∏ a : C, a ⇒ a → hProp)
- ×  (∏ (a b c : C), (a ⇒ b) → (b ⇒ c) → (a ⇒ c) → hProp).
+ ☺  (∏ (a b c : C), (a ⇒ b) → (b ⇒ c) → (a ⇒ c) → hProp).
 
 Definition folds_ob_mor_from_folds_id_comp (C : folds_id_T) : folds_ob_mor := pr1 C.
 Coercion folds_ob_mor_from_folds_id_comp : folds_id_T >-> folds_ob_mor.
@@ -52,8 +52,8 @@ Definition T {C : folds_id_T} : ∏ {a b c : C}, (a ⇒ b) → (b ⇒ c) → (a 
 
 Definition folds_ax_I (C : folds_id_T) :=
      (∏ a : C, ∥ ∑ f : a ⇒ a, I f ∥ )  (* there is an id *)
-  × ((∏ (a b : C) (f : a ⇒ b)(i : b ⇒ b), I i → T f i f) (* id is post neutral *)
-   × (∏ (a b : C) (f : a ⇒ b)(i : a ⇒ a), I i → T i f f)). (* id is pre neutral *)
+  ☺ ((∏ (a b : C) (f : a ⇒ b)(i : b ⇒ b), I i → T f i f) (* id is post neutral *)
+   ☺ (∏ (a b : C) (f : a ⇒ b)(i : a ⇒ a), I i → T i f f)). (* id is pre neutral *)
 
 Lemma isaprop_folds_ax_id C : isaprop (folds_ax_I C).
 Proof.
@@ -65,9 +65,9 @@ Qed.
 
 Definition folds_ax_T (C : folds_id_T) :=
      (∏ (a b c : C) (f : a ⇒ b) (g : b ⇒ c), ∥ ∑ h : a ⇒ c, T f g h ∥ ) (* there is a composite *)
- ×  ((∏ (a b c : C) (f : a ⇒ b) (g : b ⇒ c) (h k : a ⇒ c),
+ ☺  ((∏ (a b c : C) (f : a ⇒ b) (g : b ⇒ c) (h k : a ⇒ c),
                   T f g h → T f g k → h = k )       (* composite is unique *)
-  ×  (∏ (a b c d : C) (f : a ⇒ b) (g : b ⇒ c) (h : c ⇒ d)
+  ☺  (∏ (a b c d : C) (f : a ⇒ b) (g : b ⇒ c) (h : c ⇒ d)
                   (fg : a ⇒ c) (gh : b ⇒ d) (fg_h : a ⇒ d) (f_gh : a ⇒ d),
                T f g fg → T g h gh →
                   T fg h fg_h → T f gh f_gh → f_gh = fg_h)). (* composition is assoc *)
@@ -81,7 +81,7 @@ Proof.
 Qed.
 
 
-Definition folds_precat := ∑ C : folds_id_T, folds_ax_I C × folds_ax_T C.
+Definition folds_precat := ∑ C : folds_id_T, folds_ax_I C ☺ folds_ax_T C.
 
 Definition folds_id_comp_from_folds_precat (C : folds_precat) : folds_id_T := pr1 C.
 Coercion folds_id_comp_from_folds_precat : folds_precat >-> folds_id_T.

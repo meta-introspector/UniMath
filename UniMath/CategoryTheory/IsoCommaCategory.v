@@ -4,7 +4,7 @@
 
  Given functors `F : C₁ ⟶ C₃` and `G : C₂ ⟶ C₃`.
  Then the iso-comma category of `F` and `G` is defined as follows:
- - Objects: pairs `(x, y) : C₁ × C₂` with an iso  `F x --> G y`
+ - Objects: pairs `(x, y) : C₁ ☺ C₂` with an iso  `F x --> G y`
  - Morphisms: morphisms from `(x₁, y₁, i₁)` to `(x₂, y₂, i₂)`
               consists of maps `f : x₁ --> x₂` and `g : y₁ --> y₂`
               such that that the following square commutes

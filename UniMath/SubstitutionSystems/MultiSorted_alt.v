@@ -108,7 +108,7 @@ Variables (expSortToCC : Exponentials BPC)
 
 (** Definition of multisorted signatures *)
 Definition MultiSortedSig : UU :=
-  ∑ (I : hSet), I → list (list sort × sort) × sort.
+  ∑ (I : hSet), I → list (list sort ☺ sort) ☺ sort.
 
 Definition ops (M : MultiSortedSig) : hSet := pr1 M.
 
@@ -122,11 +122,11 @@ Proof.
   apply Coproducts_functor_precat, CoproductsMultiSortedSig_base.
 Defined.
 
-Definition arity (M : MultiSortedSig) : ops M → list (list sort × sort) × sort :=
+Definition arity (M : MultiSortedSig) : ops M → list (list sort ☺ sort) ☺ sort :=
   λ x, pr2 M x.
 
 Definition make_MultiSortedSig {I : hSet}
-  (ar : I → list (list sort × sort) × sort) : MultiSortedSig := (I,,ar).
+  (ar : I → list (list sort ☺ sort) ☺ sort) : MultiSortedSig := (I,,ar).
 
 (** Sum of multisorted binding signatures *)
 Definition SumMultiSortedSig : MultiSortedSig → MultiSortedSig → MultiSortedSig.
@@ -225,7 +225,7 @@ F^(l,t)(X) := projSortToC(t) ∘ X
 
 otherwise
  *)
-Definition exp_functor (lt : list sort × sort) : functor [sortToC,sortToC] [sortToC,C].
+Definition exp_functor (lt : list sort ☺ sort) : functor [sortToC,sortToC] [sortToC,C].
 Proof.
 induction lt as [l t].
 (* use list_ind to do a case on whether l is empty or not *)
@@ -237,7 +237,7 @@ Defined.
 
 (** This defines F^lts where lts is a list of (l,t). Outputs a product of
     functors if the list is nonempty and otherwise the constant functor. *)
-Definition exp_functor_list (xs : list (list sort × sort)) :
+Definition exp_functor_list (xs : list (list sort ☺ sort)) :
   functor [sortToC,sortToC] [sortToC,C].
 Proof.
 (* If the list is empty we output the constant functor *)
@@ -248,7 +248,7 @@ set (T := constant_functor [sortToC,sortToC] [sortToC,C]
 exact (foldr1_map (λ F G, BinProduct_of_functors BPC F G) T exp_functor xs).
 Defined.
 
-Definition hat_exp_functor_list (xst : list (list sort × sort) × sort) :
+Definition hat_exp_functor_list (xst : list (list sort ☺ sort) ☺ sort) :
   functor [sortToC,sortToC] [sortToC,sortToC] :=
     exp_functor_list (pr1 xst) ∙ post_comp_functor (hat_functor (pr2 xst)).
 
@@ -286,7 +286,7 @@ induction xs as [[|n] xs].
 Defined.
 
 (* The signature for exp_functor *)
-Definition Sig_exp_functor (lt : list sort × sort) :
+Definition Sig_exp_functor (lt : list sort ☺ sort) :
   Signature sortToC C sortToC.
 Proof.
 exists (exp_functor lt).
@@ -298,14 +298,14 @@ use list_ind.
   apply (pr2 (Gθ_Signature Sig_option_list (projSortToC t))).
 Defined.
 
-Local Lemma functor_in_Sig_exp_functor_ok (lt : list sort × sort) :
+Local Lemma functor_in_Sig_exp_functor_ok (lt : list sort ☺ sort) :
   Signature_Functor (Sig_exp_functor lt) = exp_functor lt.
 Proof.
 apply idpath.
 Qed.
 
 (* The signature for exp_functor_list *)
-Definition Sig_exp_functor_list (xs : list (list sort × sort)) :
+Definition Sig_exp_functor_list (xs : list (list sort ☺ sort)) :
   Signature sortToC C sortToC.
 Proof.
 exists (exp_functor_list xs).
@@ -319,20 +319,20 @@ induction xs as [[|n] xs].
     exact (pr2 (BinProduct_of_Signatures _ (Sig_exp_functor _) (tpair _ _ (IH (k,,xs))))).
 Defined.
 
-Local Lemma functor_in_Sig_exp_functor_list_ok (xs : list (list sort × sort)) :
+Local Lemma functor_in_Sig_exp_functor_list_ok (xs : list (list sort ☺ sort)) :
   Signature_Functor (Sig_exp_functor_list xs) = exp_functor_list xs.
 Proof.
 apply idpath.
 Qed.
 
 (* the signature for hat_exp_functor_list *)
-Definition Sig_hat_exp_functor_list (xst : list (list sort × sort) × sort) :
+Definition Sig_hat_exp_functor_list (xst : list (list sort ☺ sort) ☺ sort) :
   Signature sortToC sortToC sortToC.
 Proof.
 apply (Gθ_Signature (Sig_exp_functor_list (pr1 xst)) (hat_functor (pr2 xst))).
 Defined.
 
-Local Lemma functor_in_Sig_hat_exp_functor_list_ok (xst : list (list sort × sort) × sort) :
+Local Lemma functor_in_Sig_hat_exp_functor_list_ok (xst : list (list sort ☺ sort) ☺ sort) :
   Signature_Functor (Sig_hat_exp_functor_list xst) = hat_exp_functor_list xst.
 Proof.
 apply idpath.
@@ -409,7 +409,7 @@ apply is_omega_cocont_post_composition_functor.
 apply is_left_adjoint_projSortToC.
 Defined.
 
-Local Lemma is_omega_cocont_exp_functor (a : list sort × sort) :
+Local Lemma is_omega_cocont_exp_functor (a : list sort ☺ sort) :
   is_omega_cocont (exp_functor a).
 Proof.
 induction a as [xs t]; revert xs.
@@ -422,7 +422,7 @@ use list_ind.
   + apply is_omega_cocont_post_comp_projSortToC.
 Defined.
 
-Local Lemma is_omega_cocont_exp_functor_list (xs : list (list sort × sort)) :
+Local Lemma is_omega_cocont_exp_functor_list (xs : list (list sort ☺ sort)) :
   is_omega_cocont (exp_functor_list xs).
 Proof.
 induction xs as [[|n] xs].
@@ -475,7 +475,7 @@ Proof.
 apply is_omega_cocont_post_composition_functor, is_left_adjoint_hat.
 Defined.
 
-Local Lemma is_omega_cocont_hat_exp_functor_list (xst : list (list sort × sort) × sort) :
+Local Lemma is_omega_cocont_hat_exp_functor_list (xst : list (list sort ☺ sort) ☺ sort) :
   is_omega_cocont (hat_exp_functor_list xst).
 Proof.
   apply is_omega_cocont_functor_composite.

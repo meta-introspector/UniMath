@@ -53,7 +53,7 @@ Section DisplayedAdjunction.
     := ∑ (FF : disp_functor F D D') (GG : disp_functor G D' D),
       (disp_nat_trans eta (disp_functor_identity _ )
                       (disp_functor_composite FF GG))
-        ×
+        ☺
         (disp_nat_trans eps (disp_functor_composite GG FF) (disp_functor_identity _ )).
 
   Section notation.
@@ -89,11 +89,11 @@ Section DisplayedAdjunction.
              (A : adjunction C C') {D : disp_cat C} {D' : disp_cat C'}
              (AA : disp_adjunction_data A D D')
     : UU
-    := triangle_1_statement_over AA × triangle_2_statement_over AA.
+    := triangle_1_statement_over AA ☺ triangle_2_statement_over AA.
 
   Definition disp_adjunction {C C' : category} (A : adjunction C C') D D' : UU
     := ∑ AA : disp_adjunction_data A D D',
-        triangle_1_statement_over AA × triangle_2_statement_over AA.
+        triangle_1_statement_over AA ☺ triangle_2_statement_over AA.
 
   Coercion data_of_disp_adjunction (C C' : category) (A : adjunction C C')
            D D' (AA : disp_adjunction A D D') : disp_adjunction_data _ _ _ := pr1 AA.
@@ -120,7 +120,7 @@ Section DisplayedAdjunction.
     := ∑ (GG : disp_functor (right_functor A) D' D),
       (disp_nat_trans (adjunit A)
                       (disp_functor_identity _) (disp_functor_composite FF GG))
-        × (disp_nat_trans (adjcounit A )
+        ☺ (disp_nat_trans (adjcounit A )
                           (disp_functor_composite GG FF) (disp_functor_identity _)).
 
   Definition functor_of_right_adjoint_over {C C' : category}
@@ -184,7 +184,7 @@ Section DisplayedEquivalences.
              {D : disp_cat C} {D' : disp_cat C'}
              (AA : disp_adjunction_data E D D') : UU
     := (∏ x xx, is_z_iso_disp (adjunitiso E x) (unit_over AA x xx))
-         ×
+         ☺
          (∏ x xx, is_z_iso_disp (adjcounitiso E x) (counit_over AA x xx)).
 
 
@@ -484,7 +484,7 @@ Definition disp_adjunction_id_data {C} (D D' : disp_cat C) : UU
      (GG : disp_functor (functor_identity _) D' D),
      (disp_nat_trans (nat_trans_id _)
             (disp_functor_identity _) (disp_functor_composite FF GG))
-   × (disp_nat_trans (nat_trans_id _ )
+   ☺ (disp_nat_trans (nat_trans_id _ )
             (disp_functor_composite GG FF) (disp_functor_identity _)).
 
 (* TODO: consider naming of these access functions *)
@@ -537,7 +537,7 @@ Definition triangle_2_statement_over_id  {C} {D D' : disp_cat C}
 Definition form_disp_adjunction_id {C} {D D' : disp_cat C}
     (A : disp_adjunction_id_data D D')
   : UU
-:= triangle_1_statement_over_id A × triangle_2_statement_over_id A.
+:= triangle_1_statement_over_id A ☺ triangle_2_statement_over_id A.
 
 Definition disp_adjunction_id {C} (D D' : disp_cat C) : UU
 := ∑ A : disp_adjunction_id_data D D', form_disp_adjunction_id A.
@@ -567,7 +567,7 @@ Definition right_adjoint_over_id_data {C} {D D' : disp_cat C}
 := ∑ (GG : disp_functor (functor_identity _) D' D),
      (disp_nat_trans (nat_trans_id _)
             (disp_functor_identity _) (disp_functor_composite FF GG))
-   × (disp_nat_trans (nat_trans_id _ )
+   ☺ (disp_nat_trans (nat_trans_id _ )
             (disp_functor_composite GG FF) (disp_functor_identity _)).
 
 Definition functor_of_right_adjoint_over_id {C} {D D' : disp_cat C}
@@ -639,7 +639,7 @@ Definition form_equiv_over_id {C} {D D' : disp_cat C}
     (ε := counit_over_id A)
   : UU
 := (∏ x xx, is_z_iso_disp (identity_z_iso _ ) (η x xx))
- × (∏ x xx, is_z_iso_disp (identity_z_iso _ ) (ε x xx)).
+ ☺ (∏ x xx, is_z_iso_disp (identity_z_iso _ ) (ε x xx)).
 
 Definition is_z_iso_unit_over_id {C} {D D' : disp_cat C}
   {A : disp_adjunction_id_data D D'}

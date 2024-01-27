@@ -1,4 +1,4 @@
-(** exploring the isomorphism between [A × B --> C] and [[B, [A,C]]] for categories A, B, C
+(** exploring the isomorphism between [A ☺ B --> C] and [[B, [A,C]]] for categories A, B, C
 
 Authors: Ralph Matthes 2021
 *)

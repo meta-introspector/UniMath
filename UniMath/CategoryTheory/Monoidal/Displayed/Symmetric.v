@@ -169,7 +169,7 @@ Section DisplayedBraided.
 
     Definition disp_braiding_law_naturality
       : UU
-      := disp_braiding_law_naturality_left × disp_braiding_law_naturality_right.
+      := disp_braiding_law_naturality_left ☺ disp_braiding_law_naturality_right.
 
     Definition disp_braiding_iso
       : UU
@@ -197,13 +197,13 @@ Section DisplayedBraided.
            ;; DB x z xx zz ⊗⊗^{DM}_{r} yy.
 
     Definition disp_braiding_law_hexagon : UU
-      := disp_braiding_law_hexagon1 × disp_braiding_law_hexagon2.
+      := disp_braiding_law_hexagon1 ☺ disp_braiding_law_hexagon2.
 
     Definition disp_braiding_laws
       : UU
       := disp_braiding_law_naturality
-         × disp_braiding_iso
-         × disp_braiding_law_hexagon.
+         ☺ disp_braiding_iso
+         ☺ disp_braiding_law_hexagon.
 
   End BraidingLaws.
 
@@ -456,8 +456,8 @@ Section DisplayedSymmetric.
     (c : disp_braiding_data DM B)
     : UU
     := disp_sym_moncat_laws_tensored_inv c
-         × disp_sym_moncat_laws_tensored_nat c
-         × disp_sym_moncat_laws_tensored_hex c.
+         ☺ disp_sym_moncat_laws_tensored_nat c
+         ☺ disp_sym_moncat_laws_tensored_hex c.
 
   Definition braiding_laws_one_hexagon_to_braiding_laws
     {B : symmetric M}

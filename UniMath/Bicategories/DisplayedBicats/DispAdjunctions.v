@@ -38,7 +38,7 @@ Definition disp_left_adjoint_data
  : UU
   := ∑ (gg : bb -->[left_adjoint_right_adjoint αd] aa),
          (id_disp aa ==>[left_adjoint_unit αd] ff ;; gg)
-       × (gg ;; ff ==>[left_adjoint_counit αd] id_disp bb).
+       ☺ (gg ;; ff ==>[left_adjoint_counit αd] id_disp bb).
 
 Definition disp_left_adjoint_right_adjoint
            {a b : C}
@@ -83,7 +83,7 @@ Definition disp_left_adjoint_axioms
 ( disp_linvunitor ff •• (ηη ▹▹ ff) •• disp_rassociator _ _ _ ••
          (ff ◃◃ εε) •• disp_runitor ff =
          transportb (λ x, _ ==>[x] _) (internal_triangle1 j) (disp_id2 ff) )
-     × ( disp_rinvunitor gg •• (gg ◃◃ ηη) •• disp_lassociator _ _ _ ••
+     ☺ ( disp_rinvunitor gg •• (gg ◃◃ ηη) •• disp_lassociator _ _ _ ••
          (εε ▹▹ gg) •• disp_lunitor gg =
          transportb (λ x, _ ==>[x] _) (internal_triangle2 j) (disp_id2 gg) ).
 
@@ -155,7 +155,7 @@ Definition disp_left_equivalence_axioms
   : UU
   := is_disp_invertible_2cell (left_equivalence_unit_iso _)
        (disp_left_adjoint_unit αe ααd)
-   × is_disp_invertible_2cell (left_equivalence_counit_iso _)
+   ☺ is_disp_invertible_2cell (left_equivalence_counit_iso _)
    (disp_left_adjoint_counit αe ααd).
 
 Definition disp_left_equivalence
@@ -178,7 +178,7 @@ Definition disp_left_adjoint_equivalence
          (ff : aa -->[f] bb)
   := ∑ (ααd : disp_left_adjoint_data αe ff),
        disp_left_adjoint_axioms αe ααd
-     × disp_left_equivalence_axioms αe ααd.
+     ☺ disp_left_equivalence_axioms αe ααd.
 
 (* the coercion to the adjoint axioms will be induced *)
 Coercion disp_left_adjoint_of_left_adjoint_equivalence
@@ -801,7 +801,7 @@ Proof.
     pose (Q:=
       λ (w : (∑ αd, disp_left_adjoint_data αd ff)),
         (∑ l, disp_left_adjoint_axioms (pr1 w,,l) (pr2 w))
-      × (∑ l, disp_left_equivalence_axioms (pr1 w,,l) (pr2 w))).
+      ☺ (∑ l, disp_left_equivalence_axioms (pr1 w,,l) (pr2 w))).
     eapply (weqbandf (left_adjoint_data_total_weq ff) _ Q).
     intros td. unfold Q; cbn.
     apply weqdirprodf.

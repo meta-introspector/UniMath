@@ -42,7 +42,7 @@ Definition linear_non_linear_model
        (𝕄 : sym_monoidal_cat) (* \bM *)
        (A : adjunction 𝕄 𝕃),
      is_cartesian 𝕄
-     ×
+     ☺
      sym_monoidal_adjunction 𝕄 𝕃 A.
 
 (**

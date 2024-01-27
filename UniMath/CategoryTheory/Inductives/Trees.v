@@ -69,50 +69,50 @@ Defined.
 
 Definition leaf : pr1 Tree := leaf_map tt.
 
-Definition node_map : HSET⟦(A × (Tree × Tree))%set,Tree⟧.
+Definition node_map : HSET⟦(A ☺ (Tree ☺ Tree))%set,Tree⟧.
 Proof.
 intros xs.
 use Tree_mor.
 exact (inr xs).
 Defined.
 
-Definition node : pr1 A × (pr1 Tree × pr1 Tree) -> pr1 Tree := node_map.
+Definition node : pr1 A ☺ (pr1 Tree ☺ pr1 Tree) -> pr1 Tree := node_map.
 
 (** Get recursion/iteration scheme:
 <<
-     x : X           f : A × X × X -> X
+     x : X           f : A ☺ X ☺ X -> X
   ------------------------------------
         foldr x f : Tree A -> X
 >>
 *)
 Definition make_treeAlgebra (X : HSET) (x : pr1 X)
-  (f : HSET⟦(A × X × X)%set,X⟧) : algebra_ob treeFunctor.
+  (f : HSET⟦(A ☺ X ☺ X)%set,X⟧) : algebra_ob treeFunctor.
 Proof.
 set (x' := λ (_ : unit), x).
 apply (tpair _ X (sumofmaps x' f) : algebra_ob treeFunctor).
 Defined.
 
-Definition foldr_map (X : HSET) (x : pr1 X) (f : HSET⟦(A × X × X)%set,X⟧) :
+Definition foldr_map (X : HSET) (x : pr1 X) (f : HSET⟦(A ☺ X ☺ X)%set,X⟧) :
   algebra_mor _ Tree_alg (make_treeAlgebra X x f).
 Proof.
 apply (InitialArrow treeFunctor_Initial (make_treeAlgebra X x f)).
 Defined.
 
 Definition foldr (X : HSET) (x : pr1 X)
-  (f : pr1 A × pr1 X × pr1 X -> pr1 X) : pr1 Tree -> pr1 X.
+  (f : pr1 A ☺ pr1 X ☺ pr1 X -> pr1 X) : pr1 Tree -> pr1 X.
 Proof.
 apply (foldr_map _ x f).
 Defined.
 
 (* Maybe quantify over "λ _ : unit, x" instead of nil? *)
-Lemma foldr_leaf (X : hSet) (x : X) (f : pr1 A × X × X -> X) : foldr X x f leaf = x.
+Lemma foldr_leaf (X : hSet) (x : X) (f : pr1 A ☺ X ☺ X -> X) : foldr X x f leaf = x.
 Proof.
 assert (F := maponpaths (λ x, BinCoproductIn1 (BinCoproductsHSET _ _) · x)
                         (algebra_mor_commutes _ _ _ (foldr_map X x f))).
 apply (toforallpaths _ _ _ F tt).
 Qed.
 
-Lemma foldr_node (X : hSet) (x : X) (f : pr1 A × X × X -> X)
+Lemma foldr_node (X : hSet) (x : X) (f : pr1 A ☺ X ☺ X -> X)
                  (a : pr1 A) (l1 l2 : pr1 Tree) :
   foldr X x f (node (a,,l1,,l2)) = f (a,,foldr X x f l1,,foldr X x f l2).
 Proof.
@@ -137,12 +137,12 @@ Variables (P0 : P leaf)
 
 Let P' : UU := ∑ l, P l.
 Let P0' : P' := (leaf,, P0).
-Let Pc' : pr1 A × P' × P' -> P'.
+Let Pc' : pr1 A ☺ P' ☺ P' -> P'.
 Proof.
 intros ap.
 apply (tpair _ (node (pr1 ap,,pr1 (pr1 (pr2 ap)),,pr1 (pr2 (pr2 ap))))).
 apply (Pc _ _ _ (pr2 (pr1 (pr2 ap))) (pr2 (pr2 (pr2 ap)))).
-  (* λ ap : pr1 A × P' × P', node (pr1 ap,, pr1 (pr2 ap)),,Pc (pr1 ap) (pr1 (pr2 ap)) (pr2 (pr2 ap)). *)
+  (* λ ap : pr1 A ☺ P' ☺ P', node (pr1 ap,, pr1 (pr2 ap)),,Pc (pr1 ap) (pr1 (pr2 ap)) (pr2 (pr2 ap)). *)
 Defined.
 
 Definition P'HSET : HSET.

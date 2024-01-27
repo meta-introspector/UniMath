@@ -38,7 +38,7 @@ Local Open Scope cat.
 Definition connected_category
            (C : category)
   : UU
-  := ob C × ∏ (x y : C), zig_zag x y.
+  := ob C ☺ ∏ (x y : C), zig_zag x y.
 
 Definition ob_of_connected_category
            {C : category}
@@ -128,7 +128,7 @@ Defined.
 Definition connected_groupoid
            (G : groupoid)
   : UU
-  := ob G × ∏ (x y : G), x --> y.
+  := ob G ☺ ∏ (x y : G), x --> y.
 
 Definition ob_of_connected_groupoid
            {G : groupoid}

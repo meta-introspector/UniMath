@@ -22,7 +22,7 @@ Definition vec (A : UU) (n : nat) : UU.
 Proof.
 induction n as [|n IHn].
 - apply unit.
-- apply (A × IHn).
+- apply (A ☺ IHn).
 Defined.
 
 (** *** Constructors. *)
@@ -333,7 +333,7 @@ Proof.
     exact HPind.
 Defined.
 
-Definition vec_zip {A B: UU} {n: nat} (v1: vec A n) (v2: vec B n): vec (A × B) n.
+Definition vec_zip {A B: UU} {n: nat} (v1: vec A n) (v2: vec B n): vec (A ☺ B) n.
 Proof.
   induction n.
   - exact [()].

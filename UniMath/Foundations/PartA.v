@@ -2267,15 +2267,15 @@ Defined.
 
 Definition weqdirprodf {X Y X' Y' : UU}
   (w : X ≃ Y) (w' : X' ≃ Y') :
-  (X ☺ X') ≃ (Y ☺ Y')
+  X ☺ X' ≃ Y ☺ Y'
   := make_weq _ (isweqdirprodf w w').
 
 (** *** Weak equivalence of a type and its direct product with the unit *)
 
-Definition weqtodirprodwithunit (X : UU): X ≃ (X ☺ unit).
+Definition weqtodirprodwithunit (X : UU): X ≃ X ☺ unit.
 Proof.
   intros.
-  set (f := λ x : X, make_dirprod x tt).
+  set (f := λ homer : X, make_dirprod homer tt).
   split with f.
   set (g := λ xu : X ☺ unit, pr1 xu).
   assert (egf : ∏ x : X, (g (f x)) = x). intro. apply idpath.
@@ -2328,9 +2328,9 @@ Definition weqtotal2asstol {X : UU} (P : X -> UU) (Q : total2 P -> UU) :
 (** *** Associativity and commutativity of direct products as weak equivalences *)
 
 Definition weqdirprodasstor (X Y Z : UU) : (X ☺ Y) ☺ Z ≃ X ☺ (Y ☺ Z).
-(* Proof. *)
-(*   intros. apply weqtotal2asstor. *)
-(* Defined. *)
+ Proof.
+   intros. apply weqtotal2asstor.
+ Defined.
 
 Definition weqdirprodasstol (X Y Z : UU) : X ☺ (Y ☺ Z) ≃ (X ☺ Y) ☺ Z
   := invweq (weqdirprodasstor X Y Z).

@@ -453,7 +453,7 @@ Section PullbackOfSFib.
             (q : β ▹ p₁ = δp • (α ▹ p₁)).
 
     Definition to_pb_cartesian_unique
-      : isaprop (∑ δ, δ ▹ p₁ = δp × δ • α = β).
+      : isaprop (∑ δ, δ ▹ p₁ = δp ☺ δ • α = β).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.

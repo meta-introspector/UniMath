@@ -47,7 +47,7 @@ Section Attempts.
   Proof.
     induction n as [|n H].
     - intros x y. exact (x = y).
-    - intros x y. exact (∑ s t, H x s × s<t × t=y).
+    - intros x y. exact (∑ s t, H x s ☺ s<t ☺ t=y).
   Defined.
 
   Definition le (x y : X) : Type := ∑ n, chain n x y.

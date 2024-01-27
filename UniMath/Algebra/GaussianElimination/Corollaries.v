@@ -328,7 +328,7 @@ Section BackSubZero.
   {n : nat} (v : Vector F n)
   : coprod (∏ j : (stn n), (v j) != 0%ring)
           (∑ i : (stn n), ((v i) = 0%ring)
-        × (forall j : stn n, (j < (pr1 i) -> (v j) != 0%ring))).
+        ☺ (forall j : stn n, (j < (pr1 i) -> (v j) != 0%ring))).
   Proof.
   pose (leading_entry := leading_entry_compute F (flip_fld_bin_vec v)).
   destruct (maybe_choice' leading_entry) as [some | none].
@@ -373,7 +373,7 @@ Section BackSubZero.
     (mat : Matrix F n n)
     (ut : @is_upper_triangular F _ _ mat)
     (zero: ∑ i : stn n, (mat i i = 0)%ring
-      × (forall j : stn n, j < i -> ((mat j j) != 0)%ring))
+      ☺ (forall j : stn n, j < i -> ((mat j j) != 0)%ring))
     (inv : @matrix_left_inverse F _ _ mat)
     : empty.
   Proof.
@@ -393,7 +393,7 @@ Section BackSubZero.
         now rewrite <- eq0_1.
     }
     assert (contr_exists :  ∑ x : (Vector F n), (∑ i' : stn n,
-      (x i' != 0) × (mat ** (col_vec x)) = (@col_vec F _ (const_vec 0)))).
+      (x i' != 0) ☺ (mat ** (col_vec x)) = (@col_vec F _ (const_vec 0)))).
     2: { assert (eqz : (mat ** (@col_vec F _ (const_vec 0)))
           = (@col_vec F _ (const_vec 0))).
         { rewrite matrix_mult_eq; unfold matrix_mult_unf.

@@ -486,7 +486,7 @@ Definition is_discrete_twosided_fibration
            {D : twosided_disp_cat C₁ C₂}
            (HD : discrete_twosided_disp_cat D)
   : UU
-  := discrete_twosided_cleaving D × discrete_twosided_opcleaving D.
+  := discrete_twosided_cleaving D ☺ discrete_twosided_opcleaving D.
 
 Definition discrete_twosided_fibration
            (C₁ C₂ : category)

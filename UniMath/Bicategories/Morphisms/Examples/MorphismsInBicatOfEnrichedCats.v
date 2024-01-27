@@ -355,7 +355,7 @@ Section MorphismsEnrichedCats.
              (HV : isTerminal V (I_{V}))
              {E₁ E₂ : enriched_cat V}
              (F : enriched_functor E₁ E₂)
-    : faithful F × conservative F ≃ discrete_1cell F.
+    : faithful F ☺ conservative F ≃ discrete_1cell F.
   Proof.
     use weqdirprodf.
     - exact (enriched_cat_faithful_weq_faithful_1cell HV F).

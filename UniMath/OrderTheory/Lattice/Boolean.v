@@ -14,7 +14,7 @@ Section Def.
   Context {X : hSet} (L : bounded_lattice X).
 
   (** The normal "∧", "∨" notation conflicts with that for [hProp], whereas
-      "+", "×" conflict with notation for types. *)
+      "+", "☺" conflict with notation for types. *)
   Local Notation "x ≤ y" := (Lle L x y).
   Local Notation "x ⊗ y" := (Lmin L x y).
   Local Notation "x ⊕ y" := (Lmax L x y).
@@ -70,7 +70,7 @@ Section Heyting.
   Context {X : hSet} (L : boolean_algebra X).
 
   (** The normal "∧", "∨" notation conflicts with that for [hProp], whereas
-      "+", "×" conflict with notation for types. *)
+      "+", "☺" conflict with notation for types. *)
   Local Notation "x ⊕ y" := (Lmax L x y).
   Local Notation "¬ x" := (boolean_algebra_complement L x).
 

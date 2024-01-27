@@ -30,9 +30,9 @@ Definition transportf_dirprod_fam
            {Y₁ Y₂ : X → UU}
            {x₁ x₂ : X}
            (p : x₁ = x₂)
-           (y : Y₁ x₁ × Y₂ x₁)
+           (y : Y₁ x₁ ☺ Y₂ x₁)
   : transportf
-      (λ x, Y₁ x × Y₂ x)
+      (λ x, Y₁ x ☺ Y₂ x)
       p
       y
     =
@@ -53,10 +53,10 @@ Section FiberwiseProduct.
     : twosided_disp_cat_ob_mor C₁ C₂.
   Proof.
     simple refine (_ ,, _).
-    - exact (λ x y, D₁ x y × D₂ x y).
+    - exact (λ x y, D₁ x y ☺ D₂ x y).
     - exact (λ x₁ x₂ y₁ y₂ xy₁ xy₂ f g,
              pr1 xy₁ -->[ f ][ g ] pr1 xy₂
-             ×
+             ☺
              pr2 xy₁ -->[ f ][ g ] pr2 xy₂).
   Defined.
 
@@ -176,7 +176,7 @@ Section FiberwiseProduct.
              {xy₂₁ : D₁ x₂ y₂}
              {xy₂₂ : D₂ x₂ y₂}
              (fg : iso_twosided_disp f g xy₁₁ xy₂₁
-                   ×
+                   ☺
                    iso_twosided_disp f g xy₁₂ xy₂₂)
     : @iso_twosided_disp
         _ _
@@ -277,7 +277,7 @@ Section FiberwiseProduct.
                      (xy₁₁ ,, xy₁₂)
                      (xy₂₁ ,, xy₂₂))
     : iso_twosided_disp f g xy₁₁ xy₂₁
-      ×
+      ☺
       iso_twosided_disp f g xy₁₂ xy₂₂
     := iso_prod_of_twosided_disp_cat_pr1 fg
        ,,
@@ -293,7 +293,7 @@ Section FiberwiseProduct.
              (xy₂₁ : D₁ x₂ y₂)
              (xy₂₂ : D₂ x₂ y₂)
     :(iso_twosided_disp f g xy₁₁ xy₂₁
-      ×
+      ☺
       iso_twosided_disp f g xy₁₂ xy₂₂)
      ≃
      @iso_twosided_disp

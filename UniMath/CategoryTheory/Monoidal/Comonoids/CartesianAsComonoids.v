@@ -380,7 +380,7 @@ Section CartesianToCartesianAsComonoids.
   Lemma cartesian_monoidal_has_enough_comonoids_mor'
     {x y : V} (f : V⟦x, y⟧)
     : diag x · f #⊗ f
-      = f · diag y × aug x · identity (monoidal_unit V) = f · aug y.
+      = f · diag y ☺ aug x · identity (monoidal_unit V) = f · aug y.
   Proof.
     split.
     - exact (cartesian_monoidal_has_enough_comonoids_mor_comult f).

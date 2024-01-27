@@ -70,26 +70,26 @@ Definition nil_map : HSET⟦unitHSET,μL_A⟧ :=
 
 Definition nil : List := nil_map tt.
 
-Definition cons_map : HSET⟦(A × μL_A)%set,μL_A⟧ :=
+Definition cons_map : HSET⟦(A ☺ μL_A)%set,μL_A⟧ :=
   BinCoproductIn2 (BinCoproductsHSET _ _) · List_mor.
 
 Definition cons : pr1 A → List -> List := λ a l, cons_map (a,,l).
 
 (** Get recursion/iteration scheme:
 <<
-     x : X           f : A × X -> X
+     x : X           f : A ☺ X -> X
   ------------------------------------
        foldr x f : List A -> X
 >>
 *)
 Definition make_listAlgebra (X : HSET) (x : pr1 X)
-  (f : HSET⟦(A × X)%set,X⟧) : algebra_ob listFunctor.
+  (f : HSET⟦(A ☺ X)%set,X⟧) : algebra_ob listFunctor.
 Proof.
 set (x' := λ (_ : unit), x).
 apply (tpair _ X (sumofmaps x' f) : algebra_ob listFunctor).
 Defined.
 
-Definition foldr_map (X : HSET) (x : pr1 X) (f : HSET⟦(A × X)%set,X⟧) :
+Definition foldr_map (X : HSET) (x : pr1 X) (f : HSET⟦(A ☺ X)%set,X⟧) :
   algebra_mor _ List_alg (make_listAlgebra X x f).
 Proof.
 apply (InitialArrow listFunctor_Initial (make_listAlgebra X x f)).
@@ -384,7 +384,7 @@ use tpair.
 - abstract (
   intro p; unfold uncurry; simpl; apply subtypePath; simpl;
   [ intro g; apply impred; intro t;
-    use (let ff : HSET ⟦(x × dob hF t)%set,HcL⟧ := _ in _);
+    use (let ff : HSET ⟦(x ☺ dob hF t)%set,HcL⟧ := _ in _);
     [ simpl; apply (pr1 cc)
     | apply (@has_homsets_HSET _ HcL _ ff) ]
   | destruct p as [t p]; simpl;
@@ -503,49 +503,49 @@ Defined.
 
 Definition nil : pr1 List := nil_map tt.
 
-Definition cons_map : HSET⟦(A × List)%set,List⟧.
+Definition cons_map : HSET⟦(A ☺ List)%set,List⟧.
 Proof.
 intros xs.
 use List_mor.
 exact (inr xs).
 Defined.
 
-Definition cons : pr1 A × pr1 List -> pr1 List := cons_map.
+Definition cons : pr1 A ☺ pr1 List -> pr1 List := cons_map.
 
 (* Get recursion/iteration scheme: *)
 
-(*    x : X           f : A × X -> X *)
+(*    x : X           f : A ☺ X -> X *)
 (* ------------------------------------ *)
 (*       foldr x f : List A -> X *)
 
 Definition make_listAlgebra (X : HSET) (x : pr1 X)
-  (f : HSET⟦(A × X)%set,X⟧) : algebra_ob listFunctor.
+  (f : HSET⟦(A ☺ X)%set,X⟧) : algebra_ob listFunctor.
 Proof.
 set (x' := λ (_ : unit), x).
 apply (tpair _ X (sumofmaps x' f) : algebra_ob listFunctor).
 Defined.
 
-Definition foldr_map (X : HSET) (x : pr1 X) (f : HSET⟦(A × X)%set,X⟧) :
+Definition foldr_map (X : HSET) (x : pr1 X) (f : HSET⟦(A ☺ X)%set,X⟧) :
   algebra_mor _ List_alg (make_listAlgebra X x f).
 Proof.
 apply (InitialArrow listFunctor_Initial (make_listAlgebra X x f)).
 Defined.
 
 Definition foldr (X : HSET) (x : pr1 X)
-  (f : pr1 A × pr1 X -> pr1 X) : pr1 List -> pr1 X.
+  (f : pr1 A ☺ pr1 X -> pr1 X) : pr1 List -> pr1 X.
 Proof.
 apply (foldr_map _ x f).
 Defined.
 
 (* Maybe quantify over "λ _ : unit, x" instead of nil? *)
-Lemma foldr_nil (X : hSet) (x : X) (f : pr1 A × X -> X) : foldr X x f nil = x.
+Lemma foldr_nil (X : hSet) (x : X) (f : pr1 A ☺ X -> X) : foldr X x f nil = x.
 Proof.
 assert (F := maponpaths (λ x, BinCoproductIn1 (BinCoproductsHSET _ _) · x)
                         (algebra_mor_commutes _ _ _ (foldr_map X x f))).
 apply (toforallpaths _ _ _ F tt).
 Qed.
 
-Lemma foldr_cons (X : hSet) (x : X) (f : pr1 A × X -> X)
+Lemma foldr_cons (X : hSet) (x : X) (f : pr1 A ☺ X -> X)
                  (a : pr1 A) (l : pr1 List) :
   foldr X x f (cons (a,,l)) = f (a,,foldr X x f l).
 Proof.
@@ -563,8 +563,8 @@ Variables (P0 : P nil)
 
 Let P' : UU := ∑ l, P l.
 Let P0' : P' := (nil,, P0).
-Let Pc' : pr1 A × P' -> P' :=
-  λ ap : pr1 A × P', cons (pr1 ap,, pr1 (pr2 ap)),,Pc (pr1 ap) (pr1 (pr2 ap)) (pr2 (pr2 ap)).
+Let Pc' : pr1 A ☺ P' -> P' :=
+  λ ap : pr1 A ☺ P', cons (pr1 ap,, pr1 (pr2 ap)),,Pc (pr1 ap) (pr1 (pr2 ap)) (pr2 (pr2 ap)).
 
 Definition P'HSET : HSET.
 Proof.
@@ -617,7 +617,7 @@ Definition length : pr1 List -> nat :=
   foldr natHSET 0 (λ x, S (pr2 x)).
 
 Definition map (f : pr1 A -> pr1 A) : pr1 List -> pr1 List :=
-  foldr _ nil (λ xxs : pr1 A × pr1 List, cons (f (pr1 xxs),, pr2 xxs)).
+  foldr _ nil (λ xxs : pr1 A ☺ pr1 List, cons (f (pr1 xxs),, pr2 xxs)).
 
 Lemma length_map (f : pr1 A -> pr1 A) : ∏ xs, length (map f xs) = length xs.
 Proof.
