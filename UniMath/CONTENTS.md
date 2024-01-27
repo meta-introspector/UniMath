@@ -15,6 +15,11 @@ The packages and files are listed here in logical order: each file depends only 
    - [Tests.v](Foundations/Tests.v)
    - [HLevels.v](Foundations/HLevels.v)
    - [All.v](Foundations/All.v)
+## Package Introspector
+   - [Introspector.v](Introspector/Introspector.v)
+   - [Unimathcore_refl2_coq.v](Introspector/Unimathcore_refl2_coq.v)
+   - [AllMost.v](Introspector/AllMost.v)
+   - [All.v](Introspector/All.v)
 ## Package [MoreFoundations](MoreFoundations/README.md)
    - [Bool.v](MoreFoundations/Bool.v)
    - [Test.v](MoreFoundations/Test.v)

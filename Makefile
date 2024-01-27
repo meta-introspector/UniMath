@@ -9,6 +9,7 @@ endif
 ############################################
 # The packages, listed in order by dependency:
 PACKAGES += Foundations
+PACKAGES += Introspector
 PACKAGES += MoreFoundations
 PACKAGES += Combinatorics
 PACKAGES += Algebra
