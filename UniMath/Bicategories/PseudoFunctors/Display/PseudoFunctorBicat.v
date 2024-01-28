@@ -166,23 +166,23 @@ Section FunctorLaws.
 
   Definition psfunctor_laws : UU
     := psfunctor_id2_law
-         × psfunctor_vcomp2_law
-         × psfunctor_lunitor_law
-         × psfunctor_runitor_law
-         × psfunctor_lassociator_law
-         × psfunctor_lwhisker_law
-         × psfunctor_rwhisker_law.
+         ☺ psfunctor_vcomp2_law
+         ☺ psfunctor_lunitor_law
+         ☺ psfunctor_runitor_law
+         ☺ psfunctor_lassociator_law
+         ☺ psfunctor_lwhisker_law
+         ☺ psfunctor_rwhisker_law.
 
   Definition invertible_cells
     : UU
     := (∏ (a : C),
         is_invertible_2cell (psfunctor_id F a))
-     ×
+     ☺
        (∏ (a b c : C) (f : a --> b) (g : b --> c),
         is_invertible_2cell (psfunctor_comp F f g)).
 
   Definition is_psfunctor : UU
-    := psfunctor_laws × invertible_cells.
+    := psfunctor_laws ☺ invertible_cells.
 
   Definition is_psfunctor_isaprop
     : isaprop is_psfunctor.

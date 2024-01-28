@@ -601,7 +601,7 @@ Section def_pseudo_element.
   Definition PEq_Pullback {x y z : ob A} (f : x --> z) (g : y --> z) (Pb : Pullback f g)
              (a : PseudoElem x) (b : PseudoElem y) (H : PEq (PseudoIm a f) (PseudoIm b g)) :
     ∑ (d : PseudoElem Pb), (PEq (PseudoIm d (PullbackPr1 Pb)) a)
-                             × (PEq (PseudoIm d (PullbackPr2 Pb))) b.
+                             ☺ (PEq (PseudoIm d (PullbackPr2 Pb))) b.
   Proof.
     set (mor1 := PEqEpi1 H · b). set (mor2 := PEqEpi2 H · a).
     use tpair.

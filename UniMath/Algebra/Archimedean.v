@@ -204,7 +204,7 @@ Definition isarchmonoid {X : abmonoid} (R : hrel X) :=
   ∏ x y1 y2 : X,
     R y1 y2 ->
     (∃ n : nat, R (natmult n y1 + x)%addmonoid (natmult n y2))
-      × (∃ n : nat, R (natmult n y1) (natmult n y2 + x)%addmonoid).
+      ☺ (∃ n : nat, R (natmult n y1) (natmult n y2 + x)%addmonoid).
 
 Definition isarchmonoid_1 {X : abmonoid} (R : hrel X) :
   isarchmonoid R ->
@@ -354,8 +354,8 @@ Defined.
 
 Definition isarchrig {X : rig} (R : hrel X) :=
   (∏ y1 y2 : X, R y1 y2 -> ∃ n : nat, R (nattorig n * y1)%rig (1 + nattorig n * y2)%rig)
-    × (∏ x : X, ∃ n : nat, R (nattorig n) x)
-    × (∏ x : X, ∃ n : nat, R (nattorig n + x)%rig 0%rig).
+    ☺ (∏ x : X, ∃ n : nat, R (nattorig n) x)
+    ☺ (∏ x : X, ∃ n : nat, R (nattorig n + x)%rig 0%rig).
 
 Definition isarchrig_diff {X : rig} (R : hrel X) :
   isarchrig R ->
@@ -557,7 +557,7 @@ Defined.
 
 Definition isarchring {X : ring} (R : hrel X) :=
   (∏ x : X, R x 0%ring -> ∃ n : nat, R (nattoring n * x)%ring 1%ring)
-    × (∏ x : X, ∃ n : nat, R (nattoring n) x).
+    ☺ (∏ x : X, ∃ n : nat, R (nattoring n) x).
 
 Definition isarchring_1 {X : ring} (R : hrel X) :
   isarchring R ->
@@ -751,7 +751,7 @@ Proof.
 Defined.
 
 Lemma natmult_commringfrac {X : commring} {S : subabmonoid _} :
-  ∏ n (x : X × S), natmult (X := commringfrac X S) n (setquotpr (eqrelcommringfrac X S) x) = setquotpr (eqrelcommringfrac X S) (natmult (X := X) n (pr1 x) ,, (pr2 x)).
+  ∏ n (x : X ☺ S), natmult (X := commringfrac X S) n (setquotpr (eqrelcommringfrac X S) x) = setquotpr (eqrelcommringfrac X S) (natmult (X := X) n (pr1 x) ,, (pr2 x)).
 Proof.
   simpl ; intros n x.
   induction n as [|n IHn].

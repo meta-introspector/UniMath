@@ -61,11 +61,11 @@ Definition enrichment_data
   : UU
   := ∑ (arr : C → C → V),
      (∏ (x : C), I_{V} --> arr x x)
-     ×
+     ☺
      (∏ (x y z : C), arr y z ⊗ arr x y --> arr x z)
-     ×
+     ☺
      (∏ (x y : C), x --> y → I_{V} --> arr x y)
-     ×
+     ☺
      (∏ (x y : C), I_{V} --> arr x y → x --> y).
 
 Definition arr_enrichment_data
@@ -121,12 +121,12 @@ Definition enrichment_laws
       mon_lunitor (E ⦃ x , y ⦄)
       =
       enriched_id E y #⊗ identity _ · enriched_comp E x y y)
-     ×
+     ☺
      (∏ (x y : C),
       mon_runitor (E ⦃ x , y ⦄)
       =
       identity _ #⊗ enriched_id E x · enriched_comp E x x y)
-     ×
+     ☺
      (∏ (w x y z : C),
       enriched_comp E x y z #⊗ identity (E ⦃ w, x ⦄)
       · enriched_comp E w x z
@@ -134,22 +134,22 @@ Definition enrichment_laws
       mon_lassociator _ _ _
       · identity _ #⊗ enriched_comp E w x y
       · enriched_comp E w y z)
-     ×
+     ☺
      (∏ (x y : C) (f : x --> y),
       enriched_to_arr E (enriched_from_arr E f)
       =
       f)
-     ×
+     ☺
      (∏ (x y : C) (f : I_{V} --> E ⦃ x , y ⦄),
       enriched_from_arr E (enriched_to_arr E f)
       =
       f)
-     ×
+     ☺
      (∏ (x : C),
       enriched_to_arr E (enriched_id E x)
       =
       identity x)
-     ×
+     ☺
      (∏ (x y z : C) (f : x --> y) (g : y --> z),
       f · g
       =
@@ -372,17 +372,17 @@ Definition enrichment_data_hom_path_help
       enriched_id E₁ x · fs x x
       =
       enriched_id E₂ x)
-     ×
+     ☺
      (∏ (x y z : C),
       enriched_comp E₁ x y z · fs x z
       =
       fs y z #⊗ fs x y · enriched_comp E₂ x y z)
-     ×
+     ☺
      (∏ (x y : C) (f : x --> y),
       enriched_from_arr E₁ f · fs x y
       =
       enriched_from_arr E₂ f)
-     ×
+     ☺
      (∏ (x y : C) (f : I_{V} --> E₁ ⦃ x , y ⦄),
       enriched_to_arr E₁ f
       =

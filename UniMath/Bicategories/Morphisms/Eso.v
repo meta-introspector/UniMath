@@ -151,7 +151,7 @@ Section EsoMorphisms.
               rassociator _ _ _ • (f ◃ k₂)),
        ∑ (ξ : l₁ ==> l₂),
        f ◃ ξ = k₁
-       ×
+       ☺
        ξ ▹ m = k₂.
 
   (**
@@ -313,9 +313,9 @@ Definition eso_ff_factorization
        (f' : b₁ --> im)
        (m : im --> b₂),
      is_eso f'
-     ×
+     ☺
      fully_faithful_1cell m
-     ×
+     ☺
      invertible_2cell (f' · m) f.
 
 (**

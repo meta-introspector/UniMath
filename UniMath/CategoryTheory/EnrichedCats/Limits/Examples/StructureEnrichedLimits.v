@@ -897,7 +897,7 @@ Section StructureEnrichmentLimits.
          (pr2 X)
          (E (prods X (λ _, x)) x)
          (ProductPr _ _ (prods X (λ _, x)))
-       ×
+       ☺
        (∏ (y : C),
         mor_hset_struct
           P

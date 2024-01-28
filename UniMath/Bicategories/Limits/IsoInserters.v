@@ -210,7 +210,7 @@ Section IsoInserters.
 
     Definition has_iso_inserter_ump
       : UU
-      := has_iso_inserter_ump_1 × has_iso_inserter_ump_2 × has_iso_inserter_ump_eq.
+      := has_iso_inserter_ump_1 ☺ has_iso_inserter_ump_2 ☺ has_iso_inserter_ump_eq.
   End UniversalMappingProperty.
 
   Section Projections.

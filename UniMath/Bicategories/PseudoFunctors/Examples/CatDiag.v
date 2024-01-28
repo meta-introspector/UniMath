@@ -3,7 +3,7 @@
  The diagonal pseudofunctor on univalent categories
 
  In this file, we define the diagonal pseudofunctor on the bicategory of
- univalent categories. It sends every category `C` to `C × C`.
+ univalent categories. It sends every category `C` to `C ☺ C`.
 
  *******************************************************************************)
 Require Import UniMath.MoreFoundations.All.

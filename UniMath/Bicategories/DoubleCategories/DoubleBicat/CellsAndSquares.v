@@ -70,7 +70,7 @@ Definition horizontally_saturated
 Definition is_weak_double_cat
            (B : verity_double_bicat)
   : UU
-  := vertically_saturated B × horizontally_saturated B.
+  := vertically_saturated B ☺ horizontally_saturated B.
 
 (** * 3. Verity double bicategories in which vertical cells are the same as squares *)
 Section VerticalCellsAreSquares.
@@ -185,7 +185,7 @@ Section VerticalCellsAreSquares.
              (v₁ v₂ : x -|-> y)
     : UU
     := (square_double_bicat (id_h x) (id_h y) v₁ v₂)
-       ×
+       ☺
        (square_double_bicat (id_h x) (id_h y) v₂ v₁).
 
   Definition make_invertible_vertical_square_data
@@ -220,7 +220,7 @@ Section VerticalCellsAreSquares.
           (inv_of_invertible_vertical_square s)
         =
         id_h_square_bicat v₁)
-       ×
+       ☺
        (comp_ver_globular_square
           (inv_of_invertible_vertical_square s)
           s
@@ -467,7 +467,7 @@ Section HorizontalCellsAreSquares.
              (h₁ h₂ : x --> y)
     : UU
     := (square_double_bicat h₁ h₂ (id_v x) (id_v y))
-       ×
+       ☺
        (square_double_bicat h₂ h₁ (id_v x) (id_v y)).
 
   Definition make_invertible_horizontal_square_data
@@ -502,7 +502,7 @@ Section HorizontalCellsAreSquares.
           (inv_of_invertible_horizontal_square s)
         =
         id_v_square_bicat h₁)
-       ×
+       ☺
        (comp_hor_globular_square
           (inv_of_invertible_horizontal_square s)
           s

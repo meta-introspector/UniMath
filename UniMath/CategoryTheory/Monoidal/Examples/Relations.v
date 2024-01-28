@@ -29,7 +29,7 @@ Definition tensor_data_REL
   : tensor_data REL.
 Proof.
   use make_bifunctor_data.
-  - exact (λ X₁ X₂, X₁ × X₂)%set.
+  - exact (λ X₁ X₂, X₁ ☺ X₂)%set.
   - exact (λ X Y₁ Y₂ R xy₁ xy₂, pr1 xy₁ = pr1 xy₂ ∧ R (pr2 xy₁) (pr2 xy₂))%logic.
   - exact (λ Y X₁ X₂ R xy₁ xy₂, pr2 xy₁ = pr2 xy₂ ∧ R (pr1 xy₁) (pr1 xy₂))%logic.
 Defined.
@@ -386,7 +386,7 @@ Definition REL_monoidal_cat
  *)
 Definition REL_braiding
            (X Y : hSet)
-  : bin_hrel (X × Y)%set (Y × X)%set
+  : bin_hrel (X ☺ Y)%set (Y ☺ X)%set
   := (λ xy yx, pr1 xy = pr2 yx ∧ pr2 xy = pr1 yx)%logic.
 
 Proposition REL_braiding_laws
@@ -499,7 +499,7 @@ Definition REL_sym_mon_closed_cat
 Proof.
   use make_sym_mon_closed_cat.
   - exact REL_sym_monoidal_cat.
-  - exact (λ X Y, X × Y)%set.
+  - exact (λ X Y, X ☺ Y)%set.
   - exact (λ X Y xyx y, pr11 xyx = pr2 xyx ∧ pr21 xyx = y)%logic.
   - exact (λ X Y Z R z xy, R (z ,, pr1 xy) (pr2 xy)).
   - intros X Y Z R.

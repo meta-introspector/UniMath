@@ -12,7 +12,7 @@ https://arxiv.org/abs/1801.07664
 
 In order to show that the exponential functor Yon(c) ⇒ _ has a right adjoint
 we show that it is isomorphic to the functor given by precomposition by the
-product functor c × _. The precomposition functor always has a right adjoint
+product functor c ☺ _. The precomposition functor always has a right adjoint
 given by right Kan extension. This isomorphism is constructed by a chain of
 four isomorphisms at the set level. These are then lifted to an isomorphism
 on the level of functors using that they are all natural.
@@ -21,9 +21,9 @@ We show that the exponential and precomposition with product functors are
 isomorphic by the isomorphisms
 
  (Yon(c) → F) x ≅ Ĉ(Yon(x), Yon(c) → F)
-                ≅ Ĉ(Yon(c) × Yon(x), F)
-                ≅ Ĉ(Yon(c × x), F)
-                ≅ ((c × _)* F) x
+                ≅ Ĉ(Yon(c) ☺ Yon(x), F)
+                ≅ Ĉ(Yon(c ☺ x), F)
+                ≅ ((c ☺ _)* F) x
 
 which are all natural in both F and x. This gives an isomorphism of the
 functors. We show each functor isomorphism separately.

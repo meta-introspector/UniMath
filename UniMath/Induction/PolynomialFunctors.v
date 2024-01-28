@@ -1,7 +1,7 @@
 (** ** Polynomial functors
 
     Using the formalism of a polynomial functor, one can build any functor
-    combining constant types, +, and ×, where the variable X is to the right
+    combining constant types, +, and ☺, where the variable X is to the right
     of the arrow →.
 
     W-types are (up to isomorphism) initial algebras of polynomial functors,

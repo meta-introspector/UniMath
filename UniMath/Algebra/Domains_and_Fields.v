@@ -496,7 +496,7 @@ Defined.
 (** **** Main definitions *)
 
 Definition isafield (X : commring) : UU :=
-  (isnonzerorig X) × (∏ x : X, (multinvpair X x) ⨿ (x = 0)).
+  (isnonzerorig X) ☺ (∏ x : X, (multinvpair X x) ⨿ (x = 0)).
 
 Lemma isapropisafield (X : commring) : isaprop (isafield X).
 Proof.

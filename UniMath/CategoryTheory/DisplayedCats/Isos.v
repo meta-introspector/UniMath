@@ -18,7 +18,7 @@ Section Isos.
   Definition is_disp_inverse {C : precategory} {D : disp_cat_data C} {x y : C}
     {f : x --> y} {g: y --> x} (isinv: is_inverse_in_precat f g)
     {xx : D x} {yy : D y} (ff : xx -->[f] yy) (gg : yy -->[g] xx) : UU
-    := gg ;; ff = transportb _ (pr2 isinv) (id_disp yy) ×
+    := gg ;; ff = transportb _ (pr2 isinv) (id_disp yy) ☺
                     ff ;; gg = transportb _ (pr1 isinv) (id_disp xx).
 
   Definition is_z_iso_disp {C : precategory} {D : disp_cat_data C}

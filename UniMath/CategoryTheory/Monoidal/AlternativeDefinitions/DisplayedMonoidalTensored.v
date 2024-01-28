@@ -35,9 +35,9 @@ Section DispCartProdOfCats.
   Definition disp_binprod_ob_mor : disp_cat_ob_mor (C ⊠ C').
   Proof.
     use tpair.
-    - intro cc'. exact (D (pr1 cc') × D' (pr2 cc')).
+    - intro cc'. exact (D (pr1 cc') ☺ D' (pr2 cc')).
     - intros aa' bb' xx' yy' fg.
-      exact ( (pr1 xx' -->[ pr1 fg ] pr1 yy') × (pr2 xx' -->[ pr2 fg ] pr2 yy' )).
+      exact ( (pr1 xx' -->[ pr1 fg ] pr1 yy') ☺ (pr2 xx' -->[ pr2 fg ] pr2 yy' )).
   Defined.
 
   Definition disp_binprod_id_comp : disp_cat_id_comp _ disp_binprod_ob_mor.
@@ -646,10 +646,10 @@ Section section_tensor.
 
   (**
               TT
-    D × D ------------> D
+    D ☺ D ------------> D
     ∧   ∧               ∧
    S|   |S              |S
-    C × C ------------> C
+    C ☺ C ------------> C
                T
    *)
 

@@ -49,7 +49,7 @@ End setquot.
 (* new stuff *)
 Definition K_0_hrel (M:ExactCategory) : hrel (free_abgr (π₀ (ob M)))
   := λ g h, ∃ E : ShortExactSequence M,
-      g = free_abgr_unit (component (Ob2 E)) ×
+      g = free_abgr_unit (component (Ob2 E)) ☺
       h = free_abgr_unit (component (Ob1 E)) + free_abgr_unit (component (Ob3 E)).
 Definition K_0_related {M:ExactCategory} (E : ShortExactSequence M)
   : K_0_hrel M (free_abgr_unit (component (Ob2 E)))

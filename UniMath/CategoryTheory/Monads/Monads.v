@@ -50,7 +50,7 @@ Section Monad_disp_def.
   Context {C : category}.
 
   Definition disp_Monad_data (F : functor C C) : UU :=
-    (F ∙ F ⟹ F) × (functor_identity C ⟹ F).
+    (F ∙ F ⟹ F) ☺ (functor_identity C ⟹ F).
 
   Definition disp_μ {F : functor C C} (T : disp_Monad_data F) : F ∙ F ⟹ F := pr1 T.
   Definition disp_η {F : functor C C} (T : disp_Monad_data F) : functor_identity C ⟹ F := pr2 T.
@@ -58,9 +58,9 @@ Section Monad_disp_def.
   Definition disp_Monad_laws {F : functor C C} (T : disp_Monad_data F) : UU :=
     (
       (∏ c : C, disp_η T (F c) · disp_μ T c = identity (F c))
-      ×
+      ☺
       (∏ c : C, #F (disp_η T c) · disp_μ T c = identity (F c)) )
-      ×
+      ☺
       (∏ c : C, #F (disp_μ T c) · disp_μ T c = disp_μ T (F c) · disp_μ T c).
 
   Lemma isaprop_disp_Monad_laws {F : functor C C} (T : disp_Monad_data F) : isaprop (disp_Monad_laws T).
@@ -70,7 +70,7 @@ Section Monad_disp_def.
   Qed.
 
   Definition disp_Monad_Mor_laws {F F' : functor C C} (T : disp_Monad_data F) (T' : disp_Monad_data F') (α : F ⟹ F') : UU :=
-    (∏ a : C, disp_μ T a · α a = α (F a) · #F' (α a) · disp_μ T' a) ×
+    (∏ a : C, disp_μ T a · α a = α (F a) · #F' (α a) · disp_μ T' a) ☺
     (∏ a : C, disp_η T a · α a = disp_η T' a).
 
   Lemma isaprop_disp_Monad_Mor_laws  {F F' : functor C C} (T : disp_Monad_data F) (T' : disp_Monad_data F') (α : F ⟹ F')
@@ -233,9 +233,9 @@ Section pointfree.
   Definition Monad_laws_pointfree : UU :=
     (
       (nat_trans_comp _ _ _ (pre_whisker T0 η) μ = identity(C:=EndC) T0)
-        ×
+        ☺
       (nat_trans_comp _ _ _ (post_whisker η T0) μ = identity(C:=EndC) T0) )
-        ×
+        ☺
       (nat_trans_comp _ _ _ (post_whisker μ T0) μ = nat_trans_comp _ _ _ (pre_whisker T0 μ) μ).
 
   Lemma pointfree_is_equiv: Monad_laws_pointfree <-> disp_Monad_laws T.
@@ -262,9 +262,9 @@ Section pointfree.
   Definition Monad_laws_pointfree_in_functor_category : UU :=
     (
       (#(pre_composition_functor _ _ _ T0') η' · μ' = identity(C:=EndC) T0')
-        ×
+        ☺
       (#(post_composition_functor _ _ _ T0') η' · μ' = identity(C:=EndC) T0') )
-        ×
+        ☺
       (#(post_composition_functor _ _ _ T0') μ' · μ' = (#(pre_composition_functor _ _ _ T0') μ') · μ').
 
   (** the last variant of the laws is convertible with the one before *)
@@ -284,7 +284,7 @@ Coercion nat_trans_from_monad_mor {C : category} (T T' : Monad C) (s : Monad_Mor
 
 Definition Monad_Mor_laws {C : category} {T T' : Monad C} (α : T ⟹ T')
   : UU :=
-  (∏ a : C, μ T a · α a = α (T a) · #T' (α a) · μ T' a) ×
+  (∏ a : C, μ T a · α a = α (T a) · #T' (α a) · μ T' a) ☺
     (∏ a : C, η T a · α a = η T' a).
 
 Definition Monad_Mor_η {C : category} {T T' : Monad C} (α : Monad_Mor T T')
@@ -479,16 +479,16 @@ Section Monad_eq_helper.
   Section Monad'_def.
 
     Definition raw_Monad_data (C : category) : UU :=
-      ∑ F : C -> C, (((∏ a b : ob C, a --> b -> F a --> F b) ×
-                      (∏ a : ob C, F (F a) --> F a)) ×
+      ∑ F : C -> C, (((∏ a b : ob C, a --> b -> F a --> F b) ☺
+                      (∏ a : ob C, F (F a) --> F a)) ☺
                      (∏ a : ob C, a --> F a)).
 
     Coercion functor_data_from_raw_Monad_data {C : category} (T : raw_Monad_data C) :
       functor_data C C := make_functor_data (pr1 T) (pr1 (pr1 (pr2 T))).
 
     Definition Monad'_data_laws {C : category} (T : raw_Monad_data C) :=
-      ((is_functor T) ×
-       (is_nat_trans (functor_composite_data T T) T (pr2 (pr1 (pr2 T))))) ×
+      ((is_functor T) ☺
+       (is_nat_trans (functor_composite_data T T) T (pr2 (pr1 (pr2 T))))) ☺
       (is_nat_trans (functor_identity C) T (pr2 (pr2 T))).
 
     Definition Monad'_data (C : category) := ∑ (T : raw_Monad_data C), Monad'_data_laws T.

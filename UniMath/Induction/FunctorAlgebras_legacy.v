@@ -286,14 +286,14 @@ Proof.
   - apply (isaprop_is_z_isomorphism f).
 Defined.
 
-Definition swap (A B : UU) : A × B → B × A.
+Definition swap (A B : UU) : A ☺ B → B ☺ A.
 Proof.
   intro ab.
   exists (pr2 ab).
   exact (pr1 ab).
 Defined.
 
-Definition swapweq (A B : UU) : (A × B) ≃ (B × A).
+Definition swapweq (A B : UU) : (A ☺ B) ≃ (B ☺ A).
 Proof.
   exists (swap A B).
   apply (isweq_iso _ (swap B A)).

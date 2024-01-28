@@ -50,7 +50,7 @@ Section B.
         (Pxy : BinProduct _ x y)
         (z : C) (zx : C⟦z,x⟧) (zy : C⟦z,y⟧) :
         (∑ i : is_z_isomorphism (BinProductArrow C Pxy zx zy),
-            pr1 i · zx = BinProductPr1 _ Pxy × pr1 i · zy = BinProductPr2 _ Pxy)
+            pr1 i · zx = BinProductPr1 _ Pxy ☺ pr1 i · zy = BinProductPr2 _ Pxy)
           -> isBinProduct C x y z zx zy.
   Proof.
     intros [i [px py]].
@@ -378,7 +378,7 @@ Section EquivalenceBetweenDifferentCharacterizationsOfMultiSortedSignatureToFunc
       := hat_exp_functor_list'_optimized sort Hsort C TC BP BC CC.
 
   Definition hat_exp_functor_list'_piece_test
-             (xst : (list sort × sort) × sort)
+             (xst : (list sort ☺ sort) ☺ sort)
     :  nat_z_iso
          (exp_functor sort Hsort C TC BC CC (pr1 xst)
                       ∙ post_comp_functor (hat_functor sort Hsort C CC (pr2 xst)))
@@ -676,7 +676,7 @@ Section EquivalenceBetweenDifferentCharacterizationsOfMultiSortedSignatureToFunc
   Defined.
 
   Definition hat_exp_functor_list'_test
-             (xst : list (list sort × sort) × sort)
+             (xst : list (list sort ☺ sort) ☺ sort)
              (c : propcoproducts_commute_binproducts C BP (λ p, CC p (isasetaprop (pr2 p))))
     : nat_z_iso (hat_exp_functor_list0 xst)
                 (hat_exp_functor_list'0 xst).
@@ -700,7 +700,7 @@ Section EquivalenceBetweenDifferentCharacterizationsOfMultiSortedSignatureToFunc
       {
         induction xs as [[|n] xs].
         - induction xs. unfold exp_functor_list at 1. change (cons x (0,, tt)) with (cons x nil). rewrite foldr1_map_cons_nil.
-          unfold exp_functor_list at 1. change (0,, tt) with (nil(A:=list sort × sort)). rewrite foldr1_map_nil.
+          unfold exp_functor_list at 1. change (0,, tt) with (nil(A:=list sort ☺ sort)). rewrite foldr1_map_nil.
           apply nat_z_iso_inv.
           exact (terminal_BinProduct_of_functors_unit_l _ _ BPC TsortToCC (exp_functor sort Hsort C TC BC CC x)).
         - induction xs.
@@ -723,7 +723,7 @@ Section EquivalenceBetweenDifferentCharacterizationsOfMultiSortedSignatureToFunc
 
 
   Definition hat_exp_functor_list'_optimized_test
-             (xst : list (list sort × sort) × sort)
+             (xst : list (list sort ☺ sort) ☺ sort)
              (c : propcoproducts_commute_binproducts C BP (λ p, CC p (isasetaprop (pr2 p))))
     : nat_z_iso (hat_exp_functor_list0 xst)
                 (hat_exp_functor_list'_optimized0 xst).

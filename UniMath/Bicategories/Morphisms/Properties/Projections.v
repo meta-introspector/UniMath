@@ -36,7 +36,7 @@ Section ProjectionSFib.
                (β : h ==> g)
                (δp : h · π₁ ==> f · π₁)
                (q : β ▹ π₁ = δp • (α ▹ π₁))
-      : isaprop (∑ (δ : h ==> f), δ ▹ π₁ = δp × δ • α = β).
+      : isaprop (∑ (δ : h ==> f), δ ▹ π₁ = δp ☺ δ • α = β).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.
@@ -98,7 +98,7 @@ Section ProjectionSFib.
       apply binprod_ump_2cell_pr1.
     Qed.
 
-    Let lift : ∃! δ0 : h ==> f, δ0 ▹ π₁ = hπ₁ × δ0 • α = δ
+    Let lift : ∃! δ0 : h ==> f, δ0 ▹ π₁ = hπ₁ ☺ δ0 • α = δ
       := Hα h δ hπ₁ cartesian_to_invertible_eq.
     Let lift_map : h ==> f := pr11 lift.
     Let inv : g · π₂ ==> f · π₂
@@ -274,7 +274,7 @@ Section ProjectionSOpFib.
                (β : f ==> h)
                (δp : g · π₁ ==> h · π₁)
                (q : β ▹ π₁ = (α ▹ π₁) • δp)
-      : isaprop (∑ (δ : g ==> h), δ ▹ π₁ = δp × α • δ = β).
+      : isaprop (∑ (δ : g ==> h), δ ▹ π₁ = δp ☺ α • δ = β).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.
@@ -337,7 +337,7 @@ Section ProjectionSOpFib.
       apply binprod_ump_2cell_pr1.
     Qed.
 
-    Let lift : ∃! (δ0 : g ==> h), δ0 ▹ π₁ = hπ₁ × α • δ0 = δ
+    Let lift : ∃! (δ0 : g ==> h), δ0 ▹ π₁ = hπ₁ ☺ α • δ0 = δ
       := Hα h δ hπ₁ opcartesian_to_invertible_eq.
     Let lift_map : g ==> h := pr11 lift.
     Let inv : g · π₂ ==> f · π₂

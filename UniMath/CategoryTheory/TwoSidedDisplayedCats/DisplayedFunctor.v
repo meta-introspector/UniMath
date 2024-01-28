@@ -113,7 +113,7 @@ Section DisplayedFunctor.
   Definition twosided_disp_functor_laws
              (FG : twosided_disp_functor_data)
     : UU
-    := twosided_disp_functor_id_law FG × twosided_disp_functor_comp_law FG.
+    := twosided_disp_functor_id_law FG ☺ twosided_disp_functor_comp_law FG.
 
   Proposition isaprop_twosided_disp_functor_laws
               (FG : twosided_disp_functor_data)

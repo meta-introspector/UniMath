@@ -699,7 +699,7 @@ Section PosetEnrichmentColimits.
          (pr2 P)
          (E x (coprods P (λ _, x)))
          (CoproductIn _ _ (coprods P (λ _, x)))
-       ×
+       ☺
        (∏ (y : C),
         is_monotone
           (monotone_function_PartialOrder

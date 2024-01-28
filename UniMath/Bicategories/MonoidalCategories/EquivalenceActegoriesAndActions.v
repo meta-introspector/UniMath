@@ -425,7 +425,7 @@ Section FromActegoriesToActionsInCat.
     {a1 a2 : ACAT} (f : ACAT⟦a1,a2⟧) :
     ActionBasedStrongFunctorsWhiskeredMonoidal.param_distr_bicat_triangle_eq (monoidal_swapped Mon_V)
       (pr22 (actegory_to_object Mon_V ax2 (pr2 a1))) (pr22 (actegory_to_object Mon_V ax2 (pr2 a2))) (pr1 f) (acat_to_acti_on_mor_data f)
-      × ActionBasedStrongFunctorsWhiskeredMonoidal.param_distr_bicat_pentagon_eq (monoidal_swapped Mon_V)
+      ☺ ActionBasedStrongFunctorsWhiskeredMonoidal.param_distr_bicat_pentagon_eq (monoidal_swapped Mon_V)
       (pr22 (actegory_to_object Mon_V ax2 (pr2 a1))) (pr22 (actegory_to_object Mon_V ax2 (pr2 a2))) (pr1 f) (acat_to_acti_on_mor_data f).
   Proof.
     split.

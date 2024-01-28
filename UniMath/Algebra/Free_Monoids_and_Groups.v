@@ -190,7 +190,7 @@ Defined.
 (* Free abelian monoid on a set *)
 
 Definition free_abmonoid_hrel (X : hSet) : hrel (free_monoid X) :=
-  λ g h, ∃ x y, x * y = g × y * x = h.
+  λ g h, ∃ x y, x * y = g ☺ y * x = h.
 
 Lemma free_abmonoid_hrel_intro {X : hSet} (l1 l2 : free_monoid X) :
   free_abmonoid_hrel X (l1 * l2) (l2 * l1).
@@ -362,7 +362,7 @@ Defined.
    as the inverse of x. *)
 
 Definition free_gr_hrel (X : hSet) : hrel (free_monoid (setcoprod X X)) :=
-  λ g h, ∃ x, x::coprodcomm X X x::[] = g × [] = h.
+  λ g h, ∃ x, x::coprodcomm X X x::[] = g ☺ [] = h.
 
 Lemma free_gr_hrel_in {X : hSet} (x : X ⨿ X) : free_gr_hrel X (x::coprodcomm X X x::[]) [].
 Proof.
@@ -609,7 +609,7 @@ Defined.
 (* Free abelian group on a set *)
 
 Definition free_abgr_hrel (X : hSet) : hrel (free_gr X) :=
-  λ g h, ∃ x y, x * y = g × y * x = h.
+  λ g h, ∃ x y, x * y = g ☺ y * x = h.
 
 Lemma free_abgr_hrel_intro {X : hSet} (l1 l2 : free_gr X) :
   free_abgr_hrel X (l1 * l2) (l2 * l1).

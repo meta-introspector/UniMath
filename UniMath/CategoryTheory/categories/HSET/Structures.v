@@ -141,7 +141,7 @@ End exponentials.
 (** This section defines exponential in [C,HSET] following a slight
 variation of Moerdijk-MacLane (p. 46, Prop. 1).
 
-The formula for [C,Set] is G^F(f)=Hom(Hom(f,−)×id(F),G) taken from:
+The formula for [C,Set] is G^F(f)=Hom(Hom(f,−)☺id(F),G) taken from:
 
 http://mathoverflow.net/questions/104152/exponentials-in-functor-categories
 *)
@@ -268,7 +268,7 @@ Lemma pullback_HSET_univprop_elements {P A B C : HSET}
     {f : HSET ⟦ A, C ⟧} {g : HSET ⟦ B, C ⟧}
     (ep : p1 · f = p2 · g)
     (pb : isPullback ep)
-  : (∏ a b (e : f a = g b), ∃! ab, p1 ab = a × p2 ab = b).
+  : (∏ a b (e : f a = g b), ∃! ab, p1 ab = a ☺ p2 ab = b).
 Proof.
   intros a b e.
   set (Pb := (make_Pullback _ pb)).

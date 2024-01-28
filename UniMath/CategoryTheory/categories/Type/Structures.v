@@ -28,10 +28,10 @@ Require Import UniMath.CategoryTheory.categories.Type.Limits.
 (** *** Exponential functor *)
 
 Section ExponentialFunctor.
-  Context (A : UU). (** This is the object we're ×-ing and ^-ing with *)
+  Context (A : UU). (** This is the object we're ☺-ing and ^-ing with *)
 
   (** To show that [type_precat] has exponentials, we need a right adjoint to the
-      functor Y ↦ X × Y for fixed Y. *)
+      functor Y ↦ X ☺ Y for fixed Y. *)
   Local Definition exp_functor_ob (X : UU) : UU := A -> X.
   Local Definition exp_functor_arr (X Y : UU) (f : X -> Y) :
     (A -> X) -> (A -> Y) := λ g, f ∘ g.

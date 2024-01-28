@@ -179,7 +179,7 @@ Section CoproductEquivalence.
             (β : κ₂ · φ ==> κ₂ · ψ).
 
     Definition has_bincoprod_ump_2_left_adjoint_equivalence_unique
-      : isaprop (∑ (γ : φ ==> ψ), κ₁ ◃ γ = α × κ₂ ◃ γ = β).
+      : isaprop (∑ (γ : φ ==> ψ), κ₁ ◃ γ = α ☺ κ₂ ◃ γ = β).
     Proof.
       use invproofirrelevance.
       intros ζ₁ ζ₂.

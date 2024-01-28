@@ -78,7 +78,7 @@ Defined.
 (** union *)
 
 Definition union {X : UU} (P : (X → hProp) → hProp) : X → hProp :=
-  λ x : X, ∃ A : X → hProp, P A × A x.
+  λ x : X, ∃ A : X → hProp, P A ☺ A x.
 
 Lemma union_hfalse {X : UU} :
   union (λ _ : X → hProp, hfalse) = (λ _ : X, hfalse).
@@ -231,7 +231,7 @@ Lemma finite_intersection_case {X : UU} :
   ∏ (L : Sequence (X → hProp)),
   finite_intersection L =
   sumofmaps (λ _ _, htrue)
-            (λ (AB : (X → hProp) × Sequence (X → hProp)) (x : X), pr1 AB x ∧ finite_intersection (pr2 AB) x)
+            (λ (AB : (X → hProp) ☺ Sequence (X → hProp)) (x : X), pr1 AB x ∧ finite_intersection (pr2 AB) x)
             (disassembleSequence L).
 Proof.
   intros L.
@@ -290,7 +290,7 @@ Qed.
 Lemma finite_intersection_hProp {X : UU} :
   ∏ (P : (X → hProp) → hProp),
     (∏ (L : Sequence (X → hProp)), (∏ n, P (L n)) → P (finite_intersection L))
-    <-> (P (λ _, htrue) × (∏ A B, P A → P B → P (λ x : X, A x ∧ B x))).
+    <-> (P (λ _, htrue) ☺ (∏ A B, P A → P B → P (λ x : X, A x ∧ B x))).
 Proof.
   intros P.
   split.

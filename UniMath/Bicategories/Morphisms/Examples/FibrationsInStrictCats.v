@@ -139,7 +139,7 @@ Section IsOpCartesian.
     Qed.
 
     Definition strict_pointwise_opcartesian_is_opcartesian_unique
-      : isaprop (∑ (δ : G₂ ==> H), δ ▹ F = δp × α • δ = β).
+      : isaprop (∑ (δ : G₂ ==> H), δ ▹ F = δp ☺ α • δ = β).
     Proof.
       use invproofirrelevance.
       intros δ₁ δ₂.

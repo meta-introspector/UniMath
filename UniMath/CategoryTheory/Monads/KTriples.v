@@ -38,7 +38,7 @@ Section Kleisli_defn.
 (* ----- Datatype for Kleisli data ----- *)
 
 Definition Kleisli_Data : UU := ∑ T : C → C,
-  (∏ a : C, a --> T a) × (∏ a b : C, (a --> T b) → (T a --> T b)).
+  (∏ a : C, a --> T a) ☺ (∏ a b : C, (a --> T b) → (T a --> T b)).
 
 (* ----- Projections ----- *)
 
@@ -53,8 +53,8 @@ Definition bind (T : Kleisli_Data) {a b : C} :
 (* ----- Kleisli Laws: Data and Projections ----- *)
 
 Definition Kleisli_Laws (T : Kleisli_Data) :=
-  (∏ a, bind T (η T a) = identity (T a)) ×
-  (∏ a b (f : C⟦a,T b⟧), bind T f ∘ η T a = f) ×
+  (∏ a, bind T (η T a) = identity (T a)) ☺
+  (∏ a b (f : C⟦a,T b⟧), bind T f ∘ η T a = f) ☺
   (∏ a b c (f : C⟦a,T b⟧) (g : C⟦b,T c⟧), bind T g ∘ bind T f = bind T (bind T g ∘ f)).
 
 Lemma isaprop_Kleisli_Laws (T : Kleisli_Data) :
@@ -96,7 +96,7 @@ Section Kleisli_precategory.
 
 Definition Kleisli_Mor_laws {C : category} (T T': Kleisli_Data C)
              (α : ∏ a : C, T a --> T' a) : UU :=
-  (∏ a : C, α a ∘ η T a = η T' a) ×
+  (∏ a : C, α a ∘ η T a = η T' a) ☺
   (∏ (a b : C) (f : C⟦a,T b⟧), bind T' (α b ∘ f) ∘ α a = α b ∘ (bind T f)).
 
 Lemma isaprop_Kleisli_Mor_laws {C : category} (T T' : Kleisli_Data C)

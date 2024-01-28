@@ -310,7 +310,7 @@ Section DisplayMapBicatProduct.
       : isaprop
           (∑ χ,
            χ ▹ binprod_cone_pr1 binprod_cone_in_disp_map_slice = α
-           ×
+           ☺
            χ ▹ binprod_cone_pr2 binprod_cone_in_disp_map_slice = β).
     Proof.
       use invproofirrelevance.

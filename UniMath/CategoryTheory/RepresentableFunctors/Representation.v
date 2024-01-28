@@ -312,7 +312,7 @@ Defined.
 (** zero objects, as an alternative to ZeroObject.v *)
 
 Definition ZeroObject (C:category)
-  := ∑ z:ob C, Universal (UnitFunctor C^op) z × Universal (UnitFunctor C^op^op) z.
+  := ∑ z:ob C, Universal (UnitFunctor C^op) z ☺ Universal (UnitFunctor C^op^op) z.
 
 Definition zero_to_terminal (C:category) : ZeroObject C -> TerminalObject C
   := λ z, pr1 z ,, pr1 (pr2 z).
@@ -351,7 +351,7 @@ Abort.
 Definition HomPair {C:category} (a b:C) : [C^op,SET].
 Proof.
   unshelve refine (makeFunctor_op _ _ _ _).
-  - intro c. exact (Hom C c a × Hom C c b) % set.
+  - intro c. exact (Hom C c a ☺ Hom C c b) % set.
   - simpl. intros c d f x. exact (pr1 x ∘ f ,, pr2 x ∘ f).
   - abstract (simpl; intro c; apply funextsec; intro x;
               apply dirprodeq; apply id_left) using _B_.
@@ -586,7 +586,7 @@ Proof.
   intros.
   unshelve refine (makeFunctor_op _ _ _ _).
   - intros t. unshelve refine (_,,_).
-    + exact (∑ (p: t --> a × t --> b), f ∘ pr1 p = g ∘ pr2 p).
+    + exact (∑ (p: t --> a ☺ t --> b), f ∘ pr1 p = g ∘ pr2 p).
     + abstract (apply isaset_total2;
       [ apply isasetdirprod; apply homset_property
       | intro; apply isasetaprop; apply homset_property]) using _L_.
@@ -693,7 +693,7 @@ Definition fiber {C:category} {X Y:[C^op,SET]} (p : X --> Y) {c:C} (y : c ⇒ Y)
 Proof.
   unshelve refine (makeFunctor_op _ _ _ _).
   - intro b.
-    exists (∑ fx : (b --> c) × (b ⇒ X), p ⟳ pr2 fx = y ⟲ pr1 fx).
+    exists (∑ fx : (b --> c) ☺ (b ⇒ X), p ⟳ pr2 fx = y ⟲ pr1 fx).
     abstract (apply isaset_total2;
         [ apply isaset_dirprod, setproperty; apply homset_property
         | intros [f x]; apply isasetaprop; apply setproperty ]) using _K_.

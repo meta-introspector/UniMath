@@ -61,11 +61,11 @@ Definition is_disjoint_coproduct
            (ι₂ : y --> p)
   : UU
   := fully_faithful_1cell ι₁
-     ×
+     ☺
      fully_faithful_1cell ι₂
-     ×
+     ☺
      has_comma_ump (biinitial_comma_cone ι₁ ι₂)
-     ×
+     ☺
      has_comma_ump (biinitial_comma_cone ι₂ ι₁).
 
 Definition is_disjoint_coproduct_cone
@@ -194,7 +194,7 @@ Definition bicat_with_biinitial_bincoprod
   : UU
   := ∑ (B : bicat),
      biinitial_obj B
-     ×
+     ☺
      has_bincoprod B.
 
 Coercion bicat_with_biinitial_bincoprod_to_bicat_with_biinitial
@@ -212,5 +212,5 @@ Definition is_extensive
   : UU
   := ∏ (x y : B),
      @is_disjoint_coproduct_cone B x y (pr1 (bincoprod_of B x y))
-     ×
+     ☺
      @is_universal_coproduct_cone B x y (pr1 (bincoprod_of B x y)).

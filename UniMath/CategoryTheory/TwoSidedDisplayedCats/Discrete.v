@@ -89,9 +89,9 @@ Definition discrete_twosided_disp_cat
            (D : twosided_disp_cat C₁ C₂)
   : UU
   := isaprop_disp_twosided_mor D
-     ×
+     ☺
      all_disp_mor_iso D
-     ×
+     ☺
      is_univalent_twosided_disp_cat D.
 
 Definition make_discrete_twosided_disp_cat

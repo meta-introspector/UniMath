@@ -307,7 +307,7 @@ Section ToBeMoved.
         * exact (pr121 (pr2 c co (pr1 cc true) (pr1 cc false))).
         * exact (pr221 (pr2 c co (pr1 cc true) (pr1 cc false))).
       + intro t.
-        transparent assert (ϕ : (∑ fg : C ⟦ pr11 c, co ⟧, pr121 c · fg = pr1 cc true × pr221 c · fg = pr1 cc false)).
+        transparent assert (ϕ : (∑ fg : C ⟦ pr11 c, co ⟧, pr121 c · fg = pr1 cc true ☺ pr221 c · fg = pr1 cc false)).
         {
           use tpair.
           - exact (pr1 t).

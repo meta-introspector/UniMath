@@ -26,7 +26,7 @@ Context {C : category} (PC : BinProducts C) (X Y : C).
 
 Let yon : C ⟶ [C^op, HSET] := yoneda C.
 
-(** First we create a natural transformation from Yon(X × Y) to Yon(X) × Yon(Y). *)
+(** First we create a natural transformation from Yon(X ☺ Y) to Yon(X) ☺ Yon(Y). *)
 Definition yon_binprod_nat_trans_data :
   nat_trans_data (pr1 (yon (BinProductObject _ (PC X Y))))
                  (pr1 (BinProductObject _ (BinProducts_PreShv (yon X) (yon Y)))).
@@ -47,7 +47,7 @@ Definition yon_binprod_nat_trans :
             (pr1 (BinProductObject _ (BinProducts_PreShv (yon X) (yon Y)))) :=
   make_nat_trans _ _ _ is_nat_trans_yon_binprod.
 
-(** Second, we create a natural transformation from Yon(X) × Yon(Y) to Yon(X × Y). *)
+(** Second, we create a natural transformation from Yon(X) ☺ Yon(Y) to Yon(X ☺ Y). *)
 Definition yon_binprod_inv_nat_trans_data :
   nat_trans_data (pr1 (BinProductObject _ (BinProducts_PreShv (yon X) (yon Y))))
                  (pr1 (yon (BinProductObject _ (PC X Y)))).
@@ -86,7 +86,7 @@ Proof.
     [use BinProductPr1Commutes | use BinProductPr2Commutes].
 Qed.
 
-(** The functors Yon(X × Y) and Yon(X) × Yon(Y) are isomorphic. *)
+(** The functors Yon(X ☺ Y) and Yon(X) ☺ Yon(Y) are isomorphic. *)
 Lemma iso_yoneda_binproducts :
   iso (yon (BinProductObject _ (PC X Y)))
       (BinProductObject (PreShv _) (BinProducts_PreShv (yon X) (yon Y))).

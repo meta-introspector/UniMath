@@ -208,7 +208,7 @@ Section Inserters.
 
     Definition has_inserter_ump
       : UU
-      := has_inserter_ump_1 × has_inserter_ump_2 × has_inserter_ump_eq.
+      := has_inserter_ump_1 ☺ has_inserter_ump_2 ☺ has_inserter_ump_eq.
   End UniversalMappingProperty.
 
   Section Projections.

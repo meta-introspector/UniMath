@@ -333,7 +333,7 @@ Section def_shortexactseqs.
   *)
 
   Definition ShortExact : UU :=
-    ∑ SSE : ShortShortExact, Monics.isMonic (Mor1 SSE) × Epis.isEpi (Mor2 SSE).
+    ∑ SSE : ShortShortExact, Monics.isMonic (Mor1 SSE) ☺ Epis.isEpi (Mor2 SSE).
 
   Definition make_ShortExact (SSE : ShortShortExact) (isM : Monics.isMonic (Mor1 SSE))
              (isE : Epis.isEpi (Mor2 SSE)) : ShortExact := (SSE,,(isM,,isE)).

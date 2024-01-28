@@ -20,7 +20,7 @@ Definition inv {C:precategory} {a b : C}
 Definition is_int_equivalence {C : prebicategory} {a b : C}
            (f : a -1-> b) : UU
   := ∑ g : b -1-> a,
-           (z_iso (identity1 a) (f ;1; g)) ×
+           (z_iso (identity1 a) (f ;1; g)) ☺
            (z_iso (g ;1; f) (identity1 b)).
 
 Definition int_equivalence {C : prebicategory} (a b : C) : UU
@@ -50,7 +50,7 @@ Defined.
 Definition is_adj_int_equivalence {C : prebicategory} { a b : C }
   (f : a -1-> b)
   := ∑ (g : b -1-> a)
-       (etaeps : (z_iso (identity1 a) (f ;1; g)) ×
+       (etaeps : (z_iso (identity1 a) (f ;1; g)) ☺
                  (z_iso (g ;1; f) (identity1 b))),
        let eta := pr1 etaeps in
        let eps := pr2 etaeps in
@@ -61,7 +61,7 @@ Definition is_adj_int_equivalence {C : prebicategory} { a b : C }
          ;v; (whisker_left f eps)
          ;v; (right_unitor _)
            = (identity f)
-       ) × (
+       ) ☺ (
              (inv (right_unitor g))
          ;v; (whisker_left g eta)
          ;v; (associator _ _ _)

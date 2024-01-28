@@ -380,7 +380,7 @@ Section HSETCoequalizer.
     : eqrel Y.
   Proof.
     use make_eqrel.
-    - exact (eqrel_from_hrel (λ y₁ y₂, ∃ (x : X) , f x = y₁ × g x = y₂)).
+    - exact (eqrel_from_hrel (λ y₁ y₂, ∃ (x : X) , f x = y₁ ☺ g x = y₂)).
     - apply iseqrel_eqrel_from_hrel.
   Defined.
 

@@ -80,10 +80,10 @@ Section LambdaTheoryCategory.
     : disp_cat algebraic_theory_cat.
   Proof.
     use disp_struct.
-    - refine (λ T, _ × _).
+    - refine (λ T, _ ☺ _).
         + exact (∏ n f, app_ax T n f).
         + exact (∏ n f, abs_ax T n f).
-    - refine (λ _ _ appabs appabs' F, _ × _).
+    - refine (λ _ _ appabs appabs' F, _ ☺ _).
         + exact (∏ n t, mor_app_ax' F (pr1 appabs) (pr1 appabs') n t).
         + exact (∏ n t, mor_abs_ax' F (pr2 appabs) (pr2 appabs') n t).
     - abstract (
@@ -192,7 +192,7 @@ Section LambdaTheoryCategory.
     := data_abs (extended_composition f g) = (data_abs f) • g.
 
   Definition is_lambda_theory (L : lambda_theory_data_cat) : UU :=
-    (∏ m n f g, app_comp_ax L m n f g) ×
+    (∏ m n f g, app_comp_ax L m n f g) ☺
     (∏ m n f g, abs_comp_ax L m n f g).
 
   Definition lambda_theory_disp_cat

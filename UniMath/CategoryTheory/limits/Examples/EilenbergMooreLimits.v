@@ -120,7 +120,7 @@ Section EilenbergMooreCategoryLimits.
                {w : eilenberg_moore_cat m}
                (f : w --> x)
                (g : w --> y)
-      : isaprop (∑ (k : w --> p), k · π₁ = f × k · π₂ = g).
+      : isaprop (∑ (k : w --> p), k · π₁ = f ☺ k · π₂ = g).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.
@@ -449,7 +449,7 @@ Section EilenbergMooreCategoryLimits.
               (r : h · f = k · g).
 
       Definition isPullback_eilenberg_moore_unique
-        : isaprop (∑ (hk : w --> pb), hk · π₁ = h × hk · π₂ = k).
+        : isaprop (∑ (hk : w --> pb), hk · π₁ = h ☺ hk · π₂ = k).
       Proof.
         use invproofirrelevance.
         intros φ₁ φ₂.
@@ -862,7 +862,7 @@ Section EilenbergMooreCategoryLimits.
               (g : y --> w).
 
       Definition isBinCoproduct_eilenberg_moore_unique
-        : isaprop (∑ (fg : sum --> w), ι₁ · fg = f × ι₂ · fg = g).
+        : isaprop (∑ (fg : sum --> w), ι₁ · fg = f ☺ ι₂ · fg = g).
       Proof.
         use invproofirrelevance.
         intros φ₁ φ₂.

@@ -62,7 +62,7 @@ Section Disp_Functor.
              {D' : disp_cat C'} {D : disp_cat C} (FF : disp_functor_data F D' D)
     :=  (∏ x (xx : D' x),
           ♯ FF (id_disp xx) = transportb _ (functor_id F x) (id_disp (FF _ xx)))
-          × (∏ x y z (xx : D' x) yy zz (f : x --> y) (g : y --> z)
+          ☺ (∏ x y z (xx : D' x) yy zz (f : x --> y) (g : y --> z)
                (ff : xx -->[f] yy) (gg : yy -->[g] zz),
               ♯ FF (ff ;; gg)
               = transportb _ (functor_comp F f g) (♯ FF ff ;; ♯ FF gg)).

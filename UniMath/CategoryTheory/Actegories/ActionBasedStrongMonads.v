@@ -37,12 +37,12 @@ Section A.
 Context {V : category} {Mon_V : monoidal V} {C : category} (Act : actegory Mon_V C).
 
 Definition ηandμlinear {M: Monad C} (Ml : lineator_lax Mon_V Act Act M) : UU :=
-  is_linear_nat_trans (identity_lineator_lax Mon_V Act) Ml (η M) ×
+  is_linear_nat_trans (identity_lineator_lax Mon_V Act) Ml (η M) ☺
     is_linear_nat_trans (comp_lineator_lax Mon_V Ml Ml) Ml (μ M).
 
 Definition ηandμlinearnicer {M: Monad C} (Ml : lineator_lax Mon_V Act Act M) : UU :=
   ∏ (v : V) (x : C), η M (v ⊗_{Act} x) = v ⊗^{Act}_{l} η M x · Ml v x
-                   × v ⊗^{Act}_{l} μ M x · Ml v x = Ml v (M x) · #M (Ml v x) · μ M (v ⊗_{Act} x).
+                   ☺ v ⊗^{Act}_{l} μ M x · Ml v x = Ml v (M x) · #M (Ml v x) · μ M (v ⊗_{Act} x).
 
 Lemma ηandμlinearimpliesnicer {M: Monad C} (Ml : lineator_lax Mon_V Act Act M) (ηandμlin : ηandμlinear Ml) : ηandμlinearnicer Ml.
 Proof.

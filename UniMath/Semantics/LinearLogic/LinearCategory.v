@@ -43,7 +43,7 @@ Definition linear_category_data
   := ∑ (𝕃 : sym_mon_closed_cat)
        (bang : sym_monoidal_cmd 𝕃),
      (∏ (x : 𝕃), bang x --> bang x ⊗ bang x)
-     ×
+     ☺
      (∏ (x : 𝕃), bang x --> I_{𝕃}).
 
 Definition make_linear_category_data
@@ -97,14 +97,14 @@ Definition linear_category_laws
       =
       linear_category_comult 𝕃 x
       · (#(linear_category_bang 𝕃) f #⊗ #(linear_category_bang 𝕃) f))
-     ×
+     ☺
      (** naturality of counit *)
      (∏ (x y : 𝕃)
         (f : x --> y),
       #(linear_category_bang 𝕃) f · linear_category_counit 𝕃 y
       =
       linear_category_counit 𝕃 x)
-     ×
+     ☺
      (** the comultiplication is a coalgebra morphism *)
      (∏ (x : 𝕃),
       linear_category_comult 𝕃 x
@@ -113,7 +113,7 @@ Definition linear_category_laws
       =
       δ (linear_category_bang 𝕃) x
       · #(linear_category_bang 𝕃) (linear_category_comult 𝕃 x))
-     ×
+     ☺
      (** the counit is a coalgebra morphism *)
      (∏ (x : 𝕃),
       linear_category_counit 𝕃 x
@@ -121,14 +121,14 @@ Definition linear_category_laws
       =
       δ (linear_category_bang 𝕃) x
       · #(linear_category_bang 𝕃) (linear_category_counit 𝕃 x))
-     ×
+     ☺
      (** the comultiplication of the comonad is a comonoid morphism (counit) *)
      (∏ (x : 𝕃),
       δ (linear_category_bang 𝕃) x
       · linear_category_counit 𝕃 (linear_category_bang 𝕃 x)
       =
       linear_category_counit 𝕃 x)
-     ×
+     ☺
      (** the comultiplication of the comonad is a comonoid morphism (comultiplication) *)
      (∏ (x : 𝕃),
       δ (linear_category_bang 𝕃) x
@@ -136,7 +136,7 @@ Definition linear_category_laws
       =
       linear_category_comult 𝕃 x
       · (δ (linear_category_bang 𝕃) x #⊗ δ (linear_category_bang 𝕃) x))
-     ×
+     ☺
      (** coassociativity *)
      (∏ (x : 𝕃),
       linear_category_comult 𝕃 x
@@ -145,7 +145,7 @@ Definition linear_category_laws
       linear_category_comult 𝕃 x
       · (linear_category_comult 𝕃 x #⊗ identity _)
       · mon_lassociator _ _ _)
-     ×
+     ☺
      (** counitality *)
      (∏ (x : 𝕃),
       linear_category_comult 𝕃 x
@@ -153,14 +153,14 @@ Definition linear_category_laws
       · mon_lunitor _
       =
       identity _)
-     ×
+     ☺
      (** cocommutativity *)
      (∏ (x : 𝕃),
       linear_category_comult 𝕃 x
       · sym_mon_braiding 𝕃 _ _
       =
         linear_category_comult 𝕃 x)
-     ×
+     ☺
      (** comult preserves tensor *)
      (∏ x y : 𝕃,
          mon_functor_tensor (linear_category_bang_functor 𝕃) x y
@@ -173,20 +173,20 @@ Definition linear_category_laws
                   (linear_category_bang 𝕃 y)
                   · mon_functor_tensor (linear_category_bang_functor 𝕃) x y
                   #⊗ mon_functor_tensor (linear_category_bang_functor 𝕃) x y))
-     ×
+     ☺
      (** comult preserves unit *)
      (mon_functor_unit (linear_category_bang_functor 𝕃)
                 · linear_category_comult 𝕃 I_{𝕃}
               = mon_linvunitor I_{𝕃}
                   · mon_functor_unit (linear_category_bang_functor 𝕃)
                   #⊗ mon_functor_unit (linear_category_bang_functor 𝕃))
-     ×
+     ☺
      (** counit preserves tensor *)
      (∏ x y : 𝕃, mon_functor_tensor (linear_category_bang_functor 𝕃) x y
                            · linear_category_counit 𝕃 (x ⊗ y)
                          = linear_category_counit 𝕃 x #⊗ linear_category_counit 𝕃 y
                              · mon_lunitor (monoidal_unit 𝕃))
-     ×
+     ☺
      (** counit preserves unit *)
      (mon_functor_unit (linear_category_bang_functor 𝕃)
                 · linear_category_counit 𝕃 I_{𝕃}

@@ -156,9 +156,9 @@ Definition dirprod_disp_cat_ob_mor
            {C : precategory_ob_mor} (D1 D2 : disp_cat_ob_mor C)
   : disp_cat_ob_mor C.
 Proof.
-  exists (λ c, D1 c × D2 c).
+  exists (λ c, D1 c ☺ D2 c).
   intros x y xx yy f.
-  exact (pr1 xx -->[f] pr1 yy × pr2 xx -->[f] pr2 yy).
+  exact (pr1 xx -->[f] pr1 yy ☺ pr2 xx -->[f] pr2 yy).
 Defined.
 
 Definition dirprod_disp_cat_id_comp
@@ -209,7 +209,7 @@ Definition z_iso_disp_prod1
       (xx1 xx1' : D1 x)
       (xx2 xx2' : D2 x) :
   @z_iso_disp _ dirprod_disp_cat _ _ (identity_z_iso x) (xx1,, xx2) (xx1',, xx2') →
-  (z_iso_disp (identity_z_iso x) xx1 xx1') × (z_iso_disp (identity_z_iso x) xx2 xx2').
+  (z_iso_disp (identity_z_iso x) xx1 xx1') ☺ (z_iso_disp (identity_z_iso x) xx2 xx2').
 Proof.
   unfold z_iso_disp. cbn.
   intros [[f1 f2] Hff].
@@ -234,7 +234,7 @@ Definition z_iso_disp_prod2
       {x : C}
       (xx1 xx1' : D1 x)
       (xx2 xx2' : D2 x) :
-  (z_iso_disp (identity_z_iso x) xx1 xx1') × (z_iso_disp (identity_z_iso x) xx2 xx2') →
+  (z_iso_disp (identity_z_iso x) xx1 xx1') ☺ (z_iso_disp (identity_z_iso x) xx2 xx2') →
   @z_iso_disp _ dirprod_disp_cat _ _ (identity_z_iso x) (xx1,, xx2) (xx1',, xx2').
 Proof.
   unfold z_iso_disp. cbn.
@@ -270,7 +270,7 @@ Lemma z_iso_disp_prod12
       {x : C}
       (xx1 xx1' : D1 x)
       (xx2 xx2' : D2 x)
-      (t : z_iso_disp (identity_z_iso x) xx1 xx1' × z_iso_disp (identity_z_iso x) xx2 xx2')
+      (t : z_iso_disp (identity_z_iso x) xx1 xx1' ☺ z_iso_disp (identity_z_iso x) xx2 xx2')
 :
   z_iso_disp_prod1 xx1 xx1' xx2 xx2' (z_iso_disp_prod2 xx1 xx1' xx2 xx2' t) = t.
 Proof.
@@ -284,7 +284,7 @@ Lemma z_iso_disp_prod_weq
       (xx1 xx1' : D1 x)
       (xx2 xx2' : D2 x) :
   @z_iso_disp _ dirprod_disp_cat _ _ (identity_z_iso x) (xx1,, xx2) (xx1',, xx2') ≃
-  (z_iso_disp (identity_z_iso x) xx1 xx1') × (z_iso_disp (identity_z_iso x) xx2 xx2').
+  (z_iso_disp (identity_z_iso x) xx1 xx1') ☺ (z_iso_disp (identity_z_iso x) xx2 xx2').
 Proof.
   exists (z_iso_disp_prod1 xx1 xx1' xx2 xx2').
   use isweq_iso.
@@ -297,7 +297,7 @@ Lemma z_iso_disp_aux_weq
       (U1 : is_univalent_in_fibers D1)
       (U2 : is_univalent_in_fibers D2)
       (x : C)
-      (xx xx' : D1 x × D2 x)
+      (xx xx' : D1 x ☺ D2 x)
 
 :
   xx = xx'
@@ -375,7 +375,7 @@ Definition dirprodpr2_disp_functor
 End Dirprod.
 
 Declare Scope disp_cat_scope.
-Notation "D1 × D2" := (dirprod_disp_cat D1 D2) : disp_cat_scope.
+Notation "D1 ☺ D2" := (dirprod_disp_cat D1 D2) : disp_cat_scope.
 Delimit Scope disp_cat_scope with disp_cat.
 Bind Scope disp_cat_scope with disp_cat.
 
@@ -407,7 +407,7 @@ Section Sections.
   Definition section_disp_axioms {C} {D : disp_cat C}
              (F : section_disp_data D) : UU
     := ((forall x:C, # F (identity x) = id_disp (F x))
-          × (forall (x y z : C) (f : x --> y) (g : y --> z),
+          ☺ (forall (x y z : C) (f : x --> y) (g : y --> z),
                 # F (f · g) = (# F f) ;; (# F g))).
 
   Definition section_disp {C} (D : disp_cat C) : UU

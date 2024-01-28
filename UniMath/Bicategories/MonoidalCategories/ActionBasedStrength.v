@@ -184,7 +184,7 @@ Qed.
 End ActionBasedStrengths_Natural_Transformation.
 
 Definition actionbased_strength (F : A ⟶ A') : UU := ∑ (ϛ : actionbased_strength_nat F),
-   (actionbased_strength_triangle_eq F ϛ) × (actionbased_strength_pentagon_eq F ϛ).
+   (actionbased_strength_triangle_eq F ϛ) ☺ (actionbased_strength_pentagon_eq F ϛ).
 
 Lemma actionbased_strength_eq {F : A ⟶ A'} (sη sη': actionbased_strength F) :
   pr1 sη = pr1 sη' -> sη = sη'.
@@ -530,7 +530,7 @@ Section The_Laws.
 End The_Laws.
 
    Definition parameterized_distributivity : UU := ∑ (δ : parameterized_distributivity_nat),
-     (param_distr_triangle_eq δ) × (param_distr_pentagon_eq δ).
+     (param_distr_triangle_eq δ) ☺ (param_distr_pentagon_eq δ).
 
    Lemma parameterized_distributivity_eq (sδ sδ': parameterized_distributivity) :
      pr1 sδ = pr1 sδ' -> sδ = sδ'.
@@ -842,7 +842,7 @@ Section The_Laws.
 End The_Laws.
 
    Definition parameterized_distributivity' : UU := ∑ (δ : parameterized_distributivity'_nat),
-     (param_distr'_triangle_eq δ) × (param_distr'_pentagon_eq δ).
+     (param_distr'_triangle_eq δ) ☺ (param_distr'_pentagon_eq δ).
 
    Lemma parameterized_distributivity'_eq (sδ sδ': parameterized_distributivity') :
      pr1 sδ = pr1 sδ' -> sδ = sδ'.
@@ -923,7 +923,7 @@ Section RelativeStrengths_Natural_Transformation.
 End RelativeStrengths_Natural_Transformation.
 
 Definition rel_strength (F : Mon_V ⟶ Mon_V): UU :=
-  ∑ (ϛ : rel_strength_nat F), (rel_strength_pentagon_eq F ϛ) × (rel_strength_rectangle_eq F ϛ).
+  ∑ (ϛ : rel_strength_nat F), (rel_strength_pentagon_eq F ϛ) ☺ (rel_strength_rectangle_eq F ϛ).
 
 
 Definition rel_strength_to_rel_strength_nat {F : Mon_V ⟶ Mon_V} (str : rel_strength F) :
@@ -1008,7 +1008,7 @@ Section ActionBasedStrength_Instantiates_To_RelativeStrength.
 
   Local Definition θ' : rel_strength_nat F := pre_whisker binswap_pair_functor ab_str.
 
-  Lemma relative_strength_from_actionbased_strength_laws : rel_strength_pentagon_eq F θ' × rel_strength_rectangle_eq F θ'.
+  Lemma relative_strength_from_actionbased_strength_laws : rel_strength_pentagon_eq F θ' ☺ rel_strength_rectangle_eq F θ'.
   Proof.
     split.
     - red.

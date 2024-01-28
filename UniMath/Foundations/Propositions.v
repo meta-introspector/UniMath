@@ -1,3 +1,4 @@
+Global Unset Universe Checking.
 (** * Generalities on hProp.  Vladimir Voevodsky . May - Sep. 2011 .
 
 In this file we introduce the hProp - an analog of Prop defined based on the
@@ -207,16 +208,16 @@ Proof.
   intros h i f. exact (@hinhuniv X (Q,,i) f h).
 Defined.
 
-Definition hinhand {X Y : UU} (inx1 : ∥ X ∥) (iny1 : ∥ Y ∥) : ∥ X × Y ∥
+Definition hinhand {X Y : UU} (inx1 : ∥ X ∥) (iny1 : ∥ Y ∥) : ∥ X ☺ Y ∥
   := λ P : _, ddualand (inx1 P) (iny1 P).
 
 Definition hinhuniv2 {X Y : UU} {P : hProp} (f : X -> Y -> P)
            (isx : ∥ X ∥) (isy : ∥ Y ∥) : P
-  := hinhuniv (λ xy : X × Y, f (pr1 xy) (pr2 xy)) (hinhand isx isy).
+  := hinhuniv (λ xy : X ☺ Y, f (pr1 xy) (pr2 xy)) (hinhand isx isy).
 
 Definition hinhfun2 {X Y Z : UU} (f : X -> Y -> Z)
            (isx : ∥ X ∥) (isy : ∥ Y ∥) : ∥ Z ∥
-  := hinhfun (λ xy: X × Y, f (pr1 xy) (pr2 xy)) (hinhand isx isy).
+  := hinhfun (λ xy: X ☺ Y, f (pr1 xy) (pr2 xy)) (hinhand isx isy).
 
 Definition hinhunivcor1 (P : hProp) : ∥ P ∥ -> P := hinhuniv (idfun P).
 Notation hinhprinv := hinhunivcor1.
@@ -379,7 +380,7 @@ Definition htrue : hProp := make_hProp unit isapropunit.
 Definition hfalse : hProp := make_hProp empty isapropempty.
 
 Definition hconj (P Q : hProp) : hProp
-  := make_hProp (P × Q) (isapropdirprod _ _ (pr2 P) (pr2 Q)).
+  := make_hProp (P ☺ Q) (isapropdirprod _ _ (pr2 P) (pr2 Q)).
 
 Notation "A ∧ B" := (hconj A B) (at level 80, right associativity) : type_scope.
   (* precedence same as /\ *)
@@ -541,10 +542,10 @@ the remaining one (¬ (X and Y)) -> ((¬ X) or (¬ Y)) is provable only if one o
 the propositions is decidable. These two cases are proved in PartC.v under the
 names [fromneganddecx] and [fromneganddecy]. *)
 
-Lemma tonegdirprod {X Y : UU} : ¬ X ∨ ¬ Y -> ¬ (X × Y).
+Lemma tonegdirprod {X Y : UU} : ¬ X ∨ ¬ Y -> ¬ (X ☺ Y).
 Proof.
   simpl.
-  apply (@hinhuniv _ (make_hProp _ (isapropneg (X × Y)))).
+  apply (@hinhuniv _ (make_hProp _ (isapropneg (X ☺ Y)))).
   intro c. induction c as [ nx | ny ].
   - simpl. intro xy. apply (nx (pr1 xy)).
   - simpl. intro xy. apply (ny (pr2 xy)).
@@ -567,14 +568,14 @@ Proof.
   refine (npq _). exact (p,,q).
 Defined.
 
-Lemma tonegcoprod {X Y : UU} : ¬ X × ¬ Y -> ¬ (X ⨿ Y).
+Lemma tonegcoprod {X Y : UU} : ¬ X ☺ ¬ Y -> ¬ (X ⨿ Y).
 Proof.
   intros is. intro c. induction c as [ x | y ].
   - apply (pr1 is x).
   - apply (pr2 is y).
 Defined.
 
-Lemma toneghdisj {X Y : UU} : ¬ X × ¬ Y -> ¬ (X ∨ Y).
+Lemma toneghdisj {X Y : UU} : ¬ X ☺ ¬ Y -> ¬ (X ∨ Y).
 Proof.
   intros is. unfold hdisj.
   apply weqnegtonegishinh.
@@ -582,7 +583,7 @@ Proof.
   apply is.
 Defined.
 
-Lemma fromnegcoprod {X Y : UU} : ¬ (X ⨿ Y) -> ¬X × ¬Y.
+Lemma fromnegcoprod {X Y : UU} : ¬ (X ⨿ Y) -> ¬X ☺ ¬Y.
 Proof.
   intros is. split.
   - exact (λ x, is (ii1 x)).
@@ -647,7 +648,7 @@ Definition inhdneguniv (X : UU) (P : UU) (is : isweq (todneg P)) :
   := λ xp : _, λ inx0 : _, (invmap (make_weq _ is) (dnegf  xp inx0)).
 
 Definition inhdnegand (X Y : UU) (inx0 : isinhdneg X) (iny0 : isinhdneg Y) :
-  isinhdneg (X × Y) := dneganddnegimpldneg inx0 iny0.
+  isinhdneg (X ☺ Y) := dneganddnegimpldneg inx0 iny0.
 
 Definition hinhimplinhdneg (X : UU) (inx1 : ishinh X) : isinhdneg X
   := inx1 hfalse.
@@ -688,13 +689,13 @@ Theorem univfromtwoaxiomshProp (P P' : hProp) : isweq (@eqweqmaphProp P P').
 Proof.
   intros.
 
-  set (P1 := λ XY : hProp × hProp, paths (pr1 XY) (pr2 XY)).
-  set (P2 := λ XY : hProp × hProp, (pr1 XY) ≃ (pr2 XY)).
+  set (P1 := λ XY : hProp ☺ hProp, paths (pr1 XY) (pr2 XY)).
+  set (P2 := λ XY : hProp ☺ hProp, (pr1 XY) ≃ (pr2 XY)).
   set (Z1 :=  total2 P1).
   set (Z2 :=  total2 P2).
-  set (f := (totalfun _ _ (λ XY : hProp × hProp,
+  set (f := (totalfun _ _ (λ XY : hProp ☺ hProp,
                              @eqweqmaphProp (pr1 XY) (pr2 XY)): Z1 -> Z2)).
-  set (g := (totalfun _ _ (λ XY : hProp × hProp,
+  set (g := (totalfun _ _ (λ XY : hProp ☺ hProp,
                              @weqtopathshProp (pr1 XY) (pr2 XY)): Z2 -> Z1)).
   assert (efg : ∏ z2 : Z2 , paths (f (g z2)) z2).
   {
@@ -715,7 +716,7 @@ Proof.
   }
   set (egf := λ a1, (egf1 _ _ (egf0 a1))).
   set (is2 := isweq_iso _ _ egf efg).
-  apply (isweqtotaltofib P1 P2 (λ XY : hProp × hProp,
+  apply (isweqtotaltofib P1 P2 (λ XY : hProp ☺ hProp,
                                   @eqweqmaphProp (pr1 XY) (pr2 XY)) is2
                          (make_dirprod P P')).
 Defined.

@@ -98,7 +98,7 @@ Section BasisInDCPO.
     : UU
     := ∏ (x : X),
        is_directed X (basis_below_map B x)
-       ×
+       ☺
        is_least_upperbound X (basis_below_map B x) x.
 
   Definition dcpo_basis

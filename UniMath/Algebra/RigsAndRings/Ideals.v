@@ -114,7 +114,7 @@ Proof.
                                       (rigaddfun f)).
     + (** This does, in fact, describe a submonoid *)
       apply kernel_issubmonoid.
-  - (** It's closed under × from the left *)
+  - (** It's closed under ☺ from the left *)
     intros r s ss; cbn in *.
     refine (monoidfunmul (rigmultfun f) _ _ @ _); cbn.
     refine (maponpaths _ ss @ _).

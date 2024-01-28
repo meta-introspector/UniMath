@@ -43,7 +43,7 @@ Section KleisliObject.
          (f : z --> x)
          (γ : h · f ==> f),
        (η ▹ f • γ = lunitor _)
-       ×
+       ☺
        (rassociator _ _ _ • (_ ◃ γ) • γ = (μ ▹ f) • γ).
 
   Definition make_kleisli_cocone
@@ -93,7 +93,7 @@ Section KleisliObject.
         lassociator _ _ _
         • (cell_of_kleisli_cocone q₁ ▹ _)
         • α)
-       ×
+       ☺
        is_invertible_2cell α.
 
   Definition make_kleisli_cocone_mor
@@ -201,7 +201,7 @@ Section KleisliObject.
   Definition has_kleisli_ump
              (k : kleisli_cocone)
     : UU
-    := has_kleisli_ump_1 k × has_kleisli_ump_2 k.
+    := has_kleisli_ump_1 k ☺ has_kleisli_ump_2 k.
 
   Section Projections.
     Context {k : kleisli_cocone}

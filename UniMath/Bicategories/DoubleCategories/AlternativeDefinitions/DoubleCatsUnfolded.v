@@ -81,7 +81,7 @@ Here the definition of category involves associativity in both directions, simil
 Definition predoublecategory_hor_id_comp  (C : predoublecategory_ob_mor_data): UU (* Horizontal category data*)
   :=
     (∏ c : C, c -h-> c) (* identities *)
-      ×
+      ☺
     (∏ a b c : C, a -h-> b -> b -h-> c -> a -h-> c). (* composition *)
 
 Definition predoublecategory_hor_precat_data : UU
@@ -107,11 +107,11 @@ Notation "g ∘h f" := (hor_compose f g) (at level 60).
 Definition is_predoublecategory_hor (C : predoublecategory_hor_precat_data) : UU (* Horizontal Category Condition *)
      :=
        ((∏ (a b : C) (f : a -h-> b), hor_identity a ·h f = f)
-        ×
+        ☺
         (∏ (a b : C) (f : a -h-> b), f ·h hor_identity b = f))
-       ×
+       ☺
        ((∏ (a b c d : C) (f : a -h-> b) (g : b -h-> c) (h : c -h-> d), f ·h (g ·h h) = (f ·h g) ·h h)
-          ×
+          ☺
         (∏ (a b c d : C) (f : a -h-> b) (g : b -h-> c) (h : c -h-> d), (f ·h g) ·h h = f ·h (g ·h h))).
 
 
@@ -186,7 +186,7 @@ Section Underlying_Vertical_Composition.
 Definition predoublecategory_ver_id_comp (C : predoublecategory_hor) : UU (* Vertical composition data *)
   :=
     (∏ c : C, c -v-> c) (* vertical identities *)
-      ×
+      ☺
     (∏ a b c : C, a -v-> b -> b -v-> c -> a -v-> c). (* vertical composition *)
 
 Definition predoublecategory_hor_cat_ver_precat_data : UU (* double graph with horizontal and vertical composition*)
@@ -269,7 +269,7 @@ Section Horizontal_Composition_Squares.
 Definition predoublecategory_sq_hor_id_comp (C : predoublecategory_ob_mor_sq_data): UU (* Horizontal composition of squares *)
     :=
       (∏ (a b : C) (f: a -v-> b), (sqq (hor_identity a) f f (hor_identity b)))  (* identities *)
-        ×
+        ☺
       (∏ (a0 a1 b0 b1 c0 c1 : C)
       (f0: a0 -v-> a1) (f1: b0 -v-> b1) (f2: c0 -v-> c1) (g0: a0 -h-> b0) (h0: b0 -h-> c0) (g1: a1 -h-> b1) (h1: b1 -h-> c1),
         (sqq g0 f0 f1 g1) →
@@ -342,11 +342,11 @@ Definition is_predoublecategory_hor_sq (C : predoublecategory_sq_hor_data) : UU 
     ((∏ (a b c d : C) (f: a -h-> b) (g: a -v-> c) (h: b -v-> d) (k: c -h-> d)
       (α : mor_sq C a b c d f g h k),
       (hor_sq_identity g) ·sqh α = hor_trans_id_left_sq α))
-     ×
+     ☺
      ((∏ (a b c d : C) (f: a -h-> b) (g: a -v-> c) (h: b -v-> d) (k: c -h-> d)
       (α : mor_sq C a b c d f g h k),
       α ·sqh (hor_sq_identity h) = hor_trans_id_right_sq  α))
-    ×
+    ☺
     (∏ ( a0 b0 c0 d0 a1 b1 c1 d1 : C )
     (f0: a0 -h-> b0) (g0: b0 -h-> c0) (h0: c0 -h-> d0)
     (f1: a1 -h-> b1) (g1: b1 -h-> c1) (h1: c1 -h-> d1)
@@ -419,7 +419,7 @@ Definition get_predoublecat_sq_special {C: predoublecategory_ob_mor_sq_data} {a 
 Definition is_iso_square {C: predoublecategory_sq_hor_data} {a b : C} {g: a -v-> b} {h: a -v-> b}
   (α : get_predoublecat_sq_special g h): UU
   := ∑ (β : get_predoublecat_sq_special h g),
-  ( (α ·sqh β) =hor_trans_id_left_sq (hor_sq_identity g)) × ( (β ·sqh α) = hor_trans_id_left_sq (hor_sq_identity h)).
+  ( (α ·sqh β) =hor_trans_id_left_sq (hor_sq_identity g)) ☺ ( (β ·sqh α) = hor_trans_id_left_sq (hor_sq_identity h)).
 
 Definition get_special_iso_squares {C: predoublecategory_sq_hor_data} {a b : C} (g: a -v-> b) (h: a -v-> b)
   : UU
@@ -437,7 +437,7 @@ Section Vertical_Composition_Squares.
 Definition predoublecategory_sq_ver_id_comp (C : predoublecategory_hor_sq): UU
     :=
       (∏ (a b : C) (f: a -h-> b), (sqq f (ver_identity a) (ver_identity b) f))  (* identities *)
-        ×
+        ☺
       (∏ (a0 a1 b0 b1 c0 c1 : C)
       (f0: a0 -h-> a1) (f1: b0 -h-> b1) (f2: c0 -h-> c1) (g0: a0 -v-> b0) (h0: b0 -v-> c0) (g1: a1 -v-> b1) (h1: b1 -v-> c1),
         (sqq f0 g0 g1 f1) →
@@ -500,8 +500,8 @@ Definition ver_associator { C:predoublecategory_sq_hor_ver_data} {a b c d: C}
 
 Definition has_predoublecategory_sq_hor_ver_unit_assoc ( C:predoublecategory_sq_hor_ver_data) : UU
 :=
- (∏ (a b: C) (f: a -v-> b) , sqq_iso_special (ver_identity a ·v f) f) ×
- (∏ (a b: C) (f: a -v-> b) , sqq_iso_special (f ·v ver_identity b) f) ×
+ (∏ (a b: C) (f: a -v-> b) , sqq_iso_special (ver_identity a ·v f) f) ☺
+ (∏ (a b: C) (f: a -v-> b) , sqq_iso_special (f ·v ver_identity b) f) ☺
  (∏ (a b c d: C) (f : a -v-> b) (g : b -v-> c) (h : c -v-> d), sqq_iso_special (f ·v (g ·v h)) ((f ·v g) ·v h)).
 
 Definition predoublecategory_sq_hor_ver_unit_assoc_data : UU :=
@@ -591,9 +591,9 @@ Definition predoublecategory_interchange_id_ver  ( C : predoublecategory_sq_hor_
     (hor_sq_identity f) ·sqv (hor_sq_identity g) =hor_sq_identity(f ·v g).
 
 Definition predoublecategory_interchange  ( C : predoublecategory_sq_hor_ver_unit_assoc_data) : UU :=
-        predoublecategory_interchange_id_obj C ×
-        predoublecategory_interchange_id_hor C ×
-        predoublecategory_interchange_id_ver C ×
+        predoublecategory_interchange_id_obj C ☺
+        predoublecategory_interchange_id_hor C ☺
+        predoublecategory_interchange_id_ver C ☺
         predoublecategory_interchange_comp C.
 
 End Vertical_Unitor_and_Associator_Coherences.
@@ -617,11 +617,11 @@ Definition doublecategory_hor_sq_to_predoublecategory_hor_sq : doublecategory_ho
 
 Definition predoublecategory : UU :=
     ∑ (C:predoublecategory_sq_hor_ver_unit_assoc_data),
-    ( (predoublecategory_ver_left_unitor_naturality C) ×
-    (predoublecategory_ver_right_unitor_naturality C) ×
-    (predoublecategory_ver_assoc_naturality C) ×
-    (predoublecategory_ver_unitor_coherence C) ×
-    (predoublecategory_ver_assoc_coherence C) ×
+    ( (predoublecategory_ver_left_unitor_naturality C) ☺
+    (predoublecategory_ver_right_unitor_naturality C) ☺
+    (predoublecategory_ver_assoc_naturality C) ☺
+    (predoublecategory_ver_unitor_coherence C) ☺
+    (predoublecategory_ver_assoc_coherence C) ☺
     (predoublecategory_interchange C)).
 
 
@@ -819,7 +819,7 @@ End Underlying_Category_Vertical_Morphisms_Squares.
 
 Section Double_Categories. (* We now use the underlying categories to define double categories *)
 
-Definition doublecategory := ∑ C:predoublecategory, (has_homsets (und_ob_hor_precategory C) × has_sq_hor_homsets C).
+Definition doublecategory := ∑ C:predoublecategory, (has_homsets (und_ob_hor_precategory C) ☺ has_sq_hor_homsets C).
 
 Definition make_doublecategory C h k : doublecategory := C,,h,,k.
 
@@ -827,7 +827,7 @@ Definition doublecategory_to_predoublecategory : doublecategory → predoublecat
 
 Coercion doublecategory_to_predoublecategory : doublecategory >-> predoublecategory.
 
-Coercion homset_sq_property (C : doublecategory) : (has_homsets (und_ob_hor_precategory C) × has_sq_hor_homsets C) := pr2 C.
+Coercion homset_sq_property (C : doublecategory) : (has_homsets (und_ob_hor_precategory C) ☺ has_sq_hor_homsets C) := pr2 C.
 
 Definition get_has_sq_hor_homsets
 {C : doublecategory} {a b c d : C}
@@ -892,7 +892,7 @@ Section Univalent_Double_Categories.
   Definition is_double_univalent
              (C : doublecategory)
     := (is_univalent (und_ob_hor_cat C)
-        ×
+        ☺
         is_univalent_twosided_disp_cat (doublecategory_to_twosided_disp_cat C)).
 
   Definition univalent_doublecategory : UU := ∑ (C: doublecategory), is_double_univalent C.

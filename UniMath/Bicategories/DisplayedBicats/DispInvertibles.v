@@ -106,7 +106,7 @@ Section Prop_disp_invertible_2cell.
                 (pr1 x ,, xx) (x^-1 ,, zz)
         =
         @id2 (total_bicat D) (a ,, aa) (b ,, bb) (f ,, ff))
-         ×
+         ☺
          (@vcomp2 (total_bicat D)
                   (a ,, aa) (b ,, bb)
                   (g ,, gg) (f ,, ff) (g ,, gg)

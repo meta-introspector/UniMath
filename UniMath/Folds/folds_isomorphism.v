@@ -51,8 +51,8 @@ Local Notation "'id' a" := (identity (C:=C') a) (at level 30).
 
 Definition folds_iso_data (a b : C) : UU :=
   ((∏ (x : C), (x ⇒ a) ≃ (x ⇒ b))
- × (∏ (z : C), (a ⇒ z) ≃ (b ⇒ z)))
-×             ((a ⇒ a) ≃ (b ⇒ b)).
+ ☺ (∏ (z : C), (a ⇒ z) ≃ (b ⇒ z)))
+☺             ((a ⇒ a) ≃ (b ⇒ b)).
 
 Definition ϕ₁ {a b : C} (f : folds_iso_data a b) {x : C} : (x ⇒ a) ≃ (x ⇒ b) :=
       pr1 (pr1 f) x.
@@ -65,13 +65,13 @@ Notation "ϕ∙" := ϕo. (* works as a notation, but not as an identifier *)
 
 Definition folds_iso_prop {a b : C} (i : folds_iso_data a b) : UU :=
   ((((∏ (x y : C) (f : x ⇒ y) (g : y ⇒ a) (h : x ⇒ a), T f g h ≃ T f ((ϕ₁ i) g) ((ϕ₁ i) h))
-   × (∏ (x z : C) (f : x ⇒ a) (g : a ⇒ z) (h : x ⇒ z), T f g h ≃ T ((ϕ₁ i) f) ((ϕ₂ i) g) h))
-   × (∏ (z w : C) (f : a ⇒ z) (g : z ⇒ w) (h : a ⇒ w), T f g h ≃ T ((ϕ₂ i) f) g ((ϕ₂ i) h)))
- × (((∏ (x : C) (f : x ⇒ a) (g : a ⇒ a) (h : x ⇒ a),   T f g h ≃ T ((ϕ₁ i) f) ((ϕo i) g) ((ϕ₁ i) h))
-   × (∏ (x : C) (f : a ⇒ x) (g : x ⇒ a) (h : a ⇒ a),   T f g h ≃ T ((ϕ₂ i) f) ((ϕ₁ i) g) ((ϕ∙ i) h)))
-  × ((∏ (x : C) (f : a ⇒ a) (g h : a ⇒ x),             T f g h ≃ T ((ϕ∙ i) f) ((ϕ₂ i) g) ((ϕ₂ i) h))
-   × (∏ f g h : a ⇒ a,                                 T f g h ≃ T ((ϕ∙ i) f) ((ϕ∙ i) g) ((ϕ∙ i) h)))))
-   × (∏ f : a ⇒ a,                                     I f ≃ I ((ϕ∙ i) f)).
+   ☺ (∏ (x z : C) (f : x ⇒ a) (g : a ⇒ z) (h : x ⇒ z), T f g h ≃ T ((ϕ₁ i) f) ((ϕ₂ i) g) h))
+   ☺ (∏ (z w : C) (f : a ⇒ z) (g : z ⇒ w) (h : a ⇒ w), T f g h ≃ T ((ϕ₂ i) f) g ((ϕ₂ i) h)))
+ ☺ (((∏ (x : C) (f : x ⇒ a) (g : a ⇒ a) (h : x ⇒ a),   T f g h ≃ T ((ϕ₁ i) f) ((ϕo i) g) ((ϕ₁ i) h))
+   ☺ (∏ (x : C) (f : a ⇒ x) (g : x ⇒ a) (h : a ⇒ a),   T f g h ≃ T ((ϕ₂ i) f) ((ϕ₁ i) g) ((ϕ∙ i) h)))
+  ☺ ((∏ (x : C) (f : a ⇒ a) (g h : a ⇒ x),             T f g h ≃ T ((ϕ∙ i) f) ((ϕ₂ i) g) ((ϕ₂ i) h))
+   ☺ (∏ f g h : a ⇒ a,                                 T f g h ≃ T ((ϕ∙ i) f) ((ϕ∙ i) g) ((ϕ∙ i) h)))))
+   ☺ (∏ f : a ⇒ a,                                     I f ≃ I ((ϕ∙ i) f)).
 
 Definition isaprop_folds_iso_prop (a b : C) (i : folds_iso_data a b) : isaprop (folds_iso_prop i).
 Proof.

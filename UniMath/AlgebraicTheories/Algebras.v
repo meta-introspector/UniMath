@@ -56,7 +56,7 @@ Definition is_algebra
   (A : algebra_data T)
   : UU
   := (∏ m n f g a, comp_action_ax T A (@action T A) m n f g a)
-    × (∏ n i a, pr_action_ax T A (@action T A) n i a).
+    ☺ (∏ n i a, pr_action_ax T A (@action T A) n i a).
 
 Definition make_is_algebra
   {T : algebraic_theory}

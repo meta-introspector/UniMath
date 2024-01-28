@@ -172,9 +172,9 @@ Section Lenses.
     := let g := pr1 l in
        let p := pr2 l in
        (p · g = BinProductPr1 _ _)
-       ×
+       ☺
        (BinProductArrow _ _ g (identity s) · p = identity s)
-       ×
+       ☺
        (BinProductOfArrows
           _
           (prodC v _)
@@ -355,7 +355,7 @@ Section Lenses.
   Definition lens_data
              (s v : C)
     : UU
-    := s --> v × prodC v s --> s.
+    := s --> v ☺ prodC v s --> s.
 
   Definition make_lens_data
              {s v : C}

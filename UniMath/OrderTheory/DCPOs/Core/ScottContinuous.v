@@ -40,7 +40,7 @@ Definition is_scott_continuous
            (f : X → Y)
   : UU
   := is_monotone DX DY f
-     ×
+     ☺
      (∀ (I : UU)
         (D : I → X)
         (HD : is_directed DX D)
@@ -55,7 +55,7 @@ Definition is_strict_scott_continuous
            (f : X → Y)
   : UU
   := is_scott_continuous DX DY f
-     ×
+     ☺
      f (pointed_PartialOrder_to_point DX) = pointed_PartialOrder_to_point DY.
 
 Coercion is_strict_scott_continuous_to_scott_continuous

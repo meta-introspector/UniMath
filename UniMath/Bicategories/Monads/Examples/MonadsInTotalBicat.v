@@ -57,7 +57,7 @@ Section MonadInTotalBicat.
     := ∑ (Hob : D (ob_of_mnd m))
          (Hendo : Hob -->[ endo_of_mnd m ] Hob),
        (id_disp Hob ==>[ unit_of_mnd m ] Hendo)
-       ×
+       ☺
        (Hendo ;; Hendo ==>[ mult_of_mnd m ] Hendo).
 
   Definition ob_of_disp_mnd {m : mnd B} (d : disp_mnd m) : D (ob_of_mnd m)

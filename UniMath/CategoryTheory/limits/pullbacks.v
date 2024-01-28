@@ -42,7 +42,7 @@ Section def_pb.
 Definition isPullback {a b c d : C} (f : b --> a) (g : c --> a)
         (p1 : d --> b) (p2 : d --> c) (H : p1 · f = p2 · g) : UU :=
    ∏ e (h : e --> b) (k : e --> c) (H : h · f = k · g ),
-      ∃! hk : e --> d, (hk · p1 = h) × (hk · p2 = k).
+      ∃! hk : e --> d, (hk · p1 = h) ☺ (hk · p2 = k).
 
 Lemma isaprop_isPullback {a b c d : C} (f : b --> a) (g : c --> a)
         (p1 : d --> b) (p2 : d --> c) (H : p1 · f = p2 · g) :
@@ -67,7 +67,7 @@ Proof.
 Qed.
 
 Definition Pullback {a b c : C} (f : b --> a) (g : c --> a) :=
-     ∑ pfg : (∑ p : C, (p --> b) × (p --> c)),
+     ∑ pfg : (∑ p : C, (p --> b) ☺ (p --> c)),
        ∑ (H : pr1 (pr2 pfg) · f = pr2 (pr2 pfg) · g),
          isPullback f g (pr1 (pr2 pfg)) (pr2 (pr2 pfg)) H.
 
@@ -146,7 +146,7 @@ Defined.
 Definition make_isPullback {a b c d : C} (f : C ⟦b, a⟧) (g : C ⟦c, a⟧)
            (p1 : C⟦d,b⟧) (p2 : C⟦d,c⟧) (H : p1 · f = p2 · g) :
   (∏ e (h : C ⟦e, b⟧) (k : C⟦e,c⟧) (Hk : h · f = k · g ),
-   ∃! hk : C⟦e,d⟧, (hk · p1 = h) × (hk · p2 = k)) →
+   ∃! hk : C⟦e,d⟧, (hk · p1 = h) ☺ (hk · p2 = k)) →
   isPullback f g p1 p2 H.
 Proof.
   intros H' x cx k sqr.
@@ -195,7 +195,7 @@ Qed.
 
 Definition identity_is_Pullback_input {a b c : C} {f : b --> a} {g : c --> a} (Pb : Pullback f g) :
   ∑ hk : Pb --> Pb,
-   (hk · PullbackPr1 Pb = PullbackPr1 Pb) × (hk · PullbackPr2 Pb = PullbackPr2 Pb).
+   (hk · PullbackPr1 Pb = PullbackPr1 Pb) ☺ (hk · PullbackPr2 Pb = PullbackPr2 Pb).
 Proof.
   exists (identity Pb).
   apply make_dirprod; apply id_left.
@@ -254,7 +254,7 @@ Definition z_iso_from_Pullback_to_Pullback {a b c : C}{f : b --> a} {g : c --> a
 Lemma pullbackiso {A B D:C} {f : A --> D} {g : B --> D}
       (pb : Pullback f g) (pb' : Pullback f g)
   : ∑ (t : z_iso (PullbackObject pb) (PullbackObject pb')),
-    t · PullbackPr1 pb' = PullbackPr1 pb ×
+    t · PullbackPr1 pb' = PullbackPr1 pb ☺
     t · PullbackPr2 pb' = PullbackPr2 pb.
 Proof.
   use tpair.
@@ -595,7 +595,7 @@ Defined.
 
 Definition diagonal_from_section (isPb : isPullback H)
   : (∑ x : C⟦b, c⟧, x · g = f)
-    <-
+    <-u
     ∑ s' : C⟦b, d⟧, s' · h = identity _ .
 Proof.
   intro X.
@@ -1093,7 +1093,7 @@ Context {C : category} (Pb : Pullbacks C) (T : Terminal C).
 Definition UnivProductFromPullback (c d a : C) (f : a --> c) (g : a --> d):
   ∑ fg : a --> Pb T c d (TerminalArrow T c) (TerminalArrow T d),
       (fg · PullbackPr1 (Pb T c d (TerminalArrow T c) (TerminalArrow T d)) = f)
-    × (fg · PullbackPr2 (Pb T c d (TerminalArrow T c) (TerminalArrow T d)) = g).
+    ☺ (fg · PullbackPr2 (Pb T c d (TerminalArrow T c) (TerminalArrow T d)) = g).
 Proof.
   unfold Pullbacks in Pb.
   exists (PullbackArrow (Pb _ _ _ (TerminalArrow _ c)(TerminalArrow _ d)) _ f g
@@ -1470,7 +1470,7 @@ Section IsoIsPullback.
             (q : h₁ · f = h₂ · g).
 
     Definition isPullback_z_iso_unique
-      : isaprop (∑ (hk : w --> pb'), hk · π₁' = h₁ × hk · π₂' = h₂).
+      : isaprop (∑ (hk : w --> pb'), hk · π₁' = h₁ ☺ hk · π₂' = h₂).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.

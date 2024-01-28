@@ -28,16 +28,16 @@ Local Notation φ₁ := (functor_fix_fst_arg _ _ _).
 Local Notation φ₂ := (functor_fix_snd_arg _ _ _).
 
 Local Declare Scope functor_scope.
-Local Infix "×" := pair_functor  : functor_scope .
+Local Infix "☺" := pair_functor  : functor_scope .
 Delimit Scope functor_scope with F.
 
 Definition skewmonoidal_data : UU :=
   ∑ (V : category)(tensor : V ⊠ V ⟶ V) (I : V),
-        (* left unitor *) φ₁ tensor I   ⟹ functor_identity V ×
-        (* right unitor *) functor_identity V ⟹ φ₂ tensor I ×
-        (* associator *) (tensor × (functor_identity _))%F ∙ tensor ⟹
+        (* left unitor *) φ₁ tensor I   ⟹ functor_identity V ☺
+        (* right unitor *) functor_identity V ⟹ φ₂ tensor I ☺
+        (* associator *) (tensor ☺ (functor_identity _))%F ∙ tensor ⟹
                              (precategory_binproduct_unassoc _ _ _)
-                             ∙ (functor_identity V × tensor)%F ∙ tensor .
+                             ∙ (functor_identity V ☺ tensor)%F ∙ tensor .
 
 Coercion cat_from_skewmonoidal (V : skewmonoidal_data) : category := pr1 V.
 
@@ -87,9 +87,9 @@ Definition skewmonoidal_unitr_ax (V : skewmonoidal_data) {x y : V} (f : x --> y)
 
 
 Definition skewmonoidal_assoc_nt (V : skewmonoidal_data) :
-         (tensor × (functor_identity _))%F ∙ tensor ⟹
+         (tensor ☺ (functor_identity _))%F ∙ tensor ⟹
                              (precategory_binproduct_unassoc _ _ _)
-                             ∙ (functor_identity V × tensor)%F ∙ tensor
+                             ∙ (functor_identity V ☺ tensor)%F ∙ tensor
                              := pr2 (pr2 (pr2 nts)).
 
 Definition skewmonoidal_assoc (V : skewmonoidal_data) (x y z : V) :
@@ -105,10 +105,10 @@ Definition skewmonoidal_assoc_ax (V : skewmonoidal_data)
 
 Definition skewmonoidal_category : UU :=
   ∑ (V : skewmonoidal_data),
-  ρ' I · λ' I = identity (C := V) I ×
-   (∏ (a b : V), ρ' a #⊗ id b  · α' a I b · id a #⊗  λ' b = id (a ⊗ b)) ×
-   (∏ (a b : V), α' I a b · λ' (a ⊗ b) = λ' a #⊗ id b) ×
-   (∏ (a b : V), ρ' (a⊗b) · α' a b I = id a #⊗ ρ' b) ×
+  ρ' I · λ' I = identity (C := V) I ☺
+   (∏ (a b : V), ρ' a #⊗ id b  · α' a I b · id a #⊗  λ' b = id (a ⊗ b)) ☺
+   (∏ (a b : V), α' I a b · λ' (a ⊗ b) = λ' a #⊗ id b) ☺
+   (∏ (a b : V), ρ' (a⊗b) · α' a b I = id a #⊗ ρ' b) ☺
    (∏ (a b c d : V), α' (a ⊗ b) c d · α' a b (c ⊗ d) =
                      α' a b c #⊗ id d · α' a (b ⊗ c)  d ·
                          id a #⊗ α' b c d).

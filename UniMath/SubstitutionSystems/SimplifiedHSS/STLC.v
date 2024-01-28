@@ -65,7 +65,7 @@ Proof.
 apply BinProducts_functor_precat, BinProducts_slice_precat, PullbacksHSET.
 Defined.
 
-Local Lemma Coproducts_HSET_over_sort2 : Coproducts ((sort × sort) + (sort × sort))%set HSET_over_sort2.
+Local Lemma Coproducts_HSET_over_sort2 : Coproducts ((sort ☺ sort) + (sort ☺ sort))%set HSET_over_sort2.
 Proof.
 apply Coproducts_functor_precat, Coproducts_slice_precat, CoproductsHSET.
 apply setproperty.
@@ -76,7 +76,7 @@ Defined.
 Definition STLC_Sig : MultiSortedSig sort.
 Proof.
 use make_MultiSortedSig.
-- apply ((sort × sort) + (sort × sort))%set. (* todo: fix this once level of × is fixed *)
+- apply ((sort ☺ sort) + (sort ☺ sort))%set. (* todo: fix this once level of ☺ is fixed *)
 - intros H; induction H as [st|st]; induction st as [s t].
   + exact ((([],,arr s t) :: ([],,s) :: nil),,t).
   + exact (((cons s [],,t) :: []),,arr s t).

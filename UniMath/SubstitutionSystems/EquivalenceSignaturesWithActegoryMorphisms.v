@@ -139,7 +139,7 @@ Section A.
    set (Q := fun (ζ: actionbased_strength_nat Mon_endo' (ActionBasedStrengthOnHomsInBicat.domain_action C D')
          (ActionBasedStrengthOnHomsInBicat.target_action C D) H) => actionbased_strength_triangle_eq Mon_endo' (ActionBasedStrengthOnHomsInBicat.domain_action C D')
      (ActionBasedStrengthOnHomsInBicat.target_action C D) H ζ
-   × actionbased_strength_pentagon_eq Mon_endo' (ActionBasedStrengthOnHomsInBicat.domain_action C D')
+   ☺ actionbased_strength_pentagon_eq Mon_endo' (ActionBasedStrengthOnHomsInBicat.domain_action C D')
    (ActionBasedStrengthOnHomsInBicat.target_action C D) H ζ).
    (* a test for speeding up - not very successful (one would then use [Q'] in place of [Q] in the invocation of [weqtotal2asstor]):
       set (Q' := fun ζ: ∑ t: nat_trans_data (actionbased_strength_dom Mon_endo' (ActionBasedStrengthOnHomsInBicat.target_action C D) H)

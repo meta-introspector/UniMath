@@ -98,7 +98,7 @@ Section FixAStructure.
          P
          (hset_struct_prod P (SC y z) (SC x y))
          (SC x z)
-         (λ (fg : C ⟦ y, z ⟧ × C ⟦ x, y ⟧), pr2 fg · pr1 fg).
+         (λ (fg : C ⟦ y, z ⟧ ☺ C ⟦ x, y ⟧), pr2 fg · pr1 fg).
 
   Proposition isaprop_struct_enrichment_laws
               {C : category}
@@ -132,7 +132,7 @@ Section FixAStructure.
         P
         (hset_struct_prod P (SC y z) (SC x y))
         (SC x z)
-        (λ (fg : C ⟦ y, z ⟧ × C ⟦ x, y ⟧), pr2 fg · pr1 fg).
+        (λ (fg : C ⟦ y, z ⟧ ☺ C ⟦ x, y ⟧), pr2 fg · pr1 fg).
   Proof.
     exact (pr2 SC x y z).
   Qed.

@@ -102,9 +102,9 @@ Definition associatorinv_data
 
 Definition monoidal_data (C : category): UU :=
     ∑ (T : tensor_data C) (I : C),
-    (leftunitor_data T I) × (leftunitorinv_data T I) ×
-    (rightunitor_data T I) × (rightunitorinv_data T I) ×
-    (associator_data T) × (associatorinv_data T).
+    (leftunitor_data T I) ☺ (leftunitorinv_data T I) ☺
+    (rightunitor_data T I) ☺ (rightunitorinv_data T I) ☺
+    (associator_data T) ☺ (associatorinv_data T).
 
 Definition make_monoidal_data
            {C : category}
@@ -200,7 +200,7 @@ Definition leftunitor_law
            (lu : leftunitor_data T I)
            (luinv : leftunitorinv_data T I)
   : UU
-  := leftunitor_nat lu × leftunitor_iso_law lu luinv.
+  := leftunitor_nat lu ☺ leftunitor_iso_law lu luinv.
 
 Definition leftunitorlaw_nat
             {C : category}
@@ -254,7 +254,7 @@ Definition rightunitor_law
            (ru : rightunitor_data T I)
            (ruinv : rightunitorinv_data T I)
   : UU
-  := rightunitor_nat ru × rightunitor_iso_law ru ruinv.
+  := rightunitor_nat ru ☺ rightunitor_iso_law ru ruinv.
 
 Definition rightunitorlaw_nat
            {C : category}
@@ -320,8 +320,8 @@ Definition associator_law
            (α : associator_data T)
            (αinv : associatorinv_data T)
   : UU
-  := (associator_nat_leftwhisker α) × (associator_nat_rightwhisker α) ×
-     (associator_nat_leftrightwhisker α) × (associator_iso_law α αinv).
+  := (associator_nat_leftwhisker α) ☺ (associator_nat_rightwhisker α) ☺
+     (associator_nat_leftrightwhisker α) ☺ (associator_iso_law α αinv).
 
 Definition associatorlaw_natleft
            {C : category}
@@ -403,11 +403,11 @@ Definition monoidal_laws
            (MD : monoidal_data C)
   : UU
   := is_bifunctor MD
-     × (leftunitor_law lu_{MD} luinv_{MD})
-     × (rightunitor_law ru_{MD} ruinv_{MD})
-     × (associator_law α_{MD} αinv_{MD})
-     × (triangle_identity lu_{MD} ru_{MD} α_{MD})
-     × (pentagon_identity α_{MD}).
+     ☺ (leftunitor_law lu_{MD} luinv_{MD})
+     ☺ (rightunitor_law ru_{MD} ruinv_{MD})
+     ☺ (associator_law α_{MD} αinv_{MD})
+     ☺ (triangle_identity lu_{MD} ru_{MD} α_{MD})
+     ☺ (pentagon_identity α_{MD}).
 
 Definition monoidal (C : category) : UU :=
   ∑ (MD : monoidal_data C), (monoidal_laws MD).

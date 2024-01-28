@@ -80,7 +80,7 @@ Section relative_strength_instantiates_to_signature.
   Local Definition θ : θ_source H ⟹ θ_target H
     := pre_whisker binswap_pair_functor ϛ.
 
-  Lemma signature_from_rel_strength_laws : θ_Strength1_int θ ×
+  Lemma signature_from_rel_strength_laws : θ_Strength1_int θ ☺
                                            θ_Strength2_int θ.
   Proof.
     split; red.
@@ -148,7 +148,7 @@ Section strength_in_signature_is_a_relative_strength.
   Local Definition θ'_strength_law1 := Sig_strength_law1 sig.
   Local Definition θ'_strength_law2 := Sig_strength_law2 sig.
 
-  Lemma rel_strength_from_signature_laws : rel_strength_pentagon_eq forget H ϛ' ×
+  Lemma rel_strength_from_signature_laws : rel_strength_pentagon_eq forget H ϛ' ☺
                                            rel_strength_rectangle_eq forget H ϛ'.
   Proof.
     split.

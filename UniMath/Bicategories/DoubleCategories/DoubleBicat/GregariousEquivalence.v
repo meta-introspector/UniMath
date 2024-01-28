@@ -72,9 +72,9 @@ Section GregariousEquivalence.
              (v : x -|-> y)
     : UU
     := are_companions h v
-       ×
+       ☺
        left_adjoint_equivalence h
-       ×
+       ☺
        left_adjoint_equivalence v.
 
   Coercion is_gregarious_equivalence_to_are_companions
@@ -136,7 +136,7 @@ Section GregariousEquivalence.
              {x y : B}
              (h : x --> y)
     : UU
-    := left_adjoint_equivalence h × ∑ (c : hor_companion h), left_adjoint_equivalence c.
+    := left_adjoint_equivalence h ☺ ∑ (c : hor_companion h), left_adjoint_equivalence c.
 
   Definition make_is_hor_gregarious_equivalence
              {x y : B}

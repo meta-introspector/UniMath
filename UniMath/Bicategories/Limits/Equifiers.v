@@ -158,7 +158,7 @@ Section Equifiers.
 
     Definition has_equifier_ump
       : UU
-      := has_equifier_ump_1 × has_equifier_ump_2 × has_equifier_ump_eq.
+      := has_equifier_ump_1 ☺ has_equifier_ump_2 ☺ has_equifier_ump_eq.
   End UniversalMappingProperty.
 
   Section Projections.

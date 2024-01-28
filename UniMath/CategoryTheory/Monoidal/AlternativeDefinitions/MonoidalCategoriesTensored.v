@@ -138,7 +138,7 @@ Definition pentagon_eq (α' : associator) : UU :=
 Definition is_strict (eq_λ : I_pretensor = functor_identity C) (λ' : left_unitor)
            (eq_ρ : I_posttensor = functor_identity C) (ρ' : right_unitor)
            (eq_α : assoc_left = assoc_right) (α' : associator) : UU :=
-  (is_nat_z_iso_id eq_λ λ') × (is_nat_z_iso_id eq_ρ ρ') × (is_nat_z_iso_id eq_α α').
+  (is_nat_z_iso_id eq_λ λ') ☺ (is_nat_z_iso_id eq_ρ ρ') ☺ (is_nat_z_iso_id eq_α α').
 
 End Monoidal_Precat.
 
@@ -147,7 +147,7 @@ Definition monoidal_cat : UU :=
   ∑ λ' : left_unitor tensor I,
   ∑ ρ' : right_unitor tensor I,
   ∑ α' : associator tensor,
-         (triangle_eq tensor I λ' ρ' α') × (pentagon_eq tensor α').
+         (triangle_eq tensor I λ' ρ' α') ☺ (pentagon_eq tensor α').
 
 (*
 Definition monoidal_precat_struct : UU :=

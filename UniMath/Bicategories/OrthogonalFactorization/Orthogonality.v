@@ -213,7 +213,7 @@ Section ConstructOrthogonality.
               rassociator _ _ _ • (f ◃ k₂)),
        ∑ (ξ : l₁ ==> l₂),
        f ◃ ξ = k₁
-       ×
+       ☺
        ξ ▹ g = k₂.
 
   Definition orthogonal_faithful

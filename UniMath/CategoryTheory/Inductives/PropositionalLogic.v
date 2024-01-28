@@ -59,9 +59,9 @@ Variable (vars : hSet).
     PL_functor Var Rec :=
         Var            (* -- arity 1, sentences *)
       + Rec            (* -- arity 1, ¬ (not) *)
-      + (Rec × Rec)    (* -- arity 2, ∧ (and) *)
-      + (Rec × Rec)    (* -- arity 2, ∨ (or) *)
-      + (Rec × Rec)    (* -- arity 2, → (implies) *)
+      + (Rec ☺ Rec)    (* -- arity 2, ∧ (and) *)
+      + (Rec ☺ Rec)    (* -- arity 2, ∨ (or) *)
+      + (Rec ☺ Rec)    (* -- arity 2, → (implies) *)
 >>
  *)
 
@@ -134,7 +134,7 @@ Notation "¬" := (PL_not) : PL.
 Infix "∧" := (PL_and) : PL.
 Infix "∨" := (PL_or) : PL.
 Infix "⇒" := (PL_impl) : PL.
-Infix "⇔" := (PL_iff_fun) (at level 90) : PL.
+Infix "⇔u" := (PL_iff_fun) (at level 90) : PL.
 
 Definition make_PL_algebra (X : hSet) (vs : vars -> X) (not : X -> X)
            (and : X -> X -> X) (or : X -> X -> X) (impl : X -> X -> X) :

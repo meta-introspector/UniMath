@@ -76,7 +76,7 @@ Definition functor_compax {C C' : precategory_data} (F : functor_data C C') :=
   ∏ a b c : ob C, ∏ f : a --> b, ∏ g : b --> c, #F (f · g) = #F f · #F g .
 
 Definition is_functor {C C' : precategory_data} (F : functor_data C C') :=
-  ( functor_idax F ) × ( functor_compax F ) .
+  ( functor_idax F ) ☺ ( functor_compax F ) .
 
 Lemma isaprop_is_functor (C C' : precategory_data) (hs: has_homsets C')
       (F : functor_data C C') : isaprop (is_functor F).
@@ -1011,7 +1011,7 @@ Qed.
 (** ** Fully faithful is the same as full and faithful *)
 
 Definition full_and_faithful {C D : precategory_data} (F : functor C D) :=
-   (full F) × (faithful F).
+   (full F) ☺ (faithful F).
 
 Lemma fully_faithful_implies_full_and_faithful (C D : precategory_data) (F : functor C D) :
    fully_faithful F -> full_and_faithful F.
@@ -1213,7 +1213,7 @@ Definition pseudomonic
            {C₁ C₂ : category}
            (F : C₁ ⟶ C₂)
   : UU
-  := faithful F × full_on_iso F.
+  := faithful F ☺ full_on_iso F.
 
 Definition isweq_functor_on_iso_pseudomonic
            {C₁ C₂ : category}

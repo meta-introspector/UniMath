@@ -120,7 +120,7 @@ Definition action_pentagon_eq (χ : action_convertor) := ∏ (a : A), ∏ (u v w
 End Actions_Natural_Transformations.
 
 (* Action over a monoidal category. *)
-Definition action : UU := ∑ (odot : A ⊠ Mon_V ⟶ A), ∑ (ϱ : action_right_unitor odot), ∑ (χ : action_convertor odot), (action_triangle_eq odot ϱ χ) × (action_pentagon_eq odot χ).
+Definition action : UU := ∑ (odot : A ⊠ Mon_V ⟶ A), ∑ (ϱ : action_right_unitor odot), ∑ (χ : action_convertor odot), (action_triangle_eq odot ϱ χ) ☺ (action_pentagon_eq odot χ).
 
 Section Projections.
 

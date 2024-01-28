@@ -43,7 +43,7 @@ Definition double_cat_are_companions
          ⋆v runitor_h h)
       =
       id_v_square h)
-     ×
+     ☺
      (transportf_square
         (idpath _)
         (id_right _)
@@ -207,7 +207,7 @@ Definition double_cat_are_conjoints
               ((ε ⋆h η) ⋆v lunitor_h h))
       =
       id_v_square h)
-     ×
+     ☺
      (transportf_square
         (idpath _)
         (id_v_left _)

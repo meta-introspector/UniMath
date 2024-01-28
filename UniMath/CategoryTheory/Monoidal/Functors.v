@@ -113,7 +113,7 @@ Section MonoidalFunctors.
              (N : monoidal D)
              (F : functor C D)
     : UU
-    := preserves_tensordata M N F × preserves_unit M N F.
+    := preserves_tensordata M N F ☺ preserves_unit M N F.
 
   Definition fmonoidal_preservestensordata
              {C D : category}
@@ -257,12 +257,12 @@ Section MonoidalFunctors.
              {F : functor C D}
              (fmd : fmonoidal_data M N F)
     : UU
-    := (preserves_tensor_nat_left (fmonoidal_preservestensordata fmd)) ×
-       (preserves_tensor_nat_right (fmonoidal_preservestensordata fmd)) ×
-       (preserves_associativity (fmonoidal_preservestensordata fmd)) ×
+    := (preserves_tensor_nat_left (fmonoidal_preservestensordata fmd)) ☺
+       (preserves_tensor_nat_right (fmonoidal_preservestensordata fmd)) ☺
+       (preserves_associativity (fmonoidal_preservestensordata fmd)) ☺
        (preserves_leftunitality
           (fmonoidal_preservestensordata fmd)
-          (fmonoidal_preservesunit fmd)) ×
+          (fmonoidal_preservesunit fmd)) ☺
        (preserves_rightunitality
           (fmonoidal_preservestensordata fmd)
           (fmonoidal_preservesunit fmd)).
@@ -588,7 +588,7 @@ Section MonoidalFunctors.
              (pt : preserves_tensordata M N F)
              (pu : preserves_unit M N F)
     : UU
-    := preserves_tensor_strongly pt × preserves_unit_strongly pu.
+    := preserves_tensor_strongly pt ☺ preserves_unit_strongly pu.
 
   Lemma isaprop_fmonoidal_stronglaws
              {C D : category}
@@ -1286,7 +1286,7 @@ Section MonoidalNaturalTransformations.
   Definition is_mon_nat_trans_unitlaw : UU
     := fmonoidal_preservesunit Fm · α I_{M} = fmonoidal_preservesunit Gm.
 
-  Definition is_mon_nat_trans : UU := is_mon_nat_trans_tensorlaw × is_mon_nat_trans_unitlaw.
+  Definition is_mon_nat_trans : UU := is_mon_nat_trans_tensorlaw ☺ is_mon_nat_trans_unitlaw.
 
   Lemma isaprop_is_mon_nat_trans : isaprop is_mon_nat_trans.
   Proof.
@@ -1833,17 +1833,17 @@ Definition lax_monoidal_functor_laws
       #F f #⊗ #F g · μ x₂ y₂
       =
       μ x₁ y₁ · #F(f #⊗ g))
-     ×
+     ☺
      (∏ (x : V₁),
       η #⊗ identity _ · μ (I_{V₁}) x · #F (mon_lunitor x)
       =
       mon_lunitor (F x))
-     ×
+     ☺
      (∏ (x : V₁),
       identity _ #⊗ η · μ x (I_{V₁}) · #F (mon_runitor x)
       =
       mon_runitor (F x))
-     ×
+     ☺
      (∏ (x y z : V₁),
       (μ x y #⊗ identity _) · μ (x ⊗ y) z · #F(mon_lassociator x y z)
       =

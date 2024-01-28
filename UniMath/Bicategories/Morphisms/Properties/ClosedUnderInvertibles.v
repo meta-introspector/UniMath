@@ -224,7 +224,7 @@ Section Cartesian2CellInvertible.
              {γ : h ==> g₂}
              {δp : h · f₂ ==> g₁ · f₂}
              (q : γ ▹ f₂ = δp • (α ▹ f₂))
-    : isaprop (∑ (δ : h ==> g₁), δ ▹ f₂ = δp × δ • α = γ).
+    : isaprop (∑ (δ : h ==> g₁), δ ▹ f₂ = δp ☺ δ • α = γ).
   Proof.
     use invproofirrelevance.
     intros φ₁ φ₂.

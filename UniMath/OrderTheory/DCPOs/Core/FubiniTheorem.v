@@ -26,7 +26,7 @@ Local Open Scope dcpo.
  *)
 Definition monotone_function_app_l
            {X Y Z : dcpo}
-           (f : monotone_function (X × Y) Z)
+           (f : monotone_function (X ☺ Y) Z)
            (x : X)
   : monotone_function Y Z.
 Proof.
@@ -40,7 +40,7 @@ Defined.
 
 Definition monotone_function_app_r
            {X Y Z : dcpo}
-           (f : monotone_function (X × Y) Z)
+           (f : monotone_function (X ☺ Y) Z)
            (y : Y)
   : monotone_function X Z.
 Proof.
@@ -57,8 +57,8 @@ Notation "f ·r y" := (monotone_function_app_r f y) (at level 60).
 
 Definition fubini_monotone_function_l
            {X Y Z : dcpo}
-           (f : monotone_function (X × Y) Z)
-           (D : directed_set (X × Y))
+           (f : monotone_function (X ☺ Y) Z)
+           (D : directed_set (X ☺ Y))
   : monotone_function X Z.
 Proof.
   refine ((λ x, ⨆_{π₂ {{ D }}} (f ·l x)) ,, _).
@@ -76,8 +76,8 @@ Defined.
 
 Definition fubini_monotone_function_r
            {X Y Z : dcpo}
-           (f : monotone_function (X × Y) Z)
-           (D : directed_set (X × Y))
+           (f : monotone_function (X ☺ Y) Z)
+           (D : directed_set (X ☺ Y))
   : monotone_function Y Z.
 Proof.
   refine ((λ x, ⨆_{π₁ {{ D }}} (f ·r x)) ,, _).
@@ -98,8 +98,8 @@ Defined.
  *)
 Proposition monotone_prod_map_fubini_pair_l
             {X Y Z : dcpo}
-            (f : monotone_function (X × Y) Z)
-            (D : directed_set (X × Y))
+            (f : monotone_function (X ☺ Y) Z)
+            (D : directed_set (X ☺ Y))
   : ⨆_{D} f = ⨆_{π₁ {{D}}} fubini_monotone_function_l f D.
 Proof.
   use (eq_lub Z (f {{ D }})).
@@ -134,8 +134,8 @@ Qed.
 
 Proposition monotone_prod_map_fubini_pair_r
             {X Y Z : dcpo}
-            (f : monotone_function (X × Y) Z)
-            (D : directed_set (X × Y))
+            (f : monotone_function (X ☺ Y) Z)
+            (D : directed_set (X ☺ Y))
   : ⨆_{D} f = ⨆_{π₂ {{D}}} fubini_monotone_function_r f D.
 Proof.
   use (eq_lub Z (f {{ D }})).
@@ -170,8 +170,8 @@ Qed.
 
 Proposition monotone_fubini_swap
             {X Y Z : dcpo}
-            (f : monotone_function (X × Y) Z)
-            (D : directed_set (X × Y))
+            (f : monotone_function (X ☺ Y) Z)
+            (D : directed_set (X ☺ Y))
   : ⨆_{π₁ {{D}}} fubini_monotone_function_l f D
     =
     ⨆_{π₂ {{D}}} fubini_monotone_function_r f D.
@@ -185,7 +185,7 @@ Proposition monotone_fubini_swap'
             {X Y Z : dcpo}
             (D₁ : directed_set X)
             (D₂ : directed_set Y)
-            (f : monotone_function (X × Y) Z)
+            (f : monotone_function (X ☺ Y) Z)
   : ⨆_{D₁} (fubini_monotone_function_l f (prod_directed_set D₁ D₂))
     =
     ⨆_{D₂} (fubini_monotone_function_r f (prod_directed_set D₁ D₂)).

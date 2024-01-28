@@ -62,7 +62,7 @@ Definition transportb_dirprodeq
            (q : y₁ = y₂)
            (z : Z x₂ y₂)
   : transportb
-      (λ (w : X × Y), Z (pr1 w) (pr2 w))
+      (λ (w : X ☺ Y), Z (pr1 w) (pr2 w))
       (dirprodeq _ _ (x₁ ,, y₁) (x₂ ,, y₂) p q)
       z
     =
@@ -80,14 +80,14 @@ Defined.
 
 Definition transportb_dirprodeq'
            {X Y : UU}
-           (Z : X × Y → UU)
+           (Z : X ☺ Y → UU)
            {x₁ x₂ : X}
            (p : x₁ = x₂)
            {y₁ y₂ : Y}
            (q : y₁ = y₂)
            (z : Z (x₂ ,, y₂))
   : transportb
-      (λ (w : X × Y), Z w)
+      (λ (w : X ☺ Y), Z w)
       (dirprodeq _ _ (x₁ ,, y₁) (x₂ ,, y₂) p q)
       z
     =
@@ -178,7 +178,7 @@ Definition twosided_disp_cat_id_comp
            {C₁ C₂ : precategory_data}
            (D : twosided_disp_cat_ob_mor C₁ C₂)
   : UU
-  := twosided_disp_cat_id D × twosided_disp_cat_comp D.
+  := twosided_disp_cat_id D ☺ twosided_disp_cat_comp D.
 
 Definition twosided_disp_cat_data
            {C₁ C₂ : precategory_data}
@@ -417,11 +417,11 @@ Section TwoSidedDispCat.
              (D : twosided_disp_cat_data)
     : UU
     := id_two_disp_left_law D
-       ×
+       ☺
        id_two_disp_right_law D
-       ×
+       ☺
        assoc_two_disp_law D
-       ×
+       ☺
        isaset_disp_mor_law D.
 
   Definition isaprop_twosided_disp_cat_axioms

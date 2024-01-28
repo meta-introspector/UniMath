@@ -108,9 +108,9 @@ Definition arrow_subbicat
                (fe : e₁ --> e₂),
              UU),
      contains_id P₁
-     ×
+     ☺
      closed_under_comp P₁
-     ×
+     ☺
      closed_under_invertible_2cell P₁.
 
 Section Projections.
@@ -246,7 +246,7 @@ Definition arrow_subbicat_props
            (D : arrow_subbicat B)
   : UU
   := (∏ (x y : B) (f : x --> y), isaprop (pred_ob D f))
-     ×
+     ☺
      (∏ (e₁ e₂ b₁ b₂ : B)
         (p₁ : e₁ --> b₁)
         (p₂ : e₂ --> b₂)
@@ -288,10 +288,10 @@ Definition intersection_arrow_subbicat
   : arrow_subbicat B.
 Proof.
   use make_arrow_subbicat.
-  - exact (λ x y f, pred_ob D₁ f × pred_ob D₂ f).
+  - exact (λ x y f, pred_ob D₁ f ☺ pred_ob D₂ f).
   - exact (λ _ _ _ _ p₁ p₂ fe,
            pred_mor D₁ p₁ p₂ fe
-           ×
+           ☺
            pred_mor D₂ p₁ p₂ fe).
   - intro ; intros.
     split ; apply id_pred_mor.
@@ -505,7 +505,7 @@ Section DispMapBicat.
          (γ : invertible_2cell (p₁ · f) (p₂ · g)),
        pred_ob D f
        → has_pb_ump (make_pb_cone pb p₁ p₂ γ)
-       → pred_ob D p₂ × pred_mor D p₂ f p₁.
+       → pred_ob D p₂ ☺ pred_mor D p₂ f p₁.
 
   Definition contains_pb
     : UU
@@ -600,7 +600,7 @@ Section DispMapBicat.
        (pred_mor D p₁ p₂ fe
         →
         mor_preserves_cartesian p₁ p₂ fe)
-       ×
+       ☺
        (mor_preserves_cartesian p₁ p₂ fe
         →
         pred_mor D p₁ p₂ fe).
@@ -614,7 +614,7 @@ Section DispMapBicat.
        (pred_mor D p₁ p₂ fe
         →
         mor_preserves_opcartesian p₁ p₂ fe)
-       ×
+       ☺
        (mor_preserves_opcartesian p₁ p₂ fe
         →
         pred_mor D p₁ p₂ fe).
@@ -625,9 +625,9 @@ Definition disp_map_bicat
   : UU
   := ∑ (D : arrow_subbicat B),
      closed_under_pb D
-     ×
+     ☺
      contains_pb D
-     ×
+     ☺
      closed_under_pb_ump_mor D.
 
 Coercion disp_map_bicat_to_arrow_subbicat
@@ -924,7 +924,7 @@ Definition is_covariant_disp_map_bicat
            (D : disp_map_bicat B)
   : UU
   := contained_in_sopfib D
-     ×
+     ☺
      pred_mor_is_mor_preserves_opcartesian D.
 
 Definition is_contravariant_disp_map_bicat
@@ -932,7 +932,7 @@ Definition is_contravariant_disp_map_bicat
            (D : disp_map_bicat B)
   : UU
   := contained_in_sfib D
-     ×
+     ☺
      pred_mor_is_mor_preserves_cartesian D.
 
 Definition intersection_is_covariant
@@ -1119,7 +1119,7 @@ Definition arrow_subbicat_bifinal
            (D : arrow_subbicat B)
   : UU
   := (∏ (b : B), pred_ob D (id₁ b))
-     ×
+     ☺
      (∏ (e b : B)
         (h : e --> b),
       pred_mor D h (id₁ b) h).
@@ -1130,7 +1130,7 @@ Definition arrow_subbicat_biinitial
            (D : arrow_subbicat B)
   : UU
   := (∏ (b : B), pred_ob D (is_biinitial_1cell_property (pr2 I) b))
-     ×
+     ☺
      (∏ (e b : B)
         (h : e --> b),
       pred_mor
@@ -1151,7 +1151,7 @@ Definition arrow_subbicat_closed_composition
       pred_ob D g
       →
       pred_ob D (f · g))
-     ×
+     ☺
      (∏ (x y z : B)
         (f : x --> y)
         (g : y --> z),

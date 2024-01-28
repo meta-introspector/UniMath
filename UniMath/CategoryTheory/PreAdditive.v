@@ -43,7 +43,7 @@ Section def_preadditive.
       composition is bilinear with respect to the abelian groups? *)
   Definition isPreAdditive (PA : categoryWithAbgrops) : UU :=
     (∏ (x y z : PA) (f : x --> y), ismonoidfun (to_premor z f))
-      × (∏ (x y z : PA) (f : y --> z), ismonoidfun (to_postmor x f)).
+      ☺ (∏ (x y z : PA) (f : y --> z), ismonoidfun (to_postmor x f)).
 
   Definition make_isPreAdditive (PA : categoryWithAbgrops)
              (H1 : ∏ (x y z : PA) (f : x --> y), ismonoidfun (to_premor z f))
@@ -349,7 +349,7 @@ Section preadditive_quotient.
     (∏ (z : ob PA) (f : x --> y)
        (inf : pr1submonoid (@to_abgr PA x y) (PAS x y) f) (g : y --> z),
      pr1submonoid (@to_abgr PA x z) (PAS x z) (f · g))
-      × (∏ (z : ob PA) (f : x --> y) (g : y --> z)
+      ☺ (∏ (z : ob PA) (f : x --> y) (g : y --> z)
            (ing : pr1submonoid (@to_abgr PA y z) (PAS y z) g),
          pr1submonoid (@to_abgr PA x z) (PAS x z) (f · g)).
 

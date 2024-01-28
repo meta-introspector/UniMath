@@ -86,9 +86,9 @@ Definition factorization_1cell
        (l : x --> a)
        (r : a --> y),
      L _ _ l
-     ×
+     ☺
      R _ _ r
-     ×
+     ☺
      invertible_2cell (l · r) f.
 
 Definition make_factorization_1cell
@@ -174,11 +174,11 @@ Definition orthogonal_factorization_system
   : UU
   := ∑ (L R : ∏ (x y : B), x --> y → hProp),
      (∏ (x y : B) (f : x --> y), factorization_1cell L R f)
-     ×
+     ☺
      closed_under_invertible_2cell L
-     ×
+     ☺
      closed_under_invertible_2cell R
-     ×
+     ☺
      orthogonal_maps L R.
 
 (** * 3. Builder for orthogonal factorization systems *)

@@ -33,7 +33,7 @@ Section IsOpcartesianTotalSetCategory.
     Definition is_opcartesian_total_setcategory_of_set_functor_factor_unique
       : isaprop
           (∑ φ, # (pr1_total_category_of_set_functor G) φ = h
-               ×
+               ☺
                f · φ = g).
     Proof.
       use invproofirrelevance.

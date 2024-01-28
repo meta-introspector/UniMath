@@ -38,7 +38,7 @@ Lemma BinProductsType : BinProducts type_precat.
 Proof.
   intros X Y.
   use tpair.
-  - exact ((X × Y),, dirprod_pr1,, dirprod_pr2).
+  - exact ((X ☺ Y),, dirprod_pr1,, dirprod_pr2).
   - apply isBinProduct'_to_isBinProduct.
     intro; apply (weqfuntoprodtoprod _ X Y).
 Defined.

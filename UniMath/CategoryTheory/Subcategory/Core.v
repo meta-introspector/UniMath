@@ -36,12 +36,12 @@ Local Open Scope cat.
 Definition is_sub_precategory {C : category}
     (C' : hsubtype C)
     (Cmor' : ∏ a b : C, hsubtype (a --> b)) :=
-  (∏ a : C, C' a ->  Cmor' _ _ (identity a)) ×
+  (∏ a : C, C' a ->  Cmor' _ _ (identity a)) ☺
   (∏ (a b c : C) (f: a --> b) (g : b --> c),
             Cmor' _ _ f -> Cmor' _ _  g -> Cmor' _ _  (f · g)).
 
 Definition sub_precategories (C : category) :=
-  total2 (fun C' : (hsubtype (ob C)) × (∏ a b:ob C, hsubtype (a --> b)) =>
+  total2 (fun C' : (hsubtype (ob C)) ☺ (∏ a b:ob C, hsubtype (a --> b)) =>
            is_sub_precategory (pr1 C') (pr2 C')).
 
 (** We have a coercion [carrier] turning every predicate [P] on a type [A] into the

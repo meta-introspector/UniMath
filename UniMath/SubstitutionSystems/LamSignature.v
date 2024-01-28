@@ -75,7 +75,7 @@ Variable CP : BinProducts C.
 Let one : C :=  @TerminalObject C terminal.
 
 (**
-   [App_H (X) (A) :=  X(A) × X(A)]
+   [App_H (X) (A) :=  X(A) ☺ X(A)]
 *)
 Definition App_H : functor EndC EndC.
 Proof.

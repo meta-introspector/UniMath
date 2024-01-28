@@ -74,10 +74,10 @@ Section AlgebraicTheoryCategory.
     : disp_cat (indexed_set_cat nat).
   Proof.
     use disp_struct.
-    - refine (λ T, _ × _).
+    - refine (λ T, _ ☺ _).
       + exact (∏ n i, pr_ax T n i).
       + exact (∏ m n f g, comp_ax T m n f g).
-    - refine (λ T T' Tdata T'data F, _ × _).
+    - refine (λ T T' Tdata T'data F, _ ☺ _).
       + exact (∏ n i, mor_pr_ax' F (pr1 Tdata) (pr1 T'data) n i).
       + exact (∏ m n f g, mor_comp_ax' F (pr2 Tdata) (pr2 T'data) m n f g).
     - abstract (
@@ -191,8 +191,8 @@ Section AlgebraicTheoryCategory.
     := data_comp f data_pr = f.
 
   Definition is_algebraic_theory (T : algebraic_theory_data_cat) : UU :=
-    (∏ l m n f_l f_m f_n, comp_comp_ax T l m n f_l f_m f_n) ×
-    (∏ m n i f, pr_comp_ax T m n i f) ×
+    (∏ l m n f_l f_m f_n, comp_comp_ax T l m n f_l f_m f_n) ☺
+    (∏ m n i f, pr_comp_ax T m n i f) ☺
     (∏ n f, comp_pr_ax T n f).
 
   Definition algebraic_theory_disp_cat

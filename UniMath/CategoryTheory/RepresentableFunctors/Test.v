@@ -29,7 +29,7 @@ Definition isCoproductCocone (a b co : C) (ia : a --> co) (ib : b --> co) :=
 Definition make_isCoproductCocone (a b co : C) (ia : a --> co) (ib : b --> co) :
    (∏ (c : C) (f : a --> c) (g : b --> c),
     ∃! k : C ⟦co, c⟧,
-      ia · k = f ×
+      ia · k = f ☺
       ib · k = g)
    ->
    isCoproductCocone a b co ia ib.

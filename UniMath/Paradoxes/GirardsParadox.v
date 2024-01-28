@@ -13,7 +13,7 @@ Variable Flse : Type.
 (* an "ordering without infinite descending chains" (wf is for "well-founded") *)
 Definition wf (T : Type) : Type
   := ∑ lt : T -> T -> Type,
-            (∏ x y z: T, lt x y -> lt y z -> lt x z) ×
+            (∏ x y z: T, lt x y -> lt y z -> lt x z) ☺
             (∏ h : (nat -> T), (∏ n : nat, lt (h (S n)) (h n)) -> Flse).
 
 (* the type of such orderings *)
@@ -37,7 +37,7 @@ Definition wfp (w : wfs) :
    element of the second set which dominates the image *)
 Definition wfs_wf_uord (v : wfs) (w : wfs) : Type
   := ∑ f : uset v -> uset w,
-           (∏ x y : uset v, (uord v) x y -> (uord w) (f x) (f y)) ×
+           (∏ x y : uset v, (uord v) x y -> (uord w) (f x) (f y)) ☺
            (∑ y : uset w, ∏ (x: uset v), (uord w) (f x) y).
 
 (* the underlying function *)

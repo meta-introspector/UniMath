@@ -284,7 +284,7 @@ Defined.
 
 Local Definition rigiso' (X Y : rig) : UU :=
   ∑ D : (∑ w : X ≃ Y, istwobinopfun w),
-        ((pr1 D) (@rigunel1 X) = @rigunel1 Y) × ((pr1 D) (@rigunel2 X) = @rigunel2 Y).
+        ((pr1 D) (@rigunel1 X) = @rigunel1 Y) ☺ ((pr1 D) (@rigunel2 X) = @rigunel2 Y).
 
 Local Definition make_rigiso' (X Y : rig) (w : X ≃ Y) (H1 : istwobinopfun w)
            (H2 : w (@rigunel1 X) = @rigunel1 Y) (H3 : w (@rigunel2 X) = @rigunel2 Y) :
@@ -1521,7 +1521,7 @@ Definition rigtoringaddabgr (X : rig) : abgr := abgrdiff (rigaddabmonoid X).
 
 Definition rigtoringcarrier (X : rig) : hSet := pr1 (pr1 (rigtoringaddabgr X)).
 
-Definition rigtoringop1int (X : rig) : binop (X × X) :=
+Definition rigtoringop1int (X : rig) : binop (X ☺ X) :=
   λ x x', make_dirprod ((pr1 x) + (pr1 x')) ((pr2 x) + (pr2 x')).
 
 Definition rigtoringop1 (X : rig) : binop (rigtoringcarrier X) := @op (rigtoringaddabgr X).
@@ -1530,9 +1530,9 @@ Definition rigtoringop1axs (X : rig) : isabgrop (rigtoringop1 X) := pr2 (rigtori
 
 Definition rigtoringunel1 (X : rig) : rigtoringcarrier X := unel (rigtoringaddabgr X).
 
-Definition eqrelrigtoring (X : rig) : eqrel (X × X) := eqrelabgrdiff (rigaddabmonoid X).
+Definition eqrelrigtoring (X : rig) : eqrel (X ☺ X) := eqrelabgrdiff (rigaddabmonoid X).
 
-Definition rigtoringop2int (X : rig) : binop (X × X) :=
+Definition rigtoringop2int (X : rig) : binop (X ☺ X) :=
   λ xx xx' : dirprod X X,
     make_dirprod (pr1 xx * pr1 xx' + pr2 xx * pr2 xx') (pr1 xx * pr2 xx' + pr2 xx * pr1 xx').
 
@@ -2129,13 +2129,13 @@ Close Scope rig_scope.
 Local Open Scope ring_scope.
 
 Definition commringfracop1int (X : commring) (S : @subabmonoid (ringmultabmonoid X)) :
-  binop (X × S) := λ x1s1 x2s2 : dirprod X S,
+  binop (X ☺ S) := λ x1s1 x2s2 : dirprod X S,
                            @make_dirprod X S (((pr1 (pr2 x2s2)) * (pr1 x1s1)) +
                                              ((pr1 (pr2 x1s1)) * (pr1 x2s2)))
                                         (@op S (pr2 x1s1) (pr2 x2s2)).
 
 Definition commringfracop2int (X : commring) (S : @subabmonoid (ringmultabmonoid X)) :
-  binop (X × S) := abmonoidfracopint (ringmultabmonoid X) S.
+  binop (X ☺ S) := abmonoidfracopint (ringmultabmonoid X) S.
 
 Definition commringfracunel1int (X : commring) (S : @subabmonoid (ringmultabmonoid X)) :
   dirprod X S := make_dirprod 0 (unel S).
@@ -2147,7 +2147,7 @@ Definition commringfracinv1int (X : commring) (S : @subabmonoid (ringmultabmonoi
   dirprod X S -> dirprod X S := λ xs : _, make_dirprod ((-1) * (pr1 xs)) (pr2 xs).
 
 Definition eqrelcommringfrac (X : commring) (S : @subabmonoid (ringmultabmonoid X)) :
-  eqrel (X × S) := eqrelabmonoidfrac (ringmultabmonoid X) S.
+  eqrel (X ☺ S) := eqrelabmonoidfrac (ringmultabmonoid X) S.
 
 Lemma commringfracl1 (X : commring) (x1 x2 x3 x4 a1 a2 s1 s2 s3 s4 : X)
       (eq1 : paths ((x1 * s2) * a1) ((x2 * s1) * a1))
@@ -2559,7 +2559,7 @@ Definition isringfuntocommringfrac (X : commring) (S : @subabmonoid (ringmultabm
 (** **** Ring of fractions in the case when all elements which are being inverted are cancelable *)
 
 Definition hrelcommringfrac0 (X : commring) (S : @submonoid (ringmultabmonoid X)) :
-  hrel (X × S) :=
+  hrel (X ☺ S) :=
   λ xa yb : setdirprod X S, (pr1 xa) * (pr1 (pr2 yb)) = (pr1 yb) * (pr1 (pr2 xa)).
 
 Lemma weqhrelhrel0commringfrac (X : commring) (S : @submonoid (ringmultabmonoid X))

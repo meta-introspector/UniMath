@@ -97,7 +97,7 @@ use make_Terminal.
 Defined.
 
 (** Can we prove any further properties of wosetcat? It doesn't seem like it has binary products, at
-least the lexicographic ordering does not work. Consider {0,1} × {2,3}, in it we have (0,3) < (1,2)
+least the lexicographic ordering does not work. Consider {0,1} ☺ {2,3}, in it we have (0,3) < (1,2)
 but pr2 doesn't preserve the ordering. (Thanks Dan for pointing this out to me!) *)
 
 End wosetfuncat.

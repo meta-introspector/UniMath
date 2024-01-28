@@ -142,7 +142,7 @@ Section InternalSFibToStreetFib.
     Defined.
 
     Definition internal_sfib_is_cartesian_sfib_factor_unique
-      : isaprop (∑ φ, # (pr1 F) φ = h × φ · pr1 α tt = g).
+      : isaprop (∑ φ, # (pr1 F) φ = h ☺ φ · pr1 α tt = g).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.
@@ -351,7 +351,7 @@ Section StreetFibToInternalSFib.
       Qed.
 
       Definition pointwise_cartesian_is_cartesian_unique
-        : isaprop (∑ (δ : H ==> G₁), δ ▹ F = δp × δ • α = β).
+        : isaprop (∑ (δ : H ==> G₁), δ ▹ F = δp ☺ δ • α = β).
       Proof.
         use invproofirrelevance.
         intros δ₁ δ₂.
@@ -967,7 +967,7 @@ Section InternalSOpFibToStreetOpFib.
     Defined.
 
     Definition internal_sopfib_is_opcartesian_sopfib_factor_unique
-      : isaprop (∑ φ, # (pr1 F) φ = h × pr1 α tt · φ = g).
+      : isaprop (∑ φ, # (pr1 F) φ = h ☺ pr1 α tt · φ = g).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.
@@ -1173,7 +1173,7 @@ Section StreetOpFibToInternalSOpFib.
       Qed.
 
       Definition pointwise_opcartesian_is_opcartesian_unique
-        : isaprop (∑ (δ : G₂ ==> H), δ ▹ F = δp × α • δ = β).
+        : isaprop (∑ (δ : G₂ ==> H), δ ▹ F = δp ☺ α • δ = β).
       Proof.
         use invproofirrelevance.
         intros δ₁ δ₂.

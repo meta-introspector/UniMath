@@ -361,7 +361,7 @@ Section OneTypesUniversal.
       : isaprop
           (∑ (γ : φ ==> ψ),
            bincoprod_cocone_inl (make_bincoprod_cocone Z κ₁ κ₂) ◃ γ = α
-           ×
+           ☺
            bincoprod_cocone_inr (make_bincoprod_cocone Z κ₁ κ₂) ◃ γ = β).
     Proof.
       use invproofirrelevance.

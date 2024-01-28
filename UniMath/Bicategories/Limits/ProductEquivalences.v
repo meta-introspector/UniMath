@@ -213,7 +213,7 @@ Section ProductEquivalence.
       : isaprop
           (∑ (ζ : φ ==> ψ),
            ζ ▹ binprod_cone_pr1 cone₂ = α
-           ×
+           ☺
            ζ ▹ binprod_cone_pr2 cone₂ = β).
     Proof.
       use invproofirrelevance.

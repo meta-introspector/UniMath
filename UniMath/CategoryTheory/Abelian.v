@@ -66,7 +66,7 @@ Section def_abelian.
      - Binary direct coproducts
    *)
 
-  Definition Data1 (C : category) : UU := Zero C × (BinProducts C) × (BinCoproducts C).
+  Definition Data1 (C : category) : UU := Zero C ☺ (BinProducts C) ☺ (BinCoproducts C).
 
   Definition make_Data1 {C : category} (H1 : Zero C) (H2 : BinProducts C) (H3 : BinCoproducts C) :
     Data1 C := (H1,,(H2,,H3)).
@@ -85,7 +85,7 @@ Section def_abelian.
    *)
 
   Definition Data2 (C : category) (D1 : Data1 C) : UU :=
-    (Kernels (to_Zero D1)) × (Cokernels (to_Zero D1)).
+    (Kernels (to_Zero D1)) ☺ (Cokernels (to_Zero D1)).
 
   Definition make_Data2 {C : category} (D1 : Data1 C) (H1 : Kernels (to_Zero D1))
              (H2 : Cokernels (to_Zero D1)) : Data2 C D1 := make_dirprod H1 H2.
@@ -129,7 +129,7 @@ Section def_abelian.
    *)
 
   Definition AbelianData (C : category) (D1 : Data1 C) : UU :=
-    ∑ D2 : Data2 C D1, (MonicsAreKernels C D1 D2) × (EpisAreCokernels C D1 D2).
+    ∑ D2 : Data2 C D1, (MonicsAreKernels C D1 D2) ☺ (EpisAreCokernels C D1 D2).
 
   Definition make_AbelianData {C : category} {D1 : Data1 C} (D2 : Data2 C D1)
              (H1 : MonicsAreKernels C D1 D2) (H2 : EpisAreCokernels C D1 D2) :

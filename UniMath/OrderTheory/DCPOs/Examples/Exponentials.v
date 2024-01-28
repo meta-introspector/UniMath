@@ -34,7 +34,7 @@ Local Open Scope dcpo.
 Proposition prod_dcpo_monotone_lub_const_l
             {X Y Z : dcpo}
             (D : directed_set Y)
-            (f : monotone_function (X × Y) Z)
+            (f : monotone_function (X ☺ Y) Z)
             (x : X)
             {I : UU}
             (i : ∥ I ∥)
@@ -65,7 +65,7 @@ Qed.
 Proposition prod_dcpo_monotone_lub_const_r
             {X Y Z : dcpo}
             (D : directed_set X)
-            (f : monotone_function (X × Y) Z)
+            (f : monotone_function (X ☺ Y) Z)
             (y : Y)
             {I : UU}
             (i : ∥ I ∥)
@@ -266,7 +266,7 @@ Defined.
 Proposition is_scott_continuous_eval
             (X Y : dcpo)
   : is_scott_continuous
-      (X × dcpo_funspace X Y)
+      (X ☺ dcpo_funspace X Y)
       Y
       (λ xf, (pr12 xf) (pr1 xf)).
 Proof.
@@ -290,7 +290,7 @@ Qed.
 
 Definition eval_scott_continuous_map
            (X Y : dcpo)
-  : scott_continuous_map (X × dcpo_funspace X Y) Y
+  : scott_continuous_map (X ☺ dcpo_funspace X Y) Y
   := _ ,, is_scott_continuous_eval X Y.
 
 (**
@@ -298,7 +298,7 @@ Definition eval_scott_continuous_map
  *)
 Proposition is_scott_continuous_lam
             {X Y Z : dcpo}
-            (f : scott_continuous_map (X × Z) Y)
+            (f : scott_continuous_map (X ☺ Z) Y)
             (H : ∏ (z : Z), is_scott_continuous (pr2 X) (pr2 Y) (λ x, f (x ,, z)))
   : is_scott_continuous
       Z
@@ -343,7 +343,7 @@ Qed.
 
 Definition lam_scott_continuous_map
            {X Y Z : dcpo}
-           (f : scott_continuous_map (X × Z) Y)
+           (f : scott_continuous_map (X ☺ Z) Y)
   : scott_continuous_map Z (dcpo_funspace X Y).
 Proof.
   refine (_ ,, is_scott_continuous_lam f _).

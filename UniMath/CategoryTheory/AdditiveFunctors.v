@@ -435,10 +435,10 @@ End def_additive_quot_functor.
 Section def_additive_equivalence.
 
   Definition AddEquiv (A1 A2 : CategoryWithAdditiveStructure) : UU :=
-    ∑ D : (∑ F : (AdditiveFunctor A1 A2 × AdditiveFunctor A2 A1),
+    ∑ D : (∑ F : (AdditiveFunctor A1 A2 ☺ AdditiveFunctor A2 A1),
                  are_adjoints (dirprod_pr1 F) (dirprod_pr2 F)),
           (∏ a : A1, is_z_isomorphism (unit_from_left_adjoint (pr2 D) a))
-            × (∏ b : A2, is_z_isomorphism (counit_from_left_adjoint (pr2 D) b)).
+            ☺ (∏ b : A2, is_z_isomorphism (counit_from_left_adjoint (pr2 D) b)).
 
   Definition make_AddEquiv {A1 A2 : CategoryWithAdditiveStructure} (F : AdditiveFunctor A1 A2)
              (G : AdditiveFunctor A2 A1) (H : are_adjoints F G)

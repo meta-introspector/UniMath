@@ -60,7 +60,7 @@ Section ClosedMonoidalCategories.
             homX.
 
   Definition monoidal_biclosed {C : category} (M : monoidal C) : UU
-    := monoidal_leftclosed M × monoidal_rightclosed M.
+    := monoidal_leftclosed M ☺ monoidal_rightclosed M.
 
   Lemma adj_closed_under_nat_z_iso
         {C D : category} {F1 F2 : functor C D} (α : nat_z_iso F1 F2) (G : functor D C)

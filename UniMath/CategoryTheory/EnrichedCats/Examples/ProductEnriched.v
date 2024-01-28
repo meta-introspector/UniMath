@@ -238,7 +238,7 @@ Section ProductEnrichment.
              {x₁ y₁ : C₁}
              {x₂ y₂ : C₂}
              (fg : I_{V} --> product_enrichment_hom x₁ y₁ x₂ y₂)
-    : (x₁ --> y₁) × (x₂ --> y₂)
+    : (x₁ --> y₁) ☺ (x₂ --> y₂)
     := enriched_to_arr E₁ (fg · semi_cart_tensor_pr1 HV _ _)
        ,,
        enriched_to_arr E₂ (fg · semi_cart_tensor_pr2 HV _ _).

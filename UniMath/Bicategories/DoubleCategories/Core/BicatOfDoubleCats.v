@@ -1913,7 +1913,7 @@ Definition bicat_of_double_cats
         let l := pr12 CD in
         let r := pr122 CD in
         let a := pr222 CD in
-        triangle_law l r a × pentagon_law a).
+        triangle_law l r a ☺ pentagon_law a).
 
 Definition is_univalent_2_bicat_of_double_cats
   : is_univalent_2 bicat_of_double_cats.

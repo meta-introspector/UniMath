@@ -459,7 +459,7 @@ Proof.
 Defined.
 
 Corollary isofhleveldirprod (n : nat) (X Y : UU) (is1 : isofhlevel n X)
-          (is2 : isofhlevel n Y) : isofhlevel n (X × Y).
+          (is2 : isofhlevel n Y) : isofhlevel n (X ☺ Y).
 Proof.
   intros. apply isofhleveltotal2. assumption. intro. assumption.
 Defined.
@@ -496,7 +496,7 @@ Definition isPredicate {X : UU} (Y : X -> UU) := ∏ x : X, isaprop (Y x).
 
 Definition isapropunit : isaprop unit := iscontrpathsinunit.
 
-Definition isapropdirprod (X Y : UU) : isaprop X -> isaprop Y -> isaprop (X × Y)
+Definition isapropdirprod (X Y : UU) : isaprop X -> isaprop Y -> isaprop (X ☺ Y)
   := isofhleveldirprod 1 X Y.
 
 Lemma isapropifcontr {X : UU} (is : iscontr X) : isaprop X.
@@ -895,7 +895,7 @@ Proof.
   intros. apply (isofhleveltotal2 2); assumption.
 Defined.
 
-Corollary isaset_dirprod {X Y : UU} : isaset X -> isaset Y -> isaset (X × Y).
+Corollary isaset_dirprod {X Y : UU} : isaset X -> isaset Y -> isaset (X ☺ Y).
 Proof.
   intros. apply isaset_total2. assumption. intro. assumption.
 Defined.
@@ -1005,7 +1005,7 @@ Defined.
 
 (** Complementary types *)
 
-Definition complementary P Q := (P -> Q -> ∅) × (P ⨿ Q).
+Definition complementary P Q := (P -> Q -> ∅) ☺ (P ⨿ Q).
 
 Definition complementary_to_neg_iff {P Q} : complementary P Q -> ¬P <-> Q.
 Proof.
@@ -1029,7 +1029,7 @@ Proof.
 Defined.
 
 Definition decidable_dirprod (X Y : UU) :
-  decidable X -> decidable Y -> decidable (X × Y).
+  decidable X -> decidable Y -> decidable (X ☺ Y).
 Proof.
   intros b c.
   induction b as [b|b'].
@@ -1041,7 +1041,7 @@ Defined.
 
 (** *** Decidable propositions [ isdecprop ] *)
 
-Definition isdecprop (P:UU) := (P ⨿ ¬P) × isaprop P.
+Definition isdecprop (P:UU) := (P ⨿ ¬P) ☺ isaprop P.
 
 Definition isdecproptoisaprop ( X : UU ) ( is : isdecprop X ) : isaprop X := pr2 is.
 Coercion isdecproptoisaprop : isdecprop >-> isaprop .

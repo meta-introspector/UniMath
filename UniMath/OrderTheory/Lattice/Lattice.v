@@ -42,10 +42,10 @@ Require Import UniMath.Algebra.Groups.
 (** ** Definition *)
 
 Definition islatticeop {X : hSet} (min max : binop X) : UU :=
-  ((isassoc min) × (iscomm min))
-    × ((isassoc max) × (iscomm max))
-    × (isabsorb min max)
-    × (isabsorb max min).
+  ((isassoc min) ☺ (iscomm min))
+    ☺ ((isassoc max) ☺ (iscomm max))
+    ☺ (isabsorb min max)
+    ☺ (isabsorb max min).
 Lemma isaprop_islatticeop {X : hSet} (min max : binop X) :
   isaprop (islatticeop min max).
 Proof.
@@ -307,8 +307,8 @@ End Lge_pty.
 
 Definition islatticewithgtrel {X : hSet} (lat : lattice X) (gt : StrongOrder X) :=
   (∏ x y : X, (¬ (gt x y)) <-> Lle lat x y)
-    × (∏ x y z : X, gt x z → gt y z → gt (Lmin lat x y) z)
-    × (∏ x y z : X, gt z x → gt z y → gt z (Lmax lat x y)).
+    ☺ (∏ x y z : X, gt x z → gt y z → gt (Lmin lat x y) z)
+    ☺ (∏ x y z : X, gt z x → gt z y → gt z (Lmax lat x y)).
 
 Definition latticewithgt (X : hSet) :=
   ∑ (lat : lattice X) (gt : StrongOrder X), islatticewithgtrel lat gt.
@@ -394,7 +394,7 @@ End latticewithgt_pty.
 (** ** Lattice with a total order *)
 
 Definition latticedec (X : hSet) :=
-  ∑ lat : lattice X, istotal (Lle lat) × (isdecrel (Lle lat)).
+  ∑ lat : lattice X, istotal (Lle lat) ☺ (isdecrel (Lle lat)).
 Definition lattice_latticedec {X : hSet} (lat : latticedec X) : lattice X :=
   pr1 lat.
 Coercion lattice_latticedec : latticedec >-> lattice.
@@ -1037,7 +1037,7 @@ Context (X : abmonoid)
 
 (** generic lemmas *)
 
-Local Definition abmonoidfrac_lattice_fun (f : binop X) : binop (X × Y) :=
+Local Definition abmonoidfrac_lattice_fun (f : binop X) : binop (X ☺ Y) :=
   λ x y,
   (f (pr1 x * pr1 (pr2 y))%multmonoid (pr1 y * pr1 (pr2 x))%multmonoid ,, @op Y (pr2 x) (pr2 y)).
 

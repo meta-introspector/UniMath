@@ -46,7 +46,7 @@ Section InternalStreetOpFibration.
          (q : α ▹ p = (γ ▹ p) • δp),
        ∃! (δ : g ==> h),
        δ ▹ p = δp
-       ×
+       ☺
        γ • δ = α.
 
   Definition is_opcartesian_2cell_sopfib_factor
@@ -131,7 +131,7 @@ Section InternalStreetOpFibration.
          (γ : f ==> h)
          (β : invertible_2cell g (h · p)),
        is_opcartesian_2cell_sopfib γ
-       ×
+       ☺
        γ ▹ p = α • β.
 
   Definition internal_sopfib_opcleaving_lift_mor
@@ -192,7 +192,7 @@ Section InternalStreetOpFibration.
 
   Definition internal_sopfib
     : UU
-    := internal_sopfib_opcleaving × lwhisker_is_opcartesian.
+    := internal_sopfib_opcleaving ☺ lwhisker_is_opcartesian.
 
   Coercion internal_sopfib_to_opcleaving
            (H : internal_sopfib)
@@ -784,7 +784,7 @@ Definition mor_of_internal_sopfib_over
   : UU
   := ∑ (fe : e₁ --> e₂),
      mor_preserves_opcartesian p₁ p₂ fe
-     ×
+     ☺
      invertible_2cell (p₁ · fb) (fe · p₂).
 
 Definition make_mor_of_internal_sopfib_over

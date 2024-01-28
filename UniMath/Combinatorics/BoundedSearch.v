@@ -27,7 +27,7 @@ Section constr_indef_descr.
     apply isasetbool.
   Defined.
 
-  Local Definition min_n_UU : UU := ∑ n : nat, P n × minimal n.
+  Local Definition min_n_UU : UU := ∑ n : nat, P n ☺ minimal n.
 
   Local Definition isapropmin_n : isaprop min_n_UU.
   Proof.
@@ -44,7 +44,7 @@ Section constr_indef_descr.
 
   Local Definition min_n : hProp := make_hProp min_n_UU isapropmin_n.
 
-  Local Definition smaller (n : nat) := ∑ l : nat, P l × minimal l × (l ≤ n)%nat.
+  Local Definition smaller (n : nat) := ∑ l : nat, P l ☺ minimal l ☺ (l ≤ n)%nat.
 
   Local Definition smaller_S (n : nat) (k : smaller n) : smaller (S n).
   Proof.

@@ -821,7 +821,7 @@ Section MonadToStruct.
           : isaprop
               (∑ fg,
                (binary_coprod_algebra_in1 · fg = φ₁)
-               ×
+               ☺
                (binary_coprod_algebra_in2 · fg = φ₂)).
         Proof.
           use invproofirrelevance.

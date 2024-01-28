@@ -317,7 +317,7 @@ Section ProdProfunctor.
     : profunctor_data C₁ C₂.
   Proof.
     use make_profunctor_data.
-    - exact (λ y x, P y x × Q y x).
+    - exact (λ y x, P y x ☺ Q y x).
     - exact (λ y₁ y₂ g x₁ x₂ f h, P #[ g , f ] (pr1 h) ,, Q #[ g , f ] (pr2 h)).
   Defined.
 
@@ -356,7 +356,7 @@ Section CompProfunctor.
     : profunctor_data C₂ C₂.
   Proof.
     use make_profunctor_data.
-    - exact (λ y₁ y₂, P y₁ x × Q z y₂).
+    - exact (λ y₁ y₂, P y₁ x ☺ Q z y₂).
     - exact (λ y₁ y₂ g y₁' y₂ g' h,
              P #[ g , identity _ ] (pr1 h)
              ,,

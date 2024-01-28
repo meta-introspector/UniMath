@@ -23,7 +23,7 @@ Section Internal_Adjunction.
     : UU
     := ∑ (g : b --> a),
        identity a ==> f · g
-       ×
+       ☺
        g · f ==> identity b.
 
   Definition left_adjoint_right_adjoint
@@ -56,7 +56,7 @@ Section Internal_Adjunction.
        let η := left_adjoint_unit αd in
        let ε := left_adjoint_counit αd in
        linvunitor f • (η ▹ f) • rassociator _ _ _ • (f ◃ ε) • runitor f = id2 f
-       ×
+       ☺
        rinvunitor g • (g ◃ η) • lassociator _ _ _ • (ε ▹ g) • lunitor g = id2 g.
 
   Definition left_adjoint
@@ -86,7 +86,7 @@ Section Internal_Adjunction.
     : UU
     := ∑ (f : a --> b),
        identity a ==> f · g
-       ×
+       ☺
        g · f ==> identity b.
 
   Definition internal_right_adj_left_adjoint
@@ -119,7 +119,7 @@ Section Internal_Adjunction.
        let η := internal_right_adj_unit αd in
        let ε := internal_right_adj_counit αd in
        linvunitor f • (η ▹ f) • rassociator _ _ _ • (f ◃ ε) • runitor f = id2 f
-       ×
+       ☺
        rinvunitor g • (g ◃ η) • lassociator _ _ _ • (ε ▹ g) • lunitor g = id2 g.
 
   Definition internal_right_adj
@@ -149,7 +149,7 @@ Section Internal_Adjunction.
              (αd : left_adjoint_data f)
     : UU
     := is_invertible_2cell (left_adjoint_unit αd)
-       ×
+       ☺
        is_invertible_2cell (left_adjoint_counit αd).
 
   Definition left_equivalence
@@ -179,7 +179,7 @@ Section Internal_Adjunction.
     : UU
     := ∑ (αd : left_adjoint_data f),
        left_adjoint_axioms αd
-       ×
+       ☺
        left_equivalence_axioms αd.
 
   (* the coercion to the axioms will be induced *)

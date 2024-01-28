@@ -120,7 +120,7 @@ Definition bracket_at (T : algebra_ob Id_H) (f : U Z --> `T): UU :=
 Definition bracket_property_parts (T : algebra_ob Id_H) (f : U Z --> `T)
            (h : `T • (U Z)  --> `T) : UU
   :=
-    (f = η T •• (U Z) · h) ×
+    (f = η T •• (U Z) · h) ☺
      (θ `T · #H h · τ T  = τ T •• (U Z) ·  h).
 
 Definition bracket_parts_at (T : algebra_ob Id_H) (f : U Z --> `T) : UU :=
@@ -236,7 +236,7 @@ Section instantiate_with_identity.
     Context (θ : @PrestrengthForSignatureAtPoint C C C H (ptd_from_alg T)).
 
 Definition bracket_property_parts_identity_nicer (h : `T • `T  --> `T) : UU
-  := (identity `T = η T •• `T · h) × (θ `T · #H h · τ T  = τ T •• `T ·  h).
+  := (identity `T = η T •• `T · h) ☺ (θ `T · #H h · τ T  = τ T •• `T ·  h).
 
 Lemma bracket_property_parts_identity_nicer_impl1 (h : `T • `T  --> `T):
   bracket_property_parts θ T (identity _) h -> bracket_property_parts_identity_nicer h.

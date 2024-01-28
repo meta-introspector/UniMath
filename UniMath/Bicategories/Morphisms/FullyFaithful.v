@@ -116,7 +116,7 @@ Definition fully_faithful_1cell
       α₁ ▹ f = α₂ ▹ f
       →
       α₁ = α₂)
-     ×
+     ☺
      (∏ (z : B)
         (g₁ g₂ : z --> a)
         (αf : g₁ · f ==> g₂ · f),
@@ -272,12 +272,12 @@ Definition pseudomonic_1cell
       α₁ ▹ f = α₂ ▹ f
       →
       α₁ = α₂)
-     ×
+     ☺
      (∏ (z : B)
         (g₁ g₂ : z --> a)
         (αf : g₁ · f ==> g₂ · f)
         (Hαf : is_invertible_2cell αf),
-      ∑ (α : g₁ ==> g₂), is_invertible_2cell α × α ▹ f = αf).
+      ∑ (α : g₁ ==> g₂), is_invertible_2cell α ☺ α ▹ f = αf).
 
 
 Definition pseudomonic_1cell_faithful
@@ -346,7 +346,7 @@ Definition make_pseudomonic
                     (αf : g₁ · f ==> g₂ · f)
                     (Hαf : is_invertible_2cell αf),
                   ∑ (α : g₁ ==> g₂),
-                  is_invertible_2cell α × α ▹ f = αf)
+                  is_invertible_2cell α ☺ α ▹ f = αf)
   : pseudomonic_1cell f
   := (Hf₁ ,, Hf₂).
 

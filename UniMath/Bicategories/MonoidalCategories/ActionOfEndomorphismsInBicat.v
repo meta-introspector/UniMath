@@ -75,7 +75,7 @@ Defined.
 
 Lemma action_from_precomp_laws :
   action_triangle_eq Mon_endo homcat precomp_odot precomp_right_unitor precomp_convertor
-                     × action_pentagon_eq Mon_endo homcat precomp_odot precomp_convertor.
+                     ☺ action_pentagon_eq Mon_endo homcat precomp_odot precomp_convertor.
 Proof.
   split.
   - red. cbn. intros a x.

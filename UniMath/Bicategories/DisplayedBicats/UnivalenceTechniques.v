@@ -61,13 +61,13 @@ Definition disp_psfunctor_iso
            (FF : disp_psfunctor D₁ D₂ F)
   : UU
   := (∏ (x : B₁), isweq (FF x))
-     ×
+     ☺
      (∏ (x y : B₁)
         (f : x --> y)
         (xx : D₁ x)
         (yy : D₁ y),
       isweq (λ (ff : xx -->[ f ] yy), disp_psfunctor_mor _ _ _ FF ff))
-     ×
+     ☺
      (∏ (x y : B₁)
         (f g : x --> y)
         (τ : f ==> g)

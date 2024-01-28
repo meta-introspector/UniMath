@@ -38,26 +38,26 @@ Section FixDispCat.
     (dd : D d) (pp : D p) (pp1 : pp -->[p1] cc) (pp2 : pp -->[p2] dd) : UU :=
     ∏ (a : C) (f : a --> c) (g : a --> d) (aa : D a) (ff : aa -->[f] cc) (gg : aa -->[g] dd),
       ∃! (fg : a --> p) (fgfg : aa -->[fg] pp),
-      ∑ fgok : ((fg · p1 = f) × (fg · p2 = g)),
-        (fgfg ;; pp1 = transportb _ (pr1 fgok) ff) × (fgfg ;; pp2 = transportb _ (pr2 fgok) gg).
+      ∑ fgok : ((fg · p1 = f) ☺ (fg · p2 = g)),
+        (fgfg ;; pp1 = transportb _ (pr1 fgok) ff) ☺ (fgfg ;; pp2 = transportb _ (pr2 fgok) gg).
 
   Definition is_dispBinProduct (c d : C) (P : BinProduct C c d)
     (cc : D c) (dd : D d) (pp : D (BinProductObject _ P))
     (pp1 : pp -->[BinProductPr1 _ P] cc) (pp2 : pp -->[BinProductPr2 _ P] dd) : UU :=
     ∏ (a : C) (f : a --> c) (g : a --> d) (aa : D a) (ff : aa -->[f] cc) (gg : aa -->[g] dd),
       ∃! (fgfg : aa -->[BinProductArrow _ P f g] pp),
-      (fgfg ;; pp1 = transportb _ (BinProductPr1Commutes _ _ _ P _ f g) ff) ×
+      (fgfg ;; pp1 = transportb _ (BinProductPr1Commutes _ _ _ P _ f g) ff) ☺
       (fgfg ;; pp2 = transportb _ (BinProductPr2Commutes _ _ _ P _ f g) gg).
 
   Definition dispBinProduct (c d : C) (P : BinProduct C c d) (cc : D c) (dd : D d) : UU :=
     ∑ pppp1pp2 : (∑ pp : D (BinProductObject _ P),
-                     (pp -->[BinProductPr1 _ P] cc) × (pp -->[BinProductPr2 _ P] dd)),
+                     (pp -->[BinProductPr1 _ P] cc) ☺ (pp -->[BinProductPr2 _ P] dd)),
         is_dispBinProduct c d P cc dd (pr1 pppp1pp2) (pr1 (pr2 pppp1pp2)) (pr2 (pr2 pppp1pp2)).
 
   Definition make_dispBinProduct_locally_prop (c d : C) (P : BinProduct C c d) (cc : D c) (dd : D d)
     (LP : locally_propositional D)
     (dBP_data : ∑ pp : D (BinProductObject _ P),
-          (pp -->[BinProductPr1 _ P] cc) × (pp -->[BinProductPr2 _ P] dd))
+          (pp -->[BinProductPr1 _ P] cc) ☺ (pp -->[BinProductPr2 _ P] dd))
     (mediating : ∏ (a : C) (f : a --> c) (g : a --> d) (aa : D a)
                    (ff : aa -->[f] cc) (gg : aa -->[g] dd),
         aa -->[ BinProductArrow C P f g] pr1 dBP_data)
@@ -380,7 +380,7 @@ Section FixDispCat.
 
 
   Definition total_category_Binproducts_data (Ps : BinProducts C) (dPs : dispBinProducts Ps) (ccc ddd : total_category D) :
-    ∑ p : total_category D, total_category D ⟦ p, ccc ⟧ × total_category D ⟦ p, ddd ⟧.
+    ∑ p : total_category D, total_category D ⟦ p, ccc ⟧ ☺ total_category D ⟦ p, ddd ⟧.
   Proof.
     induction ccc as [c cc].
     induction ddd as [d dd].
@@ -405,7 +405,7 @@ Section FixDispCat.
 
   Local Lemma total_category_Binproducts_mediating_morphism_ok (Ps : BinProducts C) (dPs : dispBinProducts Ps)
     {c d x : C} {cc : D c} {dd: D d} {xx : D x} {f : x --> c} (ff: xx -->[f] cc) {g : x --> d} (gg: xx -->[g] dd) :
-    BinProductArrow C (Ps c d) f g · BinProductPr1 C (Ps c d),, dispBinProductArrow (Ps c d) (dPs c d cc dd) ff gg ;; dispBinProductPr1 (Ps c d) (dPs c d cc dd) = f,, ff ×
+    BinProductArrow C (Ps c d) f g · BinProductPr1 C (Ps c d),, dispBinProductArrow (Ps c d) (dPs c d cc dd) ff gg ;; dispBinProductPr1 (Ps c d) (dPs c d cc dd) = f,, ff ☺
     BinProductArrow C (Ps c d) f g · BinProductPr2 C (Ps c d),, dispBinProductArrow (Ps c d) (dPs c d cc dd) ff gg ;; dispBinProductPr2 (Ps c d) (dPs c d cc dd) = g,, gg.
   Proof.
     split.
@@ -424,7 +424,7 @@ Section FixDispCat.
   Local Lemma total_category_Binproducts_mediating_morphism_unique (Ps : BinProducts C) (dPs : dispBinProducts Ps)
     {c d x : C} {cc : D c} {dd: D d} {xx : D x} {f : x --> c} (ff: xx -->[f] cc) {g : x --> d} (gg: xx -->[g] dd)
     {fg : x --> BinProductObject C (Ps c d)} (fgfg : xx -->[fg] dispBinProductObject (Ps c d) (dPs c d cc dd)) :
-    fg · BinProductPr1 C (Ps c d),, fgfg ;; dispBinProductPr1 (Ps c d) (dPs c d cc dd) = f,, ff ×
+    fg · BinProductPr1 C (Ps c d),, fgfg ;; dispBinProductPr1 (Ps c d) (dPs c d cc dd) = f,, ff ☺
     fg · BinProductPr2 C (Ps c d),, fgfg ;; dispBinProductPr2 (Ps c d) (dPs c d cc dd) = g,, gg →
     fg,, fgfg = total_category_Binproducts_mediating_morphism Ps dPs ff gg.
   Proof.
@@ -1224,7 +1224,7 @@ Section FixDispCat.
           (ιι₁ ;; hh)
         =
         ff)
-       ×
+       ☺
        (transportf
           (λ z, _ -->[ z ] _)
           (BinCoproductIn2Commutes _ _ _ p _ f g)
@@ -1293,7 +1293,7 @@ Section FixDispCat.
           : isaprop
               (∑ (fg : total_category_BinCoproduct --> t_w),
                (total_category_BinCoproductIn1 · fg = t_f)
-               ×
+               ☺
                (total_category_BinCoproductIn2 · fg = t_g)).
         Proof.
           use invproofirrelevance.

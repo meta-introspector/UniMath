@@ -463,13 +463,13 @@ Section CoproductOfDCPO.
       : ((∑ (D' : D → X) (HD : is_directed X D'),
           let DX := make_directed_set _ D D' HD in
           (is_least_upperbound (coproduct_PartialOrder X Y) D (inl (⨆ DX)))
-          ×
+          ☺
           (∏ (i : D), D i = inl (D' i)))
         ∨
         (∑ (D' : D → Y) (HD : is_directed Y D'),
          let DY := make_directed_set _ D D' HD in
          is_least_upperbound (coproduct_PartialOrder X Y) D (inr (⨆ DY))
-         ×
+         ☺
          (∏ (i : D), D i = inr (D' i))))%type.
     Proof.
       assert (h := directed_set_all_inl_or_all_inr).

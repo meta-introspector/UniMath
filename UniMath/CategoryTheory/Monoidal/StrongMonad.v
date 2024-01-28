@@ -36,12 +36,12 @@ Section LeftStrength.
         f #⊗ #F g· tF x₂ y₂
         =
         tF x₁ y₁ · #F(f #⊗ g))
-       ×
+       ☺
        (∏ (x : V),
         tF I_{V} x · #F(mon_lunitor x)
         =
         mon_lunitor (F x))
-       ×
+       ☺
        (∏ (x y z : V),
         tF (x ⊗ y) z · #F(mon_lassociator x y z)
         =
@@ -111,7 +111,7 @@ Section LeftStrength.
         identity x #⊗ η M y · tM x y
         =
         η M (x ⊗ y))
-       ×
+       ☺
        (∏ (x y : V),
         identity x #⊗ μ M y · tM x y
         =

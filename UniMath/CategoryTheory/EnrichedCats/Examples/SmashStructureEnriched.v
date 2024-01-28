@@ -91,14 +91,14 @@ Section FixAStructureWithSmash.
           P
           (hset_struct_prod P (SC y z) (SC x y))
           (SC x z)
-          (λ (fg : C ⟦ y, z ⟧ × C ⟦ x, y ⟧), pr2 fg · pr1 fg))
-       ×
+          (λ (fg : C ⟦ y, z ⟧ ☺ C ⟦ x, y ⟧), pr2 fg · pr1 fg))
+       ☺
        (∏ (x y z : C)
           (f : x --> y),
         f · smash_struct_enrichment_point SC y z
         =
         smash_struct_enrichment_point SC x z)
-       ×
+       ☺
        (∏ (x y z : C)
           (f : y --> z),
         smash_struct_enrichment_point SC x y · f
@@ -139,7 +139,7 @@ Section FixAStructureWithSmash.
         P
         (hset_struct_prod P (SC y z) (SC x y))
         (SC x z)
-        (λ (fg : C ⟦ y, z ⟧ × C ⟦ x, y ⟧), pr2 fg · pr1 fg).
+        (λ (fg : C ⟦ y, z ⟧ ☺ C ⟦ x, y ⟧), pr2 fg · pr1 fg).
   Proof.
     exact (pr12 SC x y z).
   Qed.

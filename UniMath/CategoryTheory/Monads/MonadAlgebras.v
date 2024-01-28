@@ -46,7 +46,7 @@ Definition Alg_map (X : Algebra_data) : T X --> X := pr2 X.
 
 Definition Algebra_laws (X : Algebra_data) : UU
   := (η T X · Alg_map X = identity X)
-   × (μ T X · Alg_map X = #T (Alg_map X) · Alg_map X).
+   ☺ (μ T X · Alg_map X = #T (Alg_map X) · Alg_map X).
 
 Definition Algebra : UU := ∑ X : Algebra_data, Algebra_laws X.
 
@@ -285,7 +285,7 @@ Definition lift_μ_commutes (T' : Monad (MonadAlg S)) (e : lift_eq T') : UU
 
 Definition lifting : UU
   := ∑ T' : Monad (MonadAlg S),
-      (∑ e : lift_eq T', (lift_η_commutes T' e) × (lift_μ_commutes T' e)).
+      (∑ e : lift_eq T', (lift_η_commutes T' e) ☺ (lift_μ_commutes T' e)).
 
 
 (** A distributive law of S over T induces a lifting of T to S-Algebras *)

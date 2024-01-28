@@ -417,7 +417,7 @@ Definition locally_univalent_verity_double_bicat
            (B : verity_double_bicat)
   : UU
   := hor_locally_univalent B
-     ×
+     ☺
      ver_locally_univalent B.
 
 Coercion locally_univalent_verity_double_bicat_hor_locally_univalent

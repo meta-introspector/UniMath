@@ -68,7 +68,7 @@ Section displayedmonoidalcategories.
 
   Definition displayedmonoidalcat_data : UU :=
     ∑ dtd : displayedtensor_data, ∑ i : D I,
-          (displayedleftunitor_data dtd i) × (displayedrightunitor_data dtd i) × (displayedassociator_data dtd).
+          (displayedleftunitor_data dtd i) ☺ (displayedrightunitor_data dtd i) ☺ (displayedassociator_data dtd).
 
   Definition displayedtensordata_from_dispmoncatdata (DMD : displayedmonoidalcat_data) : displayedtensor_data := pr1 DMD.
   Coercion displayedtensordata_from_dispmoncatdata : displayedmonoidalcat_data >-> displayedtensor_data.
@@ -124,11 +124,11 @@ Section displayedmonoidalcategories.
       (((dα _ _ _ e a b) ⊗^{{dtd}} (id_disp c)) ;; (dα _ _ _ e (a ⊗_{{dtd}} b) c) ;; ((id_disp e) ⊗^{{dtd}}  (dα _ _ _  a b c))) = transportb _ (pen w x y z) ((dα (w ⊗_{T} x) y z (e ⊗_{{dtd}} a) b c) ;; (dα w x (y ⊗_{T} z) e a (b ⊗_{{dtd}} c))).
 
   Definition displayedmonoidal_laws (DMD :  displayedmonoidalcat_data) : UU :=
-    (displayedtensor_id DMD) × (displayedtensor_comp DMD) ×
-                             (displayedassociator_naturality DMD) × (displayedassociator_is_nat_iso DMD) ×
-                             (displayedleftunitor_naturality DMD) × (displayedleftunitor_is_nat_iso DMD) ×
-                             (displayedrightunitor_naturality DMD) × (displayedrightunitor_is_nat_iso DMD) ×
-                             (displayedtriangle_identity DMD DMD DMD) × (displayedpentagon_identity DMD).
+    (displayedtensor_id DMD) ☺ (displayedtensor_comp DMD) ☺
+                             (displayedassociator_naturality DMD) ☺ (displayedassociator_is_nat_iso DMD) ☺
+                             (displayedleftunitor_naturality DMD) ☺ (displayedleftunitor_is_nat_iso DMD) ☺
+                             (displayedrightunitor_naturality DMD) ☺ (displayedrightunitor_is_nat_iso DMD) ☺
+                             (displayedtriangle_identity DMD DMD DMD) ☺ (displayedpentagon_identity DMD).
 
   Definition displayedtensorid_from_monoidallaws {DMD : displayedmonoidalcat_data} (DML : displayedmonoidal_laws DMD) : displayedtensor_id DMD := pr1 DML.
 Coercion displayedtensorid_from_monoidallaws : displayedmonoidal_laws >-> displayedtensor_id.

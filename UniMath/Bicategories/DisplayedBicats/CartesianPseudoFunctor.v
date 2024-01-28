@@ -107,7 +107,7 @@ Definition cartesian_disp_psfunctor
            {D₂ : disp_bicat B₂}
            (FF : disp_psfunctor D₁ D₂ F)
   : UU
-  := global_cartesian_disp_psfunctor FF × local_cartesian_disp_psfunctor FF.
+  := global_cartesian_disp_psfunctor FF ☺ local_cartesian_disp_psfunctor FF.
 
 (** Lmmas on cartesian pseudofunctors *)
 Definition global_cartesian_id_psfunctor

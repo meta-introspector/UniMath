@@ -148,13 +148,13 @@ Definition lambda_calculus_ind
     A n l → A (S n) (inflate l))
   (f_paths :
     (∏ m n i f af,
-      PathOver (Y := A n) (subst_var i f) (f_subst _ _ _ _ (f_var m i) af) (af i)) ×
+      PathOver (Y := A n) (subst_var i f) (f_subst _ _ _ _ (f_var m i) af) (af i)) ☺
     (∏ m n l al l' al' f af,
       PathOver
         (Y := A n)
         (subst_app l l' f)
         (f_subst _ _ _ _ (f_app m _ _ al al') af)
-        (f_app _ _ _ (f_subst _ _ _ _ al af) (f_subst _ _ _ _ al' af))) ×
+        (f_app _ _ _ (f_subst _ _ _ _ al af) (f_subst _ _ _ _ al' af))) ☺
     (∏ m n l al f af,
       PathOver
         (Y := A n)
@@ -162,19 +162,19 @@ Definition lambda_calculus_ind
         (f_subst _ _ _ _ (f_abs m _ al) af)
         (f_abs _ _ (f_subst _ _ _ _
           al
-          (extend_tuple_dep (A := A (S n)) (λ i, f_inflate _ _ (af i)) (f_var _ lastelement))))) ×
+          (extend_tuple_dep (A := A (S n)) (λ i, f_inflate _ _ (af i)) (f_var _ lastelement))))) ☺
     (∏ l m n t a g ag f af,
       PathOver
         (Y := A n)
         (subst_subst t g f)
         (f_subst m n _ _ (f_subst l m _ _ a ag) af)
-        (f_subst _ _ _ _ a (λ i, f_subst _ _ _ _ (ag i) af))) ×
+        (f_subst _ _ _ _ a (λ i, f_subst _ _ _ _ (ag i) af))) ☺
     (∏ n f af g ag,
       PathOver
         (Y := A n)
         (beta_equality f g)
         (f_app _ _ _ (f_abs _ _ af) ag)
-        (f_subst _ _ _ _ af (extend_tuple_dep (A := A n) (f_var _) ag))) ×
+        (f_subst _ _ _ _ af (extend_tuple_dep (A := A n) (f_var _) ag))) ☺
     (∏ n f af,
       PathOver
         (Y := A n)
@@ -208,16 +208,16 @@ Definition lambda_calculus_rect
   (f_inflate := (λ n a, f_subst _ _ a (λ i, (f_var _ (dni lastelement i)))) : ∏ n, A n → A (S n))
   (f_paths :
     (∏ m n i af,
-      (f_subst m n (f_var m i) af) = (af i)) ×
+      (f_subst m n (f_var m i) af) = (af i)) ☺
     (∏ m n al al' af,
-      (f_subst m n (f_app _ al al') af) = (f_app _ (f_subst _ _ al af) (f_subst _ _ al' af))) ×
+      (f_subst m n (f_app _ al al') af) = (f_app _ (f_subst _ _ al af) (f_subst _ _ al' af))) ☺
     (∏ m n al af,
       (f_subst m n (f_abs m al) af)
-      = (f_abs _ (f_subst _ _ al (extend_tuple (λ i, f_inflate _ (af i)) (f_var _ lastelement))))) ×
+      = (f_abs _ (f_subst _ _ al (extend_tuple (λ i, f_inflate _ (af i)) (f_var _ lastelement))))) ☺
     (∏ l m n a ag af,
-      (f_subst m n (f_subst l m a ag) af) = (f_subst _ _ a (λ i, f_subst _ _ (ag i) af))) ×
+      (f_subst m n (f_subst l m a ag) af) = (f_subst _ _ a (λ i, f_subst _ _ (ag i) af))) ☺
     (∏ n af ag,
-      (f_app n (f_abs _ af) ag) = (f_subst _ _ af (extend_tuple (f_var _) ag))) ×
+      (f_app n (f_abs _ af) ag) = (f_subst _ _ af (extend_tuple (f_var _) ag))) ☺
     (∏ n af,
       (f_abs _ (f_app _ (f_inflate n af) (f_var _ lastelement))) = af)
   )
@@ -319,9 +319,9 @@ Definition ind_subst (L : lambda_calculus_data)
       (λ i, lambda_calculus_ind _ f_var f_app f_abs f_subst f_paths _ (f i)).
 
 Definition is_lambda_calculus (L : lambda_calculus_data) : UU :=
-  ind_var L ×
-  ind_app L ×
-  ind_abs L ×
+  ind_var L ☺
+  ind_app L ☺
+  ind_abs L ☺
   ind_subst L.
 
 Definition lambda_calculus : UU := ∑ L, is_lambda_calculus L.

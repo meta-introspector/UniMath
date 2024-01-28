@@ -56,7 +56,7 @@ Definition double_cat
        (l : double_cat_lunitor I Cm)
        (r : double_cat_runitor I Cm)
        (a : double_cat_associator Cm),
-     triangle_law l r a × pentagon_law a.
+     triangle_law l r a ☺ pentagon_law a.
 
 (** * 2. Accessors for double categories *)
 

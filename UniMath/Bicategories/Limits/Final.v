@@ -59,9 +59,9 @@ Section Final.
   Definition is_bifinal
              (X : B)
     := bifinal_1cell_property X
-       ×
+       ☺
        ∏ (Y : B), bifinal_2cell_property X Y
-                  ×
+                  ☺
                   bifinal_eq_property X Y.
 
   Definition is_bifinal_1cell_property

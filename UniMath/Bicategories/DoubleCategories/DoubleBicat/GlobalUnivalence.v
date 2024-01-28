@@ -99,7 +99,7 @@ Section Univalence.
   Definition globally_univalent_verity_double_bicat
     : UU
     := hor_globally_univalent
-       ×
+       ☺
        ver_globally_univalent.
 
   Proposition isaprop_globally_univalent_verity_double_bicat

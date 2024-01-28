@@ -84,7 +84,7 @@ Proof.
   apply isfinitecoprod; apply isfinitestn.
 Defined.
 
-(** Binary products in the cartesian cube category. The product ⟦m⟧ × ⟦n⟧ is the sum ⟦m + n⟧. *)
+(** Binary products in the cartesian cube category. The product ⟦m⟧ ☺ ⟦n⟧ is the sum ⟦m + n⟧. *)
 Definition cartesian_cube_category_binproducts : BinProducts cartesian_cube_category.
 Proof.
   intros m n.

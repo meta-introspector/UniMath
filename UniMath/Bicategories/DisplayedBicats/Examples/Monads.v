@@ -167,12 +167,12 @@ Section BigProjections.
           • bigmonad_mu m
         =
         lunitor (bigmonad_map m))
-         ×
+         ☺
        ((bigmonad_map m ◃ bigmonad_unit m)
           • bigmonad_mu m
         =
         runitor (bigmonad_map m))
-         ×
+         ☺
        ((bigmonad_map m ◃ bigmonad_mu m)
           • bigmonad_mu m
         =

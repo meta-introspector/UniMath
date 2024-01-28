@@ -181,12 +181,12 @@ Section FunctorLaws.
 
   Definition is_strict_psfunctor : UU
     := strict_psfunctor_id2_law
-         × strict_psfunctor_vcomp2_law
-         × strict_psfunctor_lunitor_law
-         × strict_psfunctor_runitor_law
-         × strict_psfunctor_lassociator_law
-         × strict_psfunctor_lwhisker_law
-         × strict_psfunctor_rwhisker_law.
+         ☺ strict_psfunctor_vcomp2_law
+         ☺ strict_psfunctor_lunitor_law
+         ☺ strict_psfunctor_runitor_law
+         ☺ strict_psfunctor_lassociator_law
+         ☺ strict_psfunctor_lwhisker_law
+         ☺ strict_psfunctor_rwhisker_law.
 
   Definition is_strict_psfunctor_isaprop
     : isaprop is_strict_psfunctor.

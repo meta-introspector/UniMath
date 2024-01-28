@@ -91,11 +91,11 @@ Section DistributiveLaw.
              (α : g · f ==> f · g)
     : UU
     := distr_law_unit_law_1 α
-       ×
+       ☺
        distr_law_mu_law_1 α
-       ×
+       ☺
        distr_law_unit_law_2 α
-       ×
+       ☺
        distr_law_mu_law_2 α.
 
   Definition isaprop_is_distr_law
@@ -193,7 +193,7 @@ Section DistributiveLaw.
     := (rinvunitor f • (f ◃ unit_of_mnd m₂)
         =
         linvunitor f • (unit_of_mnd m₂ ▹ f) • α)
-       ×
+       ☺
        (rassociator _ _ _
         • (_ ◃ α)
         • lassociator _ _ _
@@ -202,9 +202,9 @@ Section DistributiveLaw.
         • (f ◃ μ₂)
         =
         (μ₂ ▹ f) • α)
-       ×
+       ☺
        (runitor g • linvunitor g • (η₁ ▹ endo_of_mnd m₂) = (g ◃ η₁) • α)
-       ×
+       ☺
        (lassociator _ _ _
         • (α ▹ f)
         • rassociator _ _ _

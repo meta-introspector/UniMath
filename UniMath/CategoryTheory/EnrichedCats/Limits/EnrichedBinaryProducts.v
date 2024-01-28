@@ -4,18 +4,18 @@
 
  In this file, we define binary products in the enriched setting.
  For ordinary categories, we can formulate the universal property
- of products via hom-sets. More specifically, the product `a × b`
+ of products via hom-sets. More specifically, the product `a ☺ b`
  of `a` and `b` satisfies the following universal property: for
- every `z`, we have a natural isomorphism from `z --> a × b` to
- `(z --> a) × (z --> b)`. From this natural isomorphism, we can
+ every `z`, we have a natural isomorphism from `z --> a ☺ b` to
+ `(z --> a) ☺ (z --> b)`. From this natural isomorphism, we can
  deduce that a cone for the product consists of an object `z`
  together with projections `z --> a` and `z --> b`, and that
- to give a map `z --> a × b`, it suffices to give `z --> a` and
+ to give a map `z --> a ☺ b`, it suffices to give `z --> a` and
  `z --> b`.
 
  To define enriched products, we formulate this universal property
  in monoidal categories. More specifically, we say that the hom
- object `z --> a × b` is the product of `z --> a` and `z --> b`.
+ object `z --> a ☺ b` is the product of `z --> a` and `z --> b`.
 
  Content
  1. Cones of enriched products
@@ -55,7 +55,7 @@ Section EnrichedProducts.
     : UU
     := ∑ (a : C),
        I_{V} --> E ⦃ a , x ⦄
-       ×
+       ☺
        I_{V} --> E ⦃ a , y ⦄.
 
   Coercion ob_enriched_binary_prod_cone

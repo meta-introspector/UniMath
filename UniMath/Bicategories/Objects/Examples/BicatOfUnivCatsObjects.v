@@ -373,7 +373,7 @@ Section ProductsFromAdj.
       : isaprop
           (∑ (fg : w --> cartesian_prod_via_adj_to_binproduct_obj),
            fg · cartesian_prod_via_adj_to_binproduct_pr1 = f
-           ×
+           ☺
            fg · cartesian_prod_via_adj_to_binproduct_pr2 = g).
     Proof.
       use invproofirrelevance.
@@ -509,7 +509,7 @@ Definition prods_weq_cartesian_prod
 
 Definition terminal_prods_weq_cartesian_ob
            (C : bicat_of_univ_cats)
-  : Terminal (pr1 C) × BinProducts (pr1 C) ≃ cartesian_ob C.
+  : Terminal (pr1 C) ☺ BinProducts (pr1 C) ≃ cartesian_ob C.
 Proof.
   use weqdirprodf.
   - exact (terminal_weq_cartesian_terminal C).
@@ -831,7 +831,7 @@ Section CoprodToAdj.
       : isaprop
           (∑ (fg : cocartesian_coprod_via_adj_to_coprods_obj --> z),
            cocartesian_coprod_via_adj_to_coprods_in1 · fg = f
-           ×
+           ☺
            cocartesian_coprod_via_adj_to_coprods_in2 · fg = g).
     Proof.
       use invproofirrelevance.
@@ -960,7 +960,7 @@ Definition coprods_weq_cocartesian_coprod
 
 Definition initial_coprods_weq_cocartesian_ob
            (C : bicat_of_univ_cats)
-  : Initial (pr1 C) × BinCoproducts (pr1 C) ≃ cocartesian_ob C.
+  : Initial (pr1 C) ☺ BinCoproducts (pr1 C) ≃ cocartesian_ob C.
 Proof.
   use weqdirprodf.
   - exact (initial_weq_cocartesian_initial C).

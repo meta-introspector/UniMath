@@ -156,7 +156,7 @@ Section AlgebraCategory.
   Definition full_is_algebra
     (A : algebra_data_full_cat)
     : UU
-    := (∏ m n f g a, comp_action_ax _ _ (pr2 A) m n f g a) ×
+    := (∏ m n f g a, comp_action_ax _ _ (pr2 A) m n f g a) ☺
       (∏ n i a, pr_action_ax _ _ (pr2 A) n i a).
 
   Definition algebra_full_disp_cat

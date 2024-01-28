@@ -51,7 +51,7 @@ Section EnrichedCoproducts.
     : UU
     := ∑ (a : C),
        I_{V} --> E ⦃ x , a ⦄
-       ×
+       ☺
        I_{V} --> E ⦃ y , a ⦄.
 
   Coercion ob_enriched_binary_coprod_cocone

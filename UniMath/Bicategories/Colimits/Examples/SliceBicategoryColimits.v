@@ -295,7 +295,7 @@ Section CoproductSlice.
     : isaprop
         (∑ (γ : φ ==> ψ),
          bincoprod_cocone_inl slice_coprod_cone ◃ γ = α
-         ×
+         ☺
          bincoprod_cocone_inr slice_coprod_cone ◃ γ = β).
   Proof.
     use invproofirrelevance.

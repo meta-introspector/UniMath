@@ -95,7 +95,7 @@ Definition is_unit
            (e : carrier m)
   : UU
   := (∏ (x : carrier m), operation m x e = x)
-     ×
+     ☺
      (∏ (x : carrier m), operation m e x = x).
 
 Definition has_unit

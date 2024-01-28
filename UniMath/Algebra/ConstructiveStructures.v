@@ -13,7 +13,7 @@ Require Import UniMath.MoreFoundations.Tactics.
 
 Definition isnonzeroCR (X : rig) (R : tightap X) := R 1%rig 0%rig.
 Definition isConstrDivRig (X : rig) (R : tightap X) :=
-  isnonzeroCR X R × (∏ x : X, R x 0%rig -> multinvpair X x).
+  isnonzeroCR X R ☺ (∏ x : X, R x 0%rig -> multinvpair X x).
 
 (** ** Constructive rig with division *)
 
@@ -21,8 +21,8 @@ Definition ConstructiveDivisionRig :=
   ∑ X : rig,
   ∑ R : tightap X,
         isapbinop (X := (pr1 (pr1 X)) ,, R) BinaryOperations.op1
-      × isapbinop (X := (pr1 (pr1 X)) ,, R) BinaryOperations.op2
-      × isConstrDivRig X R.
+      ☺ isapbinop (X := (pr1 (pr1 X)) ,, R) BinaryOperations.op2
+      ☺ isConstrDivRig X R.
 Definition ConstructiveDivisionRig_rig : ConstructiveDivisionRig -> rig := pr1.
 Coercion ConstructiveDivisionRig_rig : ConstructiveDivisionRig >-> rig.
 Definition ConstructiveDivisionRig_apsetwith2binop : ConstructiveDivisionRig -> apsetwith2binop.
@@ -227,8 +227,8 @@ Definition ConstructiveCommutativeDivisionRig :=
   ∑ X : commrig,
   ∑ R : tightap X,
         isapbinop (X := (pr1 (pr1 X)) ,, R) BinaryOperations.op1
-      × isapbinop (X := (pr1 (pr1 X)) ,, R) BinaryOperations.op2
-      × isConstrDivRig X R.
+      ☺ isapbinop (X := (pr1 (pr1 X)) ,, R) BinaryOperations.op2
+      ☺ isConstrDivRig X R.
 Definition ConstructiveCommutativeDivisionRig_commrig :
   ConstructiveCommutativeDivisionRig -> commrig := pr1.
 Coercion ConstructiveCommutativeDivisionRig_commrig :
@@ -428,8 +428,8 @@ Definition ConstructiveField :=
   ∑ X : commring,
   ∑ R : tightap X,
         isapbinop (X := (pr1 (pr1 X)) ,, R) BinaryOperations.op1
-      × isapbinop (X := (pr1 (pr1 X)) ,, R) BinaryOperations.op2
-      × isConstrDivRig X R.
+      ☺ isapbinop (X := (pr1 (pr1 X)) ,, R) BinaryOperations.op2
+      ☺ isConstrDivRig X R.
 Definition ConstructiveField_commring :
   ConstructiveField -> commring := pr1.
 Coercion ConstructiveField_commring :

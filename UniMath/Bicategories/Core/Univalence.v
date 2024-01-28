@@ -113,7 +113,7 @@ Definition is_univalent_2_0 (C : bicat) : UU
     := ∏ (a b : C), isweq (idtoiso_2_0 a b).
 
 Definition is_univalent_2 (C : bicat) : UU
-  := is_univalent_2_0 C × is_univalent_2_1 C.
+  := is_univalent_2_0 C ☺ is_univalent_2_1 C.
 
 Lemma isaprop_is_univalent_2_1 (C : bicat)
   : isaprop (is_univalent_2_1 C).

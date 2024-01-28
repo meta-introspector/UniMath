@@ -28,13 +28,13 @@ Section MonoidalCategoriesReordered0.
 
   Definition associator0_nattrans {C : category} (T : bifunctor C C C) : UU
     := ∑ ass : associator_data T,
-        associator_nat_leftwhisker ass × associator_nat_rightwhisker ass × associator_nat_leftrightwhisker ass.
+        associator_nat_leftwhisker ass ☺ associator_nat_rightwhisker ass ☺ associator_nat_leftrightwhisker ass.
   Definition associator0 {C : category} (T : bifunctor C C C) : UU
     := ∑ ass : associator0_nattrans T, ∑ assi : associatorinv_data T, associator_iso_law (pr1 ass) assi.
 
   Definition monstruct0 (C : category) : UU
     := ∑ T : bifunctor C C C, ∑ I : C, ∑ lu : lunitor0 T I, ∑ ru : runitor0 T I, ∑ ass : associator0 T,
-                triangle_identity (pr11 lu) (pr11 ru) (pr11 ass) × pentagon_identity (pr11 ass).
+                triangle_identity (pr11 lu) (pr11 ru) (pr11 ass) ☺ pentagon_identity (pr11 ass).
 
   Definition moncats0 : UU := ∑ C : category, monstruct0 C.
 

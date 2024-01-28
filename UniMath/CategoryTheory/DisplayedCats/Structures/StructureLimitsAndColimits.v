@@ -128,7 +128,7 @@ Proposition hset_struct_pointwise
             {PX : P X}
             {PY : P Y}
             {PZ : P Z}
-            (f : X × Z → Y)
+            (f : X ☺ Z → Y)
             (Pf : mor_hset_struct P (hset_struct_prod P PX PZ) PY f)
             (z : Z)
   : mor_hset_struct P PX PY (λ x : X, f (x ,, z)).
@@ -161,12 +161,12 @@ Definition closed_under_fun_laws
         (hset_struct_prod P PX (hset_struct_fun P PX PY))
         PY
         (λ xf, pr12 xf (pr1 xf)))
-     ×
+     ☺
      (∏ (X Y Z : hSet)
         (PX : P X)
         (PY : P Y)
         (PZ : P Z)
-        (f : X × Z → Y)
+        (f : X ☺ Z → Y)
         (Pf : mor_hset_struct P (hset_struct_prod P PX PZ) PY f),
       mor_hset_struct
         P
@@ -203,7 +203,7 @@ Section ClosedUnderFunLaws.
               {PX : P X}
               {PY : P Y}
               {PZ : P Z}
-              (f : X × Z → Y)
+              (f : X ☺ Z → Y)
               (Pf : mor_hset_struct P (hset_struct_prod P PX PZ) PY f)
     : mor_hset_struct
         P
@@ -289,7 +289,7 @@ Definition hset_equalizer_struct_laws
         (Pf : mor_hset_struct P PX PY f)
         (Pg : mor_hset_struct P PX PY g),
       mor_hset_struct P (hset_struct_equalizer EP Pf Pg) PX pr1)
-     ×
+     ☺
      (∏ (X Y : hSet)
         (f g : X → Y)
         (PX : P X)
@@ -427,7 +427,7 @@ Definition hset_coequalizer_struct_laws
         (Pf : mor_hset_struct P PX PY f)
         (Pg : mor_hset_struct P PX PY g),
       mor_hset_struct P PY (hset_struct_coequalizer EP Pf Pg) (coequalizer_map_hSet f g))
-     ×
+     ☺
      (∏ (X Y : hSet)
         (f g : X → Y)
         (PX : P X)
@@ -552,7 +552,7 @@ Definition hset_struct_type_prod_laws
         (PD : ∏ (i : I), P (D i))
         (i : I),
       mor_hset_struct P (HP D PD) (PD i) (λ f, f i))
-     ×
+     ☺
      (∏ (D : I → hSet)
         (PD : ∏ (i : I), P (D i))
         (W : hSet)
@@ -675,7 +675,7 @@ Definition pointed_hset_struct_laws
         (PX : P X)
         (PY : P Y),
       mor_hset_struct P PX PY (λ _, hset_struct_point Pt PY))
-     ×
+     ☺
      (∏ (X Y : hSet)
         (f : X → Y)
         (PX : P X)
@@ -766,12 +766,12 @@ Definition hset_binary_coprod_struct_laws
         (PX : P X)
         (PY : P Y),
       mor_hset_struct P PX (hset_struct_binary_coprod EP PX PY) inl)
-     ×
+     ☺
      (∏ (X Y : hSet)
         (PX : P X)
         (PY : P Y),
       mor_hset_struct P PY (hset_struct_binary_coprod EP PX PY) inr)
-     ×
+     ☺
      (∏ (X Y Z : hSet)
         (PX : P X)
         (PY : P Y)
@@ -890,7 +890,7 @@ Definition hset_struct_set_coprod_laws
         (PD : ∏ (i : I), P (D i))
         (i : I),
       mor_hset_struct P (PD i) (HP D PD) (λ d, i ,, d))
-     ×
+     ☺
      (∏ (D : I → hSet)
         (PD : ∏ (i : I), P (D i))
         (W : hSet)

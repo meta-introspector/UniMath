@@ -62,7 +62,7 @@ Local Notation σ := lm_mult.
 
 Definition LModule_laws  {C : category} (T : LModule_data C) : UU :=
       (∏ c : B, #T (η M c) · σ T c = identity (T c))
-        × (∏ c : B, #T ((μ M) c) · σ T c = σ T (M c) · σ T c).
+        ☺ (∏ c : B, #T ((μ M) c) · σ T c = σ T (M c) · σ T c).
 
 Lemma isaprop_LModule_laws (C : category) (T : LModule_data C) :
    isaprop (LModule_laws T).

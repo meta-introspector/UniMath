@@ -36,7 +36,7 @@ Section Category_of_Monoids.
   Let α : associator_data M := monoidal_associatordata M.
 
   Definition monoid_data (x : C) : UU
-    := C⟦x ⊗ x, x⟧ × C⟦I, x⟧.
+    := C⟦x ⊗ x, x⟧ ☺ C⟦I, x⟧.
 
   Definition monoid_data_multiplication {x : C} (m : monoid_data x)
     : C⟦x ⊗ x, x⟧
@@ -57,7 +57,7 @@ Section Category_of_Monoids.
     := (x ⊗l η_{m}) · μ_{m} = ru x.
 
   Definition monoid_laws {x : C} (m : monoid_data x) : UU
-    := monoid_laws_unit_left m × monoid_laws_unit_right m × monoid_laws_assoc m.
+    := monoid_laws_unit_left m ☺ monoid_laws_unit_right m ☺ monoid_laws_assoc m.
 
   Lemma isaprop_monoid_laws {x : C} (m : monoid_data x)
     : isaprop (monoid_laws m).
@@ -109,7 +109,7 @@ Section Category_of_Monoids.
 
   Definition is_monoid_mor {x y : C}
              (mx : monoid x) (my : monoid y) (f : C⟦x,y⟧) : UU
-    := is_monoid_mor_mult mx my f × is_monoid_mor_unit mx my f.
+    := is_monoid_mor_mult mx my f ☺ is_monoid_mor_unit mx my f.
 
   Lemma isaprop_is_monoid_mor {x y : C}
         (mx : monoid x) (my : monoid y) (f : C⟦x,y⟧)

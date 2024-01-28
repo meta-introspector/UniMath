@@ -37,7 +37,7 @@ Local Open Scope cat.
 
 (** ** Definition *)
 
-(** A profunctor (or distributor) [C ↛ D] is a functor [D^op × C → HSET]. *)
+(** A profunctor (or distributor) [C ↛ D] is a functor [D^op ☺ C → HSET]. *)
 Definition profunctor (C D : category) : UU :=
   functor (category_binproduct (op_category D) C) HSET_univalent_category.
 
@@ -73,7 +73,7 @@ Definition profunctor_laws
         (x : C₁)
         (h : pr1 F y x),
       pr2 F _ _ (identity y) _ _ (identity x) h = h)
-     ×
+     ☺
      (∏ (y₁ y₂ y₃ : C₂)
         (g₁ : y₂ --> y₁)
         (g₂ : y₃ --> y₂)
@@ -84,7 +84,7 @@ Definition profunctor_laws
       pr2 F _ _ (g₂ · g₁) _ _ (f₁ · f₂) h
       =
       pr2 F _ _ g₂ _ _ f₂ (pr2 F _ _ g₁ _ _ f₁ h))
-     ×
+     ☺
      (∏ (y : C₂)
         (x : C₁),
       isaset (pr1 F y x)).

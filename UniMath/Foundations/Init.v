@@ -1,5 +1,5 @@
 (** Initial setup unrelated to Univalent Foundations *)
-
+Global Unset Universe Checking.
 Require Export Coq.Init.Notations.
 (* get the standard Coq reserved notations *)
 
@@ -18,7 +18,7 @@ Notation "'λ' x .. y , t" := (fun x => .. (fun y => t) ..)
 
 Notation "A -> B" := (forall (_ : A), B) : type_scope.
 
-Notation "X <- Y" := (Y -> X) (at level 90, only parsing, left associativity) : type_scope.
+Notation "X <-u Y" := (Y -> X) (at level 91, only parsing, left associativity) : type_scope.
 
 Notation "x → y" := (x -> y)
   (at level 99, y at level 200, right associativity): type_scope.
@@ -54,7 +54,8 @@ Reserved Notation "x != y" (at level 70).
 Reserved Notation "'¬' X" (at level 35, right associativity).
 (* type this in emacs in agda-input method with \neg *)
 
-Reserved Notation "A × B" (at level 75, right associativity).
+(* Reserved Notation "A ☺ B" (at level 80, right associativity). *)
+Reserved Notation "A ☺ B" (at level 90, right associativity).
 
 Reserved Notation "C ⟦ a , b ⟧" (at level 49, right associativity).
 (* ⟦   to input: type "\[[" or "\(" with Agda input method

@@ -17,7 +17,7 @@ from operation symbols to pair [(l,, s)] where [l] is the _arity_ (or _domain_) 
 the _sort_ (or _range_).
 *)
 
-Definition signature : UU := ∑ (S: decSet) (O: hSet), O → list S × S.
+Definition signature : UU := ∑ (S: decSet) (O: hSet), O → list S ☺ S.
 
 Definition sorts (σ: signature) := pr1 σ.
 
@@ -31,7 +31,7 @@ Definition sort {σ: signature} (nm: names σ) : sorts σ := pr2 (ar σ nm).
 
 (** Helper function for creating signatures. *)
 
-Definition make_signature (S: decSet) (O: hSet) (ar: O → list S × S) : signature
+Definition make_signature (S: decSet) (O: hSet) (ar: O → list S ☺ S) : signature
   := S ,, (O ,, ar).
 
 Definition make_signature_single_sorted (O: hSet) (ar: O → nat) : signature
@@ -47,9 +47,9 @@ functions, since this make it simpler to define simplified means of defining a n
 too.
  *)
 
-Definition signature_simple : UU := ∑ (ns: nat), list (list (⟦ ns ⟧) × ⟦ ns ⟧).
+Definition signature_simple : UU := ∑ (ns: nat), list (list (⟦ ns ⟧) ☺ ⟦ ns ⟧).
 
-Definition make_signature_simple {ns: nat} (ar: list (list (⟦ ns ⟧) × ⟦ ns ⟧))
+Definition make_signature_simple {ns: nat} (ar: list (list (⟦ ns ⟧) ☺ ⟦ ns ⟧))
   : signature_simple := ns ,, ar.
 
 Coercion signature_simple_compile (σ: signature_simple) : signature

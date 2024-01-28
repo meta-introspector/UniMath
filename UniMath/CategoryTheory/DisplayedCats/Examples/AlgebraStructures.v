@@ -46,7 +46,7 @@ Section MonadToStruct.
              (f : M X --> X)
     : UU
     := (η M X · f = identity X)
-       ×
+       ☺
        (μ M X · f = #M f · f).
 
   Definition monad_algebra
@@ -162,7 +162,7 @@ Section MonadToStruct.
             (f : monad_algebra X)
             (g : monad_algebra Y).
 
-    Let XY : SET := (X × Y)%set.
+    Let XY : SET := (X ☺ Y)%set.
     Let p₁ : XY --> X := dirprod_pr1.
     Let p₂ : XY --> Y := dirprod_pr2.
 

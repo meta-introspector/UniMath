@@ -59,9 +59,9 @@ Section Initial.
   Definition is_biinitial
              (X : B)
     := biinitial_1cell_property X
-       ×
+       ☺
        ∏ (Y : B), biinitial_2cell_property X Y
-                  ×
+                  ☺
                   biinitial_eq_property X Y.
 
   Definition is_biinitial_1cell_property

@@ -44,7 +44,7 @@ Section CoEilenbergMooreCategory.
   Proof.
     use make_hProp.
     - exact (pr2 f · ε m _  = identity _
-             ×
+             ☺
              pr2 f · δ m (pr1 f) = pr2 f · # m (pr2 f)).
     - apply isapropdirprod ; apply homset_property.
   Defined.

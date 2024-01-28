@@ -180,7 +180,7 @@ Section TensorFunctorProperties.
     : is_nat_trans
         (functor_tensor_map_dom TE (F ∙ G))
         (functor_tensor_map_codom TC (F ∙ G))
-        (λ cc : C × C, GG (F (pr1 cc), F (pr2 cc)) · # G (FF cc)).
+        (λ cc : C ☺ C, GG (F (pr1 cc), F (pr2 cc)) · # G (FF cc)).
   Proof.
     intros cc1 cc2 f.
     etrans. {
@@ -234,7 +234,7 @@ Section TensorFunctorProperties.
     :  is_nat_trans
          (functor_tensor_map_dom TD F)
          (functor_tensor_map_codom TC G)
-         (λ cc : C × C, # TD (α (pr1 cc) #, α (pr2 cc)) · GG cc).
+         (λ cc : C ☺ C, # TD (α (pr1 cc) #, α (pr2 cc)) · GG cc).
   Proof.
     intros cc1 cc2 ff.
     simpl.
@@ -257,7 +257,7 @@ Section TensorFunctorProperties.
     : is_nat_trans
         (functor_tensor_map_dom TD F)
         (functor_tensor_map_codom TC G)
-        (λ cc : C × C, FF cc · α (pr1 cc ⊗_C pr2 cc)).
+        (λ cc : C ☺ C, FF cc · α (pr1 cc ⊗_C pr2 cc)).
   Proof.
     intros cc1 cc2 ff.
     simpl.
@@ -531,7 +531,7 @@ Section StrongMonoidalFunctorCategory.
     := disp_full_sub (functor_monoidal_cat luC luD ruC ruD αC αD)
                      (λ F,
                        is_nat_z_iso (pr121 F : nat_trans _ _)
-                                    × is_z_isomorphism (pr221 F)).
+                                    ☺ is_z_isomorphism (pr221 F)).
 
   Definition strong_functor_monoidal_cat
     : category

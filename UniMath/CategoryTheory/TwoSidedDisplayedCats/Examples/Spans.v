@@ -291,7 +291,7 @@ Section Spans.
     := (mor_left_of_span s₁ · f
         =
         φ · mor_left_of_span s₂)
-       ×
+       ☺
        (mor_right_of_span s₁ · g
         =
         φ · mor_right_of_span s₂).

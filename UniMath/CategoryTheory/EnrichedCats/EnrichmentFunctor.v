@@ -50,14 +50,14 @@ Definition is_functor_enrichment
       enriched_id E₁ x · FE x x
       =
       enriched_id E₂ (F x))
-     ×
+     ☺
      (∏ (x y z : C₁),
       enriched_comp E₁ x y z
       · FE x z
       =
       FE y z #⊗ FE x y
       · enriched_comp E₂ (F x) (F y) (F z))
-     ×
+     ☺
      (∏ (x y : C₁) (f : x --> y),
       enriched_from_arr E₂ (#F f)
       =
@@ -297,7 +297,7 @@ Definition enriched_weak_equivalence
            {E₂ : enrichment C₂ V}
            (EF : functor_enrichment F E₁ E₂)
   : UU
-  := essentially_surjective F × fully_faithful_enriched_functor EF.
+  := essentially_surjective F ☺ fully_faithful_enriched_functor EF.
 
 (** 3. The enriched identity functor *)
 Definition functor_id_enrichment

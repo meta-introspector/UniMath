@@ -26,13 +26,13 @@ Section def_zero.
   Context {C : category}.
 
   (** An object c is zero if it initial and terminal. *)
-  Definition isZero (c : C) : UU := (isInitial C c) × (isTerminal C c).
+  Definition isZero (c : C) : UU := (isInitial C c) ☺ (isTerminal C c).
 
   (** Construction of isZero for an object c from the conditions that the space
     of all morphisms from c to any object d is contractible and and the space of
     all morphisms from any object d to c is contractible. *)
   Definition make_isZero (c : C) (H : (∏ (d : C), iscontr (c --> d))
-                                      × (∏ (d : C), iscontr (d --> c))) :
+                                      ☺ (∏ (d : C), iscontr (d --> c))) :
     isZero c := make_isInitial c (dirprod_pr1 H),,make_isTerminal c (dirprod_pr2 H).
 
   (** Definition of Zero. *)
@@ -179,7 +179,7 @@ Section def_zero.
   Lemma Initial_and_Terminal_ob_equals_Zero_ob (I : Initial C)
         (T :Terminal C) (e : iso (InitialObject I) (TerminalObject T)) :
     (iso (InitialObject I) (ZeroObject (Initial_and_Terminal_to_Zero I T e)))
-      × (iso (TerminalObject T)
+      ☺ (iso (TerminalObject T)
              (ZeroObject (Initial_and_Terminal_to_Zero I T e))).
   Proof.
     exact(identity_iso (InitialObject I),,iso_inv_from_iso e).
@@ -205,7 +205,7 @@ Section zero_coincides.
   Qed.
 
   Lemma equiv_isZero2 (c : C) :
-    limits.zero.isZero c <- isZero c.
+    limits.zero.isZero c <-u isZero c.
   Proof.
     intros X.
     set (XZ := make_Zero c X).
@@ -233,7 +233,7 @@ Section zero_coincides.
   Defined.
 
   Definition equiv_Zero2 :
-    limits.zero.Zero C <- @Zero C.
+    limits.zero.Zero C <-u @Zero C.
   Proof.
     intros Z.
     exact (limits.zero.make_Zero

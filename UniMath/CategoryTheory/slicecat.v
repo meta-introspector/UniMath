@@ -888,12 +888,12 @@ Section Pullbacks.
 
   (** A complex lemma statement for a simpler proof later *)
   Local Lemma iscontr_cond_dirprod_weq {X : UU} {P Q R : X -> UU}
-    (xx : ∃! x : X, P x × Q x) :
+    (xx : ∃! x : X, P x ☺ Q x) :
     (∏ x, isaprop (R x)) ->
     (∏ x, isaprop (P x)) ->
     (∏ x, isaprop (Q x)) ->
     (R (pr1 (iscontrpr1 xx))) ->
-    (∃! x : X, P x × Q x × R x).
+    (∃! x : X, P x ☺ Q x ☺ R x).
   Proof.
     intros ispropR ispropP ispropQ rxx.
     use make_iscontr.
@@ -967,12 +967,12 @@ Section Pullbacks.
        *)
       use iscontrweqb;
         [exact (∑ kk : % PB' --> PullbackObject PB,
-                kk · PullbackPr1 PB = ($$ prA') ×
-                kk · PullbackPr2 PB = ($$ prB') ×
+                kk · PullbackPr1 PB = ($$ prA') ☺
+                kk · PullbackPr2 PB = ($$ prB') ☺
                 slicecat_ob_morphism _ _ PB' = kk · PBtoI)| | ].
       use weqcomp.
       + exact (∑ kk : PB' --> (PullbackObject PB,, PBtoI),
-                ($$ kk) · PullbackPr1 PB = ($$ prA') ×
+                ($$ kk) · PullbackPr1 PB = ($$ prA') ☺
                 ($$ kk) · PullbackPr2 PB = ($$ prB')).
       + (** Step 1 *)
         apply weqfibtototal; intro.

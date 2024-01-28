@@ -400,7 +400,7 @@ Definition is_strong_double_functor
         (identity_is_z_iso _)
         (identity_is_z_iso _)
         (lax_double_functor_id_h F x))
-     ×
+     ☺
      (∏ (x y z : C₁)
         (h : x -->h y)
         (k : y -->h z),

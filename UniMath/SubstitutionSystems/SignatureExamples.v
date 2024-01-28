@@ -113,7 +113,7 @@ Qed.
 
 End δ_laws.
 
-Definition DistributiveLaw : UU := ∑ δ : δ_source ⟹ δ_target, δ_law1 δ × δ_law2 δ.
+Definition DistributiveLaw : UU := ∑ δ : δ_source ⟹ δ_target, δ_law1 δ ☺ δ_law2 δ.
 
 Definition δ (DL : DistributiveLaw) : δ_source ⟹ δ_target := pr1 DL.
 

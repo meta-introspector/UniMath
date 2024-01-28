@@ -36,15 +36,15 @@ Definition ℤRecursionData0 (P:ℤ->Type) (p0:P zero)
       (IH :∏ n, P(  toℤ n) -> P(  toℤ (S n)))
       (IH':∏ n, P(- toℤ n) -> P(- toℤ (S n))) := fun
           f:∏ i, P i =>
-            (f zero = p0) ×
-            (∏ n, f(  toℤ (S n)) = IH  n (f (  toℤ n))) ×
+            (f zero = p0) ☺
+            (∏ n, f(  toℤ (S n)) = IH  n (f (  toℤ n))) ☺
             (∏ n, f(- toℤ (S n)) = IH' n (f (- toℤ n))).
 
 Definition ℤRecursionData (P:ℤ->Type)
       (IH :∏ n, P(  toℤ n) -> P(  toℤ (S n)))
       (IH':∏ n, P(- toℤ n) -> P(- toℤ (S n))) := fun
              f:∏ i, P i =>
-               (∏ n, f(  toℤ (S n)) = IH  n (f (  toℤ n))) ×
+               (∏ n, f(  toℤ (S n)) = IH  n (f (  toℤ n))) ☺
                (∏ n, f(- toℤ (S n)) = IH' n (f (- toℤ n))).
 
 Lemma ℤRecursionUniq (P:ℤ->Type) (p0:P zero)
@@ -57,9 +57,9 @@ Proof.
   (* use hNatRecursion_weq *)
   apply (iscontrweqb (Y :=
                         ∑ f:∏ w, P (negpos w),
-                        (f (ii2 O) = p0) ×
-                                         (∏ n : nat, f (ii2 (S n)) = IH n (f (ii2 n))) ×
-                                         (f (ii1 O) = IH' O (f (ii2 O))) ×
+                        (f (ii2 O) = p0) ☺
+                                         (∏ n : nat, f (ii2 (S n)) = IH n (f (ii2 n))) ☺
+                                         (f (ii1 O) = IH' O (f (ii2 O))) ☺
                                          (∏ n : nat, f (ii1 (S n)) = IH' (S n) (f (ii1 n))))).
   { apply (weqbandf (weqonsecbase _ negpos)). intro f.
     simple refine (make_weq _ (isweq_iso _ _ _ _)).
@@ -74,50 +74,50 @@ Proof.
                        { apply funextsec; intros [|n']; reflexivity; reflexivity. } }
     { intros [h0 [h1' [hp hn]]]. reflexivity. } }
   intermediate_iscontr (
-    ∑ f : (∏ n, P (negpos (ii1 n))) ×
+    ∑ f : (∏ n, P (negpos (ii1 n))) ☺
                                     (∏ n, P (negpos (ii2 n))),
-          (pr2 f O = p0) ×
-                         (∏ n : nat, pr2 f (S n) = IH n (pr2 f n)) ×
-                         (pr1 f O = IH' O (pr2 f O)) ×
+          (pr2 f O = p0) ☺
+                         (∏ n : nat, pr2 f (S n) = IH n (pr2 f n)) ☺
+                         (pr1 f O = IH' O (pr2 f O)) ☺
                          (∏ n : nat, pr1 f (S n) = IH' (S n) (pr1 f n))).
   { apply (weqbandf (weqsecovercoprodtoprod (λ w, P (negpos w)))).
     intro f. apply idweq. }
   intermediate_iscontr (
-    ∑ f : (∏ n, P (negpos (ii2 n))) ×
+    ∑ f : (∏ n, P (negpos (ii2 n))) ☺
                                     (∏ n, P (negpos (ii1 n))),
-          (pr1 f O = p0) ×
-                         (∏ n : nat, pr1 f (S n) = IH n (pr1 f n)) ×
-                         (pr2 f O = IH' O (pr1 f O)) ×
+          (pr1 f O = p0) ☺
+                         (∏ n : nat, pr1 f (S n) = IH n (pr1 f n)) ☺
+                         (pr2 f O = IH' O (pr1 f O)) ☺
                          (∏ n : nat, pr2 f (S n) = IH' (S n) (pr2 f n))).
   { apply (weqbandf (weqdirprodcomm _ _)). intro f. apply idweq. }
   intermediate_iscontr (
     ∑ (f2 : ∏ n : nat, P (negpos (ii2 n)))
       (f1 : ∏ n : nat, P (negpos (ii1 n))),
-    (f2 O = p0) ×
-                (∏ n : nat, f2 (S n) = IH n (f2 n)) ×
-                (f1 O = IH' O (f2 O)) ×
+    (f2 O = p0) ☺
+                (∏ n : nat, f2 (S n) = IH n (f2 n)) ☺
+                (f1 O = IH' O (f2 O)) ☺
                 (∏ n : nat, f1 (S n) = IH' (S n) (f1 n))).
   { apply weqtotal2asstor. }
   intermediate_iscontr (
     ∑ f2 : ∏ n : nat, P (negpos (ii2 n)),
-                 (f2 O = p0) ×
+                 (f2 O = p0) ☺
                              ∑ f1 : ∏ n : nat, P (negpos (ii1 n)),
-                                          (∏ n : nat, f2 (S n) = IH n (f2 n)) ×
-                                                                              (f1 O = IH' O (f2 O)) ×
+                                          (∏ n : nat, f2 (S n) = IH n (f2 n)) ☺
+                                                                              (f1 O = IH' O (f2 O)) ☺
                                                                               (∏ n : nat, f1 (S n) = IH' (S n) (f1 n))).
   { apply weqfibtototal; intro f2. apply weq_total2_prod. }
   intermediate_iscontr (
     ∑ f2 : ∏ n : nat, P (negpos (ii2 n)),
-                 (f2 O = p0) ×
-                             (∏ n : nat, f2 (S n) = IH n (f2 n)) ×
+                 (f2 O = p0) ☺
+                             (∏ n : nat, f2 (S n) = IH n (f2 n)) ☺
                              ∑ f1 : ∏ n : nat, P (negpos (ii1 n)),
-                                          (f1 O = IH' O (f2 O)) ×
+                                          (f1 O = IH' O (f2 O)) ☺
                                                                 (∏ n : nat, f1 (S n) = IH' (S n) (f1 n))).
   { apply weqfibtototal; intro f2. apply weqfibtototal; intro.
     apply weq_total2_prod. }
   intermediate_iscontr (
     ∑ f2 : ∏ n : nat, P (negpos (ii2 n)),
-                 (f2 O = p0) ×
+                 (f2 O = p0) ☺
                              (∏ n : nat, f2 (S n) = IH n (f2 n))).
   { apply weqfibtototal; intro f2. apply weqfibtototal; intro h0.
     apply weqpr1; intro ih2.

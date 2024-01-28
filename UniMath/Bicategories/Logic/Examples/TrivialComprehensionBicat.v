@@ -368,7 +368,7 @@ Section TrivialCompBicat.
       Definition adj_equiv_to_pb_ump_2_unique
         : isaprop (∑ (γ : φ ==> ψ),
                    γ ▹ pb_cone_pr1 cone = α
-                   ×
+                   ☺
                    γ ▹ pb_cone_pr2 cone = β).
       Proof.
         use invproofirrelevance.

@@ -204,7 +204,7 @@ Section BicatCleaving.
             (h : c --> a)
             (gg : cc -->[ h · f ] bb),
           lift_1cell_factor gg)
-         ×
+         ☺
          ∏ (c : B)
            (cc : D c)
            (h h' : c --> a)
@@ -410,9 +410,9 @@ Section BicatCleaving.
   Definition cleaving_of_bicats
     : UU
     := local_cleaving
-       × global_cleaving
-       × lwhisker_cartesian
-       × rwhisker_cartesian.
+       ☺ global_cleaving
+       ☺ lwhisker_cartesian
+       ☺ rwhisker_cartesian.
 End BicatCleaving.
 
 (** 2. Properties of cartesian 2-cells *)

@@ -186,7 +186,7 @@ Definition ver_sq_bicat_ver_id_comp
            (B : ver_sq_bicat)
   : UU
   := precategory_id_comp (precat_ob_ver_mor B)
-     ×
+     ☺
      prebicat_2cell_struct (precat_ob_ver_mor B).
 
 Definition prebicat_1_id_comp_cells_ver_id_comp_cells
@@ -369,7 +369,7 @@ Definition double_bicat_whiskering
       square_double_bicat h₁ h₂ v₁' v₂
       →
       square_double_bicat h₁ h₂ v₁ v₂)
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ : w --> x)
         (h₂ : y --> z)
@@ -379,7 +379,7 @@ Definition double_bicat_whiskering
       square_double_bicat h₁ h₂ v₁ v₂
       →
       square_double_bicat h₁ h₂ v₁ v₂')
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ h₁' : w --> x)
         (h₂ : y --> z)
@@ -389,7 +389,7 @@ Definition double_bicat_whiskering
       square_double_bicat h₁' h₂ v₁ v₂
       →
       square_double_bicat h₁ h₂ v₁ v₂)
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ : w --> x)
         (h₂ h₂' : y --> z)
@@ -483,7 +483,7 @@ Definition lwhisker_square_id_comp_law
         (v₂ : x -|-> z)
         (s : square_double_bicat h₁ h₂ v₁ v₂),
       id2 v₁ ◃s s = s)
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ : w --> x)
         (h₂ : y --> z)
@@ -504,7 +504,7 @@ Definition rwhisker_square_id_comp_law
         (v₂ : x -|-> z)
         (s : square_double_bicat h₁ h₂ v₁ v₂),
       id2 v₂ ▹s s = s)
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ : w --> x)
         (h₂ : y --> z)
@@ -525,7 +525,7 @@ Definition uwhisker_square_id_comp_law
         (v₂ : x -|-> z)
         (s : square_double_bicat h₁ h₂ v₁ v₂),
       id2 h₁ ▵s s = s)
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ h₁' h₁'' : w --> x)
         (h₂ : y --> z)
@@ -546,7 +546,7 @@ Definition dwhisker_square_id_comp_law
         (v₂ : x -|-> z)
         (s : square_double_bicat h₁ h₂ v₁ v₂),
       id2 h₂ ▿s s = s)
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ : w --> x)
         (h₂ h₂' h₂'' : y --> z)
@@ -569,7 +569,7 @@ Definition whisker_square_compatible
         (θ : h₂ ==> h₂')
         (s : square_double_bicat h₁' h₂ v₁ v₂),
       θ ▿s (τ ▵s s) = τ ▵s (θ ▿s s))
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ h₁' : w --> x)
         (h₂ : y --> z)
@@ -579,7 +579,7 @@ Definition whisker_square_compatible
         (θ : v₁ ==> v₁')
         (s : square_double_bicat h₁' h₂ v₁' v₂),
       θ ◃s (τ ▵s s) = τ ▵s (θ ◃s s))
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ h₁' : w --> x)
         (h₂ : y --> z)
@@ -589,7 +589,7 @@ Definition whisker_square_compatible
         (θ : v₂ ==> v₂')
         (s : square_double_bicat h₁' h₂ v₁ v₂),
       θ ▹s (τ ▵s s) = τ ▵s (θ ▹s s))
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ : w --> x)
         (h₂ h₂' : y --> z)
@@ -599,7 +599,7 @@ Definition whisker_square_compatible
         (θ : v₁ =|=> v₁')
         (s : square_double_bicat h₁ h₂ v₁' v₂),
       θ ◃s (τ ▿s s) = τ ▿s (θ ◃s s))
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ : w --> x)
         (h₂ h₂' : y --> z)
@@ -609,7 +609,7 @@ Definition whisker_square_compatible
         (θ : v₂ =|=> v₂')
         (s : square_double_bicat h₁ h₂ v₁ v₂),
       θ ▹s (τ ▿s s) = τ ▿s (θ ▹s s))
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ : w --> x)
         (h₂ : y --> z)
@@ -627,7 +627,7 @@ Definition whisker_square_id_square
         (v w : x -|-> y)
         (τ : v =|=> w),
       τ ◃s id_h_square_bicat w = τ ▹s id_h_square_bicat v)
-     ×
+     ☺
      (∏ (x y : B)
         (h k : x --> y)
         (τ : h ==> k),
@@ -648,7 +648,7 @@ Definition whisker_square_comp_square
         (s₁ : square_double_bicat h₁' h₂ v₁ w₁)
         (s₂ : square_double_bicat h₂ h₃ v₂ w₂),
       τ ▵s (s₁ ⋆v s₂) = (τ ▵s s₁) ⋆v s₂)
-     ×
+     ☺
      (∏ (x₁ x₂ y₁ y₂ z₁ z₂ : B)
         (h₁ : x₁ --> x₂)
         (h₂ : y₁ --> y₂)
@@ -661,7 +661,7 @@ Definition whisker_square_comp_square
         (s₁ : square_double_bicat h₁ h₂ v₁ w₁)
         (s₂ : square_double_bicat h₂ h₃ v₂ w₂),
       τ ▿s (s₁ ⋆v s₂) = s₁ ⋆v (τ ▿s s₂))
-     ×
+     ☺
      (∏ (x₁ x₂ y₁ y₂ z₁ z₂ : B)
         (h₁ : x₁ --> x₂)
         (h₂ h₂' : y₁ --> y₂)
@@ -674,7 +674,7 @@ Definition whisker_square_comp_square
         (s₁ : square_double_bicat h₁ h₂ v₁ w₁)
         (s₂ : square_double_bicat h₂' h₃ v₂ w₂),
       s₁ ⋆v (τ ▵s s₂) = (τ ▿s s₁) ⋆v s₂)
-     ×
+     ☺
      (∏ (x₁ x₂ x₃ y₁ y₂ y₃ : B)
         (h₁ : x₁ --> x₂)
         (h₂ : x₂ --> x₃)
@@ -687,7 +687,7 @@ Definition whisker_square_comp_square
         (s₁ : square_double_bicat h₁ k₁ v₁' v₂)
         (s₂ : square_double_bicat h₂ k₂ v₂ v₃),
       τ ◃s (s₁ ⋆h s₂) = (τ ◃s s₁) ⋆h s₂)
-     ×
+     ☺
      (∏ (x₁ x₂ x₃ y₁ y₂ y₃ : B)
         (h₁ : x₁ --> x₂)
         (h₂ : x₂ --> x₃)
@@ -700,7 +700,7 @@ Definition whisker_square_comp_square
         (s₁ : square_double_bicat h₁ k₁ v₁ v₂)
         (s₂ : square_double_bicat h₂ k₂ v₂ v₃),
       τ ▹s (s₁ ⋆h s₂) = s₁ ⋆h (τ ▹s s₂))
-     ×
+     ☺
      (∏ (x₁ x₂ x₃ y₁ y₂ y₃ : B)
         (h₁ : x₁ --> x₂)
         (h₂ : x₂ --> x₃)
@@ -718,17 +718,17 @@ Definition whisker_square_bicat_law
            (B : ver_bicat_sq_id_comp_whisker)
   : UU
   := lwhisker_square_id_comp_law B
-     ×
+     ☺
      rwhisker_square_id_comp_law B
-     ×
+     ☺
      uwhisker_square_id_comp_law B
-     ×
+     ☺
      dwhisker_square_id_comp_law B
-     ×
+     ☺
      whisker_square_compatible B
-     ×
+     ☺
      whisker_square_id_square B
-     ×
+     ☺
      whisker_square_comp_square B.
 
 (** * 6. Laws relating composition and identity squares (items (ix) and (x) in Verity) *)
@@ -757,12 +757,12 @@ Definition double_bicat_id_square_laws
            (B : ver_bicat_sq_id_comp_whisker)
   : UU
   := (∏ (x : B), id_h_square_bicat (id_v x) = id_v_square_bicat (id_h x))
-     ×
+     ☺
      (∏ (x y z : B)
         (h : x -|-> y)
         (k : y -|-> z),
       id_h_square_bicat h ⋆v id_h_square_bicat k = id_h_square_bicat (h · k))
-     ×
+     ☺
      (∏ (x y z : B)
         (v : x --> y)
         (w : y --> z),
@@ -771,7 +771,7 @@ Definition double_bicat_id_square_laws
 Definition double_bicat_id_comp_square_laws
            (B : ver_bicat_sq_id_comp_whisker)
   : UU
-  := double_bicat_interchange_law B × double_bicat_id_square_laws B.
+  := double_bicat_interchange_law B ☺ double_bicat_id_square_laws B.
 
 (** * 7. Laws about cylinders (items (vi)-(vii) in Verity) *)
 Definition is_hor_cylinder
@@ -822,7 +822,7 @@ Definition associator_cylinder_law
         ((s₁ ⋆h s₂) ⋆h s₃)
         (lassociator _ _ _)
         (lassociator _ _ _))
-     ×
+     ☺
      (∏ (w₁ w₂ x₁ x₂ y₁ y₂ z₁ z₂ : B)
         (hw : w₁ --> w₂) (hx : x₁ --> x₂)
         (hy : y₁ --> y₂) (hz : z₁ --> z₂)
@@ -851,7 +851,7 @@ Definition lunitor_cylinder_law
         s
         (lunitor _)
         (lunitor _))
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ : w --> x)
         (h₂ : y --> z)
@@ -878,7 +878,7 @@ Definition runitor_cylinder_law
         s
         (runitor _)
         (runitor _))
-     ×
+     ☺
      (∏ (w x y z : B)
         (h₁ : w --> x)
         (h₂ : y --> z)
@@ -917,7 +917,7 @@ Definition comp_cylinder_law
         (s₁' ⋆v s₂')
         (τ₁ ⋆ τ₂)
         (θ₁ ⋆ θ₂))
-     ×
+     ☺
      (∏ (x₁ x₂ x₃ y₁ y₂ y₃ : B)
         (h₁ h₁' : x₁ --> x₂)
         (h₂ h₂' : x₂ --> x₃)
@@ -946,11 +946,11 @@ Definition double_bicat_cylinder_laws
            (B : ver_bicat_sq_id_comp_whisker)
   : UU
   := associator_cylinder_law B
-     ×
+     ☺
      lunitor_cylinder_law B
-     ×
+     ☺
      runitor_cylinder_law B
-     ×
+     ☺
      comp_cylinder_law B.
 
 (** * 8. Verity double bicategories *)
@@ -968,11 +968,11 @@ Definition double_bicat_laws
            (B : ver_bicat_sq_id_comp_whisker)
   : UU
   := whisker_square_bicat_law B
-     ×
+     ☺
      double_bicat_id_comp_square_laws B
-     ×
+     ☺
      double_bicat_cylinder_laws B
-     ×
+     ☺
      isaset_square_double_bicat_law B.
 
 Proposition make_double_bicat_laws

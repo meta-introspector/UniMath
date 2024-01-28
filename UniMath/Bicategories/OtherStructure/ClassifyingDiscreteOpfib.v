@@ -37,7 +37,7 @@ Definition disc_sopfib
            {e s : B}
            (p : e --> s)
   : UU
-  := internal_sopfib p × discrete_1cell p.
+  := internal_sopfib p ☺ discrete_1cell p.
 
 Section ClassifyingDiscreteOpfibration.
   Context {B : bicat}
@@ -233,7 +233,7 @@ Section ClassifyingDiscreteOpfibration.
 
   Definition is_classifying
     : UU
-    := is_classifying_full × is_classifying_faithful.
+    := is_classifying_full ☺ is_classifying_faithful.
 
   Definition eq_disc_slice_mor
              {x : B}
@@ -296,7 +296,7 @@ Section ClassifyingDiscreteOpfibration.
       apply maponpaths.
       apply (@pr2_transportf
                (pr1 g₁ --> pr1 g₂)
-               (λ z, mor_preserves_opcartesian (pr12 g₁) (pr12 g₂) z × unit)
+               (λ z, mor_preserves_opcartesian (pr12 g₁) (pr12 g₂) z ☺ unit)
                (λ z, invertible_2cell (pr12 g₁) (z · pr12 g₂))).
     }
     etrans.

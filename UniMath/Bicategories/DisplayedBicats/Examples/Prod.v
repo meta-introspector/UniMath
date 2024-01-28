@@ -39,7 +39,7 @@ Section Disp_PreDirprod.
     exists (dirprod_disp_cat_data D1 D2).
     intros c c' f g x d d' f' g'.
     cbn in *.
-    exact ( (pr1 f' ==>[ x ] pr1 g') × (pr2 f' ==>[ x ] pr2 g')).
+    exact ( (pr1 f' ==>[ x ] pr1 g') ☺ (pr2 f' ==>[ x ] pr2 g')).
   Defined.
 
   Definition disp_dirprod_prebicat_ops : disp_prebicat_ops disp_dirprod_prebicat_1_id_comp_cells.
@@ -185,7 +185,7 @@ Section Disp_Dirprod.
              {ff : aa -->[ f ] bb}
              {gg : aa -->[ g ] bb}
              (xx : ff ==>[ x ] gg)
-    : is_disp_invertible_2cell x (pr1 xx) × is_disp_invertible_2cell x (pr2 xx)
+    : is_disp_invertible_2cell x (pr1 xx) ☺ is_disp_invertible_2cell x (pr2 xx)
       →
       is_disp_invertible_2cell x xx.
   Proof.
@@ -226,7 +226,7 @@ Section Disp_Dirprod.
              {bb : disp_dirprod_bicat b}
              {ff : aa -->[ f ] bb}
              {gg : aa -->[ g ] bb}
-    : disp_invertible_2cell x (pr1 ff) (pr1 gg) × disp_invertible_2cell x (pr2 ff) (pr2 gg)
+    : disp_invertible_2cell x (pr1 ff) (pr1 gg) ☺ disp_invertible_2cell x (pr2 ff) (pr2 gg)
       →
       disp_invertible_2cell x ff gg.
   Proof.
@@ -400,7 +400,7 @@ Section Disp_Dirprod.
              {bb : disp_dirprod_bicat b}
              (ff : aa -->[ f ] bb)
              (gg : aa -->[ g ] bb)
-    : (disp_invertible_2cell x (pr1 ff) (pr1 gg) × disp_invertible_2cell x (pr2 ff) (pr2 gg))
+    : (disp_invertible_2cell x (pr1 ff) (pr1 gg) ☺ disp_invertible_2cell x (pr2 ff) (pr2 gg))
         ≃
         disp_invertible_2cell x ff gg.
   Proof.
@@ -476,7 +476,7 @@ Section Disp_Dirprod.
              {aa : disp_dirprod_bicat a}
              {bb : disp_dirprod_bicat b}
              (ff : aa -->[ f] bb)
-    : disp_left_adjoint_equivalence f (pr1 ff) × disp_left_adjoint_equivalence f (pr2 ff)
+    : disp_left_adjoint_equivalence f (pr1 ff) ☺ disp_left_adjoint_equivalence f (pr2 ff)
       →
       disp_left_adjoint_equivalence f ff.
   Proof.
@@ -530,7 +530,7 @@ Section Disp_Dirprod.
              (f : adjoint_equivalence a b)
              (aa : disp_dirprod_bicat a)
              (bb : disp_dirprod_bicat b)
-    : disp_adjoint_equivalence f (pr1 aa) (pr1 bb) × disp_adjoint_equivalence f (pr2 aa) (pr2 bb)
+    : disp_adjoint_equivalence f (pr1 aa) (pr1 bb) ☺ disp_adjoint_equivalence f (pr2 aa) (pr2 bb)
       →
       disp_adjoint_equivalence f aa bb.
   Proof.
@@ -688,7 +688,7 @@ Section Disp_Dirprod.
              (f : adjoint_equivalence a b)
              (aa : disp_dirprod_bicat a)
              (bb : disp_dirprod_bicat b)
-    : (disp_adjoint_equivalence f (pr1 aa) (pr1 bb) × disp_adjoint_equivalence f (pr2 aa) (pr2 bb))
+    : (disp_adjoint_equivalence f (pr1 aa) (pr1 bb) ☺ disp_adjoint_equivalence f (pr2 aa) (pr2 bb))
         ≃
         (disp_adjoint_equivalence f aa bb).
   Proof.

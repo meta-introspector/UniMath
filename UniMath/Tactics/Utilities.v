@@ -17,7 +17,7 @@ Module Export Notation.
   Notation "p # x" := (transportf _ p x) (right associativity, at level 65) : transport.
   Open Scope transport.
   Notation "{ x : X & P }" := (total2 (λ x:X, P)) : type_scope.
-  Notation "X ** Y" := (X × Y) (right associativity, at level 80) : type_scope.
+  Notation "X ** Y" := (X ☺ Y) (right associativity, at level 80) : type_scope.
 End Notation.
 
 Definition neq (X : UU) : X -> X -> hProp

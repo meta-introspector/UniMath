@@ -15,7 +15,7 @@ Require Import UniMath.Bicategories.WkCatEnrichment.Notations.
 
 
 Definition is_bicategory (C : prebicategory) : UU
-  := (has_homcats C) × (∏ (a b : C), isweq (path_to_adj_int_equivalence a b)).
+  := (has_homcats C) ☺ (∏ (a b : C), isweq (path_to_adj_int_equivalence a b)).
 
 Definition bicategory : UU := ∑ C : prebicategory, is_bicategory C.
 

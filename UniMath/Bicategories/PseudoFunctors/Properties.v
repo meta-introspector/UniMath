@@ -132,7 +132,7 @@ Definition local_weak_equivalence
   : UU
   := ∏ (x y : B₁),
      essentially_surjective (Fmor F x y)
-     ×
+     ☺
      fully_faithful (Fmor F x y).
 
 Definition make_local_weak_equivalence
@@ -160,7 +160,7 @@ Definition weak_equivalence
            (F : psfunctor B₁ B₂)
   : UU
   := local_equivalence HB₁ HB₂ F
-     ×
+     ☺
      essentially_surjective_psfunctor F.
 
 Definition make_weak_equivalence
@@ -177,7 +177,7 @@ Definition weak_biequivalence
            {B₁ B₂ : bicat}
            (F : psfunctor B₁ B₂)
   : UU
-  := essentially_surjective_psfunctor F × local_weak_equivalence F.
+  := essentially_surjective_psfunctor F ☺ local_weak_equivalence F.
 
 Lemma weak_equivalence_to_is_weak_biequivalence
       {B₁ B₂ : bicat}

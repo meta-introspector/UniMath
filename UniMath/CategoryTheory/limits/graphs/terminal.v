@@ -142,7 +142,7 @@ Proof.
 Qed.
 
 Lemma equiv_isTerminal2 (c : C) :
-  limits.terminal.isTerminal C c <- isTerminal c.
+  limits.terminal.isTerminal C c <-u isTerminal c.
 Proof.
   intros X.
   set (XT := make_Terminal c X).
@@ -160,7 +160,7 @@ Proof.
 Defined.
 
 Definition equiv_Terminal2 :
-  limits.terminal.Terminal C <- Terminal.
+  limits.terminal.Terminal C <-u Terminal.
 Proof.
   intros T.
   exact (limits.terminal.make_Terminal

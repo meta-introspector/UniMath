@@ -271,7 +271,7 @@ Defined.
 (** ** Torsors *)
 
 Definition is_torsor {G:gr} (X:Action G) :=
-  nonempty X × ∏ x:X, isweq (right_mult x).
+  nonempty X ☺ ∏ x:X, isweq (right_mult x).
 
 Lemma is_torsor_isaprop {G:gr} (X:Action G) : isaprop (is_torsor X).
 Proof.

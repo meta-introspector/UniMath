@@ -669,7 +669,7 @@ Section PullbackFromTotal.
       : isaprop
           (∑ (γ : φ₁ ⟹ φ₂),
             post_whisker γ (pr1_total_category_of_set_functor G₁) = δ₁
-            ×
+            ☺
             post_whisker γ (functor_total_category_of_set_functor F α) = δ₂).
     Proof.
       use invproofirrelevance.

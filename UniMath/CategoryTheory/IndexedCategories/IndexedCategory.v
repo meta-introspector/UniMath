@@ -46,7 +46,7 @@ Definition indexed_cat_data
   := ∑ (F₀ : C → univalent_category)
        (F₁ : ∏ (x y : C), x --> y → F₀ x ⟶ F₀ y),
      (∏ (x : C), functor_identity _ ⟹ F₁ x x (identity x))
-     ×
+     ☺
      (∏ (x y z : C)
         (f : x --> y)
         (g : y --> z),
@@ -105,7 +105,7 @@ Definition indexed_cat_isos
   : UU
   := (∏ (x : C) (xx : F x),
       is_z_isomorphism (indexed_cat_id F x xx))
-     ×
+     ☺
      (∏ (x y z : C)
         (f : x --> y)
         (g : y --> z)
@@ -127,7 +127,7 @@ Definition indexed_cat_laws
       # (F $ f) (indexed_cat_id F x xx)
       · indexed_cat_comp F (identity x) f xx
       · idtoiso (maponpaths (λ g, (F $ g) xx) (id_left f)))
-     ×
+     ☺
      (∏ (x y : C)
         (f : x --> y)
         (xx : F x),
@@ -136,7 +136,7 @@ Definition indexed_cat_laws
       indexed_cat_id F y ((F $ f) xx)
       · indexed_cat_comp F f (identity y) xx
       · idtoiso (maponpaths (λ g, (F $ g) xx) (id_right f)))
-     ×
+     ☺
      (∏ (w x y z : C)
         (f : w --> x)
         (g : x --> y)
@@ -157,7 +157,7 @@ Definition indexed_cat
   : UU
   := ∑ (F : indexed_cat_data C),
      indexed_cat_isos F
-     ×
+     ☺
      indexed_cat_laws F.
 
 Definition make_indexed_cat

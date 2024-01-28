@@ -74,8 +74,8 @@ Definition folds_double_transport {C : folds_3_ob_mor} {a a' b b' : ob C}
 
 Definition folds_3_id_comp_eq := ∑ C : folds_3_ob_mor,
  ( (∏ a : C, a ⇒ a → UU)
- × (∏ (a b c : C), (a ⇒ b) → (b ⇒ c) → (a ⇒ c) → UU))
- × ∏ a b : C, a ⇒ b → a ⇒ b → UU.
+ ☺ (∏ (a b c : C), (a ⇒ b) → (b ⇒ c) → (a ⇒ c) → UU))
+ ☺ ∏ a b : C, a ⇒ b → a ⇒ b → UU.
 
 
 Definition folds_ob_mor_from_folds_id_comp (C : folds_3_id_comp_eq) : folds_3_ob_mor := pr1 C.
@@ -91,27 +91,27 @@ Definition E {C : folds_3_id_comp_eq} :
 
 Definition E_is_good_to_I_and_T (C : folds_3_id_comp_eq) : UU :=
   (((∏ (a b : C) (f : a ⇒ b), E f f) (* refl *)
- ×  (∏ (a b : C) (f g : a ⇒ b), E f g → E g f)) (* sym *)
-×   (∏ (a b : C) (f g h : a ⇒ b), E f g → E g h → E f h))
-×  ((∏ (a : C) (f g : a ⇒ a), E f g → I f → I g)
-×   (∏ (a b c : C) (f f' : a ⇒ b) (g g' : b ⇒ c) (h h' : a ⇒ c),
+ ☺  (∏ (a b : C) (f g : a ⇒ b), E f g → E g f)) (* sym *)
+☺   (∏ (a b : C) (f g h : a ⇒ b), E f g → E g h → E f h))
+☺  ((∏ (a : C) (f g : a ⇒ a), E f g → I f → I g)
+☺   (∏ (a b c : C) (f f' : a ⇒ b) (g g' : b ⇒ c) (h h' : a ⇒ c),
                       E f f' → E g g' → E h h' → T f g h → T f' g' h')).
 
 (** **  The axioms for identity *)
 
 Definition folds_ax_id (C : folds_3_id_comp_eq) :=
      (∏ a : C, ∥ ∑ f : a ⇒ a, I f ∥ )  (* there is a thing satisfying I *)
- ×  ((∏ (a b : C) (f : a ⇒ b)(i : b ⇒ b), I i → T f i f) (* I is post neutral *)
-  ×  (∏ (a b : C) (f : a ⇒ b)(i : a ⇒ a), I i → T i f f)). (* I is pre neutral *)
+ ☺  ((∏ (a b : C) (f : a ⇒ b)(i : b ⇒ b), I i → T f i f) (* I is post neutral *)
+  ☺  (∏ (a b : C) (f : a ⇒ b)(i : a ⇒ a), I i → T i f f)). (* I is pre neutral *)
 
 (** ** The axioms for composition *)
 
 Definition folds_ax_comp (C : folds_3_id_comp_eq) :=
      (∏ (a b c : C) (f : a ⇒ b) (g : b ⇒ c), ∥ ∑ h : a ⇒ c, T f g h ∥ )
                                                         (* there is a composite *)
- × ( (∏ (a b c : C) (f : a ⇒ b) (g : b ⇒ c) (h k : a ⇒ c), T f g h → T f g k → E h k )
+ ☺ ( (∏ (a b c : C) (f : a ⇒ b) (g : b ⇒ c) (h k : a ⇒ c), T f g h → T f g k → E h k )
                                                         (* composite is unique mod E *)
-  ×  (∏ (a b c d : C) (f : a ⇒ b) (g : b ⇒ c) (h : c ⇒ d) (fg : a ⇒ c)
+  ☺  (∏ (a b c d : C) (f : a ⇒ b) (g : b ⇒ c) (h : c ⇒ d) (fg : a ⇒ c)
                       (gh : b ⇒ d) (fg_h : a ⇒ d) (f_gh : a ⇒ d),
        T f g fg → T g h gh → T fg h fg_h → T f gh f_gh → E f_gh fg_h)).
                                                         (* composition is assoc mod E *)
@@ -125,8 +125,8 @@ Definition folds_ax_comp (C : folds_3_id_comp_eq) :=
 
 Definition folds_pre_3_cat := ∑ C : folds_3_id_comp_eq,
      (folds_ax_id C
-    × folds_ax_comp C)
-    × E_is_good_to_I_and_T C.
+    ☺ folds_ax_comp C)
+    ☺ E_is_good_to_I_and_T C.
 Definition folds_id_comp_from_folds_precat (C : folds_pre_3_cat) : folds_3_id_comp_eq := pr1 C.
 Coercion folds_id_comp_from_folds_precat : folds_pre_3_cat >-> folds_3_id_comp_eq.
 
@@ -136,8 +136,8 @@ Coercion folds_id_comp_from_folds_precat : folds_pre_3_cat >-> folds_3_id_comp_e
 
 Definition is_folds_pre_2_cat (C : folds_pre_3_cat) :=
    ( (∏ (a : C) (i : a ⇒ a), isaprop (I i))
-  ×  (∏ (a b c : C) (f : a ⇒ b) (g : b ⇒ c) (h : a ⇒ c), isaprop (T f g h)))
- ×   (∏ (a b : C) (f g : a ⇒ b), isaprop (E f g)).
+  ☺  (∏ (a b c : C) (f : a ⇒ b) (g : b ⇒ c) (h : a ⇒ c), isaprop (T f g h)))
+ ☺   (∏ (a b : C) (f g : a ⇒ b), isaprop (E f g)).
 
 Definition folds_pre_2_cat : UU := ∑ C, is_folds_pre_2_cat C.
 
@@ -155,18 +155,18 @@ Coercion folds_3_from_folds_2 : folds_pre_2_cat >-> folds_pre_3_cat.
 
 Definition folds_iso {C: folds_pre_3_cat} {a b : C} (f g : a ⇒ b) : UU :=
 (((∏ (x : C) (u : x ⇒ a) (v : x ⇒ b), T u f v ≃ T u g v)
-  × (∏ (x : C) (u : a ⇒ x) (v : x ⇒ b), T u v f ≃ T u v g))
- × (∏ (x : C) (u : b ⇒ x) (v : a ⇒ x), T f u v ≃ T g u v))
-× ((((∏ (u : a ⇒ b) (p : b = a), T p ## f f u ≃ T p ## g g u)
-     × (∏ (u : b ⇒ b) (p : a = a), T (transportf (λ a, a ⇒ b) p f) u f ≃
+  ☺ (∏ (x : C) (u : a ⇒ x) (v : x ⇒ b), T u v f ≃ T u v g))
+ ☺ (∏ (x : C) (u : b ⇒ x) (v : a ⇒ x), T f u v ≃ T g u v))
+☺ ((((∏ (u : a ⇒ b) (p : b = a), T p ## f f u ≃ T p ## g g u)
+     ☺ (∏ (u : b ⇒ b) (p : a = a), T (transportf (λ a, a ⇒ b) p f) u f ≃
                                    T (transportf (λ a, a ⇒ b) p g) u g))
-    × ((∏ (u : a ⇒ a) (p : b = b), T u p ## f f ≃ T u p ## g g)
-       × (∏ (p : a = a) (q : b = a) (r : b = b),
+    ☺ ((∏ (u : a ⇒ a) (p : b = b), T u p ## f f ≃ T u p ## g g)
+       ☺ (∏ (p : a = a) (q : b = a) (r : b = b),
           T (folds_double_transport p q f) r ## f f
           ≃ T (folds_double_transport p q g) r ## g g)))
-   × (((∏ p : b = a, I p ## f ≃ I p ## g) × (∏ u : a ⇒ b, E f u ≃ E g u))
-      × ((∏ u : a ⇒ b, E u f ≃ E u g)
-         × (∏ (p : a = a) (q : b = b),
+   ☺ (((∏ p : b = a, I p ## f ≃ I p ## g) ☺ (∏ u : a ⇒ b, E f u ≃ E g u))
+      ☺ ((∏ u : a ⇒ b, E u f ≃ E u g)
+         ☺ (∏ (p : a = a) (q : b = b),
             E (folds_double_transport p q f) f ≃ E (folds_double_transport p q g) g)))).
 
 Lemma isaprop_folds_2_iso (C : folds_pre_2_cat) (a b : C) (f g : a ⇒ b) :
@@ -293,9 +293,9 @@ Definition isotoid2 (C : folds_pre_2_cat) (H : is_univalent_folds_pre_2_cat C)
 
 Definition is_folds_precategory (C : folds_pre_2_cat) : UU :=
      (∏ a b : C, isaset (a ⇒ b))
- ×  ((∏ (a b c : C) (f : a ⇒ b) (g : b ⇒ c) (h k : a ⇒ c),
+ ☺  ((∏ (a b c : C) (f : a ⇒ b) (g : b ⇒ c) (h k : a ⇒ c),
                   T f g h → T f g k → h = k )       (* T is unique mod identity *)
-  ×  (∏ (a b c d : C) (f : a ⇒ b) (g : b ⇒ c) (h : c ⇒ d)
+  ☺  (∏ (a b c d : C) (f : a ⇒ b) (g : b ⇒ c) (h : c ⇒ d)
                   (fg : a ⇒ c) (gh : b ⇒ d) (fg_h : a ⇒ d) (f_gh : a ⇒ d),
                T f g fg → T g h gh →
                   T fg h fg_h → T f gh f_gh → f_gh = fg_h)). (* T is assoc mod identity *)

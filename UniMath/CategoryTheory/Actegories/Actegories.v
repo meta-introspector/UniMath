@@ -50,8 +50,8 @@ Definition actorinv_data {C : category} (A : action_data C) : UU :=
 
 Definition actegory_data (C : category) : UU :=
     ∑ A : action_data C,
-        (action_unitor_data A) × (action_unitorinv_data A) ×
-           (actor_data A) × (actorinv_data A).
+        (action_unitor_data A) ☺ (action_unitorinv_data A) ☺
+           (actor_data A) ☺ (actorinv_data A).
 
 Definition make_actegory_data {C : category} {A : action_data C}
   (au : action_unitor_data A) (auinv : action_unitorinv_data A)
@@ -89,7 +89,7 @@ Definition action_unitor_iso_law {C : category} {A : action_data C} (au : action
   ∏ (x : C), is_inverse_in_precat (au x) (auinv x).
 
 Definition action_unitor_law {C : category} {A : action_data C} (au : action_unitor_data A) (auinv : action_unitorinv_data A) : UU :=
-  action_unitor_nat au × action_unitor_iso_law au auinv.
+  action_unitor_nat au ☺ action_unitor_iso_law au auinv.
 
 Definition action_unitorlaw_nat {C : category} {A : action_data C} {au : action_unitor_data A} {auinv : action_unitorinv_data A}
   (aul : action_unitor_law au auinv) : action_unitor_nat au := pr1 aul.
@@ -114,8 +114,8 @@ Definition actor_iso_law {C : category} {A : action_data C} (aα : actor_data A)
   := ∏ (v w : V) (z : C), is_inverse_in_precat (aα v w z) (aαinv v w z).
 
 Definition actor_law {C : category} {A : action_data C} (aα : actor_data A) (aαinv : actorinv_data A) : UU :=
-  (actor_nat_leftwhisker aα) × (actor_nat_rightwhisker aα) ×
-    (actor_nat_leftrightwhisker aα) × (actor_iso_law aα aαinv).
+  (actor_nat_leftwhisker aα) ☺ (actor_nat_rightwhisker aα) ☺
+    (actor_nat_leftrightwhisker aα) ☺ (actor_iso_law aα aαinv).
 
 Definition actorlaw_natleft {C : category} {A : action_data C} {aα : actor_data A} {aαinv : actorinv_data A}
   (aαl : actor_law aα aαinv) : actor_nat_leftwhisker aα := pr1 aαl.
@@ -144,9 +144,9 @@ Definition actegory_pentagon_identity {C : category} {A : action_data C} (aα : 
       (aα (w⊗_{Mon_V} v) v' z) · (aα w v (v' ⊗_{A} z)).
 
 Definition actegory_laws {C : category} (AD : actegory_data C) : UU :=
-  is_bifunctor AD ×
-  (action_unitor_law au_{AD} auinv_{AD}) × (actor_law aα_{AD} aαinv_{AD}) ×
-    (actegory_triangle_identity au_{AD} aα_{AD}) × (actegory_pentagon_identity aα_{AD}).
+  is_bifunctor AD ☺
+  (action_unitor_law au_{AD} auinv_{AD}) ☺ (actor_law aα_{AD} aαinv_{AD}) ☺
+    (actegory_triangle_identity au_{AD} aα_{AD}) ☺ (actegory_pentagon_identity aα_{AD}).
 
 Definition actegory (C : category) : UU :=
   ∑ (AD : actegory_data C), (actegory_laws AD).

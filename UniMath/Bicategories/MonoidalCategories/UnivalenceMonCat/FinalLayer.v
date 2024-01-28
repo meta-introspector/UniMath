@@ -61,10 +61,10 @@ Section MonoidalCategoryLayer.
         runitor_invertible (pr2 (assunitors_from_layer (pr1 C)  (pr2 C))).
 
   Definition P_inv : bicat_univlaxmon_noprop -> UU
-    := λ C, P_assinv C × P_luinv C × P_ruinv C.
+    := λ C, P_assinv C ☺ P_luinv C ☺ P_ruinv C.
 
   Definition P_prop : bicat_univlaxmon_noprop -> UU
-    := λ C, P_triangle_pentagon C × P_inv C.
+    := λ C, P_triangle_pentagon C ☺ P_inv C.
 
   Lemma isaprop_P_prop (C : bicat_univlaxmon_noprop) : isaprop (P_prop C).
   Proof.

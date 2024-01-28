@@ -19,7 +19,7 @@ Section SetIsCartesianMonoidal.
   Proof.
     repeat (use tpair).
     - intros x y.
-      exact (((pr1 x × pr1 y),, isaset_dirprod (pr2 x) (pr2 y))).
+      exact (((pr1 x ☺ pr1 y),, isaset_dirprod (pr2 x) (pr2 y))).
     - intros x y1 y2 g a.
       exact (pr1 a,, g (pr2 a)).
     - intros y x1 x2 f b.

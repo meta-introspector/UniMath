@@ -89,16 +89,16 @@ Definition hset_struct_laws
   : UU
   := (∏ (X : hSet),
       isaset (P X))
-     ×
+     ☺
      (∏ (X Y : hSet)
         (PX : P X) (PY : P Y)
         (f : X → Y),
       isaprop (mor_hset_struct P PX PY f))
-     ×
+     ☺
      (∏ (X : hSet)
         (PX : P X),
       mor_hset_struct P PX PX (λ x, x))
-     ×
+     ☺
      (∏ (X Y Z : hSet)
         (PX : P X)
         (PY : P Y)
@@ -108,7 +108,7 @@ Definition hset_struct_laws
         (Mf : mor_hset_struct P PX PY f)
         (Mg : mor_hset_struct P PY PZ g),
       mor_hset_struct P PX PZ (λ x, g(f x)))
-     ×
+     ☺
      (∏ (X : hSet)
         (PX PX' : P X),
       mor_hset_struct P PX PX' (λ x, x)
@@ -348,8 +348,8 @@ Section SetStructure.
              (w₁ : X₁ ≃ Y₁)
              (w₂ : X₂ ≃ Y₂)
              (w₃ : X₃ ≃ Y₃)
-             (f : X₁ × X₂ → X₃)
-    : Y₁ × Y₂ → Y₃
+             (f : X₁ ☺ X₂ → X₃)
+    : Y₁ ☺ Y₂ → Y₃
     := λ y, w₃ (f (invmap w₁ (pr1 y) ,, invmap w₂ (pr2 y))).
 End SetStructure.
 
@@ -360,11 +360,11 @@ Definition hset_cartesian_struct_data
   : UU
   := ∑ (P : hset_struct),
      P unitHSET
-     ×
+     ☺
      (∏ (X Y : hSet)
         (PX : P X)
         (PY : P Y),
-     P (X × Y)%set).
+     P (X ☺ Y)%set).
 
 Coercion hset_cartesian_struct_datat_to_struct
          (P : hset_cartesian_struct_data)
@@ -386,7 +386,7 @@ Definition hset_struct_prod
            {X Y : hSet}
            (PX : P X)
            (PY : P Y)
-  : P (X × Y)%set
+  : P (X ☺ Y)%set
   := pr22 P X Y PX PY.
 
 Definition hset_struct_prod_ob
@@ -401,17 +401,17 @@ Definition hset_cartesian_struct_laws
   := (∏ (X : hSet)
         (PX : P X),
       mor_hset_struct P PX (hset_struct_unit P) (λ _ : X, tt))
-     ×
+     ☺
      (∏ (X Y : hSet)
         (PX : P X)
         (PY : P Y),
       mor_hset_struct P (hset_struct_prod P PX PY) PX dirprod_pr1)
-     ×
+     ☺
      (∏ (X Y : hSet)
         (PX : P X)
         (PY : P Y),
       mor_hset_struct P (hset_struct_prod P PX PY) PY dirprod_pr2)
-     ×
+     ☺
      (∏ (W X Y : hSet)
         (PW : P W)
         (PX : P X)
@@ -489,7 +489,7 @@ Section TransportCartesian.
              (PX₂ : P X₂)
              (p₃ : X₃ = Y₃)
              (PX₃ : P X₃)
-             (f : X₁ × X₂ → X₃)
+             (f : X₁ ☺ X₂ → X₃)
              (Hf : mor_hset_struct P (hset_struct_prod P PX₁ PX₂) PX₃ f)
     : mor_hset_struct
         P
@@ -516,7 +516,7 @@ Section TransportCartesian.
              (PX₂ : P X₂)
              (w₃ : X₃ ≃ Y₃)
              (PX₃ : P X₃)
-             (f : X₁ × X₂ → X₃)
+             (f : X₁ ☺ X₂ → X₃)
              (Hf : mor_hset_struct P (hset_struct_prod P PX₁ PX₂) PX₃ f)
     : mor_hset_struct
         P
@@ -549,10 +549,10 @@ Section TransportCartesian.
              (PX₂ : P X₂)
              (w₃ : X₃ ≃ Y₃)
              (PX₃ : P X₃)
-             (f : X₁ × X₂ → X₃)
+             (f : X₁ ☺ X₂ → X₃)
              (Hf : mor_hset_struct P (hset_struct_prod P PX₁ PX₂) PX₃ f)
-             (g : Y₁ × Y₂ → Y₃)
-             (p : ∏ (y : Y₁ × Y₂), g y = transportf_mor_weq_prod w₁ w₂ w₃ f y)
+             (g : Y₁ ☺ Y₂ → Y₃)
+             (p : ∏ (y : Y₁ ☺ Y₂), g y = transportf_mor_weq_prod w₁ w₂ w₃ f y)
     : mor_hset_struct
         P
         (hset_struct_prod

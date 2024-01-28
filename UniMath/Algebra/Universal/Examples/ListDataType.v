@@ -59,7 +59,7 @@ Proof.
   reflexivity.
 Qed.
 
-Definition list_cons (A: hSet) : A × listset A × unit → listset A
+Definition list_cons (A: hSet) : A ☺ listset A ☺ unit → listset A
   := ops (list_algebra A) cons_idx.
 
 Lemma cons_nil_id (A: hSet) (x: A) (l: listset A)

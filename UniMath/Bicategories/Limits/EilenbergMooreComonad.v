@@ -48,7 +48,7 @@ Section EilenbergMooreComonad.
          (f : x --> z)
          (γ : f ==> f · h),
       (γ • (f ◃ ε) = rinvunitor _)
-      ×
+      ☺
       (γ • (γ ▹ _) • rassociator _ _ _ = γ • (f ◃ ν)).
 
   Definition make_em_comnd_cone
@@ -97,7 +97,7 @@ Section EilenbergMooreComonad.
        (cell_of_em_comnd_cone q₁ • (α ▹ _)
         =
         α • (_ ◃ cell_of_em_comnd_cone q₂) • lassociator _ _ _)
-       ×
+       ☺
        is_invertible_2cell α.
 
   Definition make_em_comnd_cone_mor
@@ -202,7 +202,7 @@ Section EilenbergMooreComonad.
   Definition has_em_comnd_ump
              (e : em_comnd_cone)
     : UU
-    := has_em_comnd_ump_1 e × has_em_comnd_ump_2 e.
+    := has_em_comnd_ump_1 e ☺ has_em_comnd_ump_2 e.
 
   Section Projections.
     Context {e : em_comnd_cone}

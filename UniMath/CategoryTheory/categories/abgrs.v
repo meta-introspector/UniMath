@@ -335,7 +335,7 @@ End abgr_preadditive.
 Section abgr_additive.
 
   (** ** Direct sums
-     Direct sum of X and Y is given by the direct product abelian group X × Y. The inclusions
+     Direct sum of X and Y is given by the direct product abelian group X ☺ Y. The inclusions
      and projections are given by
      - In1 :  x ↦ (x, 0)
      - In2 :  y ↦ (0, y)

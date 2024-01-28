@@ -50,7 +50,7 @@ Definition is_disp_biequivalence_unit_counit
   : UU
   := disp_pstrans (disp_pseudo_comp F G D₁ D₂ D₁ FF GG)
                   (disp_pseudo_id D₁)
-                  (unit_of_is_biequivalence e) ×
+                  (unit_of_is_biequivalence e) ☺
      disp_pstrans (disp_pseudo_comp G F D₂ D₁ D₂ GG FF)
                   (disp_pseudo_id D₂)
                   (counit_of_is_biequivalence e).
@@ -112,19 +112,19 @@ Definition disp_is_biequivalence_data
                                          uu
                                          (unit_of_is_disp_biequivalence ee))
                            (disp_id_pstrans _)
-                           (unitcounit_of_is_biequivalence _) ×
+                           (unitcounit_of_is_biequivalence _) ☺
       disp_invmodification _ _ _ _
                            (disp_comp_pstrans
                                          (unit_of_is_disp_biequivalence ee)
                                          uu)
                            (disp_id_pstrans _)
-                           (unitunit_of_is_biequivalence _)) ×
+                           (unitunit_of_is_biequivalence _)) ☺
      (disp_invmodification _ _ _ _
                            (disp_comp_pstrans
                                          cc
                                          (counit_of_is_disp_biequivalence ee))
                            (disp_id_pstrans _)
-                           (counitcounit_of_is_biequivalence _) ×
+                           (counitcounit_of_is_biequivalence _) ☺
       disp_invmodification _ _ _ _
                            (disp_comp_pstrans
                                          (counit_of_is_disp_biequivalence ee)

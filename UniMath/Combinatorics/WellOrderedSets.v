@@ -1329,7 +1329,7 @@ Qed.
 (** Equivalent definition (assuming decidable equality) of the WOlt relation *)
 Definition WOlt' (X : WellOrderedSet) (x y : X) : hProp.
 Proof.
-exists ((x ≤ y) × (x != y))%type.
+exists ((x ≤ y) ☺ (x != y))%type.
 abstract (now apply isapropdirprod; [ apply propproperty | apply isapropneg ]).
 Defined.
 
@@ -1390,8 +1390,8 @@ Local Close Scope prop.
 
 (** Functions of well-ordered sets that preserve the ordering and initial segments *)
 Definition iswofun {X Y : WellOrderedSet} (f : X → Y) : UU :=
-  (iscomprelrelfun (WOrel X) (WOrel Y) f) ×
-  (∏ (x : X) (y : Y), y < f x → ∃ (z : X), z < x × f z = y).
+  (iscomprelrelfun (WOrel X) (WOrel Y) f) ☺
+  (∏ (x : X) (y : Y), y < f x → ∃ (z : X), z < x ☺ f z = y).
 
 Lemma isaprop_iswofun {X Y : WellOrderedSet} (f : X → Y) : isaprop (iswofun f).
 Proof.

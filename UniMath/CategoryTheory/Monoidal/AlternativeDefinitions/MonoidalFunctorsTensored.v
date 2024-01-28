@@ -73,14 +73,14 @@ Definition monoidal_functor_associativity (μ : monoidal_functor_map) :=
 Definition monoidal_functor_unitality (ϵ : I_D --> F I_C) (μ : monoidal_functor_map) :=
   ∏ (x : Mon_C),
   (λ_D (F x) = ϵ #⊗_D (id (F x)) · μ (I_C, x) · #F (λ_C x))
-  ×
+  ☺
   (ρ_D (F x) = (id (F x)) #⊗_D ϵ · μ (x, I_C) · #F (ρ_C x)).
 
 End Monoidal_Functor_Conditions.
 
 Definition lax_monoidal_functor : UU :=
   ∑ F : Mon_C ⟶ Mon_D, ∑ ϵ : I_D --> F I_C, ∑ μ : monoidal_functor_map F,
-  (monoidal_functor_associativity F μ) × (monoidal_functor_unitality F ϵ μ).
+  (monoidal_functor_associativity F μ) ☺ (monoidal_functor_unitality F ϵ μ).
 
 Definition make_lax_monoidal_functor (F : Mon_C ⟶ Mon_D) (ϵ : I_D --> F I_C)
   (μ : monoidal_functor_map F) (Hass: monoidal_functor_associativity F μ)
@@ -110,7 +110,7 @@ Definition lax_monoidal_functor_unital (lmF : lax_monoidal_functor) :
 Definition strong_monoidal_functor : UU :=
   ∑ lmF : lax_monoidal_functor,
   (is_z_isomorphism (lax_monoidal_functor_ϵ lmF)) (* ϵ is an iso *)
-  ×
+  ☺
   (is_nat_z_iso (lax_monoidal_functor_μ lmF)). (* μ is an iso *)
 
 Definition strong_monoidal_functor_lax_monoidal_functor (smF : strong_monoidal_functor) : lax_monoidal_functor

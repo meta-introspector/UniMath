@@ -103,7 +103,7 @@ Definition indexed_functor_laws
       · indexed_functor_natural τ (identity x) xx
       =
       # (τ x) (indexed_cat_id Φ x xx))
-     ×
+     ☺
      (∏ (x y z : C)
         (f : x --> y)
         (g : y --> z)

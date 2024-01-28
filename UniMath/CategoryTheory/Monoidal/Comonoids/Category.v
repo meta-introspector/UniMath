@@ -84,7 +84,7 @@ Section CategoryOfComonoids.
 
   Definition comonoid_laws (m : comonoid_data)
     : UU
-    := comonoid_laws_unit_left m × comonoid_laws_unit_right m × comonoid_laws_assoc m.
+    := comonoid_laws_unit_left m ☺ comonoid_laws_unit_right m ☺ comonoid_laws_assoc m.
 
   Lemma isaprop_comonoid_laws (m : comonoid_data)
     : isaprop (comonoid_laws m).

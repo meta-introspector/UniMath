@@ -159,30 +159,30 @@ Local Notation "f' <==[ x ] g'" := (disp_2cells x g' f') (at level 60, only pars
 Definition disp_prebicat_ops (D : disp_prebicat_1_id_comp_cells C) : UU
   :=   (∏ (a b : C) (f : C⟦a,b⟧) (x : D a) (y : D b) (f' : x -->[f] y),
         f' ==>[id2 _] f')
-     × (∏ (a b : C) (f : C⟦a,b⟧) (x : D a) (y : D b) (f' : x -->[f] y),
+     ☺ (∏ (a b : C) (f : C⟦a,b⟧) (x : D a) (y : D b) (f' : x -->[f] y),
         id_disp x ;; f' ==>[lunitor _] f')
-     × (∏ (a b : C) (f : C⟦a,b⟧) (x : D a) (y : D b) (f' : x -->[f] y),
+     ☺ (∏ (a b : C) (f : C⟦a,b⟧) (x : D a) (y : D b) (f' : x -->[f] y),
         f' ;; id_disp y ==>[runitor _] f')
-     × (∏ (a b : C) (f : C⟦a,b⟧) (x : D a) (y : D b) (f' : x -->[f] y),
+     ☺ (∏ (a b : C) (f : C⟦a,b⟧) (x : D a) (y : D b) (f' : x -->[f] y),
         id_disp x ;; f' <==[linvunitor _] f')
-     × (∏ (a b : C) (f : C⟦a,b⟧) (x : D a) (y : D b) (f' : x -->[f] y),
+     ☺ (∏ (a b : C) (f : C⟦a,b⟧) (x : D a) (y : D b) (f' : x -->[f] y),
         f' ;; id_disp y <==[rinvunitor _] f')
-     × (∏ (a b c d : C) (f : C⟦a,b⟧) (g : C⟦b,c⟧) (h : C⟦c,d⟧)
+     ☺ (∏ (a b c d : C) (f : C⟦a,b⟧) (g : C⟦b,c⟧) (h : C⟦c,d⟧)
           (w : D a) (x : D b) (y : D c) (z : D d)
           (ff : w -->[f] x) (gg : x -->[g] y) (hh : y -->[h] z),
         (ff ;; gg) ;; hh ==>[rassociator _ _ _] ff ;; (gg ;; hh))
-     × (∏ (a b c d : C) (f : C⟦a,b⟧) (g : C⟦b,c⟧) (h : C⟦c,d⟧)
+     ☺ (∏ (a b c d : C) (f : C⟦a,b⟧) (g : C⟦b,c⟧) (h : C⟦c,d⟧)
           (w : D a) (x : D b) (y : D c) (z : D d)
           (ff : w -->[f] x) (gg : x -->[g] y) (hh : y -->[h] z),
         ff ;; (gg ;; hh) ==>[lassociator _ _ _] (ff ;; gg) ;; hh)
-     × (∏ (a b : C) (f g h : C⟦a,b⟧) (r : f ==> g) (s : g ==> h)
+     ☺ (∏ (a b : C) (f g h : C⟦a,b⟧) (r : f ==> g) (s : g ==> h)
           (x : D a) (y : D b) (ff : x -->[f] y) (gg : x -->[g] y) (hh : x -->[h] y),
         ff ==>[r] gg  →  gg ==>[s] hh  →  ff ==>[r • s] hh)
-     × (∏ (a b c : C) (f : C⟦a,b⟧) (g1 g2 : C⟦b,c⟧)
+     ☺ (∏ (a b c : C) (f : C⟦a,b⟧) (g1 g2 : C⟦b,c⟧)
           (r : g1 ==> g2) (x : D a) (y : D b) (z : D c)
           (ff : x -->[f] y) (gg1 : y -->[g1] z) (gg2 : y -->[g2] z),
         gg1 ==>[r] gg2  →  ff ;; gg1  ==>[f ◃ r] ff ;; gg2)
-     × (∏ (a b c : C) (f1 f2 : C⟦a,b⟧) (g : C⟦b,c⟧)
+     ☺ (∏ (a b c : C) (f1 f2 : C⟦a,b⟧) (g : C⟦b,c⟧)
           (r : f1 ==> f2) (x : D a) (y : D b) (z : D c)
           (ff1 : x -->[f1] y) (ff2 : x -->[f2] y) (gg : y -->[g] z),
         ff1 ==>[r] ff2 → ff1 ;; gg ==>[r ▹ g] ff2 ;; gg).
@@ -445,26 +445,26 @@ Definition disp_lassociator_lassociator_law : UU
 
 Definition disp_prebicat_laws : UU
   :=   disp_id2_left_law
-     × disp_id2_right_law
-     × disp_vassocr_law
-     × disp_lwhisker_id2_law
-     × disp_id2_rwhisker_law
-     × disp_lwhisker_vcomp_law
-     × disp_rwhisker_vcomp_law
-     × disp_vcomp_lunitor_law
-     × disp_vcomp_runitor_law
-     × disp_lwhisker_lwhisker_law
-     × disp_rwhisker_lwhisker_law
-     × disp_rwhisker_rwhisker_law
-     × disp_vcomp_whisker_law
-     × disp_lunitor_linvunitor_law
-     × disp_linvunitor_lunitor_law
-     × disp_runitor_rinvunitor_law
-     × disp_rinvunitor_runitor_law
-     × disp_lassociator_rassociator_law
-     × disp_rassociator_lassociator_law
-     × disp_runitor_rwhisker_law
-     × disp_lassociator_lassociator_law.
+     ☺ disp_id2_right_law
+     ☺ disp_vassocr_law
+     ☺ disp_lwhisker_id2_law
+     ☺ disp_id2_rwhisker_law
+     ☺ disp_lwhisker_vcomp_law
+     ☺ disp_rwhisker_vcomp_law
+     ☺ disp_vcomp_lunitor_law
+     ☺ disp_vcomp_runitor_law
+     ☺ disp_lwhisker_lwhisker_law
+     ☺ disp_rwhisker_lwhisker_law
+     ☺ disp_rwhisker_rwhisker_law
+     ☺ disp_vcomp_whisker_law
+     ☺ disp_lunitor_linvunitor_law
+     ☺ disp_linvunitor_lunitor_law
+     ☺ disp_runitor_rinvunitor_law
+     ☺ disp_rinvunitor_runitor_law
+     ☺ disp_lassociator_rassociator_law
+     ☺ disp_rassociator_lassociator_law
+     ☺ disp_runitor_rwhisker_law
+     ☺ disp_lassociator_lassociator_law.
 
 End disp_prebicat_laws.
 
@@ -729,7 +729,7 @@ Section Display_Invertible_2cell.
          (x •• y =
           transportb (λ α, _ ==>[α] _) (vcomp_rinv α)
                      (disp_id2 ff))
-       × (y •• x =
+       ☺ (y •• x =
           transportb (λ α, _ ==>[α] _) (vcomp_linv α)
                      (disp_id2 ff')).
 
@@ -740,7 +740,7 @@ Section Display_Invertible_2cell.
          (x •• y =
           transportb (λ α, _ ==>[α] _) (vcomp_rinv inv_α)
                      (disp_id2 ff))
-       × (y •• x =
+       ☺ (y •• x =
           transportb (λ α, _ ==>[α] _) (vcomp_linv inv_α)
                      (disp_id2 ff')).
 

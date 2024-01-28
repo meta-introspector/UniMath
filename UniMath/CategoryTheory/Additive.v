@@ -36,7 +36,7 @@ Local Open Scope cat.
 Section def_additive.
 
   (** A preadditive category has an additive structure if it is given a zero object and a binary direct sum operation. *)
-  Definition AdditiveStructure (PA : PreAdditive) : UU := (Zero PA) × (BinDirectSums PA).
+  Definition AdditiveStructure (PA : PreAdditive) : UU := (Zero PA) ☺ (BinDirectSums PA).
 
   Definition make_AdditiveStructure (PA : PreAdditive) (H1 : Zero PA) (H2 : BinDirectSums PA) :
     AdditiveStructure PA.

@@ -111,7 +111,7 @@ Section five_lemma_data.
 
   (** *** Objects for a row *)
 
-  Definition FiveRowObs : UU := (ob A) × (ob A) × (ob A) × (ob A) × (ob A).
+  Definition FiveRowObs : UU := (ob A) ☺ (ob A) ☺ (ob A) ☺ (ob A) ☺ (ob A).
 
   Definition make_FiveRowObs (C1 C2 C3 C4 C5 : ob A) : FiveRowObs := (C1,,(C2,,(C3,,(C4,,C5)))).
 
@@ -131,8 +131,8 @@ Section five_lemma_data.
   (** *** Differentials for a row *)
 
   Definition FiveRowDiffs (FRO : FiveRowObs) : UU :=
-    (A⟦FOb1 FRO, FOb2 FRO⟧) × (A⟦FOb2 FRO, FOb3 FRO⟧) × (A⟦FOb3 FRO, FOb4 FRO⟧)
-                            × (A⟦FOb4 FRO, FOb5 FRO⟧).
+    (A⟦FOb1 FRO, FOb2 FRO⟧) ☺ (A⟦FOb2 FRO, FOb3 FRO⟧) ☺ (A⟦FOb3 FRO, FOb4 FRO⟧)
+                            ☺ (A⟦FOb4 FRO, FOb5 FRO⟧).
 
   Definition make_FiveRowDiffs (FRO : FiveRowObs) (f1 : A⟦FOb1 FRO, FOb2 FRO⟧)
              (f2 : A⟦FOb2 FRO, FOb3 FRO⟧) (f3 : A⟦FOb3 FRO, FOb4 FRO⟧)
@@ -154,8 +154,8 @@ Section five_lemma_data.
 
   Definition FiveRowDiffsEq {FRO : FiveRowObs} (FRD : FiveRowDiffs FRO) : UU :=
     (FDiff1 FRD · FDiff2 FRD = ZeroArrow (to_Zero A) _ _)
-      × (FDiff2 FRD · FDiff3 FRD = ZeroArrow (to_Zero A) _ _)
-      × (FDiff3 FRD · FDiff4 FRD = ZeroArrow (to_Zero A) _ _).
+      ☺ (FDiff2 FRD · FDiff3 FRD = ZeroArrow (to_Zero A) _ _)
+      ☺ (FDiff3 FRD · FDiff4 FRD = ZeroArrow (to_Zero A) _ _).
 
   Definition make_FiveRowDiffsEq {FRO : FiveRowObs} (FRD : FiveRowDiffs FRO)
              (H1 : FDiff1 FRD · FDiff2 FRD = ZeroArrow (to_Zero A) _ _)
@@ -177,8 +177,8 @@ Section five_lemma_data.
   Definition FiveRowExacts {FRO : FiveRowObs} {FRD : FiveRowDiffs FRO}
              (FRDE : FiveRowDiffsEq FRD) : UU :=
     (isExact A (FDiff1 FRD) (FDiff2 FRD) (FEq1 FRDE))
-      × (isExact A (FDiff2 FRD) (FDiff3 FRD) (FEq2 FRDE))
-      × (isExact A (FDiff3 FRD) (FDiff4 FRD) (FEq3 FRDE)).
+      ☺ (isExact A (FDiff2 FRD) (FDiff3 FRD) (FEq2 FRDE))
+      ☺ (isExact A (FDiff3 FRD) (FDiff4 FRD) (FEq3 FRDE)).
 
   Definition make_FiveRowExacts {FRO : FiveRowObs} {FRD : FiveRowDiffs FRO}
              (FRDE : FiveRowDiffsEq FRD) (H1 : isExact A (FDiff1 FRD) (FDiff2 FRD) (FEq1 FRDE))
@@ -225,8 +225,8 @@ Section five_lemma_data.
   (** *** Morphisms in the morphism *)
 
   Definition FiveRowMors (FR1 FR2 : FiveRow) : UU :=
-    (A⟦FOb1 FR1, FOb1 FR2⟧) × (A⟦FOb2 FR1, FOb2 FR2⟧) × (A⟦FOb3 FR1, FOb3 FR2⟧)
-                            × (A⟦FOb4 FR1, FOb4 FR2⟧) × (A⟦FOb5 FR1, FOb5 FR2⟧).
+    (A⟦FOb1 FR1, FOb1 FR2⟧) ☺ (A⟦FOb2 FR1, FOb2 FR2⟧) ☺ (A⟦FOb3 FR1, FOb3 FR2⟧)
+                            ☺ (A⟦FOb4 FR1, FOb4 FR2⟧) ☺ (A⟦FOb5 FR1, FOb5 FR2⟧).
 
   Definition make_FiveRowMors (FR1 FR2 : FiveRow) (f1 : A⟦FOb1 FR1, FOb1 FR2⟧)
              (f2 : A⟦FOb2 FR1, FOb2 FR2⟧) (f3 : A⟦FOb3 FR1, FOb3 FR2⟧)
@@ -252,9 +252,9 @@ Section five_lemma_data.
 
   Definition FiveRowMorsComm {FR1 FR2 : FiveRow} (FRMs : FiveRowMors FR1 FR2) : UU :=
     (FDiff1 FR1 · FMor2 FRMs = FMor1 FRMs · FDiff1 FR2)
-      × (FDiff2 FR1 · FMor3 FRMs = FMor2 FRMs · FDiff2 FR2)
-      × (FDiff3 FR1 · FMor4 FRMs = FMor3 FRMs · FDiff3 FR2)
-      × (FDiff4 FR1 · FMor5 FRMs = FMor4 FRMs · FDiff4 FR2).
+      ☺ (FDiff2 FR1 · FMor3 FRMs = FMor2 FRMs · FDiff2 FR2)
+      ☺ (FDiff3 FR1 · FMor4 FRMs = FMor3 FRMs · FDiff3 FR2)
+      ☺ (FDiff4 FR1 · FMor5 FRMs = FMor4 FRMs · FDiff4 FR2).
 
   Definition make_FiveRowMorsComm {FR1 FR2 : FiveRow} (FRMs : FiveRowMors FR1 FR2)
     (H1 : FDiff1 FR1 · FMor2 FRMs = FMor1 FRMs · FDiff1 FR2)

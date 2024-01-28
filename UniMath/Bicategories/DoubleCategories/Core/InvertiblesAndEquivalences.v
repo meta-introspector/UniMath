@@ -284,7 +284,7 @@ Definition left_adjoint_equivalence_lax_double_functor_weq
            (F : lax_double_functor C₁ C₂)
   : left_adjoint_equivalence F
     ≃
-    (is_strong_double_functor F × left_adjoint_equivalence (pr111 F)).
+    (is_strong_double_functor F ☺ left_adjoint_equivalence (pr111 F)).
 Proof.
   use weqimplimpl.
   - intros HF.

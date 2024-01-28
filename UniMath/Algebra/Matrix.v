@@ -234,7 +234,7 @@ Section MatrixMult.
   Local Notation Σ := (iterop_fun rigunel1 op1).
   Local Notation "R1 ^ R2" := ((pointwise _ op2) R1 R2).
 
-  (** If A is m × n (so B is n × p),
+  (** If A is m ☺ n (so B is n ☺ p),
 <<
         AB(i, j) = A(i, 1) * B(1, j) + A(i, 2) * B(2, j) + ⋯ + A(i, n) * B(n, j)
 >>
@@ -325,7 +325,7 @@ Section Weighting.
 
   (** Definition 1.1.3 in arXiv:1012.5857v3 *)
   Definition has_magnitude {n m : nat} (mat : Matrix R m n) : UU :=
-    (weighting mat) × (coweighting mat).
+    (weighting mat) ☺ (coweighting mat).
 
   Definition magnitude {n m : nat} (m : Matrix R m n) (has : has_magnitude m) : R :=
     Σ (pr1 (dirprod_pr1 has)).

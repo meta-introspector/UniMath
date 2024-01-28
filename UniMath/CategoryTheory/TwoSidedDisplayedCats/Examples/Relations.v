@@ -37,7 +37,7 @@ Definition to_rel_weq
            {R₁ R₂ : X → Y → hProp}
            (p : R₁ = R₂)
   : ((∏ (x : X) (y : Y), R₁ x y → R₂ x y)
-    ×
+    ☺
     ∏ (x : X) (y : Y), R₂ x y → R₁ x y).
 Proof.
   induction p.
@@ -48,7 +48,7 @@ Defined.
 
 Definition hProp_weq
            (X Y : hProp)
-  : (X ≃ Y) ≃ ((X → Y) × (Y → X)).
+  : (X ≃ Y) ≃ ((X → Y) ☺ (Y → X)).
 Proof.
   use weq_iso.
   - exact (λ w, pr1 w ,, invmap w).
@@ -68,7 +68,7 @@ Definition rel_weq
     ≃
     ∏ (x : X) (y : Y),
     (R₁ x y → R₂ x y)
-    ×
+    ☺
     (R₂ x y → R₁ x y)
   := (weqonsecfibers
         _ _
@@ -173,7 +173,7 @@ Definition to_iso_rel_disp_cat
            (R₁ R₂ : rel_disp_cat X Y)
            (f : ∏ (x : pr1 X) (y : pr1 Y),
                 (R₁ x y → R₂ x y)
-                ×
+                ☺
                 (R₂ x y → R₁ x y))
   : iso_twosided_disp (identity_z_iso X) (identity_z_iso Y) R₁ R₂.
 Proof.
@@ -198,7 +198,7 @@ Definition from_iso_rel_disp_cat
            (f : iso_twosided_disp (identity_z_iso X) (identity_z_iso Y) R₁ R₂)
   : ∏ (x : pr1 X) (y : pr1 Y),
     (R₁ x y → R₂ x y)
-    ×
+    ☺
     (R₂ x y → R₁ x y)
   := λ x y, pr1 f x y ,, pr12 f x y.
 
@@ -207,7 +207,7 @@ Definition iso_rel_disp_cat
            (R₁ R₂ : rel_disp_cat X Y)
   : (∏ (x : pr1 X) (y : pr1 Y),
      (R₁ x y → R₂ x y)
-     ×
+     ☺
      (R₂ x y → R₁ x y))
     ≃
     iso_twosided_disp (identity_z_iso X) (identity_z_iso Y) R₁ R₂.

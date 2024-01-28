@@ -54,7 +54,7 @@ Section Curried_Monoidal_Functors.
   Definition unit_preserving_data : UU := D ⟦ I_{N} , F I_{M} ⟧.
 
   Definition monoidalfunctor_data :=
-    tensor_preserving_data × unit_preserving_data.
+    tensor_preserving_data ☺ unit_preserving_data.
 
   Definition tensorpreservingdata_from_monoidalfunctordata (mfd : monoidalfunctor_data) : tensor_preserving_data := pr1 mfd.
   Coercion tensorpreservingdata_from_monoidalfunctordata : monoidalfunctor_data >-> tensor_preserving_data.
@@ -78,8 +78,8 @@ Section Curried_Monoidal_Functors.
     ∏ (x : C), (#F (ru^{M}_{x})) ∘ (tpd x I_{M}) ∘ ((identity (F x)) ⊗^{N} upd) = ru^{N}_{F x}.
 
   Definition monoidalfunctor_laws (mfd : monoidalfunctor_data) : UU :=
-    (tensor_preserving_data_is_natural mfd) × (preserves_associativity mfd) ×
-    (preserves_leftunitality mfd mfd) × (preserves_rightunitality mfd mfd).
+    (tensor_preserving_data_is_natural mfd) ☺ (preserves_associativity mfd) ☺
+    (preserves_leftunitality mfd mfd) ☺ (preserves_rightunitality mfd mfd).
 
   Definition monoidalfunctor : UU :=
     ∑ (mfd : monoidalfunctor_data), monoidalfunctor_laws mfd.

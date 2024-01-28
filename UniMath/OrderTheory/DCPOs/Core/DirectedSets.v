@@ -34,7 +34,7 @@ Section Directed.
 
   Definition is_directed
     : hProp
-    := ∥ I ∥ ∧ ∀ (i j : I), ∃ (k : I), PX (D i) (D k) × PX (D j) (D k).
+    := ∥ I ∥ ∧ ∀ (i j : I), ∃ (k : I), PX (D i) (D k) ☺ PX (D j) (D k).
 
   Definition is_directed_el
              (H : is_directed)
@@ -44,7 +44,7 @@ Section Directed.
   Definition is_directed_top
              (H : is_directed)
              (i j : I)
-    : ∃ (k : I), PX (D i) (D k) × PX (D j) (D k)
+    : ∃ (k : I), PX (D i) (D k) ☺ PX (D j) (D k)
     := pr2 H i j.
 End Directed.
 
@@ -97,7 +97,7 @@ Definition directed_set_top
            {PX : PartialOrder X}
            (D : directed_set PX)
            (i j : D)
-  : ∃ (k : D), PX (D i) (D k) × PX (D j) (D k)
+  : ∃ (k : D), PX (D i) (D k) ☺ PX (D j) (D k)
   := is_directed_top (directed_set_is_directed D) i j.
 
 Definition make_directed_set
@@ -202,7 +202,7 @@ Proposition is_directed_prod
             (D₂ : directed_set PY)
   : is_directed
       (prod_PartialOrder PX PY)
-      (λ (xy : D₁ × D₂), D₁ (pr1 xy),, D₂ (pr2 xy)).
+      (λ (xy : D₁ ☺ D₂), D₁ (pr1 xy),, D₂ (pr2 xy)).
 Proof.
   split.
   - assert (i₁ := directed_set_el D₁).
@@ -233,7 +233,7 @@ Definition prod_directed_set
   : directed_set (prod_PartialOrder PX PY).
 Proof.
   use make_directed_set.
-  - exact (D₁ × D₂).
+  - exact (D₁ ☺ D₂).
   - exact (λ xy, D₁ (pr1 xy) ,, D₂ (pr2 xy)).
   - exact (is_directed_prod D₁ D₂).
 Defined.

@@ -45,7 +45,7 @@ Definition adjunction_enrichment
         (adjunit L)
         (functor_id_enrichment E₁)
         (functor_comp_enrichment EL ER))
-     ×
+     ☺
      (nat_trans_enrichment
         (adjcounit L)
         (functor_comp_enrichment ER EL))

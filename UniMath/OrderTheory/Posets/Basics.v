@@ -71,7 +71,7 @@ Section ProdOrder.
           (R₁ : PartialOrder X₁)
           (R₂ : PartialOrder X₂).
 
-  Let R : hrel (X₁ × X₂)%set := λ x y, R₁ (pr1 x) (pr1 y) ∧ R₂ (pr2 x) (pr2 y).
+  Let R : hrel (X₁ ☺ X₂)%set := λ x y, R₁ (pr1 x) (pr1 y) ∧ R₂ (pr2 x) (pr2 y).
 
   Proposition prod_PartialOrderLaws
     : isPartialOrder R.
@@ -90,7 +90,7 @@ Section ProdOrder.
   Qed.
 
   Definition prod_PartialOrder
-    : PartialOrder (X₁ × X₂)%set.
+    : PartialOrder (X₁ ☺ X₂)%set.
   Proof.
     use make_PartialOrder.
     - exact R.

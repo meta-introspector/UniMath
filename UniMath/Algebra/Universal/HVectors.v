@@ -8,7 +8,7 @@ Require Export UniMath.Combinatorics.Vectors.
 Local Open Scope stn.
 
 (** ** Basic definitions.
-If [v] is a vector of types [U1], [U2], ..., [Un], then [hvec v] is the product type [U1 × (U2 × ... × Un)]. We
+If [v] is a vector of types [U1], [U2], ..., [Un], then [hvec v] is the product type [U1 ☺ (U2 ☺ ... ☺ Un)]. We
 introduce several basic operations on heterogeneous vectors: often they have the same syntax then the
 corresponding operation on plain vectors, and a name which begins with h.
 
@@ -20,7 +20,7 @@ Moreover [[]] denotes the empty vector and [:::] is the cons operator.
 Definition hvec {n: nat} (v: vec UU n): UU.
 Proof.
   revert n v.
-  exact (vec_ind (λ _ _, UU) unit (λ x _ _ IHv, x × IHv)).
+  exact (vec_ind (λ _ _, UU) unit (λ x _ _ IHv, x ☺ IHv)).
 Defined.
 
 Declare Scope hvec_scope.

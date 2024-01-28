@@ -237,7 +237,7 @@ Definition are_conjugates' {C C' D D' : category} {L : functor D C} {R : functor
   ∏ (A : D) (B : C) (g : A --> R B),
   nat_trans_data_from_nat_trans σ A · #H (φ_adj_inv h g) = φ_adj_inv h' (#K g · nat_trans_data_from_nat_trans τ B ).
 
-(* Locate "×". *)
+(* Locate "☺". *)
 
 
 Lemma isaprop_are_conjugates {C C' D D' : category} {L : functor D C} {R : functor C D}
@@ -667,7 +667,7 @@ Proof.
     apply pathsinv0.
     apply (idtomor_FunctorAlg_commutes _ _ _ (okonobs alg1)).
   }
-  assert (Hyp: (idtomor (maponpaths (alg_carrier F'') (okonobs alg1)) = identity _) ×
+  assert (Hyp: (idtomor (maponpaths (alg_carrier F'') (okonobs alg1)) = identity _) ☺
                (idtomor (maponpaths (alg_carrier F'') (okonobs alg2)) = identity _)).
   { unfold okonobs; split.
     - etrans.

@@ -269,7 +269,7 @@ Section PullbackInProduct.
     Let P₂ : Pullback (pr2 f) (pr2 g) := make_Pullback _ H₂.
 
     Definition isPullback_in_product_category_unique
-      : isaprop (∑ (hk : q --> w), hk · π₁ = h₁ × hk · π₂ = h₂).
+      : isaprop (∑ (hk : q --> w), hk · π₁ = h₁ ☺ hk · π₂ = h₂).
     Proof.
       use invproofirrelevance.
       intros φ₁ φ₂.

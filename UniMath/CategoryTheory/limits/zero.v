@@ -16,7 +16,7 @@ Section def_zero.
   Variable C : category.
 
   Definition isZero (b : C) : UU :=
-    (∏ a : C, iscontr (b --> a)) × (∏ a : C, iscontr (a --> b)).
+    (∏ a : C, iscontr (b --> a)) ☺ (∏ a : C, iscontr (a --> b)).
 
   Lemma isaprop_isZero (b : C) : isaprop (isZero b).
   Proof.
@@ -151,7 +151,7 @@ Section facts.
   Variable C : category.
 
   Lemma ZeroIffInitialAndTerminal (b : C) :
-    isZero b <-> (isInitial C b) × (isTerminal C b).
+    isZero b <-> (isInitial C b) ☺ (isTerminal C b).
   Proof.
     unfold isZero, isInitial, isTerminal.
     split; intros H; apply H.

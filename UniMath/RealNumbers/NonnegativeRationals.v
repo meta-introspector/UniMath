@@ -549,7 +549,7 @@ Definition gtNonnegativeRationals_noteq :
 
 Lemma between_ltNonnegativeRationals :
   ∏ x y : NonnegativeRationals,
-    x < y -> ∑ t : NonnegativeRationals, x < t × t < y.
+    x < y -> ∑ t : NonnegativeRationals, x < t ☺ t < y.
 Proof.
   intros x y H.
   set (z := hqlth_between (pr1 x) (pr1 y) H).
@@ -1524,7 +1524,7 @@ Proof.
   - exact x.
 Defined.
 Lemma NQmax_eq_zero :
-  ∏ x y : NonnegativeRationals, NQmax x y = 0 -> (x = 0) × (y = 0).
+  ∏ x y : NonnegativeRationals, NQmax x y = 0 -> (x = 0) ☺ (y = 0).
 Proof.
   intros x y.
   unfold NQmax.

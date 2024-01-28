@@ -57,10 +57,10 @@ Section reindexing_forward.
   Definition reindexing_forward_ob_mor : disp_cat_ob_mor C'.
   Proof.
     use make_disp_cat_ob_mor.
-    - exact (λ c', ∑c:C,(F c=c' × ob_disp D c)).
+    - exact (λ c', ∑c:C,(F c=c' ☺ ob_disp D c)).
     - intros a' b' x' y' f'.
       exact (∑f:(↙ x')-->(↙ y'),
-      (double_transport (¤ x') (¤ y') (# F f)=f' ×
+      (double_transport (¤ x') (¤ y') (# F f)=f' ☺
       (← x')-->[f](← y'))).
   Defined.
 
@@ -530,7 +530,7 @@ Section fibrations_and_reindexing_forward.
     (ff' : x' -->[f'] y') (gg' : z' -->[g'] x') (hh' : z' -->[g' · f'] y')
     e
     (Hyp1 : ∏ g : C ⟦ ↙z', ↙x' ⟧, 
-    (# F g = double_transport (!¤z') (!¤x') g') × (g · ↙ff' = ↙hh') -> 
+    (# F g = double_transport (!¤z') (!¤x') g') ☺ (g · ↙ff' = ↙hh') -> 
     ↙gg' = g)
     (Hyp2 : ∏ (gg : ←z' -->[ ↙gg' ] ←x'), 
     (gg ;; ←ff')%mor_disp = transportb (mor_disp ←z' ←y') e ←hh' -> 
@@ -583,7 +583,7 @@ Section fibrations_and_reindexing_forward.
     {x' : D' a'} {y' : D' b'} {z' : D' c'}
     (ff' : x' -->[f'] y') (hh' : z' -->[g' · f'] y')
     (Hyp1 : ∑ φ : C ⟦ ↙ (z'), ↙ (x') ⟧,
-    (# F φ = double_transport (! ¤z') (! ¤x') g') × (φ · ↙ff' = ↙hh'))
+    (# F φ = double_transport (! ¤z') (! ¤x') g') ☺ (φ · ↙ff' = ↙hh'))
     (Hyp2 : ∑ gg : ←z' -->[pr1 Hyp1] ←x',
     (gg ;; ←ff')%mor_disp = transportb (mor_disp ←z' ←y') (pr22 Hyp1) ←hh')
     (g:= pr1 Hyp1)
@@ -594,7 +594,7 @@ Section fibrations_and_reindexing_forward.
   Proof.
     apply (total2_paths_f (pr22 Hyp1 : ↙(gg' ;; ff')%mor_disp = ↙hh')).
     assert (pr1 (transportf (λ f , 
-    ( double_transport ¤z' ¤y' (# F f) =  g' · f' ) × ( ←z' -->[ f] ←y'))
+    ( double_transport ¤z' ¤y' (# F f) =  g' · f' ) ☺ ( ←z' -->[ f] ←y'))
     (pr22 Hyp1) (pr2 (gg' ;; ff')%mor_disp)) = ¤ hh').
     { apply uip. apply homset_property. }
     apply (total2_paths_f X).
@@ -682,13 +682,13 @@ Section univalence_and_reindexing_forward.
   Local Definition Split_eq {c' : C'} (x' y' : D' c')
     := ∑ (e0:↙x' = ↙y'), 
     (transportf (λ c, F c = c') e0 ¤x'= ¤y' 
-    × transportf D e0 ←x' = ←y').
+    ☺ transportf D e0 ←x' = ←y').
 
   (*Type equivalent to the z_iso_disp in D' *)
   Local Definition Split_z_iso {c' : C'} (x' y' : D' c')
     := ∑ (i0 : z_iso ↙x' ↙y'), 
     (double_transport ¤x' ¤y' (# F i0) = identity c'
-    × z_iso_disp i0 ←x' ←y').
+    ☺ z_iso_disp i0 ←x' ←y').
 
   Local Close Scope reindexing_forward_scope.
 
@@ -716,7 +716,7 @@ Section univalence_and_reindexing_forward.
       {c' : C'} {x' y' : D' c'} 
       : (∏ (e : x' = y'), 
       Split_eq_to_reindexing_forward_ob_eq (reindexing_forward_ob_eq_to_Split_eq e) = e)
-      ×
+      ☺
       (∏ (e' : Split_eq x' y'),
       reindexing_forward_ob_eq_to_Split_eq (Split_eq_to_reindexing_forward_ob_eq e') = e').
     Proof.
@@ -878,7 +878,7 @@ Section univalence_and_reindexing_forward.
       {x' y' : D' c'}
       : (∏ (i' : Split_z_iso x' y'), reindexing_forward_ob_z_iso_to_Split_z_iso
       (Split_z_iso_to_reindexing_forward_ob_z_iso i') = i')
-      ×
+      ☺
       (∏ (i : z_iso_disp (identity_z_iso c') x' y'), Split_z_iso_to_reindexing_forward_ob_z_iso
       (reindexing_forward_ob_z_iso_to_Split_z_iso i) = i).
     Proof.
@@ -1021,7 +1021,7 @@ Section univalence_and_reindexing_forward.
       {c' : C'} {x' y' : D' c'}
       : (∏ (e' : Split_eq x' y'), Split_z_iso_to_Split_eq
       (Split_eq_to_Split_z_iso e') = e')
-      ×
+      ☺
       (∏ (i' : Split_z_iso x' y'), Split_eq_to_Split_z_iso
       (Split_z_iso_to_Split_eq i') = i').
     Proof.

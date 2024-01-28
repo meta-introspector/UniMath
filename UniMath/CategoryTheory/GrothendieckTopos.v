@@ -91,8 +91,8 @@ Section def_grothendiecktopology.
 
   Definition isGrothendieckTopology (COS : collection_of_sieves) : UU :=
     (isGrothendieckTopology_maximal_sieve COS)
-      × (isGrothendieckTopology_stability COS)
-      × (isGrothendieckTopology_transitivity COS).
+      ☺ (isGrothendieckTopology_stability COS)
+      ☺ (isGrothendieckTopology_transitivity COS).
 
   Definition GrothendieckTopology : UU :=
     ∑ COS : collection_of_sieves, isGrothendieckTopology COS.
@@ -153,7 +153,7 @@ Section def_grothendiecktopos.
   (** Here (pr1 D) is the precategory which is equivalent to the precategory of sheaves on the
       Grothendieck topology (pr2 D). *)
   Definition GrothendieckTopos : UU :=
-    ∑ D' : (∑ D : category × (GrothendieckTopology C),
+    ∑ D' : (∑ D : category ☺ (GrothendieckTopology C),
                   functor (pr1 D) (categoryOfSheaves C (pr2 D))),
            (adj_equivalence_of_cats (pr2 D')).
 

@@ -7,7 +7,7 @@ Require Import UniMath.CategoryTheory.Equivalences.Core.
 Require Export UniMath.Bicategories.WkCatEnrichment.prebicategory.
 
 
-(* Local Notation "C  'c×'  D" := (precategory_binproduct C D) (at level 75, right associativity). *)
+(* Local Notation "C  'c☺'  D" := (precategory_binproduct C D) (at level 75, right associativity). *)
 Notation "a  '-1->'  b" := (homcat a b) (at level 50, left associativity).
 Notation "f  '-2->'  g" := (@precategory_morphisms (_ -1->_) f g) (at level 50, left associativity).
 Notation "alpha  ';v;'  beta" := (@compose (_ -1-> _) _ _ _ alpha beta) (at level 50, left associativity).

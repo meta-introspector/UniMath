@@ -45,7 +45,7 @@ Definition isBinProductCone (c d p : C) (p1 : C⟦p,c⟧) (p2 : C⟦p,d⟧) :=
 Definition make_isBinProductCone (hsC : has_homsets C) (a b p : C)
   (pa : C⟦p,a⟧) (pb : C⟦p,b⟧) :
   (∏ (c : C) (f : C⟦c,a⟧) (g : C⟦c,b⟧),
-    ∃! k : C⟦c,p⟧, k · pa = f × k · pb = g) ->
+    ∃! k : C⟦c,p⟧, k · pa = f ☺ k · pb = g) ->
   isBinProductCone a b p pa pb.
 Proof.
 intros H c cc.

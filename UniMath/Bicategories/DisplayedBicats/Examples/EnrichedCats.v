@@ -321,17 +321,17 @@ Section EnrichedCats.
            (nat_trans_id _)
            (functor_id_enrichment E₁)
            (functor_comp_enrichment F₁ F₂))
-        ×
+        ☺
         (nat_trans_enrichment
            (nat_trans_id _)
            (functor_comp_enrichment F₂ F₁)
            (functor_id_enrichment E₂))
-        ×
+        ☺
         (nat_trans_enrichment
            (nat_trans_id _)
            (functor_comp_enrichment F₁ F₂)
            (functor_id_enrichment E₁))
-        ×
+        ☺
         (nat_trans_enrichment
            (nat_trans_id _)
            (functor_id_enrichment E₂)
@@ -353,17 +353,17 @@ Section EnrichedCats.
             (nat_trans_id _)
             (functor_id_enrichment E₁)
             (functor_comp_enrichment F₁ F₂))
-         ×
+         ☺
          (nat_trans_enrichment
             (nat_trans_id _)
             (functor_comp_enrichment F₂ F₁)
             (functor_id_enrichment E₂))
-         ×
+         ☺
          (nat_trans_enrichment
             (nat_trans_id _)
             (functor_comp_enrichment F₁ F₂)
             (functor_id_enrichment E₁))
-         ×
+         ☺
          (nat_trans_enrichment
             (nat_trans_id _)
             (functor_id_enrichment E₂)
@@ -617,17 +617,17 @@ Section EnrichedCats.
           (nat_trans_id (functor_identity _))
           (functor_id_enrichment E₁)
           (functor_comp_enrichment F₁ F₂)
-        ×
+        ☺
         nat_trans_enrichment
           (nat_trans_id _)
           (functor_comp_enrichment F₂ F₁)
           (functor_id_enrichment E₂)
-        ×
+        ☺
         nat_trans_enrichment
           (nat_trans_id _)
           (functor_comp_enrichment F₁ F₂)
           (functor_id_enrichment E₁)
-        ×
+        ☺
         nat_trans_enrichment
           (nat_trans_id _)
           (functor_id_enrichment E₂)
@@ -812,17 +812,17 @@ Section EnrichedCats.
                       (nat_trans_id (functor_identity _))
                       (functor_id_enrichment E₁)
                       (functor_comp_enrichment F₁ F₂)
-                    ×
+                    ☺
                     nat_trans_enrichment
                       (nat_trans_id _)
                       (functor_comp_enrichment F₂ F₁)
                       (functor_id_enrichment E₂)
-                    ×
+                    ☺
                     nat_trans_enrichment
                       (nat_trans_id _)
                       (functor_comp_enrichment F₁ F₂)
                       (functor_id_enrichment E₁)
-                    ×
+                    ☺
                     nat_trans_enrichment
                       (nat_trans_id _)
                       (functor_id_enrichment E₂)
@@ -868,17 +868,17 @@ Section EnrichedCats.
          (nat_trans_id (functor_identity _))
          (functor_id_enrichment E₁)
          (functor_comp_enrichment F₁ F₂)
-       ×
+       ☺
        nat_trans_enrichment
          (nat_trans_id _)
          (functor_comp_enrichment F₂ F₁)
          (functor_id_enrichment E₂)
-       ×
+       ☺
        nat_trans_enrichment
          (nat_trans_id _)
          (functor_comp_enrichment F₁ F₂)
          (functor_id_enrichment E₁)
-       ×
+       ☺
        nat_trans_enrichment
          (nat_trans_id _)
          (functor_id_enrichment E₂)

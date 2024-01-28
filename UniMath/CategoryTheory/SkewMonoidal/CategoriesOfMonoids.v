@@ -32,7 +32,7 @@ Notation λ' := (skewmonoidal_unitl (data_from_skewmonoidal V)).
 Notation ρ' := (skewmonoidal_unitr (data_from_skewmonoidal V)).
 
 Definition skewMonoid_data : UU :=
-  ∑ X : V, (X ⊗ X --> X) × (I --> X).
+  ∑ X : V, (X ⊗ X --> X) ☺ (I --> X).
 
 Coercion sm_ob (X : skewMonoid_data) : V := pr1 X.
 
@@ -43,8 +43,8 @@ Local Notation η := sm_unit.
 Local Notation μ := sm_mult.
 
 Definition skewMonoid_laws (X : skewMonoid_data) : UU :=
-	(μ X #⊗ identity X · μ X = α' X X X · identity X #⊗ μ X · μ X) × (* Pentagon diagram *)
-	(η X #⊗ identity X · μ X = λ' X) × (ρ' X · identity X #⊗ η X · μ X = identity _). (* Unitor diagrams *)
+	(μ X #⊗ identity X · μ X = α' X X X · identity X #⊗ μ X · μ X) ☺ (* Pentagon diagram *)
+	(η X #⊗ identity X · μ X = λ' X) ☺ (ρ' X · identity X #⊗ η X · μ X = identity _). (* Unitor diagrams *)
 
 Definition skewMonoid : UU := ∑ (X : skewMonoid_data), skewMonoid_laws X.
 
@@ -64,7 +64,7 @@ Definition skewMonoid_unitr (X : skewMonoid) :
 Definition skewMonoid_Mor_laws  {T T' : skewMonoid_data} (α : V ⟦T , T'⟧)
   : UU :=
    (μ T · α  = α #⊗ α · μ T')
-                × η T · α = η T'.
+                ☺ η T · α = η T'.
 
 Lemma isaprop_skewMonoid_Mor_laws
   (T T' : skewMonoid_data ) (α : V ⟦ T , T' ⟧)

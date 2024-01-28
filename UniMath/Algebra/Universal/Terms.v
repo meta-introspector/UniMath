@@ -79,8 +79,8 @@ Section Oplists.
   Defined.
 
   Local Lemma opexec_dec (nm: names σ) (ss: list (sorts σ))
-    : ((opexec nm (just ss) = nothing) × (prefix_remove (arity nm) ss = nothing))
-              ⨿  ∑ (ss': list (sorts σ)), (opexec nm (just ss) = just ((sort nm) :: ss')) × (prefix_remove (arity nm) ss = just ss').
+    : ((opexec nm (just ss) = nothing) ☺ (prefix_remove (arity nm) ss = nothing))
+              ⨿  ∑ (ss': list (sorts σ)), (opexec nm (just ss) = just ((sort nm) :: ss')) ☺ (prefix_remove (arity nm) ss = just ss').
   Proof.
     unfold opexec, just.
     simpl.
@@ -96,7 +96,7 @@ Section Oplists.
   Defined.
 
   Local Lemma opexec_just_f (nm: names σ) (ss: list (sorts σ)) (arityok: isprefix (arity nm) ss)
-    : ∑ ss': list (sorts σ), opexec nm (just ss) = just ((sort nm) :: ss') ×  prefix_remove (arity nm) ss = just ss'.
+    : ∑ ss': list (sorts σ), opexec nm (just ss) = just ((sort nm) :: ss') ☺  prefix_remove (arity nm) ss = just ss'.
   Proof.
     induction (opexec_dec nm ss) as [err | ok].
     - induction err as [_  err].
@@ -105,7 +105,7 @@ Section Oplists.
   Defined.
 
   Local Lemma opexec_just_b (nm: names σ) (st: stack σ) (ss: list (sorts σ))
-    : opexec nm st = just ss → ∑ ss', ss = sort nm :: ss' × st = just ((arity nm) ++ ss').
+    : opexec nm st = just ss → ∑ ss', ss = sort nm :: ss' ☺ st = just ((arity nm) ++ ss').
   Proof.
     intro scons.
     induction st as [stok | sterror].
@@ -244,7 +244,7 @@ Section Oplists.
      terms.
    *)
 
-  Local Definition oplistsplit (l: oplist σ) (n: nat): oplist σ × oplist σ.
+  Local Definition oplistsplit (l: oplist σ) (n: nat): oplist σ ☺ oplist σ.
   Proof.
     revert l n.
     refine (list_ind _ _ _).
@@ -332,9 +332,9 @@ Section Oplists.
     : oplistexec l = just ss → n ≤ length ss
       → ∑ t1 t2: list (sorts σ),
           ss = t1 ++ t2
-          × oplistexec (pr1 (oplistsplit l n)) = just t1
-          × oplistexec (pr2 (oplistsplit l n)) = just t2
-          × length t1 = n.
+          ☺ oplistexec (pr1 (oplistsplit l n)) = just t1
+          ☺ oplistexec (pr2 (oplistsplit l n)) = just t2
+          ☺ length t1 = n.
   Proof.
     revert l ss n.
     refine (list_ind _ _ _).
@@ -537,7 +537,7 @@ Section Term.
   Local Definition oplist2vecoplist {n: nat} {ar: vec (sorts σ) n} (l: oplist σ) (lstack: oplistexec l = just (n,, ar))
     : ∑ (v: hvec (vec_map (term σ) ar))
         , (hvec (h1map_vec (λ _ t, hProptoType (length (term2oplist t) ≤ length l)) v))
-          × vecoplist2oplist (h1map_vec (λ _, term2oplist) v) = l.
+          ☺ vecoplist2oplist (h1map_vec (λ _, term2oplist) v) = l.
   Proof.
     revert n ar l lstack.
     refine (vec_ind _ _ _).
@@ -610,8 +610,8 @@ Section Term.
   Local Definition term_decompose {s: sorts σ} (t: term  σ s):
     ∑ (nm:names σ) (v: (term σ)⋆ (arity nm))
       , (hvec (h1map_vec (λ _ t', hProptoType (length (term2oplist t') < length t)) v))
-         × sort nm = s
-         × oplist_build nm (h1map_vec (λ _, term2oplist) v) = t.
+         ☺ sort nm = s
+         ☺ oplist_build nm (h1map_vec (λ _, term2oplist) v) = t.
   Proof.
     induction t as [l lstack].
     cbv [pr1 term2oplist].

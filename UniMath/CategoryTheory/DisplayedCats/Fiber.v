@@ -95,7 +95,7 @@ Section Fiber.
   Defined.
 
   Definition z_iso_fiber_from_z_iso_disp (a b : fiber_category) :
-    z_iso a b <- z_iso_disp (identity_z_iso c) a b.
+    z_iso a b <-u z_iso_disp (identity_z_iso c) a b.
   Proof.
     intro i.
     use tpair.

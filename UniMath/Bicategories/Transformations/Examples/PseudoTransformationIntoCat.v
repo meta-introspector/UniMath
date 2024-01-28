@@ -171,7 +171,7 @@ Definition pstrans_from_cat_into_cat_laws
       · pr1 (pstrans_from_cat_into_cat_data_nat τ (id₁ x)) xx
       =
       # (pr1 (τ x)) (pr11 (psfunctor_id F x) xx))
-     ×
+     ☺
      (∏ (x y z : C)
         (f : x --> y)
         (g : y --> z)

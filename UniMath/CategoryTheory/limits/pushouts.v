@@ -29,7 +29,7 @@ Section def_po.
   Definition isPushout {a b c d : C} (f : a --> b) (g : a --> c)
              (in1 : b --> d) (in2 : c --> d) (H : f · in1 = g · in2) : UU :=
     ∏ e (h : b --> e) (k : c --> e) (H : f · h = g · k),
-    ∃! hk : d --> e, (in1 · hk = h) × (in2 · hk = k).
+    ∃! hk : d --> e, (in1 · hk = h) ☺ (in2 · hk = k).
 
   Lemma isaprop_isPushout {a b c d : C} (f : a --> b) (g : a --> c)
         (in1 : b --> d) (in2 : c --> d) (H : f · in1 = g · in2) :
@@ -54,7 +54,7 @@ Section def_po.
   Qed.
 
   Definition Pushout {a b c : C} (f : a --> b) (g : a --> c) :=
-    ∑ pfg : (∑ p : C, (b --> p) × (c --> p)),
+    ∑ pfg : (∑ p : C, (b --> p) ☺ (c --> p)),
       ∑ H : f · pr1 (pr2 pfg) = g · pr2 (pr2 pfg),
         isPushout f g (pr1 (pr2 pfg)) (pr2 (pr2 pfg)) H.
 
@@ -127,7 +127,7 @@ Section def_po.
   Definition make_isPushout {a b c d : C} (f : C ⟦a, b⟧) (g : C ⟦a, c⟧)
              (in1 : C⟦b,d⟧) (in2 : C⟦c,d⟧) (H : f · in1 = g · in2) :
     (∏ e (h : C ⟦b, e⟧) (k : C⟦c,e⟧)(Hk : f · h = g · k),
-        ∃! hk : C⟦d,e⟧,(in1 · hk = h) × (in2 · hk = k)) →
+        ∃! hk : C⟦d,e⟧,(in1 · hk = h) ☺ (in2 · hk = k)) →
     isPushout f g in1 in2 H.
   Proof.
     intros H' x cx k sqr.
@@ -158,7 +158,7 @@ Section def_po.
   Definition identity_is_Pushout_input {a b c : C} {f : a --> b} {g : a --> c}
              (Pb : Pushout f g) :
     ∑ hk : Pb --> Pb,
-      (PushoutIn1 Pb · hk = PushoutIn1 Pb) × (PushoutIn2 Pb · hk = PushoutIn2 Pb).
+      (PushoutIn1 Pb · hk = PushoutIn1 Pb) ☺ (PushoutIn2 Pb · hk = PushoutIn2 Pb).
   Proof.
     exists (identity Pb).
     apply make_dirprod; apply id_right.

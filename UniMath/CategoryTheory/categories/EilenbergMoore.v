@@ -45,7 +45,7 @@ Section EilenbergMooreCategory.
   Proof.
     use make_hProp.
     - exact (η m _ · pr2 f = identity _
-             ×
+             ☺
              μ m (pr1 f)  · pr2 f = # m (pr2 f) · pr2 f).
     - apply isapropdirprod ; apply homset_property.
   Defined.

@@ -85,7 +85,7 @@ Definition preserves_underlying_laws
   := (∏ (v : V₁)
         (f : I_{V₂} --> F v),
       mon_functor_unit F · #F (Fv v f) = f)
-     ×
+     ☺
      (∏ (v : V₁)
         (f : I_{V₁} --> v),
       Fv v (mon_functor_unit F · #F f) = f).

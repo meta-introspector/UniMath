@@ -73,7 +73,7 @@ Defined.
 (** The intuition is that an algebra X for this functor is given by a constant
     x : X and a function X → X. The following equivalence verifies this. *)
 Definition nat_functor_equiv :
-  ∏ {X : UU}, (X × (X → X)) ≃ (nat_functor X -> X).
+  ∏ {X : UU}, (X ☺ (X → X)) ≃ (nat_functor X -> X).
 Proof.
   intro X.
   use weq_iso.
@@ -116,7 +116,7 @@ Definition make_nat_functor_algebra_mor {X Y : algebra_ob nat_functor} :
   let X' := invmap nat_functor_equiv (pr2 X) in
   let Y' := invmap nat_functor_equiv (pr2 Y) in
   ∏ (f : pr1 X → pr1 Y),
-    (f (pr1 X') = (pr1 Y')) × (f ∘ (pr2 X') = (pr2 Y') ∘ f)
+    (f (pr1 X') = (pr1 Y')) ☺ (f ∘ (pr2 X') = (pr2 Y') ∘ f)
   → is_algebra_mor _ X Y f.
 Proof.
   intros X' Y' f p.
@@ -182,7 +182,7 @@ Defined.
     and a function from each X n to X (S n).
  *)
 Definition fibered_algebra_nat :
-  fibered_alg nat_alg_z ≃ ∑ (X : ∏ n : ℕ, UU), (X 0) × (∏ n, X n → X (S n)).
+  fibered_alg nat_alg_z ≃ ∑ (X : ∏ n : ℕ, UU), (X 0) ☺ (∏ n, X n → X (S n)).
 Proof.
   apply weqfibtototal; intro X; cbn in X.
   use weq_iso.

@@ -160,7 +160,7 @@ Section CwFRepresentation.
           (HC : is_univalent C).
 
   Definition cwf_fiber_rep_data {Γ:C} (A : Ty Γ : hSet) : UU
-    := ∑ (ΓA : C), C ⟦ΓA, Γ⟧ × (Tm ΓA : hSet).
+    := ∑ (ΓA : C), C ⟦ΓA, Γ⟧ ☺ (Tm ΓA : hSet).
 
   Lemma cwf_square_comm {Γ} {A}
         {ΓA : C} {π : ΓA --> Γ}
@@ -218,8 +218,8 @@ Section CwFRepresentation.
     - cbn.
       set (XT := transportf_dirprod _ (fun a' => C⟦a', Γ⟧) (fun a' => Tm a' : hSet)).
       cbn in XT.
-      set (XT' := XT (tpair _ ΓA m : ∑ R : C, C ⟦ R, Γ ⟧ × (Tm R : hSet) )
-                     (tpair _ ΓA' m' : ∑ R : C, C ⟦ R, Γ ⟧ × (Tm R : hSet) )).
+      set (XT' := XT (tpair _ ΓA m : ∑ R : C, C ⟦ R, Γ ⟧ ☺ (Tm R : hSet) )
+                     (tpair _ ΓA' m' : ∑ R : C, C ⟦ R, Γ ⟧ ☺ (Tm R : hSet) )).
       cbn in *.
       match goal with | [ |- transportf _ ?e _ = _ ] => set (TT := e) end.
       rewrite XT'. clear XT' XT.

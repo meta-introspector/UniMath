@@ -137,7 +137,7 @@ Defined.
 Definition app_map : HSET2⟦prod2 LambdaCalculus LambdaCalculus,LambdaCalculus⟧ :=
   BinCoproductIn1 (BinCoproductsHSET2 _ _) · BinCoproductIn2 (BinCoproductsHSET2 _ _) · LambdaCalculus_mor.
 
-Definition app_map' (x : HSET) : HSET⟦(pr1 LambdaCalculus x × pr1 LambdaCalculus x)%set,pr1 LambdaCalculus x⟧.
+Definition app_map' (x : HSET) : HSET⟦(pr1 LambdaCalculus x ☺ pr1 LambdaCalculus x)%set,pr1 LambdaCalculus x⟧.
 Proof.
 apply app_map.
 Defined.

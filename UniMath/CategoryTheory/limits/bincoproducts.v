@@ -9,7 +9,7 @@ Direct implementation of binary coproducts togther with:
   target category ([BinCoproducts_functor_precat])
 - Definition of the option functor ([option_functor])
 - Binary coproducts from colimits ([BinCoproducts_from_Colims])
-- Equivalent universal property: (A --> C) × (B --> C) ≃ (A + B --> C)
+- Equivalent universal property: (A --> C) ☺ (B --> C) ≃ (A + B --> C)
 - The type of coproducts on a given diagram is a proposition
 - Associativity
 - Distribution over a functor
@@ -48,7 +48,7 @@ Context (C : category).
 
 Definition isBinCoproduct (a b co : C) (ia : a --> co) (ib : b --> co) :=
   ∏ (c : C) (f : a --> c) (g : b --> c),
-  ∃! (fg : co --> c), (ia · fg = f) × (ib · fg = g).
+  ∃! (fg : co --> c), (ia · fg = f) ☺ (ib · fg = g).
 
 Lemma isaprop_isBinCoproduct {a b co : C} {ia : a --> co} {ib : b --> co} :
   isaprop (isBinCoproduct a b co ia ib).
@@ -60,7 +60,7 @@ Proof.
 Qed.
 
 Definition BinCoproduct (a b : C) :=
-   ∑ coiaib : (∑ co : C, a --> co × b --> co),
+   ∑ coiaib : (∑ co : C, a --> co ☺ b --> co),
       isBinCoproduct a b (pr1 coiaib) (pr1 (pr2 coiaib)) (pr2 (pr2 coiaib)).
 
 Definition BinCoproducts := ∏ (a b : C), BinCoproduct a b.
@@ -174,7 +174,7 @@ Definition make_isBinCoproduct (hsC : has_homsets C) (a b co : C)
    (ia : a --> co) (ib : b --> co) :
    (∏ (c : C) (f : a --> c) (g : b --> c),
     ∃! k : C ⟦co, c⟧,
-      ia · k = f ×
+      ia · k = f ☺
       ib · k = g)
    → isBinCoproduct a b co ia ib.
 Proof.
@@ -222,7 +222,7 @@ Proof.
   set (H' := pr2 CC _ (BinCoproductIn1 CC) (BinCoproductIn2 CC) ); simpl in *.
   set (X := (∑ fg : pr1 (pr1 CC) --> BinCoproductObject CC,
           pr1 (pr2 (pr1 CC))· fg = BinCoproductIn1 CC
-          × pr2 (pr2 (pr1 CC))· fg = BinCoproductIn2 CC)).
+          ☺ pr2 (pr2 (pr1 CC))· fg = BinCoproductIn2 CC)).
   set (t1 := tpair _ k (make_dirprod H1 H2) : X).
   set (t2 := tpair _ (identity _ ) (make_dirprod (id_right _ ) (id_right _ ) ) : X).
   assert (X' : t1 = t2).
@@ -940,13 +940,13 @@ Lemma coproduct_nat_trans_univ_prop (A : [C, D])
    ∏
    t : ∑ fg : (BinCoproduct_of_functors:[C,D]) --> A,
        (coproduct_nat_trans_in1 : (F:[C,D]) --> BinCoproduct_of_functors)· fg = f
-      ×
+      ☺
        (coproduct_nat_trans_in2: (G : [C,D]) --> BinCoproduct_of_functors)· fg = g,
    t =
    tpair
      (λ fg : (BinCoproduct_of_functors:[C,D]) --> A,
       (coproduct_nat_trans_in1 : (F:[C,D]) --> BinCoproduct_of_functors)· fg = f
-   ×
+   ☺
       (coproduct_nat_trans_in2 : (G:[C,D]) --> BinCoproduct_of_functors) · fg = g)
      (coproduct_nat_trans A f g)
      (make_dirprod (coproduct_nat_trans_In1Commutes A f g)
@@ -1034,7 +1034,7 @@ Section BinCoproduct_from_z_iso.
   Local Lemma z_iso_to_isBinCoproduct_comm {x y z : C} (BP : BinCoproduct x y)
         (i : z_iso z (BinCoproductObject BP)) (w : C) (f : x --> w) (g : y --> w) :
     (BinCoproductIn1 BP · inv_from_z_iso i · (i · BinCoproductArrow BP f g) = f)
-      × (BinCoproductIn2 BP · inv_from_z_iso i · (i · BinCoproductArrow BP f g) = g).
+      ☺ (BinCoproductIn2 BP · inv_from_z_iso i · (i · BinCoproductArrow BP f g) = g).
   Proof.
     split.
     - rewrite <- assoc. rewrite (assoc _ i).
@@ -1048,7 +1048,7 @@ Section BinCoproduct_from_z_iso.
   Local Lemma z_iso_to_isBinCoproduct_unique {x y z : C} (BP : BinCoproduct x y)
         (i : z_iso z (BinCoproductObject BP)) (w : C) (f : x --> w) (g : y --> w) (y0 : C ⟦ z, w ⟧)
         (T : (BinCoproductIn1 BP · inv_from_z_iso i · y0 = f)
-               × (BinCoproductIn2 BP · inv_from_z_iso i · y0 = g)) :
+               ☺ (BinCoproductIn2 BP · inv_from_z_iso i · y0 = g)) :
     y0 = i · BinCoproductArrow BP f g.
   Proof.
     apply (pre_comp_with_z_iso_is_inj (z_iso_inv_from_z_iso i)).
@@ -1086,7 +1086,7 @@ Section BinCoproduct_from_z_iso.
 
 End BinCoproduct_from_z_iso.
 
-(** Equivalent universal property: (A --> C) × (B --> C) ≃ (A + B --> C)
+(** Equivalent universal property: (A --> C) ☺ (B --> C) ≃ (A + B --> C)
 
  Compare to [weqfunfromcoprodtoprod].
  *)
@@ -1094,14 +1094,14 @@ End BinCoproduct_from_z_iso.
 Section EquivalentDefinition.
   Context {C : category} {a b co : ob C} (i1 : a --> co) (i2 : b --> co) .
 
-  Definition precomp_with_injections (c : ob C) (f : co --> c) : (a --> c) × (b --> c) :=
+  Definition precomp_with_injections (c : ob C) (f : co --> c) : (a --> c) ☺ (b --> c) :=
     make_dirprod (i1 · f)  (i2 · f).
 
   Definition isBinCoproduct' : UU :=
     ∏ c : ob C, isweq (precomp_with_injections c).
 
   Definition isBinCoproduct'_weq (is : isBinCoproduct') :
-    ∏ c, (co --> c) ≃ (a --> c) × (b --> c) :=
+    ∏ c, (co --> c) ≃ (a --> c) ☺ (b --> c) :=
     λ a, make_weq (precomp_with_injections a) (is a).
 
   Lemma isBinCoproduct'_to_isBinCoproduct :
@@ -1121,7 +1121,7 @@ Section EquivalentDefinition.
   Proof.
     intros isBCP ? fg.
     unfold hfiber, precomp_with_injections.
-    apply (@iscontrweqf (∑ u : C ⟦ co, c ⟧, i1 · u = pr1 fg × i2 · u = pr2 fg)).
+    apply (@iscontrweqf (∑ u : C ⟦ co, c ⟧, i1 · u = pr1 fg ☺ i2 · u = pr2 fg)).
     - use weqfibtototal; intros to_prod.
       apply invweq, pathsdirprodweq.
     - exact (isBCP c (pr1 fg) (pr2 fg)). (* apply universal property *)

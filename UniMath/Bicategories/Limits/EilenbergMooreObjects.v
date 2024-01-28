@@ -253,7 +253,7 @@ Section EMObject.
   Definition has_em_ump
              (e : em_cone)
     : UU
-    := em_ump_1 e × em_ump_2 e.
+    := em_ump_1 e ☺ em_ump_2 e.
 
   Section MappingProperties.
     Context {e : em_cone}

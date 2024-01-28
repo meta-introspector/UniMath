@@ -314,7 +314,7 @@ Section EnrichedFunctorCategory.
           (E₂ : enrichment C₂ V)
           (EqV : Equalizers V)
           (PV : Products C₁ V)
-          (PV' : Products (C₁ × C₁) V).
+          (PV' : Products (C₁ ☺ C₁) V).
 
   Definition hom_functor_on_functors
              (F G : C₁ ⟶ C₂)
@@ -330,7 +330,7 @@ Section EnrichedFunctorCategory.
       := PV (λ x, E₂ ⦃ F x , G x ⦄).
 
     Let P₂ : Product
-               (C₁ × C₁)
+               (C₁ ☺ C₁)
                V
                (λ xy, (E₁ ⦃ pr1 xy, pr2 xy ⦄) ⊸ (E₂ ⦃ F (pr1 xy), G (pr2 xy) ⦄))
       := PV' (λ xy, E₁ ⦃ pr1 xy , pr2 xy ⦄ ⊸ (E₂ ⦃ F (pr1 xy) , G (pr2 xy) ⦄)).
@@ -1075,7 +1075,7 @@ Definition enriched_presheaf_enrichment
            (E : enrichment C V)
            (EqV : Equalizers V)
            (PV : Products C V)
-           (PV' : Products (C × C) V)
+           (PV' : Products (C ☺ C) V)
   : enrichment
       (enriched_functor_category
          (op_enrichment V E)

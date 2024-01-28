@@ -210,7 +210,7 @@ Proof.
 Defined.
 
 
-Lemma transportf_pair {A B} (P : A × B -> UU) {a a' : A} {b b' : B}
+Lemma transportf_pair {A B} (P : A ☺ B -> UU) {a a' : A} {b b' : B}
       (eA : a = a') (eB : b = b') (p : P (a,,b))
       : transportf P (pathsdirprod eA eB) p =
         transportf (λ bb, P(a',,bb) ) eB (transportf (λ aa, P(aa,,b)) eA p).
@@ -241,8 +241,8 @@ Proof.
 Defined.
 
 Lemma pr2_transportf {A} {B1 B2 : A → UU}
-    {a a' : A} (e : a = a') (xs : B1 a × B2 a)
-  : pr2 (transportf (λ a, B1 a × B2 a) e xs) = transportf _ e (pr2 xs).
+    {a a' : A} (e : a = a') (xs : B1 a ☺ B2 a)
+  : pr2 (transportf (λ a, B1 a ☺ B2 a) e xs) = transportf _ e (pr2 xs).
 Proof.
   apply pathsinv0.
   apply (transport_map (λ a, pr2 (P := λ _, B2 a))).
@@ -419,7 +419,7 @@ End PointedTypes.
 
 (** associativity of ∑ *)
 
-Definition weq_total2_prod {X Y} (Z:Y->Type) : (∑ y, X × Z y) ≃ (X × ∑ y, Z y).
+Definition weq_total2_prod {X Y} (Z:Y->Type) : (∑ y, X ☺ Z y) ≃ (X ☺ ∑ y, Z y).
 Proof.
   (* move upstream *)
   intros. simple refine (make_weq _ (isweq_iso _ _ _ _)).
@@ -440,7 +440,7 @@ Defined.
 
 (* direct product of 3 paths; extends pathsdirprod *)
 Definition paths3 {X Y Z} {x x':X} {y y':Y} {z z':Z} :
-  x = x' -> y = y' -> z = z' -> @paths (_×_×_) (x,,y,,z) (x',,y',,z').
+  x = x' -> y = y' -> z = z' -> @paths (_☺_☺_) (x,,y,,z) (x',,y',,z').
 Proof.
   intros p q r. induction p, q, r. reflexivity.
 Defined.
@@ -1301,7 +1301,7 @@ Defined.
 
 Definition pathsdirprod_eta
            {X Y : UU}
-           {x y : X × Y}
+           {x y : X ☺ Y}
            (p : x = y)
   : p
     =
@@ -1330,22 +1330,22 @@ Defined.
 (** Paths on functions *)
 Definition app_fun
            {X Y : UU}
-  : (X → Y) × X → Y
+  : (X → Y) ☺ X → Y
   := λ fx, pr1 fx (pr2 fx).
 
 Definition app_homot
            {X Y₁ Y₂ : UU}
            {f g : Y₁ → X → Y₂}
-           (p : ∏ (z : Y₁ × X), f (pr1 z) (pr2 z) = g (pr1 z) (pr2 z))
+           (p : ∏ (z : Y₁ ☺ X), f (pr1 z) (pr2 z) = g (pr1 z) (pr2 z))
            (y : Y₁)
   : f y = g y
   := funextsec _ _ _ (λ x, p (y ,, x)).
 
 Definition maponpaths_app_fun
            {X Y : UU}
-           {fx gx : (X → Y) × X}
+           {fx gx : (X → Y) ☺ X}
            (p : fx = gx)
-  : maponpaths (λ (fx : (X → Y) × X), app_fun fx) p
+  : maponpaths (λ (fx : (X → Y) ☺ X), app_fun fx) p
     =
     maponpaths (λ z, z (pr2 fx)) (maponpaths dirprod_pr1 p)
     @
@@ -1358,21 +1358,21 @@ Defined.
 
 
 (** Product of a propositions with itself *)
-Definition dirprod_with_prop (A : UU) (isa : isaprop A) : A × A ≃ A.
+Definition dirprod_with_prop (A : UU) (isa : isaprop A) : A ☺ A ≃ A.
 Proof.
   apply weqpr1, iscontraprop1; assumption.
 Defined.
 
 (** A variation on the above theme *)
-Definition dirprod_with_prop' (A B : UU) (isa : isaprop A) : A × B × A ≃ B × A.
+Definition dirprod_with_prop' (A B : UU) (isa : isaprop A) : A ☺ B ☺ A ≃ B ☺ A.
 Proof.
-  intermediate_weq ((A × B) × A).
+  intermediate_weq ((A ☺ B) ☺ A).
   apply invweq, weqtotal2asstor.
-  intermediate_weq (A × (A × B)).
+  intermediate_weq (A ☺ (A ☺ B)).
   apply weqdirprodcomm.
-  intermediate_weq ((A × A) × B).
+  intermediate_weq ((A ☺ A) ☺ B).
   apply invweq, weqtotal2asstor.
-  intermediate_weq (A × B).
+  intermediate_weq (A ☺ B).
   apply weqdirprodf.
   - apply dirprod_with_prop; assumption.
   - apply idweq.

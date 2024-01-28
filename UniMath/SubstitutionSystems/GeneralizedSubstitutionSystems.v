@@ -46,7 +46,7 @@ Section hss.
     Context (t : V) (η : I_{Mon_V} --> t) (τ : H t --> t).
 
   Definition mbracket_property_parts {z : V} (e : I_{Mon_V} --> z) (f : z --> t) (h : z ⊗_{Mon_V} t --> t) : UU :=
-    (ru^{Mon_V}_{z} · f = z ⊗^{Mon_V}_{l} η · h) ×
+    (ru^{Mon_V}_{z} · f = z ⊗^{Mon_V}_{l} η · h) ☺
       (θ (z,,e) t · #H h · τ =  z ⊗^{Mon_V}_{l} τ · h).
 
   Definition mbracket_parts_at {z : V} (e : I_{Mon_V} --> z) (f : z --> t) : UU :=

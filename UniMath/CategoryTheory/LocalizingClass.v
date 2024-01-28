@@ -38,7 +38,7 @@ Section def_roofs.
   (** *** Identities and compositions are in the subset of morphisms *)
   Definition isLocalizingClass1 (SOM : SubsetsOfMors) : UU :=
     (∏ (x : ob C), SOM x x (identity x))
-      × (∏ (x y z : ob C) (f : x --> y) (e1 : SOM x y f) (g : y --> z) (e2 : SOM y z g),
+      ☺ (∏ (x y z : ob C) (f : x --> y) (e1 : SOM x y f) (g : y --> z) (e2 : SOM y z g),
          SOM x z (f · g)).
 
   Definition isLocClassIs {SOM : SubsetsOfMors} (H : isLocalizingClass1 SOM) :
@@ -51,9 +51,9 @@ Section def_roofs.
   (** **** Squares *)
   Definition LocSqr1 (SOM : SubsetsOfMors) {x y z : ob C} (s : x --> y) (e1 : SOM x y s)
              (f : x --> z) : UU :=
-    ∑ D : (∑ (w : ob C), C⟦y, w⟧ × C⟦z, w⟧),
+    ∑ D : (∑ (w : ob C), C⟦y, w⟧ ☺ C⟦z, w⟧),
           (SOM z (pr1 D) (dirprod_pr2 (pr2 D)))
-            × (s · (dirprod_pr1 (pr2 D)) = f · (dirprod_pr2 (pr2 D))).
+            ☺ (s · (dirprod_pr1 (pr2 D)) = f · (dirprod_pr2 (pr2 D))).
 
   Definition LocSqr1Ob {SOM : SubsetsOfMors} {x y z : ob C} {s : x --> y} {e1 : SOM x y s}
              {f : x --> z} (LS1 : LocSqr1 SOM s e1 f) : ob C := pr1 (pr1 LS1).
@@ -75,9 +75,9 @@ Section def_roofs.
 
   Definition LocSqr2 (SOM : SubsetsOfMors) {y z w : ob C} (s : y --> w) (e1 : SOM y w s)
              (f : z --> w) : UU :=
-    ∑ D : (∑ (x : ob C), C⟦x, y⟧ × C⟦x, z⟧),
+    ∑ D : (∑ (x : ob C), C⟦x, y⟧ ☺ C⟦x, z⟧),
           (SOM (pr1 D) z (dirprod_pr2 (pr2 D)))
-            × ((dirprod_pr1 (pr2 D)) · s = (dirprod_pr2 (pr2 D)) · f).
+            ☺ ((dirprod_pr1 (pr2 D)) · s = (dirprod_pr2 (pr2 D)) · f).
 
   Definition LocSqr2Ob {SOM : SubsetsOfMors} {y z w : ob C} {s : y --> w} {e1 : SOM y w s}
              {f : z --> w} (LS2 : LocSqr2 SOM s e1 f) : ob C := pr1 (pr1 LS2).
@@ -100,7 +100,7 @@ Section def_roofs.
   (** *** Completion to squares *)
   Definition isLocalizingClass2 (SOM : SubsetsOfMors) : UU :=
     (∏ (x y z : ob C) (s : x --> y) (e1 : SOM x y s) (f : x --> z), (LocSqr1 SOM s e1 f))
-      × (∏ (y z w : ob C) (s : y --> w) (e1 : SOM y w s) (f : z --> w), (LocSqr2 SOM s e1 f)).
+      ☺ (∏ (y z w : ob C) (s : y --> w) (e1 : SOM y w s) (f : z --> w), (LocSqr2 SOM s e1 f)).
 
   Definition isLocClassSqr1 {SOM : SubsetsOfMors} (H : isLocalizingClass2 SOM) :
     ∏ (x y z : ob C) (s : x --> y) (e1 : SOM x y s) (f : x --> z), LocSqr1 SOM s e1 f :=
@@ -113,7 +113,7 @@ Section def_roofs.
   (** **** Pre- and post switch *)
   Definition PreSwitch (SOM : SubsetsOfMors) {x y z : ob C} (s : x --> y) (e : SOM x y s)
              (f g : y --> z) (H : s · f = s · g) : UU :=
-    ∑ D : (∑ (w : ob C), C⟦z, w⟧), (SOM z (pr1 D) (pr2 D)) × (f · (pr2 D) = g · (pr2 D)).
+    ∑ D : (∑ (w : ob C), C⟦z, w⟧), (SOM z (pr1 D) (pr2 D)) ☺ (f · (pr2 D) = g · (pr2 D)).
 
   Definition PreSwitchOb {SOM : SubsetsOfMors} {x y z : ob C} {s : x --> y} {e : SOM x y s}
              {f g : y --> z} {H : s · f = s · g} (PreS : PreSwitch SOM s e f g H) : ob C :=
@@ -136,7 +136,7 @@ Section def_roofs.
 
   Definition PostSwitch (SOM : SubsetsOfMors) {y z w : ob C} (f g : y --> z) (s : z --> w)
              (e : SOM z w s) (H : f · s = g · s) : UU :=
-    ∑ D : (∑ (x : ob C), C⟦x, y⟧), (SOM (pr1 D) y (pr2 D)) × ((pr2 D) · f = (pr2 D) · g).
+    ∑ D : (∑ (x : ob C), C⟦x, y⟧), (SOM (pr1 D) y (pr2 D)) ☺ ((pr2 D) · f = (pr2 D) · g).
 
   Definition PostSwitchOb {SOM : SubsetsOfMors} {y z w : ob C} {f g : y --> z} {s : z --> w}
              {e : SOM z w s} {H : f · s = g · s} (PostS : PostSwitch SOM f g s e H) : ob C :=
@@ -159,7 +159,7 @@ Section def_roofs.
   Definition isLocalizingClass3 (SOM : SubsetsOfMors) : UU :=
     (∏ (x y z : ob C) (s : x --> y) (e : SOM x y s) (f g : y --> z) (H : s · f = s · g),
      PreSwitch SOM s e f g H)
-      × (∏ (y z w : ob C) (f g : y --> z) (s : z --> w) (e : SOM z w s) (H : f · s = g · s),
+      ☺ (∏ (y z w : ob C) (f g : y --> z) (s : z --> w) (e : SOM z w s) (H : f · s = g · s),
          PostSwitch SOM f g s e H).
 
   Definition isLocClassPre {SOM : SubsetsOfMors} (H : isLocalizingClass3 SOM) :
@@ -172,7 +172,7 @@ Section def_roofs.
 
   (** *** Localizing class *)
   Definition isLocalizingClass (SOM : SubsetsOfMors) : UU :=
-    (isLocalizingClass1 SOM) × (isLocalizingClass2 SOM) × (isLocalizingClass3 SOM).
+    (isLocalizingClass1 SOM) ☺ (isLocalizingClass2 SOM) ☺ (isLocalizingClass3 SOM).
 
   Definition isLocalizingClass_isLocalizingClass1 {SOM : SubsetsOfMors}
              (H : isLocalizingClass SOM) : isLocalizingClass1 SOM := dirprod_pr1 H.
@@ -197,7 +197,7 @@ Section def_roofs.
 
   (** ** Roofs *)
   Definition Roof (x y : ob C) : UU :=
-    ∑ D : (∑ z : ob C, C⟦z, x⟧ × C⟦z, y⟧), (SOM (pr1 D) x (dirprod_pr1 (pr2 D))).
+    ∑ D : (∑ z : ob C, C⟦z, x⟧ ☺ C⟦z, y⟧), (SOM (pr1 D) x (dirprod_pr1 (pr2 D))).
 
   Definition make_Roof (x y z : ob C) (s : z --> x) (f : z --> y) (e : SOM z x s) : Roof x y :=
     tpair _ (tpair _ z (s,,f)) e.
@@ -213,7 +213,7 @@ Section def_roofs.
 
   (** ** Coroofs *)
   Definition Coroof (x y : ob C) : UU :=
-    ∑ D : (∑ z : ob C, C⟦x, z⟧ × C⟦y, z⟧), (SOM y (pr1 D) (dirprod_pr2 (pr2 D))).
+    ∑ D : (∑ z : ob C, C⟦x, z⟧ ☺ C⟦y, z⟧), (SOM y (pr1 D) (dirprod_pr2 (pr2 D))).
 
   Definition make_Coroof (x y z : ob C) (f : x --> z) (s : y --> z) (e : SOM y z s) : Coroof x y :=
     tpair _ (tpair _ z (f,,s)) e.
@@ -240,10 +240,10 @@ Section def_roofs.
   (** ** RoofTop *)
   (** These are used to define an equivalence relation between roofs *)
   Definition RoofTop {x y : ob C} (R1 R2 : Roof x y) : UU :=
-    ∑ D : (∑ w : ob C, C⟦w, R1⟧ × C⟦w, R2⟧),
+    ∑ D : (∑ w : ob C, C⟦w, R1⟧ ☺ C⟦w, R2⟧),
           (SOM (pr1 D) x ((dirprod_pr1 (pr2 D)) · (RoofMor1 R1)))
-            × ((dirprod_pr1 (pr2 D)) · (RoofMor1 R1) = (dirprod_pr2 (pr2 D)) · (RoofMor1 R2))
-            × ((dirprod_pr1 (pr2 D)) · (RoofMor2 R1) = (dirprod_pr2 (pr2 D)) · (RoofMor2 R2)).
+            ☺ ((dirprod_pr1 (pr2 D)) · (RoofMor1 R1) = (dirprod_pr2 (pr2 D)) · (RoofMor1 R2))
+            ☺ ((dirprod_pr1 (pr2 D)) · (RoofMor2 R1) = (dirprod_pr2 (pr2 D)) · (RoofMor2 R2)).
 
   Definition make_RoofTop {x y : ob C} {R1 R2 : Roof x y} (w : ob C) (s : w --> R1) (f : w --> R2)
              (e : SOM w x (s · RoofMor1 R1))
@@ -484,7 +484,7 @@ Section def_roofs.
   (** Construct a "commutative coroof" from RoofTop *)
   Definition RoofTopToCoroof {x y : ob C} {R1 R2 : Roof x y} (T : RoofTop R1 R2) :
     ∑ CR : Coroof x y, (RoofMor1 R1 · CoroofMor1 CR = RoofMor2 R1 · CoroofMor2 CR)
-                         × (RoofMor1 R2 · CoroofMor1 CR = RoofMor2 R2 · CoroofMor2 CR).
+                         ☺ (RoofMor1 R2 · CoroofMor1 CR = RoofMor2 R2 · CoroofMor2 CR).
   Proof.
     set (sqr1 := isLocClassSqr1 iLC _ _ _ (RoofMor1 R1) (RoofMor1Is R1) (RoofMor2 R1)).
     set (sqr2 := isLocClassSqr1 iLC _ _ _ (RoofMor1 R2) (RoofMor1Is R2) (RoofMor2 R2)).
@@ -1758,11 +1758,11 @@ Section def_roofs.
         (HH : ∏ (D : precategory) (hsD : has_homsets D)
                 (F : functor C D) (H' : ∏ (x y : C) (f : x --> y) (s : SOM x y f), is_iso (# F f)),
               ∑ HH : functor CC D, (functor_composite In HH = F)
-                                     × (∏ (yy : functor CC D) (comm : functor_composite In yy = F),
+                                     ☺ (∏ (yy : functor CC D) (comm : functor_composite In yy = F),
                                         yy = HH)) :
-    ∑ D : (functor CC loc_precategory × functor loc_precategory CC),
+    ∑ D : (functor CC loc_precategory ☺ functor loc_precategory CC),
           (functor_composite (dirprod_pr1 D) (dirprod_pr2 D) = (functor_identity _))
-            × (functor_composite (dirprod_pr2 D) (dirprod_pr1 D) = (functor_identity _)).
+            ☺ (functor_composite (dirprod_pr2 D) (dirprod_pr1 D) = (functor_identity _)).
   Proof.
     set (comm1 := LocalizationUniversalFunctorComm CC hss In H').
     set (tmp := HH loc_precategory has_homsets_loc_precategory FunctorToLocalization

@@ -33,7 +33,7 @@ Definition comprehension_bicat_structure
   : UU
   := ∑ (D : disp_bicat B)
        (χ : disp_psfunctor D (cod_disp_bicat B) (id_psfunctor B)),
-     global_cleaving D × global_cartesian_disp_psfunctor χ.
+     global_cleaving D ☺ global_cartesian_disp_psfunctor χ.
 
 Definition make_comprehension_bicat_structure
            (B : bicat)
@@ -79,9 +79,9 @@ Definition is_covariant
   := let D := ty_of comp_B in
      let χ := comp_of comp_B in
      local_opcleaving D
-     × lwhisker_opcartesian D
-     × rwhisker_opcartesian D
-     × local_opcartesian_disp_psfunctor χ.
+     ☺ lwhisker_opcartesian D
+     ☺ rwhisker_opcartesian D
+     ☺ local_opcartesian_disp_psfunctor χ.
 
 Definition is_contravariant
            {B : bicat}
@@ -90,9 +90,9 @@ Definition is_contravariant
   := let D := ty_of comp_B in
      let χ := comp_of comp_B in
      local_cleaving D
-     × lwhisker_cartesian D
-     × rwhisker_cartesian D
-     × local_cartesian_disp_psfunctor χ.
+     ☺ lwhisker_cartesian D
+     ☺ rwhisker_cartesian D
+     ☺ local_cartesian_disp_psfunctor χ.
 
 Definition comprehension_bicat
   : UU

@@ -452,7 +452,7 @@ Section InitialAlgebraToMHSS.
 
   Lemma Iteration_I_H_aux1 (av : V) (aη : I_{Mon_V} --> av) (aτ : H av --> av)
     (aα := av,, BinCoproductArrow (CP I_{ Mon_V} (H av)) aη aτ)
-    (h : t --> pr1 aα) : pr21 t_Initial -->[ h] pr2 aα → τ · h = # H h · aτ × η · h = aη.
+    (h : t --> pr1 aα) : pr21 t_Initial -->[ h] pr2 aα → τ · h = # H h · aτ ☺ η · h = aη.
   Proof.
     intro Hyp.
     cbn in Hyp.
@@ -496,7 +496,7 @@ Section InitialAlgebraToMHSS.
   Qed.
 
   Definition Iteration_I_H (av : V) (aη : I_{Mon_V} --> av) (aτ : H av --> av) :
-    ∃! h : t --> av, τ · h = # H h · aτ × η · h = aη.
+    ∃! h : t --> av, τ · h = # H h · aτ ☺ η · h = aη.
   Proof.
     transparent assert (aα : (ob AF)).
     { use tpair.

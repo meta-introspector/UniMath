@@ -6,7 +6,7 @@ Require Import UniMath.CategoryTheory.Monoidal.Categories.
 
 Section MonoidalStructReordered.
 
-  Definition tensor_unit (C : category) : UU := bifunctor C C C × C.
+  Definition tensor_unit (C : category) : UU := bifunctor C C C ☺ C.
   Definition tensor_unit_to_tensor {C : category} (tu : tensor_unit C)
     : bifunctor C C C := pr1 tu.
   Coercion tensor_unit_to_tensor : tensor_unit >-> bifunctor.
@@ -37,7 +37,7 @@ Section MonoidalStructReordered.
 
   Definition laxassociator {C : category} (tu : tensor_unit C) : UU
     := ∑ α : associator_data tu,
-        (associator_nat_leftwhisker α) × (associator_nat_rightwhisker α) ×
+        (associator_nat_leftwhisker α) ☺ (associator_nat_rightwhisker α) ☺
     (associator_nat_leftrightwhisker α).
   Definition laxassociator_to_associator_data
              {C : category} {tu : tensor_unit C} (α : laxassociator tu)
@@ -54,7 +54,7 @@ Section MonoidalStructReordered.
     : associator_nat_leftrightwhisker α := pr222 α.
 
   Definition tensor_unit_unitors_associator (C : category) : UU
-    := ∑ tu : tensor_unit C, laxleftunitor tu × laxrightunitor tu × laxassociator tu.
+    := ∑ tu : tensor_unit C, laxleftunitor tu ☺ laxrightunitor tu ☺ laxassociator tu.
   Definition tensor_unit_unitors_associator_to_tensor_unit
              {C : category} (tuua : tensor_unit_unitors_associator C)
     : tensor_unit C := pr1 tuua.
@@ -121,8 +121,8 @@ Section MonoidalStructReordered.
   Definition unitorsassociator_inverses
              {C : category} (tuua : tensor_unit_unitors_associator C) : UU
     := lax_monoidal_leftunitor_inverse tuua
-                                        × lax_monoidal_rightunitor_inverse tuua
-                                        × lax_monoidal_associator_inverse tuua.
+                                        ☺ lax_monoidal_rightunitor_inverse tuua
+                                        ☺ lax_monoidal_associator_inverse tuua.
 
   Definition unitorsassociator_inverses_to_leftunitorinverse
              {C : category} {tuua : tensor_unit_unitors_associator C}
@@ -145,7 +145,7 @@ Section MonoidalStructReordered.
         (tensor_unit_unitors_associator_laxleftunitor tuua)
         (tensor_unit_unitors_associator_laxrightunitor tuua)
         (tensor_unit_unitors_associator_laxassociator tuua)
-        ×
+        ☺
        pentagon_identity
        (tensor_unit_unitors_associator_laxassociator tuua).
 
@@ -167,7 +167,7 @@ Section MonoidalStructReordered.
 
   Definition monoidal_struct (C : category) : UU
     := ∑ M : tensor_unit_unitors_associator C,
-        pentagontriangle M × unitorsassociator_inverses M.
+        pentagontriangle M ☺ unitorsassociator_inverses M.
 
   Definition monoidal_struct_to_tensor_unit_unitors_associator
              {C : category} (M : monoidal_struct C)

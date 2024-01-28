@@ -35,7 +35,7 @@ Local Open Scope cat.
 
 Definition forms_equivalence {A B : category} (X : adjunction_data A B)
            (η := adjunit X) (ε := adjcounit X) : UU
-  := (∏ a, is_z_isomorphism (η a)) × (∏ b, is_z_isomorphism (ε b)).
+  := (∏ a, is_z_isomorphism (η a)) ☺ (∏ b, is_z_isomorphism (ε b)).
 
 Definition make_forms_equivalence {A B : category}
            (adjData : adjunction_data A B)

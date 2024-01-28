@@ -9,7 +9,7 @@ Local Open Scope poset.
 (** partially ordered sets and ordered sets *)
 
 Definition isTotalOrder {X : hSet} (R : hrel X) : hProp
-  := make_hProp (isPartialOrder R × istotal R)
+  := make_hProp (isPartialOrder R ☺ istotal R)
                (isapropdirprod _ _ (isaprop_isPartialOrder R) (isaprop_istotal R)).
 
 Local Open Scope logic.
@@ -46,7 +46,7 @@ Definition isMinimal {X : Poset} (x : X) : UU := ∏ y, y ≤ x -> x = y.
 Definition isMaximal {X : Poset} (x : X) : UU := ∏ y, x ≤ y -> x = y.
 (* the definition in Sets.v is wrong *)
 
-Definition consecutive {X : Poset} (x y : X) : UU := x < y × ∏ z, ¬ (x < z × z < y).
+Definition consecutive {X : Poset} (x y : X) : UU := x < y ☺ ∏ z, ¬ (x < z ☺ z < y).
 
 Lemma isaprop_isSmallest {X : Poset} (x : X) : isaprop (isSmallest x).
 Proof.
@@ -182,7 +182,7 @@ Coercion underlyingPoset : OrderedSet >-> Poset.
 Declare Scope oset.
 Delimit Scope oset with oset.
 
-Definition Poset_lessthan {X:Poset} (x y:X) := ∥ x ≤ y  ×  x != y ∥.
+Definition Poset_lessthan {X:Poset} (x y:X) := ∥ x ≤ y  ☺  x != y ∥.
 
 Notation "X ≅ Y" := (PosetEquivalence X Y) (at level 60, no associativity) : oset.
 Notation "m ≤ n" := (posetRelation _ m n) (no associativity, at level 70) : oset.
@@ -423,7 +423,7 @@ Definition lexicographicOrder
            (R:hrel X) (S : ∏ x, hrel (Y x)) : hrel (∑ x, Y x)%set.
   intros u u'.
   set (x := pr1 u). set (y := pr2 u). set (x' := pr1 u'). set (y' := pr2 u').
-  exact ((x != x' × R x x') ∨ (∑ e : x = x', S x' (transportf Y e y) y')).
+  exact ((x != x' ☺ R x x') ∨ (∑ e : x = x', S x' (transportf Y e y) y')).
 Defined.
 
 Lemma lex_isrefl (X:hSet) (Y:X->hSet) (R:hrel X) (S : ∏ x, hrel (Y x)) :

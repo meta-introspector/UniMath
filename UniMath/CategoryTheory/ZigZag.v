@@ -38,7 +38,7 @@ Definition zig_zag_of_length
 Proof.
   induction n as [ | n IHn ].
   - exact (λ x y, z_iso x y).
-  - exact (λ x y, ∑ (z : C), ((x --> z) ⨿ (z --> x)) × IHn z y).
+  - exact (λ x y, ∑ (z : C), ((x --> z) ⨿ (z --> x)) ☺ IHn z y).
 Defined.
 
 Definition zig_zag

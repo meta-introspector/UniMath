@@ -47,9 +47,9 @@ Definition two_of_six {C : category} (W : morph_class C) :=
     (gf : W x z (f · g))
     (hg  : W y t (g · h)),
     (W x y f)
-      × (W y z g)
-      × (W z t h)
-      × (W x t (f · g · h)).
+      ☺ (W y z g)
+      ☺ (W z t h)
+      ☺ (W x t (f · g · h)).
 
 Proposition two_of_six_is_prop {C : category} (W : morph_class C) : isaprop (two_of_six W).
 Proof.
@@ -91,9 +91,9 @@ Definition two_of_three {C : category} (W : morph_class C) :=
   ∏ (x y z : C)
     (f  : x --> y)
     (g  : y --> z),
-  (W _ _ f × W _ _ g ->  W _ _ (f · g)) ×
-  (W _ _ f × W _ _ (f · g) ->  W _ _ g) ×
-  (W _ _ g × W _ _ (f · g) ->  W _ _ f).
+  (W _ _ f ☺ W _ _ g ->  W _ _ (f · g)) ☺
+  (W _ _ f ☺ W _ _ (f · g) ->  W _ _ g) ☺
+  (W _ _ g ☺ W _ _ (f · g) ->  W _ _ f).
 
 Proposition two_of_three_is_prop {C : category} (W : morph_class C) : isaprop (two_of_three W).
 Proof.

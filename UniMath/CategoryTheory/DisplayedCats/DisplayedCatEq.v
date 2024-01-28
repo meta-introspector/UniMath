@@ -122,7 +122,7 @@ Section DisplayedCatEq.
          (id_disp xx)
        =
        id_disp (eqweqmap (pob x) xx))
-      ×
+      ☺
       (∏ (x y z : C)
          (f : x --> y)
          (g : y --> z)
@@ -200,7 +200,7 @@ Section DisplayedCatEq.
         pmor _ _ _ _ _ (id_disp xx)
         =
         id_disp (pob x xx))
-       ×
+       ☺
        (∏ (x y z : C)
           (f : x --> y)
           (g : y --> z)
@@ -248,7 +248,7 @@ Section DisplayedCatEq.
       →
       ∑ (F : disp_functor (functor_identity C) D₁ D₂),
       (∏ (x : C), isweq (F x))
-      ×
+      ☺
       disp_functor_ff F.
   Proof.
     intro FF.
@@ -266,7 +266,7 @@ Section DisplayedCatEq.
   Definition disp_cat_eq_step_6_right
     : (∑ (F : disp_functor (functor_identity C) D₁ D₂),
        (∏ (x : C), isweq (F x))
-       ×
+       ☺
        disp_functor_ff F)
       →
       disp_cat_eq_functor.
@@ -293,7 +293,7 @@ Section DisplayedCatEq.
       ≃
       ∑ (F : disp_functor (functor_identity C) D₁ D₂),
       (∏ (x : C), isweq (F x))
-      ×
+      ☺
       disp_functor_ff F.
   Proof.
     use weq_iso.
@@ -308,7 +308,7 @@ Section DisplayedCatEq.
       ≃
       ∑ (F : disp_functor (functor_identity C) D₁ D₂),
       (∏ (x : C), isweq (F x))
-      ×
+      ☺
       disp_functor_ff F
     := (disp_cat_eq_step_6
         ∘ disp_cat_eq_step_5
@@ -323,12 +323,12 @@ Section DisplayedCatEq.
   Definition disp_cat_eq_step_7
     : (∑ (F : disp_functor (functor_identity C) D₁ D₂),
        (∏ (x : C), isweq (F x))
-       ×
+       ☺
        disp_functor_ff F)
       ≃
       ∑ (F : disp_functor (functor_identity C) D₁ D₂),
       disp_functor_disp_ess_surj F
-      ×
+      ☺
       disp_functor_ff F.
   Proof.
     use weqfibtototal.
@@ -359,7 +359,7 @@ Section DisplayedCatEq.
   Definition disp_cat_eq_step_8
     : (∑ (F : disp_functor (functor_identity C) D₁ D₂),
        disp_functor_disp_ess_surj F
-       ×
+       ☺
        disp_functor_ff F)
       ≃
       ∑ (F : disp_functor (functor_identity C) D₁ D₂),

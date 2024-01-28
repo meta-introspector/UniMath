@@ -74,7 +74,7 @@ Definition is_pstrans
       =
       (pr2 η _ _ f)
         • (##F α ▹ pr1 η Y))
-     ×
+     ☺
      (∏ (X : C),
       (pr1 η X ◃ psfunctor_id G X)
         • pr2 η _ _ (id₁ X)
@@ -82,7 +82,7 @@ Definition is_pstrans
       (runitor (pr1 η X))
         • linvunitor (pr1 η X)
         • (psfunctor_id F X ▹ pr1 η X))
-     ×
+     ☺
      (∏ (X Y Z : C) (f : X --> Y) (g : Y --> Z),
       (pr1 η X ◃ psfunctor_comp G f g)
         • pr2 η _ _ (f · g)
@@ -420,7 +420,7 @@ Section LocalNotation.
         =
         (pr2 η _ _ f)
           • (##F α ▹ pr1 η Y))
-         ×
+         ☺
          (∏ (X : C),
           (pr1 η X ◃ PseudoFunctorBicat.psfunctor_id G X)
             • pr2 η _ _ (id₁ X)
@@ -428,7 +428,7 @@ Section LocalNotation.
           (runitor (pr1 η X))
             • linvunitor (pr1 η X)
             • (PseudoFunctorBicat.psfunctor_id F X ▹ pr1 η X))
-         ×
+         ☺
          (∏ (X Y Z : C) (f : X --> Y) (g : Y --> Z),
           (pr1 η X ◃ PseudoFunctorBicat.psfunctor_comp G f g)
             • pr2 η _ _ (f · g)

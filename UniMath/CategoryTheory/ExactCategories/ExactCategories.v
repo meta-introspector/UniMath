@@ -812,7 +812,7 @@ Section KernelCokernelPairs.
   Lemma PairPushoutMap {M :PreAdditive} {A B C A':M} {i : A --> B} {p : B --> C}
         (pr : isKernelCokernelPair i p)
         (r : A --> A') (po : Pushout i r) :
-    ∑ (q : po --> C), PushoutIn1 po · q = p × PushoutIn2 po · q = 0.
+    ∑ (q : po --> C), PushoutIn1 po · q = p ☺ PushoutIn2 po · q = 0.
   Proof.
     refine (iscontrpr1 (isPushout_Pushout po C p 0 _)).
     refine (pr1 (PairToCokernel pr) @ ! _). apply zeroRight.
@@ -820,7 +820,7 @@ Section KernelCokernelPairs.
   Lemma PairPullbackMap {M :PreAdditive} {A B C A':M} {i : A <-- B} {p : B <-- C}
         (pr : isKernelCokernelPair p i)
         (r : A <-- A') (pb : Pullback i r) :
-    ∑ (q : pb <-- C), PullbackPr1 pb ∘ q = p × PullbackPr2 pb ∘ q = 0.
+    ∑ (q : pb <-- C), PullbackPr1 pb ∘ q = p ☺ PullbackPr2 pb ∘ q = 0.
   Proof.
     (* giving the dual proof here helps later! *)
     exact (PairPushoutMap (M:=oppositePreAdditive M) (opposite_isKernelCokernelPair pr) r pb).

@@ -20,16 +20,16 @@ Definition islinv' {X : hSet} (x1 : X) (op : binop X) (exinv : hsubtype X) (inv 
 Definition isrinv' {X : hSet} (x1 : X) (op : binop X) (exinv : hsubtype X) (inv : carrier_subset exinv -> X) :=
   ∏ (x : X) (Hx : exinv x), op x (inv (x ,, Hx)) = x1.
 Definition isinv' {X : hSet} (x1 : X) (op : binop X) (exinv : hsubtype X) (inv : carrier_subset exinv -> X)  :=
-  islinv' x1 op exinv inv × isrinv' x1 op exinv inv.
+  islinv' x1 op exinv inv ☺ isrinv' x1 op exinv inv.
 
 (** * Effective Orders *)
 (** An alternative to total orders *)
 
 Definition isEffectiveOrder {X : UU} (le lt : hrel X) :=
-  dirprod ((ispreorder le) × (isStrongOrder lt))
+  dirprod ((ispreorder le) ☺ (isStrongOrder lt))
           ((∏ x y : X, (¬ lt x y) <-> (le y x))
-          × (∏ x y z : X, lt x y -> le y z -> lt x z)
-          × (∏ x y z : X, le x y -> lt y z -> lt x z)).
+          ☺ (∏ x y z : X, lt x y -> le y z -> lt x z)
+          ☺ (∏ x y z : X, le x y -> lt y z -> lt x z)).
 Definition EffectiveOrder (X : UU) :=
   ∑ le lt : hrel X, isEffectiveOrder le lt.
 Definition pairEffectiveOrder {X : UU} (le lt : hrel X) (is : isEffectiveOrder le lt) : EffectiveOrder X :=
@@ -166,9 +166,9 @@ End eo_pty.
 
 Definition isConstructiveTotalEffectiveOrder {X : UU} (ap le lt : hrel X) :=
   istightap ap
-  × isEffectiveOrder le lt
-  × (isantisymm le)
-  × (∏ x y : X, ap x y <-> (lt x y) ⨿ (lt y x)).
+  ☺ isEffectiveOrder le lt
+  ☺ (isantisymm le)
+  ☺ (∏ x y : X, ap x y <-> (lt x y) ⨿ (lt y x)).
 Definition ConstructiveTotalEffectiveOrder X :=
   ∑ ap lt le : hrel X, isConstructiveTotalEffectiveOrder ap lt le.
 Definition ConstructiveTotalEffectivellyOrderedSet :=
@@ -187,7 +187,7 @@ Definition isSmallerThanUpperBounds (E : hsubtype X) (lub : X) : UU :=
   ∏ ub : X, isUpperBound E ub -> lub <= ub.
 
 Definition isLeastUpperBound (E : hsubtype X) (lub : X) : UU :=
-  (isUpperBound E lub) × (isSmallerThanUpperBounds E lub).
+  (isUpperBound E lub) ☺ (isSmallerThanUpperBounds E lub).
 Definition LeastUpperBound (E : hsubtype X) : UU :=
   ∑ lub : X, isLeastUpperBound E lub.
 Definition pairLeastUpperBound (E : hsubtype X) (lub : X)
@@ -232,7 +232,7 @@ Definition isBiggerThanLowerBounds (E : hsubtype X) (lub : X) : UU :=
   ∏ ub : X, isLowerBound E ub -> lub >= ub.
 
 Definition isGreatestLowerBound (E : hsubtype X) (glb : X) : UU :=
-  (isLowerBound E glb) × (isBiggerThanLowerBounds E glb).
+  (isLowerBound E glb) ☺ (isBiggerThanLowerBounds E glb).
 Definition GreatestLowerBound (E : hsubtype X) : UU :=
   ∑ glb : X, isGreatestLowerBound E glb.
 Definition pairGreatestLowerBound (E : hsubtype X) (glb : X)

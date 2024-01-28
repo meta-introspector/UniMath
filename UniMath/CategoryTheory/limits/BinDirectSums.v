@@ -145,7 +145,7 @@ Section def_bindirectsums.
 
   (** Definition of BinDirectSums. *)
   Definition BinDirectSum (a b : A) : UU :=
-    ∑ coab : (∑ co : A, a --> co × b --> co × co --> a × co --> b),
+    ∑ coab : (∑ co : A, a --> co ☺ b --> co ☺ co --> a ☺ co --> b),
              isBinDirectSum a b (pr1 coab) (pr1 (pr2 coab)) (pr1 (pr2 (pr2 coab)))
                                 (pr1 (pr2 (pr2 (pr2 coab)))) (pr2 (pr2 (pr2 (pr2 coab)))).
 

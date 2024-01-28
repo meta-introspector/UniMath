@@ -90,7 +90,7 @@ Proof.
 Qed.
 
 Definition isTRR (V : hSet) (E : hrel V) (r : V) : UU :=
-  isrefl E × istrans E × isaroot E r.
+  isrefl E ☺ istrans E ☺ isaroot E r.
 
 Lemma isaprop_isTRR (V : hSet) (E : hrel V) (r : V) : isaprop (isTRR V E r).
 Proof.
@@ -131,7 +131,7 @@ Definition selfedge (G : TRRGraph) (x : pr1 G) : pr1 (pr2 G) x x :=
     that isomorphisms are equivalent to identities [TRRGraph_univalence] **)
 
 Definition isTRRGhomo {G H : TRRGraph} (f : pr1 G → pr1 H) : UU :=
-  (∏ (x y : pr1 G), (x ≤ y) <-> (f x ≤ f y)) × (f (TRRG_root G) = TRRG_root H).
+  (∏ (x y : pr1 G), (x ≤ y) <-> (f x ≤ f y)) ☺ (f (TRRG_root G) = TRRG_root H).
 
 Lemma isaprop_isTRRGhomo {G H : TRRGraph} (f : pr1 G → pr1 H) : isaprop (isTRRGhomo f).
 Proof.
@@ -288,13 +288,13 @@ Definition DownwardClosure {G : TRRGraph} (x : pr1 G) : UU :=
   ∑ y : pr1 G, y ≤ x.
 
 Definition antisymmetric {G :TRRGraph} (y z : pr1 G) : UU :=
-  (y ≤ z) × (z ≤ y) → (z = y).
+  (y ≤ z) ☺ (z ≤ y) → (z = y).
 
 Definition total {G : TRRGraph} (y z : pr1 G) : hProp :=
   (y ≤ z) ∨ (z ≤ y).
 
 Definition isatree (G : TRRGraph) : UU :=
-  ∏ (x : pr1 G) (y z : DownwardClosure x), antisymmetric (pr1 y) (pr1 z) × total (pr1 y) (pr1 z).
+  ∏ (x : pr1 G) (y z : DownwardClosure x), antisymmetric (pr1 y) (pr1 z) ☺ total (pr1 y) (pr1 z).
 
 Lemma isaprop_isatree (G : TRRGraph) : isaprop (isatree G).
 Proof.
@@ -425,7 +425,7 @@ Proof.
 Qed.
 
 Definition issuperrigid (T : Tree) : UU :=
-  isrigid T × (∏ (x : pr11 T), isrigid (Up x)).
+  isrigid T ☺ (∏ (x : pr11 T), isrigid (Up x)).
 
 Lemma isaprop_issuperrigid (T : Tree) : isaprop (issuperrigid T).
 Proof.
@@ -447,7 +447,7 @@ Definition hasLargest {X : UU} (R : hrel X) : hProp :=
 
 Definition isWellFoundedDown (T : Tree) := hasLargest (pr121 T).
 
-Definition Tree_isWellFounded (T : Tree) := (isWellFoundedUp T) × (isWellFoundedDown T).
+Definition Tree_isWellFounded (T : Tree) := (isWellFoundedUp T) ☺ (isWellFoundedDown T).
 
 Lemma isaprop_Tree_isWellFounded (T : Tree) : isaprop (Tree_isWellFounded T).
 Proof.
@@ -465,7 +465,7 @@ Qed.
 
 **)
 
-Definition ispreZFS (T : Tree) : UU := (Tree_isWellFounded T) × (issuperrigid T).
+Definition ispreZFS (T : Tree) : UU := (Tree_isWellFounded T) ☺ (issuperrigid T).
 
 Lemma isaprop_ispreZFS (T : Tree) : isaprop (ispreZFS T).
 Proof.
@@ -560,7 +560,7 @@ Proof.
     rewrite <- p.
     apply z.
   }
-  assert (SE : ((∃ e : Ed T x (pr1 y), S (pr1 y,, e)) ∧ Ed T x (pr1 y)) <- S y).
+  assert (SE : ((∃ e : Ed T x (pr1 y), S (pr1 y,, e)) ∧ Ed T x (pr1 y)) <-u S y).
   {
     intros X.
     simpl.
@@ -1005,7 +1005,7 @@ Proof.
   apply isapropempty.
 Qed.
 
-Definition ZFS_elementof (X Y : ZFS) := ∑ (a : Y), (isapoint a) × (X = Y ↑ a).
+Definition ZFS_elementof (X Y : ZFS) := ∑ (a : Y), (isapoint a) ☺ (X = Y ↑ a).
 
 Lemma isaprop_ZFS_elementof (X Y : ZFS) : isaprop (ZFS_elementof X Y).
 Proof.
@@ -1022,7 +1022,7 @@ Proof.
   set (s := (pr2 Y w z r)).
   simpl in ρ.
   set (τ y := @isapropdirprod _ _ (isaprop_isapoint y) (isaset_ZFS X (Y ↑ y))).
-  set (P := λ y : Y, (isapoint y × X = Y ↑ y) ,, τ y).
+  set (P := λ y : Y, (isapoint y ☺ X = Y ↑ y) ,, τ y).
   apply (total2_paths_hProp_equiv P (z,, (ispp,, p)) (w,, (ispq,, q))).
   simpl.
   apply (! s).

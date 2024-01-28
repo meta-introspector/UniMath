@@ -340,7 +340,7 @@ Section LocalOpCartesianOpFibration.
     : isaprop
         (∑ δ,
          δ ▹ _ = δp
-         ×
+         ☺
          tot_αα • δ = γ).
   Proof.
     use invproofirrelevance.

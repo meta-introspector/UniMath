@@ -82,10 +82,10 @@ Local Tactic Notation "≃'" constr(H) := apply invweq; intermediate_weq H.
 
 Local Lemma combine_over_nat_basic {X Y Z : nat → UU} :
   X 0 ≃ Z 0 → (∏ n : nat, Y (S n) ≃ Z (S n)) →
-  (X 0 × ∏ n : nat, Y (S n)) ≃ ∏ n : nat, Z n.
+  (X 0 ☺ ∏ n : nat, Y (S n)) ≃ ∏ n : nat, Z n.
 Proof.
   intros x0z0 yszs.
-  ≃ (Z 0 × (∏ n : nat, Z (S n))).
+  ≃ (Z 0 ☺ (∏ n : nat, Z (S n))).
   - apply weqdirprodf; [apply x0z0|].
     apply weqonsecfibers, yszs.
   - use weq_iso.
@@ -102,11 +102,11 @@ Proof.
       induction n; reflexivity.
 Defined.
 
-Local Lemma combine_over_nat {X : nat → UU} {P : (X 0 × (∏ n : nat, X (S n))) → UU} :
+Local Lemma combine_over_nat {X : nat → UU} {P : (X 0 ☺ (∏ n : nat, X (S n))) → UU} :
   (∑ x0 : X 0, ∑ xs : ∏ n : nat, X (S n), P (make_dirprod x0 xs)) ≃
   (∑ xs : ∏ n : nat, X n, P (make_dirprod (xs 0) (xs ∘ S))).
 Proof.
-  ≃ (∑ pair : (X 0 × ∏ n : nat, X (S n)), P pair) by apply weqtotal2asstol.
+  ≃ (∑ pair : (X 0 ☺ ∏ n : nat, X (S n)), P pair) by apply weqtotal2asstol.
   use weqbandf.
   - apply (@combine_over_nat_basic X X X); intros; apply idweq.
   - intros x0xs; cbn.
@@ -159,12 +159,12 @@ Proof.
     (dmor cocha (idpath (S (S v)))
       ∘ transportf (λ o : nat, X (S o) → X (S (S v))) e
       (idfun (X (S (S v))))) (xs u) = xs v)
-    × (∑ x0 : X 0, (π 0 (xs 0)) = x0)) by
+    ☺ (∑ x0 : X 0, (π 0 (xs 0)) = x0)) by
     (apply weqfibtototal; intro; apply dirprod_with_contr_r; apply isc).
 
   (** Now, we swap the components in the direct product. *)
   ≃ (∑ xs : ∏ v : nat, X (S v),
-    (∑ x0 : X 0, π 0 (xs 0) = x0) ×
+    (∑ x0 : X 0, π 0 (xs 0) = x0) ☺
     (∏ (u v : nat) (e : S v = u),
       (dmor cocha (idpath (S (S v)))
       ∘ transportf (λ o : nat, X (S o) → X (S (S v))) e
@@ -174,17 +174,17 @@ Proof.
   (** Using associativity of Σ-types, *)
   ≃ (∑ xs : ∏ v : nat, X (S v),
      ∑ x0 : X 0,
-     (π 0 (xs 0) = x0) ×
+     (π 0 (xs 0) = x0) ☺
      (∏ (u v : nat) (e : S v = u),
        (dmor cocha (idpath (S (S v)))
        ∘ transportf (λ o : nat, X (S o) → X (S (S v))) e
        (idfun (X (S (S v))))) (xs u) = xs v)) by
     (apply weqfibtototal; intro; apply weqtotal2asstor).
 
-  (** And again by commutativity of ×, we swap the first components *)
+  (** And again by commutativity of ☺, we swap the first components *)
   ≃ (∑ x0 : X 0,
      ∑ xs : ∏ n : nat, X (S n),
-     (π 0 (xs 0) = x0) ×
+     (π 0 (xs 0) = x0) ☺
      (∏ (u v : nat) (e : S v = u),
        (dmor cocha (idpath (S (S v)))
        ∘ transportf (λ o : nat, X (S o) → X (S (S v))) e
@@ -192,7 +192,7 @@ Proof.
 
   (** Step 3: combine the first bits *)
   ≃ (∑ xs : ∏ n : nat, X n,
-      (π 0 (xs 1) = xs 0) ×
+      (π 0 (xs 1) = xs 0) ☺
       (∏ (u v : nat) (e : S v = u),
         (dmor cocha (idpath (S (S v)))
         ∘ transportf (λ o : nat, dob cocha (S o) → dob cocha (S (S v))) e
@@ -200,7 +200,7 @@ Proof.
   apply (@combine_over_nat' X
         (λ x0 xs,
         π 0 (xs 0) = x0
-        × (∏ (u v : nat) (e : S v = u),
+        ☺ (∏ (u v : nat) (e : S v = u),
             (dmor cocha (idpath (S (S v)))
             ∘ transportf (λ o : nat, X (S o) → X (S (S v))) e (idfun (X (S (S v)))))
               (xs u) = xs v))).
@@ -209,7 +209,7 @@ Proof.
   apply weqfibtototal; intros xs.
 
   ≃ (π 0 (xs 1) = xs 0
-    × (∏ (v u : nat) (e : S v = u),
+    ☺ (∏ (v u : nat) (e : S v = u),
       (dmor cocha (idpath (S (S v)))
         ∘ transportf (λ o : nat, dob cocha (S o) → dob cocha (S (S v))) e
             (idfun (dob cocha (S (S v))))) (xs (S u)) = xs (S v))) by

@@ -58,7 +58,7 @@ Definition one_types_binprod_cone
 Proof.
   use make_binprod_cone.
   - use make_one_type.
-    + exact (pr1 X × pr1 Y).
+    + exact (pr1 X ☺ pr1 Y).
     + apply isofhleveldirprod.
       * exact (pr2 X).
       * exact (pr2 Y).

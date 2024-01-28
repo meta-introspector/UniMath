@@ -39,7 +39,7 @@ Proposition is_least_upperbound_pair
             (DX : dcpo_struct X)
             (DY : dcpo_struct Y)
             (I : UU)
-            (D : I → (X × Y)%set)
+            (D : I → (X ☺ Y)%set)
             (x : X)
             (y : Y)
             (Hx : is_least_upperbound DX (λ i, pr1 (D i)) x)
@@ -62,7 +62,7 @@ Definition prod_lub
            (DX : dcpo_struct X)
            (DY : dcpo_struct Y)
            (I : UU)
-           (D : I → (X × Y)%set)
+           (D : I → (X ☺ Y)%set)
            (x : lub DX (λ i, pr1 (D i)))
            (y : lub DY (λ i, pr2 (D i)))
   : lub (prod_PartialOrder DX DY) D.
@@ -79,7 +79,7 @@ Definition prod_dcpo_struct
            {X Y : hSet}
            (DX : dcpo_struct X)
            (DY : dcpo_struct Y)
-  : dcpo_struct (X × Y)%set.
+  : dcpo_struct (X ☺ Y)%set.
 Proof.
   use make_dcpo_struct.
   - exact (prod_PartialOrder DX DY).
@@ -99,7 +99,7 @@ Definition prod_dcppo_struct
            {X Y : hSet}
            (DX : dcppo_struct X)
            (DY : dcppo_struct Y)
-  : dcppo_struct (X × Y)%set.
+  : dcppo_struct (X ☺ Y)%set.
 Proof.
   refine (prod_dcpo_struct DX DY ,, _).
   exact (pr2 (prod_pointed_PartialOrder DX DY)).
@@ -115,11 +115,11 @@ Definition prod_dcppo
   : dcppo
   := _ ,, prod_dcppo_struct X Y.
 
-Notation "X × Y" := (prod_dcpo X Y) : dcpo.
+Notation "X ☺ Y" := (prod_dcpo X Y) : dcpo.
 
 Proposition prod_dcpo_le
             {X Y : dcpo}
-            (xy₁ xy₂ : (X × Y)%dcpo)
+            (xy₁ xy₂ : (X ☺ Y)%dcpo)
             (p : pr1 xy₁ ⊑ pr1 xy₂)
             (q : pr2 xy₁ ⊑ pr2 xy₂)
   : xy₁ ⊑ xy₂.
@@ -133,8 +133,8 @@ Proposition pr1_is_least_upperbound
             {DX : dcpo_struct X}
             {DY : dcpo_struct Y}
             {I : UU}
-            {D : I → X × Y}
-            (xy : X × Y)
+            {D : I → X ☺ Y}
+            (xy : X ☺ Y)
             (Hxy : is_least_upperbound (prod_dcpo_struct DX DY) D xy)
   : is_least_upperbound DX (λ i, pr1 (D i)) (pr1 xy).
 Proof.
@@ -188,7 +188,7 @@ Qed.
 
 Definition dirprod_pr1_scott_continuous_map
            (X Y : dcpo)
-  : scott_continuous_map (X × Y) X
+  : scott_continuous_map (X ☺ Y) X
   := _ ,, is_scott_continuous_dirprod_pr1 X Y.
 
 Notation "'π₁'" := (dirprod_pr1_scott_continuous_map _ _) : dcpo.
@@ -199,8 +199,8 @@ Proposition pr2_is_least_upperbound
             {DX : dcpo_struct X}
             {DY : dcpo_struct Y}
             {I : UU}
-            {D : I → X × Y}
-            (xy : X × Y)
+            {D : I → X ☺ Y}
+            (xy : X ☺ Y)
             (Hxy : is_least_upperbound (prod_dcpo_struct DX DY) D xy)
   : is_least_upperbound DY (λ i, pr2 (D i)) (pr2 xy).
 Proof.
@@ -254,7 +254,7 @@ Qed.
 
 Definition dirprod_pr2_scott_continuous_map
            (X Y : dcpo)
-  : scott_continuous_map (X × Y) Y
+  : scott_continuous_map (X ☺ Y) Y
   := _ ,, is_scott_continuous_dirprod_pr2 X Y.
 
 Notation "'π₂'" := (dirprod_pr2_scott_continuous_map _ _) : dcpo.
@@ -327,7 +327,7 @@ Definition pair_scott_continuous
            {W X Y : dcpo}
            (f : scott_continuous_map W X)
            (g : scott_continuous_map W Y)
-  : scott_continuous_map W (X × Y)
+  : scott_continuous_map W (X ☺ Y)
   := _ ,, is_scott_continuous_prodtofun (pr2 f) (pr2 g).
 
 Notation "⟨ f , g ⟩" := (pair_scott_continuous f g) : dcpo.
@@ -336,7 +336,7 @@ Definition tensor_scott_continuous_map
            {X₁ X₂ Y₁ Y₂ : dcpo}
            (f₁ : scott_continuous_map X₁ Y₁)
            (f₂ : scott_continuous_map X₂ Y₂)
-  : scott_continuous_map (X₁ × X₂) (Y₁ × Y₂)
+  : scott_continuous_map (X₁ ☺ X₂) (Y₁ ☺ Y₂)
   := ⟨ π₁ · f₁ , π₂ · f₂ ⟩.
 
 Notation "f₁ ⊗ f₂" := (tensor_scott_continuous_map f₁ f₂) : dcpo.
@@ -344,13 +344,13 @@ Notation "f₁ ⊗ f₂" := (tensor_scott_continuous_map f₁ f₂) : dcpo.
 (** * 6. Swap & associativity functions *)
 Definition dcpo_swap
            (A B : dcpo)
-  : scott_continuous_map (A × B) (B × A)
+  : scott_continuous_map (A ☺ B) (B ☺ A)
   := ⟨ dirprod_pr2_scott_continuous_map _ _
      , dirprod_pr1_scott_continuous_map _ _ ⟩.
 
 Definition assoc_scott_continuous_map
            (X Y Z : dcpo)
-  : scott_continuous_map (X × Y × Z) ((X × Y) × Z)
+  : scott_continuous_map (X ☺ Y ☺ Z) ((X ☺ Y) ☺ Z)
   := ⟨ ⟨ π₁ , π₂ · π₁ ⟩ , π₂ · π₂ ⟩.
 
 Notation "'α'" := (assoc_scott_continuous_map _ _ _) : dcpo.
@@ -358,10 +358,10 @@ Notation "'α'" := (assoc_scott_continuous_map _ _ _) : dcpo.
 (** * 7. Lemmas on upperbounds in the product *)
 Proposition prod_dcpo_lub
             {X Y : dcpo}
-            (D : directed_set (X × Y))
+            (D : directed_set (X ☺ Y))
   : ⨆ D = (⨆ (π₁ {{ D }}) ,, ⨆ (π₂ {{ D }})).
 Proof.
-  use (eq_lub (X × Y) D).
+  use (eq_lub (X ☺ Y) D).
   - apply is_least_upperbound_dcpo_lub.
   - use is_least_upperbound_pair.
     + exact (is_least_upperbound_dcpo_comp_lub
@@ -376,7 +376,7 @@ Definition prod_directed_set_dcpo
            {X Y : dcpo}
            (D₁ : directed_set X)
            (D₂ : directed_set Y)
-  : directed_set (X × Y)
+  : directed_set (X ☺ Y)
   := prod_directed_set D₁ D₂.
 
 Proposition prod_dcpo_lub'
@@ -538,12 +538,12 @@ Section ProductBasis.
     : dcpo_basis_data (prod_dcpo X Y).
   Proof.
     use make_dcpo_basis_data.
-    - exact (BX × BY)%type.
+    - exact (BX ☺ BY)%type.
     - exact (dirprodf BX BY).
   Defined.
 
   Proposition prod_dcpo_basis_laws
-    : dcpo_basis_laws (X × Y) prod_dcpo_basis_data.
+    : dcpo_basis_laws (X ☺ Y) prod_dcpo_basis_data.
   Proof.
     intros xy.
     split.
@@ -679,7 +679,7 @@ Section scott_open_binprod.
   Context {A B : dcpo}.
 
   Proposition is_scott_open_pr1
-              (P : scott_open_set (A × B)%dcpo)
+              (P : scott_open_set (A ☺ B)%dcpo)
               (b : B)
     : is_scott_open (λ a, P (a ,, b)).
   Proof.
@@ -705,7 +705,7 @@ Section scott_open_binprod.
   Qed.
 
   Definition scott_open_pr1
-             (P : scott_open_set (A × B))
+             (P : scott_open_set (A ☺ B))
              (b : B)
     : scott_open_set A.
   Proof.
@@ -715,7 +715,7 @@ Section scott_open_binprod.
   Defined.
 
   Proposition is_scott_open_pr2
-              (P : scott_open_set (A × B))
+              (P : scott_open_set (A ☺ B))
               (a : A)
     : is_scott_open (λ b, P (a ,, b)).
   Proof.
@@ -741,7 +741,7 @@ Section scott_open_binprod.
   Qed.
 
   Definition scott_open_pr2
-             (P : scott_open_set (A × B))
+             (P : scott_open_set (A ☺ B))
              (a : A)
     : scott_open_set B.
   Proof.
@@ -753,7 +753,7 @@ Section scott_open_binprod.
   Proposition prod_is_scott_open
               (PA : scott_open_set A)
               (PB : scott_open_set B)
-    : is_scott_open (λ (x : (A × B)%dcpo), PA (pr1 x) ∧ PB (pr2 x)).
+    : is_scott_open (λ (x : (A ☺ B)%dcpo), PA (pr1 x) ∧ PB (pr2 x)).
   Proof.
     split.
     - intros ( a₁ & b₁ ) ( a₂ & b₂ ) ( p₁ & p₂ ) ( q₁ & q₂ ).
@@ -781,7 +781,7 @@ Section scott_open_binprod.
   Definition prod_scott_open
              (PA : scott_open_set A)
              (PB : scott_open_set B)
-    : scott_open_set (A × B).
+    : scott_open_set (A ☺ B).
   Proof.
     simple refine (_ ,, _).
     - exact (λ x, PA (pr1 x) ∧ PB (pr2 x)).
@@ -805,7 +805,7 @@ Section StronglyMaximal.
   Proposition strongly_maximal_pr1
               {a : A}
               {b : B}
-              (Hab : @is_strongly_maximal (A × B)%dcpo (a ,, b))
+              (Hab : @is_strongly_maximal (A ☺ B)%dcpo (a ,, b))
     : is_strongly_maximal a.
   Proof.
     assert (H := nullary_interpolation CB b).
@@ -836,7 +836,7 @@ Section StronglyMaximal.
   Proposition strongly_maximal_pr2
               {a : A}
               {b : B}
-              (Hab : @is_strongly_maximal (A × B)%dcpo (a ,, b))
+              (Hab : @is_strongly_maximal (A ☺ B)%dcpo (a ,, b))
     : is_strongly_maximal b.
   Proof.
     assert (H := nullary_interpolation CA a).
@@ -869,7 +869,7 @@ Section StronglyMaximal.
               {b : B}
               (Ha : is_strongly_maximal a)
               (Hb : is_strongly_maximal b)
-    : @is_strongly_maximal (A × B)%dcpo (a ,, b).
+    : @is_strongly_maximal (A ☺ B)%dcpo (a ,, b).
   Proof.
     intros ( x₁ & y₁ ) ( x₂ & y₂ ) q.
     pose (p₁ := way_below_prod_pr1 basis_B q : x₁ ≪ x₂).
@@ -928,7 +928,7 @@ Section StronglyMaximal.
   Definition strongly_maximal_prod_weq
              (a : A)
              (b : B)
-    : @is_strongly_maximal (A × B)%dcpo (a ,, b)
+    : @is_strongly_maximal (A ☺ B)%dcpo (a ,, b)
        ≃
        (is_strongly_maximal a ∧ is_strongly_maximal b).
   Proof.

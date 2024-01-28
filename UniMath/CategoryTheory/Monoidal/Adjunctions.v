@@ -65,7 +65,7 @@ Definition monoidal_adjunction
   := ∑ (HL : fmonoidal_lax M₁ M₂ L),
      ∑ (HR : fmonoidal_lax M₂ M₁ R),
      is_mon_nat_trans (identity_fmonoidal _) (comp_fmonoidal_lax HL HR) η
-     ×
+     ☺
      is_mon_nat_trans (comp_fmonoidal_lax HR HL) (identity_fmonoidal _) ε.
 
 (**
@@ -1048,7 +1048,7 @@ Definition is_sym_monoidal_adjunction
            (HA : monoidal_adjunction M₁ M₂ A)
   : UU
   := is_symmetric_monoidal_functor S₁ S₂ (fmonoidal_lax_left_adjoint HA)
-     ×
+     ☺
      is_symmetric_monoidal_functor S₂ S₁ (fmonoidal_lax_right_adjoint HA).
 
 Definition sym_monoidal_adjunction

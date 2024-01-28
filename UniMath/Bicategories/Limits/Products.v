@@ -39,7 +39,7 @@ Section Product.
   (** Cones on the diagram *)
   Definition binprod_cone
     : UU
-    := ∑ (p : B), p --> b₁ × p --> b₂.
+    := ∑ (p : B), p --> b₁ ☺ p --> b₂.
 
   Coercion binprod_cone_obj
            (p : binprod_cone)
@@ -71,7 +71,7 @@ Section Product.
        invertible_2cell
          (φ · binprod_cone_pr1 q)
          (binprod_cone_pr1 p)
-       ×
+       ☺
        invertible_2cell
          (φ · binprod_cone_pr2 q)
          (binprod_cone_pr2 p).
@@ -168,12 +168,12 @@ Section Product.
                 ψ · binprod_cone_pr2 p),
          ∃! (γ : φ ==> ψ),
          (γ ▹ binprod_cone_pr1 p = α)
-         ×
+         ☺
          (γ ▹ binprod_cone_pr2 p = β).
 
     Definition has_binprod_ump
       : UU
-      := binprod_ump_1 × binprod_ump_2.
+      := binprod_ump_1 ☺ binprod_ump_2.
 
     Definition has_binprod_ump_1
                (H : has_binprod_ump)
@@ -609,7 +609,7 @@ Section Product.
     Definition has_binprod_cat_ump_binprod_ump_2_unique
       : isaprop (∑ (γ : φ ==> ψ),
                  γ ▹ binprod_cone_pr1 p = α
-                 ×
+                 ☺
                  γ ▹ binprod_cone_pr2 p = β).
     Proof.
       use invproofirrelevance.
@@ -639,7 +639,7 @@ Section Product.
     Definition has_binprod_cat_ump_binprod_ump_2_iscontr
       : iscontr (∑ (γ : φ ==> ψ),
                  γ ▹ binprod_cone_pr1 p = α
-                 ×
+                 ☺
                  γ ▹ binprod_cone_pr2 p = β).
     Proof.
       pose (pr1 (fully_faithful_implies_full_and_faithful
