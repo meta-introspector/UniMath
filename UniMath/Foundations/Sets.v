@@ -1,3 +1,4 @@
+Global Unset Universe Checking.
 (** * Generalities on [hSet].  Vladimir Voevodsky. Feb. - Sep. 2011
 
 In this file we introduce the type [hSet] of h-sets, i.e., of types of h-level 2

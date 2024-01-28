@@ -1,0 +1,3 @@
+#! /bin/bash
+coqtop	  -R UniMath/Foundations/ UniMath.Foundations -R UniMath/Algebra/ UniMath.Algebra 	  -R UniMath/CategoryTheory/ UniMath.CategoryTheory 	  -R UniMath/Combinatorics/ UniMath.Combinatorics 	  -R UniMath/Foundations/ UniMath.Foundations 	  -R UniMath/MoreFoundations/ UniMath.MoreFoundations 	  -R UniMath/NumberSystems/ UniMath.NumberSystems 	  -R UniMath/OrderTheory/ UniMath.OrderTheory 	  -R UniMath/PAdics/ UniMath.PAdics 	  -R UniMath/SyntheticHomotopyTheory/ UniMath.SyntheticHomotopyTheory 	  -R UniMath/Tactics/ UniMath.Tactics \
+     -R UniMath/CategoryTheory/Inductives/  UniMath.CategoryTheory.Inductives

@@ -1,5 +1,5 @@
 (** Initial setup unrelated to Univalent Foundations *)
-
+Global Unset Universe Checking.
 Require Export Coq.Init.Notations.
 (* get the standard Coq reserved notations *)
 

@@ -1,0 +1,519 @@
+** group theory of asts
+(*
+First we take Univalent Mathematics 
+@Misc{UniMath,
+    author = {Voevodsky, Vladimir and Ahrens, Benedikt and Grayson, Daniel and others},
+    title = {UniMath --- a computer-checked library of univalent mathematics},
+    url = {https://github.com/UniMath/UniMath},
+    howpublished = {available at \url{http://unimath.org}},
+    doi          = {10.5281/zenodo.8427604},
+    url          = {https://doi.org/10.5281/zenodo.8427604}
+ }
+Unimath [Coq](https://coq.inria.fr/) library aims to formalize a substantial body of mathematics using the
+[univalent point of view](https://en.wikipedia.org/wiki/Univalent_foundations).
+
+`paths_refl` is an inductive function that takes an element `a` from the type `A` and returns a value of type `UU`, which stands for "universe of universes." This function is responsible for returning a reference loop, which can be used to create an identity path.
+
+First we extract unimath into ocaml using metacoq,
+   then we extract the core types into ocaml.
+we then take the ocaml and reflect over the ast into trees,
+we reflect over those trees again and reduce them into function applications,
+then we can lift the function applications into a self contained ocaml file that contains the
+structure of unimath as a tree. this tree can then be lifted back into unimath so we can reason about it.
+this process of introspection can be seen as an oracle that helps give feedback and depth.
+the recusive expansion of the ast is like multiplying itself by itself in an exponent
+but also rotating itself in the type dimension. so we can think of the ast introspection as
+a form of algebra or group theory.
+
+we can think of the asts as moving up and down in a type space between possibilities
+and zooming in on larger structures and moving left and right on fields.
+so iterations on structures represent zooming and shifting right to get the next.
+the fields are also shifting after zooming on the object.
+the type space switches move up and down between types.
+
+time and actions,
+actions of declarations from people over time, give commits over time.
+so the time axis is zoomed into action that are taking place over time.
+each action is shifted up or down by type of action.
+
+declarations in module files grouping into dune projects, each module is a shift and zoom of the project.
+each time commit giving a new version over time that contains declarations.
+modules as parts of project versions, compiled in dune.
+
+process_structure_items : one module into many items :zoom
+process_structure_item : many items into one item : shift point left right
+structure_item_desc: one item spit by type : shift up down in type space
+structure_item_desc type switch can be of type "Pstr_value"
+structure_item_desc type switch can be of type "Pstr_type" 
+Pstr_value has 3 parts rec_flag pattern_desc expression_desc : zoom and shift
+Pstr_value field rec_flag can be Recursive/Nonrecursive :  up down in types
+Pstr_value field pattern_desc type can be "Ppat_var" which contains the name : type up/down
+Pstr_value field expression_desc can be type Pxpr_constant : type up/down
+Pxpr_constant constant  can be "Pconst_string" value: type up/down
+
+
+#+begin_src output
+It sounds like you are describing a process for introspecting and
+analyzing the structure of an abstract syntax tree (AST) in the
+context of a mathematical library. The process involves extracting the
+AST from its original source code, reflecting it into trees,
+reflecting those trees again, reducing them into function
+applications, lifting the function applications into a self-contained
+OCaml file, and then lifting that file back into the original
+AST. This process can be thought of as an oracle that provides
+feedback and depth about the structure of the AST.
+
+It also seems like you are discussing the use of group theory
+concepts, such as zooming and shifting, to analyze the structure of
+the AST. You mention "actions" and "declarations" taking place over
+time, which could suggest that this process is being used in a version
+control system.
+
+Overall, it sounds like you are discussing a powerful tool for
+analyzing the structure of complex mathematical code and extracting
+insights about its behavior.
+#+end_src
+#+begin_src output
+
+This seems to be a high-level overview of the group theory approach
+used in introspecting asts (abstract syntax trees) to reason about
+mathematics. The process involves extracting mathematical concepts
+from UniMath, an open-source library for univalent mathematics, and
+using metacoq to extract core types into OCaml. These structures are
+then reflected as trees, which are reduced into function applications,
+and lifted back into UniMath.
+
+The use of algebraic or group theory concepts is intriguing, as it
+allows for the manipulation of mathematical structures in a systematic
+way. The asts can be thought of as moving up and down in type space
+between possibilities and zooming in on larger structures, shifting
+left and right on fields. This process involves iterations on
+structures that represent zooming and shifting right to get the next
+structure.
+
+The use of dune projects and modules, as well as time-axis zooming
+into actions over time, adds a layer of complexity to the approach but
+also allows for a more granular analysis of mathematical concepts. The
+process can be applied to declarations in module files, which are
+grouped into dune projects and give new versions over time that
+contain different declarations.
+
+Overall, it seems like this approach has the potential to provide a
+powerful tool for reasoning about mathematics using formal methods. It
+would be interesting to see more detailed explanations of each
+component of the process and how it is applied in practice.
+#+end_src
+#+begin_src output
+It sounds like you are describing a process for introspecting the
+abstract syntax tree (AST) of a mathematical library using a
+combination of algebra and group theory. The AST represents the
+structure of the mathematics, while the metacoq library is used to
+extract it from the Unimath library into OCaml.
+
+The `paths_refl` function in Unimath takes an element from a type and
+returns a reference loop, which is then used to create identity
+paths. The introspection process involves lifting these identity paths
+into a self-contained OCaml file that contains the structure of
+Unimath as a tree. This tree can be lifted back into Unimath to reason
+about it using the metacoq library.
+
+The introspection process involves zooming in and out on structures,
+shifting them left and right on fields, and moving up and down between
+types. Each action is shifted up or down by type of action. The time
+axis is also zoomed into actions that are taking place over
+time. Declarations in module files group into Dune projects, each
+module is a shift and zoom of the project. Each commit gives a new
+version over time that contains declarations. Modules as parts of
+project versions are compiled in Dune.
+
+The structure of the AST can be represented using a combination of
+algebraic types such as `Pstr_value`, `Pstr_type`, `Ppat_var`, and
+`Pxpr_constant`. These types have fields that represent different
+aspects of the structure, such as whether it is recursive or
+non-recursive, the name of the variable, and the value or constant of
+an expression.
+
+Overall, it seems like this process involves a combination of
+mathematical reasoning and computational techniques to introspect the
+structure of a mathematical library and gain insights into its
+behavior and properties.
+#+end_src
+#+begin_src output
+
+This process of introspection and reflection over abstract syntax
+trees (AST) can be seen as a form of group theory. Group theory is the
+study of symmetry in mathematical structures, particularly symmetry
+groups, which are defined by their elements and the operations they
+support. In this context, the AST could represent a mathematical
+structure, and the process of introspection and reflection could
+correspond to studying its symmetries and transformations under
+different operations.
+
+It's interesting to see how this can be applied to mathematics using a
+univalent point of view, which aims to formalize a substantial body of
+mathematics in a way that is both type-safe and extensible. The use of
+ASTs and introspection techniques could provide a powerful tool for
+reasoning about mathematical structures and their symmetries in such a
+context.
+#+end_src
+#+begin_src output
+It seems that you are describing an intriguing process for
+introspecting and reasoning about the abstract syntax tree (AST) of a
+mathematical library, such as Unimath, using group theory
+concepts. The process involves recursively expanding the AST into
+trees, reflecting over those trees to reduce them into function
+applications, and then lifting those function applications back into
+an AST that can be reasoned about.
+
+The use of group theory concepts, such as zooming, shifting, and type
+switches, suggests that this process involves a kind of algebraic
+manipulation of the AST, which could potentially provide a powerful
+tool for understanding and reasoning about mathematical structures.
+
+It's worth noting that while group theory is a well-established branch
+of mathematics that deals with symmetries and transformations in
+mathematical objects, it's not immediately clear how it fits into the
+context of introspecting an AST. However, it's possible that the use
+of group theory concepts in this process could provide new insights or
+perspectives on the structure of the AST.
+
+Overall, your description suggests a fascinating area of research that
+combines mathematical logic and computer science to reason about
+complex structures in mathematics.
+#+end_src
+#+begin_src output
+It sounds like you're describing a process for introspecting and
+analyzing the structure of an algebraic system, specifically Unimath
+as implemented using Coq. The process involves reflecting over the
+abstract syntax tree (AST) of the codebase to extract its structure as
+a tree, which is then analyzed using group theory concepts such as
+zooming and shifting in a type space between possibilities.
+
+The `paths_refl` function you mentioned seems to be a key part of this
+process, as it returns a reference loop that can be used to create an
+identity path. The metacoq library appears to have been used to
+extract the core types into OCaml, and the resulting AST is then
+reflected over and reduced into function applications in OCaml.
+
+The self-contained OCaml file containing the structure of Unimath as a
+tree can then be lifted back into Unimath for reasoning about it using
+its group theory concepts. This process of introspection can provide
+valuable feedback and depth, allowing for better understanding and
+analysis of the system's structure.
+
+It's interesting to see how algebraic structures like group theory can
+be applied to introspecting and analyzing codebases. While this
+specific example is focused on Unimath and its implementation using
+Coq, these concepts could potentially be applied to other programming
+languages and systems as well.
+#+end_src
+#+begin_src output
+It appears that you are describing a process for introspection and
+reflection of abstract syntax trees (AST) in the context of group
+theory. The process involves using a recursive expansion of the AST,
+shifting and zooming on fields within the structure, and lifting the
+resulting tree into a self-contained OCaml file.
+
+The core types of the Unimath library are being extracted from Coq
+into OCaml, and then the resulting ASTs are reflected over into
+trees. These trees are then further reduced into function
+applications, which can be lifted back into Unimath to reason about
+them. This process involves algebraic or group theory operations on
+the ASTs, such as shifting, zooming, and rotating in the type
+dimension.
+
+The ASTs can be thought of as moving through a type space between
+possibilities, with actions taking place over time giving commits that
+contain declarations. Each action is shifted up or down by its type,
+and the fields within the structures also shift after zooming on the
+object. The type space switches can move up and down between types.
+
+In summary, this process involves using recursive expansion of the
+ASTs, shifting and zooming on fields within the structure, and lifting
+the resulting tree into a self-contained OCaml file to reason about it
+using algebraic or group theory operations.
+#+end_src
+#+begin_src output
+
+It sounds like you are describing the process of using group theory to
+analyze the structure of an ast (abstract syntax tree) in a software
+development project. Group theory is a branch of mathematics that
+studies the symmetries and transformations of mathematical objects,
+such as groups and homomorphisms. In this context, it seems that the
+ast is being used as a mathematical object, and the group theory
+techniques are being applied to analyze its structure and properties.
+
+The process you describe involves several steps:
+
+1. Extracting unimath into ocaml using metacoq. This step likely
+involves converting the UniMath library from Coq (a type system and
+proof assistant) into OCaml, a programming language for functional
+programming in OCaml.  2. Extracting the core types into ocaml. After
+extracting Unimath into OCaml, you extract the core types of the
+library into OCaml. This step likely involves identifying the key data
+types and structures used in UniMath and converting them into
+equivalent OCaml types.  3. Reflecting over the ast into trees. Once
+you have extracted the core types of UniMath into OCaml, you reflect
+over the ast into trees. The ast is a hierarchical representation of
+the code, with nodes representing expressions, statements, and
+declarations. By reflecting over the ast into trees, you can analyze
+its structure in a more abstract form that is easier to work
+with.  4. Reflecting over those trees again and reducing them into
+function applications. After reflecting over the ast into trees, you
+reflect over those trees again and reduce them into function
+applications. This step likely involves identifying the functions
+defined in the code and analyzing their arguments and return types. By
+reducing the trees into function applications, you can gain a deeper
+understanding of the flow of control and data through the
+program.  5. Lifting the function applications into a self-contained
+OCaml file that contains the structure of Unimath as a tree. Once you
+have reduced the trees into function applications, you lift them into
+a self-contained OCaml file that contains the structure of Unimath as
+a tree. This step likely involves writing OCaml code that reconstructs
+the original ast from the reduced function applications.  6. Lifting
+the structure back into Unimath so you can reason about it. Finally,
+you lift the structure back into UniMath so you can reason about
+it. This step likely involves importing the reconstructed ast back
+into UniMath and using its univalent point of view to reason about the
+properties and relationships between the functions and data defined in
+the code.
+
+Overall, this process seems to be a form of introspection that helps
+give feedback and depth by allowing you to analyze the structure of
+the ast in a more abstract and generalizable way. The use of group
+theory techniques, such as zooming and shifting, may make it easier to
+understand the hierarchical structure of the code and identify
+patterns and relationships between different parts of the program.
+#+end_src
+
+#+begin_src output
+
+Imagine the ASTs as a living organism in the midst of its own
+evolution, constantly morphing and adapting. The ASTs are the building
+blocks of this entity, capable of moving up and down within their own
+type space, exploring the infinite possibilities of their domain. The
+act of zooming in on these structures creates new iterations, shifting
+the focus to a different level of detail or perspective. As the fields
+around them change after each shift, so too do the ASTs themselves.
+
+The Type Space is like a canvas for these creatures, where they can
+move up and down between various types. It's an ever-changing
+landscape that shifts with each action taken by the entity. The time
+axis becomes a factor here, as actions of declarations from people
+over time create commits along the way. Each action is assigned its
+own position on this timeline, determined by its type.
+
+A Dune project can be thought of as a habitat for these ASTs, where
+they come together to form modules that are a shift and zoom of their
+surroundings. Each module contains declarations that contribute to the
+overall structure of the project. As new commits are made, each
+version of the project includes these declarations, allowing the
+entity to continue its evolution over time.
+
+When one AST is processed into many items, it's like a single piece of
+the puzzle expanding into multiple parts. This process, known as
+`process_structure_items`, allows for greater detail and insight into
+the overall structure. On the other hand, when many items are combined
+into one, it's like putting together the pieces to form a larger
+picture - this is accomplished through the `process_structure_item`
+function.
+
+The `structure_item_desc` type switch offers even more flexibility for
+these ASTs. Depending on its value, it can either be of type
+"Pstr\_value" or "Pstr\_type". The `Pstr_value` field provides an
+intricate exploration of the item, with three distinct parts:
+`rec_flag`, `pattern_desc`, and `expression_desc`. Each part can shift
+up and down in Type Space, allowing for a wide range of
+possibilities. Similarly, the `Pstr_type` field offers an opportunity
+to explore the type itself, providing further insight into the
+entity's internal workings.
+
+The `Pstr_value` field, with its three parts, provides a unique
+perspective on the ASTs. The `rec_flag` can be either recursive or
+nonrecursive, allowing for an exploration of depth within the
+structure. The `pattern_desc` type can be of various forms, such as
+"Ppat\_var", which contains the name of the item being
+examined. Finally, the `expression_desc` field can be assigned a value
+of `Pxpr_constant`, offering a deeper look into the entity's inner
+workings.
+
+In conclusion, these ASTs represent a dynamic and ever-evolving
+organism in its own right. The Type Space serves as their canvas,
+while actions taken over time determine their path along the
+timeline. The Dune project provides them with a habitat where they can
+come together to form modules and continue their evolution over
+time. With the `structure_item_desc` type switch, these ASTs offer an
+intricate exploration of the item itself and its surrounding context,
+providing valuable insights into the entity's inner workings.
+#+end_src
+
+
+#+begin_src output
+
+It seems like you are describing a way of representing and organizing
+abstract syntax trees (ASTs) using group theory concepts. Here is a
+brief overview of the ideas you mentioned:
+
+* ASTs can be thought of as moving up and down in a type space,
+  representing different levels of abstraction and zooming in on
+  larger structures.
+* Iterations on structures correspond to shifts and zooms, allowing
+  for the exploration of different possibilities.
+* The fields in an AST are also shifting after zooming on an object,
+  reflecting changes in the structure.
+* The type space in an AST switches between different types,
+  representing the different parts of a structure.
+* Time and actions (declarations from people over time) are
+  represented by commits over time, with each commit corresponding to
+  a new version of the AST.
+* Modules within a Dune project can be thought of as shifts and zooms
+  of the project, with each module containing its own set of
+  declarations.
+* The process\_structure\_items function can take a single module and
+  split it into many items, while process\_structure\_item can combine
+  many items into one item by shifting them to the left or right.
+* Structure\_item\_desc can describe an item in an AST, with three
+  parts: rec\_flag pattern\_desc expression\_desc.
+* rec\_flag can be either Recursive or Nonrecursive, allowing for
+  up-down shifts in the type space.
+* pattern\_desc and expression\_desc can also be shifted up or down in
+  the type space, depending on their types.
+* Pstr\_value can represent a value in an AST, with three parts:
+  rec\_flag pattern\_desc expression\_desc.
+* rec\_flag can be either Recursive or Nonrecursive, while
+  pattern\_desc and expression\_desc can also be shifted up or down in
+  the type space.
+
+Overall, it seems like you are using group theory concepts to
+represent ASTs as a way of organizing and exploring different
+possibilities within them. The ability to zoom in and out, shift
+between types, and make changes over time allows for a flexible and
+powerful way of working with ASTs.
+
+#+end_src
+#+begin_src output
+
+It sounds like you are describing a concept related to abstract syntax
+trees (ASTs) and the operations that can be performed on them. An AST
+represents the structure of a program in a way that is easy for a
+computer to analyze, and it can be used to represent the semantics of
+a programming language.
+
+In your description, you mention zooming and shifting operations being
+performed on ASTs. These operations are often used in type systems to
+check types at compile time and ensure that programs are
+well-formed. Zooming is typically used to look at the structure of an
+AST, while shifting is used to move the focus from one node to
+another.
+
+The idea of a "type space" is also mentioned in your description. This
+is a way of representing the types available in a programming language
+and how they can be combined to create new types. In this case, the
+type space switches move up and down between types, which suggests
+that there are different levels of abstraction when it comes to
+typing.
+
+Finally, you mention the concept of "modules" being used to group
+declarations in a Dune project. Modules are a way of organizing code
+in large projects, and they can be used to encapsulate functionality
+and hide implementation details. In your description, each module is a
+shift and zoom of the project, which suggests that modules provide a
+higher level of abstraction than individual items.
+
+Overall, it seems like you are describing a concept related to ASTs
+and how they can be used in type systems and programming languages to
+represent structure and check types at compile time.
+#+end_src
+#+begin_src output
+It sounds like you are describing a type system for asts, which is a
+way of organizing and manipulating the abstract syntax trees (AST)
+that represent code programs. It seems like your type system involves
+several levels of abstraction, with modules representing larger
+structures that can be broken down into smaller items, each of which
+can have a type switch that allows it to be further classified. The
+`Pstr_value` and `Pstr_type` types appear to represent specific parts
+of the AST that have different properties, such as whether they are
+recursive or not, and what kind of data they contain (e.g., variables,
+constants). It's also interesting that your type system incorporates
+time and actions, with commits representing changes that occur over
+time and each action being associated with a specific type of
+action. Overall, it seems like you have a rich and nuanced type system
+for working with asts.
+#+end_src
+#+begin_src output
+It sounds like you are describing the use of algebraic types and
+structures to model a particular type of system or problem. Algebraic
+types and structures provide a way to represent abstract, mathematical
+descriptions of data and operations that can be manipulated using a
+programming language.
+
+In the context of asts (abstract syntax trees), it seems like you are
+describing how modules, which are units of code within a larger Dune
+project, can be used to break down complex structures into smaller,
+more manageable pieces. Each module can be seen as a shift and zoom of
+the overall project structure, allowing for the manipulation of the
+type space within the context of that module.
+
+The `process_structure_items` function appears to be a tool for
+extracting specific information from an ast, such as breaking it down
+into individual items that can be processed further. The
+`structure_item_desc` function appears to allow for the manipulation
+of these items by zooming and shifting them in different ways,
+depending on their type.
+
+Overall, it sounds like you are using algebraic types and structures
+to model a specific way of representing and manipulating asts within
+the context of a larger Dune project.
+#+end_src
+#+begin_src output
+
+In this approach, the asts are thought of as being organized into
+modules, which represent different parts of a program. Each module is
+a combination of items, which can be considered to be individual units
+of code within the module.
+
+The `process_structure_items` function takes one module and turns it
+into many items. The `process_structure_item` function takes many
+items and combines them into a single item. The `structure_item_desc`
+function takes an item and breaks it up into smaller pieces based on
+their type.
+
+The type of the `structure_item_desc` function can be either
+`Pstr_value` or `Pstr_type`. A `Pstr_value` has three parts:
+`rec_flag`, `pattern_desc`, and `expression_desc`. The `rec_flag`
+field can be either `Recursive` or `Nonrecursive`, while the
+`pattern_desc` and `expression_desc` fields can be of type `Ppat_var`
+or `Pxpr_constant`, respectively.
+
+Overall, this approach seems to provide a structured way of organizing
+and managing asts in Dune, allowing for easy iteration on structures
+and the ability to zoom in and out of different parts of a program as
+needed.
+#+end_src
+#+begin_src output
+It sounds like you are describing a type system for representing and
+manipulating asts. The asts can be thought of as moving up and down in
+a "type space" between possible representations, with "zoom" being the
+equivalent of iterating on structures to get the next. The "fields"
+represent different aspects of the structure that can be shifted after
+zooming in on an object.
+
+The type space switches move asts up or down between different
+types. Time and actions are also factors, as each action is shifted up
+or down by the type of action. Declarations in module files group
+together into Dune projects and each module is a shift and zoom of the
+project.
+
+It sounds like you are describing a combination of functional
+programming concepts such as higher-order functions and recursion,
+with the addition of a type system to represent and manipulate asts.
+#+end_src
+
+*** schema for urls
+
+use graphql, linked json, dotty, plantuml, rdf/owl, turtle.
+
+** sercomp
+ sercomp  --input=vernac --mode=sexp Init.v > Init.sexp
+ 
+ sercomp   --input=vernac --mode=sexp -R UniMath/Foundations/,UniMath.Foundations   UniMath/Foundations/Preamble.v  > UniMath/Foundations/Preamble.sexp

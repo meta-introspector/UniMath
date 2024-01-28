@@ -1,3 +1,5 @@
+Global Unset Universe Checking.
+
 (** * Algebra I. Part C. Groups, abelian groups. Vladimir Voevodsky. Aug. 2011 - . *)
 
 (** ** Contents
