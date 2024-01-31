@@ -450,6 +450,7 @@ Proposition scott_continuous_map_on_lub
             (D : directed_set X)
   : f (⨆ D) = ⨆_{D} f.
 Proof.
+  Debug Off.
   refine (is_scott_continuous_on_lub (pr2 f) _ (pr22 D) @ _).
   use (eq_lub Y (f {{ D }})).
   - use make_dcpo_is_least_upperbound.
@@ -471,6 +472,7 @@ Proof.
   - apply is_least_upperbound_dcpo_comp_lub.
 Qed.
 
+Debug On.
 Definition strict_scott_continuous_map_to_fun
            {X Y : dcppo}
            (f : strict_scott_continuous_map X Y)

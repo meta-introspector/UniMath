@@ -341,6 +341,7 @@ use make_Coproduct.
 - apply coproduct_nat_trans_in.
 - use make_isCoproduct.
   + apply functor_category_has_homsets.
+    Debug Off.
   + intros A f.
     use tpair.
     * apply (tpair _ (coproduct_nat_trans A f)).
@@ -352,6 +353,7 @@ use make_Coproduct.
         apply (nat_trans_eq D); intro c;
         apply CoproductArrowUnique; intro i;
         apply (nat_trans_eq_pointwise (pr2 t i))).
+      Debug On.
 Defined.
 
 End coproduct_of_functors.

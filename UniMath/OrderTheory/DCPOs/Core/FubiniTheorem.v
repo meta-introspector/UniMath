@@ -116,6 +116,7 @@ Proof.
         use less_than_dcpo_lub.
         ** exact i.
         ** apply refl_PartialOrder.
+           Debug Off.
     + intros x' Hx'.
       use dcpo_lub_is_least ; cbn ; cbn in Hx'.
       intro i.
@@ -123,6 +124,7 @@ Proof.
       intro j.
       assert (H := is_directed_top (directed_set_is_directed D) i j).
       revert H.
+      Debug On.
       use factor_through_squash.
       {
         apply propproperty.
@@ -152,6 +154,7 @@ Proof.
         use less_than_dcpo_lub.
         ** exact i.
         ** apply refl_PartialOrder.
+           Debug Off.
     + intros x' Hx'.
       use dcpo_lub_is_least ; cbn ; cbn in Hx'.
       intro i.
@@ -164,6 +167,7 @@ Proof.
         apply propproperty.
       }
       intros kH.
+      Debug On.
       induction kH as [ k [ H₁ H₂ ]].
       refine (trans_PartialOrder Z _ (Hx' k)).
       apply f.

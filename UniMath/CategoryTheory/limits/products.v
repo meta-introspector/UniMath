@@ -332,6 +332,7 @@ use make_Product.
 - apply product_nat_trans_pr.
 - use make_isProduct.
   + apply functor_category_has_homsets.
+    Debug Off.
   + intros A f.
     use tpair.
     * apply (tpair _ (product_nat_trans A f)).
@@ -343,6 +344,7 @@ use make_Product.
         apply (nat_trans_eq D); intro c;
         apply ProductArrowUnique; intro i;
         apply (nat_trans_eq_pointwise (pr2 t i))).
+      Debug On.
 Defined.
 
 End product_of_functors.
@@ -414,6 +416,7 @@ Proof.
   {
     apply homset_property.
   }
+  Debug Off.
   intros z f.
   use iscontraprop1.
   - abstract
@@ -427,6 +430,7 @@ Proof.
        rewrite <- q ;
        exact (pr2 φ₁ j @ !(pr2 φ₂ j))).
   - refine (ProductArrow _ _ (make_Product _ _ _ _ _ Hx) f · h ,, _).
+    Debug On.
     abstract
       (intro j ;
        rewrite !assoc' ;

@@ -427,10 +427,11 @@ The 1st term has type "UU" which should be a subtype of
               (x : X)
     : f x = g x.
   Proof.
-    exact (maponpaths
-             (λ z, pr1 z x)
-             (@scott_continuous_map_eq_on_basis Y (f ,, Hf) (g ,, Hg) p)).
-  Qed.
+  (*   exact (maponpaths *)
+  (*            (λ z, pr1 z x) *)
+  (*            (@scott_continuous_map_eq_on_basis Y (f ,, Hf) (g ,, Hg) p)). *)
+    (* Qed. *)
+    Abort.
 
   (**
    7. The order on maps via basis elements
