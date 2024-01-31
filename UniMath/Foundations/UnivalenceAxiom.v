@@ -376,10 +376,15 @@ Section UnivalenceImplications.
       Ltac2 Eval Message.print (Message.of_string "STEP3_PROOF:funextcontrUAH").
       - intros x.
         Ltac2 Eval Message.print (Message.of_string "STEP3_1_PROOF:funextcontrUAH").
+        Debug Off.
         use tpair.
 
-      + intro t. exact (pr1 (x t)).
-      + intro t; simpl. exact (pr2 (x t)).
+
+        + intro t.
+          exact (pr1 (x t)).
+
+        + intro t; simpl. exact (pr2 (x t)).
+           Debug On.
     - intros y t. exists (pr1 y t). exact (pr2 y t).
     - intros u. induction u as [t x]. apply idpath.
     - apply funcontrUAH. intro t. apply iscontrcoconustot.
