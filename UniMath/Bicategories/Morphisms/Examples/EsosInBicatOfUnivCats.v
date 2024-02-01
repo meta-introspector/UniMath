@@ -340,7 +340,7 @@ Section EssentiallySurjectiveIsEso.
       use (factor_through_squash _ _ (HF y)).
       - apply isapropiscontr.
       - intros z.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + exact (isaprop_ob_fiber y).
         + refine (pr1 H₁ (pr1 z) ,, _).
           exact (z_iso_comp

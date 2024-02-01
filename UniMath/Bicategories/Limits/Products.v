@@ -253,7 +253,7 @@ Section Product.
       split.
       - exact υ₁.
       - intros q f₁ f₂ α β.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + abstract
             (use invproofirrelevance ;
              intros φ₁ φ₂ ;
@@ -657,7 +657,7 @@ Section Product.
       use (factor_through_squash _ _ m).
       - apply isapropiscontr.
       - intro fib.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + apply has_binprod_cat_ump_binprod_ump_2_unique.
         + refine (pr1 fib ,, _ ,, _).
           * exact (maponpaths pr1 (pr2 fib)).

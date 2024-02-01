@@ -1082,7 +1082,7 @@ Proof.
   pose (P := make_BinProduct _ _ _ _ _ _ H).
   use make_isBinProduct.
   intros w f g.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (induction p₁, p₂ ;
        apply isapropifcontr ;
@@ -1455,7 +1455,7 @@ Definition isBinProduct_z_iso
   : isBinProduct C x y a₂ p₂ q₂.
 Proof.
   intros w h₁ h₂.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;

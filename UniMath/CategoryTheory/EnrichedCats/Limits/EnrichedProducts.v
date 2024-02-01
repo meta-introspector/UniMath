@@ -201,7 +201,7 @@ Section EnrichedProducts.
       - exact a.
       - exact (enriched_prod_cone_pr a).
       - intros w f.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + abstract
             (use invproofirrelevance ;
              intros φ₁ φ₂ ;
@@ -241,7 +241,7 @@ Section EnrichedProducts.
     use make_isProduct.
     { apply homset_property. }
     intros v f.
-    Debug Off.    use iscontraprop1.    Debug On.
+    Debug Off.    Debug Off. use iscontraprop1. Debug On.    Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

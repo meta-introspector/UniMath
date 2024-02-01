@@ -375,7 +375,7 @@ Definition is_cartesian_in_reindex_disp_cat
   : @is_cartesian _ (reindex_disp_cat F D) y x f yy xx ff.
 Proof.
   intros z g zz gg ; cbn in *.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -586,7 +586,7 @@ Definition is_opcartesian_in_reindex_disp_cat
   : @is_opcartesian _ (reindex_disp_cat F D) x y f xx yy ff.
 Proof.
   intros z zz g gg ; cbn in *.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;

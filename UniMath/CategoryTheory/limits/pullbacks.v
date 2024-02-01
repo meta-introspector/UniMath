@@ -1542,7 +1542,7 @@ Section IsoIsPullback.
     : isPullback sqr'.
   Proof.
     intros w h₁ h₂ q.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - apply isPullback_z_iso_unique.
     - refine (isPullback_z_iso_mor q ,, _ ,, _).
       + apply isPullback_z_iso_pr1.

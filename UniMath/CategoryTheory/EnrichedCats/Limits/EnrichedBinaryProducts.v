@@ -262,7 +262,7 @@ Section EnrichedProducts.
       - exact (enriched_prod_cone_pr1 a).
       - exact (enriched_prod_cone_pr2 a).
       - intros w f g.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + abstract
             (use invproofirrelevance ;
              intros φ₁ φ₂ ;
@@ -313,7 +313,7 @@ Section EnrichedProducts.
     intro w.
     use make_isBinProduct.
     intros v f g.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

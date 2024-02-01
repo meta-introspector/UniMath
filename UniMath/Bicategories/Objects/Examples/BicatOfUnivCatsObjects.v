@@ -178,7 +178,7 @@ Section AdjToTerminal.
     use make_Terminal.
     - exact (R tt).
     - intro x.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + exact (cartesian_terminal_via_adj_to_terminal_unique x).
       + exact (pr1 η x).
   Defined.
@@ -476,7 +476,7 @@ Section ProductsFromAdj.
     - exact (cartesian_prod_via_adj_to_binproduct_pr1 x y).
     - exact (cartesian_prod_via_adj_to_binproduct_pr2 x y).
     - intros w f g.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + exact (cartesian_prod_via_adj_to_binproduct_pair_unique x y w f g).
       + simple refine (_ ,, (_ ,, _)).
         * exact (cartesian_prod_via_adj_to_binproduct_pair x y w f g).
@@ -640,7 +640,7 @@ Section AdjToInitial.
     use make_Initial.
     - exact (L tt).
     - intro x.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + exact (cocartesian_initial_via_adj_to_initial_unique x).
       + exact (pr1 ε x).
   Defined.
@@ -927,7 +927,7 @@ Section CoprodToAdj.
     - exact (cocartesian_coprod_via_adj_to_coprods_in1 x y).
     - exact (cocartesian_coprod_via_adj_to_coprods_in2 x y).
     - intros z f g.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + exact (cocartesian_coprod_via_adj_to_coprods_unique x y z f g).
       + simple refine (_ ,, _ ,, _).
         * exact (cocartesian_coprod_via_adj_to_coprods_sum x y z f g).

@@ -253,7 +253,7 @@ Section Coproduct.
       split.
       - exact υ₁.
       - intros q f₁ f₂ α β.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + abstract
             (use invproofirrelevance ;
              intros φ₁ φ₂ ;
@@ -666,7 +666,7 @@ Section Coproduct.
       : bincoprod_ump_2 p.
     Proof.
       intros x u₁ u₂ ζ₁ ζ₂.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (universal_coprod_cocone_has_ump_2_unique ζ₁ ζ₂).
       - simple refine (_ ,, _ ,, _).
         + exact (invmap

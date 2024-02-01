@@ -418,7 +418,7 @@ Section LimitsTotalBicat.
           ×
           γ ▹ pb_cone_pr2 total_pb_cone = β.
       Proof.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - exact total_pb_cone_unique.
         - exact total_pb_cone_ump2.
       Defined.
@@ -613,7 +613,7 @@ Section LimitsTotalBicat.
       : em_ump_2 m total_em_cone.
     Proof.
       intros x g₁ g₂ α.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (total_has_em_ump_unique α).
       - simple refine ((_ ,, _) ,, _).
         + use (em_ump_2_cell _ ump).

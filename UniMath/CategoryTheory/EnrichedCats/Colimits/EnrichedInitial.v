@@ -106,7 +106,7 @@ Section EnrichedInitial.
     Proof.
       refine (x ,, _).
       intros y.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - abstract
           (use invproofirrelevance ;
            intros f g ;
@@ -127,7 +127,7 @@ Section EnrichedInitial.
     : is_initial_enriched x.
   Proof.
     intros y w.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

@@ -51,7 +51,7 @@ Definition opcleaving_of_opcleaving_is_opcartesian_2cell
   : is_opcartesian_2cell disp_bicat_of_opcleaving αα.
 Proof.
   intros G GG β βα.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -534,7 +534,7 @@ Section Lift2CellOpCleaving.
   Definition cleaving_of_opcleaving_lift_mor_lift_2cell
     : lift_2cell_factor _ _ αα Lh Lh'.
   Proof.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros φ₁ φ₂.
       exact (cleaving_of_opcleaving_unique_2_lifts φ₁ φ₂).

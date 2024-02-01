@@ -332,7 +332,7 @@ Section CategoryOfElementsHasPbUMP.
     : pb_ump_2 cone.
   Proof.
     intros C' G₁ G₂ τ₁ τ₂ p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

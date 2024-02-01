@@ -171,7 +171,7 @@ Section PrecompositionFullyFaithful.
         }
         intros w.
         induction w as [ w i ].
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - exact enriched_rezk_completion_ump_full_isaprop.
         - simple refine (_ ,, _).
           + exact (#G₁ (inv_from_z_iso i) · τ w · #G₂ i).

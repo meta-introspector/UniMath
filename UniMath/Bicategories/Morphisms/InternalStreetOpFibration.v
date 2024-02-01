@@ -218,7 +218,7 @@ Definition is_cartesian_to_is_opcartesian_sfib
   : is_opcartesian_2cell_sopfib p α.
 Proof.
   intros h γ δp q.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros δ₁ δ₂ ;
@@ -254,7 +254,7 @@ Definition is_opcartesian_to_is_cartesian_sfib
   : @is_cartesian_2cell_sfib (op2_bicat B) e b p x g f α.
 Proof.
   intros h γ δp q.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros δ₁ δ₂ ;

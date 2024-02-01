@@ -361,7 +361,7 @@ Proof.
        intro z ; cbn ;
        exact (pr2 z)).
   - intros W h p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

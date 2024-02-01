@@ -315,7 +315,7 @@ Section DispMapBicatCleaving.
       Definition pb_lift_2cell_factor
         : lift_2cell_factor DD hf σσ Lh Lh'.
       Proof.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - exact pb_lift_2cell_factor_unique.
         - simple refine (_ ,, _).
           + use make_disp_map_bicat_cell.
@@ -467,7 +467,7 @@ Section DispMapBicatCleaving.
       : is_cartesian_2cell DD αα.
     Proof.
       intros h hh γ γα.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (disp_map_is_cartesian_2cell_sfib_to_is_cartesian_2cell_unique γα).
       - simple refine (_ ,, _).
         + exact (disp_map_is_cartesian_2cell_sfib_to_is_cartesian_2cell_cell γα).
@@ -682,7 +682,7 @@ Section DispMapBicatCleaving.
       : is_opcartesian_2cell DD αα.
     Proof.
       intros h hh γ γα.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (disp_map_is_opcartesian_2cell_sopfib_to_is_opcartesian_2cell_unique γα).
       - simple refine (_ ,, _).
         + exact (disp_map_is_opcartesian_2cell_sopfib_to_is_opcartesian_2cell_cell γα).

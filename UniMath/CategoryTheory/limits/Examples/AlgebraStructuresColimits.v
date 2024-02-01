@@ -335,7 +335,7 @@ Section MonadToStruct.
         - exact monad_reflexive_coequalizer_arrow.
         - exact monad_reflexive_coequalizer_arrow_eq.
         - intros W h p.
-          use iscontraprop1.
+          Debug Off. use iscontraprop1. Debug On.
           + exact (monad_reflexive_coequalizer_ump_unique (pr2 W) (pr2 h)).
           + simple refine (_ ,, _).
             * apply (monad_reflexive_coequalizer_ump_mor (pr2 W) (pr2 h)).
@@ -852,7 +852,7 @@ Section MonadToStruct.
         - exact binary_coprod_algebra_in1.
         - exact binary_coprod_algebra_in2.
         - intros Z φ₁ φ₂.
-          use iscontraprop1.
+          Debug Off. use iscontraprop1. Debug On.
           + exact (binary_coprod_algebra_arrow_unique φ₁ φ₂).
           + simple refine (_ ,, _ ,, _).
             * exact (binary_coprod_algebra_arrow φ₁ φ₂).

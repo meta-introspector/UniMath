@@ -86,7 +86,7 @@ Section OpCellCoproduct.
     : bincoprod_ump_2 op_cell_cocone.
   Proof.
     intros q φ ψ α β.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

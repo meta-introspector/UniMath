@@ -190,7 +190,7 @@ Proof.
   use make_Initial.
   - exact unit_dcppo.
   - intros Y.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros f₁ f₂ ;

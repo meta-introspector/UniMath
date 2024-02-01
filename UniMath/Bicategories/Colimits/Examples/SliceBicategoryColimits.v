@@ -319,7 +319,7 @@ Section CoproductSlice.
     : bincoprod_ump_2 slice_coprod_cone.
   Proof.
     intros q φ ψ α β.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (slice_coprod_ump_unique α β).
     - simple refine ((_ ,, _) ,, _ ,, _).
       + exact (bincoprod_ump_2cell ump (pr1 α) (pr1 β)).

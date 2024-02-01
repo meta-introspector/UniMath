@@ -103,7 +103,7 @@ Section KleisliCategoryUMP.
       rewrite !id_left, !id_right in q.
       exact q.
     }
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros β₁ β₂.
       use subtypePath ; [ intro ; apply cellset_property | ].

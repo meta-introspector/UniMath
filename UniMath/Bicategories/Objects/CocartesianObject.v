@@ -302,7 +302,7 @@ Section EquivalenceCocartesian.
       use make_Initial.
       - exact (cocartesian_initial_via_adj_to_cocartesian_initial_1cell x).
       - intro f.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + exact (cocartesian_initial_via_adj_to_cocartesian_initial_eq x f).
         + exact (cocartesian_initial_via_adj_to_cocartesian_initial_2cell x f).
     Defined.

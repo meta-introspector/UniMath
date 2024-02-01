@@ -109,7 +109,7 @@ Section CoprodUMP.
     : bincoprod_ump_2 (bincoprod_cocone_one_types X Y).
   Proof.
     intros Z φ ψ α β.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros γ₁ γ₂ ;
@@ -187,7 +187,7 @@ Section OneTypesDisjoint.
            intro z ;
            exact (fromempty (negpathsii1ii2 _ _ (comma_cone_cell Z z)))).
     - intros Z φ ψ α β p.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + abstract
           (use invproofirrelevance ;
            intros τ₁ τ₂ ;
@@ -229,7 +229,7 @@ Section OneTypesDisjoint.
            intro z ;
            exact (fromempty (negpathsii2ii1 _ _ (comma_cone_cell Z z)))).
     - intros Z φ ψ α β p.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + abstract
           (use invproofirrelevance ;
            intros τ₁ τ₂ ;
@@ -412,7 +412,7 @@ Section OneTypesUniversal.
           exact (!one_types_universal_coprod_map_idpath W z (inr x) p).
         * apply one_type_2cell_iso.
     - intros W φ ψ α β.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + apply one_types_universal_coprod_unique.
       + simple refine (_ ,, _ ,, _).
         * exact (one_types_universal_coprod_cell α β).

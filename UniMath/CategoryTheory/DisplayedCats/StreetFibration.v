@@ -314,7 +314,7 @@ Section CleavingToStreetFib.
   Proof.
     intros z g h p.
     pose (lift := H (pr1 z) h (pr2 z) (transportf (λ z, _ -->[ z ] _) p (pr2 g))).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (is_cartesian_to_unique_sfib f H g h p).
     - simple refine ((h ,, pr11 lift) ,, (idpath _ ,, _)) ; cbn.
       abstract
@@ -382,7 +382,7 @@ Section CleavingToStreetFib.
   Proof.
     intros z g zz gf.
     pose (lift := H (z ,, zz) (g · pr1 f ,, gf) g (idpath _)).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - apply is_cartesian_sfib_to_unique_cartesian.
       exact H.
     - simple refine (_ ,, _).
@@ -703,7 +703,7 @@ Definition z_iso_is_cartesian_sfib
 Proof.
   pose (i_iso := make_z_iso' _ Hi).
   intros w g h p.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -834,7 +834,7 @@ Section CompositionCartesian.
     : is_cartesian_sfib F (f · g).
   Proof.
     intros w h₁ h₂ p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (comp_is_cartesian_sfib_factor_unique p).
     - simple refine (_ ,, _ ,, _).
       + exact (comp_is_cartesian_sfib_factor p).

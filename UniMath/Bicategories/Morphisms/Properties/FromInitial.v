@@ -141,7 +141,7 @@ Section FromInitial.
       exact (equiv_to_biinitial Hx (Sx z g₁)).
     }
     intros w γ δp p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -206,7 +206,7 @@ Section FromInitial.
       exact (equiv_to_biinitial Hx (Sx z h₁)).
     }
     intros w ζ δp p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -232,7 +232,7 @@ Section FromInitial.
       exact (equiv_to_biinitial Hx (Sx z g₁)).
     }
     intros w γ δp p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -297,7 +297,7 @@ Section FromInitial.
       exact (equiv_to_biinitial Hx (Sx z h₁)).
     }
     intros w ζ δp p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

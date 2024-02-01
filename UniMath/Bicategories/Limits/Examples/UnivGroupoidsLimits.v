@@ -134,7 +134,7 @@ Section IsoCommaUMP.
     : pb_ump_2 (grpds_iso_comma_pb_cone F G).
   Proof.
     intros C φ ψ α β r.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros τ₁ τ₂ ;

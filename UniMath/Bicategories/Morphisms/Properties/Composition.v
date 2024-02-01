@@ -422,7 +422,7 @@ Section CompositionOfSFib.
       : is_cartesian_2cell_sfib (f · g) α.
     Proof.
       intros k β δp q.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (to_is_cartesian_2cell_comp_unique q).
       - exact (to_is_cartesian_2cell_comp_factor q
                ,,

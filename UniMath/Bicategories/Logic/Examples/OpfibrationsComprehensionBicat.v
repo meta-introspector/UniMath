@@ -390,7 +390,7 @@ Proof.
   apply is_opcartesian_2cell_sopfib_to_is_opcartesian_2cell ; cbn.
   pose (opcleaving_of_opcleaving_opcartesian_2cell_is_pointwise_opcartesian _ Hαα) as p.
   intros G γ δp q.
-  Debug Off. use iscontraprop1. Debug On.
+  Debug Off. Debug Off. use iscontraprop1. Debug On. Debug On.
   - exact (local_opcartesian_opcleaving_lift_unique α αα p G γ δp).
   - simple refine (_ ,, _ ,, _).
     + exact (local_opcartesian_opcleaving_lift α αα p G γ δp q).

@@ -531,7 +531,7 @@ Section ConstructionOfConicalColimit.
         enriched_conical_colim_from_coprod_coequalizers_cocone.
   Proof.
     intros w v cc ; cbn.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (enriched_conical_colim_from_coprod_coequalizers_unique w v (pr1 cc)).
     - simple refine (_ ,, _).
       + exact (enriched_conical_colim_from_coprod_coequalizers_mor _ _ (pr1 cc) (pr2 cc)).

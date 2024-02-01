@@ -411,7 +411,7 @@ Definition scott_continuous_map_from_compact_basis_ump
     ∏ (i : B), g (B i) = f i.
 Proof.
   pose (CB := compact_basis_to_dcpo_basis B).
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;

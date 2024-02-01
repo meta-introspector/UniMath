@@ -205,7 +205,7 @@ Section OneTypesPb.
     : pb_ump_2 (one_types_pb_cone f g).
   Proof.
     intros W φ ψ α β r.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros τ₁ τ₂ ;

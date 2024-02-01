@@ -123,7 +123,7 @@ Proof.
   }
   intros xx.
   induction xx as [ xx i ].
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - exact (isaprop_hfiber_ff_disp HD₁ HD₂ HFF₂ x yy).
   - refine (xx ,, _).
     exact (isotoid_disp HD₂ (idpath _) i).
@@ -764,7 +764,7 @@ Section EquivIsCartesian.
     : is_cartesian_disp_functor L.
   Proof.
     intros x y f xx yy ff Hff w g ww hh.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (is_cartesian_equiv_over_id_unique Hff ww hh).
     - simple refine (_ ,, _).
       + exact (is_cartesian_equiv_over_id_fact Hff ww hh).
@@ -942,7 +942,7 @@ Section EquivIsOpcartesian.
     : is_opcartesian_disp_functor L.
   Proof.
     intros x y f xx yy ff Hff w ww g hh.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (is_opcartesian_equiv_over_id_unique Hff ww hh).
     - simple refine (_ ,, _).
       + exact (is_opcartesian_equiv_over_id_fact Hff ww hh).

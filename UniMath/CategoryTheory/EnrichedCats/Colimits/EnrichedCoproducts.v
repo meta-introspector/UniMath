@@ -204,7 +204,7 @@ Section EnrichedCoproducts.
       - exact a.
       - exact (enriched_coprod_cocone_in a).
       - intros w f.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + abstract
             (use invproofirrelevance ;
              intros φ₁ φ₂ ;
@@ -244,7 +244,7 @@ Section EnrichedCoproducts.
     use make_isProduct.
     { apply homset_property. }
     intros v f.
-    Debug Off. use iscontraprop1. Debug On.
+    Debug Off. Debug Off. use iscontraprop1. Debug On. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -253,9 +253,9 @@ Section EnrichedCoproducts.
                   w v
                   (pr1 φ₁) (pr1 φ₂)
                   (λ j, pr2 φ₁ j @ !(pr2 φ₂ j)))).
-    - simple refine (_ ,, _).
-      + exact (sum w v f).
-      + exact (in_sum w v f).
+    - Debug Off. simple refine (_ ,, _). Debug On.
+      + Debug Off. exact (sum w v f).
+      + exact (in_sum w v f). Debug On.
   Defined.
 
   Definition coprod_enriched_to_prod

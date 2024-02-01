@@ -160,7 +160,7 @@ Section ArrowTwoSidedDispCat.
     simple refine (f · g ,, _ ,, _) ; cbn.
     - apply id_left.
     - intros x₄ x₅ h k l p.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + use invproofirrelevance.
         intros φ₁ φ₂.
         use subtypePath.
@@ -184,7 +184,7 @@ Section ArrowTwoSidedDispCat.
     - rewrite id_right.
       apply idpath.
     - intros x₄ x₅ h k l p.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + use invproofirrelevance.
         intros φ₁ φ₂.
         use subtypePath.

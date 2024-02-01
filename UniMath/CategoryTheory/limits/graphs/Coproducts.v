@@ -72,7 +72,7 @@ Section CoproductGraph.
         : isCoproduct I C f x fs.
       Proof.
         intros y gs.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - apply isCoproduct_from_colims_unique.
         - simple refine (_ ,, _).
           + use colimArrow.

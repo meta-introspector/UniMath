@@ -218,7 +218,7 @@ Definition fully_faithful_1cell_to_fully_faithful
   : fully_faithful_1cell f → ∏ (z : B), fully_faithful (post_comp z f).
 Proof.
   intros Hf z g₁ g₂ α ; cbn in *.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - use invproofirrelevance.
     intros φ₁ φ₂.
     use subtypePath ; [ intro ; apply cellset_property | ].

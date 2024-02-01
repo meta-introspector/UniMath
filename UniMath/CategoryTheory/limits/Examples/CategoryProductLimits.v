@@ -42,7 +42,7 @@ Section TerminalProduct.
     : isTerminal (category_binproduct C₁ C₂) x.
   Proof.
     intros w.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -67,7 +67,7 @@ Definition pr1_preserves_terminal
   : preserves_terminal (pr1_functor C₁ C₂).
 Proof.
   intros x Hx w.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -92,7 +92,7 @@ Definition pr2_preserves_terminal
   : preserves_terminal (pr2_functor C₁ C₂).
 Proof.
   intros x Hx w.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -146,7 +146,7 @@ Section BinProductInProduct.
     pose (P₁ := make_BinProduct _ _ _ _ _ _ H₁).
     pose (P₂ := make_BinProduct _ _ _ _ _ _ H₂).
     intros w f g.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -328,7 +328,7 @@ Section PullbackInProduct.
     : isPullback p.
   Proof.
     intros q h₁ h₂ r.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (isPullback_in_product_category_unique π₁ π₂ p H₁ H₂ h₁ h₂).
     - simple refine (_ ,, _ ,, _).
       + exact (isPullback_in_product_category_mor π₁ π₂ p H₁ H₂ h₁ h₂ r).
@@ -417,7 +417,7 @@ Section InitialProduct.
     : isInitial (category_binproduct C₁ C₂) x.
   Proof.
     intros w.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -442,7 +442,7 @@ Definition pr1_preserves_initial
   : preserves_initial (pr1_functor C₁ C₂).
 Proof.
   intros x Hx w.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -467,7 +467,7 @@ Definition pr2_preserves_initial
   : preserves_initial (pr2_functor C₁ C₂).
 Proof.
   intros x Hx w.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -521,7 +521,7 @@ Section BinCoproductInProduct.
     pose (P₁ := make_BinCoproduct _ _ _ _ _ _ H₁).
     pose (P₂ := make_BinCoproduct _ _ _ _ _ _ H₂).
     intros w f g.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

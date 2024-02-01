@@ -156,7 +156,7 @@ Section BincoprodUMP.
     : bincoprod_ump_2 (bincoprod_cocone_bicat_of_univ_cats C₁ C₂).
   Proof.
     intros Q F G α β.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (has_bincoprod_ump_2_bicat_of_univ_cats_unique α β).
     - simple refine (_ ,, _ ,, _).
       + exact (sum_of_nat_trans α β).
@@ -303,7 +303,7 @@ Section DisjointCoproducts.
     split.
     - exact bicat_of_univ_cats_inl_inr_1cell.
     - intros Q φ ψ α β p.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + abstract
           (use invproofirrelevance ;
            intros τ₁ τ₂ ;
@@ -441,7 +441,7 @@ Section DisjointCoproducts.
     split.
     - exact bicat_of_univ_cats_inr_inl_1cell.
     - intros Q φ ψ α β p.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + abstract
           (use invproofirrelevance ;
            intros τ₁ τ₂ ;
@@ -1088,7 +1088,7 @@ Section UniversalCoproducts.
       + use nat_z_iso_to_invertible_2cell.
         exact (pb_of_sum_cats_inr W).
     - intros W φ ψ α β.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + exact (pb_of_sum_cats_nat_trans_unique α β).
       + simple refine (_ ,, _ ,, _).
         * exact (pb_of_sum_cats_nat_trans α β).
@@ -1187,7 +1187,7 @@ Section KleisliCategoryUMP.
       rewrite !id_left, !id_right in q.
       exact q.
     }
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros β₁ β₂.
       use subtypePath ; [ intro ; apply cellset_property | ].

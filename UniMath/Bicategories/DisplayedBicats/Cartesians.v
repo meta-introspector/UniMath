@@ -93,7 +93,7 @@ Section Lift2CellInvertible.
         (rewrite vcomp_rinv ;
          rewrite id2_rwhisker ;
          apply idpath).
-    - use iscontraprop1.
+    - Debug Off. use iscontraprop1. Debug On.
       + use invproofirrelevance.
         intros φ₁ φ₂.
         use subtypePath ; [ intro ; apply D | ].
@@ -238,7 +238,7 @@ Section Lift2CellInvertible.
         (rewrite vcomp_linv ;
          rewrite id2_rwhisker ;
          apply idpath).
-    - use iscontraprop1.
+    - Debug Off. use iscontraprop1. Debug On.
       + use invproofirrelevance.
         intros φ₁ φ₂.
         use subtypePath ; [ intro ; apply D | ].
@@ -973,7 +973,7 @@ Section WkCartesianToCartesian.
     split.
     - exact (λ c cc h gg, wk_lift_1cell_factor_to_lift_1cell_factor HB (pr1 Hff _ _ _ gg)).
     - intros c cc h h' gg gg' δ σσ Lh Lh'.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + exact (wk_cartesian_1cell_to_cartesian_1cell_unique σσ Lh Lh').
       + simple refine (_ ,, _).
         ** exact (wk_cartesian_1cell_to_cartesian_1cell_2cell σσ Lh Lh').
@@ -1240,7 +1240,7 @@ Section ExamplesOfCartesian1Cells.
       Definition cartesian_1cell_id_wk_2cell_lift
         : wk_lift_2cell_factor D (id_disp xx) σσ Lh Lh'.
       Proof.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - exact cartesian_1cell_id_wk_2cell_lift_unique.
         - exact (cartesian_1cell_id_wk_2cell_lift_cell
                  ,,
@@ -1803,7 +1803,7 @@ Section ExamplesOfCartesian1Cells.
       Definition comp_cartesian_1cell_lift_2cell_factor
         : lift_2cell_factor D (ff ;; gg) σσ Lh Lh'.
       Proof.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - exact comp_cartesian_1cell_lift_2cell_factor_unique.
         - exact (ℓ₂ ,, comp_cartesian_1cell_lift_2cell_factor_commute).
       Defined.

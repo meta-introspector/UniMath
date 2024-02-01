@@ -225,7 +225,7 @@ Section EnrichedEqualizer.
       - exact (enriched_equalizer_cone_pr a).
       - exact (enriched_equalizer_cone_eq a).
       - intros w h q.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + abstract
             (use invproofirrelevance ;
              intros φ₁ φ₂ ;
@@ -265,7 +265,7 @@ Section EnrichedEqualizer.
     intro w.
     use make_isEqualizer.
     intros v h q.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

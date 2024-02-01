@@ -663,7 +663,7 @@ Proof.
   - exact (CoproductIn _ _ _ true).
   - exact (CoproductIn _ _ _ false).
   - intros w g₁ g₂.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -1155,7 +1155,7 @@ Definition isBinCoproduct_eq_arrow
 Proof.
   pose (P := make_BinCoproduct _ _ _ _ _ _ H).
   intros w f g.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (induction p₁, p₂ ;
        apply isapropifcontr ;

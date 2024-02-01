@@ -55,7 +55,7 @@ Definition functors_into_cat_is_opcartesian_2cell
   : is_opcartesian_2cell disp_bicat_of_functors_into_cat p.
 Proof.
   intros H GH γ ββ.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - use (isaprop_total2 (_ ,, _) (λ _, _ ,, _)).
     + use impred ; intro.
       apply homset_property.
@@ -138,7 +138,7 @@ Proof.
            apply Hα).
       * apply functors_into_cat_disp_locally_groupoid.
   - intros C₃ G₃ F₁ F₂ β γ δ p ℓ₁ ℓ₂.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

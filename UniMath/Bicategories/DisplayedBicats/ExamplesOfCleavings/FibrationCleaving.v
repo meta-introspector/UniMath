@@ -50,7 +50,7 @@ Definition cleaving_of_cleaving_is_cartesian_2cell
   : is_cartesian_2cell disp_bicat_of_cleaving αα.
 Proof.
   intros G GG β βα.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -528,7 +528,7 @@ Section Lift2CellCleaving.
   Definition cleaving_of_cleaving_lift_mor_lift_2cell
     : lift_2cell_factor _ _ αα Lh Lh'.
   Proof.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros φ₁ φ₂.
       exact (cleaving_of_cleaving_unique_2_lifts φ₁ φ₂).

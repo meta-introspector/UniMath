@@ -738,7 +738,7 @@ Section CofreeComonoidUMP.
          # (underlying_commutative_comonoid REL_sym_mon_closed_cat) f'
          · map_to_cofree_comonoid_REL X).
   Proof.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - apply cofree_comonoid_REL_map_unique.
     - simple refine (_ ,, _).
       + exact cofree_comonoid_REL_map.

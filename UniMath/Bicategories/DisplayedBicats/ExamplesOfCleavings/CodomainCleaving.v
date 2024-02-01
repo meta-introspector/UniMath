@@ -147,7 +147,7 @@ Section CodomainCleaving.
       : is_cartesian_2cell (cod_disp_bicat B) αα.
     Proof.
       intros h hh γ γα.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (is_cartesian_2cell_sfib_to_is_cartesian_2cell_unique γα).
       - simple refine (_ ,, _).
         + exact (is_cartesian_2cell_sfib_to_is_cartesian_2cell_cell γα).
@@ -269,7 +269,7 @@ Section CodomainCleaving.
       : is_opcartesian_2cell (cod_disp_bicat B) αα.
     Proof.
       intros h hh γ γα.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (is_opcartesian_2cell_sopfib_to_is_opcartesian_2cell_unique γα).
       - simple refine (_ ,, _).
         + exact (is_opcartesian_2cell_sopfib_to_is_opcartesian_2cell_cell γα).
@@ -541,7 +541,7 @@ Section CodomainCleaving.
       Definition is_pb_to_cartesian_lift_2cell
         : lift_2cell_factor (cod_disp_bicat B) (π,, p) σσ Lh Lh'.
       Proof.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - exact is_pb_to_cartesian_lift_2cell_unique.
         - simple refine (_ ,, _).
           + exact is_pb_to_cartesian_lift_2cell_disp_cell.

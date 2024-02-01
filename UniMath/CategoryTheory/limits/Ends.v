@@ -413,7 +413,7 @@ Section Ends.
       : is_end construction_of_ends_wedge.
     Proof.
       intro w.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (is_end_construction_of_ends_unique_map w).
       - use make_wedge_map.
         + exact (is_end_construction_of_ends_mor w).

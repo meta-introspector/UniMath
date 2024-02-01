@@ -296,7 +296,7 @@ Definition is_opcartesian_disp_elements_universal
   : is_opcartesian p.
 Proof.
   intros Z z g q.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - use invproofirrelevance.
     intros φ₁ φ₂.
     use subtypePath.

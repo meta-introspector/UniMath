@@ -1232,7 +1232,7 @@ Proof.
     apply isapropiscontr.
   }
   intro inv.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;

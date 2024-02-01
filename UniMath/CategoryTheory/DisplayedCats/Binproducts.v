@@ -766,7 +766,7 @@ Section FixDispCat.
       - exact t_i.
       - exact total_Equalizer_path.
       - intros w h q.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + apply total_Equalizer_unique.
           exact q.
         + simple refine (_ ,, _).
@@ -1001,7 +1001,7 @@ Section FixDispCat.
       - exact t_i.
       - exact total_Coequalizer_path.
       - intros w h q.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + apply total_Coequalizer_unique.
           exact q.
         + simple refine (_ ,, _).
@@ -1182,7 +1182,7 @@ Section FixDispCat.
             total_category_ProductPr.
       Proof.
         intros w f.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - apply total_category_ProductUnique.
         - simple refine (_ ,, _).
           + exact (total_category_ProductArrow (pr2 w) (λ i, pr2 (f i))).
@@ -1395,7 +1395,7 @@ Section FixDispCat.
             total_category_BinCoproductIn2.
       Proof.
         intros w f g.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - apply total_category_BinCoproductUnique.
         - simple refine (_ ,, _ ,, _).
           + exact (total_category_BinCoproductArrow (pr2 w) (pr2 f) (pr2 g)).
@@ -1588,7 +1588,7 @@ Section FixDispCat.
             total_category_CoproductIn.
       Proof.
         intros w f.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - apply total_category_CoproductUnique.
         - simple refine (_ ,, _).
           + exact (total_category_CoproductArrow (pr2 w) (λ i, pr2 (f i))).

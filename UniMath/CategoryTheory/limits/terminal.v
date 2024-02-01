@@ -285,7 +285,7 @@ Definition iso_to_Terminal
   : isTerminal C x.
 Proof.
   intros w.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;

@@ -50,7 +50,7 @@ Section ConstantCleaving.
     : is_cartesian_2cell (trivial_displayed_bicat B₁ B₂) β.
   Proof.
     intros h h' γ ββ ; cbn in *.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros τ₁ τ₂ ;
@@ -111,7 +111,7 @@ Section ConstantCleaving.
     : is_opcartesian_2cell (trivial_displayed_bicat B₁ B₂) β.
   Proof.
     intros h h' γ ββ ; cbn in *.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros τ₁ τ₂ ;
@@ -222,7 +222,7 @@ Section ConstantCleaving.
                (Lh' : lift_1cell_factor (trivial_displayed_bicat B₁ B₂) g k')
       : lift_2cell_factor (trivial_displayed_bicat B₁ B₂) g (δ := γ) δ Lh Lh'.
     Proof.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - abstract
           (use invproofirrelevance ;
            intros φ₁ φ₂ ;

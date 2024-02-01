@@ -413,7 +413,7 @@ Section ProductEquivalence.
     : binprod_ump_2 cone₂.
   Proof.
     intros c φ ψ α β.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (has_binprod_ump_2_left_adjoint_equivalence_unique α β).
     - simple refine (_ ,, _ ,, _).
       + exact (has_binprod_ump_2_left_adjoint_equivalence_cell α β).

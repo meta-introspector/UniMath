@@ -98,7 +98,7 @@ Section ImageMap.
       apply isapropiscontr.
     }
     intros x.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - apply (isinclweqonpaths _ Hm₂).
     - simple refine (f₂ (pr1 x) ,, _).
       exact (p (pr1 x) @ maponpaths m₁ (pr2 x)).

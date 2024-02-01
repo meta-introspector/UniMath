@@ -821,7 +821,7 @@ Section LimitsEnrichedCats.
       : em_ump_2 EM em_enriched_cat_cone.
     Proof.
       intros E' FE₁ FE₂ Eτ.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - abstract
           (use invproofirrelevance ;
            intros φ₁ φ₂ ;

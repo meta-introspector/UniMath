@@ -375,7 +375,7 @@ Definition isEqualizer_eq
   : isEqualizer f' g' i' q.
 Proof.
   intros w h r.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (induction s₁, s₂, s₃ ;
        apply (isapropifcontr (He w h r))).
@@ -407,7 +407,7 @@ Definition isEqualizer_z_iso
   : isEqualizer f g p₂ q₂.
 Proof.
   intros a k s.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;

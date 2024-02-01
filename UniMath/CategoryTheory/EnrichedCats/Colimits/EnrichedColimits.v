@@ -531,7 +531,7 @@ Section ColimitToConical.
     : is_conical_colim_enriched E D enriched_weighted_to_conical_cocone.
   Proof.
     intros w v cc.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (enriched_weighted_to_conical_is_conical_colim_unique v (pr1 cc)).
     - refine (enriched_weighted_to_conical_is_conical_colim_mor v (pr1 cc) (pr2 cc)
               ,,

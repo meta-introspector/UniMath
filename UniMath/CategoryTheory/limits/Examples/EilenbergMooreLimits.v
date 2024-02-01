@@ -207,7 +207,7 @@ Section EilenbergMooreCategoryLimits.
     Proof.
       use make_isBinProduct.
       intros w f g.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (isBinProduct_eilenberg_moore_cat_unique f g).
       - simple refine (_ ,, _ ,, _).
         + exact (isBinProduct_eilenberg_moore_cat_mor f g).
@@ -522,7 +522,7 @@ Section EilenbergMooreCategoryLimits.
       : isPullback q.
     Proof.
       intros w h k r.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (isPullback_eilenberg_moore_unique h k).
       - simple refine (_ ,, _ ,, _).
         + exact (isPullback_eilenberg_moore_mor h k r).
@@ -948,7 +948,7 @@ Section EilenbergMooreCategoryLimits.
       : isBinCoproduct _ _ _ _ ι₁ ι₂.
     Proof.
       intros w f g.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (isBinCoproduct_eilenberg_moore_unique f g).
       - simple refine (_ ,, _ ,, _).
         + exact (isBinCoproduct_eilenberg_moore_mor f g).

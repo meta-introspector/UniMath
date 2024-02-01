@@ -1480,7 +1480,7 @@ Section TerminalAndProductCartesian.
   Proof.
     refine (hset_struct_unit P ,, _).
     intros X PX.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - apply isaprop_hset_struct_on_mor.
     - exact (hset_struct_to_unit P PX).
   Defined.
@@ -1494,7 +1494,7 @@ Section TerminalAndProductCartesian.
     - exact (hset_struct_pr1 P PX PY).
     - exact (hset_struct_pr2 P PX PY).
     - intros W f g PW Mf Mg ; cbn.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + abstract
           (use isaproptotal2 ;
            [ intro ;

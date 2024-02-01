@@ -173,7 +173,7 @@ Section ColimitsEnrichedCats.
         rewrite !id_left, !id_right in q.
         exact q.
       }
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - abstract
           (use invproofirrelevance ;
            intros β₁ β₂ ;

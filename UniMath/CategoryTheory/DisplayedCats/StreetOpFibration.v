@@ -200,7 +200,7 @@ Section OpcleavingToStreetOpFib.
   Proof.
     intros z g h p.
     pose (lift := H (pr1 z) (pr2 z) h (transportf (λ z, _ -->[ z ] _) p (pr2 g))).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (is_opcartesian_to_unique_sopfib _ H _ _ p).
     - simple refine ((h ,, pr11 lift) ,, (idpath _ ,, _)) ; cbn.
       abstract
@@ -268,7 +268,7 @@ Section OpcleavingToStreetOpFib.
   Proof.
     intros z zz g gf.
     pose (lift := H (z ,, zz) (pr1 f · g ,, gf) g (idpath _)).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - apply is_opcartesian_sopfib_to_unique_opcartesian.
       exact H.
     - simple refine (_ ,, _).
@@ -503,7 +503,7 @@ Definition iso_is_opcartesian_sopfib
 Proof.
   pose (i_iso := make_z_iso' _ Hi).
   intros w g h p.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -633,7 +633,7 @@ Section CompositionOpCartesian.
     : is_opcartesian_sopfib F (f · g).
   Proof.
     intros w h₁ h₂ p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (comp_is_opcartesian_sopfib_factor_unique p).
     - simple refine (_ ,, _ ,, _).
       + exact (comp_is_opcartesian_sopfib_factor p).

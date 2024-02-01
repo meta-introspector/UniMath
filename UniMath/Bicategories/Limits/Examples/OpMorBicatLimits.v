@@ -333,7 +333,7 @@ Section EilenbergMooreOpposite.
       : em_ump_2 m (to_op1_em_cone k).
     Proof.
       intros z g₁ g₂ α.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (op1_has_em_ump_2_unique k Hk α).
       - simple refine (_ ,, _).
         + exact (op1_has_em_ump_2_cell k Hk α).

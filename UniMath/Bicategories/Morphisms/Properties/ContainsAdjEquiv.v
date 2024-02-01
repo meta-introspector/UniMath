@@ -180,7 +180,7 @@ Section IdentityInternalSFib.
     : is_cartesian_2cell_sfib (id₁ b) α.
   Proof.
     intros h β δp r.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

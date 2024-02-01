@@ -469,7 +469,7 @@ Section IdEquivalenceToPB.
     : pb_ump_2 (make_pb_cone q qpr1 qpr2 qγ).
   Proof.
     intros qc φ ψ α β p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (id_left_adjoint_equivalence_to_pb_ump_2_unique _ _ p).
     - simple refine (_ ,, _ ,, _).
       + exact (id_left_adjoint_equivalence_to_pb_ump_2_cell _ _ p).

@@ -227,7 +227,7 @@ Proof.
   - exact (λ PY, _ ,, hset_struct_fun P (pr2 PX) (pr2 PY)).
   - exact (λ PY, _ ,, closed_under_fun_eval P _ _).
   - refine (λ Y Z f, _).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros g₁ g₂ ;
@@ -373,7 +373,7 @@ Proof.
   - exact (hset_equalizer_pr_struct EP Pf Pg).
   - apply isaprop_hset_struct_on_mor.
   - intros W PW h Ph q qq.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -515,7 +515,7 @@ Proof.
   - exact (hset_coequalizer_map_struct EP Pf Pg).
   - apply isaprop_hset_struct_on_mor.
   - intros W PW h Ph q qq.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -629,7 +629,7 @@ Proof.
   - exact (HP D DD).
   - exact (hset_struct_type_prod_pr HP DD).
   - intros W PW fs Hf.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use isaproptotal2 ;
          [ intro ;
@@ -847,7 +847,7 @@ Proof.
   - exact (hset_binary_coprod_struct_inl EP PX PY).
   - exact (hset_binary_coprod_struct_inr EP PX PY).
   - intros W PW f Pf g Pg.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -967,7 +967,7 @@ Proof.
   - exact (HP D DD).
   - exact (hset_struct_set_coprod_in HP DD).
   - intros W PW fs Hf.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use isaproptotal2 ;
          [ intro ;

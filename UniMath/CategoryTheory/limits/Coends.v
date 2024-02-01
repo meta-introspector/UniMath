@@ -404,7 +404,7 @@ Section Coends.
       : is_coend construction_of_coends_cowedge.
     Proof.
       intro w.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (is_coend_construction_of_coends_unique_map w).
       - use make_cowedge_map.
         + exact (is_coend_construction_of_coends_mor w).

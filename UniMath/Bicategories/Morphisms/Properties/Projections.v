@@ -58,7 +58,7 @@ Section ProjectionSFib.
       : is_cartesian_2cell_sfib π₁ α.
     Proof.
       intros h β δp q.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (invertible_to_cartesian_unique h β δp q).
       - simple refine (_ ,, _ ,, _).
         + use binprod_ump_2cell.
@@ -296,7 +296,7 @@ Section ProjectionSOpFib.
       : is_opcartesian_2cell_sopfib π₁ α.
     Proof.
       intros h β δp q.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (invertible_to_opcartesian_unique h β δp q).
       - simple refine (_ ,, _ ,, _).
         + use binprod_ump_2cell.

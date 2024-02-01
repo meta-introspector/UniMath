@@ -1171,7 +1171,7 @@ Section EMObject.
       : em_ump_2 e.
     Proof.
       intros x g₁ g₂ α.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (is_universal_has_em_ump_2_unique α).
       - refine (is_universal_has_em_ump_2_cell α ,, _).
         exact (is_universal_has_em_ump_2_eq α).

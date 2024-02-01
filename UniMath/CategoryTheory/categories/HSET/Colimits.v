@@ -460,7 +460,7 @@ Proof.
        cbn ;
        exact (coequalizer_eq_hSet f g x)).
   - intros Z h p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

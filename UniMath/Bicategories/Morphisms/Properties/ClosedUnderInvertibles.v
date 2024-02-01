@@ -264,7 +264,7 @@ Section Cartesian2CellInvertible.
     : is_cartesian_2cell_sfib f₂ α.
   Proof.
     intros h γ δp q.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (is_cartesian_2cell_invertible_unique q).
     - simple refine (_ ,, _ ,, _).
       + refine (is_cartesian_2cell_sfib_factor

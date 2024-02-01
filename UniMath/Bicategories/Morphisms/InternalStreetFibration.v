@@ -350,7 +350,7 @@ Definition id_is_cartesian_2cell_sfib
   : is_cartesian_2cell_sfib p (id2 f).
 Proof.
   intros g α δp q.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -428,7 +428,7 @@ Section VcompIsCartesian.
     : is_cartesian_2cell_sfib p (α • β).
   Proof.
     intros k ζ δp q.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - apply vcomp_is_cartesian_2cell_sfib_unique.
       exact q.
     - simple refine (_ ,, _ ,, _).
@@ -460,7 +460,7 @@ Definition invertible_is_cartesian_2cell_sfib
   : is_cartesian_2cell_sfib p α.
 Proof.
   intros h ζ δp q.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -583,7 +583,7 @@ Section PostComposition.
     : is_cartesian_2cell_sfib p α.
   Proof.
     intros k δ δp r.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (is_cartesian_2cell_sfib_postcomp_unique δp r).
     - simple refine (_ ,, _ ,, _).
       + exact (is_cartesian_2cell_sfib_postcomp_factor δp r).
@@ -605,7 +605,7 @@ Definition is_cartesian_eq
   : is_cartesian_2cell_sfib p β.
 Proof.
   intros h ζ δp r.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -758,7 +758,7 @@ Proof.
   intros h α δp q.
   pose (α_iso := make_invertible_2cell (HB _ _ _ _ α)).
   pose (γ_iso := make_invertible_2cell (HB _ _ _ _ γ)).
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -984,7 +984,7 @@ Definition is_cartesian_2cell_sfib_inv2cell
   : is_cartesian_2cell_sfib p' β.
 Proof.
   intros k ζ δp q.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - exact (is_cartesian_2cell_sfib_factor_inv2cell_unique α Hβ δp q).
   - simple refine (_ ,, _ ,, _).
     + exact (is_cartesian_2cell_sfib_factor_inv2cell α Hβ δp q).

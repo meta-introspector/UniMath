@@ -175,7 +175,7 @@ Section IsOpcartesianTotalSetCategory.
         f.
   Proof.
     intros e₃ g h p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (is_opcartesian_total_setcategory_of_set_functor_factor_unique g h).
     - simple refine (_ ,, (_ ,, _)).
       + exact (is_opcartesian_total_setcategory_of_set_functor_factor g h p).

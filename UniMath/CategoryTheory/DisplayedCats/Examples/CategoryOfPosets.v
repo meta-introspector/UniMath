@@ -153,7 +153,7 @@ Proof.
   - exact (_ ,, depfunction_poset _ (λ j, pr2 (D j))).
   - exact (λ j, _ ,, is_monotone_depfunction_poset_pr _ _ j).
   - intros R f.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -188,7 +188,7 @@ Proof.
        exact (pr2 w)).
   - simpl.
     intros W h p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -217,7 +217,7 @@ Proof.
   - exact (λ Y, _ ,, monotone_function_PartialOrder (pr2 X) (pr2 Y)).
   - exact (λ Y, eval_monotone_function (pr2 X) (pr2 Y)).
   - refine (λ Y Z f, _).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros g₁ g₂ ;

@@ -179,7 +179,7 @@ Section InternalSFibToStreetFib.
     : is_cartesian_sfib F (pr1 α tt).
   Proof.
     intros z g h q.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (internal_sfib_is_cartesian_sfib_factor_unique Hα q).
     - simple refine (_ ,, _ ,, _).
       + exact (internal_sfib_is_cartesian_sfib_factor Hα q).
@@ -385,7 +385,7 @@ Section StreetFibToInternalSFib.
       : is_cartesian_2cell_sfib F α.
     Proof.
       intros H β δp q.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (pointwise_cartesian_is_cartesian_unique q).
       - simple refine (_ ,, _ ,, _).
         + exact (pointwise_cartesian_is_cartesian_factor q).
@@ -1004,7 +1004,7 @@ Section InternalSOpFibToStreetOpFib.
     : is_opcartesian_sopfib F (pr1 α tt).
   Proof.
     intros z g h q.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (internal_sopfib_is_opcartesian_sopfib_factor_unique Hα q).
     - simple refine (_ ,, _ ,, _).
       + exact (internal_sopfib_is_opcartesian_sopfib_factor Hα q).
@@ -1207,7 +1207,7 @@ Section StreetOpFibToInternalSOpFib.
       : is_opcartesian_2cell_sopfib F α.
     Proof.
       intros H β δp q.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (pointwise_opcartesian_is_opcartesian_unique q).
       - simple refine (_ ,, _ ,, _).
         + exact (pointwise_opcartesian_is_opcartesian_factor q).

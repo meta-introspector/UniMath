@@ -330,7 +330,7 @@ Section DiscreteTwoSidedFibration.
     : twosided_opcartesian D fg.
   Proof.
     intros x₃ y₃ xy₃ f' g' fg'.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intro ; intros ;
@@ -372,7 +372,7 @@ Section DiscreteTwoSidedFibration.
     : twosided_cartesian D fg.
   Proof.
     intros x₃ y₃ xy₃ f' g' fg'.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intro ; intros ;

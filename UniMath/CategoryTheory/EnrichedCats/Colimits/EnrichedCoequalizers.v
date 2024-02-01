@@ -232,7 +232,7 @@ Section EnrichedCoequalizer.
       - exact (enriched_coequalizer_cocone_in a).
       - exact (enriched_coequalizer_cocone_eq a).
       - intros w h q.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + abstract
             (use invproofirrelevance ;
              intros φ₁ φ₂ ;
@@ -272,7 +272,7 @@ Section EnrichedCoequalizer.
     intro w.
     use make_isEqualizer.
     intros v h q.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

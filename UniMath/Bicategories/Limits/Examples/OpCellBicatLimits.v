@@ -89,7 +89,7 @@ Section ProductOp2.
     : binprod_ump_2 op2_binprod_cone.
   Proof.
     intros q φ ψ α β.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -165,7 +165,7 @@ Section Mirroring.
            rewrite !vassocl in r ;
            exact (!r)).
     - intros w φ ψ α β q.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + abstract
           (use invproofirrelevance ;
            intros ζ₁ ζ₂ ;
@@ -296,7 +296,7 @@ Section ToOp2Pullback.
     : pb_ump_2 (to_op2_pb_cone γ).
   Proof.
     intros w φ ψ α β p ; cbn in p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros ζ₁ ζ₂ ;
@@ -386,7 +386,7 @@ Section Op2Comma.
     : comma_ump_2 op2_comma_cone.
   Proof.
     intros q φ ψ α β p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros ζ₁ ζ₂ ;
@@ -768,7 +768,7 @@ Section ComonadEilenbergMoore.
     : em_ump_2 m (em_comnd_cone_to_op2_em_cone e).
   Proof.
     intros x g₁ g₂ α.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - apply op2_bicat_has_em_ump_2_unique.
     - exact (op2_bicat_has_em_ump_2_cell α ,, op2_bicat_has_em_ump_2_cell_eq α).
   Defined.

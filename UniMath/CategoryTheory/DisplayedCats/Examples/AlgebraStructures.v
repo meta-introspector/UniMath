@@ -627,7 +627,7 @@ Section MonadToStruct.
     - exact (λ X, monad_free_alg X).
     - exact (λ X, η M X).
     - refine (λ X Y f, _).
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + exact (monad_to_hset_struct_adj_lift_unique (pr2 Y) f).
       + simple refine (_ ,, _).
         * exact (monad_to_hset_struct_adj_lift (pr2 Y) f).
@@ -922,7 +922,7 @@ Section MonadToStruct.
       - exact algebra_as_coequalizer_arr.
       - exact algebra_as_coequalizer_arr_eq.
       - intros Y g p.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + exact (algebra_as_coequalizer_ump_unique g).
         + simple refine (_ ,, _).
           * exact (algebra_as_coequalizer_ump g p).

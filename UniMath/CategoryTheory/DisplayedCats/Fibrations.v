@@ -1378,7 +1378,7 @@ Definition is_cartesian_id_disp
   : is_cartesian (id_disp xx).
 Proof.
   intros z g zz hh.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros f₁ f₂ ;
@@ -1412,7 +1412,7 @@ Definition is_cartesian_comp_disp
   : is_cartesian (ff ;; gg)%mor_disp.
 Proof.
   intros w h ww hh'.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros f₁ f₂ ;
@@ -1457,7 +1457,7 @@ Definition is_cartesian_z_iso_disp
   : is_cartesian ff.
 Proof.
   intros z g zz gf.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (apply invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -1516,7 +1516,7 @@ Definition is_cartesian_transportf
   : is_cartesian (transportf (λ z, _ -->[ z ] _) p ff).
 Proof.
   intros c g cc gg.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -1568,7 +1568,7 @@ Definition is_cartesian_precomp
   : is_cartesian ff.
 Proof.
   intros w φ ww φφ.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros ψ₁ ψ₂ ;
@@ -1653,7 +1653,7 @@ Proof.
        apply maponpaths_2 ;
        apply homset_property).
   }
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;

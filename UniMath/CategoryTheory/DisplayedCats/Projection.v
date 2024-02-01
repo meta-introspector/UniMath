@@ -205,7 +205,7 @@ Definition locally_contractible_if_locally_inhabited_prop
     → locally_contractible D.
 Proof.
   intros HD₁ HD₂ x y f xx yy.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - exact (HD₂ x y f xx yy).
   - exact (HD₁ x y f xx yy).
 Defined.
@@ -230,7 +230,7 @@ Definition pseudomonic_to_iso_contractible
   : locally_iso_contractible D.
 Proof.
   intros x y f xx yy.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - apply H.
   - apply H.
 Qed.

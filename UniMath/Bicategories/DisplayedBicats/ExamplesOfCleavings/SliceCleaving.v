@@ -70,7 +70,7 @@ Section LaxSliceCleaving.
     : is_opcartesian_2cell (lax_slice_disp_bicat B a) αα.
   Proof.
     intros s₃ ss₃ γ γα.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use isaproptotal2.
       + intro ; apply (lax_slice_disp_bicat B a).
       + intros.
@@ -146,7 +146,7 @@ Section LaxSliceCleaving.
         * apply lax_slice_disp_locally_groupoid.
     - cbn.
       intros c₃ t₃ s₁ s₂ α αα β ββ Lh Lh' ; cbn in *.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + abstract
           (use invproofirrelevance ;
            intros φ₁ φ₂ ;
@@ -276,7 +276,7 @@ Section OplaxSliceCleaving.
     : is_cartesian_2cell (oplax_slice_disp_bicat B a) αα.
   Proof.
     intros s₃ ss₃ γ γα.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use isaproptotal2.
       + intro ; apply (oplax_slice_disp_bicat B a).
       + intros.
@@ -349,7 +349,7 @@ Section OplaxSliceCleaving.
         * apply oplax_slice_disp_locally_groupoid.
     - cbn.
       intros c₃ t₃ s₁ s₂ α αα β ββ Lh Lh' ; cbn in *.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + abstract
           (use invproofirrelevance ;
            intros φ₁ φ₂ ;
@@ -534,7 +534,7 @@ Section SliceCleaving.
         * apply disp_locally_groupoid_slice_disp_bicat.
     - cbn.
       intros c₃ t₃ s₁ s₂ α αα β ββ Lh Lh' ; cbn in *.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       + abstract
           (use invproofirrelevance ;
            intros φ₁ φ₂ ;

@@ -299,7 +299,7 @@ Section EquivalenceCartesian.
       use make_Terminal.
       - exact (cartesian_terminal_via_adj_to_cartesian_terminal_1cell x).
       - intro f.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + exact (cartesian_terminal_via_adj_to_cartesian_terminal_eq x f).
         + exact (cartesian_terminal_via_adj_to_cartesian_terminal_2cell x f).
     Defined.

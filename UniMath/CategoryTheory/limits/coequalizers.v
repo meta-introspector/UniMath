@@ -261,7 +261,7 @@ Proof.
        rewrite CoequalizerEqAr ;
        apply idpath).
   - intros w k q.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -479,7 +479,7 @@ Section CoequalizersFromReflexiveCoequalizers.
       - exact (CoequalizerArrow coequalizers_from_reflexive_ob).
       - exact coequalizers_from_reflexive_eq.
       - intros z h p.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + exact (coequalizer_from_reflexive_unique h).
         + simple refine (_ ,, _).
           * exact (coequalizer_from_reflexive_ump h p).

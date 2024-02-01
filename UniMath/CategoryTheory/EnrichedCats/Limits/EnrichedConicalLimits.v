@@ -524,7 +524,7 @@ Section ConstructionOfConicalLimit.
         enriched_conical_lim_from_prod_equalizers_cone.
   Proof.
     intros w v cc ; cbn.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (enriched_conical_lim_from_prod_equalizers_unique w v (pr1 cc)).
     - simple refine (_ ,, _).
       + exact (enriched_conical_lim_from_prod_equalizers_mor _ _ (pr1 cc) (pr2 cc)).

@@ -131,7 +131,7 @@ Section Builder.
         (eval x y).
   Proof.
     intros z f.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -294,7 +294,7 @@ Definition sym_mon_closed_left_tensor_left_adjoint_universal
       (sym_mon_braiding V x (x ⊸ y) · internal_eval x y).
 Proof.
   intros z f.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -343,7 +343,7 @@ Definition sym_mon_closed_left_tensor_right_adjoint_universal
       (internal_eval x y).
 Proof.
   intros z f.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;

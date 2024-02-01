@@ -553,7 +553,7 @@ Section IndexedCatToFibration.
         ff.
   Proof.
     intros w g ww hh ; cbn in *.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (is_cartesian_indexed_cat_factorisation_unique Hff g hh).
     - simple refine (_ ,, _).
       + exact (is_cartesian_indexed_cat_factorisation Hff g hh).

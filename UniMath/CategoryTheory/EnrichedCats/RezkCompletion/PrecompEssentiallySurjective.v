@@ -180,7 +180,7 @@ Section PreCompEssentiallySurjective.
         use factor_through_squash ; [ apply isapropiscontr | ].
         intros w.
         induction w as [ w i ].
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - exact (enriched_rezk_completion_ump_functor_isaprop w i).
         - simple refine (G w ,, (λ v j, _) ,, _).
           + use (functor_on_z_iso G).
@@ -305,7 +305,7 @@ Section PreCompEssentiallySurjective.
         pose (j := invmap
                      (make_weq _ (F_fully_faithful _ _))
                      (i₁ · f · inv_from_z_iso i₂)).
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - exact (enriched_rezk_completion_ump_functor_mor_isaprop i₁ i₂).
         - simple refine (_ ,, _).
           + exact (inv_from_z_iso (enriched_rezk_completion_ump_functor_iso x₁ i₁)
@@ -564,7 +564,7 @@ Section PreCompEssentiallySurjective.
       use factor_through_squash ; [ apply isapropiscontr | ].
       intros wy.
       induction wy as [ wy iy ].
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - use invproofirrelevance.
         intros φ₁ φ₂.
         induction φ₁ as [ φ₁ p₁ ].

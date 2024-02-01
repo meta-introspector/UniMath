@@ -39,7 +39,9 @@ Definition isTerminal_unit_category
 Proof.
   use make_isTerminal.
   intro y.
-  use iscontraprop1 ; [ apply isasetunit | ].
+  Debug Off.
+  use iscontraprop1;  [ apply isasetunit | ].
+  Debug On.
   apply isapropunit.
 Qed.
 
@@ -69,7 +71,7 @@ Definition isBinProduct_unit_category
   : isBinProduct unit_category x y z f g.
 Proof.
   intros w h₁ h₂.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - apply invproofirrelevance.
     intros fg₁ fg₂.
     use subtypePath.
@@ -116,7 +118,7 @@ Definition isPullback_unit_category
   : isPullback eq.
 Proof.
   intros r h₁ h₂ q.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - apply invproofirrelevance.
     intros fg₁ fg₂.
     use subtypePath.
@@ -159,7 +161,7 @@ Definition isInitial_unit_category
   : isInitial unit_category x.
 Proof.
   intro y.
-  use iscontraprop1 ; [ apply isasetunit | ].
+  Debug Off. use iscontraprop1 ; [ apply isasetunit | ]. Debug On.
   apply isapropunit.
 Qed.
 
@@ -189,7 +191,7 @@ Definition isBinCoproduct_unit_category
   : isBinCoproduct unit_category x y z f g.
 Proof.
   intros w h₁ h₂.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - apply invproofirrelevance.
     intros fg₁ fg₂.
     use subtypePath.

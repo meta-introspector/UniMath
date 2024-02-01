@@ -819,7 +819,7 @@ Section AdjunctionPreservation.
     : preserves_terminal R.
   Proof.
     intros T HT x.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros g₁ g₂.
       refine (!(id_right _) @ _ @ id_right _).
@@ -848,7 +848,7 @@ Section AdjunctionPreservation.
   Proof.
     intros x y p π₁ π₂ Hp c f g.
     pose (P := make_BinProduct _ _ _ _ _ _ Hp : BinProduct _ _ _).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros g₁ g₂.
       use subtypePath.
@@ -959,7 +959,7 @@ Section AdjunctionPreservation.
   Proof.
     intros x y z p f g π₁ π₂ q Fq Hp w h₁ h₂ r.
     pose (P := make_Pullback _ Hp).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros g₁ g₂.
       use subtypePath.
@@ -1076,7 +1076,7 @@ Section AdjunctionPreservation.
   Proof.
     intros x Hx y.
     pose (I := make_Initial x Hx).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros g₁ g₂.
       refine (!(id_left _) @ _ @ id_left _).
@@ -1106,7 +1106,7 @@ Section AdjunctionPreservation.
   Proof.
     intros x y s ι₁ ι₂ Hs z f g.
     pose (S := make_BinCoproduct _ _ _ _ _ _ Hs).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros g₁ g₂.
       use subtypePath.
@@ -1170,7 +1170,7 @@ Section AdjunctionPreservation.
   Proof.
     intros D c ι Hc x f.
     pose (S := make_Coproduct _ _ _ _ _ Hc).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros g₁ g₂.
       use subtypePath.
@@ -1216,7 +1216,7 @@ Section AdjunctionPreservation.
   Proof.
     intros x y c f g h p Fp Hc z k q.
     pose (Coeq := make_Coequalizer _ _ _ _ Hc).
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use invproofirrelevance.
       intros φ₁ φ₂.
       use subtypePath.

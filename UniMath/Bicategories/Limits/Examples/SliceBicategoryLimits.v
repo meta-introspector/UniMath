@@ -379,7 +379,7 @@ Section ProductSlice.
     : binprod_ump_2 binprod_cone_in_slice.
   Proof.
     intros h φ ψ α β.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (binprod_2_ump_in_slice_cell_unique α β).
     - refine (binprod_2_ump_in_slice_cell α β ,, _ ,, _).
       + exact (binprod_2_ump_in_slice_cell_pr1 α β).

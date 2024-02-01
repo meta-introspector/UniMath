@@ -437,7 +437,7 @@ Definition make_functor_enrichment_over_poset
 Proof.
   simple refine (_ ,, _).
   - refine (λ x y, (λ f, #F f) ,, λ f g p, _).
-    exact (HF x y f g p).
+    Debug Off. exact (HF x y f g p). Debug On.
   - repeat split.
     + abstract
         (intros x ;

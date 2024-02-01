@@ -399,6 +399,130 @@ End products_from_limits.
 
 (**
  Products are closed under iso
+
+#+begin_src output
+This is a Coq code definition for an "isProduct\_z\_iso" predicate. It takes as input:
+
+* A category C
+* A set of objects J
+* A function from J to C, D
+* Two objects x and y in C
+* An object h that represents the z-iso between x and y
+* Two functions px and py that map each object j in J to an element of C and D respectively
+* The predicate Hx that states that (px,py) is a product arrow from J to D for x
+* The predicate q that states that (py j = inv\_from\_z\_iso h · px j) for all objects j in J.
+
+The predicate asserts that the pair of functions (f,h) defined by f=px and h=py is a product arrow
+from J to D for y, where f is defined using the function px and h is the z-iso defined by
+inv\_from\_z\_iso. The predicate uses several other definitions and lemmas, such as "make\_Product"
+and "invproofirrelevance".
+
+#+end_src
+#+begin_src output
+
+The definition "isProduct\_z\_iso" is a Coq proof that takes several parameters, including a category C, a set of objects J, a function D from J to C, two objects x and y in C, a z-iso h between x and y, functions px and py mapping elements of J to the corresponding elements in C, and the assumptions "Hx" and "q".
+
+The proof begins by using the "make\_isProduct" module to construct an instance of the product arrow type with x and y as objects and px and py as morphisms. It then applies the homset property to verify that the constructed instance is a valid product arrow.
+
+The abstract definition "iscontraprop1" is then invoked to show that if two z-isos h1 and h2 are such that h1(x) = h2(x) for all x in C, and f is any morphism between the domains of h1 and h2, then f is a contraction if and only if h1(y) = h2(y) for all y in C. This is done by introducing a new parameter j and applying a series of rewrites to show that the maponpaths function can be used to derive the desired conclusion.
+
+The final refinement of the proof defines a product arrow between the domain of px on J and the codomain of py on J, with f being the composite of px and h. The proof then applies the ProductPrCommutes property to verify that this product arrow is equivalent to the constructed instance in "make\_isProduct".
+
+Overall, this definition demonstrates how Coq can be used to construct and prove properties about products and z-isos in a category theory setting.
+#+end_src
+#+begin_src output
+This is a definition of the `isProduct_z_iso` relation in the Coq library. It takes several parameters, including a category C, a family J of objects, a function D from J to C, two elements x and y in C, a z-iso h between x and y, and functions px and py that define products over J. The `isProduct_z_iso` relation then checks if x and y are isomorphic as products over J using the z-iso h and px and py functions.
+
+The proof of this definition uses the `make_isProduct` function from Coq to construct a product object for x and y using the `ProductArrow` constructor, and then shows that this product object satisfies the conditions for isomorphic products in the category C using the `ProductPrCommutes` property.
+#+end_src
+#+begin_src output
+
+It looks like you have defined a Coq type `isProduct_z_iso` with some arguments and constraints. It appears to be an implementation of the isomorphism class of products in a given category with respect to a z-iso, which is a special kind of isomorphism in category theory.
+
+The definition uses some other Coq types and definitions such as `Category`, `ProductArrow`, `iscontraprop1`, and `make_Product`. It also references some additional arguments such as `C : category`, `J : UU`, `D : J -> C`, `x y : C`, `h : z_iso x y`, `px : ∏ (j : J), x -> D j`, `py : ∏ (j : J), y -> D j`, and `Hx : isProduct J _ D x px`.
+
+The proof uses the `make_isProduct` function to check that the defined type satisfies certain properties. It also uses some other Coq tactics such as `homset_property`, `invproofirrelevance`, and `maponpaths`.
+
+It's not clear from the code snippet you provided what the purpose of this definition is or how it might be used in a larger context, but it seems to implement an important concept in category theory.
+#+end_src
+#+begin_src output
+The `isProduct_z_iso` definition is a statement about products in the category `C`, where `J` is an arbitrary set and `D: J → C` is a function. The `z_iso_x_y` parameter is a z-iso between two objects `x, y` in `C`.
+
+The function takes additional parameters, including `px` and `py`, which are functions that map each object `j` of `J` to an object in `C` and vice versa. The `Hx` parameter is a proof that the function `D` satisfies the property of being a product function for the z-iso `z_iso_x_y` and the objects `x, y`.
+
+The definition then applies the `make_isProduct` function to construct a proof that the function `D` satisfies the property of being a product function for the z-iso `z_iso_x_y` and the objects `y, py`, given the proofs `px` and `py`.
+
+The proof uses homset properties and the definition of the `iscontraprop1` lemma to construct a contradiction if the hypothesis that `D` is not a product function for the z-iso `z_iso_x_y` and the objects `y, py`, given the proofs `px` and `py`, were to be true. The resulting proof demonstrates that `D` must indeed satisfy the property of being a product function for the z-iso `z_iso_x_y` and the objects `y, py`.
+
+The `isProduct_z_iso` definition is used in Coq to prove statements about products in the category `C` that involve a z-iso.
+#+end_src
+#+begin_src output
+
+The definition isProduct\_z\_iso is a Coq function that defines an instance of the `isProduct` predicate for a given category, UU, and function D. It takes several arguments:
+
+* C: The category to which the product belongs.
+* J: A family of objects from the universe UU.
+* D: A function from J to C that assigns each object in J to an element in C.
+* x y: Two elements in C for which we want to check if they are elements of a product.
+* h: An iso between the category C and some other category.
+* px, py: Homomorphisms from J to C that assign each object in J to an element in C.
+* Hx: A proof that x is an element of the product.
+* q: A proof that y is also an element of the product.
+
+The function returns a proof that y is an element of the product, using the `isProduct` predicate.
+
+The function first uses the `make_isProduct` function from the Coq library to create a proof that x and y are elements of the product. It then applies homset properties to prove that the homomorphisms px and py assign to each object in J an element in C, and that these elements satisfy the iso h. Finally, it uses contrapositive reasoning to prove that if px j = D j inv\_from\_z\_iso h pj, then py j = D j px j = D j (pr2 φ₁ j @ !(pr2 φ₂ j)) for any object j in J and any element pj in C. This completes the proof that y is an element of the product.
+#+end_src
+#+begin_src output
+This Coq definition defines an instance of the iso\_product type for a given category, closed under a specified isomorphism. The type iso\_product represents objects that are preserved under an isomorphism.
+
+The definition uses a make\_isProduct function to create the iso\_product instance. It applies the homset\_property and subtypePath properties to ensure that the category has an isomorphism group, and it uses the invproofirrelevance lemma to prove that the isomorphism is not irrelevant to the type of the objects being mapped.
+
+The definition also defines a function ProductArrow\_eq that maps arrows in the source object to arrows in the target object under an isomorphism. This function is used to construct the arrow f \* h for the given isomorphism and arbitrary function f.
+
+Finally, the definition uses the ProductPrCommutes property to prove that products of objects preserved under an isomorphism are also preserved under the same isomorphism.
+#+end_src
+#+begin_src output
+```
+ Product isomorphism under category equivalence
+Definition isProduct_z_iso : Category C => (J : UU) =>
+                                (D : J -> C) => x y : C =>
+                                (h : z_iso x y) => px py : J -> x -> D x, y -> D y =>
+                                Hx : isProduct J _ D x px =>
+                                q : forall j : J, py j = inv_from_z_iso h * px j =>
+                                isProduct J _ D y py.
+Proof.
+  use make_isProduct.
+  {
+    apply homset_property.
+  }
+  Debug Off.
+  intros z f.
+  Debug Off. use iscontraprop1. Debug On.
+  - abstract
+      (use invproofirrelevance ;
+       intros φ₁ φ₂ ;
+       use subtypePath ; [ intro ; use impred ; intro ; apply homset_property | ] ;
+       use (cancel_z_iso _ _ (z_iso_inv h)) ;
+       use (ProductArrow_eq _ _ _ _ Hx) ; cbn ;
+       intro j ;
+       rewrite !assoc' ;
+       rewrite <- q ;
+       exact (pr2 φ₁ j @ !(pr2 φ₂ j))).
+  - Debug Off. refine (ProductArrow _ _ (make_Product _ _ _ _ _ Hx) f · h ,, _). Debug On.
+
+    abstract
+      (intro j ;
+       rewrite !assoc' ;
+       rewrite q ;
+       rewrite (maponpaths (λ z, _ · z) (assoc _ _ _)) ;
+       rewrite z_iso_inv_after_z_iso ;
+       rewrite id_left ;
+       apply ProductPrCommutes).
+Defined.
+```
+#+end_src
+
  *)
 Definition isProduct_z_iso
            {C : category}
@@ -418,7 +542,7 @@ Proof.
   }
   Debug Off.
   intros z f.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;
@@ -429,8 +553,8 @@ Proof.
        rewrite !assoc' ;
        rewrite <- q ;
        exact (pr2 φ₁ j @ !(pr2 φ₂ j))).
-  - refine (ProductArrow _ _ (make_Product _ _ _ _ _ Hx) f · h ,, _).
-    Debug On.
+  - Debug Off. refine (ProductArrow _ _ (make_Product _ _ _ _ _ Hx) f · h ,, _). Debug On.
+
     abstract
       (intro j ;
        rewrite !assoc' ;
@@ -529,7 +653,7 @@ Definition isProduct_eq_arrow
   : isProduct J C D ys π'.
 Proof.
   intros w f.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - abstract
       (use invproofirrelevance ;
        intros φ₁ φ₂ ;

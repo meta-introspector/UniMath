@@ -202,7 +202,7 @@ Section CategoryOfElements.
     : is_opcartesian p.
   Proof.
     intros c₃ x₃ g hh.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - use (isaprop_total2 (_ ,, _) (λ _, _ ,, _)) ; cbn -[isaprop].
       + apply disp_mor_elems_isaprop.
       + apply disp_cat_of_elems.

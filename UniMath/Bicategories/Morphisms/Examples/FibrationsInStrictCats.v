@@ -173,7 +173,7 @@ Section IsOpCartesian.
     : is_opcartesian_2cell_sopfib F α.
   Proof.
     intros H β δp q.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (strict_pointwise_opcartesian_is_opcartesian_unique q).
     - simple refine (_ ,, _ ,, _).
       + exact (strict_pointwise_opcartesian_is_opcartesian_factor q).

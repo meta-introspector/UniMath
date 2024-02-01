@@ -49,7 +49,7 @@ Section IsoCommaLimits.
       : isTerminal (iso_comma F G) x.
     Proof.
       intros w.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - abstract
           (use invproofirrelevance ;
            intros φ₁ φ₂ ;
@@ -216,7 +216,7 @@ Section IsoCommaLimits.
         : isBinProduct (iso_comma F G) x y z p₁ p₂.
       Proof.
         intros w f g.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - exact (isBinProduct_in_iso_comma_unique f g).
         - simple refine (_ ,, _ ,, _).
           + exact (isBinProduct_in_iso_comma_ump f g).
@@ -420,7 +420,7 @@ Section IsoCommaLimits.
         : isPullback sqr₃.
       Proof.
         intros w h₁ h₂ p.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - apply isPullback_iso_comma_unique.
         - simple refine (_ ,, _ ,, _).
           + exact (isPullback_iso_comma_mor h₁ h₂ p).
@@ -558,7 +558,7 @@ Section IsoCommaLimits.
       : isInitial (iso_comma F G) x.
     Proof.
       intros w.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - abstract
           (use invproofirrelevance ;
            intros φ₁ φ₂ ;
@@ -729,7 +729,7 @@ Section IsoCommaLimits.
         : isBinCoproduct (iso_comma F G) x y z i₁ i₂.
       Proof.
         intros w f g.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         - exact (isBinCoproduct_in_iso_comma_unique f g).
         - simple refine (_ ,, _ ,, _).
           + exact (isBinCoproduct_in_iso_comma_ump f g).

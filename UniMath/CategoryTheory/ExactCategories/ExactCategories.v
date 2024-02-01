@@ -851,7 +851,7 @@ Section KernelCokernelPairs.
       apply zeroRight. }
     assert (V := iscontrpr1 ((pr22 pr) T (s · h) L)); clear L.
     induction V as [k e3].
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     { apply invproofirrelevance; intros φ φ'.
       apply subtypePath_prop.
       induction φ as [φ e4]; induction φ' as [φ' e5]; cbn.

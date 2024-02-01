@@ -269,7 +269,7 @@ Section IsoCommaUMP.
     : pb_ump_2 (iso_comma_pb_cone F G).
   Proof.
     intros C φ ψ α β r.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros τ₁ τ₂ ;
@@ -419,7 +419,7 @@ Section ReindexingPullback.
     : pb_ump_2 cone.
   Proof.
     intros C₀ G₁ G₂ τ₁ τ₂ p.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -542,7 +542,7 @@ Section CommaObject.
     : comma_ump_2 comma_comma_cone.
   Proof.
     intros C φ ψ α β r.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros τ₁ τ₂ ;
@@ -999,7 +999,7 @@ Section EilenbergMooreUMP.
     : em_ump_2 m eilenberg_moore_cat_cone.
   Proof.
     intros C' F₁ F₂ α.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

@@ -262,7 +262,7 @@ Section EnrichedCoproducts.
       - exact (enriched_coprod_cocone_in1 a).
       - exact (enriched_coprod_cocone_in2 a).
       - intros w f g.
-        use iscontraprop1.
+        Debug Off. use iscontraprop1. Debug On.
         + abstract
             (use invproofirrelevance ;
              intros φ₁ φ₂ ;
@@ -313,7 +313,7 @@ Section EnrichedCoproducts.
     intro w.
     use make_isBinProduct.
     intros v f g.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

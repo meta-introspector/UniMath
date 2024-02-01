@@ -726,7 +726,7 @@ Section PullbackOfSFib.
     : is_cartesian_2cell_sfib p₁ α.
   Proof.
     intros h β δp q.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - exact (to_pb_cartesian_unique α Hα q).
     - simple refine (_ ,, _ ,, _).
       + exact (to_pb_cartesian_cell α Hα q).
