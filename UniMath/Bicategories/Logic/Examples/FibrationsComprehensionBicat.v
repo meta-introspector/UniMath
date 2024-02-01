@@ -384,7 +384,7 @@ Proof.
   apply is_cartesian_2cell_sfib_to_is_cartesian_2cell ; cbn.
   pose (cleaving_of_cleaving_cartesian_2cell_is_pointwise_cartesian _ Hαα) as p.
   intros G γ δp q.
-  use iscontraprop1.
+  Debug Off. use iscontraprop1. Debug On.
   - exact (local_cartesian_cleaving_lift_unique α αα p G γ δp).
   - simple refine (_ ,, _ ,, _).
     + exact (local_cartesian_cleaving_lift α αα p G γ δp q).

@@ -241,7 +241,7 @@ Section EnrichedProducts.
     use make_isProduct.
     { apply homset_property. }
     intros v f.
-    use iscontraprop1.
+    Debug Off.    use iscontraprop1.    Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;
@@ -250,9 +250,9 @@ Section EnrichedProducts.
                   w v
                   (pr1 φ₁) (pr1 φ₂)
                   (λ j, pr2 φ₁ j @ !(pr2 φ₂ j)))).
-    - simple refine (_ ,, _).
-      + exact (pair w v f).
-      + exact (pair_pr w v f).
+    - Debug Off. simple refine (_ ,, _). Debug On.
+      + Debug Off. exact (pair w v f). Debug On.
+      + Debug Off. exact (pair_pr w v f). Debug On.
   Defined.
 
   Definition prod_enriched_to_prod

@@ -613,7 +613,7 @@ Proof.
          rewrite !id_left, !id_right in q ;
          exact q).
     }
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     + apply total_set_category_pb_ump_2_unique.
       apply Hα.
     + simple refine (_ ,, _ ,, _).

@@ -101,8 +101,11 @@ Section BINOP_category.
       set (T:=z_iso_inv_after_z_iso f).
       apply subtypeInjectivity in T.
       set (T':=toforallpaths _ _ _ T). apply T'.
+      Debug Off.
       intro x0.
+      Debug On.
       apply isapropisbinopfun.
+
     - intros y.
 
       set (T:=z_iso_after_z_iso_inv f).

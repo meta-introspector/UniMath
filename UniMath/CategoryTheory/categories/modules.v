@@ -100,8 +100,10 @@ Defined.
 
 Definition modules_univalence_map (M N : mod_category) : (M = N) -> (moduleiso M N).
 Proof.
-   intro p.
-   induction p.
+  intro p.
+Debug Off.
+induction p.
+Debug On.
    exact (idmoduleiso M).
 Defined.
 
@@ -133,11 +135,18 @@ Proof.
    - intro; set (T:= z_iso_inv_after_z_iso f).
      apply subtypeInjectivity in T.
      + apply (toforallpaths _ _ _ T).
-     + intro; apply isapropismodulefun.
+
+       Debug Off.
+     +
+   intro;
+     apply isapropismodulefun.
+   Debug On.
    - intro; set (T:= z_iso_after_z_iso_inv f).
      apply subtypeInjectivity in T.
      + apply (toforallpaths _ _ _ T).
+       Debug Off.
      + intro; apply isapropismodulefun.
+       Debug On.
 Defined.
 
 Lemma z_iso_moduleiso (M N : ob mod_category) : z_iso M N -> moduleiso M N.

@@ -244,7 +244,7 @@ Section EnrichedCoproducts.
     use make_isProduct.
     { apply homset_property. }
     intros v f.
-    use iscontraprop1.
+    Debug Off. use iscontraprop1. Debug On.
     - abstract
         (use invproofirrelevance ;
          intros φ₁ φ₂ ;

@@ -181,11 +181,13 @@ Section Terminal_and_EmptyProd.
     Proof.
       use (make_isProduct _ _ (homset_property C)).
       intros c' cone'.
+      Debug Off.
       use make_iscontr.
       - use tpair.
         + exact (terminal_product_arrow c').
         + exact (terminal_product_arrow_commutes c' cone').
       - exact (terminal_product_arrow_unique c' cone').
+        Debug On.
     Defined.
 
     Definition Terminal_is_empty_product

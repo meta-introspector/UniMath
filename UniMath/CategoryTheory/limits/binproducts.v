@@ -1624,10 +1624,12 @@ Section ProductsFromBinProducts.
   Proof.
     use (make_isProduct _ _ (homset_property C)).
     intros c' cone'.
+    Debug Off.
     use make_iscontr.
     + exists (sn_power_arrow c' cone').
       exact (sn_power_arrow_commutes c' cone').
     + exact (sn_power_arrow_unique c' cone').
+      Debug On.
   Defined.
 
   Definition n_power_to_sn_power

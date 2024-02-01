@@ -516,7 +516,7 @@ Section TrivialCompBicat.
       : pb_ump_2 cone.
     Proof.
       intros q φ ψ α β p.
-      use iscontraprop1.
+      Debug Off. use iscontraprop1. Debug On.
       - exact (adj_equiv_to_pb_ump_2_unique α β).
       - exact (adj_equiv_to_pb_ump_2_cell α β
                ,,

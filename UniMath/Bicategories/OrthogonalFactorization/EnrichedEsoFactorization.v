@@ -251,7 +251,8 @@ Section EnrichedFactorizationSystem.
           }
           intros w.
           induction w as [ w f ].
-          use iscontraprop1.
+
+          Debug Off. use iscontraprop1. Debug On.
           - exact isaprop_enriched_eso_ff_lift_ob.
           - refine (Φ₁ w ,, _).
             exact (z_iso_comp
@@ -281,7 +282,7 @@ Section EnrichedFactorizationSystem.
                · #Φ₂ f
                · inv_from_z_iso (enriched_eso_ff_lift_z_iso y)).
         Proof.
-          use iscontraprop1.
+          Debug Off. use iscontraprop1. Debug On.
           - use invproofirrelevance.
             intros φ₁ φ₂.
             use subtypePath.
@@ -812,7 +813,7 @@ Section EnrichedFactorizationSystem.
         Definition iscontr_enriched_eso_ff_lift_2cell_data
           : iscontr (∑ (f : L₁ x --> L₂ x), #G f = τ₂ x).
         Proof.
-          use iscontraprop1.
+          Debug Off. use iscontraprop1. Debug On.
           - exact isaprop_enriched_eso_ff_lift_2cell_data.
           - simple refine (_ ,, _).
             + use (invmap (make_weq _ (G_fully_faithful _ _))).

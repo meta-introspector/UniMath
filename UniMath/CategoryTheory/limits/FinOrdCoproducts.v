@@ -66,8 +66,9 @@ Section FinOrdCoproduct_criteria.
     (* isCoproductcocone *)
     use (make_isCoproduct _ _ C).
     intros c g.
+    Debug Off.
     use (unique_exists (g stn1ob)).
-
+    Debug On.
     (* Commutativity. *)
     intros i. rewrite <- (isconnectedstn1 stn1ob i). apply id_left.
 

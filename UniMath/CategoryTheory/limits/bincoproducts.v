@@ -641,6 +641,7 @@ use make_Coproduct.
 - use (make_isCoproduct _ _ C); intros c f.
   set (uniqex := pr2 (HC (H true) (H false)) c (f true) (f false)).
   (* induction (pr2 (HC (H true) (H false)) c (f true) (f false)) as [[x1 [x2 x3]] x4]. *)
+  Debug Off.
   use unique_exists.
   + exact (pr1 (pr1 uniqex)).
   + abstract (cbn; induction i;
@@ -648,6 +649,7 @@ use make_Coproduct.
   + abstract (intros x; apply impred; intros; apply C).
   + abstract (intros h1 h2;
               apply (maponpaths pr1 (pr2 uniqex (h1,,(h2 true,,h2 false))))).
+    Debug On.
 Defined.
 
 Definition BinCoproducts_from_Coproducts
