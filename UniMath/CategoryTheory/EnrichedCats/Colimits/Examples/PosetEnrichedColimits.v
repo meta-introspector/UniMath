@@ -922,10 +922,14 @@ Section PosetEnrichmentColimits.
         : is_coprod_enriched E' ys make_poset_enriched_coprod_cocone.
       Proof.
         use make_is_coprod_enriched.
+        Debug Off.
         - intros z P fs.
+
           refine (_ · poset_enrichment_coprod_pair _ _ _).
+
           simple refine (_ ,, _).
           + exact (λ x j, pr1 (fs j) x).
+            Debug On.
           + abstract
               (use is_monotone_depfunction_poset_pair ;
                intro j ;

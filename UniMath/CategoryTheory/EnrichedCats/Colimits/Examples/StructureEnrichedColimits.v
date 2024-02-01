@@ -766,10 +766,13 @@ Section StructureEnrichmentColimits.
         : is_coprod_enriched E' ys make_structure_enriched_coprod_cocone.
       Proof.
         use make_is_coprod_enriched.
+        Debug Off.
         - intros z X fs.
           refine (_ · structure_enrichment_coprod_pair _ _ _).
           simple refine (_ ,, _).
+
           + exact (λ x j, pr1 (fs j) x).
+            Debug On.
           + abstract
               (use hset_struct_type_prod_pair ;
                intro j ;

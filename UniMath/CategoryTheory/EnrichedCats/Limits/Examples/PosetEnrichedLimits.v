@@ -897,9 +897,12 @@ Section PosetEnrichmentLimits.
       Proof.
         use make_is_prod_enriched.
         - intros z P fs.
+          Debug Off.
           refine (_ · poset_enrichment_prod_pair _ _ _).
           simple refine (_ ,, _).
+
           + exact (λ x j, pr1 (fs j) x).
+            Debug On.
           + abstract
               (use is_monotone_depfunction_poset_pair ;
                intro j ;

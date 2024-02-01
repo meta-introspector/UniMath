@@ -72,7 +72,9 @@ Section StructureEnrichmentLimits.
     Proof.
       use make_is_terminal_enriched.
       - intros X y.
+        Debug Off.
         simple refine (_ ,, _).
+        Debug On.
         + exact (λ _, TerminalArrow T y).
         + abstract
             (cbn ;
@@ -118,7 +120,9 @@ Section StructureEnrichmentLimits.
               (HC : is_univalent C)
     : isaprop structure_enrichment_binary_prod.
   Proof.
+    Debug Off.
     simple refine (isaprop_total2 (_ ,, _) (λ _, (_ ,, _))).
+    Debug On.
     - do 2 (use impred ; intro).
       apply (isaprop_BinProduct HC).
     - repeat (use impred ; intro).
@@ -214,8 +218,10 @@ Section StructureEnrichmentLimits.
     Proof.
       use make_is_binary_prod_enriched.
       - intros z X f g.
+        Debug Off.
         refine (_ · structure_enrichment_binary_prod_pair _ _ _ _).
         simple refine (_ ,, _).
+        Debug On.
         + exact (prodtofuntoprod (pr1 f ,, pr1 g)).
         + apply hset_struct_pair.
           * exact (pr2 f).
@@ -765,13 +771,16 @@ Section StructureEnrichmentLimits.
       Proof.
         use make_is_prod_enriched.
         - intros z X fs.
+          Debug Off.
           refine (_ · structure_enrichment_prod_pair _ _ _).
+
           simple refine (_ ,, _).
+
           + exact (λ x j, pr1 (fs j) x).
           + abstract
               (use hset_struct_type_prod_pair ;
-               intro j ;
-               exact (pr2 (fs j))).
+               intro j ;               exact (pr2 (fs j))).
+            Debug On.
         - abstract
             (intros z X f g ;
              use eq_mor_hset_struct ;
@@ -782,8 +791,9 @@ Section StructureEnrichmentLimits.
              use eq_mor_hset_struct ;
              intro w ;
              use structure_enrichment_prod_arr_eq ;
-             intro j ;
-             exact (eqtohomot (maponpaths (λ f, pr1 f) (q j)) w)).
+             intro j ; exact (eqtohomot (maponpaths (λ f, pr1 f) (q j)) w)).
+          Debug On.
+
       Defined.
     End StructureProd.
 
@@ -835,7 +845,9 @@ Section StructureEnrichmentLimits.
                 fs)
           as p.
         cbn in p.
+        Debug Off.
         exact p.
+        Debug On.
       Qed.
 
       Definition to_structure_enrichment_prod_structure_preserving
@@ -848,6 +860,7 @@ Section StructureEnrichmentLimits.
                     (underlying_Product E' ys (pr2 (EP ys)))
                     (λ i, h i)).
       Proof.
+        Debug Off.
         refine (transportb
                   _
                   _
@@ -856,12 +869,17 @@ Section StructureEnrichmentLimits.
                       (is_prod_enriched_to_Product E' _ (pr2 (EP ys)) x)
                       prod
                       prod_pr))).
+        Debug On.
         use funextsec.
         intros fg.
         use is_prod_enriched_arrow_eq.
+        Debug Off.
         - exact (pr2 (EP ys)).
+          Debug On.
         - intro j.
+          Debug Off.
           refine (_ @ !(structure_to_underlying_prod_map_pr _ j)).
+          Debug On.
           apply (ProductPrCommutes _ _ _ (underlying_Product E' ys (pr2 (EP ys)))).
       Qed.
     End ToStructureProduct.
@@ -870,7 +888,9 @@ Section StructureEnrichmentLimits.
                (EP : enrichment_prod E' J)
       : structure_enrichment_prod.
     Proof.
+      Debug Off.
       simple refine (_ ,, _).
+      Debug On.
       - exact (λ ys, underlying_Product E' ys (pr2 (EP ys))).
       - intros x ys.
         apply to_structure_enrichment_prod_structure_preserving.
@@ -961,9 +981,12 @@ Section StructureEnrichmentLimits.
     Definition structure_power_cone
       : power_cone E' X x.
     Proof.
+      Debug Off.
       simple refine (_ ,, _).
+                Debug On.
       - exact pow.
       - simple refine (_ ,, _).
+        Debug Off.
         + exact pow_pr.
         + exact (structure_pows_mor_pr HE X x).
     Defined.
@@ -972,7 +995,9 @@ Section StructureEnrichmentLimits.
                (y : C)
       : X ⊸ (E' ⦃ y , x ⦄) --> E' ⦃ y , structure_power_cone ⦄.
     Proof.
+      Debug Off.
       simple refine (_ ,, _).
+                Debug On.
       - intro f.
         exact (ProductArrow _ _ pow (pr1 f)).
       - exact (structure_pows_mor_product_arr HE X x y).
@@ -1007,7 +1032,9 @@ Section StructureEnrichmentLimits.
     : enrichment_power E'.
   Proof.
     intros X x.
+    Debug Off.
     simple refine (_ ,, _).
+    Debug On.
     - exact (structure_power_cone HE X x).
     - apply structure_power_is_power.
   Defined.
