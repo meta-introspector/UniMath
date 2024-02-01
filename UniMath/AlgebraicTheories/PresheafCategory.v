@@ -722,11 +722,15 @@ Section Product.
     - exact product_presheaf_pr.
     - use (make_isProduct _ _ (homset_property _)).
       intros Q F.
+      Debug Off.
       use make_iscontr.
+
       + use tpair.
+
         * exact (product_presheaf_induced_morphism Q F).
         * exact (product_presheaf_induced_morphism_commutes Q F).
       + exact (product_presheaf_induced_morphism_unique Q F).
+            Debug On.
   Defined.
 
 End Product.

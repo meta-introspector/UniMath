@@ -1152,11 +1152,14 @@ Proof.
         apply (F B ∨ B = A).
       * intros L Hl.
         assert (B : ∃ B : X → hProp, F B × (∏ x, (A x ∧ B x → A x ∧ finite_intersection L x))).
+        Debug Off.
         { revert L Hl.
+          Debug On.
           apply (Sequence_rect (P := λ L : Sequence (X → hProp),
                                     (∏ m : stn (length L), (λ B : X → hProp, F B ∨ B = A) (L m)) →
                                     ∃ B : X → hProp,
                                       F B × (∏ x : X, A x ∧ B x → A x ∧ finite_intersection L x))).
+
         - intros Hl.
           apply hinhpr.
           rewrite finite_intersection_htrue.
@@ -1196,15 +1199,21 @@ Proof.
             generalize (Hl (dni_lastelement m)) ; simpl.
             rewrite <- replace_dni_last.
             now rewrite append_vec_compute_1. }
-      revert B.
+        Debug Off.
+        revert B.
+        Debug On.
       apply hinhuniv.
       intros B.
       generalize (H (pr1 B) (pr1 (pr2 B))).
       apply hinhfun.
       intros x.
+      Debug Off.
       exists (pr1 x).
+
       simple refine (pr2 (pr2 (pr2 B) (pr1 x) _)).
+
       exact (pr2 x).
+      Debug On.
     + split.
       * intros B Fb.
         apply hinhpr.
