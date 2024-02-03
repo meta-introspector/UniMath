@@ -36,7 +36,17 @@ PACKAGES += Semantics
 BUILD_COQ ?= no
 BUILD_COQIDE ?= no
 DEBUG_COQ ?= yes
-COQBIN = /home/mdupont/.opam/4.12.1/bin/
+#COQLIB=/home/mdupont/experiments/UniMath/sub/coq/_build_vo/default/lib/coq/
+#COQLIB=/home/mdupont/experiments/UniMath/coq_build/default/lib/coq/
+#COQLIB=/home/mdupont/experiments/UniMath/sub/coq/_build/default/lib/coq/
+#COQLIB=/home/mdupont/experiments/UniMath/sub/coq/_build_vo/default/lib/coq/
+#COQCORELIB=/home/mdupont/experiments/UniMath/sub/coq/_build/default/lib/coq/
+#COQBIN=/home/mdupont/experiments/UniMath/sub/coq/bin/
+#COQBIN=/home/mdupont/experiments/UniMath/_build/install/default/bin/
+COQBIN=/home/mdupont/experiments/coq/_build/install/default/bin/
+COQLIB=/home/mdupont/experiments/coq/_build/default/
+
+
 VERBOSE =  yes
 MEMORY_LIMIT ?= 2500000
 LIMIT_MEMORY ?= no
@@ -95,13 +105,13 @@ EFFECTIVE_MEMORY_LIMIT = unlimited
 endif
 
 install: build/CoqMakefile.make
-	ulimit -v $(EFFECTIVE_MEMORY_LIMIT) ; $(MAKE) -f build/CoqMakefile.make $@
+	ulimit -v $(EFFECTIVE_MEMORY_LIMIT) ; COQLIB=$(COQLIB) $(MAKE) -f build/CoqMakefile.make $@
 all html uninstall: build/CoqMakefile.make
-	ulimit -v $(EFFECTIVE_MEMORY_LIMIT) ; $(MAKE) -f build/CoqMakefile.make $@
+	ulimit -v $(EFFECTIVE_MEMORY_LIMIT) ; COQLIB=$(COQLIB) $(MAKE) -f build/CoqMakefile.make $@
 clean:: build/CoqMakefile.make
-	$(MAKE) -f build/CoqMakefile.make $@
+	COQLIB=$(COQLIB) $(MAKE) -f build/CoqMakefile.make $@
 distclean:: build/CoqMakefile.make
-	$(MAKE) -f build/CoqMakefile.make cleanall archclean
+	COQLIB=$(COQLIB) $(MAKE) -f build/CoqMakefile.make cleanall archclean
 
 WARNING_FLAGS := -notation-overridden
 OTHERFLAGS += $(MOREFLAGS)
@@ -170,11 +180,11 @@ FILES_FILTER_2 := grep -vE '^[ \t]*(\#.*)?$$$$'
 $(foreach P,$(PACKAGES),												\
 	$(eval $P: make-summary-files build/CoqMakefile.make UniMath/.dir-locals.el;								\
 		+ ulimit -v $(EFFECTIVE_MEMORY_LIMIT) ;									\
-		  $(MAKE) -f build/CoqMakefile.make									\
+		  COQLIB=$(COQLIB) $(MAKE) -f build/CoqMakefile.make									\
 			$(shell <UniMath/$P/.package/files $(FILES_FILTER) |sed "s=^\(.*\).v=UniMath/$P/\1.vo=" )	\
 			UniMath/$P/All.vo))
 
-$(foreach v,$(VFILES), $(eval $v.vo: $v.v; ulimit -v $(EFFECTIVE_MEMORY_LIMIT) ; $(MAKE) -f build/CoqMakefile.make $v.vo))
+$(foreach v,$(VFILES), $(eval $v.vo: $v.v; ulimit -v $(EFFECTIVE_MEMORY_LIMIT) ; COQLIB=$(COQLIB) $(MAKE) -f build/CoqMakefile.make $v.vo))
 
 install:all
 coqwc:; coqwc $(VFILES)
@@ -215,8 +225,9 @@ describe:; git describe --dirty --long --always --abbrev=40 --all
 # endif
 build/CoqMakefile.make .coq_makefile_output.conf: .coq_makefile_input
 	echo $(COQBIN)coq_makefile
-	$(COQBIN)coq_makefile -f .coq_makefile_input -o .coq_makefile_output
+	COQLIB=$(COQLIB) $(COQBIN)coq_makefile -f .coq_makefile_input -o .coq_makefile_output
 	mv .coq_makefile_output build/CoqMakefile.make
+
 
 # "clean::" occurs also in build/CoqMakefile.make, hence both colons
 clean::
@@ -227,7 +238,7 @@ clean::; rm -rf $(ENHANCEDDOCTARGET)
 latex-clean clean::; cd $(LATEXDIR) ; rm -f *.pdf *.tex *.log *.aux *.out *.blg *.bbl
 
 distclean:: clean
-distclean::          ; - $(MAKE) -C sub/coq distclean
+distclean::          ; - COQLIB=$(COQLIB) $(MAKE) -C sub/coq distclean
 distclean::          ; rm -f build/Makefile-configuration
 
 #############################################################################
@@ -370,7 +381,7 @@ endif
 
 # DEPFILES is defined above
 $(DEPFILES): make-summary-files | build/CoqMakefile.make
-	$(MAKE) -f build/CoqMakefile.make $@
+	COQLIB=$(COQLIB) $(MAKE) -f build/CoqMakefile.make $@
 
 # here we ensure that the travis script checks every package
 check-travis:.check-travis.okay
@@ -481,7 +492,7 @@ endif
 distclean::; rm -f UniMath/.dir-locals.el
 
 # make *.vo files by calling the coq makefile
-%.vo : always; $(MAKE) -f build/CoqMakefile.make $@
+%.vo : always; COQLIB=$(COQLIB) $(MAKE) -f build/CoqMakefile.make $@
 always:
 .PHONY: always
 

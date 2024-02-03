@@ -1,5 +1,11 @@
+export COQLIB=/home/mdupont/experiments/UniMath/coq_build/default/lib/coq/
+
 make 
 OCAMLRUNPARAM=b
+
+cp -r /home/mdupont/experiments/UniMath/sub/coq/_build_vo/* coq_build/
+cp -r /home/mdupont/experiments/UniMath/sub/coq/_build/* coq_build/
+ln -s /home/mdupont/experiments/UniMath/_build/install/default/lib/coq-core/ /home/mdupont/experiments/UniMath/coq_build/default/lib/coq-core
 [![DOI](https://zenodo.org/badge/17321421.svg)](https://zenodo.org/badge/latestdoi/17321421)
 
 Univalent Mathematics
