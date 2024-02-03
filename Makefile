@@ -8,6 +8,7 @@ endif
 endif
 ############################################
 # The packages, listed in order by dependency:
+PACKAGES += Reify
 PACKAGES += Foundations
 PACKAGES += MoreFoundations
 PACKAGES += Combinatorics

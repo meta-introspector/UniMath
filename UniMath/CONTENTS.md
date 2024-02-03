@@ -1,5 +1,8 @@
 # Contents of the UniMath library
 The packages and files are listed here in logical order: each file depends only on files occurring earlier.
+## Package [Reify](Reify/README.md)
+   - [Common.v](Reify/Common.v)
+   - [All.v](Reify/All.v)
 ## Package [Foundations](Foundations/README)
    - [Init.v](Foundations/Init.v)
    - [Preamble.v](Foundations/Preamble.v)

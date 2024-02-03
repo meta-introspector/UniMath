@@ -1,5 +1,6 @@
 (** * Univalent Foundations, Part A
 
+Require  Import Unimath.Reify.Parametricity.
 Vladimir Voevodsky.
 Feb. 2010 - Sep. 2011.
 
@@ -41,7 +42,7 @@ Tomi Pannila 2016.
  - Logical equivalence
 
 - Paths and operations on paths
- - Associativity of function composition and mutual invertibility of curry/uncurry
+ - Associativity of function composition and mutual invertibility of curry/uncurry (assoc?)
  - Composition of paths and inverse paths
  - Direct product of paths
  - The function [ maponpaths ] between paths types defined by a function between ambient types
